@@ -1,0 +1,31 @@
+﻿$PBExportHeader$dw_mues_spro_calicosechero.srd
+release 10;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=144 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_tipoen dbname="spro_calicosechero.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_codigo dbname="spro_calicosechero.enva_codigo" )
+ column=(type=char(4) update=yes updatewhereclause=yes key=yes name=cale_calida dbname="spro_calicosechero.cale_calida" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=cale_nombre dbname="spro_calicosechero.cale_nombre" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=cale_pesoen dbname="spro_calicosechero.cale_pesoen" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_calicosechero~" ) COLUMN(NAME=~"dba.spro_calicosechero.enva_tipoen~") COLUMN(NAME=~"dba.spro_calicosechero.enva_codigo~") COLUMN(NAME=~"dba.spro_calicosechero.cale_calida~") COLUMN(NAME=~"dba.spro_calicosechero.cale_nombre~") COLUMN(NAME=~"dba.spro_calicosechero.cale_pesoen~")WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_calicosechero~~~".~~~"enva_tipoen~~~"~"   OP =~"=~"    EXP2 =~":tipo~"    LOGIC =~"And~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_calicosechero~~~".~~~"enva_codigo~~~"~"   OP =~"=~"    EXP2 =~":codigo~" ) ) ARG(NAME = ~"tipo~" TYPE = number)  ARG(NAME = ~"codigo~" TYPE = number) " update="dba.spro_calicosechero" updatewhere=1 updatekeyinplace=no arguments=(("tipo", number),("codigo", number)) )
+text(band=header alignment="2" text="CodigoCalidad" border="6" color="33554432" x="105" y="4" height="128" width="256" html.valueishtml="0"  name=cale_calida_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="NombreCalidad" border="6" color="33554432" x="379" y="4" height="128" width="768" html.valueishtml="0"  name=cale_nombre_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="PesoEnvase" border="6" color="33554432" x="1166" y="4" height="128" width="325" html.valueishtml="0"  name=cale_pesoen_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=detail alignment="0" expression="cale_calida + ' - ' +  cale_nombre "border="0" color="33554432" x="128" y="112" height="64" width="1038" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=40 border="0" color="33554432" x="379" y="0" height="76" width="768" format="[general]" html.valueishtml="0"  name=cale_nombre visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=50 border="0" color="33554432" x="1166" y="0" height="76" width="325" format="[general]" html.valueishtml="0"  name=cale_pesoen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=30 border="0" color="33554432" x="105" y="0" height="76" width="256" format="[general]" html.valueishtml="0"  name=cale_calida visible="1" edit.limit=4 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

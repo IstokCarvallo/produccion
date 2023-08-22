@@ -1,0 +1,49 @@
+﻿$PBExportHeader$dw_mues_alpalletfruta_gen_2_sag.srd
+$PBExportComments$DataWindows Muestra de Reetiquetado Detalle.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=4 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=paen_numero dbname="palletencab.paen_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=dest_codigo dbname="dest_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="palletencab.espe_codigo" )
+ retrieve="SELECT pae.paen_numero,isnull(des.dest_codsag,0) as dest_codigo,pae.espe_codigo
+    FROM dba.repalletdeta as rpd,dba.palletencab as pae,dba.variedades as var ,dba.repalletenca as rpe,dba.destinos as des  
+   WHERE  pae.clie_codigo = rpd.clie_codigo  and  
+          pae.paen_numero = rpd.paen_numero  and  
+          var.espe_codigo = pae.espe_codigo  and  
+          var.vari_codigo = pae.vari_codigo  and  
+          pae.plde_codigo = rpd.plde_codigo  and  
+          rpe.plde_codigo = rpd.plde_codigo  and  
+          rpe.repe_numero = rpd.repe_numero  and  
+          rpd.plde_codigo = :Planta  AND
+			 rpe.clie_codigo = :cliente AND 
+          rpe.repe_nrosag =  :Folio  AND  
+          0 in  (0,rpd.repd_tipood) and
+          rpe.repe_tipopa in (1,2) and
+          pae.paen_ccajas = 0 and
+		    pae.dest_codigo *= des.dest_codigo
+    Group By  pae.paen_numero,des.dest_codsag,pae.espe_codigo
+
+
+" arguments=(("Planta", number),("Folio", number),("Cliente", number)) )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="558" y="0" height="76" width="2528" format="[general]" html.valueishtml="0"  name=paen_numero visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="3086" y="0" height="76" width="2528" format="[general]" html.valueishtml="0"  name=dest_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="5614" y="0" height="76" width="2528" format="[general]" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=footer alignment="2" expression="rowcount()"border="5" color="0" x="631" y="12" height="60" width="393" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=footer alignment="0" text="Total Registros  " border="0" color="0" x="133" y="12" height="68" width="466" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="0" expression="/* sum(IF ( paen_tipopa = 1 , 1 , 0 ) for all) */"border="5" color="0" x="1248" y="12" height="60" width="393" format="[GENERAL]" html.valueishtml="0"  name=pallets visible="1~t0"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="0" expression="/* sum(IF ( paen_tipopa = 1 , 0 , 1 ) for all) */"border="5" color="0" x="1682" y="12" height="60" width="393" format="[GENERAL]" html.valueishtml="0"  name=puchos visible="1~t0"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

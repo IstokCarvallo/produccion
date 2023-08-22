@@ -1,0 +1,70 @@
+﻿$PBExportHeader$dw_mant_mues_spro_movtocamarafg.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=156 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_movtocamarafg.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tpmv_codigo dbname="spro_movtocamarafg.tpmv_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=mvce_numero dbname="spro_movtocamarafg.mvce_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_pltcod dbname="spro_movtocamarafg.lote_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_espcod dbname="spro_movtocamarafg.lote_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_codigo dbname="spro_movtocamarafg.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_tipoen dbname="spro_movtocamarafg.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_codigo dbname="spro_movtocamarafg.enva_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=mvca_tipomv dbname="spro_movtocamarafg.mvca_tipomv" initial="1" values="Recepción	1/Despacho	2/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_codigo dbname="spro_movtocamarafg.cama_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nroban dbname="spro_movtocamarafg.mvca_nroban" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nropos dbname="spro_movtocamarafg.mvca_nropos" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nropis dbname="spro_movtocamarafg.mvca_nropis" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_canbul dbname="spro_movtocamarafg.mvca_canbul" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" )
+ column=(type=char(15) updatewhereclause=yes name=tien_nombre dbname="tiposenvases.tien_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=envases_enva_codigo dbname="envases.enva_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=tiposenvases_enva_tipoen dbname="tiposenvases.enva_tipoen" )
+ retrieve="SELECT  dba.spro_movtocamarafg.plde_codigo,
+        dba.spro_movtocamarafg.tpmv_codigo,
+        dba.spro_movtocamarafg.mvce_numero,
+        dba.spro_movtocamarafg.lote_pltcod,
+        dba.spro_movtocamarafg.lote_espcod,
+        dba.spro_movtocamarafg.lote_codigo,
+        dba.spro_movtocamarafg.enva_tipoen,
+        dba.spro_movtocamarafg.enva_codigo,
+        dba.spro_movtocamarafg.mvca_tipomv,
+        dba.spro_movtocamarafg.cama_codigo,
+        dba.spro_movtocamarafg.mvca_nroban,
+        dba.spro_movtocamarafg.mvca_nropos,
+        dba.spro_movtocamarafg.mvca_nropis,
+        dba.spro_movtocamarafg.mvca_canbul,
+        dba.envases.enva_nombre ,
+        dba.tiposenvases.tien_nombre ,
+        dba.envases.enva_codigo ,
+        dba.tiposenvases.enva_tipoen     
+   FROM dba.spro_movtocamarafg ,
+        dba.envases ,
+        dba.tiposenvases     
+  WHERE ( dba.spro_movtocamarafg.enva_tipoen = dba.envases.enva_tipoen ) and
+        ( dba.spro_movtocamarafg.enva_codigo = dba.envases.enva_codigo ) and
+        ( dba.spro_movtocamarafg.enva_tipoen = dba.tiposenvases.enva_tipoen ) and
+        ( ( dba.spro_movtocamarafg.plde_codigo = :Planta ) And
+          ( dba.spro_movtocamarafg.cama_codigo = :Camara ) )  " update="dba.spro_movtocamarafg" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("Camara", number))  sort="lote_codigo A " )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="0" x="2245" y="4" height="64" width="233" format="[general]" html.valueishtml="0"  name=mvca_canbul visible="1" edit.limit=4 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="0" x="1458" y="4" height="64" width="233" format="[general]" html.valueishtml="0"  name=mvca_nroban visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="1710" y="4" height="64" width="265" format="[general]" html.valueishtml="0"  name=mvca_nropos visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="1993" y="4" height="64" width="233" format="[general]" html.valueishtml="0"  name=mvca_nropis visible="1" edit.limit=2 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="1001" y="4" height="64" width="439" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="String(  lote_pltcod ,'0000')+String( lote_espcod ,'00')+String( lote_codigo ,'0000')"border="0" color="0" x="133" y="8" height="64" width="416" format="" html.valueishtml="0"  name=caex_nrolote visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="567" y="4" height="64" width="416" format="[general]" html.valueishtml="0"  name=tien_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Lote" border="6" color="0" x="133" y="12" height="132" width="416" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Envase" border="6" color="0" x="1001" y="12" height="132" width="439" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Banda" border="6" color="0" x="1458" y="12" height="132" width="233" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Columna" border="6" color="0" x="1710" y="12" height="132" width="265" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Altura" border="6" color="0" x="1993" y="12" height="132" width="233" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Bultos" border="6" color="0" x="2245" y="12" height="132" width="233" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TipoEnvase" border="6" color="0" x="567" y="12" height="132" width="416" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

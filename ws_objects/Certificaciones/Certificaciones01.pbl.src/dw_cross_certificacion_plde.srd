@@ -1,0 +1,68 @@
+﻿$PBExportHeader$dw_cross_certificacion_plde.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=32896 processing=4 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no  crosstab.dynamic = yes grid.lines=0 grid.columnmove=no selected.mouse=no )
+header[1](height=0 color="536870912" )
+header[2](height=68 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=48 color="536870912" )
+table(column=(type=char(20) updatewhereclause=yes name=prot_nombre dbname="prot_nombre" )
+ column=(type=char(20) updatewhereclause=yes name=zona_nombre dbname="zona_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="plde_codigo" )
+ column=(type=char(20) updatewhereclause=yes name=plde_nombre dbname="plde_nombre" )
+ column=(type=char(20) updatewhereclause=yes name=cece_nroins dbname="cece_nroins" )
+ column=(type=char(20) updatewhereclause=yes name=prec_nombre dbname="prec_nombre" )
+ column=(type=date updatewhereclause=yes name=cece_fecexp dbname="cece_fecexp" )
+ column=(type=char(20) updatewhereclause=yes name=cace_nombre dbname="cace_nombre" )
+ column=(type=date updatewhereclause=yes name=cece_fecaud dbname="cece_fecaud" )
+ column=(type=decimal(0) updatewhereclause=yes name=marca dbname="marca" values="X	1/ 	0/" )
+ procedure="1 execute dbo.cert_info_resumencertificacion_plde;0 @Protocolo = :Protocolo, @Zona = :Zona, @Planta = :Planta, @Especie = :Especie, @Estado = :Estado" arguments=(("Protocolo", decimal),("Zona", decimal),("Planta", decimal),("Especie", decimal),("Estado", decimal))  sort="prot_nombre A zona_nombre A plde_codigo A plde_nombre A cece_nroins A prec_nombre A cece_fecexp A cace_nombre A cece_fecaud A " )
+group(level=1 header.height=0 trailer.height=0 by=("prot_nombre" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=0 trailer.height=0 by=("zona_nombre" ) header.color="536870912" trailer.color="536870912" )
+group(level=3 header.height=0 trailer.height=0 by=("plde_codigo" ) header.color="536870912" trailer.color="536870912" )
+group(level=4 header.height=0 trailer.height=0 by=("plde_nombre" ) header.color="536870912" trailer.color="536870912" )
+group(level=5 header.height=0 trailer.height=0 by=("cece_nroins" ) header.color="536870912" trailer.color="536870912" )
+group(level=6 header.height=0 trailer.height=0 by=("prec_nombre" ) header.color="536870912" trailer.color="536870912" )
+group(level=7 header.height=0 trailer.height=0 by=("cece_fecexp" ) header.color="536870912" trailer.color="536870912" )
+group(level=8 header.height=0 trailer.height=0 by=("cace_nombre" ) header.color="536870912" trailer.color="536870912" )
+text(band=header[2] alignment="2" text="
+Protocolo" border="0" color="33554432" x="9" y="4" height="56" width="416" html.valueishtml="0"  name=prot_nombre_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="
+Zona" border="0" color="33554432" x="434" y="4" height="56" width="210" html.valueishtml="0"  name=zona_nombre_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Cod
+Plde." border="0" color="33554432" x="654" y="4" height="56" width="133" html.valueishtml="0"  name=plde_codigo_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="
+Planta" border="0" color="33554432" x="795" y="4" height="56" width="622" html.valueishtml="0"  name=plde_nombre_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Nro.
+Incripción" border="0" color="33554432" x="1426" y="4" height="56" width="288" html.valueishtml="0"  name=cece_nroins_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="
+Estado" border="0" color="33554432" x="1723" y="4" height="56" width="229" html.valueishtml="0"  name=prec_nombre_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Fecha
+Expiración" border="0" color="33554432" x="1961" y="4" height="56" width="219" html.valueishtml="0"  name=cece_fecexp_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="
+Evaluación" border="0" color="33554432" x="2190" y="4" height="56" width="247" html.valueishtml="0"  name=cace_nombre_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Fecha
+Auditoria" border="0" color="33554432" x="2446" y="4" height="56" width="187" html.valueishtml="0"  name=cece_fecaud_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="@espe_nombre" border="0" color="33554432" x="2642" y="32" height="28" width="229" html.valueishtml="0"  name=marca_t visible="1"  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="4" height="40" width="416" format="[general]" html.valueishtml="0"  name=prot_nombre visible="1" edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="434" y="4" height="40" width="210" format="[general]" html.valueishtml="0"  name=zona_nombre visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="654" y="4" height="40" width="133" format="0000" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="795" y="4" height="40" width="622" format="[general]" html.valueishtml="0"  name=plde_nombre visible="1" edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="1426" y="4" height="40" width="288" format="[general]" html.valueishtml="0"  name=cece_nroins visible="1" edit.limit=50 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="1723" y="4" height="40" width="229" format="[general]" html.valueishtml="0"  name=prec_nombre visible="1" edit.limit=25 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="33554432" x="1966" y="4" height="40" width="215" format="dd/mm/yyyy" html.valueishtml="0"  name=cece_fecexp visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="33554432" x="2190" y="4" height="40" width="247" format="[general]" html.valueishtml="0"  name=cace_nombre visible="1" edit.limit=60 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="2450" y="4" height="40" width="183" format="dd/mm/yyyy" html.valueishtml="0"  name=cece_fecaud visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="2642" y="4" height="40" width="229" format="[general]" html.valueishtml="0"  name=marca visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any crosstab.repeat=yes  font.face="Arial" font.height="-5" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+ crosstab(band = foreground  crosstabonly = yes 
+ columns = "espe_nombre" rows = "prot_nombre, zona_nombre, plde_codigo, plde_nombre, cece_nroins, prec_nombre, cece_fecexp, cace_nombre, cece_fecaud" values = "sum(marca for crosstab)" sourcenames = "plde_codigo, espe_codigo, cert_codigo, prot_codigo, cace_codigo, prec_codigo, cece_nroins, cece_ggngap, cece_fecaud, cece_fecexp, cece_fecins, cece_feesau, cece_montos, plde_nombre, zona_codigo, zona_nombre, espe_nombre, cert_nombre, prot_nombre, cace_nombre, prec_nombre, marca")
+sparse(names="prot_nombre	zona_nombre	plde_codigo	plde_nombre	cece_nroins	prec_nombre	cece_fecexp	cace_nombre")htmltable(border="0" cellpadding="1" cellspacing="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

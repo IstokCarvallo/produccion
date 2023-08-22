@@ -1,0 +1,53 @@
+﻿$PBExportHeader$f_grupo_embalaje.srf
+global type f_grupo_embalaje from function_object
+end type
+
+forward prototypes
+global function boolean f_grupo_embalaje (integer especie, string embalaje1, string embalaje2)
+end prototypes
+
+global function boolean f_grupo_embalaje (integer especie, string embalaje1, string embalaje2);Boolean	lb_retorno
+String	ls_codigo1, ls_codigo2
+
+Select	esem_codigo
+	Into	:ls_Codigo1
+	From	dba.especie_grupo_embalaje
+	Where	espe_codigo = :especie
+	And	emba_codigo = :embalaje1;
+	
+If Sqlca.SqlCode = -1 Then
+	MessageBox('Error...', 'No se pudo conectar a la base de Datos.')
+	lb_retorno = False
+Else
+	Select	esem_codigo
+		Into	:ls_Codigo2
+		From	dba.especie_grupo_embalaje
+		Where	espe_codigo = :especie
+		And	emba_codigo = :embalaje2;
+		
+	If Sqlca.SqlCode = -1 Then
+		MessageBox('Error...', 'No se pudo conectar a la base de Datos.')
+		lb_retorno = False
+	Else
+		If IsNull(ls_Codigo1) Or ls_Codigo1 = '' Then
+			MessageBox('Advertencia...', 'El Embalaje: ' + embalaje1 + ' no esta asociado a ningún grupo de Embalajes.')
+			lb_retorno = False
+		Else
+			If IsNull(ls_Codigo2) Or ls_Codigo2 = '' Then
+				MessageBox('Advertencia...', 'El Embalaje: ' + embalaje2 + ' no esta asociado a ningún grupo de Embalajes.')
+				lb_retorno = False
+			Else
+				If ls_codigo1 <> ls_Codigo2 Then 
+					MessageBox('Advertencia...', 'Los Embalajes no estan en el mismo grupo de asociacion.')
+					lb_retorno = False
+				Else
+					lb_retorno = True
+				End If 
+			End IF
+		End IF
+	End If
+End IF
+
+Return lb_retorno
+end function
+

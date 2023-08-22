@@ -1,0 +1,1767 @@
+﻿$PBExportHeader$m_principal.srm
+forward
+global type m_principal from m_sys_frame
+end type
+type m_tablasgeograficas from menu within m_aplicacion
+end type
+type m_provinciasciudades from menu within m_tablasgeograficas
+end type
+type m_provinciascomunas from menu within m_tablasgeograficas
+end type
+type m_tablasgeograficas from menu within m_aplicacion
+m_provinciasciudades m_provinciasciudades
+m_provinciascomunas m_provinciascomunas
+end type
+type m_- from menu within m_aplicacion
+end type
+type m_mantenciónsistemaconducción from menu within m_aplicacion
+end type
+type m_-4 from menu within m_aplicacion
+end type
+type m_mantenciónsistemariego from menu within m_aplicacion
+end type
+type m_-5 from menu within m_aplicacion
+end type
+type m_estadocertificación from menu within m_aplicacion
+end type
+type m_nivelcertificación from menu within m_aplicacion
+end type
+type m_-7 from menu within m_aplicacion
+end type
+type m_mantenciónpredios from menu within m_aplicacion
+end type
+type m_prediosporproductor from menu within m_aplicacion
+end type
+type m_-9 from menu within m_aplicacion
+end type
+type m_1 from menu within m_aplicacion
+end type
+type m_-10 from menu within m_aplicacion
+end type
+type m_parametrospredioscuarteles from menu within m_aplicacion
+end type
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_tablasgeograficas m_tablasgeograficas
+m_- m_-
+m_mantenciónsistemaconducción m_mantenciónsistemaconducción
+m_-4 m_-4
+m_mantenciónsistemariego m_mantenciónsistemariego
+m_-5 m_-5
+m_estadocertificación m_estadocertificación
+m_nivelcertificación m_nivelcertificación
+m_-7 m_-7
+m_mantenciónpredios m_mantenciónpredios
+m_prediosporproductor m_prediosporproductor
+m_-9 m_-9
+m_1 m_1
+m_-10 m_-10
+m_parametrospredioscuarteles m_parametrospredioscuarteles
+end type
+type m_actualizaproyección from menu within m_procesos
+end type
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_actualizaproyección m_actualizaproyección
+end type
+type m_informeestadisticadeplantación from menu within m_informes
+end type
+type m_resumenestadisticadeplantación from menu within m_informes
+end type
+type m_informepredioscuarteles from menu within m_informes
+end type
+type m_informesgeograficos from menu within m_informes
+end type
+type m_provinciascomunas0 from menu within m_informesgeograficos
+end type
+type m_informesgeograficos from menu within m_informes
+m_provinciascomunas0 m_provinciascomunas0
+end type
+type m_conservadorbienesraices from menu within m_informes
+end type
+type m_totalplantacionespoaño from menu within m_informes
+end type
+type m_resumenplantacionesporzona from menu within m_informes
+end type
+type m_informes from m_sys_frame`m_informes within m_principal
+m_informeestadisticadeplantación m_informeestadisticadeplantación
+m_resumenestadisticadeplantación m_resumenestadisticadeplantación
+m_informepredioscuarteles m_informepredioscuarteles
+m_informesgeograficos m_informesgeograficos
+m_conservadorbienesraices m_conservadorbienesraices
+m_totalplantacionespoaño m_totalplantacionespoaño
+m_resumenplantacionesporzona m_resumenplantacionesporzona
+end type
+end forward
+
+global type m_principal from m_sys_frame
+end type
+global m_principal m_principal
+
+type variables
+Integer	columna = 8
+
+end variables
+
+on m_principal.create
+m_principal=this
+call super::create
+end on
+
+on m_principal.destroy
+call super::destroy
+end on
+
+type m_file from m_sys_frame`m_file within m_principal
+end type
+
+on m_file.create
+call super::create
+end on
+
+on m_file.destroy
+call super::destroy
+end on
+
+type m_controldeaccesos from m_sys_frame`m_controldeaccesos within m_file
+end type
+
+on m_controldeaccesos.create
+call super::create
+end on
+
+on m_controldeaccesos.destroy
+call super::destroy
+end on
+
+type m_visordeaccesos from m_sys_frame`m_visordeaccesos within m_controldeaccesos
+end type
+
+on m_visordeaccesos.create
+call super::create
+end on
+
+on m_visordeaccesos.destroy
+call super::destroy
+end on
+
+type m_depuracióndeaccesos from m_sys_frame`m_depuracióndeaccesos within m_controldeaccesos
+end type
+
+on m_depuracióndeaccesos.create
+call super::create
+end on
+
+on m_depuracióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_rayita2000 from m_sys_frame`m_rayita2000 within m_controldeaccesos
+end type
+
+on m_rayita2000.create
+call super::create
+end on
+
+on m_rayita2000.destroy
+call super::destroy
+end on
+
+type m_mantencióndeaccesos from m_sys_frame`m_mantencióndeaccesos within m_controldeaccesos
+end type
+
+on m_mantencióndeaccesos.create
+call super::create
+end on
+
+on m_mantencióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_sucursalesyuadministrativas from m_sys_frame`m_sucursalesyuadministrativas within m_mantencióndeaccesos
+end type
+
+on m_sucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_sucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_accesodegruposalsistema from m_sys_frame`m_accesodegruposalsistema within m_mantencióndeaccesos
+end type
+
+on m_accesodegruposalsistema.create
+call super::create
+end on
+
+on m_accesodegruposalsistema.destroy
+call super::destroy
+end on
+
+type m_gruposyusuarios from m_sys_frame`m_gruposyusuarios within m_mantencióndeaccesos
+end type
+
+on m_gruposyusuarios.create
+call super::create
+end on
+
+on m_gruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_rayita2003 from m_sys_frame`m_rayita2003 within m_mantencióndeaccesos
+end type
+
+on m_rayita2003.create
+call super::create
+end on
+
+on m_rayita2003.destroy
+call super::destroy
+end on
+
+type m_accesosdeusuarios from m_sys_frame`m_accesosdeusuarios within m_mantencióndeaccesos
+end type
+
+on m_accesosdeusuarios.create
+call super::create
+end on
+
+on m_accesosdeusuarios.destroy
+call super::destroy
+end on
+
+type m_tipodeadministraciónsistema from m_sys_frame`m_tipodeadministraciónsistema within m_mantencióndeaccesos
+end type
+
+on m_tipodeadministraciónsistema.create
+call super::create
+end on
+
+on m_tipodeadministraciónsistema.destroy
+call super::destroy
+end on
+
+type m_rayita2002 from m_sys_frame`m_rayita2002 within m_controldeaccesos
+end type
+
+on m_rayita2002.create
+call super::create
+end on
+
+on m_rayita2002.destroy
+call super::destroy
+end on
+
+type m_informesdeaccesos from m_sys_frame`m_informesdeaccesos within m_controldeaccesos
+end type
+
+on m_informesdeaccesos.create
+call super::create
+end on
+
+on m_informesdeaccesos.destroy
+call super::destroy
+end on
+
+type m_informedesucursalesyuadministrativas from m_sys_frame`m_informedesucursalesyuadministrativas within m_informesdeaccesos
+end type
+
+on m_informedesucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_informedesucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_informedegruposyusuarios from m_sys_frame`m_informedegruposyusuarios within m_informesdeaccesos
+end type
+
+on m_informedegruposyusuarios.create
+call super::create
+end on
+
+on m_informedegruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_informedesistemasygrupos from m_sys_frame`m_informedesistemasygrupos within m_informesdeaccesos
+end type
+
+on m_informedesistemasygrupos.create
+call super::create
+end on
+
+on m_informedesistemasygrupos.destroy
+call super::destroy
+end on
+
+type m_informedeaccesoalsistema from m_sys_frame`m_informedeaccesoalsistema within m_informesdeaccesos
+end type
+
+on m_informedeaccesoalsistema.create
+call super::create
+end on
+
+on m_informedeaccesoalsistema.destroy
+call super::destroy
+end on
+
+type m_informeaccesodeusuariosaaplicaciones from m_sys_frame`m_informeaccesodeusuariosaaplicaciones within m_informesdeaccesos
+end type
+
+on m_informeaccesodeusuariosaaplicaciones.create
+call super::create
+end on
+
+on m_informeaccesodeusuariosaaplicaciones.destroy
+call super::destroy
+end on
+
+type m_rayita2001 from m_sys_frame`m_rayita2001 within m_controldeaccesos
+end type
+
+on m_rayita2001.create
+call super::create
+end on
+
+on m_rayita2001.destroy
+call super::destroy
+end on
+
+type m_cambiodepassword from m_sys_frame`m_cambiodepassword within m_controldeaccesos
+end type
+
+on m_cambiodepassword.create
+call super::create
+end on
+
+on m_cambiodepassword.destroy
+call super::destroy
+end on
+
+type m_calculadora from m_sys_frame`m_calculadora within m_file
+end type
+
+on m_calculadora.create
+call super::create
+end on
+
+on m_calculadora.destroy
+call super::destroy
+end on
+
+type m_-0 from m_sys_frame`m_-0 within m_file
+end type
+
+on m_-0.create
+call super::create
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_configurarimpresora from m_sys_frame`m_configurarimpresora within m_file
+end type
+
+on m_configurarimpresora.create
+call super::create
+end on
+
+on m_configurarimpresora.destroy
+call super::destroy
+end on
+
+type m_-1 from m_sys_frame`m_-1 within m_file
+end type
+
+on m_-1.create
+call super::create
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_cerrarventanaactiva from m_sys_frame`m_cerrarventanaactiva within m_file
+end type
+
+on m_cerrarventanaactiva.create
+call super::create
+end on
+
+on m_cerrarventanaactiva.destroy
+call super::destroy
+end on
+
+type m_-2 from m_sys_frame`m_-2 within m_file
+end type
+
+on m_-2.create
+call super::create
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salirdelaaplicacin from m_sys_frame`m_salirdelaaplicacin within m_file
+end type
+
+on m_salirdelaaplicacin.create
+call super::create
+end on
+
+on m_salirdelaaplicacin.destroy
+call super::destroy
+end on
+
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_tablasgeograficas m_tablasgeograficas
+m_- m_-
+m_mantenciónsistemaconducción m_mantenciónsistemaconducción
+m_-4 m_-4
+m_mantenciónsistemariego m_mantenciónsistemariego
+m_-5 m_-5
+m_estadocertificación m_estadocertificación
+m_nivelcertificación m_nivelcertificación
+m_-7 m_-7
+m_mantenciónpredios m_mantenciónpredios
+m_prediosporproductor m_prediosporproductor
+m_-9 m_-9
+m_1 m_1
+m_-10 m_-10
+m_parametrospredioscuarteles m_parametrospredioscuarteles
+end type
+
+on m_aplicacion.create
+call super::create
+this.m_tablasgeograficas=create m_tablasgeograficas
+this.m_-=create m_-
+this.m_mantenciónsistemaconducción=create m_mantenciónsistemaconducción
+this.m_-4=create m_-4
+this.m_mantenciónsistemariego=create m_mantenciónsistemariego
+this.m_-5=create m_-5
+this.m_estadocertificación=create m_estadocertificación
+this.m_nivelcertificación=create m_nivelcertificación
+this.m_-7=create m_-7
+this.m_mantenciónpredios=create m_mantenciónpredios
+this.m_prediosporproductor=create m_prediosporproductor
+this.m_-9=create m_-9
+this.m_1=create m_1
+this.m_-10=create m_-10
+this.m_parametrospredioscuarteles=create m_parametrospredioscuarteles
+this.Item[UpperBound(this.Item)+1]=this.m_tablasgeograficas
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_mantenciónsistemaconducción
+this.Item[UpperBound(this.Item)+1]=this.m_-4
+this.Item[UpperBound(this.Item)+1]=this.m_mantenciónsistemariego
+this.Item[UpperBound(this.Item)+1]=this.m_-5
+this.Item[UpperBound(this.Item)+1]=this.m_estadocertificación
+this.Item[UpperBound(this.Item)+1]=this.m_nivelcertificación
+this.Item[UpperBound(this.Item)+1]=this.m_-7
+this.Item[UpperBound(this.Item)+1]=this.m_mantenciónpredios
+this.Item[UpperBound(this.Item)+1]=this.m_prediosporproductor
+this.Item[UpperBound(this.Item)+1]=this.m_-9
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_-10
+this.Item[UpperBound(this.Item)+1]=this.m_parametrospredioscuarteles
+end on
+
+on m_aplicacion.destroy
+call super::destroy
+destroy(this.m_tablasgeograficas)
+destroy(this.m_-)
+destroy(this.m_mantenciónsistemaconducción)
+destroy(this.m_-4)
+destroy(this.m_mantenciónsistemariego)
+destroy(this.m_-5)
+destroy(this.m_estadocertificación)
+destroy(this.m_nivelcertificación)
+destroy(this.m_-7)
+destroy(this.m_mantenciónpredios)
+destroy(this.m_prediosporproductor)
+destroy(this.m_-9)
+destroy(this.m_1)
+destroy(this.m_-10)
+destroy(this.m_parametrospredioscuarteles)
+end on
+
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+end type
+
+on m_movimientos.create
+call super::create
+this.visible = false
+this.text = "Movimiento"
+this.enabled = false
+this.toolbaritemorder = 1
+this.toolbaritemspace = 1
+this.menuitemtype = menuitemtypeexit!
+end on
+
+on m_movimientos.destroy
+call super::destroy
+end on
+
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_actualizaproyección m_actualizaproyección
+end type
+
+on m_procesos.create
+call super::create
+this.m_actualizaproyección=create m_actualizaproyección
+this.Item[UpperBound(this.Item)+1]=this.m_actualizaproyección
+end on
+
+on m_procesos.destroy
+call super::destroy
+destroy(this.m_actualizaproyección)
+end on
+
+type m_informes from m_sys_frame`m_informes within m_principal
+m_informeestadisticadeplantación m_informeestadisticadeplantación
+m_resumenestadisticadeplantación m_resumenestadisticadeplantación
+m_informepredioscuarteles m_informepredioscuarteles
+m_informesgeograficos m_informesgeograficos
+m_conservadorbienesraices m_conservadorbienesraices
+m_totalplantacionespoaño m_totalplantacionespoaño
+m_resumenplantacionesporzona m_resumenplantacionesporzona
+end type
+
+on m_informes.create
+call super::create
+this.m_informeestadisticadeplantación=create m_informeestadisticadeplantación
+this.m_resumenestadisticadeplantación=create m_resumenestadisticadeplantación
+this.m_informepredioscuarteles=create m_informepredioscuarteles
+this.m_informesgeograficos=create m_informesgeograficos
+this.m_conservadorbienesraices=create m_conservadorbienesraices
+this.m_totalplantacionespoaño=create m_totalplantacionespoaño
+this.m_resumenplantacionesporzona=create m_resumenplantacionesporzona
+this.Item[UpperBound(this.Item)+1]=this.m_informeestadisticadeplantación
+this.Item[UpperBound(this.Item)+1]=this.m_resumenestadisticadeplantación
+this.Item[UpperBound(this.Item)+1]=this.m_informepredioscuarteles
+this.Item[UpperBound(this.Item)+1]=this.m_informesgeograficos
+this.Item[UpperBound(this.Item)+1]=this.m_conservadorbienesraices
+this.Item[UpperBound(this.Item)+1]=this.m_totalplantacionespoaño
+this.Item[UpperBound(this.Item)+1]=this.m_resumenplantacionesporzona
+end on
+
+on m_informes.destroy
+call super::destroy
+destroy(this.m_informeestadisticadeplantación)
+destroy(this.m_resumenestadisticadeplantación)
+destroy(this.m_informepredioscuarteles)
+destroy(this.m_informesgeograficos)
+destroy(this.m_conservadorbienesraices)
+destroy(this.m_totalplantacionespoaño)
+destroy(this.m_resumenplantacionesporzona)
+end on
+
+type m_consultas from m_sys_frame`m_consultas within m_principal
+end type
+
+on m_consultas.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+type m_topicactions from m_sys_frame`m_topicactions within m_principal
+end type
+
+on m_topicactions.create
+call super::create
+end on
+
+on m_topicactions.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_sys_frame`m_primerregistro within m_topicactions
+end type
+
+on m_primerregistro.create
+call super::create
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_sys_frame`m_registroanterior within m_topicactions
+end type
+
+on m_registroanterior.create
+call super::create
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_sys_frame`m_siguienteregistro within m_topicactions
+end type
+
+on m_siguienteregistro.create
+call super::create
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_sys_frame`m_ultimoregistro within m_topicactions
+end type
+
+on m_ultimoregistro.create
+call super::create
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-45 from m_sys_frame`m_-45 within m_topicactions
+end type
+
+on m_-45.create
+call super::create
+end on
+
+on m_-45.destroy
+call super::destroy
+end on
+
+type m_buscarregistro from m_sys_frame`m_buscarregistro within m_topicactions
+end type
+
+on m_buscarregistro.create
+call super::create
+end on
+
+on m_buscarregistro.destroy
+call super::destroy
+end on
+
+type m_ordenar from m_sys_frame`m_ordenar within m_topicactions
+end type
+
+on m_ordenar.create
+call super::create
+end on
+
+on m_ordenar.destroy
+call super::destroy
+end on
+
+type m_-0001 from m_sys_frame`m_-0001 within m_topicactions
+end type
+
+on m_-0001.create
+call super::create
+end on
+
+on m_-0001.destroy
+call super::destroy
+end on
+
+type m_nuevoregistro from m_sys_frame`m_nuevoregistro within m_topicactions
+end type
+
+on m_nuevoregistro.create
+call super::create
+end on
+
+on m_nuevoregistro.destroy
+call super::destroy
+end on
+
+type m_búsquedadeinformación from m_sys_frame`m_búsquedadeinformación within m_topicactions
+end type
+
+on m_búsquedadeinformación.create
+call super::create
+end on
+
+on m_búsquedadeinformación.destroy
+call super::destroy
+end on
+
+type m_lectura from m_sys_frame`m_lectura within m_topicactions
+end type
+
+on m_lectura.create
+call super::create
+end on
+
+on m_lectura.destroy
+call super::destroy
+end on
+
+type m_grabainformación from m_sys_frame`m_grabainformación within m_topicactions
+end type
+
+on m_grabainformación.create
+call super::create
+end on
+
+on m_grabainformación.destroy
+call super::destroy
+end on
+
+type m_eliminainformación from m_sys_frame`m_eliminainformación within m_topicactions
+end type
+
+on m_eliminainformación.create
+call super::create
+end on
+
+on m_eliminainformación.destroy
+call super::destroy
+end on
+
+type m_imprimedocumento from m_sys_frame`m_imprimedocumento within m_topicactions
+end type
+
+on m_imprimedocumento.create
+call super::create
+end on
+
+on m_imprimedocumento.destroy
+call super::destroy
+end on
+
+type m_-0002 from m_sys_frame`m_-0002 within m_topicactions
+end type
+
+on m_-0002.create
+call super::create
+end on
+
+on m_-0002.destroy
+call super::destroy
+end on
+
+type m_agregadetalle from m_sys_frame`m_agregadetalle within m_topicactions
+end type
+
+on m_agregadetalle.create
+call super::create
+end on
+
+on m_agregadetalle.destroy
+call super::destroy
+end on
+
+type m_eliminadetalle from m_sys_frame`m_eliminadetalle within m_topicactions
+end type
+
+on m_eliminadetalle.create
+call super::create
+end on
+
+on m_eliminadetalle.destroy
+call super::destroy
+end on
+
+type m_respaldos from m_sys_frame`m_respaldos within m_principal
+end type
+
+on m_respaldos.create
+call super::create
+end on
+
+on m_respaldos.destroy
+call super::destroy
+end on
+
+type m_respaldobasededatosylog from m_sys_frame`m_respaldobasededatosylog within m_respaldos
+end type
+
+on m_respaldobasededatosylog.create
+call super::create
+end on
+
+on m_respaldobasededatosylog.destroy
+call super::destroy
+end on
+
+type m_-respaldos from m_sys_frame`m_-respaldos within m_respaldos
+end type
+
+on m_-respaldos.create
+call super::create
+end on
+
+on m_-respaldos.destroy
+call super::destroy
+end on
+
+type m_actualizacióndedatos from m_sys_frame`m_actualizacióndedatos within m_respaldos
+end type
+
+on m_actualizacióndedatos.create
+call super::create
+end on
+
+on m_actualizacióndedatos.destroy
+call super::destroy
+end on
+
+type m_window from m_sys_frame`m_window within m_principal
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_tile from m_sys_frame`m_tile within m_window
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_tilehorizontal from m_sys_frame`m_tilehorizontal within m_window
+end type
+
+on m_tilehorizontal.create
+call super::create
+end on
+
+on m_tilehorizontal.destroy
+call super::destroy
+end on
+
+type m_layer from m_sys_frame`m_layer within m_window
+end type
+
+on m_layer.create
+call super::create
+end on
+
+on m_layer.destroy
+call super::destroy
+end on
+
+type m_cascade from m_sys_frame`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_help from m_sys_frame`m_help within m_principal
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_helpgeneralidades from m_sys_frame`m_helpgeneralidades within m_help
+end type
+
+on m_helpgeneralidades.create
+call super::create
+end on
+
+on m_helpgeneralidades.destroy
+call super::destroy
+end on
+
+type m_helpadministracióndeusuarios from m_sys_frame`m_helpadministracióndeusuarios within m_help
+end type
+
+on m_helpadministracióndeusuarios.create
+call super::create
+end on
+
+on m_helpadministracióndeusuarios.destroy
+call super::destroy
+end on
+
+type m_liberacióndesistemas from m_sys_frame`m_liberacióndesistemas within m_help
+end type
+
+on m_liberacióndesistemas.create
+call super::create
+end on
+
+on m_liberacióndesistemas.destroy
+call super::destroy
+end on
+
+type m_actualizacionesdesistema from m_sys_frame`m_actualizacionesdesistema within m_help
+end type
+
+on m_actualizacionesdesistema.create
+call super::create
+end on
+
+on m_actualizacionesdesistema.destroy
+call super::destroy
+end on
+
+type m_helpindex from m_sys_frame`m_helpindex within m_help
+end type
+
+on m_helpindex.create
+call super::create
+end on
+
+on m_helpindex.destroy
+call super::destroy
+end on
+
+type m_-3 from m_sys_frame`m_-3 within m_help
+end type
+
+on m_-3.create
+call super::create
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_about from m_sys_frame`m_about within m_help
+end type
+
+on m_about.create
+call super::create
+end on
+
+on m_about.destroy
+call super::destroy
+end on
+
+type m_tablasgeograficas from menu within m_aplicacion
+m_provinciasciudades m_provinciasciudades
+m_provinciascomunas m_provinciascomunas
+end type
+
+on m_tablasgeograficas.create
+call super::create
+this.text = "Tablas Geograficas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_provinciasciudades=create m_provinciasciudades
+this.m_provinciascomunas=create m_provinciascomunas
+this.Item[UpperBound(this.Item)+1]=this.m_provinciasciudades
+this.Item[UpperBound(this.Item)+1]=this.m_provinciascomunas
+end on
+
+on m_tablasgeograficas.destroy
+call super::destroy
+destroy(this.m_provinciasciudades)
+destroy(this.m_provinciascomunas)
+end on
+
+type m_provinciasciudades from menu within m_tablasgeograficas
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_maed_provincias_ciudades, w_main, columna, Original!)
+
+end event
+
+on m_provinciasciudades.create
+call super::create
+this.text = "Provincias/Ciudades"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_provinciasciudades.destroy
+call super::destroy
+end on
+
+type m_provinciascomunas from menu within m_tablasgeograficas
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_maed_provincias_comunas, w_main, columna, Original!)
+
+end event
+
+on m_provinciascomunas.create
+call super::create
+this.text = "Provincias/Comunas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_provinciascomunas.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_aplicacion
+end type
+
+on m_-.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_mantenciónsistemaconducción from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_prodsistconduc, w_main, columna, Original!)
+end event
+
+on m_mantenciónsistemaconducción.create
+call super::create
+this.text = "Sistema &Conducción"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mantenciónsistemaconducción.destroy
+call super::destroy
+end on
+
+type m_-4 from menu within m_aplicacion
+end type
+
+on m_-4.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-4.destroy
+call super::destroy
+end on
+
+type m_mantenciónsistemariego from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_prodsistriego, w_main, columna, Original!)
+end event
+
+on m_mantenciónsistemariego.create
+call super::create
+this.text = "Sistema &Riego"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mantenciónsistemariego.destroy
+call super::destroy
+end on
+
+type m_-5 from menu within m_aplicacion
+end type
+
+on m_-5.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-5.destroy
+call super::destroy
+end on
+
+type m_estadocertificación from menu within m_aplicacion
+end type
+
+on m_estadocertificación.create
+call super::create
+this.text = "&Estado Certificación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_estadocertificación.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_estadocertific, w_main, columna, Original!)
+end event
+
+type m_nivelcertificación from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_nivelcertificacion, w_main, columna, Original!)
+end event
+
+on m_nivelcertificación.create
+call super::create
+this.text = "&Nivel Certificación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_nivelcertificación.destroy
+call super::destroy
+end on
+
+type m_-7 from menu within m_aplicacion
+end type
+
+on m_-7.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-7.destroy
+call super::destroy
+end on
+
+type m_mantenciónpredios from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+
+OpenSheet(w_maed_predios_cuarteles, w_main, columna, Original!)
+end event
+
+on m_mantenciónpredios.create
+call super::create
+this.text = "&Predios y Cuarteles"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mantenciónpredios.destroy
+call super::destroy
+end on
+
+type m_prediosporproductor from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_spropredioprod, w_main, columna, Original!)
+end event
+
+on m_prediosporproductor.create
+call super::create
+this.visible = false
+this.text = "Predios por Productor"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_prediosporproductor.destroy
+call super::destroy
+end on
+
+type m_-9 from menu within m_aplicacion
+end type
+
+on m_-9.create
+call super::create
+this.visible = false
+this.text = "-"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-9.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_mant_mues_certificacion, w_main, columna, Original!)
+end event
+
+on m_1.create
+call super::create
+this.text = "Ce&rtificación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_-10 from menu within m_aplicacion
+end type
+
+on m_-10.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-10.destroy
+call super::destroy
+end on
+
+type m_parametrospredioscuarteles from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_parampredioscuarteles, w_main, columna, Original!)
+end event
+
+on m_parametrospredioscuarteles.create
+call super::create
+this.text = "Parametros Predios/Cuarteles"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_parametrospredioscuarteles.destroy
+call super::destroy
+end on
+
+type m_actualizaproyección from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+
+OpenSheet(w_proc_actualiza_proyeccion, w_main, columna, Original!)
+end event
+
+on m_actualizaproyección.create
+call super::create
+this.text = "Actualiza Proyección"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_actualizaproyección.destroy
+call super::destroy
+end on
+
+type m_informeestadisticadeplantación from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+
+OpenSheet(w_info_estadistica_plantacion, w_main, columna, Original!)
+end event
+
+on m_informeestadisticadeplantación.create
+call super::create
+this.text = "(1) Estadistica de Plantación "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_informeestadisticadeplantación.destroy
+call super::destroy
+end on
+
+type m_resumenestadisticadeplantación from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_resumenestplantacion, w_main, columna, Original!)
+end event
+
+on m_resumenestadisticadeplantación.create
+call super::create
+this.text = "(2) Resumen Estadistica de Plantación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_resumenestadisticadeplantación.destroy
+call super::destroy
+end on
+
+type m_informepredioscuarteles from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_predios_cuarteles, w_main, columna, Original!)
+end event
+
+on m_informepredioscuarteles.create
+call super::create
+this.text = "(3) Predios Cuarteles "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_informepredioscuarteles.destroy
+call super::destroy
+end on
+
+type m_informesgeograficos from menu within m_informes
+m_provinciascomunas0 m_provinciascomunas0
+end type
+
+on m_informesgeograficos.create
+call super::create
+this.text = "&Informes Geograficos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_provinciascomunas0=create m_provinciascomunas0
+this.Item[UpperBound(this.Item)+1]=this.m_provinciascomunas0
+end on
+
+on m_informesgeograficos.destroy
+call super::destroy
+destroy(this.m_provinciascomunas0)
+end on
+
+type m_provinciascomunas0 from menu within m_informesgeograficos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_provincias_comunas, w_main, columna, Original!)
+end event
+
+on m_provinciascomunas0.create
+call super::create
+this.text = "(4) Provincias / Comunas "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_provinciascomunas0.destroy
+call super::destroy
+end on
+
+type m_conservadorbienesraices from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_informe_doctoslegales_predio, w_main, columna, Original!)
+end event
+
+on m_conservadorbienesraices.create
+call super::create
+this.text = "(5) Conservador Bienes Raices "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_conservadorbienesraices.destroy
+call super::destroy
+end on
+
+type m_totalplantacionespoaño from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_totalplantaporano, w_main, columna, Original!)
+end event
+
+on m_totalplantacionespoaño.create
+call super::create
+this.text = "(6) Plantaciones por Año "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_totalplantacionespoaño.destroy
+call super::destroy
+end on
+
+type m_resumenplantacionesporzona from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_resuplantaporzona, w_main, columna, Original!)
+end event
+
+on m_resumenplantacionesporzona.create
+call super::create
+this.text = "(7) Resumen Plantaciones por Zona "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_resumenplantacionesporzona.destroy
+call super::destroy
+end on
+

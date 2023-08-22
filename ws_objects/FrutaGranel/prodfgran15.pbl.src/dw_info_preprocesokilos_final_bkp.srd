@@ -1,0 +1,169 @@
+﻿$PBExportHeader$dw_info_preprocesokilos_final_bkp.srd
+$PBExportComments$Informe de Proceso en Kilos - Detalle de Kilos
+release 10;
+datawindow(units=0 timer_interval=0 color=8421504 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=372 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=452 color="536870912"  height.autosize=yes)
+table(column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="spro_ordenproceso.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_ordenproceso.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_tipord dbname="spro_ordenproceso.orpr_tipord" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_numero dbname="spro_ordenproceso.orpr_numero" )
+ column=(type=date updatewhereclause=yes name=orpr_fecpro dbname="spro_ordenproceso.orpr_fecpro" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_ordenproceso.prod_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="spro_ordenproceso.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="spro_ordenproceso.vari_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=line_codigo dbname="spro_ordenproceso.line_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=pefr_codigo dbname="spro_ordenproceso.pefr_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=ppre_numero dbname="spro_ordenproceso.ppre_numero" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="especies.espe_nombre" )
+ column=(type=char(20) updatewhereclause=yes name=frio_nombre dbname="tratamientofrio.frio_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=prbr_codpre dbname="spro_lotesfrutagranel.prbr_codpre" )
+ column=(type=decimal(0) updatewhereclause=yes name=prcc_codigo dbname="spro_lotesfrutagranel.prcc_codigo" )
+ column=(type=date updatewhereclause=yes name=ppre_feccre dbname="spro_ordenproceso.ppre_feccre" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_tippro dbname="spro_ordenproceso.orpr_tippro" )
+ column=(type=char(30) updatewhereclause=yes name=plde_nombre dbname="plantadesp.plde_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=line_nombre dbname="lineapacking.line_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=pefr_nombre dbname="periodofrio.pefr_nombre" )
+ retrieve="  SELECT ~"dba~".~"spro_ordenproceso~".~"clie_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"plde_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_tipord~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_numero~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_fecpro~",   
+         ~"dba~".~"spro_ordenproceso~".~"prod_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"espe_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"vari_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"line_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"pefr_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"ppre_numero~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"especies~".~"espe_nombre~",   
+         ~"dba~".~"tratamientofrio~".~"frio_nombre~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prbr_codpre~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prcc_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"ppre_feccre~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_tippro~",   
+         ~"dba~".~"plantadesp~".~"plde_nombre~",   
+         ~"dba~".~"lineapacking~".~"line_nombre~",   
+         ~"dba~".~"periodofrio~".~"pefr_nombre~"  
+    FROM ~"dba~".~"spro_ordenproceso~",   
+         ~"dba~".~"tratamientofrio~",   
+         ~"dba~".~"variedades~",   
+         ~"dba~".~"especies~",   
+         ~"dba~".~"productores~",   
+         ~"dba~".~"spro_ordenprocdeta~",   
+         ~"dba~".~"spro_lotesfrutagranel~",   
+         ~"dba~".~"plantadesp~",   
+         ~"dba~".~"lineapacking~",   
+         ~"dba~".~"periodofrio~"  
+   WHERE ( ~"dba~".~"spro_ordenproceso~".~"frio_tipofr~" = ~"dba~".~"tratamientofrio~".~"frio_tipofr~" ) and  
+         ( ~"dba~".~"variedades~".~"espe_codigo~" = ~"dba~".~"spro_ordenproceso~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"vari_codigo~" = ~"dba~".~"spro_ordenproceso~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"espe_codigo~" = ~"dba~".~"especies~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"spro_ordenproceso~".~"prod_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"clie_codigo~" = ~"dba~".~"spro_ordenproceso~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"plde_codigo~" = ~"dba~".~"spro_ordenproceso~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"orpr_tipord~" = ~"dba~".~"spro_ordenproceso~".~"orpr_tipord~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"orpr_numero~" = ~"dba~".~"spro_ordenproceso~".~"orpr_numero~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"lote_pltcod~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"lote_espcod~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_ordenprocdeta~".~"lote_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"vari_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"prod_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"prod_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"plde_codigo~" = ~"dba~".~"plantadesp~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"plde_codigo~" = ~"dba~".~"lineapacking~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"line_codigo~" = ~"dba~".~"lineapacking~".~"line_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"pefr_codigo~" = ~"dba~".~"periodofrio~".~"pefr_codigo~" ) and  
+         ( ( dba.spro_ordenproceso.clie_codigo = :Cliente ) AND  
+         ( :Planta in ( dba.plantadesp.plde_codigo, dba.plantadesp.plde_admini ) ) AND  
+         ( :NumeroOrden in ( -1, dba.spro_ordenproceso.orpr_numero ) ) AND  
+         ( dba.spro_ordenproceso.orpr_tipord = :TipoOrden ) AND  
+         ( :Productor in ( -1,-9,-8, dba.spro_ordenproceso.prod_codigo ) ) AND  
+         ( :Especie in ( -1, dba.spro_ordenproceso.espe_codigo ) ) AND  
+         ( :Variedad in ( -1,-9, dba.spro_ordenproceso.vari_codigo ) ) AND  
+         ( :Linea in ( -1, dba.spro_ordenproceso.line_codigo ) ) AND  
+         ( :Periodo in ( -1,-9, dba.spro_ordenproceso.pefr_codigo ) ) AND  
+         ( dba.spro_ordenproceso.orpr_fecpro between :FechaInicio and :FechaTermino ) AND  
+         ( :Programa in ( -1,0, dba.spro_ordenproceso.ppre_numero ) ) )   
+GROUP BY ~"dba~".~"spro_ordenproceso~".~"clie_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"plde_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_tipord~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_numero~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_fecpro~",   
+         ~"dba~".~"spro_ordenproceso~".~"prod_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"espe_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"vari_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"line_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"pefr_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"ppre_numero~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"especies~".~"espe_nombre~",   
+         ~"dba~".~"tratamientofrio~".~"frio_nombre~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prbr_codpre~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prcc_codigo~",   
+         ~"dba~".~"spro_ordenproceso~".~"ppre_feccre~",   
+         ~"dba~".~"spro_ordenproceso~".~"orpr_tippro~",   
+         ~"dba~".~"plantadesp~".~"plde_nombre~",   
+         ~"dba~".~"lineapacking~".~"line_nombre~",   
+         ~"dba~".~"periodofrio~".~"pefr_nombre~"   
+" arguments=(("Cliente", number),("Planta", number),("TipoOrden", number),("NumeroOrden", number),("Productor", number),("Especie", number),("Variedad", number),("Linea", number),("Periodo", number),("FechaInicio", date),("FechaTermino", date),("Programa", number),("ConsPredio", number),("ConsFecha", number),("TipoInforme", number)) )
+group(level=1 header.height=0 trailer.height=4 by=("clie_codigo" , "plde_codigo" , "orpr_tipord" , "orpr_numero" , "prod_codigo" , "espe_codigo" , "vari_codigo" , "line_codigo" , "pefr_codigo" , "ppre_numero" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="12" height="40" width="1211" html.valueishtml="0"  name=nom_empresa visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="12" height="40" width="1211" html.valueishtml="0"  name=nombre_empresa visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="56" height="40" width="1211" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="4050" y="8" height="40" width="123" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="4050" y="52" height="40" width="114" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="4050" y="96" height="40" width="82" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="4187" y="96" height="40" width="197" format="hh:mm:ss" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="( Información de Carácter Provisorio )" border="0" color="0" x="1989" y="140" height="40" width="667" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema" border="0" color="0" x="1842" y="8" height="40" width="128" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="PRODUCCION FRUTA GRANEL" border="0" color="0" x="1989" y="8" height="40" width="544" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo" border="0" color="0" x="1842" y="52" height="40" width="128" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Procesos" border="0" color="0" x="1989" y="52" height="40" width="155" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe" border="0" color="0" x="1842" y="96" height="40" width="128" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha Inicio" border="0" color="0" x="3296" y="236" height="40" width="201" html.valueishtml="0"  name=t_50 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha Término" border="0" color="0" x="3296" y="280" height="40" width="251" html.valueishtml="0"  name=t_51 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Tipo Proceso" border="0" color="0" x="1993" y="236" height="40" width="210" html.valueishtml="0"  name=orpr_tipdoc_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="4187" y="52" height="40" width="197" format="dd/mm/yyyy" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="4187" y="8" height="40" width="197" format="[general]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=15 alignment="0" tabsequence=32766 border="0" color="0" x="311" y="324" height="40" width="823" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="311" y="236" height="40" width="823" format="[general]" html.valueishtml="0"  name=espe_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=20 alignment="0" tabsequence=32766 border="0" color="0" x="311" y="280" height="40" width="823" format="[general]" html.valueishtml="0"  name=plde_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="'PreProceso en Kilos ' + IF ( TipoInforme = 1 , 'Interno' , 'al Productor')"border="0" color="0" x="1989" y="96" height="40" width="645" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Período Frio" border="0" color="0" x="1993" y="324" height="40" width="210" html.valueishtml="0"  name=pefr_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Línea" border="0" color="0" x="1993" y="280" height="40" width="91" html.valueishtml="0"  name=line_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=9 alignment="0" tabsequence=32766 border="0" color="0" x="2226" y="280" height="40" width="55" format="[general]" html.valueishtml="0"  name=line_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=21 alignment="0" tabsequence=32766 border="0" color="0" x="2295" y="280" height="40" width="526" format="[general]" html.valueishtml="0"  name=line_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="if( NumeroOrden > 0,'N° : '+String( NumeroOrden ,'00000000'),'')"border="0" color="0" x="2565" y="236" height="40" width="256" format="[GENERAL]" html.valueishtml="0"  name=compute_78 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=22 alignment="0" tabsequence=32766 border="0" color="0" x="2565" y="324" height="40" width="256" format="[general]" html.valueishtml="0"  name=pefr_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="case ( orpr_tipord when 0 then 'Todos' when 4 then 'Proceso' when 8 then 'Preproceso') + case (orpr_tippro when 1 then ' Completo' when 2 then ' Selección' else '')"border="0" color="0" x="2226" y="236" height="40" width="325" format="[GENERAL]" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=14 alignment="0" tabsequence=32766 border="0" color="0" x="2226" y="324" height="40" width="325" format="[general]" html.valueishtml="0"  name=frio_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha Proceso" border="0" color="0" x="3296" y="324" height="40" width="251" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="String( FechaInicio ,'dd/mm/yyyy')"border="0" color="0" x="3570" y="236" height="40" width="219" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="String( FechaTermino ,'dd/mm/yyyy')"border="0" color="0" x="3570" y="280" height="40" width="219" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="String( orpr_fecpro ,'dd/mm/yyyy')"border="0" color="0" x="3570" y="324" height="40" width="219" format="[GENERAL]" html.valueishtml="0"  name=compute_8 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=6 alignment="1" tabsequence=32766 border="0" color="0" x="178" y="324" height="40" width="114" format="00000" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=2 alignment="1" tabsequence=32766 border="0" color="0" x="178" y="280" height="40" width="114" format="0000" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=7 alignment="1" tabsequence=32766 border="0" color="0" x="178" y="236" height="40" width="114" format="00" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Productor" border="0" color="0" x="5" y="324" height="40" width="160" html.valueishtml="0"  name=prod_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Planta" border="0" color="0" x="5" y="280" height="40" width="160" html.valueishtml="0"  name=plde_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Especie" border="0" color="0" x="5" y="236" height="40" width="160" html.valueishtml="0"  name=espe_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_a" x="5" y="308" height="136" width="4489" border="0"  height.autosize=yes criteria="" nest_arguments=((" clie_codigo "),(" plde_codigo "),(" orpr_tipord "),(" orpr_numero "),(" prod_codigo "),(" espe_codigo "),(" vari_codigo "),(" line_codigo "),(" pefr_codigo "),(" orpr_fecpro "),(" orpr_fecpro "),(" ppre_numero "),(" ConsPredio "),(" ConsFecha "),(" TipoInforme "),("1")) trail_footer = yes  name=dw_3 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_b" x="5" y="156" height="136" width="4489" border="0"  height.autosize=yes criteria="" nest_arguments=((" clie_codigo "),(" plde_codigo "),(" orpr_tipord "),(" orpr_numero "),(" prod_codigo "),(" espe_codigo "),(" vari_codigo "),(" line_codigo "),(" pefr_codigo "),(" orpr_fecpro "),(" orpr_fecpro "),(" ppre_numero "),(" ConsPredio "),(" ConsFecha "),(" TipoInforme "),("2")) trail_footer = yes  name=dw_2 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_c" x="5" y="4" height="136" width="4489" border="0"  height.autosize=yes criteria="" nest_arguments=((" clie_codigo "),(" plde_codigo "),(" orpr_tipord "),(" orpr_numero ")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

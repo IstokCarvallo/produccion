@@ -1,0 +1,36 @@
+﻿$PBExportHeader$str_temporada.srs
+$PBExportComments$Estructura de Parámetros de Temporada.
+global type str_temporada from structure
+	integer		temporada
+	string		nombre
+	string		abreviacion
+	datetime		fechainicio
+	datetime		fechatermino
+	string		agenteaduana1
+	string		agenteaduana2
+	string		embarcador1
+	string		embarcador2
+	string		ciaseguro
+	string		firmacarta1
+	string		firmacarta2
+	string		firmacarta3
+	string		representante1
+	string		rutrepresentante1
+	string		cargorepresentante1
+	string		nacionalidadrepresentante1
+	integer		estadocivilrepresentante1
+	string		profesionrepresentante1
+	string		representante2
+	string		rutrepresentante2
+	string		cargorepresentante2
+	string		nacionalidadrepresentante2
+	integer		estadocivilrepresentante2
+	string		profesionrepresentante2
+	string		arbitro1
+	string		arbitro2
+	string		mandato1
+	string		mandato2
+	integer		estado
+	decimal { 2 }		financiamiento
+end type
+

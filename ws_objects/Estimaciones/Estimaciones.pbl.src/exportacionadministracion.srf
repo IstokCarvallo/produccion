@@ -1,0 +1,20 @@
+﻿$PBExportHeader$exportacionadministracion.srf
+global type exportacionadministracion from function_object
+end type
+
+forward prototypes
+global subroutine exportacionadministracion (ref integer ai_contabilidad)
+end prototypes
+
+global subroutine exportacionadministracion (ref integer ai_contabilidad);SELECT	Max(prpa_contab)
+	INTO	:ai_Contabilidad
+	FROM	dba.spro_paramplanta
+  WHERE	plde_codigo = plde_consol;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta")
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Error","No está definida la planta de Consolidación en Parámetros de Planta")
+END IF
+end subroutine
+

@@ -1,0 +1,9 @@
+﻿$PBExportHeader$dbpl_03_ctlcalfamilias.srp
+PIPELINE(source_connect=Directo ProdRancagua_2008,destination_connect=produccion_2008,type=update,commit=0,errors=0,keyname="ctlcalfamilias")
+SOURCE(name="ctlcalfamilias",COLUMN(type=decimal,name="ccfa_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="ccfa_descrip",dbtype="varchar(40)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccfa_pidesf",dbtype="numeric(1,0)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcalfamilias~") COLUMN(NAME=~"dba.ctlcalfamilias.ccfa_codigo~")COLUMN(NAME=~"dba.ctlcalfamilias.ccfa_descrip~")COLUMN(NAME=~"dba.ctlcalfamilias.ccfa_pidesf~"))")
+DESTINATION(name="dba.ctlcalfamilias",COLUMN(type=decimal,name="ccfa_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="ccfa_descrip",dbtype="char(40)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccfa_pidesf",dbtype="numeric(1,0)",nulls_allowed=yes))

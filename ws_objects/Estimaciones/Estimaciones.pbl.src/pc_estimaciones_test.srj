@@ -1,0 +1,276 @@
+﻿$PBExportHeader$pc_estimaciones_test.srj
+EXE:Estimaciones.exe,..\..\imagenes\productiva.pbr,0,1,1,1,
+CMP:0,0,0,2,0,0,1
+COM:RIOblanco Spa
+DES:Estimación de Cosecha
+CPY:05-07-2010
+PRD:Estimación de Cosecha
+PVS:5.21.30092021
+PVN:5,21,3009,2021
+FVS:5.21.30092021
+FVN:5,21,3009,2021
+MAN:0,asInvoker,0
+POWERCLIENT:{"pc_estimaciones_test":{"Format":"1.0","AppType":1,"AppName":"Estimaciones","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\temp\\Estimaciones","ResourceName":"C:\\Desarrollo 21\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.21.30092021","MinimumValidVersion":"5.21.30092021","OnlineTime":"2021-06-14 17:16:13","OfflineTime":"2031-06-14 17:16:13","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuild":true,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":true,"LocalServer":false,"ServerProfile":"AplicacionesQA","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"C:\\Users\\istok.carvallo\\AppData\\Roaming\\CloudAppLauncher_Installer","RuntimePlatform":3,"LauncherName":"Default_Both_WithServiceMulti","PackageOutputPath":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\export","FullDownload":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"Estimaciones","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"21.0.0.1288","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Estimación de Cosecha","CompanyName":"RIOblanco Spa","Description":"Estimación de Cosecha","Copyright":"05-07-2010","ProductVersion":"5.21.30092021","FileVersion":"5.21.30092021","ProductVersionMajor":5,"ProductVersionMinor":21,"ProductVersionBuild":3009,"ProductVersionRevision":2021,"FileVersionMajor":5,"FileVersionMinor":21,"FileVersionBuild":3009,"FileVersionRevision":2021,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"192.168.168.250","RunPort":"","AppStartupMethod":0,"Libraries":[{"PbdName":"Estimaciones.pbd","PbdLocalPath":"Estimaciones.pbd"},{"PbdName":"Pronos00.pbd","PbdLocalPath":"Pronos00.pbd"},{"PbdName":"Pronos01.pbd","PbdLocalPath":"Pronos01.pbd"},{"PbdName":"Pronos02.pbd","PbdLocalPath":"Pronos02.pbd"},{"PbdName":"PredCuartel01.pbd","PbdLocalPath":"C:\\Desarrollo 21\\Productiva\\PredioCuartel\\PredCuartel01.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"TabProd04.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 21\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 21\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 21\\ObjePubl.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["Pronostico.ini"],"InstantDownloadFiles":[],"RuntimeModules":["Core Runtime Files","Microsoft OLE DB Driver for SQL Server (MOD)","SNC SQL Native Client (SNC)","MS Excel12 Support","NativePDF Support"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","PfxFile":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"Pronostico.ini","UpdateType":3}]}}
+PBD:Estimaciones.pbl,,1
+PBD:Pronos00.pbl,,1
+PBD:Pronos01.pbl,,1
+PBD:Pronos02.pbl,,1
+PBD:..\PredioCuartel\PredCuartel01.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd01.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd02.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd03.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd04.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd05.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd06.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProdTab.pbl,,1
+PBD:..\..\AdmUsuar.pbl,,1
+PBD:..\..\ObjePubl.pbl,,1
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd05.pbl,str_parempresa,s
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_mues_admausuarios,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_plan_pronos_cosecha_enca,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pron_distfrujocoscondsemana,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_zonas,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_medidas_escritorio,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_fecha_carta,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_zoom,s
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_plantadesp,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_deta_usuariosweb,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_usuario,s
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd02.pbl,dw_mues_exportadores,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_deta_temporadaespecie,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,f_insertamenu,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_apiwindows,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_depura_admaaplicacces,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admausuarios,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_acerca_de,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_selec_distribtemp,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_plan_pronostico_cosecha_cuartel,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_mues_pesocosecha,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,f_etiqueta,f
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dddw_codnumero,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_variecolor,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,accesosistemavalido,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_para_informes,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mant_admagruposistema,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_pronvariecalibre,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pron_conexion,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,str_parametros,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_buscar,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,uo_seleccion_predios,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd06.pbl,uo_predios,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admaunidadadmini,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_temporadasespecies,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_grupoespecie,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_carga_pronosticopacking,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_mail,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_mant_detalle_csd,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,printer_info,s
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,uo_pronconectividad,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dw_menu_imprimir_herr,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_prodcuarteles,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admausuarios_unidadsucursal,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd03.pbl,buscaagronomo,f
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_deta_pronvariecalibre,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_correo,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_admdoctos,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admaaplicacces,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_admausuarios,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_paramtemporada,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_aviso_acceso,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd05.pbl,parempresa,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_informes,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,m_sys_frame,m
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_mues_calibrecuartel,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd03.pbl,w_mant_mues_agronomos,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_mues_prodcalidadmercado,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,d_columna_ordena,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,w_busc_agronomos,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor_agronomo,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_exportadores,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_info_cambioagronomo,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_clientesprod,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_mues_condicioncuartel,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_info_bisemanal,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_agronomos,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_agronomo_productor,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admagruposistema,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_pronvariecalibre,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_pronconectividad,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_carga_estimprodsemana,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_varicolor,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_temporada,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,uo_seleccion_conectividad,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_info_sistemasgrupos,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_cons_superficie_seleccion,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pron_distfrujocoscuartel,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd01.pbl,dw_mues_prodpacking2,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_info_fruticola,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,accesopuntocritico,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_mant_tabla,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_info_gruposusuarios,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_variedades,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_consulta_sistemaestimacion,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_plan_pronostico_cosecha_agregado,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_mant,s
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_maed_admasucursales,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_correo_error,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dddw_admagrupos,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,w_mant_deta_productores_terceros,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_pesocosecha,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_deta_pronconectividad,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pron_distfrujocoscondcalibre,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_prodcuarteles,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,w_busc_exportador,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_prodpredio,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_seleccion_multisemana,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_gene_pronostico_cierre,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,str_temporada,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_membrete,f
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_temporadaespecie,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_plan_pronostico_cosecha,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_agronomo,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_odbc,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_actualizaciones,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_cliente,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pronostico_cosecha_consulta,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_consultas_pronosticocosech,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,w_info_fruticola,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_admasucursal,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admatipoadmiusua,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_actualiza_log,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_info_estimacionsemanal_cc,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,manbin_especie,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_imprimir,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_imprimeinformepdf,f
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_maed_admagruposistemas,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_consulta_catastro_superficie,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,m_consulta_sis,m
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,str_process_information,s
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,grabaaccesoaplicacion,f
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_gene_pentasemanal_excel,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_mues_admaaplicacces,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dddw_admausuarios,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_mues_admatipoadmiusua,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_seleccion_admasistemas,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_pronvariecalibre,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_usuariosweb,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_web_usuariosproductor,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_carga_produccion,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,w_acceso,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_buscar,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,d_campos_orden,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mant_admausuariopcio,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_pronconectividad,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_subgrupoespecie,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_flujocosechaenca,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,f_creamenubd,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_busqueda,s
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd01.pbl,dw_mues_productores,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,f_generasemtitulos,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dw_menu_imprimir,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_columna_orden,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admasucursales,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_variedad,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_prodpredio,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_distribproduccion,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_flujocosechamulsemanal_packing,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_info_comparativo,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_fondo,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_grupoeconomico,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,opcionsoloconsulta,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_respaldo,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_mues_calibresdeta,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dw_mues_actualizador,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_agronomoespeprod,w
+OBJ:C:\Desarrollo 21\Productiva\PredioCuartel\PredCuartel01.pbl,dw_busc_prodpredio,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,paramtemporada_tipo,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_info_liberacion_sistemas,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_seleccion_admausuarios,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,w_mensaje,w
+OBJ:C:\Desarrollo 21\Productiva\PredioCuartel\PredCuartel01.pbl,w_busc_prodpredio,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,dw_mant_productores_terceros,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,str_startupinfo,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_principal,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_mant_detalle,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_deta_admagrupos,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_zoom,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_mant_admausuaropcio,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_especie,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_agronomoespeprod,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_gene_estimacionsemanal_cali_excel,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,w_main,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_info_accesoaplicaciones,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_pron_distfrujocosenca,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_nrosemana,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,f_nrosemanaano,f
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_selec_distribtemp,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,w_info_cumplimiento,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_acceso_usuario,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_cambio_password,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_prodcalidadmercado,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_temporadaespecie,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_fechassemana,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_flujocosechasemanal_packing,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_global_replace,f
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mant_grupousuarios,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_fechassemana,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,paramplanta,f
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_info_admasucursales,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,uo_admasistemas,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_zonas,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_grupoeconomico,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_info_cumplimiento_semanal,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_info,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_admausuarios_actualizacion,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_busqueda,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_busc_admagruposistema,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_info_accesousuarios,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,grupoproductor,f
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_clientesprod,u
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_deta_fechassemana,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_password,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_mant_directo,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_distribucioncond,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,estimaciones,a
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,str_osversioninfo,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dw_errorbasedatos,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mues_admagrupousuario,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_agronomos,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,w_busc_admasucursales,w
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mant_admasucursal,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd01.pbl,w_busc_especies,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd01.pbl,dw_mues_especies,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_gene_pentasemanal,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,w_info_comparativo,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd03.pbl,str_agronomousuario,s
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,str_paramplanta,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_dw,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dw_mant_admaunidadadmini,d
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dddw_admasucursales,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_agronomo,u
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_verrut,f
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_grabatablas,u
+OBJ:C:\Desarrollo 21\Productiva\PredioCuartel\PredCuartel01.pbl,dw_mues_agronomos,d
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_prodpacking2,w
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,uo_errorbasedatos,u
+OBJ:C:\Desarrollo 21\AdmUsuar.pbl,dddw_admasistemas,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,dddw_codcaracteres,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_selec_distribtemp_resumen,d
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,str_parms,s
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Estimaciones.pbl,m_principal,m
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 21\ObjePubl.pbl,w_mant_encab_deta,w
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,uo_productores,u
+OBJ:C:\Desarrollo 21\TablasProd\Tablas\TabProdTab.pbl,w_busc_productores,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,w_mant_mues_distribucioncalibre,w
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mant_usuarioweb,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos02.pbl,dw_consulta_sistemaestimacion,d
+OBJ:C:\Desarrollo 21\Productiva\Estimaciones\Pronos00.pbl,dw_mues_fechassemana,d

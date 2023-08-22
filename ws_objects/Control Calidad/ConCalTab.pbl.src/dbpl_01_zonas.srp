@@ -1,0 +1,11 @@
+﻿$PBExportHeader$dbpl_01_zonas.srp
+PIPELINE(source_connect=Directo ProdRancagua_2008,destination_connect=produccion_2008,type=update,commit=100,errors=100,keyname="zonas")
+SOURCE(name="zonas",COLUMN(type=decimal,name="zona_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="zona_nombre",dbtype="varchar(30)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="zona_grupos",dbtype="numeric(1,0)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="zona_ctlcal",dbtype="numeric(3,0)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.zonas~") COLUMN(NAME=~"dba.zonas.zona_codigo~")COLUMN(NAME=~"dba.zonas.zona_nombre~")COLUMN(NAME=~"dba.zonas.zona_grupos~")COLUMN(NAME=~"dba.zonas.zona_ctlcal~"))")
+DESTINATION(name="dba.zonas",COLUMN(type=decimal,name="zona_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="zona_nombre",dbtype="char(30)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="zona_grupos",dbtype="numeric(1,0)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="zona_ctlcal",dbtype="numeric(3,0)",nulls_allowed=yes))

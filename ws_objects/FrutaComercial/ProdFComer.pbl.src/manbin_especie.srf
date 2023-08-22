@@ -1,0 +1,52 @@
+﻿$PBExportHeader$manbin_especie.srf
+global type manbin_especie from function_object
+end type
+
+forward prototypes
+global function boolean manbin_especie (long al_planta, integer ai_especie, boolean ab_mensaje, transaction at_transaccion)
+end prototypes
+
+global function boolean manbin_especie (long al_planta, integer ai_especie, boolean ab_mensaje, transaction at_transaccion);Integer		li_existe, li_especie, li_manejo
+
+SELECT count(*) into :li_existe
+FROM dbo.spro_paramplantadeta
+WHERE plde_codigo = :al_planta
+USING at_transaccion;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta: spro_param_plantadeta")
+	Return False
+ELSEIF sqlca.SQLCode	= 100 OR li_existe < 1 THEN
+	MessageBox("Error","La planta no posee tipos de manejo de bins para ninguna especie.")
+	Return False
+END IF
+
+SELECT IsNull(prpa_ctlbin, -1) into :li_manejo
+FROM dbo.spro_paramplantadeta
+WHERE plde_codigo = :al_planta
+  AND espe_codigo = :ai_especie
+USING at_transaccion;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta: spro_param_plantadeta")
+	Return False
+ELSEIF sqlca.SQLCode	= 100 OR li_manejo = -1 THEN
+	MessageBox("Error","La especie " + String(ai_especie) + " no tiene especificado el manejo de fruta a utilizar. Por favor, ingrese o seleccione otra")
+	Return False
+END IF
+
+IF (li_manejo = 1) THEN 
+	gstr_paramplanta.binsabins				= 	TRUE
+	gstr_paramplanta.palletdebins			=	FALSE
+ELSEIF (li_manejo = 2) THEN
+	gstr_paramplanta.palletdebins			=	TRUE
+	gstr_paramplanta.binsabins				= 	FALSE
+ELSEIF (li_manejo = 3) THEN
+	gstr_paramplanta.palletdebins			=	FALSE
+	gstr_paramplanta.binsabins				= 	FALSE
+	gstr_paramplanta.bultobins				=	TRUE
+END IF
+
+Return True
+end function
+

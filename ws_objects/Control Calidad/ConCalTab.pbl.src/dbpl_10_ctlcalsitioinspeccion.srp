@@ -1,0 +1,9 @@
+﻿$PBExportHeader$dbpl_10_ctlcalsitioinspeccion.srp
+PIPELINE(source_connect=Directo ProdRancagua_2008,destination_connect=produccion_2008,type=update,commit=0,errors=0,keyname="ctlcalsitioinspeccion")
+SOURCE(name="ctlcalsitioinspeccion",COLUMN(type=decimal,name="ccsi_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="ccsi_descri",dbtype="varchar(40)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccsi_abrevi",dbtype="varchar(10)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcalsitioinspeccion~") COLUMN(NAME=~"dba.ctlcalsitioinspeccion.ccsi_codigo~")COLUMN(NAME=~"dba.ctlcalsitioinspeccion.ccsi_descri~")COLUMN(NAME=~"dba.ctlcalsitioinspeccion.ccsi_abrevi~"))")
+DESTINATION(name="dba.ctlcalsitioinspeccion",COLUMN(type=decimal,name="ccsi_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="ccsi_descri",dbtype="char(40)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccsi_abrevi",dbtype="char(10)",nulls_allowed=yes))

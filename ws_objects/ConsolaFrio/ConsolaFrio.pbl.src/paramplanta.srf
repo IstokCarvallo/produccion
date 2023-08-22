@@ -1,0 +1,91 @@
+﻿$PBExportHeader$paramplanta.srf
+global type paramplanta from function_object
+end type
+
+forward prototypes
+global subroutine paramplanta ()
+end prototypes
+
+global subroutine paramplanta ();Integer  li_Planta, li_packing, li_CrtlBins, li_tabapa
+
+SELECT	Max(plde_codigo)
+INTO		:li_planta
+FROM     dbo.spro_paramplanta;
+
+IF sqlca.SQLCode	<> 0 AND sqlca.SQLCode <> 100 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros por Planta: spro_paramplanta")
+	RETURN
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Advertencia","No Existen parametros para plantas")
+	RETURN
+END IF
+
+SELECT	 plde_codigo, 								prpa_nomadm,							prpa_destar, 
+			 prpa_recenv, 								prpa_guienv, 							espe_codigo, 	
+			 vari_codigo, 								sepl_codigo,								prpa_diaret, 	
+			 prod_codigo, 								prpa_poriva, 							prpa_etiemb, 
+			 prpa_pesbin,								prpa_ticopv,								prpa_ticopr,	
+			 prpa_packing, 								prpa_ctlbin, 								prpa_minbul,
+			 prpa_gencom,								prpa_passwo,							prpa_genpuc,
+			 prpa_ctludp
+	INTO	:gstr_paramplanta.codigoplanta, 		:gstr_paramplanta.administrador, 	:gstr_paramplanta.destare,
+			:gstr_paramplanta.controlenvase, 	:gstr_paramplanta.guiaenvase,			:gstr_paramplanta.codigoespecie, 
+			:gstr_paramplanta.codigovariedad, 	:gstr_paramplanta.codigoservicio, 	:gstr_paramplanta.diasretraso,
+			:gstr_paramplanta.productorempresa, :gstr_paramplanta.porcentajeiva, 	:gstr_paramplanta.etiquetaembalaje,
+			:gstr_paramplanta.pesajebins,			:gstr_paramplanta.PoolVenta,			:gstr_paramplanta.PoolRetiro,
+			:li_packing,								:li_CrtlBins, 								:gstr_paramplanta.MinBulProceso,
+			:gstr_paramplanta.CompMan,				:gstr_paramplanta.Password,			:gstr_paramplanta.GenPucho,
+			:gstr_paramplanta.prpa_ctludp
+	FROM	dbo.spro_paramplanta
+  WHERE	plde_codigo =: li_planta;
+
+
+IF (li_packing = 1) THEN 
+	gstr_paramplanta.packing 				= 	TRUE
+ELSE
+	gstr_paramplanta.packing 				= 	FALSE
+END IF
+
+IF (li_CrtlBins = 1) THEN 
+	gstr_paramplanta.binsabins				= 	TRUE
+	gstr_paramplanta.palletdebins			=	FALSE
+ELSEIF (li_CrtlBins = 2) THEN
+	gstr_paramplanta.palletdebins			=	TRUE
+	gstr_paramplanta.binsabins				= 	FALSE
+END IF
+
+gstr_paramplanta.destarabasepallet		=	0
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta: spro_param_planta")
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Error","Lectura de Parametros Planta: spro_paramplanta")
+END IF
+
+SELECT	plde_nombre, plde_admini
+	INTO	:gstr_apl.referencia, :gstr_ParamPlanta.plantaadminist
+	FROM	dbo.plantadesp
+	WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta ;
+	
+gstr_apl.referencia	=	"Planta : " + gstr_apl.referencia
+
+SELECT	empr_rutemp, empr_razsoc, empr_nombre,
+			empr_direcc, empr_comuna, empr_ciudad,
+			empr_nrotel, empr_nrofax, empr_giroem,	
+			empr_repleg, empr_rutrle, empr_codexp,
+			empr_codplt, empr_oficin
+	INTO	:gstr_parempresa.empr_rutemp, :gstr_parempresa.empr_razsoc, :gstr_parempresa.empr_nombre,
+			:gstr_parempresa.empr_direcc, :gstr_parempresa.empr_comuna, :gstr_parempresa.empr_ciudad,
+			:gstr_parempresa.empr_nrotel, :gstr_parempresa.empr_nrofax, :gstr_parempresa.empr_giroem,
+			:gstr_parempresa.empr_repleg, :gstr_parempresa.empr_rutrle, :gstr_parempresa.empr_codexp,
+			:gstr_parempresa.empr_codplt, :gstr_parempresa.empr_oficin
+	FROM	dbo.parempresa;
+	
+	
+IF SQLCA.SQLCode = -1 THEN
+	F_ErrorBaseDatos(SQLCA,"Lectura de Parametros Temporada Vigente")
+END IF
+
+
+end subroutine
+

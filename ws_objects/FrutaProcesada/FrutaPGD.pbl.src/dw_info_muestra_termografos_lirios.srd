@@ -1,0 +1,40 @@
+﻿$PBExportHeader$dw_info_muestra_termografos_lirios.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no rows_per_detail = 10 )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=char(19) updatewhereclause=yes name=defe_termog dbname="defe_termog" )
+ retrieve="  SELECT Convert(char(8),~"dba~".~"despafrigode~".~"defe_termog~")+'-'+convert(char(8),~"dba~".~"despafrigode~".~"paen_numero~")+'/ ' as defe_termog
+    FROM ~"dba~".~"despafrigode~",   
+         ~"dba~".~"despafrigoen~"  
+   WHERE ( ~"dba~".~"despafrigode~".~"plde_codigo~" = ~"dba~".~"despafrigoen~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"despafrigode~".~"clie_codigo~" = ~"dba~".~"despafrigoen~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"despafrigode~".~"defe_numero~" = ~"dba~".~"despafrigoen~".~"defe_numero~" ) and  
+         ( ( ~"dba~".~"despafrigode~".~"clie_codigo~" = :cliente ) AND  
+         ( ~"dba~".~"despafrigode~".~"plde_codigo~" = :planta ) AND  
+         ( ~"dba~".~"despafrigoen~".~"defe_guides~" = :guia ) AND  
+         ( IsNull(~"dba~".~"despafrigode~".~"defe_termog~", '') <> '' ) )    
+" arguments=(("cliente", number),("planta", number),("guia", number)) )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="5" y="8" height="60" width="530" format="[general]" html.valueishtml="0" row_in_detail=1  name=defe_termog_1 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="544" y="8" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=2  name=defe_termog_2 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1097" y="8" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=3  name=defe_termog_3 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="1650" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=4  name=defe_termog_4 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="2203" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=5  name=defe_termog_5 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="2757" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=6  name=defe_termog_6 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="3310" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=7  name=defe_termog_7 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="3863" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=8  name=defe_termog_8 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="4416" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=9  name=defe_termog_9 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="4969" y="4" height="60" width="544" format="[general]" html.valueishtml="0" row_in_detail=10  name=defe_termog_10 visible="1" edit.limit=19 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

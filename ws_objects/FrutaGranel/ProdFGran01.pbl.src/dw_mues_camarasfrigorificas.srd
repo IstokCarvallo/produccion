@@ -1,0 +1,36 @@
+﻿$PBExportHeader$dw_mues_camarasfrigorificas.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=164 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes key=yes name=cama_codigo dbname="camarasbode.cama_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=cama_nombre dbname="camarasbode.cama_nombre" )
+ column=(type=date updatewhereclause=yes name=cama_feccie dbname="camarasbode.cama_feccie" )
+ column=(type=date updatewhereclause=yes name=cama_fecape dbname="camarasbode.cama_fecape" )
+ column=(type=decimal(0) updatewhereclause=yes name=cama_cancal dbname="camarasbode.cama_cancal" )
+ column=(type=char(2) updatewhereclause=yes name=frio_tipofr dbname="camarasbode.frio_tipofr" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=plde_codigo dbname="camarasbode.plde_codigo" )
+ retrieve="SELECT  ~"dba~".~"camarasbode~".~"cama_codigo~" ,
+           ~"dba~".~"camarasbode~".~"cama_nombre~" ,
+           ~"dba~".~"camarasbode~".~"cama_feccie~" ,
+           ~"dba~".~"camarasbode~".~"cama_fecape~" ,
+           ~"dba~".~"camarasbode~".~"cama_cancal~" ,
+           ~"dba~".~"camarasbode~".~"frio_tipofr~" ,
+           ~"dba~".~"camarasbode~".~"plde_codigo~"     
+        FROM ~"dba~".~"camarasbode~"    " update="dba.camarasbode" updatewhere=1 updatekeyinplace=no )
+text(band=header alignment="2" text="Codigo" border="6" color="0" x="133" y="12" height="144" width="238" html.valueishtml="0"  name=cama_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Nombre" border="6" color="0" x="389" y="12" height="144" width="1010" html.valueishtml="0"  name=cama_nombre_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Feccie" border="6" color="0" x="1417" y="12" height="144" width="475" html.valueishtml="0"  name=cama_feccie_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecape" border="6" color="0" x="1911" y="12" height="144" width="475" html.valueishtml="0"  name=cama_fecape_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Nº Bandas" border="6" color="0" x="2405" y="12" height="144" width="325" html.valueishtml="0"  name=cama_nroban_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Tratam." border="6" color="0" x="2747" y="12" height="144" width="283" html.valueishtml="0"  name=frio_tipofr_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=1 alignment="0" tabsequence=0 border="0" color="0" x="133" y="0" height="64" width="238" html.valueishtml="0"  name=cama_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=2 alignment="0" tabsequence=0 border="0" color="0" x="389" y="0" height="64" width="1010" html.valueishtml="0"  name=cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=3 alignment="0" tabsequence=0 border="0" color="0" x="1417" y="0" height="64" width="475" html.valueishtml="0"  name=cama_feccie visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=4 alignment="0" tabsequence=0 border="0" color="0" x="1911" y="0" height="64" width="475" html.valueishtml="0"  name=cama_fecape visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=5 alignment="0" tabsequence=0 border="0" color="0" x="2405" y="0" height="64" width="325" html.valueishtml="0"  name=cama_cancal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=6 alignment="0" tabsequence=0 border="0" color="0" x="2747" y="0" height="64" width="283" html.valueishtml="0"  name=frio_tipofr visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

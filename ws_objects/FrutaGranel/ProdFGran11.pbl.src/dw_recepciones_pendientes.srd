@@ -1,0 +1,128 @@
+﻿$PBExportHeader$dw_recepciones_pendientes.srd
+release 10.5;
+datawindow(units=3 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 635 print.margin.right = 635 print.margin.top = 635 print.margin.bottom = 635 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=1058 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=449 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="spro_movtofrutagranenca.clie_codigo" dbalias="mge.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutagranenca.plde_codigo" dbalias="mge.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagranenca_tpmv_codigo dbname="spro_movtofrutagranenca.tpmv_codigo" dbalias="mge.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfge_numero dbname="spro_movtofrutagranenca.mfge_numero" dbalias="mge.mfge_numero" )
+ column=(type=date updatewhereclause=yes name=mfge_fecmov dbname="spro_movtofrutagranenca.mfge_fecmov" dbalias="mge.mfge_fecmov" )
+ column=(type=time updatewhereclause=yes name=refg_horaen dbname="spro_movtofrutagranenca.refg_horaen" dbalias="mge.refg_horaen" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfge_totbul dbname="spro_movtofrutagranenca.mfge_totbul" dbalias="mge.mfge_totbul" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfgb_vactot dbname="spro_movtofrutagrandeta.mfgb_vactot" dbalias="mgd.mfgb_vactot" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_pltcod dbname="spro_movtofrutagrandeta.lote_pltcod" dbalias="mgd.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_espcod dbname="spro_movtofrutagrandeta.lote_espcod" dbalias="mgd.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_codigo dbname="lote_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfgd_bulent dbname="mfgd_bulent" )
+ column=(type=long updatewhereclause=yes name=mfge_bulpes dbname="mfge_bulpes" )
+ column=(type=decimal(0) updatewhereclause=yes name=clie_nombre dbname="clie_nombre" )
+ retrieve="select mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mgd.lote_pltcod,
+       mgd.lote_espcod, mgd.lote_codigo, Sum(mgd.mfgd_bulent) as mfgd_bulent into #Clasif1
+  from dba.spro_movtofrutagranenca as mge, dba.spro_movtofrutagrandeta as mgd
+ where mge.clie_codigo = mgd.clie_codigo 
+   and mge.plde_codigo = mgd.plde_codigo
+   and mge.tpmv_codigo = mgd.tpmv_codigo
+   and mge.mfge_numero = mgd.mfge_numero
+   and mge.mfge_estmov <> 3
+   and mge.tpmv_codigo = 1
+ group by mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mgd.lote_pltcod,
+       mgd.lote_espcod, mgd.lote_codigo;
+
+select mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.lote_pltcod,
+       mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent, Count(fgmb_nrotar) as mfge_bulpes,
+       Convert(decimal(8,0), 0) as mfgb_vactot into #clasif2
+  from #Clasif1 as mge, dba.spro_movtofrutagranpesa as mgd
+ where mge.clie_codigo = mgd.clie_codigo 
+   and mge.plde_codigo = mgd.plde_codigo
+   and mge.tpmv_codigo = mgd.tpmv_codigo
+   and mge.mfge_numero = mgd.mfge_numero
+   and mge.lote_codigo = mgd.lote_codigo
+   and IsNull(mgd.mfgp_pesore, 0) <> 0
+ group by mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.lote_pltcod,
+       mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent;
+
+Insert into #clasif2
+select mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.lote_pltcod,
+       mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent, 0, 0
+  from #Clasif1 as mge, dba.spro_movtofrutagranpesa as mgd
+ where mge.clie_codigo = mgd.clie_codigo 
+   and mge.plde_codigo = mgd.plde_codigo
+   and mge.tpmv_codigo = mgd.tpmv_codigo
+   and mge.mfge_numero = mgd.mfge_numero
+   and mge.lote_codigo = mgd.lote_codigo
+   and IsNull(mgd.mfgp_pesore, 0) = 0
+   and not exists(select * from #clasif2 as cl2
+                       where mgd.lote_codigo = cl2.lote_codigo)
+ group by mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.lote_pltcod,
+       mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent;
+
+select mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mfgb_vactot = Count(fgmb_nrotar) into #Clasif3
+  from #Clasif1 as mge, dba.spro_movtofrutagranpesa as mgd
+ where mge.clie_codigo = mgd.clie_codigo 
+   and mge.plde_codigo = mgd.plde_codigo
+   and mge.tpmv_codigo = mgd.tpmv_codigo
+   and mge.mfge_numero = mgd.mfge_numero
+   and IsNull(mgd.mfgp_pesore, 0) <> 0
+ group by mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.lote_pltcod,
+       mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent;
+
+update #clasif2 as mge
+   set mge.mfgb_vactot = mgd.mfgb_vactot
+from #Clasif3 as mgd
+ where mge.clie_codigo = mgd.clie_codigo 
+   and mge.plde_codigo = mgd.plde_codigo
+   and mge.tpmv_codigo = mgd.tpmv_codigo
+   and mge.mfge_numero = mgd.mfge_numero;
+
+select mge.clie_codigo, mge.plde_codigo, mge.tpmv_codigo, mge.mfge_numero, 
+       mge.mfge_fecmov, mge.refg_horaen, mge.mfge_totbul, mge.mfgb_vactot,
+       mge.lote_pltcod, mge.lote_espcod, mge.lote_codigo, mge.mfgd_bulent, 
+       mge.mfge_bulpes, mge.clie_codigo as clie_nombre from #clasif2 as mge;"  sort="clie_codigo A plde_codigo A spro_movtofrutagranenca_tpmv_codigo A mfge_numero A mfge_fecmov A refg_horaen A " )
+group(level=1 header.height=0 trailer.height=423 by=("clie_codigo" , "plde_codigo" , "spro_movtofrutagranenca_tpmv_codigo" , "mfge_numero" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Recepción" border="6" color="33554432" x="6058" y="158" height="370" width="5159" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Nro" border="6" color="33554432" x="6058" y="635" height="370" width="1455" html.valueishtml="0"  name=spro_movtofrutagranenca_mfge_numero_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha" border="6" color="33554432" x="7620" y="635" height="370" width="1905" html.valueishtml="0"  name=spro_movtofrutagranenca_mfge_fecmov_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hora" border="6" color="33554432" x="9630" y="635" height="370" width="1587" html.valueishtml="0"  name=spro_movtofrutagranenca_refg_horaen_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Recep." border="6" color="33554432" x="11324" y="635" height="370" width="1455" html.valueishtml="0"  name=spro_movtofrutagranenca_mfge_totbul_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Pes." border="6" color="33554432" x="12885" y="635" height="370" width="1455" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Bultos" border="6" color="33554432" x="11324" y="158" height="370" width="3016" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Lote" border="6" color="33554432" x="14446" y="158" height="846" width="2354" html.valueishtml="0"  name=spro_movtofrutagrandeta_lote_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Bultos" border="6" color="33554432" x="16906" y="158" height="370" width="2989" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Recibidos" border="6" color="33554432" x="16906" y="635" height="370" width="1455" html.valueishtml="0"  name=mfgd_bulent_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Pesados" border="6" color="33554432" x="18441" y="635" height="370" width="1455" html.valueishtml="0"  name=mfge_bulpes_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=detail alignment="2" expression="String( spro_movtofrutagrandeta_lote_pltcod, '0000' ) + String( spro_movtofrutagrandeta_lote_espcod,'00' ) + String( spro_movtofrutagrandeta_lote_codigo,'00000' )"border="0" color="33554432" x="14446" y="26" height="396" width="2354" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfgd_bulent =  mfge_bulpes , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="33554432" x="16906" y="26" height="396" width="1455" format="#,##0" html.valueishtml="0"  name=mfgd_bulent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfgd_bulent =  mfge_bulpes , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="33554432" x="18441" y="26" height="396" width="1455" format="#,##0" html.valueishtml="0"  name=mfge_bulpes visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfgd_bulent =  mfge_bulpes , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="6058" y="26" height="396" width="1455" format="[general]" html.valueishtml="0"  name=mfge_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="33554432" x="740" y="26" height="396" width="582" format="000" html.valueishtml="0"  name=clie_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="33554432" x="7620" y="26" height="396" width="1905" format="dd/mm/yyyy" html.valueishtml="0"  name=mfge_fecmov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="33554432" x="9630" y="26" height="396" width="1587" format="hh:mm:ss" html.valueishtml="0"  name=refg_horaen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="11324" y="26" height="396" width="1455" format="#,##0" html.valueishtml="0"  name=mfge_totbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="12885" y="26" height="396" width="1455" format="#,##0" html.valueishtml="0"  name=mfgb_vactot visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+text(band=header alignment="2" text="
+Cliente" border="6" color="33554432" x="740" y="158" height="846" width="5212" html.valueishtml="0"  name=spro_movtofrutagranenca_clie_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=14 alignment="0" tabsequence=0 border="0" color="33554432" x="1349" y="26" height="396" width="4603" html.valueishtml="0"  name=clie_nombre visible="1" dddw.name=dw_mues_clienprod dddw.displaycolumn=clie_nombre dddw.datacolumn=clie_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="16777215~tIF( mfge_totbul = mfgb_vactot , rgb(92, 248, 97), rgb(255, 45, 45))" )
+
+sparse(names="clie_codigo	clie_nombre	mfge_numero	mfge_fecmov	refg_horaen	mfge_totbul	mfgb_vactot")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

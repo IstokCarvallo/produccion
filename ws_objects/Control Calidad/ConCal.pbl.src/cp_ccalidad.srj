@@ -1,0 +1,740 @@
+﻿$PBExportHeader$cp_ccalidad.srj
+EXE:ControlCalidad.exe,..\..\imagenes\productiva.pbr,0,1,1,1,
+CMP:0,0,0,2,0,0,1
+COM:RIOblanco Spa
+DES:
+CPY:2012
+PRD:Control de Calidad
+PVS:5.22.28022023
+PVN:5,22,2802,2023
+FVS:5.22.28022023
+FVN:5,22,2802,2023
+MAN:0,asInvoker,0
+POWERCLIENT:{"cp_ccalidad":{"Format":"1.0","AppType":1,"AppName":"ControlCalidad","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\ControlCalidad","ResourceName":"C:\\Desarrollo 22\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.22.28022023","MinimumValidVersion":"5.22.28022023","OnlineTime":"2021-7-15 15:40:30","OfflineTime":"2031-7-15 15:40:30","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuild":true,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":false,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":3,"LauncherName":"Default","PackageOutputPath":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\export","UploadOrPackageLauncherFiles":true,"UploadStrategyWhenExist":0,"FullDownload":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"ControlCalidad","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.0.0.1900","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Control de Calidad","CompanyName":"RIOblanco Spa","Description":"","Copyright":"2012","ProductVersion":"5.22.28022023","FileVersion":"5.22.28022023","ProductVersionMajor":5,"ProductVersionMinor":22,"ProductVersionBuild":2802,"ProductVersionRevision":2023,"FileVersionMajor":5,"FileVersionMinor":22,"FileVersionBuild":2802,"FileVersionRevision":2023,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","Libraries":[{"PbdName":"ConCal.pbd","PbdLocalPath":"ConCal.pbd"},{"PbdName":"ConCal01.pbd","PbdLocalPath":"ConCal01.pbd"},{"PbdName":"ConCal02.pbd","PbdLocalPath":"ConCal02.pbd"},{"PbdName":"ConCal03.pbd","PbdLocalPath":"ConCal03.pbd"},{"PbdName":"ConCal04.pbd","PbdLocalPath":"ConCal04.pbd"},{"PbdName":"ConCal05.pbd","PbdLocalPath":"ConCal05.pbd"},{"PbdName":"ConCal06.pbd","PbdLocalPath":"ConCal06.pbd"},{"PbdName":"ConCal07.pbd","PbdLocalPath":"ConCal07.pbd"},{"PbdName":"ConCal08.pbd","PbdLocalPath":"ConCal08.pbd"},{"PbdName":"ConCal09.pbd","PbdLocalPath":"ConCal09.pbd"},{"PbdName":"ConCal10.pbd","PbdLocalPath":"ConCal10.pbd"},{"PbdName":"ConCal11.pbd","PbdLocalPath":"ConCal11.pbd"},{"PbdName":"ConCal12.pbd","PbdLocalPath":"ConCal12.pbd"},{"PbdName":"ConCal13.pbd","PbdLocalPath":"ConCal13.pbd"},{"PbdName":"ConCal14.pbd","PbdLocalPath":"ConCal14.pbd"},{"PbdName":"ConCal15.pbd","PbdLocalPath":"ConCal15.pbd"},{"PbdName":"ConCal16.pbd","PbdLocalPath":"ConCal16.pbd"},{"PbdName":"ConCal17.pbd","PbdLocalPath":"ConCal17.pbd"},{"PbdName":"ConCal18.pbd","PbdLocalPath":"ConCal18.pbd"},{"PbdName":"ConCalTab.pbd","PbdLocalPath":"ConCalTab.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"tabprod04.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\tabprod04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 22\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 22\\ObjePubl.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["ConCal.ini"],"InstantDownloadFiles":[],"RuntimeModules":["Core Runtime Files","SNC SQL Native Client (SNC)","MS Excel12 Support","NativePDF Support"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","PfxFile":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapipath":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","TargetFramework":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"ConCal.ini","UpdateType":3}],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1}}}
+PBD:ConCal.pbl,,1
+PBD:ConCal01.pbl,,1
+PBD:ConCal02.pbl,,1
+PBD:ConCal03.pbl,,1
+PBD:ConCal04.pbl,,1
+PBD:ConCal05.pbl,,1
+PBD:ConCal06.pbl,,1
+PBD:ConCal07.pbl,,1
+PBD:ConCal08.pbl,,1
+PBD:ConCal09.pbl,,1
+PBD:ConCal10.pbl,,1
+PBD:ConCal11.pbl,,1
+PBD:ConCal12.pbl,,1
+PBD:ConCal13.pbl,,1
+PBD:ConCal14.pbl,,1
+PBD:ConCal15.pbl,,1
+PBD:ConCal16.pbl,,1
+PBD:ConCal17.pbl,,1
+PBD:ConCal18.pbl,,1
+PBD:ConCalTab.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd01.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd02.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd03.pbl,,1
+PBD:..\..\TablasProd\Tablas\tabprod04.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd05.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProd06.pbl,,1
+PBD:..\..\TablasProd\Tablas\TabProdTab.pbl,,1
+PBD:..\..\AdmUsuar.pbl,,1
+PBD:..\..\ObjePubl.pbl,,1
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mensaje,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_zonas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mant_ctlcalmadurez,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_distribu_calibre,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_especies,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mant_ctlcalplacualuvas_resolucionlot,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_info_planillarecepcionespecie,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_maed_admagruposistemas,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_admausuaropcio,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dddw_codnumero,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_acerca_de,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_variedades_mantvig,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_mant_mues_ctlcalagronomos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalgrupo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcalparammadurez,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_busc_ctlcalplanillacerezas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanilladetalle_id,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dddw_codcaracteres,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_maed_planilla_cualitativa_uva,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,dw_mues_lotes,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_consultaplanillamadurez,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_comparativo_origendestino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_cons_informe_llegadadestino,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,str_paramlote,s
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admatipoadmiusua,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctlcalagronomos,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcalagroproduc,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcalsitioinspeccion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillapaltas_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_maed_ctlcaltercerainspepecenc,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_busc_recibidores,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_promedioaceite,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,parempresa,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_zoom,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_mant,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_imprimir,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admasucursales,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_odbc,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalsolidossolubles,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_busc_ctlcalsubfamilia,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mant_ctlcalplanillakiwis_condicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_busc_spro_ordenproceso,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_busc_ctlcaltercerinspeccion,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_puertos_archivo_excel,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajerecibidores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_ctlcalinspecalidadet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mues_ctlcallotes,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_embalajes,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_mercado,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_maed_planilla_cualitativa_uvas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_agronomo,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_info_ctlcallotesobjetadospend,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_osversioninfo,s
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_busc_ctlcalplanillaespecies,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,uo_docto_recepcion_pdf,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_planillas_clasif,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_destinos,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_mant_ctlcaldestinosenc_resolucionlot,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_ctlcalpesopromedio,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admagruposistema,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_productores,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_embalajesprod,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalevaluacion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_agrupa_variedades,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_deta_ctlcalplanillakiwis,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillalimas_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisisfirmezacolumela,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcaldestinoplanilla,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_seleccion_inspectores_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcalagroproduc,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_tabla_ctlcallotes,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_gene_proceso_pdf,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_recibidores,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_detalle_csd,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcaltemperaturagases,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_ctlcalplanillapaltas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_mant_deta_ctlcalplanillauvas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_categoriaguarda,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mant_mues_condicioncalidad_obs,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mant_deta_reclasif,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mant_reclasif,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipotransporte,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_ctlcalreclamospdf,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_info_analisis_precosecha_palta,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_ctlcalpesonetoenpesofijo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,str_paramplanta,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_para_informes,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_envases,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mant_ctlcallotes,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_segregacion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_maed_ctlcalplanillamadurez,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_exportador,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_info_general_planilla_cuantitativa,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admasucursal,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_respaldo,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admdoctos,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especie,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalmateriaseca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mant_ctlcalplanillakiwis_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillanaranjas_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillaciruelas_embalaje,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_puertos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_info_condicioncalidad,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_consultareclamos,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,str_agronomousuario,s
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_tipoenvase,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_etiquetas,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_deta_agrupa_variedades,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_mues_ctlcaldanoespecie,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_maed_ctlcalplanillaespecies,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillalimas_resol,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,uo_recepcionpdf,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantapacking_zonas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_deta_ctlcallotes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dddw_ctlcalfamilias,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_navesembarque,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mant_mues_ctlcalplanillareclamoslote,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_plantapacking_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dddw_ctlcaldaños,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fecha_carta,f
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios_unidadsucursal,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalfirmeza,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_generalote,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_ctlcalplanillapaltas_resol,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillagranados_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_busc_verificacionlotes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_busc_lotes_cuantitativas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mues_ctlcaldescarteespecies,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_maed_ctlcaltercerainspepecenc_uvas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalplanillacondicionambiente,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_info_planillaevolumuestreo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_planillainspeccion_destino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_info_ctlcallotesplanillaslotes,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_buscar,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_imprimeinformepdf,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_plantadesp,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcaltercerainspe_uvas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_gene_archivo_condicion,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor_zonas_mod,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_grupousuarios,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_variedades,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_variecalibre,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dddw_ctlcalgrupo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_alternariadeta,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillagranados_resolucion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_maed_ctlcalplanillauvas_obse,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_busc_naves,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dddw_pesoneto,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_apiwindows,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,m_sys_frame,m
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,grabaaccesoaplicacion,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_comunasexp,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_deta_distribu_calibre,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mant_distribu_calibre,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mant_mues_segregacion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_alternaria,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_spro_ordenproceso,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_naves,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_planta_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_parms,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_directo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_agruespvarcolor,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mant_generalote,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacerezas_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_resumen_destino,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,str_temporada,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,d_columna_ordena,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_especies_mantvig,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_variecalibre,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_tipoenvases,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_embalajes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalcolorsemilla,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_prodcuarteles,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_busc_parametrosmadurez,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mues_ctlcalevalumaducolor_det,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacerezas_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillanaranjas_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillaciruelas_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mues_ctlcalplacuaninspuvaencdefi,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mant_planillasmodificadas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,dw_mues_lotes_cualitativa,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_resumenmadurez,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_resumen_objecciones,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_info_racimopeso,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_resumenreclamos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_planillas_modificadas,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesousuarios,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalpesofruto,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_busc_ctlcalsubfamilia,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_analisisfirmeza,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacerezas_resolucion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillalimas_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas_resolucion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_plantas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_mant_mues_reportesarribo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,uo_doctosarribo,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_planillainspdestinodet_id,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_clientesprod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_embalajes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalfamilias,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_especies,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_ctlcalplanillapaltas_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_inf_recepcion_pdf,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_errores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_ctlcalpanillareclamos,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_exportadores,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_resumen_inspeccion,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_startupinfo,s
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcalsitioinspeccion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal08.pbl,dw_mues_lotesfrugranel,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_lotesfrutagranel,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_busc_puertos_archivo_excel,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_planillainspdestinodet_res,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_productores_zona,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_frigorifico_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_info_variedades_blancas_objetadas,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_depura_admaaplicacces,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajes_especie,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalcondicionambiente,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalbrotytis,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_genera_calidadcondicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_reclasif_busq,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_naves_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_busc_ctlcalplanilladestino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_llegada_destino_porprod,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_tabla,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admausuariopcio,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mues_ctlcalinspecalicondi,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mues_ctlcalevaluafirmeza,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_ctlcalplanillanaranjas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_maed_ctlcaldescarteespecies,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_busc_recibidores_plan_dest,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajesprod_like,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_ctlcalplacualuvas_resolucionlot,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_ultimainspeccion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_resumenplanillacondicionambiente,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_nroplanilla,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_evolucioncondicion,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_envases,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_plantas,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcaltemperaturagases,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mant_mues_destinorechazado,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mues_agrupaespecie_enca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_maed_ctlcalplanillaespecies,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,dw_mues_lotes_cuantitativas1,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_maed_ctlcalplanillareclamos,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipotransporte_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,m_consulta_edi,m
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_planilla_cualita_uva_deta,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_predioproduc_mod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_frigopacking_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_busqueda,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_tipoproduc,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_regiones,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_tipoenvases1,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_tipoembalaje,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajesprod_mantvig,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalsubgrupodetalle,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalsubgrupodet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_busc_ctlcalplanillacerezas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_maed_ctlcalplanillauvas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,w_maed_planilla_uk,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_admasucursales,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcaltecnicos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_ctlcaldanodestino,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillakiwis_resolucion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas_calidad,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_embalajesprod_mod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_mercado_mod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_tipoproduc,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalevaluacion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillagranados_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_busc_ctlcalplanillacondicionambiente,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_correotablas,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,w_mant_mues_ctlcalinspecalicondi,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisisbrotytis,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillagranados_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_ctlcalplanillalimas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_buscallotes_especie,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_ctlcalcategoriascondicion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_proceso_pdf_productores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_consulta_embarques,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_nrosemana,f
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_busc_ctlcalplacualinspuvaenc,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,m_consulta,m
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_grupoespecie,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillanaranjas_resol,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_variecalibre_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_maed_ctlcalplanilladestino,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_rechazo_uvamesa,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admaunidadadmini,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_admasistemas,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_mues_actualizador,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,buscagrupo,f
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisismateriaseca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas_resolucionlot,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_maed_ctlcalcategoriacondicion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_ctlcalreclamosimagen,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dddw_calibres,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_productores_cliente,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_cons_listado_general,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_cons_informe_llegadadestino,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_detalle,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalfirmezacolumela,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_maed_ctlcalplanillacondicionambiente,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,accesosistemavalido,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_info,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,accesopuntocritico,f
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalcondicionambiente,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalfirmeza,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mues_ctlcalinspecalicondi_det,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mant_ctlcalplanillakiwis,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_mant_ctlcalplanillauvas_resolucionlot,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_maed_tercerainspe_uvas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_recepcion_pdf,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_inspectores,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_busc_lotes_cualitativa,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanilladetalle_resolucion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_seleccion_tipoinspeccion_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_planillacategoriacondicion,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_calibre,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_segregaciondet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctlcaltecnicos,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_resumen_lotes_objetados,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_info_resumen_descarteespecies,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_actualizaciones,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_variedades,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_zonas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_envases,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalsubgrupo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_ctlcalmadurez,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalsolidossolubles,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_deta_ctlcalplanillaciruelas,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_ctlcalnaves,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_ctlcalfechaszarpe,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_recibidor_mod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_sitioinspeccion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,sacaplanta,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_mail,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,w_main,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admasucursales,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_variedades,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalmadurez00,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mues_ctlcalevalfirmezadet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_categoriaguarda_selec,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_maed_ctlcalplanillacerezas_obse,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_busc_ctlcalplacuaninspuvaenc,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_busc_descartafruta,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_destinorechazado,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_ctlcalcategoriacondicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_consulta_embarques,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_busqueda,s
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcaltecnicos,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_deta_ctlcalplanillagranados,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_maed_ctlcalplanillauvas_enca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_planilla_destino_det,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_variedades,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_calibre_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_menu_imprimir_herr,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,str_parempresa,s
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_embalajesprod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dddw_ctlcalsubgrupo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_alternaria,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillakiwis_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas_embalaje,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_clientesprod,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcaltercerainspe,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisiscondicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_ctlcalplanillareclamos,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_inspectores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_reportesarribo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_info_reportesarribo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,m_principal,m
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admausuarios,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_zonas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_plantadesp,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacerezas_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_ctlcalplanillalimones,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_destinos,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_prodcuarteles_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_info_detalle_precosecha_palta,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_movtoreclamos,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_seleccion_admasistemas,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_productores,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_codigopallet,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dddw_ctlcalsubfamilias,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_maed_agruespvarcolor2,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_mant_deta_ctlcalplanillacerezas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal08.pbl,w_busc_loterecepcion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_ctlcalcategoriacondiciondeta,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisistemperatura,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_embalajesprod,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_ctlcalplanilla_destino,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_menu_imprimir,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,d_campos_orden,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_especies,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_envases,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_tipoembalajes1,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_embalajesprod,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalsubfamilias,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_prodpredio_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,paramlote,f
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admagrupos,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_info_liberacion_sistemas,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_envases,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_verrut,f
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_deta_ctlcalagroproduc,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mues_ctlcalevalumaducolor,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_ctlcalplanillapaltas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_reclasif,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_mant_deta_ctlcalreclamosimagendeta,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_cons_listado_general,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admausuarios,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_ws_cargoproduce,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctlcalinspectores,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mant_mues_paramadurezdeta,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillagranados,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_ctlcalplanillagranados,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_sitioinspeccion,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_etiqueta,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admausuarios_actualizacion,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mues_ctlcaldefectos,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_ctlcalplanillaclementinas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mues_ctlcalplanillauvas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_mues_planillainspdestinoenc,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_deta_ctlcalplacualinspuvadet,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_cons_listado_barcos,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_creamenubd,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_dw,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admagruposistema,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_tipoproduc,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_productores,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisiscolorsemilla,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_selecciona,f
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_maed_ctlcalplanillacerezas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_puertos,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_busc_mues_planilladestino,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcalplanilladestino_condicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_tipoproduc,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_naves,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_naves,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_busc_puertos,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_busc_ctlcaldestinosenc,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_gral_eva_calif_y_resol,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_embalaje_mod,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admaaplicacces,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admaunidadadmini,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_embalajesprod,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_zonas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_variedad_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_agrupavariedades,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_mues_ctlcalinspectordestino,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_camarasbode_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_zoom,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_principal,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_columna_orden,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_tipoembalaje,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalfamilias,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_mant_mues_ctlcaldefectos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mant_ctlcalplanillacerezas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_productores,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mant_deta_productores_terceros,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_destinos,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_recibimercado,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_ctlcalplacualinspuvaenc,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcaldestinosenc_resolucionlot,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal18.pbl,w_info_detallerecepcionespecie,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal18.pbl,w_inf_recepcion_tipo_embarque,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_embalajesprod,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,dw_info_ctlcapesocajaproductor,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,w_acceso,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_familia,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacerezas_id,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_sitioinspeccion,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_sistemasgrupos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_busc_agrupavariedades,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_variedades,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_analisispesofruto,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillanaranjas_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillaciruelas_condicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_etiquetas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_deta_planillainspdestinodet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_maed_ctlcalplanilladestino,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_correo_error,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_tipoembalaje,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_naves,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_agruespvarcalibre,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mant_ctlcalplanillauvas,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dw_mant_productores_terceros,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_mant_deta_planillainspdestinodet,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_medidas_escritorio,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_admasucursal,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_plantadesp_plantas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_deta_ctlcalmadurez,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalmateriaseca,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mant_alternaria,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_ctlcalinspectordestino,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_maed_planillainspecdestino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_gral_resolucion_calidad,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admasucursales,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_cambio_password,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoenvase,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especies,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcaltipoinspecion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_mues_ctlcallotes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,w_mant_mues_ctlcalevalumaducolor,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_maed_ctlcalplanillacerezas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillalimones_condicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_loteobjetadopendiente,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_exportadores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_planillainspdestinodet_cal,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_recibidor_planilla_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_info_rankingllegada,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_resumereportesarribo,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesoaplicaciones,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_actualiza_log,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_plantadesp_packing_planta,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,dw_mues_agruespcalibre,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalpanillamadurezenca,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantadesp_tipo_zona,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mant_categoriacondicionenca,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_camarasbode,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_info_ctlcalreclamosimagenes,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipotransporte,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_gral_causales_objeciones,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_variecalibre,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_categoriaguarda,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_deta_reclasif,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_planillasmodificadas,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcaltiposinspeccion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mant_ctlcalagroproduc,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_familia,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_distribu_calibre,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_ctlcaldanoespecie,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,w_mant_mues_ctlcaldanodestino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_busc_ctlcalplanillamadurez,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_mant_deta_condicioncalidad_obs,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalfirmezapsi,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_mues_planillainspdestinodet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcalplanilldestino_embalaje,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcalplanilladestino_calidad,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_tipoenvases,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_envases,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalfirmezacolumela,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_mant_mues_ctlcalpesofruto,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,w_mant_mues_ctlcalevaluafirmeza,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mues_ctlcalinpecevaluadet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_maed_ctlcalplanillacerezas_enca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_maed_ctlcaldescarteespecies,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_acceso_usuario,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_informes,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_global_replace,f
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,opcionsoloconsulta,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_clientesprod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_naves,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisissolidossolubles,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcalparammadurez,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillalimones_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_fzarpe,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_busc_lotes,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,w_info_consultaplanillacondicionambiente,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_tipoenvases,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_ctlcalsubgrupo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_categoriaguarda,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_busc_parametrosmadurez,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_productores,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admagrupos,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipoenvases,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_provincias,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalgrupo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctlcaltipoinspec,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mant_ctlcalcondicionambiente_enca,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_naves,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_embarques,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_info_calificacion_lote_detallado,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_errorbasedatos,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagruposistema,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillanaranjas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillaciruelas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_mant_ctlcalplanillacereza_reslot,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_planillainspdestinodet_emb,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dddw_navefecar,d
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_gruposusuarios,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_zonas,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mues_ctlcalagronomos,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_zonas_mod,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mues_ctlcalevalmateriasecadet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctlcaldanoespecie,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_mant_mues_ctlcalreclamosenca,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_ctlcaldestinosenc,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_correo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_recibidores,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_agrupa_variedades,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_pronbotrytis,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dddw_nroplanilla,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_aviso_acceso,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admaaplicacces,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_ctlcalrecepcionfrutasenca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_mues_ctlcalinspdistribcaldet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mant_ctlcalplacualinspuvadet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_ctlcaldestino,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_agronomo_mod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_destinos_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_errorbasedatos,u
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admatipoadmiusua,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_ctlcalsubfamilias,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalbrotytis,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal04.pbl,w_maed_ctlcalplanillauvas,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_ctrolusuario,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mues_reportesarribo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mant_ctlcalreclamosencapend,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_etiquetas,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_productores_zona,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_ctlcalinfhistresolfruobje,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_cons_listado_porplanilla,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ordenesproceso,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_tercerainpeccion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dddw_mercado,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_variedades,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_grupoeconomico,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_zonas,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mant_mues_agrupavariedades,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_variedades,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_especies,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,dw_mant_ctlcalplanillacereza_reslot,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal14.pbl,dw_busc_ctlcaldescarteespecie,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,uo_reclamos,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_mant_ctlcalreclamosenca,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_busc_recibidores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_resumen_uvas_objetadas,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_fondo,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal.pbl,control_calidad,a
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_grabatablas,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_productores,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mant_ctlcalparammadurezenca,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplanillapaltas_calidad,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_busc_planillasrecl,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_destinos,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,dw_mues_lotes_planilla_cuantitativa,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_mant_deta_ctlcaldesinodet,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_info_especie_variedad,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalcolorsemilla,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_cliente,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dw_mues_ctlcalhistobjetados_uvas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_maed_reclasif,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_naves,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_destinos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,w_info_resolucionlotesdestino,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_especies,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_deta_alternaria,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_busc_lotefrutagranel,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantadesp_tipo,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplanillaciruelas_resolucion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,dw_mant_planillainspdestinodet_con,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,dddw_ctlcalagronomos,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_info_general_inspec_resolucion,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,str_ctlcallotes,s
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_prodpredio,u
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal17.pbl,dw_gene_archivo_condicion,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,w_maed_planilla_usa,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_maed_admasucursales,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_admausuarios,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_variecalibre,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_productores,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta_csd,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisiscategoria,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dddw_planta,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,w_info_ctlcalpesocajasproductor,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal13.pbl,w_cons_listado_barcos,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,w_cons_listado_porplanillas,w
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_insertamenu,f
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_usuario,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_membrete,f
+OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admasistemas,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal02.pbl,w_mant_mues_destinorechazado,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_busc_reclasif,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_ctlcaldestinodet,d
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal16.pbl,dw_mues_ctlcalplanilla_destino_det,d

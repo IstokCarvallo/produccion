@@ -1,0 +1,23 @@
+﻿$PBExportHeader$dw_tit_info_enfriamiento_temp.srd
+$PBExportComments$Data Window de Titulos interactivos para el informe dw_info_enfriamiento_temp
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=260 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=decimal(2) updatewhereclause=yes name=pevt_enfmin dbname="spro_paramevalutempe.pevt_enfmin" )
+ column=(type=decimal(2) updatewhereclause=yes name=pevt_enfmax dbname="spro_paramevalutempe.pevt_enfmax" )
+ column=(type=decimal(0) updatewhereclause=yes name=pevt_cadeds dbname="spro_paramevalutempe.pevt_cadeds" )
+ column=(type=decimal(0) updatewhereclause=yes name=pevt_careds dbname="spro_paramevalutempe.pevt_careds" )
+ column=(type=decimal(0) updatewhereclause=yes name=pevt_camads dbname="spro_paramevalutempe.pevt_camads" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_paramevalutempe~" ) COLUMN(NAME=~"dba.spro_paramevalutempe.pevt_enfmin~") COLUMN(NAME=~"dba.spro_paramevalutempe.pevt_enfmax~") COLUMN(NAME=~"dba.spro_paramevalutempe.pevt_cadeds~") COLUMN(NAME=~"dba.spro_paramevalutempe.pevt_careds~") COLUMN(NAME=~"dba.spro_paramevalutempe.pevt_camads~")WHERE(    EXP1 =~"dba.spro_paramevalutempe.espe_codigo~"   OP =~"=~"    EXP2 =~":especie~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_paramevalutempe.vari_codigo~"   OP =~"=~"    EXP2 =~":variedad~" ) ) ARG(NAME = ~"especie~" TYPE = number)  ARG(NAME = ~"variedad~" TYPE = number) " arguments=(("especie", number),("variedad", number)) )
+compute(band=header alignment="2" expression="'Tiempo de Enfriamiento  (Rango: '+( string( pevt_enfmin )) +' a '+ (string( pevt_enfmax ))+')'"border="0" color="0" x="37" y="0" height="124" width="891" format="[GENERAL]"  name=compute_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="'T de pulpa Mantencion (fruta con mas de '+( pevt_camads + 1)+' dias en frio)'"border="0" color="0" x="937" y="0" height="124" width="777" format="[GENERAL]"  name=compute_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="'adecuado('+int(  pevt_cadeds )+' a '+int( pevt_careds -1)+' dias)'"border="0" color="0" x="37" y="132" height="120" width="274" format="[GENERAL]"  name=compute_3  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="'regular('+int( pevt_careds ) + ' a ' + int( pevt_camads  - 1)+' dias)'"border="0" color="0" x="320" y="132" height="120" width="311" format="[GENERAL]"  name=compute_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="'Malo('+int(  pevt_camads ) + ' a ' + int(    pevt_camads  +  1)+' dias)'"border="0" color="0" x="640" y="132" height="120" width="288" format="[GENERAL]"  name=compute_5  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression="'Adecuado('+string( pevt_enfmin )+' a '+string( pevt_enfmax )+')'"border="0" color="0" x="937" y="132" height="120" width="366" format="[GENERAL]"  name=compute_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="2" expression=" 'Malo(> a ' +string( pevt_enfmax )+')'"border="0" color="0" x="1312" y="132" height="120" width="398" format="[GENERAL]"  name=compute_7  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

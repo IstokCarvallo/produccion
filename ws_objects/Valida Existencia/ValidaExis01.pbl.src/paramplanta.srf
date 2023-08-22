@@ -1,0 +1,24 @@
+﻿$PBExportHeader$paramplanta.srf
+global type paramplanta from function_object
+end type
+
+forward prototypes
+global subroutine paramplanta ()
+end prototypes
+
+global subroutine paramplanta ();/*Rescata el codigo de la planta Activa para el usuario*/
+SELECT	plde_codigo
+INTO		:gstr_paramplanta.codigoplanta
+FROM     dbo.spro_usuarplanta
+WHERE   usua_codigo =: gstr_us.nombre
+AND		usua_activa = 1;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Usuarios por Planta: spro_usuarplanta")
+	RETURN
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Advertencia","Debe dejar activa una Planta para el Usuario")
+	RETURN
+END IF
+end subroutine
+

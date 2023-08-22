@@ -1,0 +1,86 @@
+﻿$PBExportHeader$dw_pesaje_romana_trans.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=140 color="536870912" )
+summary(height=80 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_movtofrutagranpesa_trans.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tpmv_codigo dbname="spro_movtofrutagranpesa_trans.tpmv_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=mfge_numero dbname="spro_movtofrutagranpesa_trans.mfge_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="spro_movtofrutagranpesa_trans.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=mfgp_nropes dbname="spro_movtofrutagranpesa_trans.mfgp_nropes" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=mfgp_secuen dbname="spro_movtofrutagranpesa_trans.mfgp_secuen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgmb_nrotar dbname="spro_movtofrutagranpesa_trans.fgmb_nrotar" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=bins_numero dbname="spro_movtofrutagranpesa_trans.bins_numero" )
+ column=(type=time update=yes updatewhereclause=yes name=mfgp_horaev dbname="spro_movtofrutagranpesa_trans.mfgp_horaev" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=mfgp_pesore dbname="spro_movtofrutagranpesa_trans.mfgp_pesore" )
+ column=(type=decimal(4) update=yes updatewhereclause=yes name=mfgp_valref dbname="spro_movtofrutagranpesa_trans.mfgp_valref" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mfgp_estado dbname="spro_movtofrutagranpesa_trans.mfgp_estado" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mfgp_tippes dbname="spro_movtofrutagranpesa_trans.mfgp_tippes" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_codigo dbname="spro_movtofrutagranpesa_trans.lote_codigo" )
+ column=(type=date update=yes updatewhereclause=yes name=mfgp_fechac dbname="spro_movtofrutagranpesa_trans.mfgp_fechac" )
+ retrieve="  SELECT ~"dba~".~"spro_movtofrutagranpesa_trans~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"tpmv_codigo~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfge_numero~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"clie_codigo~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_nropes~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_secuen~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"fgmb_nrotar~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"bins_numero~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_horaev~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_pesore~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_valref~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_estado~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_tippes~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"lote_codigo~",   
+         ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfgp_fechac~"  
+    FROM ~"dba~".~"spro_movtofrutagranpesa_trans~",   
+         ~"dba~".~"spro_movtofrutagrandeta_trans~" ~"spro_movtofrutagrandeta_a~",   
+         ~"dba~".~"spro_lotesfrutagrandeta_trans~"
+   WHERE ( ~"spro_movtofrutagrandeta_a~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagranpesa_trans~".~"plde_codigo~" ) and  
+         ( ~"spro_movtofrutagrandeta_a~".~"tpmv_codigo~" = ~"dba~".~"spro_movtofrutagranpesa_trans~".~"tpmv_codigo~" ) and  
+         ( ~"spro_movtofrutagrandeta_a~".~"mfge_numero~" = ~"dba~".~"spro_movtofrutagranpesa_trans~".~"mfge_numero~" ) and  
+         ( ~"spro_movtofrutagrandeta_a~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagranpesa_trans~".~"clie_codigo~" ) and  
+         ( ~"spro_movtofrutagrandeta_a~".~"lote_codigo~" = ~"dba~".~"spro_movtofrutagranpesa_trans~".~"lote_codigo~" ) and  
+         ( ( ~"spro_movtofrutagrandeta_a~".~"plde_codigo~" = :Planta ) AND  
+         ( ~"spro_movtofrutagrandeta_a~".~"tpmv_codigo~" = :Tipo ) AND  
+         ( ~"spro_movtofrutagrandeta_a~".~"mfge_numero~" = :Numero ) AND  
+         ( ~"spro_movtofrutagrandeta_a~".~"clie_codigo~" = :Cliente ) )    
+" update="dba.spro_movtofrutagranpesa_trans" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("Tipo", number),("Numero", number),("Cliente", number)) )
+text(band=header alignment="2" text="Sec.
+Pesaje" border="6" color="0" x="128" y="12" height="116" width="192" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hora
+Captura" border="6" color="0" x="1266" y="12" height="116" width="347" html.valueishtml="0"  name=horaevento_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha
+Cosecha" border="6" color="0" x="965" y="12" height="116" width="283" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Pesaje" border="6" color="0" x="1632" y="12" height="116" width="302" html.valueishtml="0"  name=ld_peso_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Número
+Tarja" border="6" color="0" x="338" y="12" height="116" width="247" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Número
+Bulto" border="6" color="0" x="603" y="12" height="116" width="343" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+button(band=detail text="N" enabled=yes action="0" border="0" color="16777215" x="603" y="4" height="64" width="78" vtextalign="0" htextalign="0"  name=b_nuevobins visible="1~tIF ( GetRow() = CurrentRow(), 1, 0 )"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8388608" )
+column(band=detail id=7 alignment="1" tabsequence=10 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="338" y="4" height="60" width="247" format="[general]" html.valueishtml="0" protect="0~t1"  name=fgmb_nrotar visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( GetRow() = CurrentRow(), 12632256, 10789024 )
+" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="128" y="4" height="60" width="192" format="[general]" html.valueishtml="0"  name=mfgp_secuen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=20 border="0~tif ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="695" y="4" height="60" width="251" format="[general]" html.valueishtml="0" protect="0~t1"  name=bins_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( GetRow() = CurrentRow(), 12632256, 10789024 )
+" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="33554432" x="1266" y="4" height="60" width="347" format="[time]" html.valueishtml="0"  name=mfgp_horaev visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="2" tabsequence=30 border="0~tif ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="960" y="4" height="60" width="293" format="[general]" html.valueishtml="0"  name=mfgp_fechac visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tif ( GetRow() = CurrentRow(), 12632256, 10789024 )
+" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="1632" y="4" height="60" width="302" format="#,##0.0000" html.valueishtml="0"  name=mfgp_pesore visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="count(  mfgp_secuen  for all )"border="0" color="0" x="128" y="8" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=bultos visible="1~t0"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=summary alignment="0" text="Total Romana" border="5" color="0" x="1266" y="8" height="56" width="347" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=summary alignment="1" expression="sum(   mfgp_pesore  for all )"border="5" color="0" x="1632" y="8" height="56" width="302" format="#,##0.0000" html.valueishtml="0"  name=total visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

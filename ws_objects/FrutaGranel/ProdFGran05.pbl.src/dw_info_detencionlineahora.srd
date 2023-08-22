@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dw_info_detencionlineahora.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=148 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=0 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=rdla_minuto dbname="spro_detencionlinearesu.rdla_minuto" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_detencionlinearesu~" ) COLUMN(NAME=~"dba.spro_detencionlinearesu.rdla_minuto~")WHERE(    EXP1 =~"dba.spro_detencionlinearesu.plde_codigo~"   OP =~"=~"    EXP2 =~":Planta~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_detencionlinearesu.line_codigo~"   OP =~"=~"    EXP2 =~":Linea~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_detencionlinearesu.espe_codigo~"   OP =~"=~"    EXP2 =~":Especie~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_detencionlinearesu.edla_fecpro~"   OP =~"=~"    EXP2 =~":Fecha~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_detencionlinearesu.rdla_turno~"   OP =~"=~"    EXP2 =~":Turno~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"dba.spro_detencionlinearesu.area_codigo~"   OP =~"=~"    EXP2 =~":Area~" ) ) ARG(NAME = ~"Area~" TYPE = number)  ARG(NAME = ~"Planta~" TYPE = number)  ARG(NAME = ~"Linea~" TYPE = number)  ARG(NAME = ~"Especie~" TYPE = number)  ARG(NAME = ~"Fecha~" TYPE = date)  ARG(NAME = ~"Turno~" TYPE = number) " arguments=(("Area", number),("Planta", number),("Linea", number),("Especie", number),("Fecha", date),("Turno", number)) )
+text(band=header alignment="0" text="Minutos a Justificar          :" border="0" color="0" x="133" y="12" height="128" width="571"  name=rdla_turno_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="0" x="709" y="72" height="68" width="146" format="[general]"  name=rdla_minuto edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

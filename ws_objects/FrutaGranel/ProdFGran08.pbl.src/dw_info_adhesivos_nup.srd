@@ -1,0 +1,31 @@
+﻿$PBExportHeader$dw_info_adhesivos_nup.srd
+release 10.5;
+datawindow(units=3 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 0 print.margin.right = 0 print.margin.top = 0 print.margin.bottom = 0 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no rows_per_detail = 5 )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=9022 color="536870912" )
+table(column=(type=char(30) updatewhereclause=no name=barras dbname="barras" )
+ column=(type=char(30) updatewhereclause=no name=simple dbname="simple" )
+ )
+ole(band=detail x="211" y="2620" height="978" width="2487" border="0"  clientname="untitled"range=0 binaryindex=1 activation=1 linkupdateoptions=0 contentsallowed=2 displaytype=1  name=ole_1 visible="1" )
+ole(band=detail x="211" y="3916" height="978" width="2487" border="0"  clientname="untitled"range=0 binaryindex=2 activation=1 linkupdateoptions=0 contentsallowed=2 displaytype=1  name=ole_2 visible="1" )
+ole(band=detail x="211" y="5213" height="978" width="2487" border="0"  clientname="untitled"range=0 binaryindex=3 activation=1 linkupdateoptions=0 contentsallowed=2 displaytype=1  name=ole_3 visible="1" )
+ole(band=detail x="211" y="6509" height="978" width="2487" border="0"  clientname="untitled"range=0 binaryindex=4 activation=1 linkupdateoptions=0 contentsallowed=2 displaytype=1  name=ole_4 visible="1" )
+ole(band=detail x="211" y="7806" height="978" width="2487" border="0"  clientname="untitled"range=0 binaryindex=5 activation=1 linkupdateoptions=0 contentsallowed=2 displaytype=1  name=ole_5 visible="1" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 
+
+Start of PowerBuilder Binary Data Section : Do NOT Edit
+04dw_info_adhesivos_nup.bin 
+14dw_info_adhesivos_nup.bin 
+End of PowerBuilder Binary Data Section : No Source Expected After This Point

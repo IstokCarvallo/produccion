@@ -1,0 +1,97 @@
+﻿$PBExportHeader$dw_inf_guia_recep_inter_tran.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=224 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=mfge_numero dbname="spro_movtofrutagranenca.mfge_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_coorde dbname="spro_movtofrutagranenca.plde_coorde" )
+ column=(type=date updatewhereclause=yes name=mfge_fecmov dbname="spro_movtofrutagranenca.mfge_fecmov" )
+ column=(type=time updatewhereclause=yes name=refg_horaen dbname="spro_movtofrutagranenca.refg_horaen" )
+ column=(type=decimal(3) updatewhereclause=yes name=refg_tkbent dbname="spro_movtofrutagranenca.refg_tkbent" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutagranenca.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_pltcod dbname="spro_movtofrutagrandeta.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_espcod dbname="spro_movtofrutagrandeta.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_codigo dbname="spro_movtofrutagrandeta.lote_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_mfgd_bulent dbname="spro_movtofrutagrandeta.mfgd_bulent" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="spro_movtofrutagranenca.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_movtofrutagranenca.prod_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=plantadesp_plde_nombre dbname="spro_movtofrutagranenca.plde_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=plantadesp_plde_nombre dbname="spro_movtofrutagranenca.plde_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=camarasbode_cama_nombre dbname="camarasbode.cama_nombre" )
+ column=(type=char(15) updatewhereclause=yes name=especies_espe_nombre dbname="especies.espe_nombre" )
+ retrieve="SELECT  ~"dba~".~"spro_movtofrutagranenca~".~"mfge_numero~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"plde_coorde~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"mfge_fecmov~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"refg_horaen~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"refg_tkbent~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~".~"lote_pltcod~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~".~"lote_codigo~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~".~"mfgd_bulent~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"espe_codigo~" ,
+           ~"dba~".~"spro_movtofrutagranenca~".~"prod_codigo~" ,
+           ~"plantadesp_a~".~"plde_nombre~" ,
+           ~"plantadesp_b~".~"plde_nombre~" ,
+           ~"dba~".~"camarasbode~".~"cama_nombre~" ,
+           ~"dba~".~"especies~".~"espe_nombre~"     
+        FROM ~"dba~".~"spro_movtofrutagranenca~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~" ,
+           ~"dba~".~"plantadesp~" ~"plantadesp_a~" ,
+           ~"dba~".~"plantadesp~" ~"plantadesp_b~" ,
+           ~"dba~".~"camarasbode~" ,
+           ~"dba~".~"especies~"     
+        WHERE ( ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"tpmv_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"tpmv_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"mfge_numero~" = ~"dba~".~"spro_movtofrutagranenca~".~"mfge_numero~" )
+ and          ( ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" = ~"plantadesp_a~".~"plde_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagranenca~".~"plde_coorde~" = ~"plantadesp_b~".~"plde_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~" = ~"dba~".~"camarasbode~".~"plde_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"cama_codigo~" = ~"dba~".~"camarasbode~".~"cama_codigo~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~" = ~"dba~".~"especies~".~"espe_codigo~" )
+ and          ( ( dba.spro_movtofrutagranenca.tpmv_codigo = 2 )
+ and          ( dba.spro_movtofrutagranenca.plde_codigo = :Planta )
+ and          ( dba.spro_movtofrutagranenca.mfge_numero = :Numero ) )  " arguments=(("Planta", number),("Numero", number)) )
+group(level=1 header.height=684 trailer.height=0 by=("prod_codigo" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="12" height="56" width="1211" html.valueishtml="0"  name=nombre_empresa visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="2939" y="8" height="56" width="151" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="3131" y="8" height="56" width="279" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="PRODUCCION FRUTA GRANEL" border="0" color="0" x="1568" y="8" height="56" width="677" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Movimientos" border="0" color="0" x="1568" y="68" height="56" width="411" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema" border="0" color="0" x="1371" y="8" height="56" width="174" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo" border="0" color="0" x="1371" y="68" height="56" width="174" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="2939" y="68" height="56" width="142" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="3131" y="68" height="56" width="279" format="dd/mm/yyyy" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="72" height="56" width="1211" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe" border="0" color="0" x="1371" y="128" height="56" width="174" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Recepción Fruta Granel Inter Plantas" border="0" color="0" x="1568" y="128" height="56" width="910" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="2939" y="128" height="56" width="110" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="3131" y="128" height="56" width="279" format="hh:mm:ss" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header.1 alignment="3" text="Hora Ingreso" border="0" color="0" x="1952" y="32" height="60" width="521" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=4 alignment="0" tabsequence=32766 border="0" color="0" x="2578" y="32" height="60" width="608" format="h:mm" html.valueishtml="0"  name=refg_horaen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Peso Bruto Entrada" border="0" color="0" x="1952" y="128" height="60" width="521" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2578" y="128" height="60" width="311" format="[general]" html.valueishtml="0"  name=refg_tkbent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Nro Recepción" border="0" color="0" x="128" y="48" height="60" width="526" html.valueishtml="0"  name=mfge_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Fecha Movto." border="0" color="0" x="128" y="144" height="60" width="521" html.valueishtml="0"  name=mfge_fecmov_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=1 alignment="0" tabsequence=32766 border="0" color="0" x="754" y="44" height="60" width="329" format="00000000" html.valueishtml="0"  name=mfge_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=3 alignment="2" tabsequence=32766 border="0" color="0" x="754" y="140" height="60" width="434" format="[shortdate]" html.valueishtml="0"  name=mfge_fecmov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Especie" border="0" color="0" x="119" y="392" height="64" width="521" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Planta Origen" border="0" color="0" x="123" y="612" height="64" width="718" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Planta Destino" border="0" color="0" x="2661" y="612" height="64" width="731" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Bultos" border="0" color="0" x="2309" y="612" height="64" width="201" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Lote" border="0" color="0" x="937" y="612" height="64" width="466" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=11 alignment="0" tabsequence=32766 border="0" color="0" x="754" y="392" height="64" width="142" format="[general]" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=12 alignment="0" tabsequence=32766 border="0" color="0" x="745" y="228" height="64" width="389" format="[general]" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.1 id=16 alignment="0" tabsequence=32766 border="0" color="0" x="919" y="392" height="64" width="407" format="[general]" html.valueishtml="0"  name=especies_espe_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="0" x="123" y="4" height="64" width="155" format="0000" html.valueishtml="0"  name=plde_coorde visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2665" y="4" height="64" width="169" format="0000" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="2313" y="4" height="64" width="201" format="[general]" html.valueishtml="0"  name=spro_movtofrutagrandeta_mfgd_bulent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2853" y="4" height="64" width="553" format="[general]" html.valueishtml="0"  name=plantadesp_plde_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="297" y="4" height="64" width="539" format="[general]" html.valueishtml="0"  name=plantadesp_plde_nombre_1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="string( spro_movtofrutagrandeta_lote_pltcod ,~"0000~")+string(  spro_movtofrutagrandeta_lote_espcod ,~"00~")+string( spro_movtofrutagrandeta_lote_codigo ,~"0000~")"border="0" color="0" x="937" y="4" height="64" width="466" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header.1 alignment="3" text="Camara" border="0" color="0" x="1426" y="612" height="64" width="754" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=0 border="0" color="0" x="1426" y="4" height="64" width="754" html.valueishtml="0"  name=camarasbode_cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

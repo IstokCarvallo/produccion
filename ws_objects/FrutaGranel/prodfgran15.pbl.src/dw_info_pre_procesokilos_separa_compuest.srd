@@ -1,0 +1,23 @@
+﻿$PBExportHeader$dw_info_pre_procesokilos_separa_compuest.srd
+$PBExportComments$Informe de Proceso en Kilos - Detalle de Kilos
+release 10;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=5 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 5 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=8 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=404 color="536870912"  height.autosize=yes)
+table(column=(type=char(10) updatewhereclause=yes name=a dbname="a" )
+ unbound = "yes"arguments=(("Cliente", number),("Planta", number),("TipoOrden", number),("NumeroOrden", number),("Productor", number),("Especie", number),("Variedad", number),("Linea", number),("Periodo", number),("FecIni", date),("FecTer", date),("Programa", number),("ConsPredio", number),("Consfecha", number),("TipoInforme", number)) )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_a" x="5" y="0" height="120" width="4453" border="0"  height.autosize=yes criteria="" nest_arguments=(("Cliente"),("Planta"),("TipoOrden"),("NumeroOrden"),("Productor"),("Especie"),("Variedad"),("Linea"),("Periodo"),("FecIni"),("FecTer"),("Programa"),("ConsPredio"),("ConsFecha"),("TipoInforme"),("1")) trail_footer = yes  name=dw_1 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_b" x="5" y="132" height="120" width="4453" border="0"  height.autosize=yes criteria="" nest_arguments=(("Cliente"),("Planta"),("TipoOrden"),("NumeroOrden"),("Productor"),("Especie"),("Variedad"),("Linea"),("Periodo"),("FecIni"),("FecTer"),("Programa"),("ConsPredio"),("ConsFecha"),("TipoInforme"),("2")) trail_footer = yes  name=dw_2 visible="1"  slideup=directlyabove )
+report(band=detail dataobject="dw_info_pre_procesokilos_separa_c" x="5" y="260" height="136" width="4453" border="0"  height.autosize=yes criteria="" nest_arguments=((" Cliente "),(" Planta "),(" TipoOrden "),(" NumeroOrden ")) trail_footer = yes  name=dw_3 visible="1"  slideup=directlyabove )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,22 @@
+﻿$PBExportHeader$dw_info_concalcom_frutaembalada.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no rows_per_detail = 6 )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=ccfe_fruemb dbname="spro_concalcomdetfruemb.ccfe_fruemb" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_codigo dbname="spro_concalcomdetfruemb.lote_codigo" )
+ retrieve="SELECT  dba.spro_concalcomdetfruemb.ccfe_fruemb,
+        dba.spro_concalcomdetfruemb.lote_codigo
+   FROM dba.spro_concalcomdetfruemb      
+ WHERE ( dba.spro_concalcomdetfruemb.plde_codigo = :planta ) And
+       ( dba.spro_concalcomdetfruemb.ccco_folio = :folio )   " arguments=(("planta", number),("folio", number)) )
+text(band=detail alignment="0" text="Nº de Frutos Embalables" border="0" color="33554432" x="507" y="4" height="52" width="873"  name=t_1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="1381" y="4" height="56" width="343" format="#,##0" row_in_detail=1  name=ccfe_fruemb_1 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="1733" y="4" height="56" width="329" format="#,##0" row_in_detail=2  name=ccfe_fruemb_2 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="2071" y="4" height="56" width="343" format="#,##0" row_in_detail=3  name=ccfe_fruemb_3 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="2423" y="4" height="56" width="343" format="#,##0" row_in_detail=4  name=ccfe_fruemb_4 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="2775" y="4" height="56" width="338" format="#,##0" row_in_detail=5  name=ccfe_fruemb_5 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="2" color="33554432" x="3118" y="4" height="56" width="338" format="#,##0" row_in_detail=6  name=ccfe_fruemb_6 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

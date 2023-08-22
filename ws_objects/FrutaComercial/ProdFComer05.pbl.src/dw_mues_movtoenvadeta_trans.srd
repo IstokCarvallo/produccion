@@ -1,0 +1,108 @@
+﻿$PBExportHeader$dw_mues_movtoenvadeta_trans.srd
+$PBExportComments$Muestra en mantención Detalle de Movimientos de Envases
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=140 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=80 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_movtoenvadeta_trans.plde_codigo" dbalias=".plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tpmv_codigo dbname="spro_movtoenvadeta_trans.tpmv_codigo" dbalias=".tpmv_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=meen_numero dbname="spro_movtoenvadeta_trans.meen_numero" dbalias=".meen_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_tipoen dbname="spro_movtoenvadeta_trans.enva_tipoen" dbalias=".enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_codigo dbname="spro_movtoenvadeta_trans.enva_codigo" dbalias=".enva_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=fgme_conenv dbname="spro_movtoenvadeta_trans.fgme_conenv" dbalias=".fgme_conenv" initial="1" values="Vacío	0/Con Fruta	1/" )
+ column=(type=char(4) update=yes updatewhereclause=yes key=yes name=cale_calida dbname="spro_movtoenvadeta_trans.cale_calida" dbalias=".cale_calida" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=fgme_sentid dbname="spro_movtoenvadeta_trans.fgme_sentid" dbalias=".fgme_sentid" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgme_cantid dbname="spro_movtoenvadeta_trans.fgme_cantid" dbalias=".fgme_cantid" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=fgme_pesone dbname="spro_movtoenvadeta_trans.fgme_pesone" dbalias=".fgme_pesone" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" dbalias=".enva_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=cale_nombre dbname="spro_calicosechero.cale_nombre" dbalias=".cale_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="spro_movtoenvadeta_trans.clie_codigo" dbalias=".clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_movtoenvaenca_trans.prod_codigo" dbalias=".prod_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" dbalias=".prod_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=cons_control dbname="cons_control" )
+ retrieve="  SELECT ~"dba~".~"spro_movtoenvadeta_trans~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"tpmv_codigo~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"meen_numero~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_tipoen~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_codigo~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"fgme_conenv~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"cale_calida~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"fgme_sentid~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"fgme_cantid~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"fgme_pesone~",   
+         ~"dba~".~"envases~".~"enva_nombre~",   
+         ~"dba~".~"spro_calicosechero~".~"cale_nombre~",   
+         ~"dba~".~"spro_movtoenvadeta_trans~".~"clie_codigo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"prod_codigo~",   
+         ~"dba~".~"productores~".~"prod_nombre~",
+			convert(decimal(7), 0) as cons_control
+    FROM ~"dba~".~"spro_movtoenvadeta_trans~",   
+         ~"dba~".~"envases~",   
+         ~"dba~".~"spro_calicosechero~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~",   
+         ~"dba~".~"productores~"  
+   WHERE ( ~"dba~".~"envases~".~"enva_tipoen~" = ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"envases~".~"enva_codigo~" = ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_tipoen~" = ~"dba~".~"envases~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_codigo~" = ~"dba~".~"envases~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_tipoen~" = ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_codigo~" = ~"dba~".~"spro_movtoenvadeta_trans~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"cale_calida~" = ~"dba~".~"spro_movtoenvadeta_trans~".~"cale_calida~" ) and  
+         ( ~"dba~".~"spro_movtoenvadeta_trans~".~"plde_codigo~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_movtoenvadeta_trans~".~"clie_codigo~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtoenvadeta_trans~".~"tpmv_codigo~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"tpmv_codigo~" ) and  
+         ( ~"dba~".~"spro_movtoenvadeta_trans~".~"meen_numero~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_numero~" ) and  
+         ( ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"prod_codigo~" ) and  
+         ( ( dba.spro_movtoenvaenca_trans.plde_codigo = :Planta ) AND  
+         ( dba.spro_movtoenvaenca_trans.tpmv_codrec = :TipoMovto ) AND  
+         ( dba.spro_movtoenvaenca_trans.mfge_numero = :Numero ) AND  
+         ( dba.spro_movtoenvaenca_trans.clie_codigo = :Cliente ) )    
+
+
+" update="dba.spro_movtoenvadeta_trans" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("TipoMovto", number),("Numero", number),("Cliente", number)) )
+text(band=header alignment="2" text="Cantidad" border="6" color="0" x="2487" y="8" height="120" width="242" html.valueishtml="0"  name=fgme_cantid_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Peso
+Envase" border="6" color="0" x="2747" y="8" height="120" width="233" html.valueishtml="0"  name=fgme_pesone_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Tipo
+Envase" border="6" color="0" x="1275" y="8" height="120" width="306" html.valueishtml="0"  name=enva_tipoen_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Código
+Envase" border="6" color="0" x="1600" y="8" height="120" width="521" html.valueishtml="0"  name=enva_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Calidad" border="6" color="0" x="2139" y="8" height="120" width="329" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Productor" border="6" color="0" x="549" y="8" height="120" width="704" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Condición
+Envase" border="6" color="0" x="133" y="8" height="120" width="293" html.valueishtml="0"  name=cama_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Clie" border="6" color="0" x="443" y="8" height="120" width="87" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1275" y="4" height="60" width="306" format="[general]" html.valueishtml="0"  name=enva_tipoen  tag="Tipo de Envase" visible="1" dddw.name=dw_mues_tiposenvases dddw.displaycolumn=tien_nombre dddw.datacolumn=enva_tipoen dddw.percentwidth=300 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="2487" y="4" height="60" width="242" format="#,##0" html.valueishtml="0"  name=fgme_cantid  tag="Cantidad de Envases" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1600" y="4" height="60" width="521" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="2139" y="4" height="60" width="329" format="[general]" html.valueishtml="0"  name=cale_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="  fgme_cantid * fgme_pesone "border="0" color="0" x="2272" y="76" height="64" width="325" format="[GENERAL]" html.valueishtml="0"  name=total_neto visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="if( fgme_conenv = 1, fgme_cantid ,0)"border="0" color="0" x="2021" y="88" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=bultos_fruta visible="1~t0"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="133" y="4" height="60" width="293" format="[general]" html.valueishtml="0"  name=fgme_conenv visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="2747" y="4" height="60" width="233" format="#,##0.000" html.valueishtml="0"  name=fgme_pesone  tag="Peso Neto" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="443" y="4" height="60" width="87" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=32766 border="0" color="0" x="549" y="4" height="60" width="133" format="[general]" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="695" y="4" height="60" width="562" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="0" expression="sum(if( fgme_conenv = 1, fgme_cantid ,0) for all)"border="0" color="0" x="2021" y="4" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=tot_bultos_fruta visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="0" text="Total " border="5" color="0" x="133" y="8" height="60" width="224" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="1" expression="RowCount()"border="5" color="0" x="375" y="8" height="60" width="352" format="#,##0" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="1" expression="sum(  fgme_cantid * fgme_pesone  for all)"border="5" color="0" x="2144" y="8" height="60" width="329" format="#,##0.000" html.valueishtml="0"  name=total_pesoenv visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="1" expression="sum(fgme_cantid for all)"border="5" color="0" x="2487" y="8" height="60" width="242" format="#,##0" html.valueishtml="0"  name=total_envases visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="1" expression="sum(fgme_pesone for all)"border="5" color="0" x="2747" y="8" height="60" width="233" format="#,##0.000" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=footer alignment="1" text="Peso Total Envases  " border="5" color="0" x="745" y="8" height="60" width="1376" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

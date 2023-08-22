@@ -1,0 +1,11 @@
+﻿$PBExportHeader$str_calibreenvase.srs
+$PBExportComments$Estructura de Tabla Calibre por Envase
+global type str_calibreenvase from structure
+	integer		especie
+	integer		tipoenvase
+	integer		codigoenvase
+	string		calibre
+	string		grupo
+	integer		columna
+end type
+

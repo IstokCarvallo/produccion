@@ -1,0 +1,44 @@
+﻿$PBExportHeader$dw_mues_guia_existencia.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=72 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=mden_gdprod dbname="exismovtoenca.mden_gdprod" )
+ column=(type=decimal(0) updatewhereclause=yes name=mden_numero dbname="mden_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=bode_codigo dbname="exismovtoenca.bode_codigo" )
+ column=(type=date updatewhereclause=yes name=mden_fecmov dbname="exismovtoenca.mden_fecmov" )
+ column=(type=decimal(0) updatewhereclause=yes name=tpmv_tipomv dbname="exismovtoenca.tpmv_tipomv" )
+ retrieve="  SELECT ~"dba~".~"exismovtoenca~".~"mden_gdprod~",   
+         (~"dba~".~"exismovtoenca~".~"mden_numero~") as mden_numero,   
+         ~"dba~".~"exismovtoenca~".~"bode_codigo~",   
+         ~"dba~".~"exismovtoenca~".~"mden_fecmov~",   
+         ~"dba~".~"exismovtoenca~".~"tpmv_tipomv~"  
+    FROM ~"dba~".~"exismovtoenca~"  
+   WHERE ( ~"dba~".~"exismovtoenca~".~"mden_gdprod~" = :guia ) AND  
+         ( ~"dba~".~"exismovtoenca~".~"mden_estado~" = 1 ) AND  
+         ( ~"dba~".~"exismovtoenca~".~"mden_docrel~" = :docrel )   
+	group by ~"dba~".~"exismovtoenca~".~"mden_gdprod~",   
+         ~"dba~".~"exismovtoenca~".~"mden_numero~",   
+         ~"dba~".~"exismovtoenca~".~"bode_codigo~",   
+         ~"dba~".~"exismovtoenca~".~"mden_fecmov~",   
+         ~"dba~".~"exismovtoenca~".~"tpmv_tipomv~" 
+" arguments=(("guia", number),("docrel", number))  sort="tpmv_tipomv A " )
+text(band=header alignment="2" text="Mden Gdprod" border="0" color="33554432" x="5" y="4" height="64" width="357" html.valueishtml="0"  name=mden_gdprod_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="329" format="[general]" html.valueishtml="0"  name=mden_gdprod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="361" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=mden_numero visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="2496" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=bode_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="4631" y="0" height="64" width="1595" format="[general]" html.valueishtml="0"  name=mden_fecmov visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="33554432" x="6226" y="0" height="64" width="2135" format="[general]" html.valueishtml="0"  name=tpmv_tipomv visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,126 @@
+﻿$PBExportHeader$m_consulta.srm
+forward
+global type m_consulta from menu
+end type
+type m_m_edicion from menu within m_consulta
+end type
+type m_listadopornave from menu within m_m_edicion
+end type
+type m_listadoporplanillas from menu within m_m_edicion
+end type
+type m_detalleplanilla from menu within m_m_edicion
+end type
+type m_m_edicion from menu within m_consulta
+m_listadopornave m_listadopornave
+m_listadoporplanillas m_listadoporplanillas
+m_detalleplanilla m_detalleplanilla
+end type
+global type m_consulta from menu
+m_m_edicion m_m_edicion
+end type
+end forward
+
+global type m_consulta from menu
+m_m_edicion m_m_edicion
+end type
+global m_consulta m_consulta
+
+on m_consulta.create
+m_consulta=this
+call super::create
+this.text = "m_consulta_bk"
+this.m_m_edicion=create m_m_edicion
+this.Item[UpperBound(this.Item)+1]=this.m_m_edicion
+end on
+
+on m_consulta.destroy
+call super::destroy
+destroy(this.m_m_edicion)
+end on
+
+type m_m_edicion from menu within m_consulta
+m_listadopornave m_listadopornave
+m_listadoporplanillas m_listadoporplanillas
+m_detalleplanilla m_detalleplanilla
+end type
+
+on m_m_edicion.create
+call super::create
+this.text = "m_edicion"
+this.m_listadopornave=create m_listadopornave
+this.m_listadoporplanillas=create m_listadoporplanillas
+this.m_detalleplanilla=create m_detalleplanilla
+this.Item[UpperBound(this.Item)+1]=this.m_listadopornave
+this.Item[UpperBound(this.Item)+1]=this.m_listadoporplanillas
+this.Item[UpperBound(this.Item)+1]=this.m_detalleplanilla
+end on
+
+on m_m_edicion.destroy
+call super::destroy
+destroy(this.m_listadopornave)
+destroy(this.m_listadoporplanillas)
+destroy(this.m_detalleplanilla)
+end on
+
+type m_listadopornave from menu within m_m_edicion
+end type
+
+event clicked;gs_opcion	=	'2' // Consulta
+gs_windows	=	'2' // Opción del Menu
+
+IF gstr_us.opcionactiva = 'w_cons_listado_general' THEN
+	w_cons_listado_general.TriggerEvent('ue_asignacion')
+END IF
+end event
+
+on m_listadopornave.create
+call super::create
+this.text = "Listado por Nave"
+end on
+
+on m_listadopornave.destroy
+call super::destroy
+end on
+
+type m_listadoporplanillas from menu within m_m_edicion
+end type
+
+on m_listadoporplanillas.create
+call super::create
+this.text = "Listado Planillas por Recibidor"
+end on
+
+on m_listadoporplanillas.destroy
+call super::destroy
+end on
+
+event clicked;gs_opcion	=	'2' // Consulta
+gs_windows	=	'2' // Opción del Menu
+
+IF gstr_us.opcionactiva = 'w_cons_listado_barcos' THEN
+	w_cons_listado_barcos.TriggerEvent('ue_asignacion')
+END IF
+end event
+
+type m_detalleplanilla from menu within m_m_edicion
+end type
+
+event clicked;gs_opcion	=	'2' // Consulta
+gs_windows	=	'2' // Opción del Menu
+
+IF gstr_us.opcionactiva = 'w_cons_listado_porplanillas' THEN
+	w_cons_listado_porplanillas.TriggerEvent('ue_asignacion')
+ELSE
+	w_cons_informe_llegadadestino.TriggerEvent('ue_asignacion')
+END IF
+end event
+
+on m_detalleplanilla.create
+call super::create
+this.text = "Detalle Planilla"
+end on
+
+on m_detalleplanilla.destroy
+call super::destroy
+end on
+

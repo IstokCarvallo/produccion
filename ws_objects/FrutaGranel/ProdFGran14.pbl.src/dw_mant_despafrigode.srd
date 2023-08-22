@@ -1,0 +1,95 @@
+﻿$PBExportHeader$dw_mant_despafrigode.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1184 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=plde_codigo dbname="despafrigode.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=defe_numero dbname="despafrigode.defe_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=clie_codigo dbname="despafrigode.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=paen_numero dbname="despafrigode.paen_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_paen_tipopa dbname="palletencab.paen_tipopa" values="Pallet	1/Pucho	2/" )
+ column=(type=char(30) updatewhereclause=yes name=variedades_vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(10) updatewhereclause=yes name=palletencab_emba_codigo dbname="palletencab.emba_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_cate_codigo dbname="palletencab.cate_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_paen_ccajas dbname="palletencab.paen_ccajas" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="palletencab.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="palletencab.vari_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_paen_inspec dbname="palletencab.paen_inspec" values="Sin Inspección	0/Inspeccionado	1/Re-Inspeccionado	2/" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_dest_codigo dbname="palletencab.dest_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=destinos_dest_nombre dbname="destinos.dest_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_paen_concal dbname="palletencab.paen_concal" values="Habilitado	1/Objetado	2/Rechazado	3/" )
+ column=(type=decimal(0) updatewhereclause=yes name=palletencab_stat_codigo dbname="palletencab.stat_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=defe_termog dbname="despafrigode.defe_termog" )
+ column=(type=decimal(2) updatewhereclause=yes name=defe_tempe1 dbname="despafrigode.defe_tempe1" )
+ column=(type=decimal(2) updatewhereclause=yes name=defe_tempe2 dbname="despafrigode.defe_tempe2" )
+ column=(type=decimal(0) updatewhereclause=yes name=defe_ladoes dbname="despafrigode.defe_ladoes" values="Izquierdo	1/Derecho	2/" )
+ column=(type=decimal(0) updatewhereclause=yes name=defe_filaes dbname="despafrigode.defe_filaes" )
+ column=(type=decimal(0) updatewhereclause=yes name=defe_pcopda dbname="despafrigode.defe_pcopda" )
+ retrieve="SELECT     ~"dba~".~"despafrigode~".~"plde_codigo~" ,
+           ~"dba~".~"despafrigode~".~"defe_numero~" ,
+           ~"dba~".~"despafrigode~".~"clie_codigo~" ,
+           ~"dba~".~"despafrigode~".~"paen_numero~" ,
+           ~"dba~".~"palletencab~".~"paen_tipopa~" ,
+           ~"dba~".~"variedades~".~"vari_nombre~" ,
+           ~"dba~".~"palletencab~".~"emba_codigo~" ,
+           ~"dba~".~"palletencab~".~"cate_codigo~" ,
+           ~"dba~".~"palletencab~".~"paen_ccajas~" ,
+           ~"dba~".~"palletencab~".~"espe_codigo~" ,
+           ~"dba~".~"palletencab~".~"vari_codigo~" ,
+           ~"dba~".~"palletencab~".~"paen_inspec~" ,
+           ~"dba~".~"palletencab~".~"dest_codigo~" ,
+           ~"dba~".~"destinos~".~"dest_nombre~" ,
+           ~"dba~".~"palletencab~".~"paen_concal~" ,
+           ~"dba~".~"palletencab~".~"stat_codigo~" ,
+           ~"dba~".~"despafrigode~".~"defe_termog~" ,
+           ~"dba~".~"despafrigode~".~"defe_tempe1~" ,
+           ~"dba~".~"despafrigode~".~"defe_tempe2~" ,
+           ~"dba~".~"despafrigode~".~"defe_ladoes~" ,
+           ~"dba~".~"despafrigode~".~"defe_filaes~" ,
+           ~"dba~".~"despafrigode~".~"defe_pcopda~"  
+        FROM {oj ~"dba~".~"palletencab~" LEFT OUTER JOIN ~"dba~".~"destinos~" 
+ON ~"dba~".~"palletencab~".~"dest_codigo~" = ~"dba~".~"destinos~".~"dest_codigo~"} ,
+           ~"dba~".~"variedades~" ,
+           ~"dba~".~"despafrigode~"    
+       WHERE ( ~"dba~".~"variedades~".~"espe_codigo~" = ~"dba~".~"palletencab~".~"espe_codigo~" ) 
+and          ( ~"dba~".~"variedades~".~"vari_codigo~" = ~"dba~".~"palletencab~".~"vari_codigo~" ) 
+and          ( ~"dba~".~"despafrigode~".~"clie_codigo~" = ~"dba~".~"palletencab~".~"clie_codigo~" ) 
+and          ( ~"dba~".~"despafrigode~".~"paen_numero~" = ~"dba~".~"palletencab~".~"paen_numero~" )   " )
+text(band=detail alignment="0" text="" border="6" color="0" x="1426" y="924" height="248" width="1221" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="" border="6" color="0" x="46" y="924" height="248" width="1362" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text=" " border="6" color="0" x="46" y="252" height="656" width="2601" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="" border="6" color="0" x="46" y="36" height="200" width="2601" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="ANTECEDENTES DEL PALLET" border="0" color="0" x="699" y="88" height="92" width="1294" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="5" color="0" x="439" y="280" height="76" width="1202" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" dddw.name=dw_mues_clienprod dddw.displaycolumn=clie_nombre dddw.datacolumn=clie_codigo dddw.percentwidth=200 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Cliente" border="0" color="0" x="114" y="280" height="68" width="293" html.valueishtml="0"  name=clie_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Pallet" border="0" color="0" x="114" y="384" height="64" width="293" html.valueishtml="0"  name=paen_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="'...'"border="6" color="0" x="846" y="384" height="68" width="78" format="[general]" html.valueishtml="0"  name=buscapallet visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Variedad" border="0" color="0" x="114" y="488" height="68" width="293" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Categoría" border="0" color="0" x="114" y="592" height="68" width="293" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=10 border="5" color="0" x="439" y="384" height="76" width="379" format="00000000" html.valueishtml="0"  name=paen_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Tipo" border="0" color="0" x="1669" y="384" height="68" width="128" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="5" color="0" x="2048" y="384" height="76" width="517" format="[general]" html.valueishtml="0"  name=palletencab_paen_tipopa visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="5" color="0" x="434" y="488" height="76" width="1024" format="[general]" html.valueishtml="0"  name=variedades_vari_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Embalaje" border="0" color="0" x="1669" y="488" height="68" width="274" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="5" color="0" x="2048" y="488" height="76" width="517" format="[general]" html.valueishtml="0"  name=palletencab_emba_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="5" color="0" x="439" y="592" height="76" width="347" format="[general]" html.valueishtml="0"  name=palletencab_cate_codigo visible="1" dddw.name=dw_mues_categorias dddw.displaycolumn=cate_nombre dddw.datacolumn=cate_codigo dddw.percentwidth=100 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Condición" border="0" color="0" x="1669" y="592" height="76" width="311" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="5" color="0" x="2048" y="592" height="76" width="517" format="[general]" html.valueishtml="0"  name=palletencab_paen_inspec visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="C.Calidad" border="0" color="0" x="114" y="696" height="64" width="293" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="5" color="0" x="439" y="696" height="76" width="617" format="[General]" html.valueishtml="0"  name=palletencab_paen_concal visible="1" edit.name="Control de Calidad" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Cajas" border="0" color="0" x="1669" y="696" height="64" width="160" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Destino" border="0" color="0" x="114" y="800" height="64" width="293" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="5" color="0" x="439" y="800" height="76" width="617" format="[general]" html.valueishtml="0"  name=destinos_dest_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Termógrafo" border="0" color="0" x="114" y="960" height="64" width="338" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="5" color="0" x="2048" y="696" height="76" width="517" format="[general]" html.valueishtml="0"  name=palletencab_paen_ccajas visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Temperaturas  " border="0" color="0" x="114" y="1068" height="64" width="402" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="0" tabsequence=50 border="0" color="0" x="1669" y="952" height="64" width="896" format="[general]" html.valueishtml="0"  name=defe_ladoes visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Estiba" border="0" color="0" x="1669" y="1064" height="64" width="265" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="2" tabsequence=60 border="5" color="0" x="2048" y="1064" height="76" width="517" format="[general]" html.valueishtml="0"  name=defe_filaes visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=17 alignment="1" tabsequence=20 border="5" color="0" x="539" y="952" height="76" width="754" format="[general]" html.valueishtml="0"  name=defe_termog visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=18 alignment="2" tabsequence=30 border="5" color="0" x="539" y="1064" height="76" width="293" format="##0.00" html.valueishtml="0"  name=defe_tempe1 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=19 alignment="2" tabsequence=40 border="5" color="0" x="1001" y="1064" height="76" width="293" format="##0.00" html.valueishtml="0"  name=defe_tempe2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="sum(palletencab_paen_ccajas for all)"border="5" color="0" x="2048" y="56" height="76" width="517" format="[general]" html.valueishtml="0"  name=totcajas visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

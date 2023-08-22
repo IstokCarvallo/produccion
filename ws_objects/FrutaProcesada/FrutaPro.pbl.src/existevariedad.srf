@@ -1,0 +1,33 @@
+﻿$PBExportHeader$existevariedad.srf
+global type existevariedad from function_object
+end type
+
+forward prototypes
+global function boolean existevariedad (integer ai_cliente, integer ai_especie, integer ai_variedad, ref string as_columna[])
+end prototypes
+
+global function boolean existevariedad (integer ai_cliente, integer ai_especie, integer ai_variedad, ref string as_columna[]);Integer	li_VariedadRelaci
+
+SELECT	vari_nombre, vari_relaci, vari_codcli
+	INTO	:as_Columna[1], :li_VariedadRelaci, :as_Columna[3]
+	FROM	dba.VARIEDADES
+	WHERE espe_codigo	=	:ai_Especie
+	AND	vari_codigo	=	:ai_Variedad;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de tabla Variedades")
+	
+	RETURN False
+ELSEIF sqlca.SQLCode = 100 THEN
+	MessageBox("Atención", "Código de Variedad no ha sido Definido.~r~r" + &
+					"Ingrese o seleccione otro código.")
+
+	RETURN False
+ELSE
+	as_Columna[2]	=	String(li_VariedadRelaci)
+END IF	
+
+RETURN TRUE
+
+end function
+

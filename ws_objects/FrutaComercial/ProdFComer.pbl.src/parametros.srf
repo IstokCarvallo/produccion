@@ -1,0 +1,20 @@
+﻿$PBExportHeader$parametros.srf
+global type parametros from function_object
+end type
+
+forward prototypes
+global subroutine parametros ()
+end prototypes
+
+global subroutine parametros ();
+SELECT	plde_codigo, prpa_destar, prpa_recenv, prpa_guienv
+	INTO	:gstr_param.plde_codigo, :gstr_param.prpa_destar, :gstr_param.prpa_recenv, :gstr_param.prpa_guienv
+	FROM	dbo.producparam ;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Producción: producparam")
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Error","Lectura de Parametros Producción: producparam")
+END IF
+end subroutine
+

@@ -1,0 +1,37 @@
+﻿$PBExportHeader$f_generasemtitulos.srf
+global type f_generasemtitulos from function_object
+end type
+
+forward prototypes
+global subroutine f_generasemtitulos (date ad_fecha, integer ai_semana, datawindow adw)
+end prototypes
+
+global subroutine f_generasemtitulos (date ad_fecha, integer ai_semana, datawindow adw);integer	li_fila, li_fila00
+String		ls_columna, ls_valor
+
+li_fila00 = 1
+
+For li_Fila = 1 to 24
+	ls_columna = 'esps_sema' + String(li_Fila , '00') + '_t.Text = '
+	
+	If f_nrosemanaano(ad_fecha) = 53 Then
+		If ai_semana + (li_Fila - 1) > 53 Then
+			ls_valor = '"Sem ' + String (0 + li_Fila00) + '"'
+			li_fila00++
+		Else
+			ls_valor = '"Sem ' + String (ai_semana + (li_Fila - 1)) + '"'
+		End IF
+	Else
+		If ai_semana + (li_Fila - 1) > 52 Then
+			ls_valor = '"Sem ' + String (0 + li_Fila00) + '"'
+			li_fila00++
+		Else
+			ls_valor = '"Sem ' + String (ai_semana + (li_Fila - 1)) + '"'
+		End IF
+	End If
+
+	adw.Modify(ls_columna + ls_valor)
+Next
+
+end subroutine
+

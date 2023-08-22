@@ -1,0 +1,20 @@
+﻿$PBExportHeader$f_validafechatempo.srf
+global type f_validafechatempo from function_object
+end type
+
+forward prototypes
+global function boolean f_validafechatempo (date fecha)
+end prototypes
+
+global function boolean f_validafechatempo (date fecha);
+
+
+IF fecha >= gstr_paramtempo.FechaInicio AND fecha <= gstr_paramtempo.FechaTermino THEN
+	RETURN True
+ElSE
+	MessageBox('Fecha Errónea','Fecha Ingresada Fuera de Temporada Actual...')
+	RETURN False
+END IF
+
+end function
+

@@ -1,0 +1,18 @@
+﻿$PBExportHeader$str_parametros.srs
+global type str_parametros from structure
+	long		identificador
+	integer		temporada_1
+	integer		temporada_2
+	integer		temporada_3
+	integer		temporada_4
+	integer		temporada_5
+	string		clave
+	integer		estado
+	integer		plde_codigo
+	integer		prpa_destar
+	integer		prpa_recenv
+	integer		prpa_guienv
+	string		admin1
+	string		admin2
+end type
+

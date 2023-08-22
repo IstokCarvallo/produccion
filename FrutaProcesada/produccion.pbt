@@ -1,0 +1,5 @@
+Save Format v3.0(19990112)
+appname "produccion";
+applib "FrutaPro.pbl";
+liblist "FrutaPro.pbl;FrutaP00.pbl;FrutaP20.pbl;FrutaP21.pbl;FrutaP22.pbl;FrutaP23.pbl;FrutaP24.pbl;FrutaP25.pbl;FrutaP26.pbl;FrutaP27.pbl;FrutaP28.pbl;FrutaP29.pbl;FrutaP30.pbl;FrutaP31.pbl;FrutaP50.pbl;FrutaP51.pbl;FrutaP52.pbl;FrutaP53.pbl;FrutaP60.pbl;FrutaP61.pbl;FrutaP62.pbl;FrutaP63.pbl;FrutaP64.pbl;FrutaP65.pbl;FrutaP66.pbl;FrutaP67.pbl;FrutaP68.pbl;FrutaP69.pbl;FrutaP70.pbl;FrutaP71.pbl;FrutaP72.pbl;frutap73.pbl;Frutap74.pbl;FrutaP80.pbl;FrutaP81.pbl;FrutaPBasura.pbl;FrutaPGD.pbl;guiadespacho.pbl;Productiva.pbl;webserviceguiadespacho.pbl;..\\CajasProd\\CajasProdFto.pbl;..\\..\\TablasProd\\Tablas\\TabProd01.pbl;..\\..\\TablasProd\\Tablas\\TabProd02.pbl;..\\..\\TablasProd\\Tablas\\TabProd03.pbl;..\\..\\TablasProd\\Tablas\\TabProd04.pbl;..\\..\\TablasProd\\Tablas\\TabProd05.pbl;..\\..\\TablasProd\\Tablas\\TabProd06.pbl;..\\..\\TablasProd\\Tablas\\TabProdConsol.pbl;..\\..\\TablasProd\\Tablas\\TabProdTab.pbl;..\\..\\AdmUsuar.pbl;..\\..\\ObjePubl.pbl;..\\..\\WebServices17.pbl";
+type "pb";

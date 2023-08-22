@@ -1,0 +1,94 @@
+﻿$PBExportHeader$dw_mant_mues_spro_camaraexistefg_dest.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=156 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_codigo dbname="spro_camaraexistefg.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_camaraexistefg.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=cama_codigo dbname="spro_camaraexistefg.cama_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=caex_nroban dbname="spro_camaraexistefg.caex_nroban" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=caex_nropos dbname="spro_camaraexistefg.caex_nropos" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=caex_nropis dbname="spro_camaraexistefg.caex_nropis" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=caex_canbul dbname="spro_camaraexistefg.caex_canbul" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_pltcod dbname="spro_camaraexistefg.lote_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lote_espcod dbname="spro_camaraexistefg.lote_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_tipoen dbname="spro_camaraexistefg.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=enva_codigo dbname="spro_camaraexistefg.enva_codigo" )
+ column=(type=char(15) updatewhereclause=yes name=tien_nombre dbname="tiposenvases.tien_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=tot_bultos dbname="tot_bultos" )
+ retrieve="  SELECT ~"dba~".~"spro_camaraexistefg~".~"lote_codigo~",   
+         ~"dba~".~"spro_camaraexistefg~".~"plde_codigo~",   
+         ~"dba~".~"spro_camaraexistefg~".~"cama_codigo~",   
+         ~"dba~".~"spro_camaraexistefg~".~"caex_nroban~",   
+         ~"dba~".~"spro_camaraexistefg~".~"caex_nropos~",   
+         ~"dba~".~"spro_camaraexistefg~".~"caex_nropis~",   
+         ~"dba~".~"spro_camaraexistefg~".~"caex_canbul~",   
+         ~"dba~".~"spro_camaraexistefg~".~"lote_pltcod~",   
+         ~"dba~".~"spro_camaraexistefg~".~"lote_espcod~",   
+         ~"dba~".~"spro_camaraexistefg~".~"enva_tipoen~",   
+         ~"dba~".~"spro_camaraexistefg~".~"enva_codigo~",   
+         ~"dba~".~"tiposenvases~".~"tien_nombre~",   
+         ~"dba~".~"envases~".~"enva_nombre~", 
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"productores~".~"prod_nombre~",
+			convert(decimal(8), 0) as tot_bultos
+    FROM ~"dba~".~"spro_camaraexistefg~",   
+         ~"dba~".~"envases~",   
+         ~"dba~".~"tiposenvases~",   
+         ~"dba~".~"spro_lotesfrutagranel~",   
+         ~"dba~".~"variedades~",   
+         ~"dba~".~"productores~"  
+   WHERE ( ~"dba~".~"spro_camaraexistefg~".~"enva_tipoen~" = ~"dba~".~"envases~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_camaraexistefg~".~"enva_codigo~" = ~"dba~".~"envases~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_camaraexistefg~".~"enva_tipoen~" = ~"dba~".~"tiposenvases~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_camaraexistefg~".~"lote_pltcod~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_camaraexistefg~".~"lote_espcod~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_camaraexistefg~".~"lote_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"espe_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"variedades~".~"vari_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"prod_codigo~" ) and  
+         ( dba.spro_camaraexistefg.plde_codigo = :Planta ) AND  
+         ( dba.spro_camaraexistefg.cama_codigo = :Camara )    
+" update="dba.spro_camaraexistefg" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("Camara", number))  sort="lote_codigo A plde_codigo A cama_codigo A " )
+text(band=header alignment="2" text="Lote" border="6" color="0" x="133" y="12" height="132" width="370" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Bultos" border="6" color="0" x="2519" y="12" height="132" width="187" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Al" border="6" color="0" x="2391" y="12" height="132" width="110" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Co" border="6" color="0" x="2263" y="12" height="132" width="110" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Ba" border="6" color="0" x="2135" y="12" height="132" width="110" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Envase" border="6" color="0" x="1755" y="12" height="132" width="361" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TipoEnvase" border="6" color="0" x="1376" y="12" height="132" width="361" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Variedad" border="6" color="0" x="1006" y="12" height="132" width="352" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Productor" border="6" color="0" x="521" y="12" height="132" width="466" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1719" y="112" height="60" width="370" format="[general]" html.valueishtml="0"  name=enva_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="2194" y="120" height="60" width="370" format="[general]" html.valueishtml="0"  name=enva_tipoen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="453" y="156" height="76" width="512" format="[general]" html.valueishtml="0"  name=lote_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="String( lote_pltcod ,'0000') + String( lote_espcod ,'00') + String( lote_codigo ,'0000')"border="0" color="0" x="133" y="4" height="64" width="370" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="1006" y="4" height="64" width="352" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1376" y="4" height="64" width="361" format="[general]" html.valueishtml="0"  name=tien_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="1755" y="4" height="64" width="361" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2135" y="4" height="64" width="110" format="00" html.valueishtml="0"  name=caex_nroban visible="1" edit.limit=2 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="521" y="4" height="64" width="466" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2263" y="4" height="64" width="110" format="00" html.valueishtml="0"  name=caex_nropos visible="1" edit.limit=2 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2391" y="4" height="64" width="110" format="00" html.valueishtml="0"  name=caex_nropis visible="1" edit.limit=2 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="553648127~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="2519" y="4" height="64" width="187" format="[general]" html.valueishtml="0"  name=caex_canbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Total Registros" border="0" color="0" x="489" y="16" height="68" width="430" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="2" expression="rowcount()"border="5" color="0" x="1019" y="16" height="68" width="293" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

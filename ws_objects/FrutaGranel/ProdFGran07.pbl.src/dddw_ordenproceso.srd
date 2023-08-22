@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dddw_ordenproceso.srd
+$PBExportComments$DataWindows Muestra de Ordenes de Proceso.
+release 8;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=108 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=orpr_numero dbname="spro_ordenproceso.orpr_numero" )
+ retrieve="PBSELECT(TABLE(NAME=~"dba.spro_ordenproceso~") COLUMN(NAME=~"dba.spro_ordenproceso.orpr_numero~"))" )
+column(band=detail id=1 alignment="1" tabsequence=10 border="5" color="0" x="18" y="8" height="76" width="690" format="00000000" html.valueishtml="0"  name=orpr_numero visible="1" dddw.name=dw_mues_spro_ordenproceso dddw.displaycolumn=orpr_numero dddw.datacolumn=orpr_numero dddw.percentwidth=260 dddw.lines=0 dddw.limit=8 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.hscrollbar=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,1770 @@
+﻿$PBExportHeader$m_principal.srm
+forward
+global type m_principal from m_sys_frame
+end type
+type m_productores from menu within m_aplicacion
+end type
+type m_valoresdefacturaciónporespecie from menu within m_productores
+end type
+type m_valoresdefacturación from menu within m_productores
+end type
+type m_valoresespecialesdefacturación from menu within m_productores
+end type
+type m_productores from menu within m_aplicacion
+m_valoresdefacturaciónporespecie m_valoresdefacturaciónporespecie
+m_valoresdefacturación m_valoresdefacturación
+m_valoresespecialesdefacturación m_valoresespecialesdefacturación
+end type
+type m_macro from menu within m_aplicacion
+end type
+type m_calibresporvariedades from menu within m_aplicacion
+end type
+type m_semanafacturacion from menu within m_aplicacion
+end type
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_productores m_productores
+m_macro m_macro
+m_calibresporvariedades m_calibresporvariedades
+m_semanafacturacion m_semanafacturacion
+end type
+type m_generafacturacióndeproductores from menu within m_movimientos
+end type
+type m_- from menu within m_movimientos
+end type
+type m_mantenciónfacturaciónporproductor from menu within m_movimientos
+end type
+type m_-14 from menu within m_movimientos
+end type
+type m_validaproforma from menu within m_movimientos
+end type
+type m_informefacturaciónproductores from menu within m_movimientos
+end type
+type m_-4 from menu within m_movimientos
+end type
+type m_cargapreciosfichaproductores from menu within m_movimientos
+end type
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_generafacturacióndeproductores m_generafacturacióndeproductores
+m_- m_-
+m_mantenciónfacturaciónporproductor m_mantenciónfacturaciónporproductor
+m_-14 m_-14
+m_validaproforma m_validaproforma
+m_informefacturaciónproductores m_informefacturaciónproductores
+m_-4 m_-4
+m_cargapreciosfichaproductores m_cargapreciosfichaproductores
+end type
+type m_ from menu within m_informes
+end type
+type m_resumendefacturaciónproductor from menu within m_informes
+end type
+type m_validacionproforma from menu within m_informes
+end type
+type m_históricoporproductor from menu within m_informes
+end type
+type m_comparacionfacturacionversusproducido from menu within m_informes
+end type
+type m_-6 from menu within m_informes
+end type
+type m_comparacionfacturaciónvsproducciónactual from menu within m_informes
+end type
+type m_-5 from menu within m_informes
+end type
+type m_consolidadodespachosespeciales from menu within m_informes
+end type
+type m_informes from m_sys_frame`m_informes within m_principal
+m_ m_
+m_resumendefacturaciónproductor m_resumendefacturaciónproductor
+m_validacionproforma m_validacionproforma
+m_históricoporproductor m_históricoporproductor
+m_comparacionfacturacionversusproducido m_comparacionfacturacionversusproducido
+m_-6 m_-6
+m_comparacionfacturaciónvsproducciónactual m_comparacionfacturaciónvsproducciónactual
+m_-5 m_-5
+m_consolidadodespachosespeciales m_consolidadodespachosespeciales
+end type
+end forward
+
+global type m_principal from m_sys_frame
+end type
+global m_principal m_principal
+
+type variables
+Integer	columna = 8
+end variables
+
+on m_principal.create
+m_principal=this
+call super::create
+end on
+
+on m_principal.destroy
+call super::destroy
+end on
+
+type m_file from m_sys_frame`m_file within m_principal
+event create ( )
+event destroy ( )
+end type
+
+on m_file.create
+call super::create
+end on
+
+on m_file.destroy
+call super::destroy
+end on
+
+type m_controldeaccesos from m_sys_frame`m_controldeaccesos within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_controldeaccesos.create
+call super::create
+end on
+
+on m_controldeaccesos.destroy
+call super::destroy
+end on
+
+type m_visordeaccesos from m_sys_frame`m_visordeaccesos within m_controldeaccesos
+end type
+
+on m_visordeaccesos.create
+call super::create
+end on
+
+on m_visordeaccesos.destroy
+call super::destroy
+end on
+
+type m_depuracióndeaccesos from m_sys_frame`m_depuracióndeaccesos within m_controldeaccesos
+end type
+
+on m_depuracióndeaccesos.create
+call super::create
+end on
+
+on m_depuracióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_rayita2000 from m_sys_frame`m_rayita2000 within m_controldeaccesos
+end type
+
+on m_rayita2000.create
+call super::create
+end on
+
+on m_rayita2000.destroy
+call super::destroy
+end on
+
+type m_mantencióndeaccesos from m_sys_frame`m_mantencióndeaccesos within m_controldeaccesos
+end type
+
+on m_mantencióndeaccesos.create
+call super::create
+end on
+
+on m_mantencióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_sucursalesyuadministrativas from m_sys_frame`m_sucursalesyuadministrativas within m_mantencióndeaccesos
+end type
+
+on m_sucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_sucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_accesodegruposalsistema from m_sys_frame`m_accesodegruposalsistema within m_mantencióndeaccesos
+end type
+
+on m_accesodegruposalsistema.create
+call super::create
+end on
+
+on m_accesodegruposalsistema.destroy
+call super::destroy
+end on
+
+type m_gruposyusuarios from m_sys_frame`m_gruposyusuarios within m_mantencióndeaccesos
+end type
+
+on m_gruposyusuarios.create
+call super::create
+end on
+
+on m_gruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_rayita2003 from m_sys_frame`m_rayita2003 within m_mantencióndeaccesos
+end type
+
+on m_rayita2003.create
+call super::create
+end on
+
+on m_rayita2003.destroy
+call super::destroy
+end on
+
+type m_accesosdeusuarios from m_sys_frame`m_accesosdeusuarios within m_mantencióndeaccesos
+end type
+
+on m_accesosdeusuarios.create
+call super::create
+end on
+
+on m_accesosdeusuarios.destroy
+call super::destroy
+end on
+
+type m_tipodeadministraciónsistema from m_sys_frame`m_tipodeadministraciónsistema within m_mantencióndeaccesos
+end type
+
+on m_tipodeadministraciónsistema.create
+call super::create
+end on
+
+on m_tipodeadministraciónsistema.destroy
+call super::destroy
+end on
+
+type m_rayita2002 from m_sys_frame`m_rayita2002 within m_controldeaccesos
+end type
+
+on m_rayita2002.create
+call super::create
+end on
+
+on m_rayita2002.destroy
+call super::destroy
+end on
+
+type m_informesdeaccesos from m_sys_frame`m_informesdeaccesos within m_controldeaccesos
+end type
+
+on m_informesdeaccesos.create
+call super::create
+end on
+
+on m_informesdeaccesos.destroy
+call super::destroy
+end on
+
+type m_informedesucursalesyuadministrativas from m_sys_frame`m_informedesucursalesyuadministrativas within m_informesdeaccesos
+end type
+
+on m_informedesucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_informedesucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_informedegruposyusuarios from m_sys_frame`m_informedegruposyusuarios within m_informesdeaccesos
+end type
+
+on m_informedegruposyusuarios.create
+call super::create
+end on
+
+on m_informedegruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_informedesistemasygrupos from m_sys_frame`m_informedesistemasygrupos within m_informesdeaccesos
+end type
+
+on m_informedesistemasygrupos.create
+call super::create
+end on
+
+on m_informedesistemasygrupos.destroy
+call super::destroy
+end on
+
+type m_informedeaccesoalsistema from m_sys_frame`m_informedeaccesoalsistema within m_informesdeaccesos
+end type
+
+on m_informedeaccesoalsistema.create
+call super::create
+end on
+
+on m_informedeaccesoalsistema.destroy
+call super::destroy
+end on
+
+type m_informeaccesodeusuariosaaplicaciones from m_sys_frame`m_informeaccesodeusuariosaaplicaciones within m_informesdeaccesos
+end type
+
+on m_informeaccesodeusuariosaaplicaciones.create
+call super::create
+end on
+
+on m_informeaccesodeusuariosaaplicaciones.destroy
+call super::destroy
+end on
+
+type m_rayita2001 from m_sys_frame`m_rayita2001 within m_controldeaccesos
+end type
+
+on m_rayita2001.create
+call super::create
+end on
+
+on m_rayita2001.destroy
+call super::destroy
+end on
+
+type m_cambiodepassword from m_sys_frame`m_cambiodepassword within m_controldeaccesos
+end type
+
+on m_cambiodepassword.create
+call super::create
+end on
+
+on m_cambiodepassword.destroy
+call super::destroy
+end on
+
+type m_calculadora from m_sys_frame`m_calculadora within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_calculadora.create
+call super::create
+end on
+
+on m_calculadora.destroy
+call super::destroy
+end on
+
+type m_-0 from m_sys_frame`m_-0 within m_file
+end type
+
+on m_-0.create
+call super::create
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_configurarimpresora from m_sys_frame`m_configurarimpresora within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_configurarimpresora.create
+call super::create
+end on
+
+on m_configurarimpresora.destroy
+call super::destroy
+end on
+
+type m_-1 from m_sys_frame`m_-1 within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_-1.create
+call super::create
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_cerrarventanaactiva from m_sys_frame`m_cerrarventanaactiva within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_cerrarventanaactiva.create
+call super::create
+end on
+
+on m_cerrarventanaactiva.destroy
+call super::destroy
+end on
+
+type m_-2 from m_sys_frame`m_-2 within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_-2.create
+call super::create
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salirdelaaplicacin from m_sys_frame`m_salirdelaaplicacin within m_file
+event create ( )
+event destroy ( )
+end type
+
+on m_salirdelaaplicacin.create
+call super::create
+end on
+
+on m_salirdelaaplicacin.destroy
+call super::destroy
+end on
+
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_productores m_productores
+m_macro m_macro
+m_calibresporvariedades m_calibresporvariedades
+m_semanafacturacion m_semanafacturacion
+end type
+
+on m_aplicacion.create
+call super::create
+this.m_productores=create m_productores
+this.m_macro=create m_macro
+this.m_calibresporvariedades=create m_calibresporvariedades
+this.m_semanafacturacion=create m_semanafacturacion
+this.Item[UpperBound(this.Item)+1]=this.m_productores
+this.Item[UpperBound(this.Item)+1]=this.m_macro
+this.Item[UpperBound(this.Item)+1]=this.m_calibresporvariedades
+this.Item[UpperBound(this.Item)+1]=this.m_semanafacturacion
+end on
+
+on m_aplicacion.destroy
+call super::destroy
+destroy(this.m_productores)
+destroy(this.m_macro)
+destroy(this.m_calibresporvariedades)
+destroy(this.m_semanafacturacion)
+end on
+
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_generafacturacióndeproductores m_generafacturacióndeproductores
+m_- m_-
+m_mantenciónfacturaciónporproductor m_mantenciónfacturaciónporproductor
+m_-14 m_-14
+m_validaproforma m_validaproforma
+m_informefacturaciónproductores m_informefacturaciónproductores
+m_-4 m_-4
+m_cargapreciosfichaproductores m_cargapreciosfichaproductores
+end type
+
+on m_movimientos.create
+call super::create
+this.text = "&Procesos"
+this.m_generafacturacióndeproductores=create m_generafacturacióndeproductores
+this.m_-=create m_-
+this.m_mantenciónfacturaciónporproductor=create m_mantenciónfacturaciónporproductor
+this.m_-14=create m_-14
+this.m_validaproforma=create m_validaproforma
+this.m_informefacturaciónproductores=create m_informefacturaciónproductores
+this.m_-4=create m_-4
+this.m_cargapreciosfichaproductores=create m_cargapreciosfichaproductores
+this.Item[UpperBound(this.Item)+1]=this.m_generafacturacióndeproductores
+this.Item[UpperBound(this.Item)+1]=this.m_-
+this.Item[UpperBound(this.Item)+1]=this.m_mantenciónfacturaciónporproductor
+this.Item[UpperBound(this.Item)+1]=this.m_-14
+this.Item[UpperBound(this.Item)+1]=this.m_validaproforma
+this.Item[UpperBound(this.Item)+1]=this.m_informefacturaciónproductores
+this.Item[UpperBound(this.Item)+1]=this.m_-4
+this.Item[UpperBound(this.Item)+1]=this.m_cargapreciosfichaproductores
+end on
+
+on m_movimientos.destroy
+call super::destroy
+destroy(this.m_generafacturacióndeproductores)
+destroy(this.m_-)
+destroy(this.m_mantenciónfacturaciónporproductor)
+destroy(this.m_-14)
+destroy(this.m_validaproforma)
+destroy(this.m_informefacturaciónproductores)
+destroy(this.m_-4)
+destroy(this.m_cargapreciosfichaproductores)
+end on
+
+type m_procesos from m_sys_frame`m_procesos within m_principal
+end type
+
+on m_procesos.create
+call super::create
+this.visible = false
+this.text = "Transmisión de &Datos"
+end on
+
+on m_procesos.destroy
+call super::destroy
+end on
+
+type m_informes from m_sys_frame`m_informes within m_principal
+m_ m_
+m_resumendefacturaciónproductor m_resumendefacturaciónproductor
+m_validacionproforma m_validacionproforma
+m_históricoporproductor m_históricoporproductor
+m_comparacionfacturacionversusproducido m_comparacionfacturacionversusproducido
+m_-6 m_-6
+m_comparacionfacturaciónvsproducciónactual m_comparacionfacturaciónvsproducciónactual
+m_-5 m_-5
+m_consolidadodespachosespeciales m_consolidadodespachosespeciales
+event destroy ( )
+end type
+
+on m_informes.destroy
+call super::destroy
+destroy(this.m_)
+destroy(this.m_resumendefacturaciónproductor)
+destroy(this.m_validacionproforma)
+destroy(this.m_históricoporproductor)
+destroy(this.m_comparacionfacturacionversusproducido)
+destroy(this.m_-6)
+destroy(this.m_comparacionfacturaciónvsproducciónactual)
+destroy(this.m_-5)
+destroy(this.m_consolidadodespachosespeciales)
+end on
+
+on m_informes.create
+call super::create
+this.m_=create m_
+this.m_resumendefacturaciónproductor=create m_resumendefacturaciónproductor
+this.m_validacionproforma=create m_validacionproforma
+this.m_históricoporproductor=create m_históricoporproductor
+this.m_comparacionfacturacionversusproducido=create m_comparacionfacturacionversusproducido
+this.m_-6=create m_-6
+this.m_comparacionfacturaciónvsproducciónactual=create m_comparacionfacturaciónvsproducciónactual
+this.m_-5=create m_-5
+this.m_consolidadodespachosespeciales=create m_consolidadodespachosespeciales
+this.Item[UpperBound(this.Item)+1]=this.m_
+this.Item[UpperBound(this.Item)+1]=this.m_resumendefacturaciónproductor
+this.Item[UpperBound(this.Item)+1]=this.m_validacionproforma
+this.Item[UpperBound(this.Item)+1]=this.m_históricoporproductor
+this.Item[UpperBound(this.Item)+1]=this.m_comparacionfacturacionversusproducido
+this.Item[UpperBound(this.Item)+1]=this.m_-6
+this.Item[UpperBound(this.Item)+1]=this.m_comparacionfacturaciónvsproducciónactual
+this.Item[UpperBound(this.Item)+1]=this.m_-5
+this.Item[UpperBound(this.Item)+1]=this.m_consolidadodespachosespeciales
+end on
+
+type m_consultas from m_sys_frame`m_consultas within m_principal
+event destroy ( )
+end type
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+on m_consultas.create
+call super::create
+this.visible = false
+end on
+
+type m_topicactions from m_sys_frame`m_topicactions within m_principal
+event create ( )
+event destroy ( )
+end type
+
+on m_topicactions.create
+call super::create
+end on
+
+on m_topicactions.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_sys_frame`m_primerregistro within m_topicactions
+event create ( )
+event destroy ( )
+end type
+
+on m_primerregistro.create
+call super::create
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_sys_frame`m_registroanterior within m_topicactions
+event create ( )
+event destroy ( )
+end type
+
+on m_registroanterior.create
+call super::create
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_sys_frame`m_siguienteregistro within m_topicactions
+event create ( )
+event destroy ( )
+end type
+
+on m_siguienteregistro.create
+call super::create
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_sys_frame`m_ultimoregistro within m_topicactions
+event destroy ( )
+end type
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+on m_ultimoregistro.create
+call super::create
+this.visible = false
+end on
+
+type m_-45 from m_sys_frame`m_-45 within m_topicactions
+event destroy ( )
+end type
+
+on m_-45.destroy
+call super::destroy
+end on
+
+on m_-45.create
+call super::create
+this.visible = false
+end on
+
+type m_buscarregistro from m_sys_frame`m_buscarregistro within m_topicactions
+event destroy ( )
+end type
+
+on m_buscarregistro.destroy
+call super::destroy
+end on
+
+on m_buscarregistro.create
+call super::create
+this.visible = false
+end on
+
+type m_ordenar from m_sys_frame`m_ordenar within m_topicactions
+event create ( )
+event destroy ( )
+end type
+
+on m_ordenar.create
+call super::create
+end on
+
+on m_ordenar.destroy
+call super::destroy
+end on
+
+type m_-0001 from m_sys_frame`m_-0001 within m_topicactions
+end type
+
+on m_-0001.create
+call super::create
+end on
+
+on m_-0001.destroy
+call super::destroy
+end on
+
+type m_nuevoregistro from m_sys_frame`m_nuevoregistro within m_topicactions
+end type
+
+on m_nuevoregistro.create
+call super::create
+end on
+
+on m_nuevoregistro.destroy
+call super::destroy
+end on
+
+type m_búsquedadeinformación from m_sys_frame`m_búsquedadeinformación within m_topicactions
+end type
+
+on m_búsquedadeinformación.create
+call super::create
+end on
+
+on m_búsquedadeinformación.destroy
+call super::destroy
+end on
+
+type m_lectura from m_sys_frame`m_lectura within m_topicactions
+end type
+
+on m_lectura.create
+call super::create
+end on
+
+on m_lectura.destroy
+call super::destroy
+end on
+
+type m_grabainformación from m_sys_frame`m_grabainformación within m_topicactions
+end type
+
+on m_grabainformación.create
+call super::create
+end on
+
+on m_grabainformación.destroy
+call super::destroy
+end on
+
+type m_eliminainformación from m_sys_frame`m_eliminainformación within m_topicactions
+end type
+
+on m_eliminainformación.create
+call super::create
+end on
+
+on m_eliminainformación.destroy
+call super::destroy
+end on
+
+type m_imprimedocumento from m_sys_frame`m_imprimedocumento within m_topicactions
+end type
+
+on m_imprimedocumento.create
+call super::create
+end on
+
+on m_imprimedocumento.destroy
+call super::destroy
+end on
+
+type m_-0002 from m_sys_frame`m_-0002 within m_topicactions
+end type
+
+on m_-0002.create
+call super::create
+end on
+
+on m_-0002.destroy
+call super::destroy
+end on
+
+type m_agregadetalle from m_sys_frame`m_agregadetalle within m_topicactions
+end type
+
+on m_agregadetalle.create
+call super::create
+end on
+
+on m_agregadetalle.destroy
+call super::destroy
+end on
+
+type m_eliminadetalle from m_sys_frame`m_eliminadetalle within m_topicactions
+end type
+
+on m_eliminadetalle.create
+call super::create
+end on
+
+on m_eliminadetalle.destroy
+call super::destroy
+end on
+
+type m_respaldos from m_sys_frame`m_respaldos within m_principal
+end type
+
+on m_respaldos.create
+call super::create
+end on
+
+on m_respaldos.destroy
+call super::destroy
+end on
+
+type m_respaldobasededatosylog from m_sys_frame`m_respaldobasededatosylog within m_respaldos
+end type
+
+on m_respaldobasededatosylog.create
+call super::create
+end on
+
+on m_respaldobasededatosylog.destroy
+call super::destroy
+end on
+
+type m_-respaldos from m_sys_frame`m_-respaldos within m_respaldos
+end type
+
+on m_-respaldos.create
+call super::create
+end on
+
+on m_-respaldos.destroy
+call super::destroy
+end on
+
+type m_actualizacióndedatos from m_sys_frame`m_actualizacióndedatos within m_respaldos
+end type
+
+on m_actualizacióndedatos.create
+call super::create
+end on
+
+on m_actualizacióndedatos.destroy
+call super::destroy
+end on
+
+type m_window from m_sys_frame`m_window within m_principal
+event create ( )
+event destroy ( )
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_tile from m_sys_frame`m_tile within m_window
+event create ( )
+event destroy ( )
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_tilehorizontal from m_sys_frame`m_tilehorizontal within m_window
+event create ( )
+event destroy ( )
+end type
+
+on m_tilehorizontal.create
+call super::create
+end on
+
+on m_tilehorizontal.destroy
+call super::destroy
+end on
+
+type m_layer from m_sys_frame`m_layer within m_window
+event create ( )
+event destroy ( )
+end type
+
+on m_layer.create
+call super::create
+end on
+
+on m_layer.destroy
+call super::destroy
+end on
+
+type m_cascade from m_sys_frame`m_cascade within m_window
+event create ( )
+event destroy ( )
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_help from m_sys_frame`m_help within m_principal
+event create ( )
+event destroy ( )
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_helpgeneralidades from m_sys_frame`m_helpgeneralidades within m_help
+end type
+
+on m_helpgeneralidades.create
+call super::create
+end on
+
+on m_helpgeneralidades.destroy
+call super::destroy
+end on
+
+type m_helpadministracióndeusuarios from m_sys_frame`m_helpadministracióndeusuarios within m_help
+end type
+
+on m_helpadministracióndeusuarios.create
+call super::create
+end on
+
+on m_helpadministracióndeusuarios.destroy
+call super::destroy
+end on
+
+type m_liberacióndesistemas from m_sys_frame`m_liberacióndesistemas within m_help
+end type
+
+on m_liberacióndesistemas.create
+call super::create
+end on
+
+on m_liberacióndesistemas.destroy
+call super::destroy
+end on
+
+type m_actualizacionesdesistema from m_sys_frame`m_actualizacionesdesistema within m_help
+end type
+
+on m_actualizacionesdesistema.create
+call super::create
+end on
+
+on m_actualizacionesdesistema.destroy
+call super::destroy
+end on
+
+type m_helpindex from m_sys_frame`m_helpindex within m_help
+event create ( )
+event destroy ( )
+end type
+
+on m_helpindex.create
+call super::create
+end on
+
+on m_helpindex.destroy
+call super::destroy
+end on
+
+type m_-3 from m_sys_frame`m_-3 within m_help
+event create ( )
+event destroy ( )
+end type
+
+on m_-3.create
+call super::create
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_about from m_sys_frame`m_about within m_help
+event create ( )
+event destroy ( )
+end type
+
+on m_about.create
+call super::create
+end on
+
+on m_about.destroy
+call super::destroy
+end on
+
+type m_productores from menu within m_aplicacion
+m_valoresdefacturaciónporespecie m_valoresdefacturaciónporespecie
+m_valoresdefacturación m_valoresdefacturación
+m_valoresespecialesdefacturación m_valoresespecialesdefacturación
+end type
+
+on m_productores.create
+call super::create
+this.text = "&Valores"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_valoresdefacturaciónporespecie=create m_valoresdefacturaciónporespecie
+this.m_valoresdefacturación=create m_valoresdefacturación
+this.m_valoresespecialesdefacturación=create m_valoresespecialesdefacturación
+this.Item[UpperBound(this.Item)+1]=this.m_valoresdefacturaciónporespecie
+this.Item[UpperBound(this.Item)+1]=this.m_valoresdefacturación
+this.Item[UpperBound(this.Item)+1]=this.m_valoresespecialesdefacturación
+end on
+
+on m_productores.destroy
+call super::destroy
+destroy(this.m_valoresdefacturaciónporespecie)
+destroy(this.m_valoresdefacturación)
+destroy(this.m_valoresespecialesdefacturación)
+end on
+
+type m_valoresdefacturaciónporespecie from menu within m_productores
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_mant_mues_valofactespe, w_main, columna, Original!)
+end event
+
+on m_valoresdefacturaciónporespecie.create
+call super::create
+this.text = "Valores de Facturación por &Especie"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valoresdefacturaciónporespecie.destroy
+call super::destroy
+end on
+
+type m_valoresdefacturación from menu within m_productores
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_mant_mues_valofactprod, w_main, columna, Original!)
+end event
+
+on m_valoresdefacturación.create
+call super::create
+this.text = "&Valores de Facturación por Productor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valoresdefacturación.destroy
+call super::destroy
+end on
+
+type m_valoresespecialesdefacturación from menu within m_productores
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_mant_mues_valorespecial, w_main, columna, Original!)
+end event
+
+on m_valoresespecialesdefacturación.create
+call super::create
+this.text = "Valores Especiales de &Facturación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valoresespecialesdefacturación.destroy
+call super::destroy
+end on
+
+type m_macro from menu within m_aplicacion
+end type
+
+on m_macro.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_macro.destroy
+call super::destroy
+end on
+
+type m_calibresporvariedades from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_mant_mues_variecalibre, w_main, columna, Original!)
+end event
+
+on m_calibresporvariedades.create
+call super::create
+this.text = "&Calibres por Variedades"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_calibresporvariedades.destroy
+call super::destroy
+end on
+
+type m_semanafacturacion from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_mant_mues_semanafactura, w_main, columna, Original!)
+end event
+
+on m_semanafacturacion.create
+call super::create
+this.text = "Semana Facturacion"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_semanafacturacion.destroy
+call super::destroy
+end on
+
+type m_generafacturacióndeproductores from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_genera_facturacion, w_main, columna, Original!)
+end event
+
+on m_generafacturacióndeproductores.create
+call super::create
+this.text = "Genera Facturación de Productores"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_generafacturacióndeproductores.destroy
+call super::destroy
+end on
+
+type m_- from menu within m_movimientos
+end type
+
+on m_-.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-.destroy
+call super::destroy
+end on
+
+type m_mantenciónfacturaciónporproductor from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT AccesoPuntoCritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_facturprodgenerado, w_main, columna, Original!)
+end event
+
+on m_mantenciónfacturaciónporproductor.create
+call super::create
+this.text = "Mantención Facturación por Productor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mantenciónfacturaciónporproductor.destroy
+call super::destroy
+end on
+
+type m_-14 from menu within m_movimientos
+end type
+
+on m_-14.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-14.destroy
+call super::destroy
+end on
+
+type m_validaproforma from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_estado_facturacion, w_main, columna, Original!)
+end event
+
+on m_validaproforma.create
+call super::create
+this.text = "Valida Proforma "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_validaproforma.destroy
+call super::destroy
+end on
+
+type m_informefacturaciónproductores from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_facturacion_productorgenerado, w_main, columna, Original!)
+end event
+
+on m_informefacturaciónproductores.create
+call super::create
+this.text = "Informe Facturación Productores"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_informefacturaciónproductores.destroy
+call super::destroy
+end on
+
+type m_-4 from menu within m_movimientos
+end type
+
+on m_-4.create
+call super::create
+this.visible = false
+this.text = "-"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-4.destroy
+call super::destroy
+end on
+
+type m_cargapreciosfichaproductores from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_carga_precios_fichaproductores, w_main, columna, Original!)
+end event
+
+on m_cargapreciosfichaproductores.create
+call super::create
+this.visible = false
+this.text = "Carga Precios Ficha Productores"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cargapreciosfichaproductores.destroy
+call super::destroy
+end on
+
+type m_ from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_facturacion_productor, w_main, columna, Original!)
+end event
+
+on m_.create
+call super::create
+this.visible = false
+this.text = "Informe de &Facturación Productor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_.destroy
+call super::destroy
+end on
+
+type m_resumendefacturaciónproductor from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+OpenSheet(w_info_facturacion_productor_resumen, w_main, columna, Original!)
+end event
+
+on m_resumendefacturaciónproductor.create
+call super::create
+this.visible = false
+this.text = "&Resumen de Facturación Productor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_resumendefacturaciónproductor.destroy
+call super::destroy
+end on
+
+type m_validacionproforma from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_valida_facturacion, w_main, columna, Original!)
+end event
+
+on m_validacionproforma.create
+call super::create
+this.text = "Validacion Proforma"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_validacionproforma.destroy
+call super::destroy
+end on
+
+type m_históricoporproductor from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_info_producciondespachofacturacion, w_main, columna, Original!)
+
+end event
+
+on m_históricoporproductor.create
+call super::create
+this.text = "Comparativo Facturado v/s Producido"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_históricoporproductor.destroy
+call super::destroy
+end on
+
+type m_comparacionfacturacionversusproducido from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_info_prodeuccionversusfacturacion, w_main, columna, Original!)
+
+end event
+
+on m_comparacionfacturacionversusproducido.create
+call super::create
+this.text = "Comparacion Facturación v/s Producción Actual"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_comparacionfacturacionversusproducido.destroy
+call super::destroy
+end on
+
+type m_-6 from menu within m_informes
+end type
+
+on m_-6.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-6.destroy
+call super::destroy
+end on
+
+type m_comparacionfacturaciónvsproducciónactual from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_info_produccion_resumido, w_main, columna, Original!)
+
+
+
+
+end event
+
+on m_comparacionfacturaciónvsproducciónactual.create
+call super::create
+this.text = "Producción Resumen &Opcional"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_comparacionfacturaciónvsproducciónactual.destroy
+call super::destroy
+end on
+
+type m_-5 from menu within m_informes
+end type
+
+on m_-5.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_-5.destroy
+call super::destroy
+end on
+
+type m_consolidadodespachosespeciales from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_info_consolidado_general_despa, w_main, columna, Original!)
+
+
+
+
+end event
+
+on m_consolidadodespachosespeciales.create
+call super::create
+this.text = "Consolidado Despachos &Especiales (Fecha Embalaje)"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_consolidadodespachosespeciales.destroy
+call super::destroy
+end on
+

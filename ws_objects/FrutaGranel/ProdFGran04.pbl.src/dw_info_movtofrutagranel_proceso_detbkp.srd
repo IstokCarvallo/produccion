@@ -1,0 +1,135 @@
+﻿$PBExportHeader$dw_info_movtofrutagranel_proceso_detbkp.srd
+$PBExportComments$Despacho de Fruta Granel
+release 10;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=268 color="536870912" )
+summary(height=180 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=428 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_plde_codigo dbname="spro_movtofrutagrandeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_tpmv_codigo dbname="spro_movtofrutagrandeta.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_mfge_numero dbname="spro_movtofrutagrandeta.mfge_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_mfgd_secuen dbname="spro_movtofrutagrandeta.mfgd_secuen" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_pltcod dbname="spro_movtofrutagrandeta.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_espcod dbname="spro_movtofrutagrandeta.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_lote_codigo dbname="spro_movtofrutagrandeta.lote_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfgd_bulent dbname="spro_movtofrutagrandeta.mfgd_bulent" )
+ column=(type=decimal(3) updatewhereclause=yes name=spro_movtofrutagrandeta_mfgd_kgnent dbname="spro_movtofrutagrandeta.mfgd_kgnent" )
+ column=(type=char(40) updatewhereclause=yes name=camarasbode_cama_nombre dbname="camarasbode.cama_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=envases_enva_nombre dbname="envases.enva_nombre" )
+ column=(type=decimal(3) updatewhereclause=yes name=lote_kilpro dbname="spro_lotesfrutagranel.lote_kilpro" )
+ column=(type=decimal(0) updatewhereclause=yes name=cama_codigo dbname="spro_movtofrutagrandeta.cama_codigo" )
+ column=(type=char(3) updatewhereclause=yes name=tien_abresp dbname="tiposenvases.tien_abresp" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_kildec dbname="especies.espe_kildec" )
+ retrieve="SELECT  dba.spro_movtofrutagrandeta.plde_codigo ,
+           dba.spro_movtofrutagrandeta.tpmv_codigo ,
+           dba.spro_movtofrutagrandeta.mfge_numero ,
+           dba.spro_movtofrutagrandeta.mfgd_secuen ,
+           dba.spro_movtofrutagrandeta.lote_pltcod ,
+           dba.spro_movtofrutagrandeta.lote_espcod ,
+           dba.spro_movtofrutagrandeta.lote_codigo ,
+           dba.spro_movtofrutagrandeta.mfgd_bulent ,
+           dba.spro_movtofrutagrandeta.mfgd_kgnent ,
+           dba.camarasbode.cama_nombre ,
+           dba.envases.enva_nombre ,
+           dba.spro_lotesfrutagranel.lote_kilpro ,
+           dba.spro_movtofrutagrandeta.cama_codigo ,
+           dba.tiposenvases.tien_abresp ,
+           dba.especies.espe_kildec
+
+        FROM dba.camarasbode ,
+           dba.envases ,
+           dba.spro_movtofrutagrandeta ,
+           dba.tiposenvases ,
+           dba.spro_lotesfrutagranel ,
+           dba.especies
+
+        WHERE ( dba.spro_movtofrutagrandeta.enva_tipoen = dba.envases.enva_tipoen )
+ and          ( dba.spro_movtofrutagrandeta.enva_codigo = dba.envases.enva_codigo )
+ and          ( dba.spro_movtofrutagrandeta.plde_codigo = dba.camarasbode.plde_codigo )
+ and          ( dba.spro_movtofrutagrandeta.cama_codigo = dba.camarasbode.cama_codigo )
+ and          ( dba.tiposenvases.enva_tipoen = dba.spro_movtofrutagrandeta.enva_tipoen )
+ and          ( dba.spro_lotesfrutagranel.lote_pltcod = dba.spro_movtofrutagrandeta.lote_pltcod )
+ and          ( dba.spro_lotesfrutagranel.lote_espcod = dba.spro_movtofrutagrandeta.lote_espcod )
+ and          ( dba.spro_lotesfrutagranel.lote_codigo = dba.spro_movtofrutagrandeta.lote_codigo )
+ and          ( dba.especies.espe_codigo = dba.spro_lotesfrutagranel.lote_espcod )
+ and          ( ( dba.spro_movtofrutagrandeta.plde_codigo = :Planta )
+ And          ( dba.spro_movtofrutagrandeta.tpmv_codigo in(20, 21) )
+ And          ( dba.spro_movtofrutagrandeta.mfge_numero = :Numero )
+ and          ( dba.spro_movtofrutagrandeta.clie_codigo = :cliente ) )  " arguments=(("planta", number),("numero", number),("cliente", number)) )
+line(band=detail x1="2011" y1="84" x2="2217" y2="84"  name=l_4 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2011" y1="172" x2="2217" y2="172"  name=l_9 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2016" y1="260" x2="2222" y2="260"  name=l_19 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2016" y1="348" x2="2222" y2="348"  name=l_20 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2277" y1="84" x2="2469" y2="84"  name=l_5 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2277" y1="172" x2="2469" y2="172"  name=l_10 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2281" y1="260" x2="2473" y2="260"  name=l_17 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2281" y1="348" x2="2473" y2="348"  name=l_18 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2523" y1="84" x2="2834" y2="84"  name=l_6 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2523" y1="172" x2="2834" y2="172"  name=l_11 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2528" y1="260" x2="2839" y2="260"  name=l_15 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2528" y1="348" x2="2839" y2="348"  name=l_16 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2885" y1="84" x2="3163" y2="84"  name=l_7 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2885" y1="172" x2="3163" y2="172"  name=l_12 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2889" y1="260" x2="3168" y2="260"  name=l_13 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="2889" y1="348" x2="3168" y2="348"  name=l_14 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2080" y="100" height="60" width="82" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2080" y="188" height="60" width="82" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2336" y="100" height="60" width="82" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2336" y="188" height="60" width="82" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2336" y="276" height="60" width="82" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2080" y="276" height="60" width="82" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2336" y="364" height="60" width="82" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2080" y="364" height="60" width="82" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2080" y="16" height="60" width="82" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text=":" border="0" color="0" x="2336" y="16" height="60" width="82" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=detail x1="1783" y1="84" x2="1975" y2="84"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="1783" y1="172" x2="1975" y2="172"  name=l_8 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="1787" y1="260" x2="1979" y2="260"  name=l_21 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=detail x1="1787" y1="348" x2="1979" y2="348"  name=l_22 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="2" expression="String( spro_movtofrutagrandeta_lote_pltcod ,'0000') +'-'+ String( spro_movtofrutagrandeta_lote_espcod,'00') +'-'+ String( spro_movtofrutagrandeta_lote_codigo ,'0000') "border="0" color="0" x="32" y="16" height="60" width="357" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="2" tabsequence=32766 border="0" color="0" x="398" y="16" height="60" width="201" format="0000" html.valueishtml="0"  name=cama_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="tien_abresp + '   '+ envases_enva_nombre "border="0" color="0" x="613" y="16" height="60" width="608" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="1225" y="16" height="60" width="256" format="#,##0" html.valueishtml="0"  name=mfgd_bulent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="mfgd_bulent * lote_kilpro"border="0" color="0" x="1490" y="16" height="60" width="283" format="#,##0.000" html.valueishtml="0"  name=kilos visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="393" y="88" height="56" width="923" format="[general]" html.valueishtml="0"  name=camarasbode_cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=detail x1="18" y1="0" x2="3205" y2="0"  name=l_24 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="Total" border="0" color="0" x="1065" y="16" height="60" width="270" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=summary alignment="0" text="Kilos" border="0" color="0" x="1065" y="88" height="60" width="270" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum( mfgd_bulent  for all )"border="0" color="0" x="1367" y="16" height="60" width="283" format="#,##0" html.valueishtml="0"  name=sumabultos visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=summary alignment="1" expression="sum(  kilos  for all )"border="0" color="0" x="1367" y="88" height="60" width="283" format="[GENERAL]~tif( espe_kildec=1, '#,##0.00', '#,##0')" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=summary x1="18" y1="4" x2="3205" y2="4"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Detalle de Fruta" border="0" color="0" x="87" y="24" height="64" width="503" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="
+Camara" border="0" color="0" x="389" y="128" height="128" width="219" html.valueishtml="0"  name=camarasfrigo_cama_nombre_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="
+Cantidad" border="0" color="0" x="2885" y="128" height="128" width="279" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Calidad
+Envase" border="0" color="0" x="2523" y="128" height="128" width="311" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Hora
+Term." border="0" color="0" x="2277" y="128" height="128" width="192" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Hora
+Inicio" border="0" color="0" x="2011" y="128" height="128" width="206" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="
+Lote" border="0" color="0" x="46" y="128" height="128" width="338" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="
+Turno" border="0" color="0" x="1783" y="128" height="128" width="192" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Cantidad
+de Bultos" border="0" color="0" x="1225" y="128" height="128" width="256" html.valueishtml="0"  name=spro_movtofrutagrandeta_mfgd_bulent_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="
+Envases" border="0" color="0" x="613" y="128" height="128" width="608" html.valueishtml="0"  name=envases_enva_nombre_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="K. Prom.
+Estimado" border="0" color="0" x="1486" y="128" height="128" width="288" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="18" y1="256" x2="3205" y2="256"  name=l_23 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="18" y1="124" x2="3205" y2="124"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

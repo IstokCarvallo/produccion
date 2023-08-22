@@ -1,0 +1,45 @@
+﻿$PBExportHeader$str_paramplanta.srs
+global type str_paramplanta from structure
+	integer		codigoplanta
+	string		administrador
+	integer		destare
+	integer		controlenvase
+	integer		guiaenvase
+	integer		codigoespecie
+	integer		codigovariedad
+	integer		codigoservicio
+	integer		plantaadminist
+	integer		diasretraso
+	integer		productorempresa
+	integer		etiquetaembalaje
+	integer		pesajebins
+	decimal		porcentajeiva
+	integer		poolventa
+	integer		poolretiro
+	boolean		packing
+	boolean		binsabins
+	boolean		palletdebins
+	long		destarabasepallet
+	integer		minbulproceso
+	string		pathap
+	integer		compman
+	string		password
+	integer		impresora
+	string		nombreimpresora
+	integer		cone_existe
+	integer		conexion
+	string		pass_cierreweb
+	boolean		bultobins
+	string		passpack
+	string		imprcompdef
+	boolean		distcali
+	datawindow		dw_detalle_especie
+	integer		aplicaporc
+	integer		porcentaje
+	string		jefeplanta
+	integer		controlodbc
+	integer		controlventpall
+	integer		usaapc
+	boolean		semipacking
+end type
+

@@ -1,0 +1,10 @@
+﻿$PBExportHeader$dbpl_15_ctlcalevalmadcol.srp
+PIPELINE(source_connect=ProdRancagua_2014,destination_connect=Produccion_2014,type=update,commit=0,errors=0,keyname="ctlcalevalmadcol")
+SOURCE(name="ctlcalevalmadcol",COLUMN(type=decimal,name="espe_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=decimal,name="evmc_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="evmc_descri",dbtype="varchar(25)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcalevalmadcol~") COLUMN(NAME=~"dba.ctlcalevalmadcol.espe_codigo~")COLUMN(NAME=~"dba.ctlcalevalmadcol.evmc_codigo~")COLUMN(NAME=~"dba.ctlcalevalmadcol.evmc_descri~"))")
+DESTINATION(name="dba.ctlcalevalmadcol",COLUMN(type=decimal,name="espe_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=decimal,name="evmc_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="evmc_descri",dbtype="char(25)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="cons_control",dbtype="numeric(7,0)",nulls_allowed=yes))

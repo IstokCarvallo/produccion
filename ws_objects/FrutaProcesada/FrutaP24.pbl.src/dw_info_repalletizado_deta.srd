@@ -1,0 +1,66 @@
+﻿$PBExportHeader$dw_info_repalletizado_deta.srd
+$PBExportComments$Detalle Informe de Repalletizado por tipo Origen / Destino.
+release 10;
+datawindow(units=2 timer_interval=0 color=32896 processing=4 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 250 print.margin.right = 250 print.margin.top = 250 print.margin.bottom = 250 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no  crosstab.dynamic = yes grid.lines=0 grid.columnmove=no selected.mouse=no )
+header[1](height=0 color="536870912" )
+header[2](height=270 color="536870912" )
+summary(height=135 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=135 color="536870912" )
+table(column=(type=char(20) updatewhereclause=yes name=emba_codigo dbname="emba_codigo" )
+ column=(type=number updatewhereclause=yes name=prod_codigo dbname="prod_codigo" )
+ column=(type=char(20) updatewhereclause=yes name=prod_nombre dbname="prod_nombre" )
+ column=(type=number updatewhereclause=yes name=espe_codigo dbname="espe_codigo" )
+ column=(type=char(20) updatewhereclause=yes name=vari_nombre dbname="vari_nombre" )
+ column=(type=number updatewhereclause=yes name=etiq_codigo dbname="etiq_codigo" )
+ column=(type=char(20) updatewhereclause=yes name=etiq_nombre dbname="etiq_nombre" )
+ column=(type=number updatewhereclause=yes name=totcajas dbname="totcajas" )
+ column=(type=number updatewhereclause=yes name=val dbname="val" )
+ procedure="1 execute dbo.fproccuadraturarepa;1 @planta = :planta, @numero = :numero, @cliente = :cliente, @tipo = :tipo, @numcambio = :numcambio" arguments=(("planta", number),("numero", number),("cliente", number),("tipo", number),("numcambio", number))  sort="emba_codigo A prod_codigo A prod_nombre A espe_codigo A vari_nombre A etiq_codigo A etiq_nombre A totcajas A " )
+group(level=1 header.height=0 trailer.height=145 by=("emba_codigo" ) header.color="536870912" trailer.color="536870912" )
+compute(band=header[1] alignment="0" expression="~"Tarjas ~" + IF( tipo = 1 , ~"Origen~", ~"Destino~" )"border="0" color="0" x="354" y="104" height="145" width="1343" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Cod.
+Prod" border="0" color="0" x="52" y="10" height="208" width="281" html.valueishtml="0"  name=prod_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="Nombre
+Productor" border="0" color="0" x="354" y="10" height="208" width="1343" html.valueishtml="0"  name=prod_nombre_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="
+Variedad" border="0" color="0" x="1947" y="10" height="208" width="1062" html.valueishtml="0"  name=vari_nombre_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="Nombre
+Etiqueta" border="0" color="0" x="3260" y="10" height="208" width="635" html.valueishtml="0"  name=etiq_nombre_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="Total
+Cajas" border="0" color="0" x="4541" y="10" height="208" width="291" html.valueishtml="0"  name=grand_sum_val_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Cod.
+Etiq" border="0" color="0" x="3031" y="10" height="208" width="208" html.valueishtml="0"  name=etiq_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Cod.
+Espe" border="0" color="0" x="1718" y="10" height="208" width="208" html.valueishtml="0"  name=espe_codigo_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="Total
+Produc" border="0" color="0" x="3916" y="10" height="208" width="291" html.valueishtml="0"  name=totcajas_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="@pafr_calibr" border="0" color="0" x="4229" y="135" height="104" width="291" html.valueishtml="0"  name=val_t visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="52" y="0" height="125" width="281" format="00000" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="354" y="0" height="125" width="1343" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=40 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1947" y="0" height="125" width="1062" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3260" y="0" height="125" width="635" format="[general]" html.valueishtml="0"  name=etiq_nombre visible="1" edit.limit=15 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="0" color="0" x="3031" y="0" height="125" width="208" format="00" html.valueishtml="0"  name=etiq_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="0" x="1718" y="0" height="125" width="208" format="[general]" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="20" y="0" height="125" width="10" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1~t0" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="3916" y="0" height="125" width="291" format="#,##0" html.valueishtml="0"  name=totcajas visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="4229" y="0" height="125" width="291" format="#,##0" html.valueishtml="0"  name=val visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes crosstab.repeat=yes  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="crosstabsum(1)"border="0" color="0" x="4541" y="0" height="125" width="291" format="#,##0" html.valueishtml="0"  name=grand_sum_val visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="0" expression="~"Total Embalaje ~" + emba_codigo "border="0" color="0" x="354" y="10" height="125" width="1343" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(grand_sum_val for group 1)"border="0" color="0" x="4541" y="10" height="125" width="291" format="#,##0" html.valueishtml="0"  name=compute_21 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(val for group 1)"border="0" color="0" x="4229" y="10" height="125" width="291" format="#,##0" html.valueishtml="0"  name=compute_20 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="Total General" border="0" color="0" x="354" y="0" height="104" width="1343" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-6" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(grand_sum_val for all )"border="0" color="0" x="4541" y="0" height="125" width="291" format="#,##0" html.valueishtml="0"  name=compute_24 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(val for all )"border="0" color="0" x="4229" y="0" height="125" width="291" format="#,##0" html.valueishtml="0"  name=compute_23 visible="1"  font.face="Arial" font.height="-6" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+ crosstab(band = foreground  crosstabonly = yes 
+ columns = "pafr_calibr" rows = "emba_codigo, prod_codigo, prod_nombre, espe_codigo, vari_nombre, etiq_codigo, etiq_nombre, totcajas" values = "sum(pafr_ccajas for crosstab)" sourcenames = "emba_codigo, prod_codigo, prod_nombre, espe_codigo, vari_nombre, etiq_codigo, etiq_nombre, pafr_calibr, totcajas, pafr_ccajas")
+sparse(names="emba_codigo	prod_codigo	prod_nombre	espe_codigo	vari_nombre	etiq_codigo	etiq_nombre")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

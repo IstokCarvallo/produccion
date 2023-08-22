@@ -1,0 +1,144 @@
+﻿$PBExportHeader$dw_mues_pron_distfrujocoscondsemana.srd
+release 21;
+datawindow(units=0 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=136 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=84 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long update=yes updatewhereclause=yes name=dfce_identi dbname="pron_distfrujocosenca.dfce_identi" dbalias="en.dfce_identi" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cacm_codigo dbname="pron_distfrujocoscondsemana.cacm_codigo" dbalias="ca.cacm_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=calm_nombre dbname="prodcalidadmercado.calm_nombre" dbalias="cc.calm_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=dfcc_tipreg dbname="pron_distfrujocoscondsemana.dfcc_tipreg" dbalias="ca.dfcc_tipreg" )
+ column=(type=decimal(6) update=yes updatewhereclause=yes name=dfcc_valord dbname="pron_distfrujocoscondsemana.dfcc_valord" dbalias="ca.dfcc_valord" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=dfcc_semana dbname="pron_distfrujocoscondsemana.dfcc_semana" dbalias="ca.dfcc_semana" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=dfcc_valors dbname="pron_distfrujocoscondsemana.dfcc_valors" dbalias="ca.dfcc_valors" )
+ column=(type=long update=yes updatewhereclause=yes key=yes identity=yes name=dfcc_idcose dbname="pron_distfrujocoscondsemana.dfcc_idcose" dbalias="ca.dfcc_idcose" )
+ retrieve="Select en.dfce_identi, ca.cacm_codigo, cc.calm_nombre, ca.dfcc_tipreg,
+           ca.dfcc_valord, ca.dfcc_semana, ca.dfcc_valors, ca.dfcc_idcose
+    from  dbo.pron_distfrujocosenca en, dbo.pron_distfrujocoscondsemana ca, dbo.prodcalidadmercado cc
+    where en.dfce_identi = ca.dfce_identi 
+    and   en.dfce_identi = :Identificador
+    and   ca.cacm_codigo = cc.calm_codigo
+Union
+Select distinct e.dfce_identi, c.calm_codigo, c.calm_nombre, 1, 
+           dfcc_valord = cc.cocu_pordis, 
+           e.dfce_semini, dfcc_tcajas = 0, null
+    from dbo.pron_distfrujocosenca e, dbo.pron_resuldistempdeta r, 
+         dbo.Pron_CondicionCuartel cc, dbo.prodcalidadmercado c
+    where e.dfce_identi =  :Identificador
+    and   e.prod_codigo = r.prod_codigo
+    and   e.prpr_codigo = r.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1,r.prcc_codigo)
+    and   e.espe_codigo = r.espe_codigo
+    and   Isnull(e.vari_codigo,-1) in (-1,r.vari_codigo)
+    and   cc.prod_codigo = r.prod_codigo 
+    and   cc.prpr_codigo = r.prpr_codigo 
+    and   Isnull(cc.prcc_codigo,-1) in (-1,r.prcc_codigo)
+    and   Isnull(cc.vari_codigo,-1) in (-1,r.vari_codigo)
+    and   cc.calm_codigo = c.calm_codigo
+    and   Not Exists(Select top 1 1 from dbo.estimprodsemana s
+                     where s.prod_codigo = e.prod_codigo
+                     and   s.prpr_codigo = e.prpr_codigo
+                     and   Isnull(e.prcc_codigo,-1) in (-1,s.prcc_codigo)
+                     and   s.espe_codigo = e.espe_codigo
+                     and   Isnull(e.vari_codigo,-1) in (-1,s.vari_codigo)
+                     and   s.esps_fecini between e.dfce_lunini and e.dfce_lunter)
+    And   Not Exists(Select top 1 1 from dbo.pron_distfrujocoscondsemana d1 where d1.dfce_identi =  :Identificador)
+Union
+Select e.dfce_identi, cc.calm_codigo, c.calm_nombre, 2, 
+           dfcc_valord = Round(e.dfce_tcajas * cc.cocu_pordis / 100,0), 
+           e.dfce_semini, dfcc_tcajas = 0, null
+    from dbo.pron_distfrujocosenca e, dbo.pron_resuldistempdeta r, 
+         dbo.Pron_CondicionCuartel cc, dbo.prodcalidadmercado c
+    where e.dfce_identi =  :Identificador
+    and   e.prod_codigo = r.prod_codigo
+    and   e.prpr_codigo = r.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1,r.prcc_codigo)
+    and   e.espe_codigo = r.espe_codigo
+    and   Isnull(e.vari_codigo,-1) in (-1,r.vari_codigo)
+    and   cc.prod_codigo = r.prod_codigo 
+    and   cc.prpr_codigo = r.prpr_codigo 
+    and   Isnull(cc.prcc_codigo,-1) in (-1,r.prcc_codigo)
+    and   Isnull(cc.vari_codigo,-1) in (-1,r.vari_codigo)
+    and   cc.calm_codigo = c.calm_codigo
+    and   Not Exists(Select top 1 1 from dbo.estimprodsemana s
+                     where s.prod_codigo = e.prod_codigo
+                     and   s.prpr_codigo = e.prpr_codigo
+                     and   Isnull(e.prcc_codigo,-1) in (-1,s.prcc_codigo)
+                     and   s.espe_codigo = e.espe_codigo
+                     and   Isnull(e.vari_codigo,-1) in (-1,s.vari_codigo)
+                     and   s.esps_fecini between e.dfce_lunini and e.dfce_lunter)
+    And   Not Exists(Select top 1 1 from dbo.pron_distfrujocoscondsemana d1 where d1.dfce_identi =  :Identificador)
+Union    
+Select  e.dfce_identi, c.calm_codigo, c.calm_nombre, 1, 
+            dfcc_valord = cc.cocu_pordis, 
+            s.esps_semana, dfcc_tcajas = 0, null
+        From dbo.estimprodsemana s, dbo.Pron_CondicionCuartel cc,
+            dbo.pron_distfrujocosenca e, dbo.prodcalidadmercado c
+       Where e.dfce_identi = :Identificador
+         and e.prod_codigo = s.prod_codigo
+         And e.prpr_codigo = s.prpr_codigo
+         And IsNull(e.prcc_codigo, -1) in (-1, s.prcc_codigo)
+         And e.espe_codigo = s.espe_codigo
+         And IsNull(e.vari_codigo, -1) in (-1, s.vari_codigo)
+         And cc.prod_codigo = s.prod_codigo 
+         And cc.prpr_codigo = s.prpr_codigo 
+         And IsNull(cc.prcc_codigo, -1) in (-1, s.prcc_codigo)
+         And cc.espe_codigo = s.espe_codigo
+         And IsNull(cc.vari_codigo, -1) in (-1, s.vari_codigo)
+         And cc.calm_codigo = c.calm_codigo
+         And s.esps_fecini between e.dfce_lunini and e.dfce_lunter
+         And Not Exists(Select top 1 1 from dbo.pron_distfrujocoscondsemana d1 where d1.dfce_identi = :Identificador)
+    Group by e.dfce_identi, c.calm_codigo, c.calm_nombre, cc.cocu_pordis, s.esps_semana
+Union
+Select e.dfce_identi, cc.calm_codigo, c.calm_nombre, 2, 
+           dfcc_valord = Round(e.dfce_tcajas * cc.cocu_pordis / 100,0), 
+           s.esps_semana, dfcc_tcajas = 0, null
+    from dbo.estimprodsemana s, dbo.pron_distfrujocosenca e, dbo.Pron_CondicionCuartel cc, dbo.prodcalidadmercado c
+    where e.dfce_identi = :Identificador
+    and   e.prod_codigo = cc.prod_codigo
+    and   e.prpr_codigo = cc.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1, cc.prcc_codigo)
+    and   e.prod_codigo = s.prod_codigo
+    and   e.prpr_codigo = s.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1,s.prcc_codigo)
+    and   e.espe_codigo = s.espe_codigo
+    and   Isnull(e.vari_codigo,-1) in (-1,s.vari_codigo)
+    and   Isnull(e.vari_codigo,-1) in (-1,cc.vari_codigo)
+    and   cc.calm_codigo = c.calm_codigo
+    and   s.esps_fecini between e.dfce_lunini and e.dfce_lunter
+    And   Not Exists(Select top 1 1 from dbo.pron_distfrujocoscondsemana d1 where d1.dfce_identi = :Identificador)
+    group by e.dfce_identi, cc.calm_codigo, c.calm_nombre, cc.cocu_pordis, e.dfce_tcajas, s.esps_semana    " update="dbo.pron_distfrujocoscondsemana" updatewhere=0 updatekeyinplace=no arguments=(("Identificador", number)) )
+text(band=header alignment="2" text="Pron Distfrujocosenca
+Dfce Identi" border="0" color="33554432" x="5" y="4" height="128" width="667" html.valueishtml="0"  name=pron_distfrujocosenca_dfce_identi_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Cacm Codigo" border="0" color="33554432" x="677" y="4" height="128" width="887" html.valueishtml="0"  name=pron_distfrujocoscondsemana_cacm_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Dfcc Tipreg" border="0" color="33554432" x="1568" y="4" height="128" width="887" html.valueishtml="0"  name=pron_distfrujocoscondsemana_dfcc_tipreg_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Dfcc Valord" border="0" color="33554432" x="2459" y="4" height="128" width="887" html.valueishtml="0"  name=pron_distfrujocoscondsemana_dfcc_valord_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Dfcc Semana" border="0" color="33554432" x="3351" y="4" height="128" width="882" html.valueishtml="0"  name=pron_distfrujocoscondsemana_dfcc_semana_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Dfcc Valors" border="0" color="33554432" x="4242" y="4" height="128" width="882" html.valueishtml="0"  name=pron_distfrujocoscondsemana_dfcc_valors_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="Pron Distfrujocoscondsemana
+Dfcc Idcose" border="0" color="33554432" x="5129" y="4" height="128" width="887" html.valueishtml="0"  name=pron_distfrujocoscondsemana_dfcc_idcose_t visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="5" y="4" height="76" width="667" format="[general]" html.valueishtml="0"  name=dfce_identi visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="677" y="4" height="76" width="887" format="[general]" html.valueishtml="0"  name=cacm_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="1568" y="4" height="76" width="887" format="[general]" html.valueishtml="0"  name=dfcc_tipreg visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2459" y="4" height="76" width="887" format="[general]" html.valueishtml="0"  name=dfcc_valord visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="3351" y="4" height="76" width="882" format="[general]" html.valueishtml="0"  name=dfcc_semana visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="4242" y="4" height="76" width="882" format="[general]" html.valueishtml="0"  name=dfcc_valors visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="5129" y="4" height="76" width="887" format="[general]" html.valueishtml="0"  name=dfcc_idcose visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="6016" y="0" height="64" width="809" format="[general]" html.valueishtml="0"  name=calm_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

@@ -1,0 +1,33 @@
+﻿$PBExportHeader$dw_mues_spro_tarifatratos.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=176 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tatr_codigo dbname="spro_tarifatratos.tatr_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=espe_codigo dbname="spro_tarifatratos.espe_codigo" )
+ column=(type=char(10) update=yes updatewhereclause=yes key=yes name=emba_codigo dbname="spro_tarifatratos.emba_codigo" )
+ column=(type=date update=yes updatewhereclause=yes key=yes name=tatr_fectra dbname="spro_tarifatratos.tatr_fectra" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tatr_faenas dbname="spro_tarifatratos.tatr_faenas" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tatr_valors dbname="spro_tarifatratos.tatr_valors" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_tarifatratos~" ) COLUMN(NAME=~"dba.spro_tarifatratos.tatr_codigo~") COLUMN(NAME=~"dba.spro_tarifatratos.espe_codigo~") COLUMN(NAME=~"dba.spro_tarifatratos.emba_codigo~") COLUMN(NAME=~"dba.spro_tarifatratos.tatr_fectra~") COLUMN(NAME=~"dba.spro_tarifatratos.tatr_faenas~") COLUMN(NAME=~"dba.spro_tarifatratos.tatr_valors~")WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_tarifatratos~~~".~~~"tatr_codigo~~~"~"   OP =~"=~"    EXP2 =~":codigo~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_tarifatratos~~~".~~~"espe_codigo~~~"~"   OP =~"=~"    EXP2 =~":especie~"    LOGIC =~"and~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_tarifatratos~~~".~~~"tatr_fectra~~~"~"   OP =~"=~"    EXP2 =~":fecha~" ) ) ARG(NAME = ~"codigo~" TYPE = number)  ARG(NAME = ~"especie~" TYPE = number)  ARG(NAME = ~"fecha~" TYPE = date) " update="dba.spro_tarifatratos" updatewhere=0 updatekeyinplace=yes arguments=(("codigo", number),("especie", number),("fecha", date)) )
+text(band=header alignment="2" text="
+Embalaje" border="6" color="33554432" x="133" y="16" height="152" width="1157" html.valueishtml="0"  name=bins_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256"  height.autosize=yes)
+text(band=header alignment="2" text="
+Valor" border="6" color="33554432" x="1312" y="16" height="148" width="475" html.valueishtml="0"  name=enva_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256"  height.autosize=yes)
+column(band=detail id=3 alignment="0" tabsequence=80 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="133" y="4" height="68" width="1157" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" dddw.name=dw_mues_embalajes_especie dddw.displaycolumn=resume dddw.datacolumn=emba_codigo dddw.percentwidth=200 dddw.lines=6 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes dddw.autoretrieve=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )
+" )
+column(band=detail id=6 alignment="2" tabsequence=100 border="0~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="1312" y="4" height="68" width="475" format="#,##0" html.valueishtml="0"  name=tatr_valors visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="536870912~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )
+" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

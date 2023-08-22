@@ -1,0 +1,38 @@
+﻿$PBExportHeader$existelote.srf
+global type existelote from function_object
+end type
+
+forward prototypes
+global function boolean existelote (integer ai_cliente, integer ai_planta, long al_lote, boolean ab_conmensaje, str_ctlcallotes astr_lotes)
+end prototypes
+
+global function boolean existelote (integer ai_cliente, integer ai_planta, long al_lote, boolean ab_conmensaje, str_ctlcallotes astr_lotes);Integer	li_Zona, li_TipoPlanta, li_CodigoSag
+
+SELECT	clie_codigo,plde_codigo,prod_codigo,espe_codigo,
+			vari_codigo,emba_codigo,vaca_calibr,plde_codpak,
+			cclo_fecemb,cclo_tamlot,cclo_tippla,cclo_pldeap,
+			cclo_numpla,cclo_fecapr, cclo_estado,cclo_numero
+	INTO	:gstr_Lotes.Cliente,:gstr_Lotes.Planta,:gstr_Lotes.Productor,
+			:gstr_Lotes.Especie,:gstr_Lotes.Variedad,:gstr_Lotes.Embalaje,
+			:gstr_Lotes.Calibre,:gstr_Lotes.Packing,:gstr_Lotes.FechaEmb,
+			:gstr_Lotes.Tamaño,:gstr_Lotes.TipoPlanilla,:gstr_Lotes.PlantaAprob,
+			:gstr_Lotes.NumeroPla,:astr_Lotes.FechaAprob, :gstr_Lotes.Estado,:gstr_Lotes.Lote
+	FROM	dba.ctlcallotes
+	WHERE	clie_codigo	=	:ai_Cliente
+	AND	plde_codigo	=	:ai_Planta
+	AND   cclo_numero =  :al_Lote; 
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de tabla Lotes")
+	
+	RETURN False
+ELSEIF sqlca.SQLCode = 100 THEN
+	IF ab_ConMensaje	=	True	THEN
+		MessageBox("Atención", "Número de Lote no Existe.~r~r" + &
+									  "Ingrese otro.")
+	END IF
+	RETURN False
+END IF
+RETURN TRUE
+end function
+

@@ -1,0 +1,62 @@
+﻿$PBExportHeader$dw_comp_resuprod.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=1073741824 processing=4 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no  crosstab.dynamic = yes grid.lines=0 grid.columnmove=no selected.mouse=no )
+header[1](height=0 color="536870912" )
+header[2](height=112 color="536870912" )
+summary(height=80 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=number updatewhereclause=yes name=prod_codigo dbname="prod_codigo" )
+ column=(type=char(20) updatewhereclause=yes name=emba_codigo dbname="emba_codigo" )
+ column=(type=number updatewhereclause=yes name=val dbname="val" )
+ retrieve="  SELECT ~"dba~".~"zonas~".~"zona_nombre~",   
+         ~"dba~".~"palletfruta~".~"prod_codigo~",   
+         ~"dba~".~"palletfruta~".~"emba_codigo~",   
+         ~"dba~".~"palletfruta~".~"pafr_ccajas~"  
+    FROM ~"dba~".~"palletencab~",   
+         ~"dba~".~"palletfruta~",   
+         ~"dba~".~"plantadesp~",   
+         ~"dba~".~"zonas~",   
+         ~"dba~".~"productores~",   
+         ~"dba~".~"recfruproced~",
+			~"dba~".~"recfruprocee~"  
+   WHERE ( ~"dba~".~"palletencab~".~"clie_codigo~" = ~"dba~".~"palletfruta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"palletencab~".~"paen_numero~" = ~"dba~".~"palletfruta~".~"paen_numero~" ) and
+			( ~"dba~".~"palletencab~".~"plde_codigo~" = ~"dba~".~"palletfruta~".~"plde_codigo~" ) and
+			( ~"dba~".~"palletencab~".~"paen_fecemb~" between :fech_ini and :fech_fin ) and
+         ( ~"dba~".~"palletfruta~".~"clie_codigo~" = :cliente ) and
+			( ~"dba~".~"recfruproced~".~"clie_codigo~" = ~"dba~".~"palletfruta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"recfruproced~".~"paen_numero~" = ~"dba~".~"palletfruta~".~"paen_numero~" ) and  
+			( ~"dba~".~"recfruproced~".~"plde_codigo~" = ~"dba~".~"palletfruta~".~"plde_codigo~" ) and  
+			( ~"dba~".~"recfruprocee~".~"plde_codigo~" = ~"dba~".~"recfruproced~".~"plde_codigo~" ) and
+			( ~"dba~".~"recfruprocee~".~"rfpe_numero~" = ~"dba~".~"recfruproced~".~"rfpe_numero~" ) and
+         ( ~"dba~".~"recfruprocee~".~"rfpe_tipoen~" = 1 ) and
+         ( ~"dba~".~"plantadesp~".~"plde_codigo~" = ~"dba~".~"recfruproced~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"zonas~".~"zona_codigo~" = ~"dba~".~"plantadesp~".~"zona_codigo~" ) and  
+         ( ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"palletfruta~".~"prod_codigo~" ) and  
+         ( ( :productor in (0,~"dba~".~"productores~".~"tipr_codigo~") ) )
+" arguments=(("cliente", number),("productor", number),("fech_ini", date),("fech_fin", date))  sort="prod_codigo A emba_codigo A " )
+group(level=1 header.height=0 trailer.height=80 by=("prod_codigo" ) header.color="536870912" trailer.color="536870912" )
+text(band=header[1] alignment="0" text="Sum Of Pafr Ccajas" border="0" color="0" x="9" y="4" height="52" width="229" html.valueishtml="0"  name=t_1 visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[1] alignment="0" text="Zona Nombre" border="0" color="0" x="247" y="4" height="52" width="165" html.valueishtml="0"  name=t_2 visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="Código
+Productor" border="0" color="0" x="9" y="4" height="104" width="229" html.valueishtml="0"  name=prod_codigo_t visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="Emba-laje" border="0" color="0" x="247" y="4" height="104" width="165" html.valueishtml="0"  name=emba_codigo_t visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="
+@zona_nombre" border="0" color="0" x="421" y="4" height="104" width="306" html.valueishtml="0"  name=val_t visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="
+Total " border="0" color="0" x="736" y="4" height="104" width="261" html.valueishtml="0"  name=grand_sum_pafr_ccajas_t visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="421" y="4" height="52" width="306" format="#,##0" html.valueishtml="0"  name=val visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0 crosstab.repeat=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="247" y="4" height="52" width="165" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="4" height="52" width="229" format="00000" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="crosstabsum(1)"border="0" color="0" x="736" y="4" height="52" width="261" format="#,##0" html.valueishtml="0"  name=grand_sum_pafr_ccajas visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="T.Prod." border="0" color="0" x="9" y="12" height="52" width="229" html.valueishtml="0"  name=t_3 visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(val for group 1)"border="0" color="0" x="421" y="12" height="52" width="306" format="#,##0" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(grand_sum_pafr_ccajas for group 1)"border="0" color="0" x="736" y="12" height="52" width="261" format="#,##0" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="0" text="T.Final" border="0" color="0" x="9" y="12" height="52" width="229" html.valueishtml="0"  name=t_4 visible="1"  font.face="MS Sans Serif" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(val for all )"border="0" color="0" x="421" y="12" height="52" width="306" format="#,##0" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(grand_sum_pafr_ccajas for all )"border="0" color="0" x="736" y="12" height="52" width="261" format="#,##0" html.valueishtml="0"  name=compute_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+ crosstab(band = foreground  crosstabonly = yes 
+ columns = "zona_nombre" rows = "prod_codigo, emba_codigo" values = "sum(pafr_ccajas for crosstab)" sourcenames = "zona_nombre, prod_codigo, emba_codigo, pafr_ccajas")
+sparse(names="prod_codigo")htmltable(border="0" cellpadding="1" cellspacing="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

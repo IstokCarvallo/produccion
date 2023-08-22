@@ -1,0 +1,20 @@
+﻿$PBExportHeader$str_ctlcallotes.srs
+global type str_ctlcallotes from structure
+	integer		cliente
+	integer		planta
+	long		lote
+	long		productor
+	integer		especie
+	integer		variedad
+	string		embalaje
+	string		calibre
+	integer		packing
+	date		fechaemb
+	integer		tamaño
+	integer		tipoplanilla
+	integer		plantaaprob
+	long		numeropla
+	date		fechaaprob
+	integer		estado
+end type
+

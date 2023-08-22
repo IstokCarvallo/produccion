@@ -1,0 +1,25 @@
+Save Format v3.0(19990112)
+@begin Targets
+ 0 "CajasProd\\CajasProd.pbt";
+ 10 "FruticolaGDE\\fruticolagde.pbt";
+ 1 "..\\TablasProd\\Tablas\\Catalogos.pbt";
+ 11 "GestionPatio\\GestionPatio.pbt";
+ 2 "ConsolaFrio\\consolafrio.pbt";
+ 12 "Packing3\\Packing3.pbt";
+ 3 "Control Calidad\\Control Calidad.pbt";
+ 13 "PredioCuartel\\Predio Cuartel.pbt";
+ 4 "EntradaCamiones\\Entrada Camiones.pbt";
+ 14 "Laboratorios\\Lab01.pbt";
+ 5 "Estimaciones\\Estimaciones.pbt";
+ 15 "UNITEC\\unitec.pbt";
+ 6 "FacturacionProductores\\Facturacion Productores.pbt";
+ 16 "Valida Existencia\\Valida Existencia.pbt";
+ 7 "FrutaComercial\\Fruta Comercial.pbt";
+ 17 "Certificaciones\\Certificaciones.pbt";
+ 8 "FrutaGranel\\Fruta Granel.pbt";
+ 18 "CargoProduce\\CargoProduce.pbt";
+ 9 "FrutaProcesada\\produccion.pbt";
+@end;
+DefaultTarget "..\\TablasProd\\Tablas\\Catalogos.pbt";
+DefaultExportEncode "UTF-8";
+DefaultRemoteTarget "..\\TablasProd\\Tablas\\Catalogos.pbt";

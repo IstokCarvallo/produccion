@@ -1,0 +1,747 @@
+﻿$PBExportHeader$w_selecciona_lotes_existencia.srw
+$PBExportComments$Muestra y Selecciona los lotes en existencia
+forward
+global type w_selecciona_lotes_existencia from w_mant_detalle_csd
+end type
+type dw_2 from uo_dw within w_selecciona_lotes_existencia
+end type
+type st_1 from statictext within w_selecciona_lotes_existencia
+end type
+type em_total from editmask within w_selecciona_lotes_existencia
+end type
+type dw_3 from uo_dw within w_selecciona_lotes_existencia
+end type
+type st_3 from statictext within w_selecciona_lotes_existencia
+end type
+type cb_aplicar from commandbutton within w_selecciona_lotes_existencia
+end type
+type cb_aplicatodo from commandbutton within w_selecciona_lotes_existencia
+end type
+type st_4 from statictext within w_selecciona_lotes_existencia
+end type
+type cb_desaplica from commandbutton within w_selecciona_lotes_existencia
+end type
+type cb_desaplicatodo from commandbutton within w_selecciona_lotes_existencia
+end type
+type st_5 from statictext within w_selecciona_lotes_existencia
+end type
+end forward
+
+global type w_selecciona_lotes_existencia from w_mant_detalle_csd
+integer width = 3534
+integer height = 1876
+string title = "DETALLE ORDEN DE PROCESO"
+event ue_nuevo_detalle ( )
+event ue_borra_detalle ( )
+dw_2 dw_2
+st_1 st_1
+em_total em_total
+dw_3 dw_3
+st_3 st_3
+cb_aplicar cb_aplicar
+cb_aplicatodo cb_aplicatodo
+st_4 st_4
+cb_desaplica cb_desaplica
+cb_desaplicatodo cb_desaplicatodo
+st_5 st_5
+end type
+global w_selecciona_lotes_existencia w_selecciona_lotes_existencia
+
+type variables
+DataWindowChild	idwc_especie, idwc_calibre, idwc_lineapacking, idwc_camara, idwc_envase, &
+						idwc_variedad, idwc_calidad, idwc_planta, idwc_productor
+
+String		is_rutprod
+Integer	il_Fila_det
+Long     	il_total
+end variables
+
+event ue_borra_detalle();Integer	li_Fila
+
+IF dw_2.RowCount() < 1 THEN RETURN
+
+SetPointer(HourGlass!)
+
+ib_borrar = True
+w_main.SetMicroHelp("Validando la eliminación de detalle...")
+
+Message.DoubleParm = 0
+
+This.TriggerEvent ("ue_validaborrar_detalle")
+
+IF Message.DoubleParm = -1 THEN RETURN
+
+IF MessageBox("Eliminación de Registro", "Está seguro de Eliminar este Registro", Question!, YesNo!) = 1 THEN
+	IF dw_2.DeleteRow(0) = 1 THEN
+		ib_borrar = False
+		
+		w_main.SetMicroHelp("Borrando Registro...")
+		SetPointer(Arrow!)
+	ELSE
+		ib_borrar = False
+		MessageBox(This.Title,"No se puede borrar actual registro.")
+	END IF
+
+	IF dw_2.RowCount() = 0 THEN
+//		pb_eli_det.Enabled = False
+	ELSE
+		il_fila = dw_2.GetRow()
+		il_fila_det = dw_2.GetRow()
+	END IF
+END IF
+end event
+
+on w_selecciona_lotes_existencia.create
+int iCurrent
+call super::create
+this.dw_2=create dw_2
+this.st_1=create st_1
+this.em_total=create em_total
+this.dw_3=create dw_3
+this.st_3=create st_3
+this.cb_aplicar=create cb_aplicar
+this.cb_aplicatodo=create cb_aplicatodo
+this.st_4=create st_4
+this.cb_desaplica=create cb_desaplica
+this.cb_desaplicatodo=create cb_desaplicatodo
+this.st_5=create st_5
+iCurrent=UpperBound(this.Control)
+this.Control[iCurrent+1]=this.dw_2
+this.Control[iCurrent+2]=this.st_1
+this.Control[iCurrent+3]=this.em_total
+this.Control[iCurrent+4]=this.dw_3
+this.Control[iCurrent+5]=this.st_3
+this.Control[iCurrent+6]=this.cb_aplicar
+this.Control[iCurrent+7]=this.cb_aplicatodo
+this.Control[iCurrent+8]=this.st_4
+this.Control[iCurrent+9]=this.cb_desaplica
+this.Control[iCurrent+10]=this.cb_desaplicatodo
+this.Control[iCurrent+11]=this.st_5
+end on
+
+on w_selecciona_lotes_existencia.destroy
+call super::destroy
+destroy(this.dw_2)
+destroy(this.st_1)
+destroy(this.em_total)
+destroy(this.dw_3)
+destroy(this.st_3)
+destroy(this.cb_aplicar)
+destroy(this.cb_aplicatodo)
+destroy(this.st_4)
+destroy(this.cb_desaplica)
+destroy(this.cb_desaplicatodo)
+destroy(this.st_5)
+end on
+
+event ue_recuperadatos;call super::ue_recuperadatos;Integer	li_Fila, li_FilaClasif, li_CtaFila, li_Cliente
+
+li_Cliente	=	Integer(istr_mant.argumento[16])
+
+dw_1.insertrow(0)
+dw_1.Object.plde_codigo[1]	=	Integer(istr_Mant.Argumento[1])
+dw_1.Object.espe_codigo[1]	=	Integer(istr_Mant.Argumento[8])
+dw_1.Object.prod_codigo[1]	=	Long(istr_Mant.Argumento[6])
+dw_1.Object.orpr_numero[1]	=	Integer(istr_Mant.Argumento[5])
+dw_1.Object.vari_codigo[1]	=	Integer(istr_Mant.Argumento[9])
+dw_1.Object.frio_tipofr[1]	=	istr_Mant.Argumento[12]
+dw_1.Object.pefr_codigo[1]	=	Integer(istr_Mant.Argumento[13])
+dw_1.Object.clie_codigo[1]	=	Integer(istr_Mant.Argumento[16])
+
+li_Fila	=	dw_3.Retrieve(Integer(istr_Mant.Argumento[8]), &
+								  Integer(istr_Mant.Argumento[9]), &
+								  Long(istr_Mant.Argumento[6]), &
+								  Integer(istr_Mant.Argumento[13]), &
+								  istr_Mant.Argumento[12],Integer(istr_Mant.Argumento[16]))
+	
+IF li_Fila > 0 THEN
+	cb_aplicar.Enabled		=	True
+	cb_aplicatodo.Enabled	=	True
+END IF
+
+
+li_CtaFila	=	dw_2.RowCount()
+
+FOR li_Fila	=	1 TO li_CtaFila
+	IF dw_2.RowCount() > 0 THEN
+		li_FilaClasif	=	dw_3.Find("numero_lote = '" + dw_2.Object.numero_lote[li_Fila] + "'" + "AND " + &
+											 "clie_codigo = " + String(li_Cliente) + "AND " + &
+											 "enva_codigo = " + String(dw_2.Object.enva_codigo[li_Fila]) + "AND " + &
+											 "cama_codigo = " + String(dw_2.Object.cama_codigo[li_Fila]), &
+											 1, dw_3.RowCount())
+		
+		IF li_FilaClasif > 0 THEN
+			dw_3.DeleteRow(li_FilaClasif)
+		END IF
+	END IF
+NEXT
+
+IF dw_3.RowCount() > 0 THEN
+	cb_aplicar.Enabled			=	True
+	cb_aplicatodo.Enabled		=	True
+END IF
+
+IF dw_2.RowCount() > 0 THEN
+	cb_desaplica.Enabled			=	True
+	cb_desaplicatodo.Enabled	=	True
+END IF
+
+end event
+
+event ue_deshace();call super::ue_deshace;IF UpperBound(ias_campo) > 0 THEN
+END IF
+end event
+
+event open;/* 
+Argumentos
+
+*/
+
+x	= 100
+y	= 450
+
+This.Icon	=	Gstr_apl.Icono
+
+PostEvent("ue_recuperadatos")
+
+istr_mant = Message.PowerObjectParm
+
+dw_1.GetChild("espe_codigo", idwc_especie)
+idwc_especie.SetTransObject(sqlca)
+idwc_especie.Retrieve(gi_codexport)
+
+dw_1.GetChild("prod_codigo", idwc_productor)
+idwc_productor.SetTransObject(sqlca)
+idwc_productor.Retrieve(gi_codexport)
+
+dw_1.GetChild("plde_codigo", idwc_planta)
+idwc_planta.SetTransObject(sqlca)
+idwc_planta.Retrieve(gi_codexport)
+
+dw_1.GetChild("vari_codigo",idwc_variedad)
+idwc_variedad.SetTransObject(Sqlca)
+idwc_variedad.Retrieve(Integer(istr_Mant.Argumento[8]))
+
+dw_2.Getchild("enva_codigo", idwc_envase)
+idwc_envase.SetTransObject(sqlca)
+idwc_envase.Retrieve(0)
+
+dw_2.Getchild("cama_codigo", idwc_camara)
+idwc_camara.SetTransObject(sqlca)
+idwc_camara.Retrieve(Integer(istr_Mant.Argumento[1]))
+
+dw_2.Getchild("cate_codigo", idwc_calidad)
+idwc_calidad.SetTransObject(sqlca)
+idwc_calidad.Retrieve()
+
+dw_3.Getchild("enva_codigo", idwc_envase)
+idwc_envase.SetTransObject(sqlca)
+idwc_envase.Retrieve(0)
+
+dw_3.Getchild("cama_codigo", idwc_camara)
+idwc_camara.SetTransObject(sqlca)
+idwc_camara.Retrieve(Integer(istr_Mant.Argumento[1]))
+
+dw_3.Getchild("cate_codigo", idwc_calidad)
+idwc_calidad.SetTransObject(sqlca)
+idwc_calidad.Retrieve()
+
+dw_2.SetTransObject(Sqlca)
+istr_mant.dw.ShareData(dw_2)
+
+dw_2.Modify("datawindow.message.title='Error '+ is_titulo")
+dw_2.SetRowFocusIndicator(Hand!)
+dw_2.Modify("DataWindow.Footer.Height = 84")
+
+dw_3.SetTransObject(Sqlca)
+dw_1.SetTransObject(Sqlca)
+end event
+
+event resize;//
+end event
+
+event closequery;IF Not istr_mant.Borra THEN
+
+	IF istr_mant.Agrega AND istr_mant.Respuesta <> 1 THEN 
+		dw_1.DeleteRow(il_fila)
+		dw_2.RowsMove(1,dw_2.RowCount(),Primary!,dw_2,1,Delete!)
+		
+		IF dw_1.RowCount() > 0 THEN
+			dw_1.SelectRow(0, False)
+			dw_1.SelectRow(dw_1.RowCount(), True)
+		END IF
+		
+		RETURN
+	END IF
+
+	IF ib_Modifica AND istr_mant.Respuesta = 1 THEN
+		This.TriggerEvent("ue_guardar")
+		
+		IF Message.DoubleParm = -1 THEN Message.ReturnValue = 1
+		
+		RETURN
+	ELSEIF istr_mant.Respuesta = 2 THEN
+		This.TriggerEvent("ue_deshace")
+	END IF
+END IF
+end event
+
+event ue_nuevo();call super::ue_nuevo;//dw_1.Object.plde_codigo[il_Fila]	=	Integer(istr_Mant.Argumento[1])
+
+end event
+
+event ue_borrar();call super::ue_borrar;Long	ll_fila1
+
+if dw_2.rowcount() < 1 then return
+if messagebox("Borrar registro(s)","Desea Eliminar la fila seleccionada ?",&
+				exclamation!,yesno!,2) <> 1 then
+	return
+end if
+setpointer(hourglass!)
+ib_borrar = true
+w_main.setmicrohelp("Validando la eliminación...")
+message.doubleparm = 0
+this.triggerevent ("ue_validaborrar")
+if message.doubleparm = -1 then return
+
+ll_fila1=dw_2.GetRow()
+
+IF dw_2.RowsMove(ll_fila1,ll_fila1,Primary!,dw_3,dw_3.RowCount()+1,Primary!) > 0 THEN
+	w_main.setmicrohelp("Registro Borrado.")
+	setpointer(Arrow!)
+else
+	ib_borrar = false
+	messagebox(this.title,"No se puede borrar registro actual.")
+end if
+
+end event
+
+event ue_guardar();SetPointer(HourGlass!)
+
+Message.DoubleParm = 0
+
+w_main.SetMicroHelp("Grabando información...")
+TriggerEvent("ue_antesguardar")
+
+IF Message.DoubleParm = -1 THEN RETURN
+end event
+
+type pb_ultimo from w_mant_detalle_csd`pb_ultimo within w_selecciona_lotes_existencia
+boolean visible = false
+end type
+
+type pb_siguiente from w_mant_detalle_csd`pb_siguiente within w_selecciona_lotes_existencia
+boolean visible = false
+end type
+
+type pb_anterior from w_mant_detalle_csd`pb_anterior within w_selecciona_lotes_existencia
+boolean visible = false
+end type
+
+type pb_primero from w_mant_detalle_csd`pb_primero within w_selecciona_lotes_existencia
+boolean visible = false
+end type
+
+type pb_cancela from w_mant_detalle_csd`pb_cancela within w_selecciona_lotes_existencia
+integer x = 3159
+integer y = 284
+integer taborder = 50
+end type
+
+event pb_cancela::clicked;istr_mant.respuesta = 2
+
+CloseWithReturn(Parent, istr_mant)
+end event
+
+type pb_acepta from w_mant_detalle_csd`pb_acepta within w_selecciona_lotes_existencia
+integer x = 3159
+integer y = 108
+integer taborder = 40
+boolean default = false
+end type
+
+event pb_acepta::clicked;istr_mant.respuesta = 1
+
+IF istr_mant.agrega THEN
+	Parent.TriggerEvent("ue_nuevo")
+ELSE
+	Parent.TriggerEvent("ue_antesguardar")
+	CloseWithReturn(Parent, istr_mant)
+END IF
+end event
+
+type pb_salir from w_mant_detalle_csd`pb_salir within w_selecciona_lotes_existencia
+integer x = 3159
+integer y = 456
+integer taborder = 60
+end type
+
+type dw_1 from w_mant_detalle_csd`dw_1 within w_selecciona_lotes_existencia
+integer x = 123
+integer y = 128
+integer width = 2834
+integer height = 328
+string dataobject = "dw_mues_encabezado_selecciona_lotes"
+borderstyle borderstyle = StyleBox!
+end type
+
+type dw_2 from uo_dw within w_selecciona_lotes_existencia
+integer x = 443
+integer y = 1124
+integer width = 2583
+integer height = 600
+integer taborder = 20
+boolean bringtotop = true
+boolean titlebar = true
+string title = "LOTES SELECCIONADOS"
+string dataobject = "dw_mant_spro_lotes_clasificados"
+boolean hscrollbar = true
+boolean livescroll = true
+end type
+
+event clicked;call super::clicked;IF row > 0 THEN
+	IF IsSelected(row) THEN
+		SelectRow(row,False)
+	ELSE
+		SelectRow(row,True)
+	END IF
+END IF
+end event
+
+event itemerror;call super::itemerror;RETURN 1
+end event
+
+event losefocus;call super::losefocus;Accepttext()
+end event
+
+event rowfocuschanged;call super::rowfocuschanged;ib_datos_ok = True
+
+IF This.RowCount() < 1 OR CurrentRow = 0 OR ib_borrar THEN
+	ib_datos_ok = False
+ELSE
+	il_fila_det = CurrentRow
+END IF
+end event
+
+type st_1 from statictext within w_selecciona_lotes_existencia
+boolean visible = false
+integer x = 599
+integer y = 1004
+integer width = 402
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 12632256
+string text = "Total Cajas"
+boolean focusrectangle = false
+end type
+
+type em_total from editmask within w_selecciona_lotes_existencia
+boolean visible = false
+integer x = 978
+integer y = 992
+integer width = 402
+integer height = 84
+integer taborder = 50
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+alignment alignment = right!
+borderstyle borderstyle = stylelowered!
+string mask = "#######"
+end type
+
+event modified;dw_2.Enabled 			= TRUE
+
+il_total= Long(em_total.text)
+end event
+
+type dw_3 from uo_dw within w_selecciona_lotes_existencia
+integer x = 443
+integer y = 520
+integer width = 2583
+integer height = 600
+integer taborder = 30
+boolean bringtotop = true
+boolean titlebar = true
+string title = "LOTES CLASIFICADOS"
+string dataobject = "dw_mant_spro_lotes_clasificados"
+boolean hscrollbar = true
+boolean livescroll = true
+end type
+
+event clicked;call super::clicked;IF row > 0 THEN
+	IF IsSelected(row) THEN
+		SelectRow(row,False)
+	ELSE
+		SelectRow(row,True)
+	END IF
+END IF
+end event
+
+event itemerror;call super::itemerror;RETURN 1
+end event
+
+event losefocus;call super::losefocus;Accepttext()
+end event
+
+event rowfocuschanged;call super::rowfocuschanged;ib_datos_ok = True
+
+IF This.RowCount() < 1 OR CurrentRow = 0 OR ib_borrar THEN
+	ib_datos_ok = False
+ELSE
+	il_fila_det = CurrentRow
+END IF
+end event
+
+type st_3 from statictext within w_selecciona_lotes_existencia
+integer x = 32
+integer y = 520
+integer width = 416
+integer height = 600
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 16711680
+boolean border = true
+borderstyle borderstyle = styleraised!
+boolean focusrectangle = false
+end type
+
+type cb_aplicar from commandbutton within w_selecciona_lotes_existencia
+integer x = 64
+integer y = 688
+integer width = 352
+integer height = 104
+integer taborder = 120
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+boolean enabled = false
+string text = "Aplica"
+end type
+
+event clicked;Long		ll_fila1, ll_fila2
+Integer	li_causal
+
+ll_fila2 = dw_3.GetSelectedRow(0)
+
+IF ll_fila2 = 0 THEN
+	MessageBox("Error de Consistencia","Debe seleccionar Lotes Clasificados previamente ")
+	RETURN
+END IF
+
+SetPointer(HourGlass!)
+
+DO WHILE ll_fila2 > 0
+	ll_fila1	=	dw_2.RowCount() + 1
+
+	dw_3.RowsMove(ll_fila2,ll_fila2,Primary!,dw_2,ll_fila1,Primary!)
+
+	cb_desaplica.Enabled	= True
+	cb_desaplicatodo.Enabled	= True
+
+	ll_fila2 = dw_3.GetSelectedRow(0)
+LOOP
+
+
+dw_2.SetFocus()
+end event
+
+type cb_aplicatodo from commandbutton within w_selecciona_lotes_existencia
+integer x = 64
+integer y = 848
+integer width = 352
+integer height = 104
+integer taborder = 130
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+boolean enabled = false
+string text = "Aplica Todos"
+end type
+
+event clicked;Long		ll_fila2,ll_fila1
+Boolean	lb_respuesta = True
+
+ll_fila2 = dw_3.Rowcount()
+
+IF ll_fila2 = 0 THEN
+	MessageBox("Error de Consistencia","No Existe Lotes Clasificados")
+	RETURN 
+END IF
+
+SetPointer(HourGlass!)
+
+IF lb_respuesta THEN
+	ll_fila1	=	dw_2.RowCount() + 1
+	dw_3.RowsMove(1,ll_fila2,Primary!,dw_2,ll_fila1,Primary!)
+	
+	cb_desaplica.Enabled	= True
+	cb_desaplicatodo.Enabled	= True
+
+	dw_2.SetFocus()
+ELSE
+	dw_3.SelectRow(ll_fila2,False)
+	dw_3.SetFocus()
+END IF
+
+
+
+end event
+
+type st_4 from statictext within w_selecciona_lotes_existencia
+integer x = 32
+integer y = 1120
+integer width = 416
+integer height = 600
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 16711680
+boolean border = true
+borderstyle borderstyle = styleraised!
+boolean focusrectangle = false
+end type
+
+type cb_desaplica from commandbutton within w_selecciona_lotes_existencia
+integer x = 64
+integer y = 1276
+integer width = 352
+integer height = 104
+integer taborder = 140
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+boolean enabled = false
+string text = "Desaplica "
+end type
+
+event clicked;Parent.TriggerEvent("ue_borrar")
+
+
+end event
+
+type cb_desaplicatodo from commandbutton within w_selecciona_lotes_existencia
+integer x = 64
+integer y = 1436
+integer width = 352
+integer height = 104
+integer taborder = 150
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+boolean enabled = false
+string text = "Desapl. Todo"
+end type
+
+event clicked;//Long		ll_filas,ll_fila1, ll_fila2
+//
+//IF dw_2.rowcount() < 1 then return
+//
+//IF messagebox("Borrar registro(s)","Desea Eliminar TODAS LAS FILAS asignadas ?",&
+//				exclamation!,yesno!,2) <> 1 then
+//	return
+//END IF
+//
+//SetPointer(hourglass!)
+//
+//ib_borrar = true
+//w_main.setmicrohelp("Validando la eliminación...")
+//message.doubleparm = 0
+//Parent.triggerevent ("ue_validaborrar")
+//IF message.doubleparm = -1 then return
+//
+////dw_2.RowsMove(1,dw_2.RowCount(),Primary!,dw_3,1,deleted!)
+////dw_2.Reset()
+////dw_2.ResetUpdate()
+//
+//dw_3.RowsMove(1,dw_3.RowCount(),Primary!,dw_3,1,Primary!)
+//
+//cb_aplicar.Enabled	= True
+//cb_aplicatodo.Enabled	= True
+//
+//dw_3.SetFocus()
+
+
+Long		ll_fila2,ll_fila1
+Boolean	lb_respuesta = True
+
+ll_fila2 = dw_2.Rowcount()
+
+IF ll_fila2 = 0 THEN
+	MessageBox("Error de Consistencia","No Existen Lotes Seleccionados")
+	RETURN 
+END IF
+
+SetPointer(HourGlass!)
+
+IF lb_respuesta THEN
+	ll_fila1	=	dw_3.RowCount() + 1
+	dw_2.RowsMove(1,ll_fila2,Primary!,dw_3,ll_fila1,Primary!)
+	
+	cb_aplicar.Enabled	= True
+	cb_aplicatodo.Enabled	= True
+
+	dw_3.SetFocus()
+ELSE
+	dw_2.SelectRow(ll_fila2,False)
+	dw_2.SetFocus()
+END IF
+end event
+
+type st_5 from statictext within w_selecciona_lotes_existencia
+integer x = 32
+integer y = 32
+integer width = 2994
+integer height = 488
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 16777215
+boolean border = true
+borderstyle borderstyle = styleraised!
+boolean focusrectangle = false
+end type
+

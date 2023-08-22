@@ -1,0 +1,64 @@
+﻿$PBExportHeader$dw_mues_spro_ccalidadpackdetcate.srd
+$PBExportComments$Detalle de Despacho de Fruta Granel Interplanta y Devolución a Productor
+release 7;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=140 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_ccalidadpackdetcate.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=ccap_folio dbname="spro_ccalidadpackdetcate.ccap_folio" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=ccap_secuen dbname="spro_ccalidadpackdetcate.ccap_secuen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cate_codigo dbname="spro_ccalidadpackdetcate.cate_codigo" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=ccpd_calibre dbname="spro_ccalidadpackdetcate.ccpd_calibre" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=ccpd_pesnet dbname="spro_ccalidadpackdetcate.ccpd_pesnet" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=ccpd_pordes dbname="spro_ccalidadpackdetcate.ccpd_pordes" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=ccpd_porplu dbname="spro_ccalidadpackdetcate.ccpd_porplu" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccpd_dcacla dbname="spro_ccalidadpackdetcate.ccpd_dcacla" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccpd_dcasev dbname="spro_ccalidadpackdetcate.ccpd_dcasev" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccpd_dcocla dbname="spro_ccalidadpackdetcate.ccpd_dcocla" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccpd_dcosev dbname="spro_ccalidadpackdetcate.ccpd_dcosev" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=emba_codigo dbname="spro_ccalidadpackdetcate.emba_codigo" )
+ retrieve="SELECT  dba.spro_ccalidadpackdetcate.plde_codigo ,
+           dba.spro_ccalidadpackdetcate.ccap_folio ,
+           dba.spro_ccalidadpackdetcate.ccap_secuen ,
+           dba.spro_ccalidadpackdetcate.cate_codigo ,
+           dba.spro_ccalidadpackdetcate.ccpd_calibre ,
+           dba.spro_ccalidadpackdetcate.ccpd_pesnet ,
+           dba.spro_ccalidadpackdetcate.ccpd_pordes ,
+           dba.spro_ccalidadpackdetcate.ccpd_porplu ,
+           dba.spro_ccalidadpackdetcate.ccpd_dcacla ,
+           dba.spro_ccalidadpackdetcate.ccpd_dcasev ,
+           dba.spro_ccalidadpackdetcate.ccpd_dcocla ,
+           dba.spro_ccalidadpackdetcate.ccpd_dcosev ,
+           dba.spro_ccalidadpackdetcate.emba_codigo     
+        FROM dba.spro_ccalidadpackdetcate      
+        WHERE ( dba.spro_ccalidadpackdetcate.plde_codigo = :Planta ) and          ( dba.spro_ccalidadpackdetcate.ccap_folio = :Folio )   " update="dba.spro_ccalidadpackdetcate" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("Folio", number))  sort="plde_codigo A ccap_folio A ccap_secuen A " )
+text(band=header alignment="2" text="Categoria" border="6" color="0" x="407" y="8" height="120" width="306"  name=cama_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Embalaje" border="6" color="0" x="731" y="8" height="120" width="672"  name=lote_pltcod_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="D.CondicionN.Sever." border="6" color="0" x="3589" y="8" height="120" width="325"  name=t_7  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="D.CondicionN.Clasif." border="6" color="0" x="3246" y="8" height="120" width="325"  name=t_5  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="D.CalidadN.Sever." border="6" color="0" x="2903" y="8" height="120" width="325"  name=t_4  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="D.CalidadN.Clasif." border="6" color="0" x="2560" y="8" height="120" width="325"  name=t_3  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="% Plu" border="6" color="0" x="2217" y="8" height="120" width="325"  name=t_2  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Peso
+Neto" border="6" color="0" x="1641" y="8" height="120" width="215"  name=lote_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+% Descalibre" border="6" color="0" x="1874" y="8" height="120" width="325"  name=t_6  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Calibre" border="6" color="0" x="1422" y="8" height="120" width="201"  name=lote_espcod_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="NºColumna" border="6" color="0" x="133" y="8" height="120" width="256"  name=t_8  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="731" y="4" height="60" width="672" format="[general]"  name=emba_codigo dddw.name=dw_mues_embalajes dddw.displaycolumn=emba_nombre dddw.datacolumn=emba_codigo dddw.percentwidth=200 dddw.lines=4 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="3589" y="4" height="60" width="325" format="[General]"  name=ccpd_dcosev  tag="Daños Condición Nota Severidad" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="0" x="3246" y="4" height="60" width="325" format="[General]"  name=ccpd_dcocla  tag="Daños Condición Nota Clasificación" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="2903" y="4" height="60" width="325" format="[General]"  name=ccpd_dcasev  tag="Daños Calidad Nota Severidad" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="2560" y="4" height="60" width="325" format="[General]"  name=ccpd_dcacla  tag="Daños Calidad Nota Clasificación" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="2217" y="4" height="60" width="325" format="#,##0.00"  name=ccpd_porplu  tag="Porcentaje Plu" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="1874" y="4" height="60" width="325" format="#,##0.00"  name=ccpd_pordes  tag="Porcentaje de Distribucion" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1641" y="4" height="60" width="215" format="#,##0.00"  name=ccpd_pesnet  tag="Peso Neto" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="1422" y="4" height="60" width="201" format="[general]"  name=ccpd_calibre  tag="Calibre" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="407" y="4" height="60" width="306" format="[general]"  name=cate_codigo  tag="Codigo Categoria" dddw.name=dw_mues_categorias dddw.displaycolumn=cate_nombre dddw.datacolumn=cate_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="133" y="0" height="60" width="256" format="[general]"  name=ccap_secuen edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="1" expression="RowCount()"border="0" color="0" x="855" y="4" height="60" width="82" format="#,##0"  name=compute_3  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Total Registros" border="0" color="0" x="457" y="4" height="56" width="384"  name=t_1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

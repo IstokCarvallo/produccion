@@ -1,0 +1,99 @@
+﻿$PBExportHeader$dw_imprime_palletcamara_directo.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=608 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes key=yes name=clie_codigo dbname="palletencab.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=paen_numero dbname="palletencab.paen_numero" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=plde_codigo dbname="palletencab.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tmvp_codigo dbname="palletencab.tmvp_codigo" values="Al Patio	0/A PreFrio	1/A Fumigación	2/A Mantención	3/	/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_codigo dbname="palletencab.cama_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=paen_calle dbname="palletencab.paen_calle" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=paen_base dbname="palletencab.paen_base" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=paen_posici dbname="palletencab.paen_posici" )
+ column=(type=decimal(0) updatewhereclause=yes name=paen_estado dbname="palletencab.paen_estado" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="palletencab.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="palletencab.vari_codigo" )
+ column=(type=char(10) updatewhereclause=yes name=emba_codigo dbname="palletencab.emba_codigo" )
+ column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="espe_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="vari_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=cama_nombre dbname="cama_nombre" )
+ column=(type=char(1) updatewhereclause=yes name=frio_codigo dbname="palletencab.frio_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=paen_propfr dbname="palletencab.paen_propfr" )
+ retrieve="    SELECT ~"dba~".~"palletencab~".~"clie_codigo~",   
+         ~"dba~".~"palletencab~".~"paen_numero~",   
+         ~"dba~".~"palletencab~".~"plde_codigo~",   
+         ~"dba~".~"palletencab~".~"tmvp_codigo~",   
+         ~"dba~".~"palletencab~".~"cama_codigo~",   
+         ~"dba~".~"palletencab~".~"paen_calle~",   
+         ~"dba~".~"palletencab~".~"paen_base~",   
+         ~"dba~".~"palletencab~".~"paen_posici~",   
+         ~"dba~".~"palletencab~".~"paen_estado~",   
+         ~"dba~".~"palletencab~".~"espe_codigo~",   
+         ~"dba~".~"palletencab~".~"vari_codigo~",   
+         ~"dba~".~"palletencab~".~"emba_codigo~",   
+         Convert( Char(15), '' ) as espe_nombre,   
+         Convert( Char(30), '' ) as vari_nombre,   
+         Convert( Char(30), '' ) as cama_nombre,   
+         ~"dba~".~"palletencab~".~"frio_codigo~",   
+         ~"dba~".~"palletencab~".~"paen_propfr~"
+    FROM ~"dba~".~"palletencab~"  
+   WHERE ( ~"dba~".~"palletencab~".~"clie_codigo~" = :cliente ) AND  
+         ( ~"dba~".~"palletencab~".~"plde_codigo~" = :planta ) 
+" update="dba.palletencab" updatewhere=0 updatekeyinplace=yes arguments=(("cliente", number),("planta", number))  sort="clie_codigo A plde_codigo A paen_numero A " )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="12" height="56" width="1211" html.valueishtml="0"  name=nom_empresa visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="72" height="56" width="1211" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Nº Pallet" border="0" color="33554432" x="32" y="468" height="128" width="283" html.valueishtml="0"  name=palletfruta_paen_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Especie" border="0" color="33554432" x="329" y="468" height="128" width="480" html.valueishtml="0"  name=palletfruta_espe_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Variedad" border="0" color="33554432" x="827" y="468" height="128" width="613" html.valueishtml="0"  name=palletfruta_vari_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Embj." border="0" color="33554432" x="1449" y="468" height="128" width="201" html.valueishtml="0"  name=palletfruta_emba_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Planta" border="0" color="33554432" x="23" y="372" height="60" width="219" html.valueishtml="0"  name=ordencargapallet_ocen_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="274" y="372" height="60" width="151" format="[general]" html.valueishtml="0"  name=plde_codigo_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Cliente" border="0" color="33554432" x="23" y="300" height="60" width="219" html.valueishtml="0"  name=ordencargapallet_nave_tipotr_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="274" y="300" height="60" width="151" format="[general]" html.valueishtml="0"  name=clie_codigo_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="448" y="300" height="60" width="1390" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" dddw.name=dw_mues_clienprod dddw.displaycolumn=clie_nombre dddw.datacolumn=clie_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=3 alignment="0" tabsequence=32766 border="0" color="33554432" x="448" y="372" height="60" width="1390" format="[general]" html.valueishtml="0"  name=plde_codigo visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_nombre dddw.datacolumn=plde_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema" border="0" color="0" x="1394" y="60" height="60" width="219" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo" border="0" color="0" x="1394" y="124" height="60" width="219" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe" border="0" color="0" x="1394" y="188" height="60" width="219" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="PRODUCCION PLANTAS" border="0" color="0" x="1632" y="60" height="60" width="635" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fruta Procesada" border="0" color="0" x="1632" y="124" height="60" width="416" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Pallet Existentes en Cámaras  " border="0" color="0" x="1632" y="188" height="60" width="864" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="TipoMovto" border="0" color="33554432" x="1659" y="468" height="128" width="357" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="2971" y="132" height="56" width="261" format="hh:mm:ss" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="2971" y="72" height="56" width="261" format="dd/mm/yyyy" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="2971" y="12" height="56" width="261" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="2816" y="132" height="56" width="151" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="2816" y="72" height="56" width="151" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="2816" y="12" height="56" width="151" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Alt." border="0" color="33554432" x="3072" y="468" height="128" width="146" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Base" border="0" color="33554432" x="2912" y="468" height="128" width="146" html.valueishtml="0"  name=palletfruta_pafr_calibr_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Calle" border="0" color="33554432" x="2747" y="468" height="128" width="155" html.valueishtml="0"  name=palletfruta_etiq_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="9" y1="456" x2="3214" y2="456"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="9" y1="600" x2="3214" y2="600"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Cámara" border="0" color="33554432" x="2030" y="468" height="128" width="704" html.valueishtml="0"  name=palletfruta_cond_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="23" y="4" height="72" width="293" format="00000000" html.valueishtml="0"  name=paen_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="471" y="4" height="72" width="338" format="[general]" html.valueishtml="0"  name=espe_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="33554432" x="974" y="4" height="72" width="475" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="329" y="4" height="72" width="128" format="[general]" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="827" y="4" height="72" width="128" format="[general]" html.valueishtml="0"  name=vari_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=12 alignment="2" tabsequence=32766 border="0" color="33554432" x="1458" y="4" height="72" width="187" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2034" y="4" height="72" width="105" format="[general]" html.valueishtml="0"  name=cama_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="33554432" x="1659" y="4" height="76" width="361" format="[general]" html.valueishtml="0"  name=tmvp_codigo visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="2747" y="4" height="72" width="155" format="[general]" html.valueishtml="0"  name=paen_calle visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="2912" y="4" height="72" width="146" format="[general]" html.valueishtml="0"  name=paen_base visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="33554432" x="3072" y="4" height="72" width="146" format="[general]" html.valueishtml="0"  name=paen_posici visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="33554432" x="2153" y="4" height="72" width="581" format="[general]" html.valueishtml="0"  name=cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

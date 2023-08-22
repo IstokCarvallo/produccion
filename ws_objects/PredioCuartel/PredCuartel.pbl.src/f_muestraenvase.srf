@@ -1,0 +1,27 @@
+﻿$PBExportHeader$f_muestraenvase.srf
+global type f_muestraenvase from function_object
+end type
+
+forward prototypes
+global function string f_muestraenvase (integer enva_tipoen, integer enva_codigo)
+end prototypes
+
+global function string f_muestraenvase (integer enva_tipoen, integer enva_codigo);String	ls_retorno
+
+IF enva_tipoen = 1 THEN
+	ls_retorno	= 'M'
+ELSEIF enva_tipoen = 2 THEN
+	ls_retorno	= 'C'
+ELSEIF enva_tipoen = 3 THEN
+	ls_retorno	= 'P'
+ELSEIF enva_tipoen = 5 THEN
+	ls_retorno	= 'B'
+ELSE
+	ls_retorno	= 'X'
+END IF
+
+ls_retorno	+= String(enva_codigo, '000')
+
+RETURN ls_retorno
+end function
+

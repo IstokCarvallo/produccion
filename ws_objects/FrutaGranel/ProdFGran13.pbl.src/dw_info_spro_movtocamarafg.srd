@@ -1,0 +1,87 @@
+﻿$PBExportHeader$dw_info_spro_movtocamarafg.srd
+$PBExportComments$DataWindows Informe de Traslado de Camaras.
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=572 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=plde_codigo dbname="spro_movtocamarafg.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=tpmv_codigo dbname="spro_movtocamarafg.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mvce_numero dbname="spro_movtocamarafg.mvce_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_pltcod dbname="spro_movtocamarafg.lote_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_espcod dbname="spro_movtocamarafg.lote_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_codigo dbname="spro_movtocamarafg.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_tipomv dbname="spro_movtocamarafg.mvca_tipomv" values="Recepción	1/Despacho	2/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_codigo dbname="spro_movtocamarafg.cama_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nroban dbname="spro_movtocamarafg.mvca_nroban" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nropos dbname="spro_movtocamarafg.mvca_nropos" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_nropis dbname="spro_movtocamarafg.mvca_nropis" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mvca_canbul dbname="spro_movtocamarafg.mvca_canbul" )
+ column=(type=char(30) updatewhereclause=yes name=plantadesp_plde_nombre dbname="plantadesp.plde_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=cama_nombre dbname="camarasbode.cama_nombre" )
+ column=(type=date updatewhereclause=yes name=mvce_fecmov dbname="spro_movtocamarafgenca.mvce_fecmov" )
+ retrieve="SELECT  dba.spro_movtocamarafg.plde_codigo,
+        dba.spro_movtocamarafg.tpmv_codigo,
+        dba.spro_movtocamarafg.mvce_numero,
+        dba.spro_movtocamarafg.lote_pltcod,
+        dba.spro_movtocamarafg.lote_espcod,
+        dba.spro_movtocamarafg.lote_codigo,
+        dba.spro_movtocamarafg.mvca_tipomv,
+        dba.spro_movtocamarafg.cama_codigo,
+        dba.spro_movtocamarafg.mvca_nroban,
+        dba.spro_movtocamarafg.mvca_nropos,
+        dba.spro_movtocamarafg.mvca_nropis,
+        dba.spro_movtocamarafg.mvca_canbul,
+        dba.plantadesp.plde_nombre,
+        dba.camarasbode.cama_nombre,     
+        dba.spro_movtocamarafgenca.mvce_fecmov
+   FROM dba.spro_movtocamarafg,
+        dba.spro_movtocamarafgenca,
+        dba.plantadesp ,
+        dba.camarasbode     
+  WHERE ( dba.camarasbode.plde_codigo = dba.plantadesp.plde_codigo ) and
+        ( dba.camarasbode.plde_codigo = dba.spro_movtocamarafg.plde_codigo ) and
+        ( dba.camarasbode.cama_codigo = dba.spro_movtocamarafg.cama_codigo ) and
+        ( dba.spro_movtocamarafg.plde_codigo = dba.spro_movtocamarafgenca.plde_codigo ) AND
+        ( dba.spro_movtocamarafg.tpmv_codigo = dba.spro_movtocamarafgenca.tpmv_codigo ) AND
+        ( dba.spro_movtocamarafg.mvce_numero = dba.spro_movtocamarafgenca.mvce_numero ) AND
+        ( ( dba.spro_movtocamarafgenca.plde_codigo = :Planta ) and
+          ( dba.spro_movtocamarafgenca.tpmv_codigo = :tipmov ) and
+          ( dba.spro_movtocamarafgenca.mvce_fecmov between :FechaMovto and :Fecha ) )  " arguments=(("Planta", number),("tipmov", number),("FechaMovto", date),("Fecha", date))  sort="mvca_tipomv A mvce_fecmov A cama_codigo A lote_codigo A " )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="3246" y="12" height="56" width="261" format="[general]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="3246" y="72" height="56" width="261" format="dd/mm/yyyy" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="3081" y="132" height="56" width="110" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="3081" y="12" height="56" width="151" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="3081" y="72" height="56" width="142" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="3246" y="132" height="56" width="261" format="hh:mm:ss" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="9" y1="428" x2="3506" y2="428"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="9" y1="568" x2="3506" y2="568"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="12" height="60" width="1211" html.valueishtml="0"  name=nom_empresa visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="76" height="60" width="1211" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema  Produccion Fruta Granel" border="0" color="0" x="1362" y="72" height="64" width="901" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo   Producción" border="0" color="0" x="1362" y="140" height="64" width="562" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe Traslado de Cámaras" border="0" color="0" x="1362" y="208" height="64" width="1339" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Camara" border="0" color="0" x="983" y="440" height="120" width="882" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tipo Movimiento" border="0" color="0" x="14" y="440" height="120" width="635" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Fecha.Movimiento" border="0" color="0" x="663" y="440" height="120" width="306" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Número Lote" border="0" color="0" x="1879" y="440" height="120" width="466" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Banda" border="0" color="0" x="2359" y="440" height="120" width="274" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Columna" border="0" color="0" x="2647" y="440" height="120" width="274" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Altura" border="0" color="0" x="2935" y="440" height="120" width="274" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Bultos" border="0" color="0" x="3223" y="440" height="120" width="274" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Planta" border="0" color="0" x="18" y="356" height="60" width="178" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="0" x="215" y="356" height="60" width="146" format="0000" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="379" y="356" height="60" width="690" format="[general]" html.valueishtml="0"  name=plantadesp_plde_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="0" x="2359" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=mvca_nroban visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="0" x="2647" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=mvca_nropos visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="0" x="2935" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=mvca_nropis visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="3223" y="4" height="60" width="274" format="[general]" html.valueishtml="0"  name=mvca_canbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="14" y="4" height="60" width="635" format="[general]" html.valueishtml="0"  name=mvca_tipomv visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="String ( lote_pltcod , '0000' ) + '-' + String (  lote_espcod , '00') + '-' + String ( lote_codigo , '0000' )"border="0" color="0" x="1879" y="4" height="60" width="466" format="[GENERAL]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="983" y="4" height="60" width="123" format="0000" html.valueishtml="0"  name=cama_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="2" tabsequence=32766 border="0" color="0" x="663" y="4" height="60" width="306" format="dd/mm/yyyy" html.valueishtml="0"  name=mvce_fecmov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=0 border="0" color="0" x="3506" y="0" height="60" width="923" html.valueishtml="0"  name=cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="mvca_tipomv")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

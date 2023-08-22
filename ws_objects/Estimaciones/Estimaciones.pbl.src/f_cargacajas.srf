@@ -1,0 +1,77 @@
+﻿$PBExportHeader$f_cargacajas.srf
+global type f_cargacajas from function_object
+end type
+
+forward prototypes
+global function boolean f_cargacajas (integer temporada, long productor, integer agronomo, integer predio, integer planta, integer especie, integer variedad, date fecha, datawindow adw, transaction at_transaccion)
+global function boolean f_cargacajas (integer temporada, long productor, integer agronomo, integer predio, integer planta, integer especie, integer variedad, date fecha, datawindow adw, long fila, transaction at_transaccion)
+end prototypes
+
+global function boolean f_cargacajas (integer temporada, long productor, integer agronomo, integer predio, integer planta, integer especie, integer variedad, date fecha, datawindow adw, transaction at_transaccion);Long	ll_cajas11, ll_cajas12, ll_cajas13, ll_cajas14, ll_cajas15, ll_cajas16, ll_cajas17, &
+		ll_cajas21, ll_cajas22, ll_cajas23, ll_cajas24, ll_cajas25, ll_cajas26,  ll_cajas27
+
+Select esps_cadi11,esps_cadi12,esps_cadi13,esps_cadi14,esps_cadi15,esps_cadi16,esps_cadi17,
+       	esps_cadi21,esps_cadi22,esps_cadi23,esps_cadi24,esps_cadi25,esps_cadi26,esps_cadi27
+	Into	:ll_cajas11, :ll_cajas12, :ll_cajas13, :ll_cajas14, :ll_cajas15, :ll_cajas16, :ll_cajas17, 
+			:ll_cajas21, :ll_cajas22, :ll_cajas23, :ll_cajas24, :ll_cajas25, :ll_cajas26,  :ll_cajas27
+    From dba.estimprodsemana
+   Where pate_tempor = :temporada
+     And agro_codigo = :agronomo
+     And prod_codigo = :productor
+     And prbr_codpre = :predio
+     And plde_codigo = :planta
+     And espe_codigo = :especie
+     And vari_codigo = :variedad
+     And esps_fecini = :fecha
+	  Using at_Transaccion;
+	  
+Return True
+end function
+
+global function boolean f_cargacajas (integer temporada, long productor, integer agronomo, integer predio, integer planta, integer especie, integer variedad, date fecha, datawindow adw, long fila, transaction at_transaccion);Long	ll_cajas11, ll_cajas12, ll_cajas13, ll_cajas14, ll_cajas15, ll_cajas16, ll_cajas17, &
+		ll_cajas21, ll_cajas22, ll_cajas23, ll_cajas24, ll_cajas25, ll_cajas26,  ll_cajas27, ll_Cajas4s, ll_Cajas5s
+
+Select IsNull(esps_cadi11, 0),IsNull(esps_cadi12, 0),IsNull(esps_cadi13, 0),IsNull(esps_cadi14, 0),IsNull(esps_cadi15, 0),IsNull(esps_cadi16, 0),IsNull(esps_cadi17, 0),
+       	 IsNull(esps_cadi21, 0),IsNull(esps_cadi22, 0),IsNull(esps_cadi23, 0),IsNull(esps_cadi24, 0),IsNull(esps_cadi25, 0),IsNull(esps_cadi26, 0),IsNull(esps_cadi27, 0),
+		 IsNull(esps_seman4, 0),IsNull(esps_seman4, 0)			  
+	Into	:ll_cajas11, :ll_cajas12, :ll_cajas13, :ll_cajas14, :ll_cajas15, :ll_cajas16, :ll_cajas17, 
+			:ll_cajas21, :ll_cajas22, :ll_cajas23, :ll_cajas24, :ll_cajas25, :ll_cajas26,  :ll_cajas27,
+			:ll_Cajas4s, :ll_Cajas5s
+    From dba.estimprodsemana
+   Where pate_tempor = :temporada
+     And agro_codigo = :agronomo
+     And prod_codigo = :productor
+     And prbr_codpre = :predio
+     And plde_codigo = :planta
+     And espe_codigo = :especie
+     And vari_codigo = :variedad
+     And esps_fecini = :fecha
+   Using at_Transaccion;
+	  
+If at_Transaccion.SqlCode = -1 Then
+	MessageBox('Alerta', 'No se pudo cargar datos.', Information!, Ok!)
+	Return False
+Else
+	adw.object.esps_cadia1[Fila] = ll_cajas11
+	adw.object.esps_cadia2[Fila] = ll_cajas12
+	adw.object.esps_cadia3[Fila] = ll_cajas13
+	adw.object.esps_cadia4[Fila] = ll_cajas14
+	adw.object.esps_cadia5[Fila] = ll_cajas15
+	adw.object.esps_cadia6[Fila] = ll_cajas16
+	adw.object.esps_cadia7[Fila] = ll_cajas17
+
+	adw.object.esps_cadi11[Fila] = ll_cajas21
+	adw.object.esps_cadi12[Fila] = ll_cajas22
+	adw.object.esps_cadi13[Fila] = ll_cajas23
+	adw.object.esps_cadi14[Fila] = ll_cajas24
+	adw.object.esps_cadi15[Fila] = ll_cajas25
+	adw.object.esps_cadi16[Fila] = ll_cajas26
+	adw.object.esps_cadi17[Fila] = ll_cajas27
+	
+	adw.object.esps_seman4[Fila] = ll_Cajas4s
+	adw.object.esps_seman5[Fila] = ll_Cajas5s
+End If
+	  
+Return True
+end function
+

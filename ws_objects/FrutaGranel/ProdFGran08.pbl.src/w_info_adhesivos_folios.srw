@@ -1,0 +1,350 @@
+﻿$PBExportHeader$w_info_adhesivos_folios.srw
+forward
+global type w_info_adhesivos_folios from w_para_informes
+end type
+type st_3 from statictext within w_info_adhesivos_folios
+end type
+type em_emision from editmask within w_info_adhesivos_folios
+end type
+type st_4 from statictext within w_info_adhesivos_folios
+end type
+type em_actual from editmask within w_info_adhesivos_folios
+end type
+type dw_1 from uo_dw within w_info_adhesivos_folios
+end type
+type ole_1 from olecustomcontrol within w_info_adhesivos_folios
+end type
+type dw_2 from datawindow within w_info_adhesivos_folios
+end type
+type gb_4 from groupbox within w_info_adhesivos_folios
+end type
+end forward
+
+global type w_info_adhesivos_folios from w_para_informes
+integer x = 14
+integer y = 32
+integer width = 2194
+integer height = 1008
+string title = "IMPRESION DE ADHESIVOS CAJAS"
+boolean minbox = false
+boolean maxbox = false
+boolean resizable = false
+windowtype windowtype = response!
+string icon = "F:\Desarrollo\Producción\FrutaProcesada\Producc.ico"
+st_3 st_3
+em_emision em_emision
+st_4 st_4
+em_actual em_actual
+dw_1 dw_1
+ole_1 ole_1
+dw_2 dw_2
+gb_4 gb_4
+end type
+global w_info_adhesivos_folios w_info_adhesivos_folios
+
+type variables
+str_mant					istr_mant
+uo_correladhesivos	iuo_adhesivos
+String						is_Lado
+end variables
+
+on w_info_adhesivos_folios.create
+int iCurrent
+call super::create
+this.st_3=create st_3
+this.em_emision=create em_emision
+this.st_4=create st_4
+this.em_actual=create em_actual
+this.dw_1=create dw_1
+this.ole_1=create ole_1
+this.dw_2=create dw_2
+this.gb_4=create gb_4
+iCurrent=UpperBound(this.Control)
+this.Control[iCurrent+1]=this.st_3
+this.Control[iCurrent+2]=this.em_emision
+this.Control[iCurrent+3]=this.st_4
+this.Control[iCurrent+4]=this.em_actual
+this.Control[iCurrent+5]=this.dw_1
+this.Control[iCurrent+6]=this.ole_1
+this.Control[iCurrent+7]=this.dw_2
+this.Control[iCurrent+8]=this.gb_4
+end on
+
+on w_info_adhesivos_folios.destroy
+call super::destroy
+destroy(this.st_3)
+destroy(this.em_emision)
+destroy(this.st_4)
+destroy(this.em_actual)
+destroy(this.dw_1)
+destroy(this.ole_1)
+destroy(this.dw_2)
+destroy(this.gb_4)
+end on
+
+event open;call super::open;
+dw_1.SetTransObject(Sqlca)
+
+iuo_adhesivos	=	Create uo_correladhesivos
+
+iuo_Adhesivos.existe_folio(gi_CodExport, gstr_paramplanta.CodigoPlanta, True, Sqlca)
+
+em_actual.Text	= String(iuo_Adhesivos.Correlativo, '#,##0')
+
+ole_1.object.LicenseMe ("Mem: Exportadora Rio Blanco Santiago CL", 3, 1, "33E3AD94226C68E043BEF94763700EA9", 44)
+
+end event
+
+event resize;//
+end event
+
+type pb_excel from w_para_informes`pb_excel within w_info_adhesivos_folios
+end type
+
+type st_computador from w_para_informes`st_computador within w_info_adhesivos_folios
+end type
+
+type st_usuario from w_para_informes`st_usuario within w_info_adhesivos_folios
+end type
+
+type st_temporada from w_para_informes`st_temporada within w_info_adhesivos_folios
+end type
+
+type p_logo from w_para_informes`p_logo within w_info_adhesivos_folios
+end type
+
+type st_titulo from w_para_informes`st_titulo within w_info_adhesivos_folios
+integer width = 1454
+string text = "Impresión de Folios de Cajas"
+end type
+
+type pb_acepta from w_para_informes`pb_acepta within w_info_adhesivos_folios
+string tag = "Imprimir Reporte"
+integer x = 1819
+integer y = 344
+integer taborder = 100
+string picturename = "AddWatch!"
+vtextalign vtextalign = multiline!
+end type
+
+event pb_acepta::clicked;Long		ll_fila_e, respuesta, ll_fila, ll_actual, ll_control, ll_controlimp
+
+IF MOD(Integer(em_emision.Text), 4) <> 0 THEN
+	MessageBox("Error de protección de datos", "Solo debe imprimir adhesivos en multiplos de 4")
+	Return
+END IF
+
+Do
+	ll_fila_e	=	dw_1.Retrieve(gi_CodExport, gstr_paramplanta.CodigoPlanta, Integer(em_emision.Text), Long(em_actual.Text))
+										  
+	If ll_fila_e = -1 Then
+		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)		
+	ElseIf ll_fila_e < 1 Then 
+		SetPointer(Arrow!)
+		Return
+	Else
+		FOR ll_fila = 1 TO dw_1.RowCount()
+			ll_actual							=	dw_2.InsertRow(0)			
+			ll_control ++
+			dw_2.Object.Barras[ll_actual]	=	dw_1.Object.codigo[ll_fila]
+			
+			CHOOSE CASE ll_control
+				CASE 1
+					dw_2.Object.Ole_1.Object.Text	=	dw_1.Object.codigo[ll_fila]
+
+				CASE 2
+					dw_2.Object.Ole_2.Object.Text	=	dw_1.Object.codigo[ll_fila]
+
+				CASE 3
+					dw_2.Object.Ole_3.Object.Text	=	dw_1.Object.codigo[ll_fila]
+
+				CASE 4
+					dw_2.Object.Ole_4.Object.Text	=	dw_1.Object.codigo[ll_fila]
+					ll_controlimp						=	dw_2.Print()
+					ll_control							=	0
+					dw_2.RowsMove(1, dw_2.RowCount(), Primary!, dw_2, 1, Delete!)
+
+			END CHOOSE
+			
+			IF ll_controlimp = -1 THEN
+				EXIT
+			END IF
+		NEXT
+		
+		IF ll_controlimp = -1 THEN 
+			MessageBox("Error", "No se pudo realizar la impresión")
+			SetPointer(Arrow!)
+			RETURN
+		END IF
+	END IF
+LOOP WHILE respuesta = 1
+
+iuo_Adhesivos.existe_folio(gi_CodExport, gstr_paramplanta.CodigoPlanta, True, Sqlca)
+em_actual.Text	= String(iuo_Adhesivos.Correlativo, '#,##0')
+
+Disconnect Using Sqlca;
+Connect Using Sqlca;
+dw_1.SetTransObject(sqlca)
+
+IF respuesta = 2 Then Close(Parent)
+
+
+end event
+
+type pb_salir from w_para_informes`pb_salir within w_info_adhesivos_folios
+string tag = "Salir [Cerrar Ventana Activa]"
+integer x = 1815
+integer y = 604
+integer taborder = 110
+string disabledname = "\desarrollo\bmp\exitd.bmp"
+string powertiptext = "Salir [Cerrar Ventana Activa]"
+end type
+
+type st_3 from statictext within w_info_adhesivos_folios
+integer x = 325
+integer y = 648
+integer width = 549
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Adhesivos a Emitir"
+boolean focusrectangle = false
+end type
+
+type em_emision from editmask within w_info_adhesivos_folios
+integer x = 946
+integer y = 636
+integer width = 402
+integer height = 92
+integer taborder = 120
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+alignment alignment = center!
+borderstyle borderstyle = stylelowered!
+string mask = "###"
+end type
+
+type st_4 from statictext within w_info_adhesivos_folios
+integer x = 320
+integer y = 528
+integer width = 402
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Caja Actual"
+boolean focusrectangle = false
+end type
+
+type em_actual from editmask within w_info_adhesivos_folios
+integer x = 946
+integer y = 516
+integer width = 402
+integer height = 92
+integer taborder = 120
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+boolean enabled = false
+alignment alignment = right!
+boolean displayonly = true
+borderstyle borderstyle = stylelowered!
+string mask = "#,##0"
+end type
+
+type dw_1 from uo_dw within w_info_adhesivos_folios
+boolean visible = false
+integer x = 690
+integer y = 824
+integer taborder = 10
+boolean bringtotop = true
+string dataobject = "dw_info_adhesivos_uva4"
+end type
+
+type ole_1 from olecustomcontrol within w_info_adhesivos_folios
+event click ( )
+event dblclick ( )
+event mousedown ( integer nbutton,  integer nshift,  long ocx_x,  long ocx_y )
+event mousemove ( integer nbutton,  integer nshift,  long ocx_x,  long ocx_y )
+event mouseup ( integer nbutton,  integer nshift,  long ocx_x,  long ocx_y )
+event beforedraw ( )
+boolean visible = false
+integer x = 197
+integer y = 724
+integer width = 210
+integer height = 140
+integer taborder = 20
+boolean bringtotop = true
+borderstyle borderstyle = stylelowered!
+boolean focusrectangle = false
+string binarykey = "w_info_adhesivos_folios.win"
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+end type
+
+type dw_2 from datawindow within w_info_adhesivos_folios
+boolean visible = false
+integer x = 261
+integer y = 1020
+integer width = 686
+integer height = 400
+integer taborder = 30
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_info_adhesivos_embaladorax4"
+boolean livescroll = true
+borderstyle borderstyle = stylelowered!
+end type
+
+type gb_4 from groupbox within w_info_adhesivos_folios
+integer x = 251
+integer y = 416
+integer width = 1449
+integer height = 400
+integer taborder = 130
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long backcolor = 16711680
+end type
+
+
+Start of PowerBuilder Binary Data Section : Do NOT Edit
+09w_info_adhesivos_folios.bin 
+2C00001400e011cfd0e11ab1a1000000000000000000000000000000000003003e0009fffe000000060000000000000000000000010000000100000000000010000000000200000001fffffffe0000000000000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd00000006fffffffe000000040000000500000007fffffffe00000008fffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff006f00520074006f004500200074006e00790072000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050016ffffffffffffffff0000000300000000000000000000000000000000000000000000000000000000f55d66c001d4f14a00000003000008400000000000500003004c004200430049004e0045004500530045004b000000590000000000000000000000000000000000000000000000000000000000000000000000000002001cffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000002e0000000000500003004f0042005800430054005300450052004d0041000000000000000000000000000000000000000000000000000000000000000000000000000000000002001affffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000001000003ef00000000004200500043004f00530058004f00540041005200450047000000000000000000000000000000000000000000000000000000000000000000000000000000000101001a00000002000000010000000485382357404fca79c1bc00b25884d19700000000f55d66c001d4f14af55d66c001d4f14a000000000000000000000000fffffffe00000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010fffffffe00000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f00000020fffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+21ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0079004d00720020006e00750074002d006d0069002000650069006c006500630073006e002000650065006b000000790000000000000000000000000000000000000900000004c10000039effff0013000300ff00000000ffff000b520300098f910be3e39d11ce4b00aa00000151b8019000000001424420534d0c6c6568536c44206c000013670800000000000c0034003500350036000000340000000300030000000000140001000300030000000000000000000b000000080003000000ffffff00000003ff08000000000008003300330000003900000003000b0000000bffff00080000000000000030000800310000003a0042004200320033003a003a0042004200340031003a003a0053005300320033003a003a0053005300340008000000000020003a0031003a0032003a0033003a0034003a0031003a0032003a0033000000340000001300080000000000520061004c006f0020006500700061007200690063006e00f30073002000200065006f00630070006d0065006c00f30074006300200072006f0065007200740063006d0061006e0065006500740020002e00030000000000000000000b000000030003000000ffffff00000005ff00000000034053c00000000000000b000000050000000000033ff0000000000000000b0000000800050000000000000000000000000003000300000000004b000000030003000000ffffff00000003ff03000000000000000000030005000000000000000000000000000500000000000500000000000000000000000000050000000000030000000000000000000300050000000000000072c0000001000340030000000000000001000300130000000000000000090000ff00030003ffffffffffff00ff0003ff03ffffffffffff00000003ff00000000030000090000000000000b00000003000b00000003000000ffffff00ff0003ff03ffffffffffff00000900ff000003000b00000003000000ffffff0000000bff0000030008000000000002000b00000012000000120041000800410000000200000000000300000900000400ff00030003ffffffffffff00ff0003ff0bffffff0800000000000200080000000000020008000000000002000800000000000600360039000000000003000009ffffff00ff0003ff03ffffffffffff00000003ff03000000ffffff00020008ff00000000ff00030003ffffffffffff00020008ff000000000200080000000000ff00030003ffffffffffff00020008ff00000000ff00030008ffffff000002000b00000003000000000000000000030000000000030000090000000000000300030000000000000002000800000000000100030003000000ffffff00ff0003ff03ffffffffffff00ff0003ff02ffffff03ffff00ffffff00000900ff00000b00ff00030003ffffffffffff00ff0003ff03ffffffffffff00010003ff03000000ffffff00000003ff000000000000000000000000000000000000000000000900000004c10000039effff0013000300ff00000000ffff000b520300098f910be3e39d11ce4b00aa00000151b8019000000001424420534d0c6c6568536c44206c000013670800000000000c0034003500350036000000340000000300030000000000140001000300030000000000000000000b000000080003000000ffffff00000003ff08000000000008003300330000003900000003000b0000000bffff00080000000000000030000800310000003a0042004200320033003a003a0042004200340031003a003a0053005300320033003a003a0053005300340008000000000020003a0031003a0032003a0033003a0034003a0031003a0032003a0033000000340000001300080000000000520061004c006f0020006500700061007200690063006e00f30073002000200065006f00630070006d0065006c00f30074006300200072006f0065007200740063006d0061006e0065006500740020002e00030000000000000000000b000000030003000000ffffff00000005ff00000000034053c00000000000000b000000050000000000033ff0000000000000000b0000000800050000000000000000000000000003000300000000004b00006f00430074006e006e00650073007400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001020012ffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000011000003ef000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+22000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000030003000000ffffff00000003ff03000000000000000000030005000000000000000000000000000500000000000500000000000000000000000000050000000000030000000000000000000300050000000000000072c0000001000340030000000000000001000300130000000000000000090000ff00030003ffffffffffff00ff0003ff03ffffffffffff00000003ff00000000030000090000000000000b00000003000b00000003000000ffffff00ff0003ff03ffffffffffff00000900ff000003000b00000003000000ffffff0000000bff0000030008000000000002000b00000012000000120041000800410000000200000000000300000900000400ff00030003ffffffffffff00ff0003ff0bffffff0800000000000200080000000000020008000000000002000800000000000600360039000000000003000009ffffff00ff0003ff03ffffffffffff00000003ff03000000ffffff00020008ff00000000ff00030003ffffffffffff00020008ff000000000200080000000000ff00030003ffffffffffff00020008ff00000000ff00030008ffffff000002000b00000003000000000000000000030000000000030000090000000000000300030000000000000002000800000000000100030003000000ffffff00ff0003ff03ffffffffffff00ff0003ff02ffffff03ffff00ffffff00000900ff00000b00ff00030003ffffffffffff00ff0003ff03ffffffffffff00010003ff03000000ffffff00000003ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+19w_info_adhesivos_folios.bin 
+End of PowerBuilder Binary Data Section : No Source Expected After This Point

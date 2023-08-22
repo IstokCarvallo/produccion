@@ -1,0 +1,144 @@
+﻿$PBExportHeader$f_validacliente.srf
+global type f_validacliente from function_object
+end type
+
+forward prototypes
+global function boolean f_validacliente (integer cliente)
+end prototypes
+
+global function boolean f_validacliente (integer cliente);Integer	li_cantid, li_cont, li_resp
+String	ls_mensaje
+
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.especies;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Especies")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nEspecies"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.variedades;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Variedades")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nVariedades"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.variecalibre;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla VarieCalibre")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nCalibres por Variedad"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.embalajesprod
+	WHERE	clie_codigo	=	:cliente;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Embalajesprod")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nEmbalajes"
+	END IF
+
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.tipopallemba
+	WHERE	clie_codigo	=	:cliente;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla TipoPallemba")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nTipos de Pallet por Embalaje"
+	END IF
+
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.plantadesp;
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla PlantaDesp")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nPlantas de Despacho"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.etiquetas;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Etiquetas")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nEtiquetas"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.productores;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Productores")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nProductores"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.recibidores;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Recibidores")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nRecibidores"
+	END IF
+	
+SELECT	Count(*)
+	INTO	:li_cantid
+	FROM 	dbo.embarcadores;
+	
+	IF sqlca.SQLCode	=	-1 THEN
+		F_errorbasedatos(sqlca,"Lectura tabla Embarcadores")
+	ELSEIF li_cantid	=	0 THEN 
+		li_cont ++
+		ls_mensaje 		=	ls_mensaje + "~nEmbarcadores"
+	END IF
+	
+//SELECT	Count(*)
+//	INTO	:li_cantid
+//	FROM 	"dbo"."embarqueprod"
+//	WHERE	clie_codigo	=	:cliente;
+//	
+//	IF sqlca.SQLCode	=	-1 THEN
+//		F_errorbasedatos(sqlca,"Lectura tabla EmbarqueProd")
+//	ELSEIF li_cantid	=	0 THEN 
+//		li_cont ++
+//		ls_mensaje 		=	ls_mensaje + "~nEmbarques"
+//	END IF
+
+IF li_cont > 0 THEN
+	IF MessageBox("Error de Consistencia", "No Existe Asignación de: " + &
+		ls_mensaje + "." + "~r~r¿Desea Continuar? ", Exclamation!, YesNo!, 2) = 2 THEN
+		RETURN False
+	END IF
+END IF
+
+RETURN True
+end function
+

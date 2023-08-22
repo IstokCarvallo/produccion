@@ -1,0 +1,8 @@
+﻿$PBExportHeader$str_parametros.srs
+global type str_parametros from structure
+	integer		plde_codigo
+	integer		prpa_destar
+	integer		prpa_recenv
+	integer		prpa_guienv
+end type
+

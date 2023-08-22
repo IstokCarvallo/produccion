@@ -1,0 +1,25 @@
+﻿$PBExportHeader$sacaplanta.srf
+$PBExportComments$Entrega string con planta base.
+global type sacaplanta from function_object
+end type
+
+forward prototypes
+global function string sacaplanta (integer ii_codplanta)
+end prototypes
+
+global function string sacaplanta (integer ii_codplanta);String ls_planta
+
+Select		isnull(replace(RTrim(plde_nombre),' ','_'),'')
+	Into		:ls_planta
+	From		dbo.plantadesp
+	Where	plde_codigo = :ii_codplanta
+	Using 		Sqlca;
+
+If Sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura tabla plantadesp  ")
+	Return ' '
+Else
+	Return ls_planta
+End If
+end function
+

@@ -1,0 +1,30 @@
+﻿$PBExportHeader$f_controlaarchivo.srf
+global type f_ControlaArchivo from function_object
+end type
+
+forward prototypes
+global subroutine f_controlaarchivo ()
+end prototypes
+
+global subroutine f_controlaarchivo ();Long	li_Archivo, li_Inicio, li_Termino
+String	ls_linea
+
+li_Archivo	=	FileOpen(gstr_apl.ini)
+
+If li_archivo < 0 Then
+	MessageBox("Error","Archivo " + gstr_apl.ini + " no se encuentra en directorio.", StopSign!)
+	Halt Close
+Else
+	Do While FileRead(li_archivo,ls_linea) >= 0 
+		li_inicio		= Pos(ls_linea,"[",1)
+		li_termino	= Pos(ls_linea,"]",1)
+		
+		If li_inicio > 0 And li_termino>0 Then is_base = (Mid(ls_linea, li_inicio + 1, li_termino - li_inicio - 1))
+	Loop
+End If
+
+FileClose(li_Archivo)
+
+Return 
+end subroutine
+

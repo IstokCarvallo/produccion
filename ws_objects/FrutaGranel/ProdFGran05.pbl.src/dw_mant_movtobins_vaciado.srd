@@ -1,0 +1,106 @@
+﻿$PBExportHeader$dw_mant_movtobins_vaciado.srd
+release 10;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=816 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=clie_codigo dbname="spro_movtobins.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=plde_codigo dbname="spro_movtobins.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgmb_nrotar dbname="spro_movtobins.fgmb_nrotar" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=bins_numero dbname="spro_movtobins.bins_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_codigo dbname="spro_movtobins.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_espcod dbname="spro_movtobins.lote_espcod" )
+ column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="especies.espe_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="spro_lotesfrutagranel.vari_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_codigo dbname="spro_movtobins.cama_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgmb_calle dbname="spro_movtobins.fgmb_calle" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgmb_base dbname="spro_movtobins.fgmb_base" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=fgmb_posici dbname="spro_movtobins.fgmb_posici" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_lotesfrutagranel.prod_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_tipoen dbname="spro_bins.enva_tipoen" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_codigo dbname="spro_bins.enva_codigo" )
+ column=(type=char(4) updatewhereclause=yes name=cale_calida dbname="spro_bins.cale_calida" )
+ column=(type=char(30) updatewhereclause=yes name=cale_nombre dbname="spro_calicosechero.cale_nombre" )
+ column=(type=decimal(3) updatewhereclause=yes name=cale_pesoen dbname="spro_calicosechero.cale_pesoen" )
+ retrieve="SELECT dba.spro_movtobins.clie_codigo,   
+	dba.spro_movtobins.plde_codigo,   
+	dba.spro_movtobins.fgmb_nrotar,   
+	dba.spro_movtobins.bins_numero,   
+	dba.spro_movtobins.lote_codigo,   
+	dba.spro_movtobins.lote_espcod,   
+	dba.especies.espe_nombre,   
+	dba.spro_lotesfrutagranel.vari_codigo,   
+	dba.variedades.vari_nombre,   
+	dba.spro_movtobins.cama_codigo,   
+	dba.spro_movtobins.fgmb_calle,   
+	dba.spro_movtobins.fgmb_base,   
+	dba.spro_movtobins.fgmb_posici,   
+	dba.spro_lotesfrutagranel.prod_codigo,   
+	dba.productores.prod_nombre,
+	dba.spro_bins.enva_tipoen,
+	dba.spro_bins.enva_codigo,
+	dba.spro_bins.cale_calida,
+	dba.spro_calicosechero.cale_nombre,
+	dba.spro_calicosechero.cale_pesoen
+FROM dba.spro_movtobins,   
+	dba.spro_lotesfrutagranel,   
+	dba.especies,   
+	dba.variedades,   
+	dba.productores,   
+	dba.spro_ordenprocdeta,
+	dba.spro_bins,
+	dba.spro_calicosechero
+WHERE ( dba.spro_movtobins.plde_codigo = dba.spro_lotesfrutagranel.lote_pltcod ) and  
+	( dba.spro_movtobins.lote_espcod = dba.spro_lotesfrutagranel.lote_espcod ) and  
+	( dba.spro_movtobins.lote_codigo = dba.spro_lotesfrutagranel.lote_codigo ) and  
+	( dba.spro_movtobins.clie_codigo = dba.spro_bins.clie_codigo ) and 
+	( dba.spro_movtobins.plde_codigo = dba.spro_bins.plde_codigo ) and 
+	( dba.spro_movtobins.bins_numero = dba.spro_bins.bins_numero ) and 
+	( dba.spro_bins.enva_tipoen = dba.spro_calicosechero.enva_tipoen ) and
+	( dba.spro_bins.enva_codigo = dba.spro_calicosechero.enva_codigo ) and
+	( dba.spro_bins.cale_calida = dba.spro_calicosechero.cale_calida ) and
+	( dba.spro_lotesfrutagranel.lote_espcod = dba.especies.espe_codigo ) and  
+	( dba.spro_lotesfrutagranel.lote_espcod = dba.variedades.espe_codigo ) and  
+	( dba.spro_lotesfrutagranel.vari_codigo = dba.variedades.vari_codigo ) and  
+	( dba.spro_lotesfrutagranel.prod_codigo = dba.productores.prod_codigo ) and  
+	( dba.spro_movtobins.plde_codigo = dba.spro_ordenprocdeta.lote_pltcod ) and  
+	( dba.spro_movtobins.lote_codigo = dba.spro_ordenprocdeta.lote_codigo ) and  
+	( dba.spro_movtobins.lote_espcod = dba.spro_ordenprocdeta.lote_espcod ) and
+	( dba.spro_ordenprocdeta.orpr_numero = :orden ) AND  
+	( dba.spro_movtobins.fgmb_nrotar = :tarja ) AND  
+	( dba.spro_movtobins.fgmb_estado = 1) AND  
+	( dba.spro_ordenprocdeta.orpr_tipord = :tipoord )    
+" arguments=(("tarja", number),("orden", number),("tipoord", number)) )
+text(band=detail alignment="2" text="" border="6" color="0" x="32" y="152" height="652" width="955" html.valueishtml="0"  name=t_7 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="" border="6" color="0" x="32" y="28" height="108" width="955" html.valueishtml="0"  name=t_titulo visible="1"  font.face="Tahoma" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="PRIMER BINS" border="0" color="0" x="320" y="52" height="64" width="375" html.valueishtml="0"  name=t_8 visible="1"  font.face="Tahoma" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Especie" border="0" color="0" x="73" y="364" height="64" width="283" html.valueishtml="0"  name=t_3 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Nro. Bin" border="0" color="0" x="73" y="276" height="64" width="283" html.valueishtml="0"  name=t_2 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="String(  clie_codigo , ~"000~" ) + String( plde_codigo, ~"0000~") + String ( bins_numero , ~"00000000~")"border="5" color="0" x="375" y="276" height="64" width="585" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Nro. Tarja" border="0" color="0" x="69" y="180" height="64" width="283" html.valueishtml="0"  name=t_1 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="2" tabsequence=10 border="5" color="0" x="375" y="176" height="72" width="585" format="[general]" html.valueishtml="0"  name=fgmb_nrotar visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="5" color="0" x="517" y="364" height="64" width="443" format="[general]" html.valueishtml="0"  name=espe_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="5" color="0" x="375" y="364" height="64" width="123" format="[general]" html.valueishtml="0"  name=lote_espcod visible="1" editmask.mask="00" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Envase" border="0" color="0" x="73" y="716" height="64" width="283" html.valueishtml="0"  name=t_9 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="0" expression="String( enva_tipoen ) + ~" - ~" + String(  enva_codigo , ~"000~" ) + ~" - ~" + String(  cale_calida ) + ~" - ~" + String( cale_pesoen )"border="5" color="0" x="375" y="716" height="64" width="585" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Lote" border="0" color="0" x="73" y="628" height="64" width="283" html.valueishtml="0"  name=t_6 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=detail alignment="2" expression="String(  clie_codigo , ~"000~" ) + String( plde_codigo, ~"0000~") + String ( lote_codigo , ~"00000000~")"border="5" color="0" x="375" y="628" height="64" width="585" format="[GENERAL]" html.valueishtml="0"  name=compute_2  tag="" visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Productor" border="0" color="0" x="73" y="540" height="64" width="283" html.valueishtml="0"  name=t_5 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=14 alignment="2" tabsequence=32766 border="5" color="0" x="375" y="540" height="64" width="123" format="[general]" html.valueishtml="0"  name=prod_codigo visible="1" editmask.mask="00000" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="5" color="0" x="517" y="540" height="64" width="443" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Variedad" border="0" color="0" x="73" y="452" height="64" width="283" html.valueishtml="0"  name=t_4 visible="1"  font.face="Tahoma" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="5" color="0" x="375" y="452" height="64" width="123" format="00" html.valueishtml="0"  name=vari_codigo visible="1" editmask.mask="000" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="5" color="0" x="517" y="452" height="64" width="443" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

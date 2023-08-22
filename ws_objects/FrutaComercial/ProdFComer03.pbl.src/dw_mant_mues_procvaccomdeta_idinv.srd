@@ -1,0 +1,115 @@
+﻿$PBExportHeader$dw_mant_mues_procvaccomdeta_idinv.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=176 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_ordprocvaccomdeta.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=orpr_tipord dbname="spro_ordprocvaccomdeta.orpr_tipord" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=orpr_numero dbname="spro_ordprocvaccomdeta.orpr_numero" )
+ column=(type=date update=yes updatewhereclause=yes name=opve_fecvac dbname="spro_ordprocvaccomdeta.opve_fecvac" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=opve_turno dbname="spro_ordprocvaccomdeta.opve_turno" )
+ column=(type=time update=yes updatewhereclause=yes name=opvd_horava dbname="spro_ordprocvaccomdeta.opvd_horava" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=lofc_pltcod dbname="spro_ordprocvaccomdeta.lofc_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lofc_espcod dbname="spro_ordprocvaccomdeta.lofc_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lofc_lotefc dbname="spro_ordprocvaccomdeta.lofc_lotefc" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_tipoen dbname="spro_ordprocvaccomdeta.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_codigo dbname="spro_ordprocvaccomdeta.enva_codigo" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=opvd_canbul dbname="spro_ordprocvaccomdeta.opvd_canbul" )
+ column=(type=char(10) updatewhereclause=yes name=lote dbname="lote" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" )
+ column=(type=time update=yes updatewhereclause=yes name=opvd_horate dbname="spro_ordprocvaccomdeta.opvd_horate" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=cale_calida dbname="spro_ordprocvaccomdeta.cale_calida" )
+ column=(type=char(30) updatewhereclause=yes name=cale_nombre dbname="spro_calicosechero.cale_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=bultostot dbname="bultostot" )
+ column=(type=decimal(0) updatewhereclause=yes name=protec dbname="protec" initial="0" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=clie_codigo dbname="spro_ordprocvaccomdeta.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=opve_nrtar1 dbname="spro_ordprocvaccomdeta.opve_nrtar1" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=opve_nrtar2 dbname="spro_ordprocvaccomdeta.opve_nrtar2" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=opve_nrtar3 dbname="spro_ordprocvaccomdeta.opve_nrtar3" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=opvd_pesone dbname="spro_ordprocvaccomdeta.opvd_pesone" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=opvd_pesobr dbname="spro_ordprocvaccomdeta.opvd_pesobr" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=opvd_kilpro dbname="spro_ordprocvaccomdeta.opvd_kilpro" )
+ column=(type=decimal(2) updatewhereclause=yes name=pesaje dbname="pesaje" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=opvd_kilori dbname="spro_ordprocvaccomdeta.opvd_kilori" )
+ retrieve="  SELECT ~"dba~".~"spro_ordprocvaccomdeta~".~"plde_codigo~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"orpr_tipord~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"orpr_numero~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opve_fecvac~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opve_turno~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_horava~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"lofc_pltcod~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"lofc_espcod~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"lofc_lotefc~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_tipoen~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_codigo~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_canbul~",   
+         Lote=Convert(Char(10),''),   
+         ~"dba~".~"envases~".~"enva_nombre~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_horate~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"cale_calida~",   
+         ~"dba~".~"spro_calicosechero~".~"cale_nombre~",   
+         BultosTot=Convert(decimal(4),0),   
+         Protec=Convert(decimal(1),0),   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"clie_codigo~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opve_nrtar1~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opve_nrtar2~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opve_nrtar3~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_pesone~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_pesobr~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_kilpro~",   
+         Pesaje=Convert(decimal(6,2),0),   
+         ~"dba~".~"spro_ordprocvaccomdeta~".~"opvd_kilori~"  
+    FROM ~"dba~".~"envases~",   
+         ~"dba~".~"spro_ordprocvaccomdeta~",   
+         ~"dba~".~"spro_calicosechero~"  
+   WHERE ( ~"dba~".~"envases~".~"enva_tipoen~" = ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"envases~".~"enva_codigo~" = ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_tipoen~" = ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"enva_codigo~" = ~"dba~".~"spro_ordprocvaccomdeta~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_calicosechero~".~"cale_calida~" = ~"dba~".~"spro_ordprocvaccomdeta~".~"cale_calida~" ) and  
+         ( ( dba.spro_ordprocvaccomdeta.plde_codigo = :Planta ) AND  
+         ( dba.spro_ordprocvaccomdeta.clie_codigo = :Cliente ) AND  
+         ( dba.spro_ordprocvaccomdeta.orpr_tipord = :TipoDoc ) AND  
+         ( dba.spro_ordprocvaccomdeta.orpr_numero = :Numero ) AND  
+         ( dba.spro_ordprocvaccomdeta.opve_fecvac = :Fecha ) AND  
+         ( dba.spro_ordprocvaccomdeta.opve_turno = :Turno ) )    
+" update="dba.spro_ordprocvaccomdeta" updatewhere=0 updatekeyinplace=yes arguments=(("Cliente", number),("Planta", number),("TipoDoc", number),("Numero", number),("Fecha", date),("Turno", number)) )
+text(band=header alignment="2" text="Hora
+Inicio" border="6" color="0" x="128" y="12" height="144" width="201" html.valueishtml="0"  name=spro_ordprocvaccomdeta_opvd_horava_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hora
+Término" border="6" color="0" x="347" y="12" height="144" width="229" html.valueishtml="0"  name=spro_ordprocvaccomdeta_opvd_horate_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Lote Comercial" border="6" color="0" x="594" y="12" height="144" width="571" html.valueishtml="0"  name=spro_ordprocvaccomdeta_lofc_pltcod_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Tipo Envase" border="6" color="0" x="1184" y="12" height="144" width="370" html.valueishtml="0"  name=spro_ordprocvaccomdeta_enva_tipoen_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Envase" border="6" color="0" x="1573" y="12" height="144" width="425" html.valueishtml="0"  name=spro_ordprocvaccomdeta_enva_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Calidad" border="6" color="0" x="2016" y="12" height="144" width="480" html.valueishtml="0"  name=spro_ordprocvaccomdeta_cale_calida_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Bultos" border="6" color="0" x="2514" y="12" height="144" width="274" html.valueishtml="0"  name=spro_ordprocvaccomdeta_opvd_canbul_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=13 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2309" y="140" height="76" width="434" format="[general]" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=lote visible="1~t0" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="599" y="4" height="56" width="119" format="0000" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=lofc_pltcod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="741" y="4" height="56" width="73" format="00" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=lofc_espcod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=6 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="133" y="4" height="56" width="197" format="hh:mm:ss" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=opvd_horava visible="1" editmask.mask="hh:mm:ss" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=15 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="347" y="4" height="56" width="229" format="hh:mm:ss" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=opvd_horate visible="1" editmask.mask="hh:mm" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="837" y="4" height="56" width="320" format="00000000" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=lofc_lotefc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="1184" y="4" height="56" width="370" format="[general]" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=enva_tipoen visible="1" dddw.name=dw_mues_tiposenvases dddw.displaycolumn=tien_nombre dddw.datacolumn=enva_tipoen dddw.percentwidth=180 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="1573" y="4" height="56" width="425" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1~tIF ( GetRow() = CurrentRow(), 0, 1 )" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="1573" y="4" height="56" width="425" format="[general]" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=enva_codigo visible="1~tIF ( GetRow() = CurrentRow(), 1, 0 )" dddw.name=dw_mues_envases dddw.displaycolumn=enva_nombre dddw.datacolumn=enva_codigo dddw.percentwidth=180 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.nilisnull=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2021" y="4" height="56" width="475" format="[general]" html.valueishtml="0"  name=cale_nombre visible="1~tIF ( GetRow() = CurrentRow(), 0, 1 )" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2021" y="4" height="56" width="475" format="[general]" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=cale_calida visible="1~tIF ( GetRow() = CurrentRow(), 1, 0 )" dddw.name=dw_mues_spro_calidadenvases dddw.displaycolumn=cale_nombre dddw.datacolumn=cale_calida dddw.percentwidth=180 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=no dddw.case=any dddw.nilisnull=yes dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="2514" y="4" height="56" width="274" format="#,##0.00" html.valueishtml="0" protect="0~tif( protec = 1, 1, 0 )"  name=opvd_canbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="12632256~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

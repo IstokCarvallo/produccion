@@ -1,0 +1,28 @@
+﻿$PBExportHeader$funcionesguiasservice.srx
+$PBExportComments$Proxy imported from Web service using Web Service Proxy Generator.
+global type FuncionesGuiasService from NonVisualObject
+end type
+
+type variables
+Protected:
+        string pbws_ver = ".NET"
+        string cs_namespace = "WebService"
+        string cs_class = "FuncionesGuiasService"
+        string cs_assembly = "FuncionesGuiasService.dll"
+        string pb_prefix = ""
+        string pb_usenvo = "YES"
+        string pb_target = "F:\Desarrollo 12\Productiva\FrutaProcesada"
+        string cabeceraGuia = "cabeceraGuia(System.String instEmbarque,System.Int32 numGuia,System.Int32 codRecibidor,System.Int32 codPlanta,System.String patTransporte,System.Int32 codEspecie,System.String condFumi,System.String numPallet,System.Int32 codEtiq,System.String fhEmbalaje,System.Int32 codProductor,System.String codEmbalaje,System.Int32 codVariedad,System.String calibre,System.Int32 cantCajas,System.String categoria,System.String tipoCamion,System.Int32 codPuertoEmbarque,System.Int32 codPack,System.String numTermografo,System.Int32 codPallet,System.String codInsp,System.String actPallet,System.String numContenedor,System.String sellos,System.String chofer,System.String celular,System.String acoplado,System.Int32 hsPartida,System.Int32 minPartida,System.Int32 codPuertoDestino,System.String idUsuario,System.String nomEquipo,System.String hsFecha)"
+        string Array = "Array(System.Xml.XmlElement[] Any,System.String arrayType,System.String offset,System.Boolean offsetSpecified,System.String id,System.String href,System.Xml.XmlAttribute[] AnyAttr)"
+        string buscarGuia = "buscarGuia(System.String guia)"
+end variables
+
+forward prototypes
+public:
+function string insertarCabeceraGuia(  cabeceraGuia cabeGuia) alias for "<method name='insertarCabeceraGuia' ns='WebService' pbname='insertarCabeceraGuia'><return name='returnvalue' type='System.String' isRef='False' ArrayDim='0' IsNullableType='False' /><param name='cabeGuia' type='WebService.cabeceraGuia' pos='0' dir='in' ArrayDim='0' IsNullableType='False'/></method>"
+function Array listadoCabeceras(  buscarGuia guia,  Array campos) alias for "<method name='listadoCabeceras' ns='WebService' pbname='listadoCabeceras'><return name='returnvalue' type='WebService.Array' isRef='False' ArrayDim='0' IsNullableType='False' /><param name='guia' type='WebService.buscarGuia' pos='0' dir='in' ArrayDim='0' IsNullableType='False'/><param name='campos' type='WebService.Array' pos='1' dir='in' ArrayDim='0' IsNullableType='False'/></method>"
+subroutine CancelAsync (  any userState) alias for "<method name='CancelAsync' ns='WebService' pbname='CancelAsync'><param name='userState' type='System.Object' pos='0' dir='in' ArrayDim='0' IsNullableType='False'/></method>"
+subroutine PBAddCookie(any cookie) alias for "<method name='PBAddCookie' ns='System.Runtime.Remoting.Messaging'  IsCookieFunction='True' pbname='PBAddCookie'><return name='returnvalue' type='System.Void' isRef='false' ArrayDim='0' IsNullableType='false' /><param name='cookie' type='any' pos='0' dir='in' ArrayDim='0' IsNullableType='False'/></method>"
+function any PBGetCookies(string Uri) alias for "<method name='PBGetCookies' ns='System.Runtime.Remoting.Messaging'  IsCookieFunction='True' pbname='PBGetCookies'><return name='returnvalue' type='System.Object' isRef='false' ArrayDim='0' IsNullableType='false' /><param name='cookie' type='System.String' pos='0' dir='in' ArrayDim='0' IsNullableType='False'/></method>"
+end prototypes
+

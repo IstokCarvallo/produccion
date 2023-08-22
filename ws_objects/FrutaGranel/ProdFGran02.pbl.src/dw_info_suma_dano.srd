@@ -1,0 +1,22 @@
+﻿$PBExportHeader$dw_info_suma_dano.srd
+$PBExportComments$Suma Todos los Color de Fondo, Grupo Calibre y Color de Cubrimiento que Constituyan daños
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=8 color="536870912" )
+summary(height=68 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912"  height.autosize=yes)
+table(column=(type=char(30) updatewhereclause=no name=nombre dbname="nombre" )
+ column=(type=char(30) updatewhereclause=no name=descripcion dbname="descripcion" )
+ column=(type=decimal(2) updatewhereclause=no name=porcentaje dbname="porcentaje" )
+ column=(type=char(1) updatewhereclause=no name=tipo dbname="tipo" )
+ procedure="1 execute dba.Informe_sumadano_dano;1 @planta = :planta, @nrolote = :nrolote, @especie = :especie , @grupo = :grupo, @subgrupo = :subgrupo, @variedad = :variedad" arguments=(("planta", number),("nrolote", number),("especie", number),("grupo", number),("subgrupo", number),("variedad", number)) )
+line(band=header x1="69" y1="4" x2="1536" y2="4"  name=l_2 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression=" case ( nombre when 'SOB' then 'SobreCalibre' when 'EXG' then 'Extragrande' when 'GRA' then 'Grande' when 'MED' then 'Mediano' when 'CHI' then 'Chico' when 'EXC' then 'ExtraChico' when 'PRE' then 'PreCalibre' else nombre )  "border="0" color="0" x="183" y="4" height="56" width="530" format="[GENERAL]"  name=compute_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="0" x="1289" y="4" height="56" width="242" format="##0.0"  name=porcentaje edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="727" y="4" height="56" width="517" format="[general]"  name=descripcion edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="82" y1="0" x2="1536" y2="0"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="Suma Total Defectos" border="0" color="0" x="187" y="4" height="56" width="1097"  name=sumadefectos_t  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="sum(   porcentaje for all )"border="0" color="0" x="1289" y="4" height="56" width="242" format="##0.0"  name=compute_1  slideup=directlyabove  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

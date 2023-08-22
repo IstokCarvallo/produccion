@@ -1,0 +1,7 @@
+﻿$PBExportHeader$dbpl_09_ctlcaltiposinspeccion.srp
+PIPELINE(source_connect=Directo ProdRancagua_2008,destination_connect=produccion_2008,type=update,commit=0,errors=0,keyname="ctlcaltiposinspeccion")
+SOURCE(name="ctlcaltiposinspeccion",COLUMN(type=decimal,name="ccti_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="ccti_descrip",dbtype="varchar(30)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcaltiposinspeccion~") COLUMN(NAME=~"dba.ctlcaltiposinspeccion.ccti_codigo~")COLUMN(NAME=~"dba.ctlcaltiposinspeccion.ccti_descrip~"))")
+DESTINATION(name="dba.ctlcaltiposinspeccion",COLUMN(type=decimal,name="ccti_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="ccti_descrip",dbtype="char(30)",nulls_allowed=yes))

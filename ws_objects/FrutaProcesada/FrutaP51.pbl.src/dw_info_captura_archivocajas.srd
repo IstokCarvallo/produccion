@@ -1,0 +1,154 @@
+﻿$PBExportHeader$dw_info_captura_archivocajas.srd
+release 10;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=624 color="536870912" )
+summary(height=96 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="spro_cajasprod.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_cajasprod.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=capr_numero dbname="spro_cajasprod.capr_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=espe_codigo dbname="spro_cajasprod.espe_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=vari_codigo dbname="spro_cajasprod.vari_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_codigo dbname="spro_cajasprod.prod_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_predio dbname="spro_cajasprod.prod_predio" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_huerto dbname="spro_cajasprod.prod_huerto" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_cuarte dbname="spro_cajasprod.prod_cuarte" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=emba_codigo dbname="spro_cajasprod.emba_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=etiq_codigo dbname="spro_cajasprod.etiq_codigo" )
+ column=(type=date update=yes updatewhereclause=yes name=capr_fecemb dbname="spro_cajasprod.capr_fecemb" )
+ column=(type=char(3) update=yes updatewhereclause=yes name=capr_calibr dbname="spro_cajasprod.capr_calibr" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_embala dbname="spro_cajasprod.capr_embala" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_selecc dbname="spro_cajasprod.capr_selecc" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_pesado dbname="spro_cajasprod.capr_pesado" )
+ column=(type=char(14) update=yes updatewhereclause=yes name=capr_cean14 dbname="spro_cajasprod.capr_cean14" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_numpal dbname="spro_cajasprod.capr_numpal" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=capr_regcap dbname="spro_cajasprod.capr_regcap" )
+ column=(type=decimal(0) updatewhereclause=yes name=capr_estado dbname="spro_cajasprod.capr_estado" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_varrot dbname="spro_cajasprod.capr_varrot" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_numgia dbname="spro_cajasprod.capr_numgia" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cate_codigo dbname="spro_cajasprod.cate_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_cespak dbname="spro_cajasprod.capr_cespak" )
+ column=(type=decimal(0) updatewhereclause=yes name=capr_docrel dbname="spro_cajasprod.capr_docrel" )
+ column=(type=date updatewhereclause=yes name=capr_fecdig dbname="spro_cajasprod.capr_fecdig" )
+ column=(type=time updatewhereclause=yes name=capr_hordig dbname="spro_cajasprod.capr_hordig" )
+ column=(type=decimal(0) updatewhereclause=yes name=capr_nrlote dbname="spro_cajasprod.capr_nrlote" )
+ column=(type=decimal(0) updatewhereclause=yes name=capr_numtra dbname="spro_cajasprod.capr_numtra" )
+ retrieve="  SELECT ~"dba~".~"spro_cajasprod~".~"clie_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"plde_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_numero~",  
+         ~"dba~".~"spro_cajasprod~".~"espe_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"vari_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"prod_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"prod_predio~",   
+         ~"dba~".~"spro_cajasprod~".~"prod_huerto~",   
+         ~"dba~".~"spro_cajasprod~".~"prod_cuarte~",   
+         ~"dba~".~"spro_cajasprod~".~"emba_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"etiq_codigo~",    
+         ~"dba~".~"spro_cajasprod~".~"capr_fecemb~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_calibr~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_embala~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_selecc~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_pesado~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_cean14~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_numpal~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_regcap~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_estado~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_varrot~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_numgia~",   
+         ~"dba~".~"spro_cajasprod~".~"cate_codigo~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_cespak~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_docrel~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_fecdig~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_hordig~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_nrlote~",   
+         ~"dba~".~"spro_cajasprod~".~"capr_numtra~"  
+    FROM ~"dba~".~"spro_cajasprod~"   
+" update="dba.spro_cajasprod" updatewhere=0 updatekeyinplace=yes arguments=(("cliente", number),("planta", number),("pallet", number))  sort="capr_numero A " )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="12" height="56" width="1070" html.valueishtml="0"  name=nom_empresa visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema de Producción" border="0" color="0" x="2359" y="72" height="56" width="896" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo   Movimientos" border="0" color="0" x="2359" y="132" height="56" width="553" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Captura Archivo Plano de Cajas" border="0" color="0" x="2359" y="192" height="56" width="896" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Sistema" border="0" color="0" x="2117" y="72" height="56" width="219" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Módulo" border="0" color="0" x="2117" y="132" height="56" width="219" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Informe" border="0" color="0" x="2117" y="192" height="56" width="219" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="72" height="56" width="1070" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="132" height="56" width="1070" html.valueishtml="0"  name=oficina visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Cliente" border="0" color="33554432" x="14" y="336" height="56" width="334" html.valueishtml="0"  name=clie_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="558" y="336" height="56" width="1819" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" dddw.name=dw_mues_clienprod dddw.displaycolumn=clie_nombre dddw.datacolumn=clie_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="375" y="336" height="56" width="169" format="000" html.valueishtml="0"  name=clie_codigo_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Planta" border="0" color="33554432" x="14" y="396" height="56" width="334" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="375" y="396" height="56" width="169" format="[general]" html.valueishtml="0"  name=plde_codigo_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="
+Packing" border="0" color="33554432" x="32" y="492" height="112" width="219" html.valueishtml="0"  name=plde_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="
+Etiqueta" border="0" color="33554432" x="928" y="492" height="112" width="219" html.valueishtml="0"  name=etiq_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Embalaje" border="0" color="33554432" x="1166" y="492" height="112" width="233" html.valueishtml="0"  name=emba_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Fecha de
+Embalaje" border="0" color="33554432" x="1417" y="492" height="112" width="265" html.valueishtml="0"  name=capr_fecemb_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Número 
+de Guía" border="0" color="33554432" x="1701" y="492" height="112" width="229" html.valueishtml="0"  name=capr_numgia_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Especie" border="0" color="33554432" x="1947" y="492" height="112" width="224" html.valueishtml="0"  name=espe_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Número 
+de Pallet" border="0" color="33554432" x="599" y="492" height="112" width="315" html.valueishtml="0"  name=capr_numpal_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Número 
+de Caja" border="0" color="33554432" x="265" y="488" height="112" width="315" html.valueishtml="0"  name=capr_numero_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="
+Variedad" border="0" color="33554432" x="2185" y="492" height="112" width="242" html.valueishtml="0"  name=vari_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Variedad
+rotulada" border="0" color="33554432" x="2446" y="492" height="112" width="242" html.valueishtml="0"  name=capr_varrot_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Calibre" border="0" color="33554432" x="2706" y="492" height="112" width="187" html.valueishtml="0"  name=capr_calibr_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="
+Productor" border="0" color="33554432" x="2912" y="492" height="112" width="265" html.valueishtml="0"  name=prod_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Predio" border="0" color="33554432" x="3195" y="492" height="112" width="187" html.valueishtml="0"  name=prod_predio_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Cuartel" border="0" color="33554432" x="3401" y="492" height="112" width="206" html.valueishtml="0"  name=prod_cuarte_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Categoría" border="0" color="33554432" x="3621" y="492" height="112" width="251" html.valueishtml="0"  name=cate_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="558" y="396" height="56" width="1819" format="[general]" html.valueishtml="0"  name=plde_codigo visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_nombre dddw.datacolumn=plde_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="Nº Recepción" border="0" color="0" x="3022" y="396" height="56" width="325" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="1" text="" border="0" color="0" x="3410" y="396" height="56" width="215" html.valueishtml="0"  name=t_recepcion visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="
+Pesadora" border="0" color="33554432" x="3886" y="492" height="112" width="242" html.valueishtml="0"  name=capr_pesado_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="27" y1="480" x2="4142" y2="480"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="27" y1="616" x2="4142" y2="616"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="3625" y="12" height="56" width="183" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="3625" y="72" height="56" width="165" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="3625" y="132" height="56" width="123" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="3854" y="12" height="56" width="279" format="[general]" html.valueishtml="0"  name=pagina visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="3854" y="72" height="56" width="279" format="dd/mm/yyyy" html.valueishtml="0"  name=fecha visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="3854" y="132" height="56" width="279" format="hh:mm:ss" html.valueishtml="0"  name=hora visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=24 alignment="1" tabsequence=32766 border="0" color="33554432" x="23" y="4" height="64" width="219" format="0000" html.valueishtml="0"  name=capr_cespak visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=32766 border="0" color="33554432" x="928" y="4" height="64" width="219" format="000" html.valueishtml="0"  name=etiq_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="33554432" x="1170" y="4" height="64" width="229" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="2" tabsequence=32766 border="0" color="33554432" x="1422" y="4" height="64" width="265" format="dd/mm/yyyy" html.valueishtml="0"  name=capr_fecemb visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="33554432" x="1705" y="4" height="64" width="219" format="00000000" html.valueishtml="0"  name=capr_numgia visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="1" tabsequence=32766 border="0" color="33554432" x="1966" y="4" height="64" width="197" format="00" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="2" tabsequence=32766 border="0" color="33554432" x="603" y="4" height="64" width="315" format="00000000" html.valueishtml="0"  name=capr_numpal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="33554432" x="265" y="4" height="64" width="315" format="00000000" html.valueishtml="0"  name=capr_numero visible="1" edit.limit=18 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="1" tabsequence=32766 border="0" color="33554432" x="2231" y="4" height="64" width="165" format="0000" html.valueishtml="0"  name=vari_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="1" tabsequence=32766 border="0" color="33554432" x="2491" y="4" height="64" width="165" format="0000" html.valueishtml="0"  name=capr_varrot visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="33554432" x="2734" y="4" height="64" width="142" format="[general]" html.valueishtml="0"  name=capr_calibr visible="1" edit.limit=3 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="33554432" x="2912" y="4" height="64" width="270" format="00000" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="33554432" x="3209" y="4" height="64" width="165" format="000" html.valueishtml="0"  name=prod_predio visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="1" tabsequence=32766 border="0" color="33554432" x="3424" y="4" height="64" width="178" format="000" html.valueishtml="0"  name=prod_cuarte visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="1" tabsequence=32766 border="0" color="33554432" x="3694" y="4" height="64" width="137" format="00" html.valueishtml="0"  name=cate_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="1" tabsequence=32766 border="0" color="33554432" x="3913" y="4" height="64" width="169" format="000" html.valueishtml="0"  name=capr_pesado visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=summary x1="37" y1="12" x2="1600" y2="12"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=summary alignment="0" text="Total Cajas" border="0" color="0" x="46" y="24" height="56" width="361" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=summary alignment="1" expression="count(  capr_numero  for all )"border="0" color="0" x="466" y="28" height="56" width="183" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

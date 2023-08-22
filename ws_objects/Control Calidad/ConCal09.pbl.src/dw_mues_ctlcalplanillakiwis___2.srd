@@ -1,0 +1,375 @@
+﻿$PBExportHeader$dw_mues_ctlcalplanillakiwis___2.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=704 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="ctlcalplaniverifideta.clie_codigo" dbalias=".clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="ctlcalplaniverifideta.plde_codigo" dbalias=".plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=ccpv_numero dbname="ctlcalplaniverifideta.ccpv_numero" dbalias=".ccpv_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=espe_codigo dbname="ctlcalplaniverifideta.espe_codigo" dbalias=".espe_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=cpvd_secuen dbname="ctlcalplaniverifideta.cpvd_secuen" dbalias=".cpvd_secuen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_nummaq dbname="ctlcalplaniverifideta.cpvd_nummaq" dbalias=".cpvd_nummaq" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_numsal dbname="ctlcalplaniverifideta.cpvd_numsal" dbalias=".cpvd_numsal" )
+ column=(type=time update=yes updatewhereclause=yes name=cpvd_horinp dbname="ctlcalplaniverifideta.cpvd_horinp" dbalias=".cpvd_horinp" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_embala dbname="ctlcalplaniverifideta.cpvd_embala" dbalias=".cpvd_embala" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_numpal dbname="ctlcalplaniverifideta.cpvd_numpal" dbalias=".cpvd_numpal" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_numcaj dbname="ctlcalplaniverifideta.cpvd_numcaj" dbalias=".cpvd_numcaj" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=emba_codigo dbname="ctlcalplaniverifideta.emba_codigo" dbalias=".emba_codigo" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calibr dbname="ctlcalplaniverifideta.cpvd_calibr" dbalias=".cpvd_calibr" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_paleti dbname="ctlcalplaniverifideta.cpvd_paleti" dbalias=".cpvd_paleti" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_rotula dbname="ctlcalplaniverifideta.cpvd_rotula" dbalias=".cpvd_rotula" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_materi dbname="ctlcalplaniverifideta.cpvd_materi" dbalias=".cpvd_materi" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_empaq dbname="ctlcalplaniverifideta.cpvd_empaq" dbalias=".cpvd_empaq" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_pesone dbname="ctlcalplaniverifideta.cpvd_pesone" dbalias=".cpvd_pesone" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_aparie dbname="ctlcalplaniverifideta.cpvd_aparie" dbalias=".cpvd_aparie" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_numfru dbname="ctlcalplaniverifideta.cpvd_numfru" dbalias=".cpvd_numfru" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_frsplu dbname="ctlcalplaniverifideta.cpvd_frsplu" dbalias=".cpvd_frsplu" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_tempul dbname="ctlcalplaniverifideta.cpvd_tempul" dbalias=".cpvd_tempul" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_resemb dbname="ctlcalplaniverifideta.cpvd_resemb" dbalias=".cpvd_resemb" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_cobjem dbname="ctlcalplaniverifideta.cpvd_cobjem" dbalias=".cpvd_cobjem" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calmay dbname="ctlcalplaniverifideta.cpvd_calmay" dbalias=".cpvd_calmay" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calma2 dbname="ctlcalplaniverifideta.cpvd_calma2" dbalias=".cpvd_calma2" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calma3 dbname="ctlcalplaniverifideta.cpvd_calma3" dbalias=".cpvd_calma3" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calma4 dbname="ctlcalplaniverifideta.cpvd_calma4" dbalias=".cpvd_calma4" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calmen dbname="ctlcalplaniverifideta.cpvd_calmen" dbalias=".cpvd_calmen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_color1 dbname="ctlcalplaniverifideta.cpvd_color1" dbalias=".cpvd_color1" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_color2 dbname="ctlcalplaniverifideta.cpvd_color2" dbalias=".cpvd_color2" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_color3 dbname="ctlcalplaniverifideta.cpvd_color3" dbalias=".cpvd_color3" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_color4 dbname="ctlcalplaniverifideta.cpvd_color4" dbalias=".cpvd_color4" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_deform dbname="ctlcalplaniverifideta.cpvd_deform" dbalias=".cpvd_deform" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_heridas dbname="ctlcalplaniverifideta.cpvd_heridas" dbalias=".cpvd_heridas" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_mandor dbname="ctlcalplaniverifideta.cpvd_mandor" dbalias=".cpvd_mandor" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_golsol dbname="ctlcalplaniverifideta.cpvd_golsol" dbalias=".cpvd_golsol" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_residu dbname="ctlcalplaniverifideta.cpvd_residu" dbalias=".cpvd_residu" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_mancha dbname="ctlcalplaniverifideta.cpvd_mancha" dbalias=".cpvd_mancha" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_russet dbname="ctlcalplaniverifideta.cpvd_russet" dbalias=".cpvd_russet" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_insect dbname="ctlcalplaniverifideta.cpvd_insect" dbalias=".cpvd_insect" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_matext dbname="ctlcalplaniverifideta.cpvd_matext" dbalias=".cpvd_matext" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_otrcal dbname="ctlcalplaniverifideta.cpvd_otrcal" dbalias=".cpvd_otrcal" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_rescal dbname="ctlcalplaniverifideta.cpvd_rescal" dbalias=".cpvd_rescal" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_cobjca dbname="ctlcalplaniverifideta.cpvd_cobjca" dbalias=".cpvd_cobjca" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_firpul dbname="ctlcalplaniverifideta.cpvd_firpul" dbalias=".cpvd_firpul" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_herabi dbname="ctlcalplaniverifideta.cpvd_herabi" dbalias=".cpvd_herabi" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_medlun dbname="ctlcalplaniverifideta.cpvd_medlun" dbalias=".cpvd_medlun" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_ausped dbname="ctlcalplaniverifideta.cpvd_ausped" dbalias=".cpvd_ausped" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_frubla dbname="ctlcalplaniverifideta.cpvd_frubla" dbalias=".cpvd_frubla" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_pudric dbname="ctlcalplaniverifideta.cpvd_pudric" dbalias=".cpvd_pudric" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_deship dbname="ctlcalplaniverifideta.cpvd_deship" dbalias=".cpvd_deship" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_pittin dbname="ctlcalplaniverifideta.cpvd_pittin" dbalias=".cpvd_pittin" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_machuc dbname="ctlcalplaniverifideta.cpvd_machuc" dbalias=".cpvd_machuc" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_desgap dbname="ctlcalplaniverifideta.cpvd_desgap" dbalias=".cpvd_desgap" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_otrcon dbname="ctlcalplaniverifideta.cpvd_otrcon" dbalias=".cpvd_otrcon" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_rescon dbname="ctlcalplaniverifideta.cpvd_rescon" dbalias=".cpvd_rescon" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_cobjco dbname="ctlcalplaniverifideta.cpvd_cobjco" dbalias=".cpvd_cobjco" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_portot dbname="ctlcalplaniverifideta.cpvd_portot" dbalias=".cpvd_portot" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=cpvd_rescaj dbname="ctlcalplaniverifideta.cpvd_rescaj" dbalias=".cpvd_rescaj" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest1 dbname="ctlcalplaniverifideta.cpvd_muest1" dbalias=".cpvd_muest1" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest2 dbname="ctlcalplaniverifideta.cpvd_muest2" dbalias=".cpvd_muest2" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest3 dbname="ctlcalplaniverifideta.cpvd_muest3" dbalias=".cpvd_muest3" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest4 dbname="ctlcalplaniverifideta.cpvd_muest4" dbalias=".cpvd_muest4" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest5 dbname="ctlcalplaniverifideta.cpvd_muest5" dbalias=".cpvd_muest5" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest6 dbname="ctlcalplaniverifideta.cpvd_muest6" dbalias=".cpvd_muest6" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest7 dbname="ctlcalplaniverifideta.cpvd_muest7" dbalias=".cpvd_muest7" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest8 dbname="ctlcalplaniverifideta.cpvd_muest8" dbalias=".cpvd_muest8" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_muest9 dbname="ctlcalplaniverifideta.cpvd_muest9" dbalias=".cpvd_muest9" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues10 dbname="ctlcalplaniverifideta.cpvd_mues10" dbalias=".cpvd_mues10" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues11 dbname="ctlcalplaniverifideta.cpvd_mues11" dbalias=".cpvd_mues11" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues12 dbname="ctlcalplaniverifideta.cpvd_mues12" dbalias=".cpvd_mues12" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues13 dbname="ctlcalplaniverifideta.cpvd_mues13" dbalias=".cpvd_mues13" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues14 dbname="ctlcalplaniverifideta.cpvd_mues14" dbalias=".cpvd_mues14" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues15 dbname="ctlcalplaniverifideta.cpvd_mues15" dbalias=".cpvd_mues15" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues16 dbname="ctlcalplaniverifideta.cpvd_mues16" dbalias=".cpvd_mues16" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues17 dbname="ctlcalplaniverifideta.cpvd_mues17" dbalias=".cpvd_mues17" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues18 dbname="ctlcalplaniverifideta.cpvd_mues18" dbalias=".cpvd_mues18" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues19 dbname="ctlcalplaniverifideta.cpvd_mues19" dbalias=".cpvd_mues19" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_mues20 dbname="ctlcalplaniverifideta.cpvd_mues20" dbalias=".cpvd_mues20" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_grbrix dbname="ctlcalplaniverifideta.cpvd_grbrix" dbalias=".cpvd_grbrix" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_calma5 dbname="ctlcalplaniverifideta.cpvd_calma5" dbalias=".cpvd_calma5" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=cpvd_grbri2 dbname="ctlcalplaniverifideta.cpvd_grbri2" dbalias=".cpvd_grbri2" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_defor2 dbname="ctlcalplaniverifideta.cpvd_defor2" dbalias=".cpvd_defor2" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_defor3 dbname="ctlcalplaniverifideta.cpvd_defor3" dbalias=".cpvd_defor3" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_firpu2 dbname="ctlcalplaniverifideta.cpvd_firpu2" dbalias=".cpvd_firpu2" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_profir dbname="ctlcalplaniverifideta.cpvd_profir" dbalias=".cpvd_profir" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_firbla dbname="ctlcalplaniverifideta.cpvd_firbla" dbalias=".cpvd_firbla" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_bajfir dbname="ctlcalplaniverifideta.cpvd_bajfir" dbalias=".cpvd_bajfir" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_firpu4 dbname="ctlcalplaniverifideta.cpvd_firpu4" dbalias=".cpvd_firpu4" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=cpvd_firpu3 dbname="ctlcalplaniverifideta.cpvd_firpu3" dbalias=".cpvd_firpu3" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cpvd_lotgra dbname="ctlcalplaniverifideta.cpvd_lotgra" dbalias=".cpvd_lotgra" )
+ retrieve=" SELECT ~"dba~".~"ctlcalplaniverifideta~".~"clie_codigo~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"plde_codigo~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"ccpv_numero~",
+			~"dba~".~"ctlcalplaniverifideta~".~"espe_codigo~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_secuen~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_nummaq~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_numsal~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_horinp~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_embala~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_numpal~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_numcaj~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"emba_codigo~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calibr~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_paleti~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_rotula~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_materi~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_empaq~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_pesone~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_aparie~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_numfru~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_frsplu~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_tempul~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_resemb~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_cobjem~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calmay~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calma2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calma3~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calma4~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calmen~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_color1~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_color2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_color3~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_color4~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_deform~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_heridas~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mandor~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_golsol~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_residu~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mancha~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_russet~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_insect~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_matext~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_otrcal~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_rescal~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_cobjca~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_firpul~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_herabi~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_medlun~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_ausped~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_frubla~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_pudric~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_deship~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_pittin~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_machuc~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_desgap~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_otrcon~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_rescon~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_cobjco~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_portot~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_rescaj~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest1~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest3~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest4~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest5~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest6~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest7~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest8~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_muest9~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues10~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues11~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues12~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues13~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues14~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues15~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues16~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues17~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues18~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues19~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_mues20~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_grbrix~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_calma5~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_grbri2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_defor2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_defor3~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_firpu2~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_profir~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_firbla~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_bajfir~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_firpu4~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_firpu3~",   
+         ~"dba~".~"ctlcalplaniverifideta~".~"cpvd_lotgra~"  
+    FROM ~"dba~".~"ctlcalplaniverifideta~"  
+   WHERE ( ~"dba~".~"ctlcalplaniverifideta~".~"clie_codigo~" = :Cliente ) AND  
+         ( ~"dba~".~"ctlcalplaniverifideta~".~"plde_codigo~" = :Planta ) AND  
+         ( ~"dba~".~"ctlcalplaniverifideta~".~"ccpv_numero~" = :Numero ) AND  
+         ( ~"dba~".~"ctlcalplaniverifideta~".~"espe_codigo~" = :especie )    
+" update="dba.ctlcalplaniverifideta" updatewhere=1 updatekeyinplace=no arguments=(("Cliente", number),("Planta", number),("Numero", number),("Especie", number)) )
+text(band=header alignment="2" text="" border="6" color="0" x="73" y="20" height="676" width="5243" html.valueishtml="0"  name=admausuarios_usua_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+line(band=header x1="160" y1="80" x2="160" y2="692"  name=l_26 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="Identific." border="0" color="0" x="73" y="16" height="56" width="288" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Embalaje" border="0" color="0" x="759" y="16" height="56" width="389" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Calidad (%)" border="0" color="0" x="2272" y="16" height="56" width="274" html.valueishtml="0"  name=t_17 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="( B - R - M )" border="0" color="0" x="521" y="104" height="56" width="261" html.valueishtml="0"  name=t_99 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="155" y="616" height="56" width="146" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="375" y1="180" x2="905" y2="180"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Sólidos
+Solubl." border="0" color="0" x="1554" y="108" height="112" width="187" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calibre" border="0" color="0" x="1765" y="164" height="56" width="178" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="1541" y1="232" x2="2277" y2="232"  name=l_58 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Deformes" border="0" color="0" x="1989" y="164" height="56" width="261" html.valueishtml="0"  name=t_19 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Bajo" border="0" color="0" x="1829" y="616" height="56" width="105" html.valueishtml="0"  name=t_28 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Folio Pallet
+Inspeccionado" border="0" color="0" x="334" y="564" height="112" width="375" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sobre" border="0" color="0" x="1938" y="616" height="56" width="151" html.valueishtml="0"  name=t_29 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Peso Neto (Kg)" border="0" color="0" x="997" y="616" height="56" width="370" html.valueishtml="0"  name=t_22 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Nº Frutos" border="0" color="0" x="1097" y="620" height="56" width="229" html.valueishtml="0"  name=t_23 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Frutos sin PLU (%)" border="0" color="0" x="1207" y="616" height="56" width="457" html.valueishtml="0"  name=t_24 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Temperatura Pulpa (ºC)" border="0" color="0" x="1307" y="620" height="56" width="585" html.valueishtml="0"  name=t_25 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calificación (B-R-M)" border="0" color="0" x="1417" y="620" height="56" width="480" html.valueishtml="0"  name=t_26 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Causales de Objeción" border="0" color="0" x="1513" y="620" height="56" width="594" html.valueishtml="0"  name=t_27 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="480" y1="184" x2="480" y2="692"  name=l_38 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="585" y1="184" x2="585" y2="692"  name=l_40 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="695" y1="184" x2="695" y2="692"  name=l_44 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="800" y1="184" x2="800" y2="692"  name=l_45 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="905" y1="80" x2="905" y2="692"  name=l_47 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1010" y1="80" x2="1010" y2="692"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1115" y1="80" x2="1115" y2="692"  name=l_17 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1221" y1="80" x2="1221" y2="692"  name=l_28 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1330" y1="80" x2="1326" y2="696"  name=l_108 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1431" y1="80" x2="1431" y2="692"  name=l_50 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1637" y1="236" x2="1637" y2="692"  name=l_14 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1746" y1="80" x2="1746" y2="692"  name=l_52 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1851" y1="236" x2="1851" y2="692"  name=l_53 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="1957" y1="80" x2="1957" y2="692"  name=l_54 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2062" y1="236" x2="2062" y2="692"  name=l_13 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2167" y1="236" x2="2167" y2="692"  name=l_15 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2277" y1="80" x2="2277" y2="692"  name=l_30 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Palletizaje" border="0" color="0" x="466" y="616" height="56" width="251" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Rotulación" border="0" color="0" x="571" y="616" height="56" width="261" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Materiales" border="0" color="0" x="681" y="616" height="56" width="265" html.valueishtml="0"  name=t_15 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Empaq y apariencia" border="0" color="0" x="777" y="616" height="56" width="480" html.valueishtml="0"  name=t_20 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sellado bolsa" border="0" color="0" x="891" y="616" height="56" width="453" html.valueishtml="0"  name=t_21 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Planos" border="0" color="0" x="2043" y="612" height="56" width="169" html.valueishtml="0"  name=t_30 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Abanicos" border="0" color="0" x="2153" y="612" height="56" width="233" html.valueishtml="0"  name=t_31 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="1" border="0" color="0" x="1559" y="624" height="56" width="59" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="2" border="0" color="0" x="1664" y="624" height="56" width="59" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="1536" y1="12" x2="1531" y2="692"  name=l_12 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="379" y1="12" x2="375" y2="692"  name=l_43 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="64" y1="12" x2="59" y2="692"  name=l_10 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3333" y1="232" x2="3845" y2="232"  name=l_31 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Resis a la Pres." border="0" color="0" x="3401" y="132" height="56" width="384" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hombros Caídos" border="0" color="0" x="2258" y="620" height="56" width="421" html.valueishtml="0"  name=t_32 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Mancha de agua" border="0" color="0" x="2363" y="620" height="56" width="402" html.valueishtml="0"  name=t_34 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calificación (B-R-M)" border="0" color="0" x="3205" y="620" height="56" width="480" html.valueishtml="0"  name=t_42 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Causales de Objección" border="0" color="0" x="3310" y="620" height="56" width="571" html.valueishtml="0"  name=t_43 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="2382" y1="80" x2="2382" y2="692"  name=l_8 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2487" y1="80" x2="2487" y2="692"  name=l_63 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2592" y1="80" x2="2592" y2="692"  name=l_75 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2702" y1="80" x2="2702" y2="692"  name=l_77 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2807" y1="80" x2="2807" y2="692"  name=l_78 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="2912" y1="80" x2="2912" y2="692"  name=l_79 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3017" y1="80" x2="3017" y2="692"  name=l_5 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3122" y1="84" x2="3118" y2="692"  name=l_84 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3227" y1="80" x2="3227" y2="692"  name=l_24 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3333" y1="12" x2="3328" y2="692"  name=l_109 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Marca Hayward" border="0" color="0" x="2469" y="616" height="56" width="379" html.valueishtml="0"  name=t_35 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Herida Cicatrizada" border="0" color="0" x="2574" y="616" height="56" width="448" html.valueishtml="0"  name=t_36 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Russet" border="0" color="0" x="2683" y="616" height="56" width="178" html.valueishtml="0"  name=t_37 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Insectos" border="0" color="0" x="2784" y="616" height="56" width="219" html.valueishtml="0"  name=t_38 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Residuos" border="0" color="0" x="2894" y="616" height="56" width="238" html.valueishtml="0"  name=t_39 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Materias Extrañas" border="0" color="0" x="2999" y="620" height="56" width="448" html.valueishtml="0"  name=t_40 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Otros Calidad" border="0" color="0" x="3104" y="620" height="56" width="338" html.valueishtml="0"  name=t_41 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="1" border="0" color="0" x="3355" y="624" height="56" width="59" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="2" border="0" color="0" x="3461" y="624" height="56" width="59" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="3840" y1="80" x2="3840" y2="696"  name=l_18 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3429" y1="232" x2="3429" y2="688"  name=l_20 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3630" y1="236" x2="3630" y2="848"  name=l_21 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="3735" y1="236" x2="3735" y2="852"  name=l_16 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="3" border="0" color="0" x="3561" y="624" height="56" width="59" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Condición (%)" border="0" color="0" x="4032" y="20" height="56" width="343" html.valueishtml="0"  name=t_98 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Resolución" border="0" color="0" x="5029" y="20" height="52" width="274" html.valueishtml="0"  name=t_97 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="3529" y1="232" x2="3529" y2="688"  name=l_27 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Promedio" border="0" color="0" x="3822" y="620" height="56" width="375" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="4" border="0" color="0" x="3657" y="620" height="56" width="59" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="3954" y1="80" x2="3954" y2="696"  name=l_33 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="5115" y1="80" x2="5115" y2="700"  name=l_29 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Deshidratación" border="0" color="0" x="4160" y="616" height="56" width="375" html.valueishtml="0"  name=t_44 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="5326" y1="16" x2="5326" y2="696"  name=l_11 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="% Total de defectos" border="0" color="0" x="5097" y="612" height="56" width="494" html.valueishtml="0"  name=t_52 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Verificación (A/O)" border="0" color="0" x="5198" y="616" height="56" width="434" html.valueishtml="0"  name=t_53 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Comercial (A/O)" border="0" color="0" x="5303" y="608" height="56" width="393" html.valueishtml="0"  name=t_54 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="4274" y1="80" x2="4274" y2="696"  name=l_93 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4379" y1="80" x2="4379" y2="692"  name=l_22 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4489" y1="80" x2="4489" y2="696"  name=l_100 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4594" y1="80" x2="4594" y2="696"  name=l_99 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4699" y1="80" x2="4699" y2="696"  name=l_98 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4805" y1="80" x2="4800" y2="696"  name=l_7 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4910" y1="80" x2="4910" y2="696"  name=l_9 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="5015" y1="16" x2="5010" y2="696"  name=l_23 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="5221" y1="80" x2="5221" y2="700"  name=l_6 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Pudrición" border="0" color="0" x="4576" y="612" height="56" width="238" html.valueishtml="0"  name=t_47 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sobre Maduro" border="0" color="0" x="4681" y="612" height="56" width="357" html.valueishtml="0"  name=t_48 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Otros Condición" border="0" color="0" x="4786" y="612" height="56" width="407" html.valueishtml="0"  name=t_49 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calificación (B-R-M)" border="0" color="0" x="4891" y="612" height="56" width="480" html.valueishtml="0"  name=t_50 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Causales de Objeción" border="0" color="0" x="4992" y="612" height="56" width="544" html.valueishtml="0"  name=t_51 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="4274" y1="80" x2="4274" y2="696"  name=l_19 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Golpe/quemado de sol" border="0" color="0" x="4261" y="616" height="56" width="567" html.valueishtml="0"  name=t_33 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="4069" y1="80" x2="4069" y2="696"  name=l_25 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="4174" y1="80" x2="4174" y2="696"  name=l_34 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Baja Firmeza" border="0" color="0" x="3936" y="620" height="56" width="375" html.valueishtml="0"  name=t_55 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Blando" border="0" color="0" x="4046" y="616" height="56" width="375" html.valueishtml="0"  name=t_56 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Herida abierta" border="0" color="0" x="4361" y="616" height="56" width="347" html.valueishtml="0"  name=t_46 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Machucón" border="0" color="0" x="4471" y="612" height="56" width="256" html.valueishtml="0"  name=t_45 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0"font.escapement="0~t900"  background.mode="1" background.color="553648127" )
+line(band=header x1="64" y1="12" x2="5326" y2="8"  name=l_32 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="64" y1="84" x2="5317" y2="80"  name=l_1 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="64" y1="692" x2="5321" y2="696"  name=l_3 visible="1" pen.style="0" pen.width="9" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="50" y="8" height="48" width="105" format="hh:mm" html.valueishtml="0"  name=cpvd_horinp visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=60 alignment="2" tabsequence=32766 border="0" color="33554432" x="5129" y="8" height="48" width="96" format="[general]" html.valueishtml="0"  name=cpvd_rescaj visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="1" tabsequence=32766 border="0" color="33554432" x="169" y="8" height="48" width="197" format="00000000" html.valueishtml="0"  name=cpvd_numpal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="1" tabsequence=32766 border="0" color="33554432" x="905" y="8" height="48" width="101" format="#0.0" html.valueishtml="0"  name=cpvd_pesone visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="33554432" x="1015" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_numfru visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="33554432" x="1230" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_tempul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="2" tabsequence=32766 border="0" color="33554432" x="1335" y="8" height="48" width="91" format="[general]" html.valueishtml="0"  name=cpvd_resemb visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="1" tabsequence=32766 border="0" color="33554432" x="1440" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_cobjem visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=81 alignment="1" tabsequence=32766 border="0" color="33554432" x="1541" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_grbrix visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="1" tabsequence=32766 border="0" color="33554432" x="1115" y="8" height="48" width="101" format="[general]" html.valueishtml="0"  name=cpvd_frsplu visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=83 alignment="1" tabsequence=32766 border="0" color="33554432" x="1646" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_grbri2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="1" tabsequence=32766 border="0" color="33554432" x="1751" y="8" height="48" width="101" format="#0.0" html.valueishtml="0"  name=cpvd_calmen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="1" tabsequence=32766 border="0" color="33554432" x="1865" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_calmay visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=34 alignment="1" tabsequence=32766 border="0" color="33554432" x="1966" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_deform visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=84 alignment="1" tabsequence=32766 border="0" color="33554432" x="2071" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_defor2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=85 alignment="1" tabsequence=32766 border="0" color="33554432" x="2176" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_defor3 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="2" tabsequence=32766 border="0" color="33554432" x="379" y="8" height="48" width="91" format="[general]" html.valueishtml="0"  name=cpvd_paleti visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="2" tabsequence=32766 border="0" color="33554432" x="485" y="8" height="48" width="91" format="[general]" html.valueishtml="0"  name=cpvd_rotula visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="2" tabsequence=32766 border="0" color="33554432" x="590" y="8" height="48" width="96" format="[general]" html.valueishtml="0"  name=cpvd_materi visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="33554432" x="699" y="8" height="48" width="96" format="[general]" html.valueishtml="0"  name=cpvd_empaq visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="2" tabsequence=32766 border="0" color="33554432" x="809" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_aparie visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=42 alignment="1" tabsequence=32766 border="0" color="33554432" x="2926" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_matext visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=44 alignment="2" tabsequence=32766 border="0" color="33554432" x="3127" y="8" height="48" width="96" format="[general]" html.valueishtml="0"  name=cpvd_rescal visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=45 alignment="1" tabsequence=32766 border="0" color="33554432" x="3237" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_cobjca visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=36 alignment="1" tabsequence=32766 border="0" color="33554432" x="2286" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_mandor visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=39 alignment="1" tabsequence=32766 border="0" color="33554432" x="2391" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_mancha visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=35 alignment="1" tabsequence=32766 border="0" color="33554432" x="2496" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_heridas visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=40 alignment="1" tabsequence=32766 border="0" color="33554432" x="2606" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_russet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=41 alignment="1" tabsequence=32766 border="0" color="33554432" x="2711" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_insect visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=38 alignment="1" tabsequence=32766 border="0" color="33554432" x="2816" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_residu visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=43 alignment="1" tabsequence=32766 border="0" color="33554432" x="3026" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_otrcal visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=46 alignment="1" tabsequence=32766 border="0" color="33554432" x="3337" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_firpul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=86 alignment="1" tabsequence=32766 border="0" color="33554432" x="3438" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_firpu2 visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=57 alignment="2" tabsequence=32766 border="0" color="33554432" x="4814" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_rescon visible="1" edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=58 alignment="1" tabsequence=32766 border="0" color="33554432" x="4914" y="8" height="48" width="87" format="[general]" html.valueishtml="0"  name=cpvd_cobjco visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=59 alignment="1" tabsequence=32766 border="0" color="33554432" x="5024" y="8" height="48" width="96" format="[general]" html.valueishtml="0"  name=cpvd_portot visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=52 alignment="1" tabsequence=32766 border="0" color="33554432" x="4073" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_deship visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=51 alignment="1" tabsequence=32766 border="0" color="33554432" x="4494" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_pudric visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=50 alignment="1" tabsequence=32766 border="0" color="33554432" x="4603" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_frubla visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=56 alignment="1" tabsequence=32766 border="0" color="33554432" x="4709" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_otrcon visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=37 alignment="1" tabsequence=32766 border="0" color="33554432" x="4187" y="8" height="48" width="91" format="#0.0" html.valueishtml="0"  name=cpvd_golsol visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=47 alignment="1" tabsequence=32766 border="0" color="33554432" x="4293" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_herabi visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=54 alignment="1" tabsequence=32766 border="0" color="33554432" x="4393" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_machuc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=87 alignment="1" tabsequence=32766 border="0" color="33554432" x="3753" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_profir visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=88 alignment="1" tabsequence=32766 border="0" color="33554432" x="3963" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_firbla visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=89 alignment="1" tabsequence=32766 border="0" color="33554432" x="3854" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_bajfir visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=90 alignment="1" tabsequence=32766 border="0" color="33554432" x="3653" y="8" height="48" width="87" format="#0.0" html.valueishtml="0"  name=cpvd_firpu4 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=91 alignment="1" tabsequence=32766 border="0" color="33554432" x="3543" y="8" height="48" width="96" format="#0.0" html.valueishtml="0"  name=cpvd_firpu3 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

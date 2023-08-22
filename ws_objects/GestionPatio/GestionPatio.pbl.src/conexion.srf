@@ -1,0 +1,107 @@
+﻿$PBExportHeader$conexion.srf
+global type conexion from function_object
+end type
+
+forward prototypes
+global function boolean conexion ()
+end prototypes
+
+global function boolean conexion ();SetPointer(HourGlass!)
+
+String		ls_server1 = "12345678", ls_nombre, ls_Dbms, ls_DbParm, ls_aplicacion, ls_Usuario, ls_Clave, ls_Provider
+
+F_ControlaArchivo()	
+
+sqlca.SQLCode	=	1
+ii_pos				=	1
+ls_server1		=	ProfileString(gstr_apl.ini, is_base, "servername", "nn")
+ls_Dbms			=	ProFileString(gstr_apl.ini, is_base, "dbms", "ODBC")
+ls_aplicacion	=	"AppName='"+gstr_apl.NombreSistema+"',Host='"+gstr_us.computador+"'"
+ls_DBParm		=	ProfileString(gstr_apl.ini, is_base, "DbParm", "")
+ls_Provider		=	ProfileString(gstr_apl.ini, is_base, "Provider", "SQLNCLI10")
+
+
+If ls_server1 <> "12345678" Then
+	ls_nombre			=	ProfileString(gstr_apl.ini, is_base, "NombreOdbc", "")
+	sqlca.Dbms			=	ProFileString(gstr_apl.ini, is_base, "dbms", "ODBC")
+	sqlca.ServerName	=	ProfileString(gstr_apl.ini, is_base, "servername", "")
+	sqlca.DataBase		=	ProFileString(gstr_apl.ini, is_base, "database", "")
+	ls_usuario        	=  ProfileString(gstr_apl.ini, is_base,"LogId", "")
+	ls_clave          		=  ProfileString(gstr_apl.ini, is_base,"LogPassWord", "")
+	
+	gstr_us.Nombre	=	ls_usuario
+	
+	If ls_Dbms = "ODBC" Then
+		sqlca.DbParm	=	"ConnectString='DSN=" + ls_nombre + &
+								";UID=" + ls_usuario + &
+								";PWD=" + ls_clave + "',DisableBind=1," + &
+								"ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'" + &
+								"// ;PBUseProcOwner = " + '"Yes"'
+								
+	ElseIf ls_Dbms = 'OLEDB' Then
+		sqlca.LogId   = ls_usuario
+		sqlca.LogPass  = ls_clave
+		sqlca.Autocommit = True
+		
+		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
+
+		ls_DBParm = "PROVIDER='" + ls_Provider + "',PROVIDERSTRING='database="+ProfileString(gstr_apl.ini, is_base, "database", "")+"',"+&
+					 "DATASOURCE='"+ProfileString(gstr_apl.ini, is_base, "servername", "") +"'"+ls_DbParm
+				
+		sqlca.DbParm = ls_DbParm
+	ElseIf Mid(ls_Dbms,1,3) = 'SNC' or Mid(ls_Dbms,1,9) = 'TRACE SNC' Then
+		sqlca.LogId   = ls_usuario
+		sqlca.LogPass  = ls_clave
+		sqlca.Autocommit = True
+			
+		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
+		
+		ls_Dbparm = "Provider='" + ls_Provider + "',Database='"+ProfileString(gstr_apl.ini, is_base, "database", "")+"'"+ls_DbParm+",TrimSpaces=1,"+ls_Aplicacion
+			
+		SQLCA.DBParm = ls_Dbparm
+	ElseIf	ls_Dbms = "ADO.Net" Then
+		SQLCA.DBMS = "ADO.Net"
+		sqlca.LogId			=	ls_usuario
+		sqlca.LogPass		=	ls_clave
+		sqlca.Autocommit	=	True
+		SQLCA.DBParm 	= "DataSource='" + ProfileString(gstr_apl.ini, is_base, "servername", "") + "',Database='" + ProFileString(gstr_apl.ini, is_base, "database", "") + "',Namespace='System.Data.OleDb',Provider='SQLNCLI10'"
+	Else
+		sqlca.LogId			=	ls_usuario
+		sqlca.LogPass		=	ls_clave
+		sqlca.Autocommit	=	True
+	End If
+Else
+	MessageBox("Error de Conecion...","No se puede ejecutar la aplicación por la falta de archivo " &
+					+ gstr_apl.ini + ". VerIfique que el archivo exista y que esté en el directorio " + &
+					"donde la aplicación esté corriendo o en el PATH del Computador del cliente.",StopSign!)
+	Halt Close
+	Return False
+End If
+
+SetPointer(HourGlass!)
+
+DO
+	CONNECT Using Sqlca; 
+
+	If Sqlca.SQLCode <> 0 Then
+		If Sqlca.SQLDBCode = -103 Then
+			MessageBox("Error de Conexión", "Usuario o Password ingresado está incorrecto.", Information!, RetryCancel!)
+			Return False
+		ElseIf Sqlca.SQLDBCode = -102 Then
+			MessageBox("Error de Conexión", "Demasiados Usuarios conectados a la Base.~rConsulte con Administrador", StopSign!, Ok!)
+				Return False
+		ElseIf Sqlca.SQLDBCode <> 0 Then
+			F_ErrorBaseDatos(Sqlca, gstr_apl.ini)
+			Return False
+		End If
+	End If	
+LOOP UNTIL sqlca.SQLCode <> 0
+
+ib_connected	= True
+SetPointer(Arrow!)
+
+Return True
+
+
+end function
+

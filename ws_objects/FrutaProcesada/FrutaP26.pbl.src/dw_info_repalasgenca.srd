@@ -1,0 +1,191 @@
+﻿$PBExportHeader$dw_info_repalasgenca.srd
+release 10;
+datawindow(units=0 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=756 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=68 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="repalletdeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=repe_numero dbname="repalletdeta.repe_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=repd_tipood dbname="repalletdeta.repd_tipood" )
+ column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="repalletdeta.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=paen_numero dbname="repalletdeta.paen_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=repd_neopal dbname="repalletdeta.repd_neopal" )
+ column=(type=decimal(0) updatewhereclause=yes name=pafr_secuen dbname="repalletdeta.pafr_secuen" )
+ column=(type=date updatewhereclause=yes name=pafr_fecemb dbname="repalletdeta.pafr_fecemb" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="repalletdeta.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="repalletdeta.vari_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="repalletdeta.prod_codigo" )
+ column=(type=char(10) updatewhereclause=yes name=emba_codigo dbname="repalletdeta.emba_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=etiq_codigo dbname="repalletdeta.etiq_codigo" )
+ column=(type=char(3) updatewhereclause=yes name=pafr_calibr dbname="repalletdeta.pafr_calibr" )
+ column=(type=decimal(0) updatewhereclause=yes name=pafr_ccajas dbname="repalletdeta.pafr_ccajas" )
+ column=(type=decimal(0) updatewhereclause=yes name=paen_nroori dbname="repalletdeta.paen_nroori" )
+ column=(type=decimal(0) updatewhereclause=yes name=pafr_secori dbname="repalletdeta.pafr_secori" )
+ column=(type=decimal(0) updatewhereclause=yes name=pafr_varrot dbname="repalletdeta.pafr_varrot" )
+ column=(type=char(1) updatewhereclause=yes name=repd_marcao dbname="repalletdeta.repd_marcao" )
+ column=(type=char(1) updatewhereclause=yes name=repd_marcad dbname="repalletdeta.repd_marcad" )
+ column=(type=decimal(0) updatewhereclause=yes name=repd_totcao dbname="repalletdeta.repd_totcao" )
+ column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="especies.espe_nombre" )
+ column=(type=char(15) updatewhereclause=yes name=etiq_nombre dbname="etiquetas.etiq_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=plantadesp_plde_nombre dbname="plantadesp.plde_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=repe_tipopa dbname="repalletenca.repe_tipopa" values=" Rebaja de Altura	1/Levantamiento de Altura	2/Completar Pallets	3/Cambio Etiqueta Variedad	4/Cambio Etiqueta Embalaje	5/Cambio de Folio	6/Reembalaje	7/" )
+ column=(type=char(80) updatewhereclause=yes name=repe_observ dbname="repalletenca.repe_observ" )
+ column=(type=decimal(0) updatewhereclause=yes name=repe_respon dbname="repalletenca.repe_respon" values="Planta	1/Productor	2/" )
+ column=(type=date updatewhereclause=yes name=repe_fecrep dbname="repalletenca.repe_fecrep" )
+ column=(type=decimal(0) updatewhereclause=yes name=repe_lugarp dbname="repalletenca.repe_lugarp" values="Frigorífico	1/Packing	2/Patio	3/Puerto	4/" )
+ column=(type=date updatewhereclause=yes name=pafr_fecing dbname="repalletdeta.pafr_fecing" )
+ column=(type=decimal(2) updatewhereclause=yes name=enva_pesone dbname="envases.enva_pesone" )
+ retrieve="  SELECT ~"dba~".~"repalletdeta~".~"plde_codigo~",   
+         ~"dba~".~"repalletdeta~".~"repe_numero~",   
+         ~"dba~".~"repalletdeta~".~"repd_tipood~",   
+         ~"dba~".~"repalletdeta~".~"clie_codigo~",   
+         ~"dba~".~"repalletdeta~".~"paen_numero~",   
+         ~"dba~".~"repalletdeta~".~"repd_neopal~",   
+         ~"dba~".~"repalletdeta~".~"pafr_secuen~",   
+         ~"dba~".~"repalletdeta~".~"pafr_fecemb~",   
+         ~"dba~".~"repalletdeta~".~"espe_codigo~",   
+         ~"dba~".~"repalletdeta~".~"vari_codigo~",   
+         ~"dba~".~"repalletdeta~".~"prod_codigo~",   
+         ~"dba~".~"repalletdeta~".~"emba_codigo~",   
+         ~"dba~".~"repalletdeta~".~"etiq_codigo~",   
+         ~"dba~".~"repalletdeta~".~"pafr_calibr~",   
+         ~"dba~".~"repalletdeta~".~"pafr_ccajas~",   
+         ~"dba~".~"repalletdeta~".~"paen_nroori~",   
+         ~"dba~".~"repalletdeta~".~"pafr_secori~",   
+         ~"dba~".~"repalletdeta~".~"pafr_varrot~",   
+         ~"dba~".~"repalletdeta~".~"repd_marcao~",   
+         ~"dba~".~"repalletdeta~".~"repd_marcad~",   
+         ~"dba~".~"repalletdeta~".~"repd_totcao~",   
+         ~"dba~".~"especies~".~"espe_nombre~",   
+         ~"dba~".~"etiquetas~".~"etiq_nombre~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"plantadesp~".~"plde_nombre~",   
+         ~"dba~".~"repalletenca~".~"repe_tipopa~",   
+         ~"dba~".~"repalletenca~".~"repe_observ~",   
+         ~"dba~".~"repalletenca~".~"repe_respon~",   
+         ~"dba~".~"repalletenca~".~"repe_fecrep~",   
+         ~"dba~".~"repalletenca~".~"repe_lugarp~",   
+         ~"dba~".~"repalletdeta~".~"pafr_fecing~",   
+         ~"dba~".~"envases~".~"enva_pesone~"  
+    FROM ~"dba~".~"repalletdeta~",   
+         ~"dba~".~"especies~",   
+         ~"dba~".~"etiquetas~",   
+         ~"dba~".~"variedades~",   
+         ~"dba~".~"productores~",   
+         ~"dba~".~"plantadesp~",   
+         ~"dba~".~"repalletenca~",   
+         ~"dba~".~"embalajesprod~",   
+         ~"dba~".~"envases~"  
+   WHERE ( ~"dba~".~"repalletdeta~".~"espe_codigo~" = ~"dba~".~"especies~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"repalletdeta~".~"etiq_codigo~" = ~"dba~".~"etiquetas~".~"etiq_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"vari_codigo~" = ~"dba~".~"repalletdeta~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"espe_codigo~" = ~"dba~".~"repalletdeta~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"repalletdeta~".~"prod_codigo~" = ~"dba~".~"productores~".~"prod_codigo~" ) and  
+         ( ~"dba~".~"repalletdeta~".~"plde_codigo~" = ~"dba~".~"plantadesp~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"repalletenca~".~"plde_codigo~" = ~"dba~".~"repalletdeta~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"repalletenca~".~"repe_numero~" = ~"dba~".~"repalletdeta~".~"repe_numero~" ) and  
+         ( ~"dba~".~"repalletdeta~".~"clie_codigo~" = ~"dba~".~"embalajesprod~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"repalletdeta~".~"emba_codigo~" = ~"dba~".~"embalajesprod~".~"emba_codigo~" ) and  
+         ( ~"dba~".~"embalajesprod~".~"enva_codigo~" = ~"dba~".~"envases~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"embalajesprod~".~"enva_tipoen~" = ~"dba~".~"envases~".~"enva_tipoen~" ) and  
+         ( ( ~"dba~".~"repalletdeta~".~"plde_codigo~" = :planta ) ) AND  
+         (~"dba~".~"repalletenca~".~"repe_fecrep~" between :FechaI and :FechaT OR  
+         ~"dba~".~"repalletdeta~".~"repe_numero~" between :desde and :hasta) AND  
+         (~"dba~".~"repalletdeta~".~"clie_codigo~" = :cliente)    
+" arguments=(("cliente", number),("planta", number),("FechaI", date),("FechaT", date),("desde", number),("hasta", number))  sort="plde_codigo A comp_saldo D paen_numero A paen_nroori A vari_codigo A prod_codigo A emba_codigo A pafr_calibr A " )
+group(level=1 header.height=0 trailer.height=96 by=("plde_codigo" , "repe_numero" ) newpage=yes header.color="536870912" trailer.color="536870912" )
+group(level=2 header.height=84 trailer.height=88 by=("clie_codigo" , "paen_numero" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="0" text="Pallet Levantado" border="0" color="0" x="14" y="620" height="60" width="448" html.valueishtml="0"  name=t_16 visible="0~tIF(repe_tipopa=2 ,1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Pallet Nuevo" border="0" color="0" x="14" y="620" height="60" width="366" html.valueishtml="0"  name=spro_repalasigdeta_plde_codigo_t visible="0~tIF(repe_tipopa=3,1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Pal. Reembalado" border="0" color="0" x="14" y="620" height="60" width="485" html.valueishtml="0"  name=t_17 visible="0~tIF(repe_tipopa=7,1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Pallet Levantado" border="0" color="0" x="14" y="620" height="60" width="434" html.valueishtml="0"  name=t_15 visible="0~tIF(repe_tipopa=1 ,1,0)"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="3099" y="76" height="56" width="261" format="dd/mm/yyyy" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="2935" y="136" height="56" width="110" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="2935" y="16" height="56" width="151" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="2935" y="76" height="56" width="142" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="3099" y="136" height="56" width="261" format="hh:mm:ss" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="3099" y="16" height="56" width="261" format="[general]" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo      Movimientos" border="0" color="0" x="1344" y="140" height="64" width="983" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe    Repalletizajes" border="0" color="0" x="1344" y="208" height="64" width="1248" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema   Producción De Plantas" border="0" color="0" x="1344" y="72" height="64" width="1102" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="12" height="56" width="1211" html.valueishtml="0"  name=nom_empresa visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="14" y="72" height="56" width="1211" html.valueishtml="0"  name=referencia visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=header id=2 alignment="0" tabsequence=32766 border="0" color="0" x="1815" y="324" height="60" width="558" format="00000000" html.valueishtml="0"  name=repe_numero visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=26 alignment="0" tabsequence=32766 border="0" color="0" x="558" y="324" height="60" width="681" format="[general]" html.valueishtml="0"  name=plantadesp_plde_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=1 alignment="0" tabsequence=32766 border="0" color="0" x="393" y="324" height="60" width="146" format="0000" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=27 alignment="0" tabsequence=32766 border="0" color="0" x="393" y="416" height="60" width="846" format="[general]" html.valueishtml="0"  name=repe_tipopa visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=28 alignment="0" tabsequence=32766 border="0" color="0" x="393" y="512" height="60" width="1842" format="[general]" html.valueishtml="0"  name=repe_observ visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tipo Movto." border="0" color="0" x="41" y="420" height="60" width="297" html.valueishtml="0"  name=spro_repalasigenca_repa_tipopa_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Planta" border="0" color="0" x="41" y="324" height="60" width="165" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Observación" border="0" color="0" x="41" y="512" height="60" width="329" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Nro. Movimiento" border="0" color="0" x="1344" y="324" height="60" width="425" html.valueishtml="0"  name=spro_repalasigenca_repa_numero_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Responsabilidad" border="0" color="0" x="1344" y="420" height="60" width="448" html.valueishtml="0"  name=spro_repalasigenca_repa_respon_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Lugar" border="0" color="0" x="2455" y="420" height="60" width="178" html.valueishtml="0"  name=spro_repalasigenca_repa_lugarp_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="2455" y="324" height="60" width="178" html.valueishtml="0"  name=spro_repalasigenca_repa_fecrep_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=30 alignment="0" tabsequence=32766 border="0" color="0" x="2665" y="324" height="60" width="379" format="dd/mm/yyyy" html.valueishtml="0"  name=repe_fecrep visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=31 alignment="0" tabsequence=32766 border="0" color="0" x="2665" y="424" height="60" width="379" format="[general]" html.valueishtml="0"  name=repe_lugarp visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header id=29 alignment="0" tabsequence=32766 border="0" color="0" x="1819" y="424" height="60" width="558" format="[general]" html.valueishtml="0"  name=repe_respon visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="0" y1="596" x2="3493" y2="596"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="0" y1="748" x2="3493" y2="748"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="Especie" border="0" color="0" x="503" y="616" height="60" width="663" html.valueishtml="0"  name=spro_repalasigdeta_espe_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Etiqueta" border="0" color="0" x="978" y="616" height="60" width="640" html.valueishtml="0"  name=spro_repalasigdeta_etiq_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Variedad" border="0" color="0" x="59" y="680" height="60" width="251" html.valueishtml="0"  name=spro_repalasigdeta_vari_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Fecha Emb." border="0" color="0" x="526" y="680" height="60" width="302" html.valueishtml="0"  name=spro_repalasigdeta_pafr_fecemb_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Fecha Ing." border="0" color="0" x="837" y="680" height="60" width="256" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Productor" border="0" color="0" x="1134" y="680" height="60" width="558" html.valueishtml="0"  name=spro_repalasigdeta_prod_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Embalaje" border="0" color="0" x="1701" y="680" height="60" width="242" html.valueishtml="0"  name=spro_repalasigdeta_emba_codigo_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Cal." border="0" color="0" x="1957" y="680" height="60" width="114" html.valueishtml="0"  name=spro_repalasigdeta_pafr_calibr_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Caj. Ori." border="0" color="0" x="3109" y="680" height="60" width="210" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Pall. Origen" border="0" color="0" x="2523" y="680" height="60" width="311" html.valueishtml="0"  name=spro_repalasigdeta_plde_origen_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Kilos Or." border="0" color="0" x="2853" y="680" height="60" width="247" html.valueishtml="0"  name=t_14 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Saldo" border="0" color="0" x="3342" y="680" height="60" width="146" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Kilos N." border="0" color="0" x="2089" y="680" height="60" width="229" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Caj. N." border="0" color="0" x="2331" y="680" height="60" width="178" html.valueishtml="0"  name=spro_repalasigdeta_pafr_ccajas_t visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.2 alignment="0" expression="string( clie_codigo ,~"000~") + string ( paen_nroori   ,~"0000000~") "border="0" color="0" x="18" y="12" height="60" width="343" format="[GENERAL]" html.valueishtml="0"  name=compute_5 visible="0~tIF(repe_tipopa=1,0,1)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=header.2 alignment="0" expression=" string( clie_codigo ,~"000~") + string (  paen_numero  , ~"0000000~")  "border="0" color="0" x="18" y="12" height="60" width="343" format="[GENERAL]" html.valueishtml="0"  name=compute_13 visible="0~tIF(repe_tipopa=1,1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=9 alignment="0" tabsequence=32766 border="0" color="0" x="475" y="12" height="60" width="73" format="00" html.valueishtml="0"  name=espe_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=22 alignment="0" tabsequence=32766 border="0" color="0" x="562" y="12" height="60" width="357" format="[general]" html.valueishtml="0"  name=espe_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=13 alignment="0" tabsequence=32766 border="0" color="0" x="965" y="12" height="60" width="82" format="00" html.valueishtml="0"  name=etiq_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=header.2 id=23 alignment="0" tabsequence=32766 border="0" color="0" x="1065" y="12" height="60" width="421" format="[general]" html.valueishtml="0"  name=etiq_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="string( clie_codigo ,~"000~") + string ( paen_nroori   ,~"0000000~") "border="0" color="0" x="2523" y="4" height="56" width="315" format="[GENERAL]" html.valueishtml="0"  name=compute_14 visible="0~tIF(repe_tipopa=1,1,0)"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" string( clie_codigo ,~"000~") + string (  paen_numero  , ~"0000000~")  "border="0" color="0" x="2523" y="4" height="56" width="315" format="[GENERAL]" html.valueishtml="0"  name=compute_6 visible="0~tIF(repe_tipopa=1,0,1)"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="repd_totcao + pafr_ccajas"border="0" color="0" x="3346" y="4" height="56" width="142" format="[GENERAL]" html.valueishtml="0"  name=compute_11 visible="0~tIF(repe_tipopa=2 ,1,0)"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="27" y="4" height="56" width="82" format="00" html.valueishtml="0"  name=vari_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="0" tabsequence=32766 border="0" color="0" x="123" y="4" height="56" width="389" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="526" y="4" height="56" width="256" format="[general]" html.valueishtml="0"  name=pafr_fecemb visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="0" x="818" y="4" height="56" width="261" format="dd/mm/yyyy" html.valueishtml="0"  name=pafr_fecing visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="0" x="1102" y="4" height="56" width="603" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1723" y="4" height="56" width="242" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="1984" y="4" height="56" width="101" format="[general]" html.valueishtml="0"  name=pafr_calibr visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="enva_pesone * repd_totcao "border="0" color="0" x="2853" y="4" height="56" width="247" format="#,##.00" html.valueishtml="0"  name=compute_10 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="1" tabsequence=32766 border="0" color="0" x="3109" y="4" height="56" width="210" format="[general]" html.valueishtml="0"  name=repd_totcao visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="repd_totcao - pafr_ccajas"border="0" color="0" x="3346" y="4" height="56" width="142" format="[GENERAL]" html.valueishtml="0"  name=comp_saldo visible="0~tIF(repe_tipopa<>2 ,1,0)"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" enva_pesone * pafr_ccajas "border="0" color="0" x="2103" y="4" height="56" width="215" format="#,##.00" html.valueishtml="0"  name=compute_9 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="1" tabsequence=32766 border="0" color="0" x="2331" y="4" height="56" width="178" format="[general]" html.valueishtml="0"  name=pafr_ccajas visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.2 x1="2117" y1="8" x2="3493" y2="8"  name=l_4 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=trailer.2 alignment="1" expression="sum(repd_totcao for group 2)"border="0" color="0" x="3109" y="20" height="56" width="210" format="[general]" html.valueishtml="0"  name=compute_16 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.2 alignment="1" expression="sum(repd_totcao - pafr_ccajas for group 2)"border="0" color="0" x="3346" y="20" height="56" width="142" format="[GENERAL]" html.valueishtml="0"  name=compute_17 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.2 alignment="0" text="Total Cajas Pallet" border="0" color="0" x="1874" y="20" height="60" width="448" html.valueishtml="0"  name=t_18 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=trailer.2 alignment="1" expression="sum(pafr_ccajas for group 2)"border="0" color="0" x="2336" y="20" height="56" width="174" format="[general]" html.valueishtml="0"  name=compute_15 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression=" sum(  repd_totcao for group 1 ) "border="0" color="0" x="3067" y="28" height="56" width="251" format="#,##0" html.valueishtml="0"  name=compute_7 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(comp_saldo for group 1)"border="0" color="0" x="3333" y="28" height="56" width="155" format="[GENERAL]" html.valueishtml="0"  name=compute_8 visible="0~tIF(repe_tipopa<>2 ,1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(compute_11 for group 1)"border="0" color="0" x="3333" y="28" height="56" width="155" format="[GENERAL]" html.valueishtml="0"  name=compute_12 visible="0~tIF(repe_tipopa=2 ,1,0)"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=trailer.1 x1="2117" y1="8" x2="3493" y2="8"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=trailer.1 alignment="0" text="Total Cajas" border="0" color="0" x="1874" y="24" height="60" width="306" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=trailer.1 alignment="1" expression="sum(  pafr_ccajas  for group 1 )"border="0" color="0" x="2336" y="28" height="56" width="174" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-9" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+
+sparse(names="compute_5")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

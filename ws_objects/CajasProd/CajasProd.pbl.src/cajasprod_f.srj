@@ -1,0 +1,32 @@
+﻿$PBExportHeader$cajasprod_f.srj
+EXE:CajasProd.exe,..\..\imagenes\consolafrio.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 21.0.0.1509
+CMP:1,0,0,2,0,0,1
+COM:RIOblanco Spa
+DES:Sybase, Inc. Product File
+CPY:2010
+PRD:Cajas Prod
+PVS:5.21.30092021
+PVN:5,21,3009,2021
+FVS:5.21.30092021
+FVN:5,21,3009,2021
+MAN:0,asInvoker,0
+PBD:CajasProd.pbl,,1
+PBD:CajasProdFto.pbl,,1
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProdFto.pbl,uo_voicecode,u
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,dw_creacion_cajas,d
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,paramplanta,f
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,uo_manejoimpresora,u
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,str_usuario,s
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,dw_mant_mues_spro_cajasprod_clon,d
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,cajasprod,a
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,conexion,f
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,dw_mues_calibres_salida,d
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,str_paramplanta,s
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,str_parempresa,s
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,w_mant_mues_cajasprod_procalm,w
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProdFto.pbl,uo_qr,u
+OBJ:C:\Desarrollo 21\Productiva\CajasProd\CajasProd.pbl,dw_errorbasedatos,d

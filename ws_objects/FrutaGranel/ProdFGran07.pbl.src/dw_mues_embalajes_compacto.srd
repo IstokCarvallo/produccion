@@ -1,0 +1,28 @@
+﻿$PBExportHeader$dw_mues_embalajes_compacto.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=160 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=long updatewhereclause=yes name=orden dbname="orden" )
+ column=(type=char(5) updatewhereclause=yes name=tipo dbname="tipo" )
+ column=(type=long updatewhereclause=yes name=cajas dbname="cajas" )
+ procedure="1 execute dba.fgran_imprime_etiquetas;0 @Planta = :Planta, @cliente = :cliente, @Especie = :Especie, @fecha = :fecha, @Numero = :Numero, @dw = :dw" arguments=(("Planta", number),("cliente", number),("Especie", number),("fecha", date),("Numero", number),("dw", number)) )
+text(band=header alignment="2" text="
+Embalaje" border="6" color="33554432" x="105" y="8" height="144" width="393" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Etiquetas" border="6" color="33554432" x="517" y="8" height="144" width="288" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="0" x="105" y="8" height="72" width="393" format="[general]" html.valueishtml="0"  name=tipo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="10789024~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+column(band=detail id=3 alignment="0" tabsequence=10 border="5~tIF ( GetRow() = CurrentRow(), 5, 0 )" color="33554432" x="517" y="8" height="72" width="288" format="[general]" html.valueishtml="0"  name=cajas visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="0" background.color="10789024~tIF ( GetRow() = CurrentRow(), 12632256, 10789024 )" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

@@ -1,0 +1,15 @@
+﻿$PBExportHeader$str_mant_envases.srs
+$PBExportComments$Estructura del tipo istr_mant más argumento de productores hábiles de ingreso para control de envases
+global type str_mant_envases from structure
+	string		argumento[]
+	datawindow		dw
+	datawindow		dw2
+	boolean		Agrega
+	boolean		Borra
+	boolean		Solo_Consulta
+	integer		respuesta
+	string		tipo
+	boolean		usuariosoloconsulta
+	string		productores[]
+end type
+

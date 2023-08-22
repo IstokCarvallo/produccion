@@ -1,0 +1,44 @@
+﻿$PBExportHeader$dw_lotesfrutagrandeta.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_pltcod dbname="spro_lotesfrutagrandeta.lote_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_espcod dbname="spro_lotesfrutagrandeta.lote_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_codigo dbname="spro_lotesfrutagrandeta.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_tipoen dbname="spro_lotesfrutagrandeta.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_codigo dbname="spro_lotesfrutagrandeta.enva_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lotd_totbul dbname="spro_lotesfrutagrandeta.lotd_totbul" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=lotd_totnet dbname="spro_lotesfrutagrandeta.lotd_totnet" )
+ column=(type=decimal(3) update=yes updatewhereclause=yes name=lotd_kilpro dbname="spro_lotesfrutagrandeta.lotd_kilpro" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_movtofrutagrandeta_clie_codigo dbname="spro_movtofrutagrandeta.clie_codigo" )
+ retrieve="SELECT DISTINCT  ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_pltcod~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_espcod~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_codigo~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"enva_tipoen~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"enva_codigo~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"lotd_totbul~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"lotd_totnet~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~".~"lotd_kilpro~" ,
+           ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~" as clie_codigo     
+        FROM ~"dba~".~"spro_movtofrutagrandeta~" ,
+           ~"dba~".~"spro_lotesfrutagrandeta~"     
+        WHERE ( ~"dba~".~"spro_movtofrutagrandeta~".~"lote_pltcod~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_pltcod~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_espcod~" )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"lote_codigo~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_codigo~" )
+ and          ( ( dba.spro_movtofrutagrandeta.plde_codigo = :planta )
+ and          ( dba.spro_movtofrutagrandeta.tpmv_codigo = :tipo )
+ and          ( dba.spro_movtofrutagrandeta.mfge_numero = :numero ) )
+ and          ( ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~" = :cliente )   " arguments=(("planta", number),("tipo", number),("numero", number),("cliente", number))  sort="lote_pltcod A lote_espcod A lote_codigo A enva_tipoen A enva_codigo A " )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="9" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lote_pltcod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="553" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lote_espcod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="1097" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lote_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1641" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=enva_tipoen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="2185" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=enva_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2729" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lotd_totbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="3273" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lotd_totnet visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="3817" y="4" height="64" width="526" format="[general]" html.valueishtml="0"  name=lotd_kilpro visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=0 border="0" color="0" x="4343" y="0" height="64" width="1161" html.valueishtml="0"  name=spro_movtofrutagrandeta_clie_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

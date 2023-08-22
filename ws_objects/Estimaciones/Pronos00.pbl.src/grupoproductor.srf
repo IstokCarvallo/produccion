@@ -1,0 +1,37 @@
+﻿$PBExportHeader$grupoproductor.srf
+global type grupoproductor from function_object
+end type
+
+forward prototypes
+global function integer grupoproductor (long ai_predio)
+end prototypes
+
+global function integer grupoproductor (long ai_predio);Integer li_Productor, li_GrupoProductor
+
+SELECT MIN(prod_codigo) INTO :li_Productor
+  FROM dbo.spro_prediosproductor
+ WHERE prpr_codigo = :ai_predio
+ Using SQLCA;
+ 
+ IF SQLCA.SQLCode = -1 THEN
+	F_ErrorBaseDatos(SQLCA, "Lectura de Tabla PrediosProductor ")
+	li_GrupoProductor = -1
+Else
+	If IsNull(li_Productor) Then li_Productor = 0
+	 
+	SELECT prod_progru INTO :li_GrupoProductor
+	  FROM dbo.productores
+	 WHERE prod_codigo = :li_productor
+	  Using SQLCA;
+
+	IF SQLCA.SQLCode = -1 THEN 
+		F_ErrorBaseDatos(SQLCA, "Lectura de Tabla PrediosProductor ")
+		li_GrupoProductor = -1
+	Else
+	 	IF IsNull(li_GrupoProductor) THEN li_GrupoProductor = 0
+	End If
+End If
+
+RETURN li_GrupoProductor
+end function
+

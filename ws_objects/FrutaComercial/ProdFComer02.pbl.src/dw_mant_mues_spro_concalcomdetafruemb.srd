@@ -1,0 +1,18 @@
+﻿$PBExportHeader$dw_mant_mues_spro_concalcomdetafruemb.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=164 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=92 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=plde_codigo dbname="spro_concalcomdetfruemb.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccco_folio dbname="spro_concalcomdetfruemb.ccco_folio" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_concalcomdetfruemb~" ) COLUMN(NAME=~"dba.spro_concalcomdetfruemb.plde_codigo~") COLUMN(NAME=~"dba.spro_concalcomdetfruemb.ccco_folio~")WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_concalcomdetfruemb~~~".~~~"plde_codigo~~~"~"   OP =~"=~"    EXP2 =~":planta~"    LOGIC =~"And~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_concalcomdetfruemb~~~".~~~"ccco_folio~~~"~"   OP =~"=~"    EXP2 =~":folio~" ) ) ARG(NAME = ~"planta~" TYPE = number)  ARG(NAME = ~"folio~" TYPE = number) " arguments=(("planta", number),("folio", number)) )
+text(band=footer alignment="2" text="Total" border="5" color="0" x="448" y="8" height="68" width="343" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+compute(band=footer alignment="1" expression="/* sum(  ccfe_bulrev  for all ) */"border="5" color="0" x="809" y="8" height="68" width="603" format="#,##0.00" html.valueishtml="0"  name=total_bulto visible="1"  font.face="Arial" font.height="-9" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Lote - Secuencia" border="6" color="0" x="151" y="12" height="144" width="640" html.valueishtml="0"  name=foliolotese_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Hora Revisión" border="6" color="0" x="1431" y="12" height="144" width="425" html.valueishtml="0"  name=ccfe_horrev_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Nº Frutos Embalables" border="6" color="0" x="1874" y="12" height="144" width="654" html.valueishtml="0"  name=ccfe_fruemb_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Nº Frutos Revisados" border="6" color="0" x="809" y="12" height="144" width="603" html.valueishtml="0"  name=ccfe_bulrev_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

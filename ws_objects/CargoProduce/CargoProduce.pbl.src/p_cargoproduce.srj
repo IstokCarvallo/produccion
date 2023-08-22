@@ -1,0 +1,33 @@
+﻿$PBExportHeader$p_cargoproduce.srj
+EXE:cargoproduce.exe,..\..\..\desarrollo 17\imagenes\consolafrio.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 21.0.0.1509
+CMP:1,0,0,2,0,0,1
+COM:Appeon
+DES:Appeon Product File
+CPY:
+PRD:PowerBuilder Enterprise Series
+PVS:1.0.0.1
+PVN:1,0,0,1
+FVS:1.0.0.1
+FVN:1,0,0,1
+MAN:0,asInvoker,0
+PBD:CargoProduce.pbl,,1
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,cargoproduce,a
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,m_icontray,m
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,uo_ws_cargoproduce,u
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,str_usuario,s
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,uo_mail,u
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,str_parempresa,s
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,w_systray,w
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,dw_carga,d
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,f_global_replace,f
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,dw_log,d
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,uo_dw,u
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,n_icontray,u
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,w_cargoproduce,w
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,conexion,f
+OBJ:C:\Desarrollo 21\Productiva\CargoProduce\CargoProduce.pbl,f_controlaarchivo,f

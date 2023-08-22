@@ -1,0 +1,87 @@
+﻿$PBExportHeader$dw_mues_pron_distfrujocoscuartel.srd
+release 19;
+datawindow(units=0 timer_interval=0 color=1073741824 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=1 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" grid.lines=0 )
+header(height=80 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=92 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=76 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=long updatewhereclause=yes key=yes identity=yes name=dfcc_idcuar dbname="pron_distfrujocoscuartel.dfcc_idcuar" dbalias="d.dfcc_idcuar" )
+ column=(type=long update=yes updatewhereclause=yes name=dfce_identi dbname="pron_distfrujocoscuartel.dfce_identi" dbalias="d.dfce_identi" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_codigo dbname="pron_distfrujocoscuartel.prod_codigo" dbalias="d.prod_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prpr_codigo dbname="pron_distfrujocoscuartel.prpr_codigo" dbalias="d.prpr_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prcc_codigo dbname="pron_distfrujocoscuartel.prcc_codigo" dbalias="d.prcc_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=prcc_nombre dbname="spro_prodcuarteles.prcc_nombre" dbalias="c.prcc_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=espe_codigo dbname="pron_distfrujocoscuartel.espe_codigo" dbalias="d.espe_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=vari_codigo dbname="pron_distfrujocoscuartel.vari_codigo" dbalias="d.vari_codigo" )
+ column=(type=char(60) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" dbalias="v.vari_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=dfcc_tcajas dbname="pron_distfrujocoscuartel.dfcc_tcajas" dbalias="d.dfcc_tcajas" )
+ retrieve="    Select d.dfcc_idcuar, d.dfce_identi, d.prod_codigo, d.prpr_codigo, d.prcc_codigo, c.prcc_nombre, d.espe_codigo, d.vari_codigo, v.vari_nombre, d.dfcc_tcajas
+    from dbo.pron_distfrujocoscuartel d, dbo.spro_prodcuarteles c, dbo.variedades v
+    where d.dfce_identi = :Identificador
+    and   d.prod_codigo = c.prod_codigo
+    and   d.prpr_codigo = c.prpr_codigo
+    and   d.prcc_codigo = c.prcc_codigo
+    and   d.espe_codigo = v.espe_codigo
+    and   d.vari_codigo = v.vari_codigo
+    union
+    Select dfcc_idcuar = null, e.dfce_identi, r.prod_codigo, r.prpr_codigo, r.prcc_codigo, c.prcc_nombre, r.espe_codigo, r.vari_codigo, v.vari_nombre, 
+           dfcc_tcajas = sum(r.prcc_cajtot) 
+    from dbo.pron_distfrujocosenca e, dbo.pron_resuldistempdeta r, dbo.spro_prodcuarteles c, dbo.variedades v
+    where e.dfce_identi = :Identificador
+    and   r.prod_codigo = e.prod_codigo
+    and   r.prpr_codigo = e.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1,r.prcc_codigo)
+    and   r.espe_codigo = e.espe_codigo
+    and   Isnull(e.vari_codigo,-1) in (-1,r.vari_codigo)
+    and   r.prod_codigo = c.prod_codigo
+    and   r.prpr_codigo = c.prpr_codigo
+    and   r.prcc_codigo = c.prcc_codigo
+    and   r.espe_codigo = v.espe_codigo
+    and   r.vari_codigo = v.vari_codigo
+    And   Not Exists(Select top 1 1 from dbo.pron_distfrujocoscuartel d1 where d1.dfce_identi = :Identificador)
+    And   Not Exists(Select top 1 1 from dbo.estimprodsemana s 
+                     where s.prod_codigo = e.prod_codigo
+                     and   s.prpr_codigo = e.prpr_codigo
+                     and   Isnull(e.prcc_codigo,-1) in (-1,s.prcc_codigo)
+                     and   s.espe_codigo = e.espe_codigo
+                     and   Isnull(e.vari_codigo,-1) in (-1,s.vari_codigo)
+				 and   s.esps_fecini between e.dfce_lunini and DateAdd(dd,6,e.dfce_lunter))
+    group by e.dfce_identi, r.prod_codigo,r.prpr_codigo,r.prcc_codigo,c.prcc_nombre,r.espe_codigo,r.vari_codigo,v.vari_nombre
+    union
+    Select dfcc_idcuar = null, e.dfce_identi, s.prod_codigo, s.prpr_codigo, s.prcc_codigo, c.prcc_nombre, s.espe_codigo, s.vari_codigo, v.vari_nombre, 
+           dfcc_tcajas = sum(s.esps_cadia1 + s.esps_cadia2 + s.esps_cadia3 + s.esps_cadia4 + s.esps_cadia5 + s.esps_cadia6 + s.esps_cadia7) 
+    from dbo.estimprodsemana s, dbo.pron_distfrujocosenca e, dbo.spro_prodcuarteles c, dbo.variedades v
+    where e.dfce_identi = :Identificador
+    and   s.prod_codigo = e.prod_codigo
+    and   s.prpr_codigo = e.prpr_codigo
+    and   Isnull(e.prcc_codigo,-1) in (-1,s.prcc_codigo)
+    and   s.espe_codigo = e.espe_codigo
+    and   Isnull(e.vari_codigo,-1) in (-1,s.vari_codigo)
+    and   s.prod_codigo = c.prod_codigo
+    and   s.prpr_codigo = c.prpr_codigo
+    and   s.prcc_codigo = c.prcc_codigo
+    and   s.espe_codigo = v.espe_codigo
+    and   s.vari_codigo = v.vari_codigo
+    and   s.esps_fecini between e.dfce_lunini and DateAdd(dd,6,e.dfce_lunter)
+    And   Not Exists(Select top 1 1 from dbo.pron_distfrujocoscuartel d1 where d1.dfce_identi = :Identificador)
+    group by e.dfce_identi, s.prod_codigo,s.prpr_codigo,s.prcc_codigo,c.prcc_nombre,s.espe_codigo,s.vari_codigo,v.vari_nombre    " update="dbo.pron_distfrujocoscuartel" updatewhere=0 updatekeyinplace=yes arguments=(("Identificador", number)) )
+text(band=header alignment="0" text="Cuartel" enabled="0" border="6" color="16777215" x="201" y="4" height="56" width="466" html.valueishtml="0"  name=spro_prodcuarteles_prcc_nombre_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="15793151" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="0" background.gradient.focus="0" background.gradient.scale="0" background.gradient.spread="0" tooltip.backcolor="0" tooltip.delay.initial="0" tooltip.delay.visible="0" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="0" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="0" text="Variedad" enabled="0" border="6" color="16777215" x="686" y="4" height="56" width="530" html.valueishtml="0"  name=variedades_vari_nombre_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="15793151" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="0" background.gradient.focus="0" background.gradient.scale="0" background.gradient.spread="0" tooltip.backcolor="0" tooltip.delay.initial="0" tooltip.delay.visible="0" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="0" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="0" text="Cajas" enabled="0" border="6" color="16777215" x="1225" y="4" height="56" width="325" html.valueishtml="0"  name=pron_distfrujocoscuartel_dfcc_tcajas_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="15793151" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="0" background.gradient.focus="0" background.gradient.scale="0" background.gradient.spread="0" tooltip.backcolor="0" tooltip.delay.initial="0" tooltip.delay.visible="0" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="0" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="33554432" x="9" y="0" height="56" width="165" format="[general]" html.valueishtml="0"  name=dfcc_idcuar visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="206" y="0" height="56" width="462" format="[general]" html.valueishtml="0"  name=prcc_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="33554432" x="690" y="0" height="56" width="526" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=10 alignment="1" tabsequence=10 border="0" color="33554432" x="1230" y="0" height="56" width="320" format="#,##0" html.valueishtml="0"  name=dfcc_tcajas visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=summary alignment="2" text="Total de Cajas" border="5" color="16777215" x="677" y="8" height="72" width="539" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+compute(band=summary alignment="1" expression="sum(dfcc_tcajas for all)"enabled="0" border="5" color="16777215" x="1225" y="8" height="72" width="325" format="#,##0" html.valueishtml="0"  name=total_cajas visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

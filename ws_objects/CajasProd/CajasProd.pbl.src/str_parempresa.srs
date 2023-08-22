@@ -1,0 +1,18 @@
+﻿$PBExportHeader$str_parempresa.srs
+global type str_parempresa from structure
+	string		empr_rutemp
+	string		empr_razsoc
+	string		empr_nombre
+	string		empr_direcc
+	string		empr_comuna
+	string		empr_ciudad
+	string		empr_nrotel
+	string		empr_nrofax
+	string		empr_giroem
+	string		empr_repleg
+	string		empr_rutrle
+	integer		empr_codexp
+	integer		empr_codplt
+	string		empr_oficin
+end type
+

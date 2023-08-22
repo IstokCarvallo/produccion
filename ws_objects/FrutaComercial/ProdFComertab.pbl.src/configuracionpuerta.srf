@@ -1,0 +1,28 @@
+﻿$PBExportHeader$configuracionpuerta.srf
+global type configuracionpuerta from function_object
+end type
+
+forward prototypes
+global function integer configuracionpuerta (ref str_puertacomm astr_puertacomm)
+end prototypes
+
+global function integer configuracionpuerta (ref str_puertacomm astr_puertacomm);SELECT	crpl_puerta, crpl_baudio, crpl_parida, crpl_data, crpl_parada, crpl_larlec,
+			crpl_larcad, crpl_cadini, crpl_nrodec, crpl_pesmin, crpl_estabi, crpl_pesbin
+	INTO	:astr_puertacomm.Puerta, :astr_puertacomm.Baudios, :astr_puertacomm.Paridad,
+			:astr_puertacomm.Data, :astr_puertacomm.Parada,	:astr_puertacomm.LargoLectura, 
+			:astr_puertacomm.LargoCadena, :astr_puertacomm.CadenaInicio, :astr_puertacomm.Decimales,
+			:astr_puertacomm.PesoMinimo, :astr_puertacomm.Estabilidad, :astr_puertacomm.PesajeBins
+	FROM	dbo.plantaconfromana 
+  WHERE	plde_codigo = :gstr_ParamPlanta.CodigoPlanta
+  AND		Upper(crpl_equcon) = Upper(:gstr_us.computador);
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parámetros Romana: plantaconfromana")
+	RETURN -1
+ELSEIF sqlca.SQLCode	= 100  OR astr_puertacomm.PesajeBins <> 1 OR IsNull(astr_puertacomm.PesajeBins) THEN
+	RETURN 100
+ELSE
+	RETURN 0
+END IF
+end function
+

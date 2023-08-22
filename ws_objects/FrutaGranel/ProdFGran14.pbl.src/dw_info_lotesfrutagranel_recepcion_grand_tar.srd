@@ -1,0 +1,136 @@
+﻿$PBExportHeader$dw_info_lotesfrutagranel_recepcion_grand_tar.srd
+$PBExportComments$DataWindow para la generación de lotes en la recepción de  Fruta a Granel.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 1 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=8 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=3028 color="536870912" height.autosize=yes )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_pltcod dbname="spro_lotesfrutagranel.lote_pltcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_espcod dbname="spro_lotesfrutagranel.lote_espcod" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_codigo dbname="spro_lotesfrutagranel.lote_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=vari_codigo dbname="spro_lotesfrutagranel.vari_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_totbul dbname="spro_lotesfrutagranel.lote_totbul" )
+ column=(type=char(10) updatewhereclause=yes name=n_lote dbname="productores.prod_rut" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutagrandeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutagranenca.plde_codigo" )
+ column=(type=date updatewhereclause=yes name=mfge_fecmov dbname="spro_movtofrutagranenca.mfge_fecmov" )
+ column=(type=time updatewhereclause=yes name=refg_horaen dbname="spro_movtofrutagranenca.refg_horaen" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre_1 dbname="variedades.vari_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="spro_movtofrutagrandeta.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_lotesfrutagranel.prod_codigo" )
+ column=(type=char(3) updatewhereclause=yes name=lote_calibr dbname="spro_lotesfrutagranel.lote_calibr" )
+ column=(type=decimal(3) updatewhereclause=yes name=lotd_totnet dbname="spro_lotesfrutagrandeta.lotd_totnet" )
+ column=(type=decimal(0) updatewhereclause=yes name=fgmb_nrotar dbname="spro_movtobins.fgmb_nrotar" )
+ column=(type=char(40) updatewhereclause=yes name=nrotarja dbname="nrotarja" )
+ column=(type=decimal(2) updatewhereclause=yes name=peso dbname="peso" )
+ retrieve="  SELECT ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"vari_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_totbul~",   
+         ~"dba~".~"productores~".~"prod_rut~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"mfge_fecmov~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"refg_horaen~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prod_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_calibr~",   
+         ~"dba~".~"spro_lotesfrutagrandeta~".~"lotd_totnet~" ,
+			~"dba~".~"spro_movtobins~".~"fgmb_nrotar~",
+			convert(char(40),'') as nrotarja,
+			convert(decimal(8,2),'') as peso 
+    FROM ~"dba~".~"spro_movtofrutagrandeta~",   
+         ~"dba~".~"productores~",   
+         ~"dba~".~"especies~",   
+         ~"dba~".~"variedades~",   
+         ~"dba~".~"spro_movtofrutagranenca~",   
+         ~"dba~".~"spro_lotesfrutagranel~",   
+         ~"dba~".~"spro_movtofrutagranpesa~",   
+         ~"dba~".~"spro_movtobins~",   
+         ~"dba~".~"spro_lotesfrutagrandeta~"  
+   WHERE ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_codigo~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" = ~"dba~".~"variedades~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"vari_codigo~" = ~"dba~".~"variedades~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"prod_codigo~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" = ~"dba~".~"especies~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"espe_codigo~" = ~"dba~".~"especies~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"tpmv_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"tpmv_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"mfge_numero~" = ~"dba~".~"spro_movtofrutagrandeta~".~"mfge_numero~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"tpmv_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"tpmv_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"mfge_numero~" = ~"dba~".~"spro_movtofrutagranenca~".~"mfge_numero~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"bins_numero~" = ~"dba~".~"spro_movtobins~".~"bins_numero~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"fgmb_nrotar~" = ~"dba~".~"spro_movtobins~".~"fgmb_nrotar~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"plde_codigo~" = ~"dba~".~"spro_movtobins~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranpesa~".~"clie_codigo~" = ~"dba~".~"spro_movtobins~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtobins~".~"plde_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_movtobins~".~"lote_espcod~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_movtobins~".~"lote_codigo~" = ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~" = ~"dba~".~"spro_lotesfrutagrandeta~".~"lote_codigo~" ) and  
+         ( ( dba.spro_movtofrutagrandeta.plde_codigo = :Planta ) AND  
+         ( dba.spro_movtofrutagrandeta.clie_codigo = :Cliente ) AND  
+         ( dba.spro_movtofrutagrandeta.tpmv_codigo = :Tipo ) AND  
+         ( dba.spro_movtofrutagrandeta.mfge_numero = :Numero )) 
+GROUP BY ~"dba~".~"spro_lotesfrutagranel~".~"lote_pltcod~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_espcod~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"vari_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_totbul~",   
+         ~"dba~".~"productores~".~"prod_rut~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"mfge_fecmov~",   
+         ~"dba~".~"spro_movtofrutagranenca~".~"refg_horaen~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"prod_codigo~",   
+         ~"dba~".~"spro_lotesfrutagranel~".~"lote_calibr~",   
+         ~"dba~".~"spro_lotesfrutagrandeta~".~"lotd_totnet~",
+			~"dba~".~"spro_movtobins~".~"fgmb_nrotar~"  
+" arguments=(("Planta", number),("Cliente", number),("Tipo", number),("Numero", number)) )
+column(band=header id=13 alignment="0" tabsequence=32766 border="0" color="0" x="114" y="3564" height="96" width="283" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-15" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Lote   " border="0" color="0" x="1371" y="4" height="580" width="1495" html.valueishtml="0"  name=ccos_codigo_t visible="1"  font.face="Arial" font.height="-115" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="String( lote_pltcod ,'0000') + String( lote_espcod ,'00') + String( lote_codigo ,'0000')"border="0" color="0" x="59" y="584" height="696" width="4059" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-115" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="1292" height="188" width="334" format="[general]" html.valueishtml="0"  name=prod_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2043" y="1292" height="188" width="2144" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="1492" height="188" width="2432" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Productor              " border="0" color="0" x="101" y="1292" height="188" width="1554" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Variedad               " border="0" color="0" x="101" y="1492" height="188" width="1554" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=19 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="2480" height="188" width="878" format="#,##0.0" html.valueishtml="0"  name=peso visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="1692" height="188" width="2432" format="#,##0" html.valueishtml="0"  name=lote_totbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="2084" height="188" width="878" format="[time]" html.valueishtml="0"  name=refg_horaen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="1888" height="188" width="878" format="DD/MM/YYYY" html.valueishtml="0"  name=mfge_fecmov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="1696" y="2280" height="188" width="878" format="#,##0.0" html.valueishtml="0"  name=lotd_totnet visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Total Bultos           " border="0" color="0" x="101" y="1692" height="188" width="1554" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Fecha Recepción  " border="0" color="0" x="101" y="1888" height="188" width="1554" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Kilos Brutos" border="0" color="0" x="101" y="2480" height="188" width="1554" html.valueishtml="0"  name=t_12 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Nro. Tarjas" border="0" color="0" x="101" y="2680" height="256" width="1554" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-40" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Hora Recepción" border="0" color="0" x="101" y="2084" height="188" width="1554" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Total Kilos Netos" border="0" color="0" x="101" y="2280" height="188" width="1554" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="0" x="2592" y="2460" height="556" width="1531" format="00000000" html.valueishtml="0"  name=fgmb_nrotar visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="IDAutomationHC39M" font.height="-28" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+compute(band=detail alignment="0" expression="TRIM( lote_calibr)"border="2" color="0" x="3433" y="2084" height="384" width="690" format="[GENERAL]" html.valueishtml="0"  name=color visible="1~tIF(len(Color)>0,1, 0)"  font.face="Arial" font.height="-60" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="2" text="Color" border="2" color="0" x="3433" y="1892" height="188" width="690" html.valueishtml="0"  name=t_5 visible="1~tIF(len(Color)>0,1, 0)"  font.face="Arial" font.height="-30" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

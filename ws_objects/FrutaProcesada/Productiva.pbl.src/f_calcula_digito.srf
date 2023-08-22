@@ -1,0 +1,52 @@
+﻿$PBExportHeader$f_calcula_digito.srf
+global type f_calcula_digito from function_object
+end type
+
+forward prototypes
+global function string f_calcula_digito (string as_pallet, string as_cliente)
+end prototypes
+
+global function string f_calcula_digito (string as_pallet, string as_cliente);/* 
+Función calcula digito verificador de codigo barra
+*/
+Long		ll_valor, i, ll_valortot
+Integer	li_digito, li_numero = 1
+String	ls_par1, ls_par2, ls_valor
+
+as_pallet 	= gs_pfijopallet+as_cliente+as_pallet
+as_pallet	= Trim(as_pallet)
+
+FOR i = Len(as_pallet) TO 1 STEP -1
+	
+	IF li_numero <> 3 THEN
+		li_numero = 3
+	ELSE
+		li_numero = 1
+	END IF	
+	
+	li_digito	= Integer(Mid(as_pallet,i,1)) * li_numero
+	ll_valor		= ll_valor + li_digito
+
+NEXT
+
+ll_valortot = ll_valor
+
+IF ll_valor < 99 THEN
+	ll_valor = Long(Left(string(ll_valor), 1))
+ELSE	
+	ll_valor = Long(Left(string(ll_valor), 2)) 
+END IF	
+
+ll_valor = (ll_valor * 10) + 10
+
+ll_valor = ll_valor - ll_valortot
+
+IF ll_valor = 10 THEN
+	ls_valor = '0'
+ELSE
+	ls_valor = String(ll_valor)
+END IF	
+
+RETURN ls_valor
+end function
+

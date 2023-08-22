@@ -1,0 +1,22 @@
+﻿$PBExportHeader$dw_cierrelineadtencion.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=164 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=104 color="536870912" )
+detail(height=92 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=area_codigo dbname="area_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mininf dbname="mininf" )
+ column=(type=decimal(0) updatewhereclause=yes name=minjusti dbname="minjusti" )
+ procedure="1 execute dba.FGran_CierreDetencionLinea;1 @Planta = :Planta, @Linea = :Linea, @Especie = :Especie, @FechaPro = :FechaPro, @Turno = :Turno" arguments=(("Planta", number),("Linea", number),("Especie", number),("FechaPro", date),("Turno", number)) )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="133" y="4" height="76" width="864" format="00" html.valueishtml="0"  name=area_codigo visible="1" dddw.name=dw_mues_spro_arearesponsable dddw.displaycolumn=area_nombre dddw.datacolumn=area_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="0" x="1381" y="4" height="76" width="329" format="000" html.valueishtml="0"  name=minjusti visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="1024" y="4" height="76" width="329" format="000" html.valueishtml="0"  name=mininf visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=footer alignment="2" text="Total" border="0" color="0" x="123" y="12" height="64" width="251" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="2" expression="sum( minjusti  for all )"border="5" color="0" x="1381" y="4" height="76" width="329" format="000" html.valueishtml="0"  name=total_justi visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=footer alignment="2" expression="sum(  mininf  for all )"border="5" color="0" x="1024" y="4" height="76" width="329" format="000" html.valueishtml="0"  name=total_info visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Area Codigo" border="6" color="0" x="133" y="12" height="144" width="873" html.valueishtml="0"  name=area_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="MinutosJustificados" border="6" color="0" x="1381" y="12" height="144" width="347" html.valueishtml="0"  name=minjusti_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="MinutosInformados" border="6" color="0" x="1024" y="12" height="144" width="338" html.valueishtml="0"  name=mininf_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

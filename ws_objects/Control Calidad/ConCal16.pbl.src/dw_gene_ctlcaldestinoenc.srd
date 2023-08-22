@@ -1,0 +1,142 @@
+﻿$PBExportHeader$dw_gene_ctlcaldestinoenc.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=144 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="ctlcaldestinosenc.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=nave_tipotr dbname="ctlcaldestinosenc.nave_tipotr" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=espe_codigo dbname="ctlcaldestinosenc.espe_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=vari_codigo dbname="ctlcaldestinosenc.vari_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=etiq_codigo dbname="ctlcaldestinosenc.etiq_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=prod_codigo dbname="ctlcaldestinosenc.prod_codigo" )
+ column=(type=char(3) update=yes updatewhereclause=yes key=yes name=vaca_calibr dbname="ctlcaldestinosenc.vaca_calibr" )
+ column=(type=char(10) update=yes updatewhereclause=yes key=yes name=emba_codigo dbname="ctlcaldestinosenc.emba_codigo" )
+ column=(type=date update=yes updatewhereclause=yes key=yes name=ccde_fecemb dbname="ctlcaldestinosenc.ccde_fecemb" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccin_codigo dbname="ctlcaldestinosenc.ccin_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=puer_codigo dbname="ctlcaldestinosenc.puer_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=reci_codigo dbname="ctlcaldestinosenc.reci_codigo" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=ccde_bodega dbname="ctlcaldestinosenc.ccde_bodega" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=ccde_lugins dbname="ctlcaldestinosenc.ccde_lugins" )
+ column=(type=date update=yes updatewhereclause=yes name=ccde_fecarr dbname="ctlcaldestinosenc.ccde_fecarr" )
+ column=(type=date update=yes updatewhereclause=yes name=ccde_fecfum dbname="ctlcaldestinosenc.ccde_fecfum" )
+ column=(type=date update=yes updatewhereclause=yes name=ccde_fecins dbname="ctlcaldestinosenc.ccde_fecins" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=ccde_temmax dbname="ctlcaldestinosenc.ccde_temmax" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=ccde_temmin dbname="ctlcaldestinosenc.ccde_temmin" )
+ column=(type=decimal(1) update=yes updatewhereclause=yes name=ccde_temfre dbname="ctlcaldestinosenc.ccde_temfre" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=ccde_reslot dbname="ctlcaldestinosenc.ccde_reslot" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccde_cauobj dbname="ctlcaldestinosenc.ccde_cauobj" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccde_causa2 dbname="ctlcaldestinosenc.ccde_causa2" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ccde_causa3 dbname="ctlcaldestinosenc.ccde_causa3" )
+ column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="especies.espe_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=nave_codigo dbname="ctlcaldestinosenc.nave_codigo" )
+ column=(type=char(15) updatewhereclause=yes name=etiq_nombre dbname="etiquetas.etiq_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=char(60) updatewhereclause=yes name=ccin_nombre dbname="ctlcalinspectores.ccin_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=puer_nombre dbname="puertos.puer_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=reci_nombre dbname="recibidores.reci_nombre" )
+ retrieve="  SELECT ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"nave_tipotr~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"espe_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"vari_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"etiq_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"prod_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"vaca_calibr~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"emba_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_fecemb~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccin_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"puer_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"reci_codigo~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_bodega~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_lugins~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_fecarr~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_fecfum~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_fecins~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_temmax~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_temmin~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_temfre~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_reslot~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_cauobj~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_causa2~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"ccde_causa3~",   
+         ~"dba~".~"especies~".~"espe_nombre~",   
+         ~"dba~".~"variedades~".~"vari_nombre~",   
+         ~"dba~".~"ctlcaldestinosenc~".~"nave_codigo~",   
+         ~"dba~".~"etiquetas~".~"etiq_nombre~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"ctlcalinspectores~".~"ccin_nombre~",   
+         ~"dba~".~"puertos~".~"puer_nombre~",   
+         ~"dba~".~"recibidores~".~"reci_nombre~"  
+    FROM ~"dba~".~"ctlcaldestinosenc~",   
+         ~"dba~".~"especies~",   
+         ~"dba~".~"variedades~",   
+         ~"dba~".~"etiquetas~",   
+         ~"dba~".~"productores~",   
+         ~"dba~".~"ctlcalinspectores~",   
+         ~"dba~".~"puertos~",   
+         ~"dba~".~"recibidores~"  
+   WHERE ( ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~" = ~"dba~".~"especies~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"clie_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"espe_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"variedades~".~"vari_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"vari_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"espe_codigo~" = ~"dba~".~"especies~".~"espe_codigo~" ) and  
+         ( ~"dba~".~"etiquetas~".~"clie_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"etiquetas~".~"etiq_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"etiq_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~" = ~"dba~".~"productores~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"prod_codigo~" = ~"dba~".~"productores~".~"prod_codigo~" ) and  
+         ( ~"dba~".~"ctlcalinspectores~".~"ccin_codigo~" = ~"dba~".~"ctlcaldestinosenc~".~"ccin_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"puer_codigo~" = ~"dba~".~"puertos~".~"puer_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"clie_codigo~" = ~"dba~".~"recibidores~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"ctlcaldestinosenc~".~"reci_codigo~" = ~"dba~".~"recibidores~".~"reci_codigo~" )    
+" update="dba.ctlcaldestinosenc" updatewhere=0 updatekeyinplace=yes )
+column(band=detail id=25 alignment="0" tabsequence=32766 border="0" color="0" x="594" y="4" height="64" width="398" format="[general]"  name=espe_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=26 alignment="0" tabsequence=32766 border="0" color="0" x="1010" y="4" height="64" width="462" format="[general]"  name=vari_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="0" tabsequence=32766 border="0" color="0" x="1490" y="4" height="64" width="471" format="[general]"  name=etiq_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="0" tabsequence=32766 border="0" color="0" x="1979" y="4" height="64" width="507" format="[general]"  name=prod_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2505" y="4" height="64" width="229" format="[general]"  name=vaca_calibr edit.limit=3 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="2752" y="4" height="64" width="270" format="[general]"  name=emba_codigo edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="0" x="3040" y="4" height="64" width="306" format="dd/mm/yyyy"  name=ccde_fecemb editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="0" tabsequence=32766 border="0" color="0" x="3365" y="4" height="64" width="539" format="[general]"  name=ccin_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=31 alignment="0" tabsequence=32766 border="0" color="0" x="3922" y="4" height="64" width="517" format="[general]"  name=puer_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="0" x="4457" y="4" height="64" width="571" format="[general]"  name=reci_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="5047" y="4" height="64" width="439" format="[general]"  name=ccde_bodega edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="5504" y="4" height="64" width="329" format="[general]"  name=ccde_lugins edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=24 alignment="1" tabsequence=32766 border="0" color="0" x="8713" y="4" height="64" width="293" format="[general]"  name=ccde_causa3 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=23 alignment="1" tabsequence=32766 border="0" color="0" x="8402" y="4" height="64" width="293" format="[general]"  name=ccde_causa2 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="0" x="8091" y="4" height="64" width="293" format="[general]"  name=ccde_cauobj edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="2" tabsequence=32766 border="0" color="0" x="7749" y="4" height="64" width="325" format="[general]"  name=ccde_reslot edit.limit=1 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="2" tabsequence=32766 border="0" color="0" x="6560" y="4" height="64" width="329" format="[general]"  name=ccde_fecins editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="2" tabsequence=32766 border="0" color="0" x="6199" y="4" height="64" width="343" format="dd/mm/yyyy"  name=ccde_fecfum editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="2" tabsequence=32766 border="0" color="0" x="5851" y="4" height="64" width="329" format="[general]"  name=ccde_fecarr editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="1" tabsequence=32766 border="0" color="0" x="6907" y="4" height="64" width="247" format="00.0"  name=ccde_temmax edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="1" tabsequence=32766 border="0" color="0" x="7173" y="4" height="64" width="247" format="00.0"  name=ccde_temmin edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="1" tabsequence=32766 border="0" color="0" x="7438" y="4" height="64" width="265" format="00.0"  name=ccde_temfre edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="1" tabsequence=32766 border="0" color="0" x="251" y="4" height="64" width="320" format="[general]"  name=nave_codigo edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="137" y="4" height="64" width="101" format="[general]"  name=nave_tipotr edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=header alignment="2" text="TipoTransporte" border="6" color="0" x="133" y="12" height="120" width="443"  name=ccde_conave_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Etiqueta" border="6" color="0" x="1490" y="12" height="120" width="471"  name=etiq_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Productor" border="6" color="0" x="1979" y="12" height="120" width="507"  name=prod_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Calibre" border="6" color="0" x="2505" y="12" height="120" width="229"  name=vaca_calibr_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Embalaje" border="6" color="0" x="2752" y="12" height="120" width="274"  name=emba_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaEmbalaje" border="6" color="0" x="3045" y="12" height="120" width="306"  name=ccde_fecemb_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Inspector" border="6" color="0" x="3369" y="12" height="120" width="535"  name=ccin_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Puerto" border="6" color="0" x="3922" y="12" height="120" width="517"  name=puer_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Recibidores" border="6" color="0" x="4457" y="12" height="120" width="571"  name=reci_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Bodega" border="6" color="0" x="5047" y="12" height="120" width="439"  name=ccde_bodega_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="LugarInspección" border="6" color="0" x="5504" y="12" height="120" width="329"  name=ccde_lugins_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaArribo" border="6" color="0" x="5851" y="12" height="120" width="329"  name=ccde_fecarr_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Variedad" border="6" color="0" x="1010" y="12" height="120" width="462"  name=vari_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Especie" border="6" color="0" x="594" y="12" height="120" width="398"  name=espe_codigo_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="3º Causal" border="6" color="0" x="8713" y="12" height="120" width="293"  name=ccde_causa3_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="2º Causal" border="6" color="0" x="8402" y="12" height="120" width="293"  name=ccde_causa2_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="CausalObjección" border="6" color="0" x="8091" y="12" height="120" width="293"  name=ccde_cauobj_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="ResoluciónLote" border="6" color="0" x="7749" y="12" height="120" width="325"  name=ccde_reslot_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TºFrecuente" border="6" color="0" x="7438" y="12" height="120" width="293"  name=ccde_temfre_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TºMínima" border="6" color="0" x="7173" y="12" height="120" width="247"  name=ccde_temmin_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TºMáxima" border="6" color="0" x="6907" y="12" height="120" width="247"  name=ccde_temmax_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaInspección" border="6" color="0" x="6560" y="12" height="120" width="329"  name=ccde_fecins_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaFumigación" border="6" color="0" x="6199" y="12" height="120" width="343"  name=ccde_fecfum_t  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

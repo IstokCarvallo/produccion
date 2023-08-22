@@ -1,0 +1,92 @@
+﻿$PBExportHeader$dw_info_spro_ordenretiroventa.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=896 color="536870912" )
+summary(height=4 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912"  height.autosize=yes)
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_ordenretiroventadet.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tdop_codigo dbname="spro_ordenretiroventadet.tdop_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=oret_numero dbname="spro_ordenretiroventadet.oret_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=odre_secuen dbname="spro_ordenretiroventadet.odre_secuen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=espe_codigo dbname="spro_ordenretiroventadet.espe_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=grva_codigo dbname="spro_ordenretiroventadet.grva_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=grva_codsub dbname="spro_ordenretiroventadet.grva_codsub" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=vari_codigo dbname="spro_ordenretiroventadet.vari_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cate_codigo dbname="spro_ordenretiroventadet.cate_codigo" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=frio_tipofr dbname="spro_ordenretiroventadet.frio_tipofr" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_tipoen dbname="spro_ordenretiroventadet.enva_tipoen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=enva_codigo dbname="spro_ordenretiroventadet.enva_codigo" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=odre_gcalib dbname="spro_ordenretiroventadet.odre_gcalib" values="SobreCalibre	SOB/ExtraGrande	EXG/Grande	GRA/Mediano	MED/Chico	CHI/PreCalibre	PRE/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=odre_bultos dbname="spro_ordenretiroventadet.odre_bultos" )
+ column=(type=char(30) updatewhereclause=yes name=grva_nombre dbname="spro_ordenretiroventadet.grva_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=grva_nombre_1 dbname="spro_ordenretiroventadet.grva_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ retrieve="  SELECT dba.spro_ordenretiroventadet.plde_codigo,
+			dba.spro_ordenretiroventadet.tdop_codigo,      
+         dba.spro_ordenretiroventadet.oret_numero,   
+         dba.spro_ordenretiroventadet.odre_secuen,   
+         dba.spro_ordenretiroventadet.espe_codigo,   
+         dba.spro_ordenretiroventadet.grva_codigo,   
+         dba.spro_ordenretiroventadet.grva_codsub,   
+         dba.spro_ordenretiroventadet.vari_codigo,   
+         dba.spro_ordenretiroventadet.cate_codigo,   
+         dba.spro_ordenretiroventadet.frio_tipofr,
+		   dba.spro_ordenretiroventadet.enva_tipoen,
+			dba.spro_ordenretiroventadet.enva_codigo,
+         dba.spro_ordenretiroventadet.odre_gcalib,   
+         dba.spro_ordenretiroventadet.odre_bultos,   
+         grupovariedad_a.grva_nombre,   
+         grupovariedad_b.grva_nombre,   
+         dba.variedades.vari_nombre  
+    FROM dba.spro_ordenretiroventadet,   
+         dba.variedades,   
+         dba.grupovariedad grupovariedad_a,   
+         dba.grupovariedad grupovariedad_b  
+   WHERE ( dba.spro_ordenretiroventadet.espe_codigo *= grupovariedad_a.espe_codigo) and  
+         ( dba.spro_ordenretiroventadet.grva_codigo *= grupovariedad_a.grva_codigo) and  
+         ( dba.spro_ordenretiroventadet.espe_codigo *= grupovariedad_b.espe_codigo) and  
+         ( dba.spro_ordenretiroventadet.grva_codsub *= grupovariedad_b.grva_codsub) and  
+         ( dba.spro_ordenretiroventadet.grva_codigo *= grupovariedad_b.grva_codigo) and  
+         ( dba.variedades.espe_codigo =* dba.spro_ordenretiroventadet.espe_codigo) and  
+         ( dba.variedades.vari_codigo =* dba.spro_ordenretiroventadet.vari_codigo) and  
+         ( grupovariedad_a.grva_codsub = 0 ) AND  
+         ( ( dba.spro_ordenretiroventadet.plde_codigo = :planta  ) and 
+  			  ( dba.spro_ordenretiroventadet.tdop_codigo = :tipodoc ) and
+           ( dba.spro_ordenretiroventadet.oret_numero = :numero  ) )    
+" update="dba.spro_ordenretiroventadet" updatewhere=0 updatekeyinplace=yes arguments=(("planta", number),("tipodoc", number),("numero", number)) )
+text(band=header alignment="0" text="Página" border="0" color="0" x="3049" y="4" height="56" width="151"  name=t_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="3049" y="64" height="56" width="142"  name=t_8  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="page() + ' de' + pageCount()"border="0" color="0" x="3227" y="4" height="56" width="279" format="[general]"  name=compute_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="today()"border="0" color="0" x="3227" y="64" height="56" width="279" format="dd/mm/yyyy"  name=compute_3  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="FRUTA COMERCIAL" border="0" color="0" x="1609" y="64" height="56" width="439"  name=t_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Movimientos" border="0" color="0" x="1609" y="124" height="56" width="402"  name=t_7  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="3049" y="124" height="64" width="110"  name=t_9  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="0" expression="now()"border="0" color="0" x="3227" y="124" height="64" width="279" format="hh:mm:ss"  name=compute_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="4" height="56" width="1211"  name=nom_empresa  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="64" height="56" width="1211"  name=referencia  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo" border="0" color="0" x="1403" y="124" height="56" width="155"  name=t_5  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema" border="0" color="0" x="1403" y="64" height="56" width="174"  name=t_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Orden de Retiro Venta" border="0" color="0" x="1609" y="184" height="56" width="827"  name=t_3  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe" border="0" color="0" x="1403" y="184" height="56" width="165"  name=t_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+report(band=header dataobject="dw_info_spro_ordenretiroenca" x="475" y="272" height="460" width="2784" border="0"  height.autosize=yes criteria="" nest_arguments=((" planta "),(" tipodoc "),(" numero ")) trail_footer = yes  name=dw_1  slideup=directlyabove )
+text(band=header alignment="2" text="TipoFrío" border="0" color="0" x="2427" y="744" height="144" width="187"  name=spro_ordenventacomdeta_frio_tipofr_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="GrupoCalibre" border="0" color="0" x="2638" y="744" height="144" width="288"  name=spro_ordenventacomdeta_ofcd_gcalib_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Bultos" border="0" color="0" x="2944" y="744" height="144" width="320"  name=spro_ordenventacomdeta_ofcd_bultos_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="439" y1="740" x2="3319" y2="740"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="439" y1="888" x2="3319" y2="888"  name=l_2 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="507" y="8" height="64" width="357" format="[general]"  name=espe_codigo dddw.name=dw_mues_especies dddw.displaycolumn=espe_nombre dddw.datacolumn=espe_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="882" y="8" height="64" width="347" format="[general]"  name=grva_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="1248" y="8" height="64" width="347" format="[general]"  name=grva_nombre_1 edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="2057" y="8" height="64" width="357" format="[general]"  name=cate_codigo dddw.name=dw_mues_categorias dddw.displaycolumn=cate_nombre dddw.datacolumn=cate_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="1614" y="8" height="64" width="425" format="[general]"  name=vari_nombre edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="2432" y="8" height="64" width="187" format="[general]"  name=frio_tipofr edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2642" y="8" height="64" width="288" format="[general]"  name=odre_gcalib ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="1" tabsequence=10 border="0" color="0" x="2949" y="8" height="64" width="320" format="#,##0"  name=odre_bultos edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Especie" border="0" color="0" x="503" y="744" height="144" width="357"  name=spro_ordenventacomdeta_espe_codigo_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Grupo" border="0" color="0" x="878" y="744" height="144" width="347"  name=grupovariedad_grva_nombre_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="SubGrupo" border="0" color="0" x="1243" y="744" height="144" width="347"  name=grupovariedad_grva_nombre_t_1_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Variedad" border="0" color="0" x="1609" y="744" height="144" width="425"  name=variedades_vari_nombre_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Categoria" border="0" color="0" x="2053" y="744" height="144" width="357"  name=spro_ordenventacomdeta_cate_codigo_t  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

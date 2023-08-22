@@ -1,0 +1,13 @@
+﻿$PBExportHeader$dbpl_12_ctlcalinspectores.srp
+PIPELINE(source_connect=Directo ProdRancagua_2008,destination_connect=produccion_2008,type=update,commit=0,errors=0,keyname="ctlcalinspectores")
+SOURCE(name="ctlcalinspectores",COLUMN(type=decimal,name="ccin_codigo",dbtype="numeric(4,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="ccin_nombre",dbtype="varchar(60)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccin_abrevi",dbtype="varchar(5)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccin_tipins",dbtype="numeric(1,0)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccin_fuente",dbtype="varchar(80)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcalinspectores~") COLUMN(NAME=~"dba.ctlcalinspectores.ccin_codigo~")COLUMN(NAME=~"dba.ctlcalinspectores.ccin_nombre~")COLUMN(NAME=~"dba.ctlcalinspectores.ccin_abrevi~")COLUMN(NAME=~"dba.ctlcalinspectores.ccin_tipins~")COLUMN(NAME=~"dba.ctlcalinspectores.ccin_fuente~"))")
+DESTINATION(name="dba.ctlcalinspectores",COLUMN(type=decimal,name="ccin_codigo",dbtype="numeric(4,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="ccin_nombre",dbtype="char(60)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccin_abrevi",dbtype="char(5)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccin_tipins",dbtype="numeric(1,0)",nulls_allowed=yes)
+ COLUMN(type=varchar,name="ccin_fuente",dbtype="varchar(80)",nulls_allowed=yes))

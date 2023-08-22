@@ -1,0 +1,139 @@
+﻿$PBExportHeader$dw_info_termino_de_proceso_detalle_old.srd
+$PBExportComments$dw de Termino proceso colgada a tablas spro_movtofrutagrandeta y spro_ordenprocvacdeta
+release 10;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=160 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=76 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=lote_pltcod dbname="spro_movtofrutagrandeta.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_espcod dbname="spro_movtofrutagrandeta.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_codigo dbname="spro_movtofrutagrandeta.lote_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_tipoen dbname="spro_movtofrutagrandeta.enva_tipoen" )
+ column=(type=char(15) updatewhereclause=yes name=tien_nombre dbname="tiposenvases.tien_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_codigo dbname="spro_movtofrutagrandeta.enva_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mfgd_bulent dbname="spro_movtofrutagrandeta.mfgd_bulent" )
+ column=(type=decimal(0) updatewhereclause=yes name=opve_turno dbname="spro_ordenprocvacdeta.opve_turno" )
+ column=(type=time updatewhereclause=yes name=opvd_horava dbname="spro_ordenprocvacdeta.opvd_horava" )
+ column=(type=time updatewhereclause=yes name=opvd_horate dbname="spro_ordenprocvacdeta.opvd_horate" )
+ column=(type=char(30) updatewhereclause=yes name=cale_nombre dbname="spro_calicosechero.cale_nombre" )
+ column=(type=decimal(2) updatewhereclause=yes name=opvd_canbul dbname="spro_ordenprocvacdeta.opvd_canbul" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutagrandeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=tpmv_codigo dbname="spro_movtofrutagrandeta.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfge_numero dbname="spro_movtofrutagrandeta.mfge_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfgd_secuen dbname="spro_movtofrutagrandeta.mfgd_secuen" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_coorde dbname="spro_movtofrutagrandeta.plde_coorde" )
+ column=(type=decimal(0) updatewhereclause=yes name=cama_codigo dbname="spro_movtofrutagrandeta.cama_codigo" )
+ column=(type=char(4) updatewhereclause=yes name=cale_calida dbname="spro_ordenprocvacdeta.cale_calida" )
+ column=(type=char(30) updatewhereclause=yes name=line_nombre dbname="lineapacking.line_nombre" )
+ column=(type=date updatewhereclause=yes name=opve_fecvac dbname="spro_ordenprocvacdeta.opve_fecvac" )
+ retrieve="  SELECT ~"dba~".~"spro_movtofrutagrandeta~".~"lote_pltcod~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"lote_codigo~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"enva_tipoen~",   
+         ~"dba~".~"tiposenvases~".~"tien_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"enva_codigo~",   
+         ~"dba~".~"envases~".~"enva_nombre~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"mfgd_bulent~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"opve_turno~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"opvd_horava~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"opvd_horate~",   
+         ~"dba~".~"spro_calicosechero~".~"cale_nombre~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"opvd_canbul~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"tpmv_codigo~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"mfge_numero~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"mfgd_secuen~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"plde_coorde~",   
+         ~"dba~".~"spro_movtofrutagrandeta~".~"cama_codigo~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"cale_calida~",   
+         ~"dba~".~"lineapacking~".~"line_nombre~",   
+         ~"dba~".~"spro_ordenprocvacdeta~".~"opve_fecvac~"  
+    FROM ~"dba~".~"envases~",   
+         ~"dba~".~"spro_calicosechero~",   
+         ~"dba~".~"spro_movtofrutagrandeta~",   
+         ~"dba~".~"spro_movtofrutagranenca~",   
+         ~"dba~".~"spro_ordenproceso~",   
+         ~"dba~".~"spro_ordenprocvacdeta~",   
+         ~"dba~".~"spro_ordenprocvacenca~",   
+         ~"dba~".~"tiposenvases~",   
+         ~"dba~".~"lineapacking~"  
+   WHERE ( ~"dba~".~"spro_ordenproceso~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"orpr_tipord~" = ~"dba~".~"spro_movtofrutagranenca~".~"defg_tipdoc~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"orpr_numero~" = ~"dba~".~"spro_movtofrutagranenca~".~"defg_docrel~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagranenca~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"plde_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"tpmv_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"tpmv_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"mfge_numero~" = ~"dba~".~"spro_movtofrutagrandeta~".~"mfge_numero~" ) and  
+         ( ~"dba~".~"spro_movtofrutagranenca~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_movtofrutagrandeta~".~"enva_tipoen~" = ~"dba~".~"tiposenvases~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_movtofrutagrandeta~".~"enva_tipoen~" = ~"dba~".~"envases~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_movtofrutagrandeta~".~"enva_codigo~" = ~"dba~".~"envases~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"plde_codigo~" = ~"dba~".~"spro_ordenprocvacenca~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"orpr_tipord~" = ~"dba~".~"spro_ordenprocvacenca~".~"orpr_tipord~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"orpr_numero~" = ~"dba~".~"spro_ordenprocvacenca~".~"orpr_numero~" ) and  
+         ( ~"dba~".~"spro_ordenproceso~".~"clie_codigo~" = ~"dba~".~"spro_ordenprocvacenca~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"plde_codigo~" = ~"dba~".~"spro_ordenprocvacdeta~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"orpr_tipord~" = ~"dba~".~"spro_ordenprocvacdeta~".~"orpr_tipord~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"orpr_numero~" = ~"dba~".~"spro_ordenprocvacdeta~".~"orpr_numero~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"opve_fecvac~" = ~"dba~".~"spro_ordenprocvacdeta~".~"opve_fecvac~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"opve_turno~" = ~"dba~".~"spro_ordenprocvacdeta~".~"opve_turno~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"clie_codigo~" = ~"dba~".~"spro_ordenprocvacdeta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"enva_tipoen~" = ~"dba~".~"spro_calicosechero~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"enva_codigo~" = ~"dba~".~"spro_calicosechero~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"cale_calida~" = ~"dba~".~"spro_calicosechero~".~"cale_calida~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"lote_pltcod~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_pltcod~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"lote_espcod~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_espcod~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"lote_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"lote_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"enva_tipoen~" = ~"dba~".~"spro_movtofrutagrandeta~".~"enva_tipoen~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"enva_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"enva_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacdeta~".~"clie_codigo~" = ~"dba~".~"spro_movtofrutagrandeta~".~"clie_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"plde_codigo~" = ~"dba~".~"lineapacking~".~"plde_codigo~" ) and  
+         ( ~"dba~".~"spro_ordenprocvacenca~".~"line_codigo~" = ~"dba~".~"lineapacking~".~"line_codigo~" ) and  
+         ( ( dba.spro_ordenproceso.plde_codigo = :planta ) AND  
+         ( dba.spro_ordenproceso.orpr_tipord = :tipo ) AND  
+         ( dba.spro_ordenproceso.orpr_numero = :numero ) ) AND  
+         ~"dba~".~"spro_ordenproceso~".~"clie_codigo~" = :cliente    
+" arguments=(("planta", number),("tipo", number),("numero", number),("cliente", number))  sort="compute_1 A opvd_horava A opvd_horate A " )
+group(level=1 header.height=0 trailer.height=168 by=("lote_pltcod" , "lote_espcod" , "lote_codigo" , "enva_tipoen" , "enva_codigo" ) header.color="536870912" trailer.color="536870912" )
+text(band=header alignment="2" text="Lote" border="0" color="0" x="59" y="16" height="112" width="393" html.valueishtml="0"  name=spro_movtofrutagrandeta_lote_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Tipode Envase" border="0" color="0" x="466" y="16" height="112" width="366" html.valueishtml="0"  name=spro_movtofrutagrandeta_enva_tipoen_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Envase" border="0" color="0" x="846" y="16" height="112" width="361" html.valueishtml="0"  name=spro_movtofrutagrandeta_enva_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="BultosTraspasados" border="0" color="0" x="1221" y="16" height="112" width="338" html.valueishtml="0"  name=spro_movtofrutagrandeta_mfgd_bulent_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="1" text="Bultos" border="0" color="0" x="3086" y="16" height="112" width="242" html.valueishtml="0"  name=spro_ordenprocvacdeta_opvd_canbul_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Calidad" border="0" color="0" x="2670" y="16" height="112" width="402" html.valueishtml="0"  name=spro_calicosechero_cale_nombre_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="HoraTérmino" border="0" color="0" x="2432" y="16" height="112" width="224" html.valueishtml="0"  name=spro_ordenprocvacdeta_opvd_horate_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Turno" border="0" color="0" x="1600" y="16" height="112" width="151" html.valueishtml="0"  name=spro_ordenprocvacdeta_opve_turno_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Línea" border="0" color="0" x="1760" y="16" height="112" width="201" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Fecha/HoraInicio" border="0" color="0" x="1975" y="16" height="112" width="443" html.valueishtml="0"  name=spro_ordenprocvacdeta_opvd_horava_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+line(band=header x1="9" y1="140" x2="3419" y2="140"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="9" y1="4" x2="3419" y2="4"  name=l_3 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=trailer.1 x1="1568" y1="0" x2="3360" y2="0"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+compute(band=detail alignment="2" expression="String( lote_pltcod ,'0000') +'-'+ String( lote_espcod ,'00') +'-'+ String( lote_codigo ,'0000')"border="0" color="0" x="59" y="4" height="64" width="393" format="[GENERAL]" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="466" y="4" height="64" width="366" format="[general]" html.valueishtml="0"  name=tien_nombre visible="1" edit.limit=15 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="846" y="4" height="64" width="361" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1" edit.limit=40 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="1" tabsequence=32766 border="0" color="0" x="1221" y="4" height="64" width="338" format="#,##0" html.valueishtml="0"  name=mfgd_bulent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="1" tabsequence=32766 border="0" color="0" x="3109" y="4" height="64" width="219" format="#,##0" html.valueishtml="0"  name=opvd_canbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="2670" y="4" height="64" width="425" format="[general]" html.valueishtml="0"  name=cale_nombre visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=32766 border="0" color="0" x="2432" y="4" height="64" width="224" format="hh:mm" html.valueishtml="0"  name=opvd_horate visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="0" x="2272" y="4" height="64" width="146" format="hh:mm" html.valueishtml="0"  name=opvd_horava visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="0" x="1600" y="4" height="64" width="146" format="[general]" html.valueishtml="0"  name=opve_turno visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="1760" y="4" height="64" width="201" format="[general]" html.valueishtml="0"  name=line_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=32766 border="0" color="0" x="1970" y="4" height="64" width="288" format="dd/mm/yyyy" html.valueishtml="0"  name=opve_fecvac visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(  opvd_canbul  for group 1 )"border="0" color="0" x="3086" y="16" height="64" width="242" format="#,##0" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression=" mfgd_bulent - (sum(  opvd_canbul  for group 1 ))"border="0" color="0" x="3086" y="92" height="60" width="242" format="#,##0" html.valueishtml="0"  name=devolucion visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="0" text="Total Vaciado" border="0" color="0" x="2597" y="16" height="56" width="352" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=trailer.1 alignment="0" text="Total A Devolución" border="0" color="0" x="2597" y="92" height="56" width="475" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+
+sparse(names="compute_1	tien_nombre	enva_nombre	mfgd_bulent")htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

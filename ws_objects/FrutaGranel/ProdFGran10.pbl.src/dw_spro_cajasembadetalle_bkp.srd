@@ -1,0 +1,54 @@
+﻿$PBExportHeader$dw_spro_cajasembadetalle_bkp.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=168 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_cajasembadetalle.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="spro_cajasembadetalle.clie_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=orpr_tipord dbname="spro_cajasembadetalle.orpr_tipord" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=orpr_numero dbname="spro_cajasembadetalle.orpr_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=caem_correl dbname="spro_cajasembadetalle.caem_correl" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=emba_codigo dbname="spro_cajasembadetalle.emba_codigo" )
+ column=(type=char(4) update=yes updatewhereclause=yes name=caen_calibr dbname="spro_cajasembadetalle.caen_calibr" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=trab_codi01 dbname="spro_cajasembadetalle.trab_codi01" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=trab_codi02 dbname="spro_cajasembadetalle.trab_codi02" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=trab_codi03 dbname="spro_cajasembadetalle.trab_codi03" )
+ column=(type=decimal(2) update=yes updatewhereclause=yes name=emba_pesone dbname="spro_cajasembadetalle.emba_pesone" )
+ column=(type=date update=yes updatewhereclause=yes key=yes name=cepp_fecham dbname="spro_cajasembadetalle.cepp_fecham" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=caem_tipcor dbname="spro_cajasembadetalle.caem_tipcor" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.spro_cajasembadetalle~" ) COLUMN(NAME=~"dba.spro_cajasembadetalle.plde_codigo~") COLUMN(NAME=~"dba.spro_cajasembadetalle.clie_codigo~") COLUMN(NAME=~"dba.spro_cajasembadetalle.orpr_tipord~") COLUMN(NAME=~"dba.spro_cajasembadetalle.orpr_numero~") COLUMN(NAME=~"dba.spro_cajasembadetalle.caem_correl~") COLUMN(NAME=~"dba.spro_cajasembadetalle.emba_codigo~") COLUMN(NAME=~"dba.spro_cajasembadetalle.caen_calibr~") COLUMN(NAME=~"dba.spro_cajasembadetalle.trab_codi01~") COLUMN(NAME=~"dba.spro_cajasembadetalle.trab_codi02~") COLUMN(NAME=~"dba.spro_cajasembadetalle.trab_codi03~") COLUMN(NAME=~"dba.spro_cajasembadetalle.emba_pesone~") COLUMN(NAME=~"dba.spro_cajasembadetalle.cepp_fecham~") COLUMN(NAME=~"dba.spro_cajasembadetalle.caem_tipcor~")WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_cajasembadetalle~~~".~~~"clie_codigo~~~"~"   OP =~"=~"    EXP2 =~":cliente~"    LOGIC =~"And~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_cajasembadetalle~~~".~~~"plde_codigo~~~"~"   OP =~"=~"    EXP2 =~":planta~"    LOGIC =~"And~" ) WHERE(    EXP1 =~"~~~"dba~~~".~~~"spro_cajasembadetalle~~~".~~~"cepp_fecham~~~"~"   OP =~"=~"    EXP2 =~":Fecha~" ) ) ARG(NAME = ~"Cliente~" TYPE = number)  ARG(NAME = ~"Planta~" TYPE = number)  ARG(NAME = ~"Fecha~" TYPE = date) " update="dba.spro_cajasembadetalle" updatewhere=0 updatekeyinplace=yes arguments=(("Cliente", number),("Planta", number),("Fecha", date)) )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="33554432" x="517" y="4" height="68" width="315" format="[general]" html.valueishtml="0"  name=trab_codi01 visible="1" edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="33554432" x="850" y="4" height="68" width="306" format="[general]" html.valueishtml="0"  name=caen_calibr visible="1" edit.limit=4 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="2" tabsequence=32766 border="0" color="33554432" x="1175" y="4" height="68" width="315" format="[general]" html.valueishtml="0"  name=trab_codi02 visible="1" edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="2" tabsequence=32766 border="0" color="33554432" x="1509" y="4" height="68" width="306" format="[general]" html.valueishtml="0"  name=emba_pesone visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=32766 border="0" color="33554432" x="1833" y="4" height="68" width="315" format="[general]" html.valueishtml="0"  name=trab_codi03 visible="1" edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="33554432" x="2167" y="4" height="68" width="357" format="[general]" html.valueishtml="0"  name=emba_codigo visible="1" edit.limit=10 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="187" y="4" height="68" width="315" format="[general]" html.valueishtml="0"  name=caem_correl visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="114" y="4" height="68" width="46" format="[general]" html.valueishtml="0"  name=caem_tipcor visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="2" text="Número
+Tarjetón" border="6" color="33554432" x="133" y="24" height="136" width="366" html.valueishtml="0"  name=trab_codi01_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Código
+Embalaje" border="6" color="33554432" x="2167" y="24" height="136" width="357" html.valueishtml="0"  name=emba_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="32768" )
+text(band=header alignment="2" text="
+Embalaje" border="6" color="33554432" x="1833" y="24" height="136" width="315" html.valueishtml="0"  name=trab_codi02_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="32768" )
+text(band=header alignment="2" text="
+Kilos" border="6" color="33554432" x="1509" y="24" height="136" width="306" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" )
+text(band=header alignment="2" text="
+Pesaje" border="6" color="33554432" x="1175" y="24" height="136" width="315" html.valueishtml="0"  name=trab_codi03_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" )
+text(band=header alignment="2" text="
+Calibre" border="6" color="0" x="850" y="24" height="136" width="306" html.valueishtml="0"  name=caen_calibr_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="255" )
+text(band=header alignment="2" text="
+Selección" border="6" color="0" x="517" y="24" height="136" width="315" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="255" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

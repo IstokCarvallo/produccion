@@ -1,0 +1,23 @@
+﻿$PBExportHeader$paramlote.srf
+global type paramlote from function_object
+end type
+
+forward prototypes
+global subroutine paramlote ()
+end prototypes
+
+global subroutine paramlote ();  SELECT pacc_identi,pacc_codgen,pacc_desgen,pacc_paswor, pacc_admpas
+    INTO :gstr_parlote.identi,:gstr_parlote.codgen,:gstr_parlote.desgen,:gstr_parlote.paswor,:gstr_parlote.admispas
+    FROM dbo.paramconcal 
+	Using Sqlca;
+
+ 
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta: paramconcal")
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Error","Lectura de Parametros Planta: paramconcal")
+END IF
+
+
+end subroutine
+

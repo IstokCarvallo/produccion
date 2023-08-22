@@ -1,0 +1,40 @@
+﻿$PBExportHeader$dw_info_recepcion_distribucion_color.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no rows_per_detail = 2 )
+header(height=64 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=60 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=spro_colorfondorec_cofo_codigo dbname="spro_colorfondorec.cofo_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=spro_colordefondo_cofo_nombre dbname="spro_colordefondo.cofo_nombre" )
+ column=(type=decimal(2) updatewhereclause=yes name=spro_colorfondorec_cfre_porcol dbname="spro_colorfondorec.cfre_porcol" )
+ retrieve="  SELECT dba.spro_colorfondorec.cofo_codigo,   
+         dba.spro_colordefondo.cofo_nombre,   
+         dba.spro_colorfondorec.cfre_porcol  
+    FROM dba.spro_colordefondo,   
+         dba.spro_colorfondorec,   
+         dba.spro_contparamadurez  
+   WHERE ( dba.spro_colorfondorec.lote_espcod = dba.spro_colordefondo.espe_codigo ) and  
+         ( dba.spro_colorfondorec.cofo_codigo = dba.spro_colordefondo.cofo_codigo ) and  
+         ( dba.spro_colorfondorec.lote_espcod = dba.spro_contparamadurez.espe_codigo ) and
+         ( ( dba.spro_colorfondorec.lote_pltcod = :planta ) AND  
+         ( dba.spro_colorfondorec.lote_espcod = :especie ) AND  
+         ( dba.spro_colorfondorec.lote_codigo = :lote ) AND  
+         ( dba.spro_contparamadurez.copam_colorf = 1 )) AND  
+         ( isnull(dba.spro_colordefondo.grva_codigo,-1) = :grupo  ) AND  
+         ( isnull(dba.spro_colordefondo.grva_codsub,-1) = :subgrupo ) AND  
+         ( isnull(dba.spro_colordefondo.vari_codigo,-1) = :varieco ) AND
+			 isnull(dba.spro_contparamadurez.grva_codigo,-1) = :grupo1 AND  
+          isnull(dba.spro_contparamadurez.grva_codsub,-1) = :subgrupo1 AND  
+          isnull(dba.spro_contparamadurez.vari_codigo,-1) = :variedad1
+             
+" arguments=(("planta", number),("especie", number),("lote", number),("grupo", number),("subgrupo", number),("varieco", number),("grupo1", number),("subgrupo1", number),("variedad1", number)) )
+text(band=header alignment="0" text="DISTRIBUCION DEL COLOR" border="0" color="0" x="78" y="4" height="56" width="754"  name=t_1  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" font.underline="1" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="getrow()"border="0" color="0" x="82" y="0" height="56" width="101" format="[GENERAL]"  name=compute_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="206" y="0" height="56" width="635" format="[general]" row_in_detail=1  name=spro_colordefondo_cofo_nombre_1 edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="33554432" x="1879" y="0" height="56" width="635" format="[general]" row_in_detail=2  name=spro_colordefondo_cofo_nombre_2 edit.limit=20 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="2528" y="0" height="56" width="224" format="#0.00" row_in_detail=2  name=spro_colorfondorec_cfre_porcol_2 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="1" tabsequence=32766 border="0" color="33554432" x="855" y="0" height="56" width="224" format="#0.00" row_in_detail=1  name=spro_colorfondorec_cfre_porcol_1 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="getrow() +1"border="0" color="0" x="1755" y="0" height="56" width="101" format="[GENERAL]"  name=compute_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

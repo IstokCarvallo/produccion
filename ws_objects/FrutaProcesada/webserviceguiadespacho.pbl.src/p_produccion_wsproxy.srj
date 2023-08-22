@@ -1,0 +1,12 @@
+﻿$PBExportHeader$p_produccion_wsproxy.srj
+$PBExportComments$Generated Web Service Proxy Project
+GeneratorID:{1B1DCEE2-E514-11D1-B30A-006008925BD4}GENBC00000000
+
+WSDLLOCATION:http://190.2.248.51/ws-stephens/Guias?wsdl	
+COMPONENT:0
+PACKAGE:4	WebService.FuncionesGuiasService	WebService.Array	WebService.buscarGuia	WebService.cabeceraGuia
+COMMENT:Web Service Proxy Generator
+DEPLOYMENT:webserviceguiadespacho.pbl	0	0
+PROJECT:p_produccion_wsproxy
+PREFIX:
+ASSEMBLY:0	1	FuncionesGuiasService.dll

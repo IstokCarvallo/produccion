@@ -1,0 +1,69 @@
+﻿$PBExportHeader$dw_info_duchas_vigentes.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=476 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=spro_duchacontrol_duch_codigo dbname="spro_duchacontrol.duch_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_duchacontrol_codu_nropos dbname="spro_duchacontrol.codu_nropos" )
+ column=(type=date updatewhereclause=yes name=spro_duchacontrol_codu_fecini dbname="spro_duchacontrol.codu_fecini" )
+ column=(type=time updatewhereclause=yes name=spro_duchacontrol_codu_horini dbname="spro_duchacontrol.codu_horini" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_duchacontrol_espe_codigo dbname="spro_duchacontrol.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=totalbultos dbname="totalbultos" )
+ column=(type=long updatewhereclause=yes name=compute_0007 dbname="compute_0007" )
+ retrieve="  SELECT ~"dba~".~"spro_duchacontrol~".~"duch_codigo~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_nropos~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_fecini~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_horini~",   
+         ~"dba~".~"spro_duchacontrol~".~"espe_codigo~",   
+         sum(dba.spro_lotesduchados.lote_totbul) as totalbultos,   
+         datediff(mi,dba.spro_duchacontrol.codu_horini,:FecHora)  
+    FROM ~"dba~".~"spro_duchacontrol~",   
+         ~"dba~".~"spro_lotesduchados~"  
+   WHERE ( ~"dba~".~"spro_lotesduchados~".~"duch_codigo~" = ~"dba~".~"spro_duchacontrol~".~"duch_codigo~" ) and  
+         ( ~"dba~".~"spro_lotesduchados~".~"codu_nropos~" = ~"dba~".~"spro_duchacontrol~".~"codu_nropos~" ) and  
+         ( ~"dba~".~"spro_lotesduchados~".~"codu_fecini~" = ~"dba~".~"spro_duchacontrol~".~"codu_fecini~" ) and  
+         ( ~"dba~".~"spro_lotesduchados~".~"codu_horini~" = ~"dba~".~"spro_duchacontrol~".~"codu_horini~" ) and  
+         ( ( dba.spro_duchacontrol.codu_fecter = null ) )   
+GROUP BY ~"dba~".~"spro_duchacontrol~".~"duch_codigo~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_nropos~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_fecini~",   
+         ~"dba~".~"spro_duchacontrol~".~"codu_horini~",   
+         ~"dba~".~"spro_duchacontrol~".~"espe_codigo~"   
+" arguments=(("FecHora", time)) )
+text(band=header alignment="0" text="PRODUCCION FRUTA GRANEL" border="0" color="0" x="1573" y="72" height="56" width="677"  name=t_5  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Movimientos" border="0" color="0" x="1573" y="132" height="56" width="411"  name=t_7  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Duchas Vigentes" border="0" color="0" x="1573" y="192" height="56" width="466"  name=t_9  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Sistema" border="0" color="0" x="1376" y="72" height="56" width="174"  name=t_4  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Módulo" border="0" color="0" x="1376" y="132" height="56" width="174"  name=t_6  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Informe" border="0" color="0" x="1376" y="192" height="56" width="174"  name=t_8  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="12" height="56" width="1211"  name=nom_empresa  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="" border="0" color="0" x="9" y="72" height="56" width="1211"  name=referencia  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Página" border="0" color="0" x="2939" y="8" height="56" width="151"  name=t_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="page() + ' de ' + pageCount()"border="0" color="0" x="3131" y="8" height="56" width="279" format="[general]"  name=compute_1  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Fecha" border="0" color="0" x="2939" y="68" height="56" width="142"  name=t_3  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="today()"border="0" color="0" x="3131" y="68" height="56" width="279" format="dd/mm/yyyy"  name=compute_2  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Hora" border="0" color="0" x="2939" y="128" height="56" width="110"  name=t_10  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+compute(band=header alignment="1" expression="now()"border="0" color="0" x="3131" y="128" height="56" width="279" format="hh:mm:ss"  name=compute_3  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=header alignment="0" text="Estanque" border="0" color="0" x="530" y="336" height="128" width="293"  name=spro_duchacontrol_codu_nropos_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Ducha" border="0" color="0" x="288" y="336" height="128" width="229"  name=spro_duchacontrol_duch_codigo_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="FechaInicial" border="0" color="0" x="837" y="336" height="128" width="329"  name=spro_duchacontrol_codu_fecini_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="HoraInicial" border="0" color="0" x="1179" y="336" height="128" width="329"  name=spro_duchacontrol_codu_horini_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Especie" border="0" color="0" x="1522" y="336" height="128" width="841"  name=spro_duchacontrol_espe_codigo_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="TotalBultos" border="0" color="0" x="2377" y="340" height="128" width="320"  name=spro_lotesduchados_lote_totbul_t  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="TotalTiempo" border="0" color="0" x="2711" y="336" height="128" width="297"  name=t_1  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="274" y1="332" x2="3022" y2="332"  name=l_1 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+line(band=header x1="274" y1="464" x2="3022" y2="464"  name=l_2 pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="1499" y="156" height="84" width="233" format="[general]"  name=compute_0007 edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="530" y="4" height="76" width="293" format="#"  name=spro_duchacontrol_codu_nropos edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="288" y="4" height="76" width="229" format="00"  name=spro_duchacontrol_duch_codigo edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="0" x="837" y="4" height="76" width="329" format="dd/mm/yyyy"  name=spro_duchacontrol_codu_fecini edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="0" x="1179" y="4" height="76" width="329" format="hh:mm"  name=spro_duchacontrol_codu_horini edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="1541" y="4" height="76" width="786" format="[general]"  name=spro_duchacontrol_espe_codigo dddw.name=dw_mues_especies dddw.displaycolumn=espe_nombre dddw.datacolumn=espe_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="2395" y="4" height="76" width="270" format="#,##0"  name=totalbultos edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="int( compute_0007 / 60 )"border="0" color="0" x="1751" y="156" height="76" width="297" format="[GENERAL]"  name=hora  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="Mod( compute_0007,60) "border="0" color="0" x="2066" y="156" height="76" width="215" format="[GENERAL]"  name=minuto  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="String( hora ,'00') + ':' + String (Minuto,'00')"border="0" color="0" x="2711" y="4" height="76" width="297" format="[GENERAL]"  name=compute_4  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

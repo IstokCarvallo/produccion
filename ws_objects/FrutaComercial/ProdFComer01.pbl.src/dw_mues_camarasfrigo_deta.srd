@@ -1,0 +1,76 @@
+﻿$PBExportHeader$dw_mues_camarasfrigo_deta.srd
+$PBExportComments$Muestra para Mantención de Cámaras Frigoríficas
+release 10;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=172 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=80 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=opcion dbname="opcion" initial="1" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="camarasbode.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=cama_codigo dbname="camarasbode.cama_codigo" )
+ column=(type=char(2) update=yes updatewhereclause=yes name=frio_tipofr dbname="camarasbode.frio_tipofr" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=cama_nombre dbname="camarasbode.cama_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_cancal dbname="camarasbode.cama_cancal" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_canbas dbname="camarasbode.cama_canbas" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_canpos dbname="camarasbode.cama_canpos" )
+ column=(type=date update=yes updatewhereclause=yes name=cama_feccie dbname="camarasbode.cama_feccie" )
+ column=(type=date update=yes updatewhereclause=yes name=cama_fecape dbname="camarasbode.cama_fecape" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_altbin dbname="camarasbode.cama_altbin" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_altpal dbname="camarasbode.cama_altpal" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_recdia dbname="camarasbode.cama_recdia" )
+ column=(type=date update=yes updatewhereclause=yes name=cama_inille dbname="camarasbode.cama_inille" )
+ column=(type=date update=yes updatewhereclause=yes name=cama_terlle dbname="camarasbode.cama_terlle" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_codfri dbname="camarasbode.cama_codfri" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cama_cnrack dbname="camarasbode.cama_cnrack" values="	1/	0" )
+ retrieve="PBSELECT( VERSION(400) TABLE(NAME=~"dba.camarasbode~" ) COMPUTE(NAME=~"opcion = Convert(decimal(1),0)~") COLUMN(NAME=~"dba.camarasbode.plde_codigo~") COLUMN(NAME=~"dba.camarasbode.cama_codigo~") COLUMN(NAME=~"dba.camarasbode.frio_tipofr~") COLUMN(NAME=~"dba.camarasbode.cama_nombre~") COLUMN(NAME=~"dba.camarasbode.cama_cancal~") COLUMN(NAME=~"dba.camarasbode.cama_canbas~") COLUMN(NAME=~"dba.camarasbode.cama_canpos~") COLUMN(NAME=~"dba.camarasbode.cama_feccie~") COLUMN(NAME=~"dba.camarasbode.cama_fecape~") COLUMN(NAME=~"dba.camarasbode.cama_altbin~") COLUMN(NAME=~"dba.camarasbode.cama_altpal~") COLUMN(NAME=~"dba.camarasbode.cama_recdia~") COLUMN(NAME=~"dba.camarasbode.cama_inille~") COLUMN(NAME=~"dba.camarasbode.cama_terlle~") COLUMN(NAME=~"dba.camarasbode.cama_codfri~") COLUMN(NAME=~"dba.camarasbode.cama_cnrack~")WHERE(    EXP1 =~"(:planta~"   OP =~"in~"    EXP2 =~"(-9, dba.camarasbode.plde_codigo))~" ) ) ARG(NAME = ~"planta~" TYPE = number) " update="dba.camarasbode" updatewhere=0 updatekeyinplace=yes arguments=(("planta", number)) )
+text(band=header alignment="2" text="Código
+Cámara" border="6" color="0" x="133" y="8" height="144" width="251" html.valueishtml="0"  name=cama_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Tipo
+Frio" border="6" color="0" x="1166" y="8" height="144" width="320" html.valueishtml="0"  name=frio_tipofr_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="
+Nombre" border="6" color="0" x="402" y="8" height="144" width="745" html.valueishtml="0"  name=cama_nombre_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha
+Apertura" border="6" color="0" x="1870" y="8" height="144" width="347" html.valueishtml="0"  name=cama_fecape_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha
+Cierre" border="6" color="0" x="1504" y="8" height="144" width="347" html.valueishtml="0"  name=cama_feccie_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Número
+Base" border="6" color="0" x="2537" y="8" height="144" width="357" html.valueishtml="0"  name=cama_nropos_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Número
+Calles" border="6" color="0" x="2235" y="8" height="144" width="283" html.valueishtml="0"  name=cama_nroban_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Altura
+Bins" border="6" color="0" x="3205" y="8" height="144" width="238" html.valueishtml="0"  name=cama_altbin_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Altura
+Pallets" border="6" color="0" x="3461" y="8" height="144" width="261" html.valueishtml="0"  name=cama_altpal_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Número
+Posicion" border="6" color="0" x="2912" y="8" height="144" width="274" html.valueishtml="0"  name=cama_nropis_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Capacidad
+Recep.Diaria" border="6" color="0" x="3739" y="8" height="144" width="430" html.valueishtml="0"  name=cama_recdia_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TieneRack" border="6" color="0" x="4187" y="8" height="144" width="178" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="133" y="4" height="64" width="251" format="[general]" html.valueishtml="0"  name=cama_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="402" y="4" height="64" width="745" format="[general]" html.valueishtml="0"  name=cama_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1166" y="4" height="64" width="320" format="[general]" html.valueishtml="0"  name=frio_tipofr visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1870" y="4" height="64" width="347" format="[general]" html.valueishtml="0"  name=cama_fecape visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="1504" y="4" height="64" width="347" format="[general]" html.valueishtml="0"  name=cama_feccie visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="2235" y="4" height="64" width="283" format="[general]" html.valueishtml="0"  name=cama_cancal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="2537" y="4" height="64" width="357" format="[general]" html.valueishtml="0"  name=cama_canbas visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="2912" y="4" height="64" width="274" format="[general]" html.valueishtml="0"  name=cama_canpos visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="3205" y="4" height="64" width="238" format="[general]" html.valueishtml="0"  name=cama_altbin visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=12 alignment="0" tabsequence=32766 border="0" color="0" x="3461" y="4" height="64" width="261" format="[general]" html.valueishtml="0"  name=cama_altpal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="0" color="0" x="2025" y="228" height="64" width="274" format="[general]" html.valueishtml="0"  name=cama_inille visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="2537" y="228" height="64" width="274" format="[general]" html.valueishtml="0"  name=cama_terlle visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="3049" y="228" height="64" width="274" format="[general]" html.valueishtml="0"  name=cama_codfri visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="0" color="0" x="677" y="148" height="64" width="1161" format="[general]" html.valueishtml="0"  name=plde_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="3739" y="4" height="64" width="430" format="[general]" html.valueishtml="0"  name=cama_recdia visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="0" color="0" x="4242" y="8" height="56" width="64" format="[general]" html.valueishtml="0"  name=cama_cnrack visible="1" checkbox.text="" checkbox.on="1" checkbox.off="0" checkbox.scale=no checkbox.threed=yes  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

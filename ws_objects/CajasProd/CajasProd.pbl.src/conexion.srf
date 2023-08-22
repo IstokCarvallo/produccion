@@ -1,0 +1,79 @@
+﻿$PBExportHeader$conexion.srf
+global type conexion from function_object
+end type
+
+forward prototypes
+global function boolean conexion ()
+end prototypes
+
+global function boolean conexion ();String		ls_nombrepc, ls_Usuario, ls_Password, ls_nomodb, ls_nomser, ls_nombas, ls_nodbms, ls_planta
+Integer	li_lineas, li_conectividad
+
+RegistryGet("HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ComputerName\ComputerName", "ComputerName", RegString!, ls_nombrepc)
+
+If gb_ConectadoSQLCA Then
+	DISCONNECT USING SQLCA;
+End If
+
+SELECT cone_lineas, cone_codigo,     IsNull(cone_manejo, 0)
+  INTO :li_lineas, :li_conectividad, :gi_manejo
+  FROM dbo.equipos
+ WHERE equi_nombre = :ls_nombrepc
+ USING itran_odbc;
+
+If IsNull(li_lineas) Then
+	gb_ConectadoSQLCA	=	False
+	Return gb_conectadoSQLCA
+End If
+
+SELECT cone_nomodb,cone_nomser,cone_nombas,
+		 cone_nodbms,cone_nomusu,cone_passwo  
+  INTO :ls_nomodb,:ls_nomser,:ls_nombas,
+	 	 :ls_nodbms,:ls_Usuario,:ls_Password
+  FROM dbo.conectividad
+ WHERE cone_codigo = :li_conectividad
+   AND cone_lineas = :li_lineas
+ USING itran_odbc;
+
+If IsNull(ls_nomodb) Then
+	gb_ConectadoSQLCA	=	False
+	Return gb_ConectadoSQLCA
+End If
+
+If ls_nodbms = 'ODBC' Then
+	ls_Usuario				=	itran_odbc.UserId
+	ls_Password				=	itran_odbc.DbPass
+	SQLCA.DbParm			=	"Connectstring='DSN=" + ls_nomodb + ";UID=" + ls_Usuario + &
+								";PWD=" + ls_Password + "'// ;PBUseProcOwner = " + '"Yes"'
+Else
+	SQLCA.LogId		=	itran_odbc.LogId
+	SQLCA.LogPass		=	itran_odbc.LogPass
+	SQLCA.DbParm		=	itran_odbc.DbParm
+End If
+
+SQLCA.ServerName	=	ls_nomser
+SQLCA.DataBase		=	ls_nombas
+SQLCA.Dbms			= 	ls_nodbms
+
+CONNECT USING SQLCA;
+
+If SQLCA.SQLCode = 0 Then
+	gb_conectadoSQLCA	=	True
+	If IsValid(w_mant_mues_cajasprod_procalm) Then
+		w_mant_mues_cajasprod_procalm.settransobject()
+		w_mant_mues_cajasprod_procalm.st_odbc.Text	=	ls_nomodb
+	End If
+Else
+	gb_ConectadoSQLCA	=	False
+	If IsValid(w_mant_mues_cajasprod_procalm) Then
+		w_mant_mues_cajasprod_procalm.settransobject()
+		w_mant_mues_cajasprod_procalm.st_odbc.Text	=	'Sin Conexión Base Datos'
+	Else
+		MessageBox("Estimado Usuario", "No fue posible encontrar una conexión en ControlODBC para el PC actual (" + ls_nombrepc + "). ~r~n" + &
+												 "Por favor dar aviso al Administrador del Sistema", Exclamation!)
+	End If
+End If
+
+Return gb_ConectadoSQLCA
+end function
+

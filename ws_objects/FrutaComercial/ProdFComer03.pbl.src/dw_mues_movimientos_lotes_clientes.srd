@@ -1,0 +1,36 @@
+﻿$PBExportHeader$dw_mues_movimientos_lotes_clientes.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=168 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=88 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_movtofrutacomenca.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=tpmv_codigo dbname="spro_movtofrutacomenca.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=mfco_numero dbname="spro_movtofrutacomenca.mfco_numero" )
+ column=(type=date updatewhereclause=yes name=mfco_fecmov dbname="spro_movtofrutacomenca.mfco_fecmov" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfco_guisii dbname="spro_movtofrutacomenca.mfco_guisii" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfco_totbul dbname="spro_movtofrutacomenca.mfco_totbul" )
+ column=(type=decimal(3) updatewhereclause=yes name=mfco_tpneto dbname="spro_movtofrutacomenca.mfco_tpneto" )
+ retrieve="  SELECT ~"dba~".~"spro_movtofrutacomenca~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"tpmv_codigo~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"mfco_numero~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"mfco_fecmov~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"mfco_guisii~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"mfco_totbul~",   
+         ~"dba~".~"spro_movtofrutacomenca~".~"mfco_tpneto~"  
+    FROM ~"dba~".~"spro_movtofrutacomenca~"   ;
+" update="dba.spro_movtofrutacomenca" updatewhere=0 updatekeyinplace=yes arguments=(("planta", number),("tipomov", number),("estado", number),("docrel", number)) )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="0" color="0" x="133" y="4" height="76" width="384" format="00000000" html.valueishtml="0"  name=mfco_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=4 alignment="2" tabsequence=32766 border="0" color="0" x="530" y="4" height="76" width="370" format="dd/mm/yyyy" html.valueishtml="0"  name=mfco_fecmov visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="928" y="4" height="76" width="411" format="00000000" html.valueishtml="0"  name=mfco_guisii visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="1367" y="4" height="76" width="393" format="#,##0" html.valueishtml="0"  name=mfco_totbul visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="1" tabsequence=32766 border="0" color="0" x="1778" y="4" height="76" width="416" format="#,##0.000" html.valueishtml="0"  name=mfco_tpneto visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Número" border="6" color="0" x="133" y="12" height="144" width="384" html.valueishtml="0"  name=mfco_numero_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Fecha" border="6" color="0" x="535" y="12" height="144" width="375" html.valueishtml="0"  name=mfco_fecmov_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="Guía" border="6" color="0" x="928" y="12" height="144" width="421" html.valueishtml="0"  name=mfco_guisii_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TotalBultos" border="6" color="0" x="1367" y="12" height="144" width="393" html.valueishtml="0"  name=mfco_totbul_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TotalNeto" border="6" color="0" x="1778" y="12" height="144" width="416" html.valueishtml="0"  name=mfco_tpneto_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="GeneraRecepción" border="6" color="0" x="2213" y="12" height="144" width="375" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

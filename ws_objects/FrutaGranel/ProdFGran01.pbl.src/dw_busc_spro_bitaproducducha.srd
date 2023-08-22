@@ -1,0 +1,49 @@
+﻿$PBExportHeader$dw_busc_spro_bitaproducducha.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+header(height=168 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=96 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=duch_codigo dbname="spro_bitaproducducha.duch_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=codu_nropos dbname="spro_bitaproducducha.codu_nropos" )
+ column=(type=date updatewhereclause=yes name=codu_fecini dbname="spro_bitaproducducha.codu_fecini" )
+ column=(type=time updatewhereclause=yes name=codu_horini dbname="spro_bitaproducducha.codu_horini" )
+ column=(type=decimal(0) updatewhereclause=yes name=bpdu_tipoev dbname="spro_bitaproducducha.bpdu_tipoev" values="Inicio	1/Relleno	2/" )
+ column=(type=date updatewhereclause=yes name=bpdu_feceve dbname="spro_bitaproducducha.bpdu_feceve" )
+ column=(type=time updatewhereclause=yes name=bpdu_horeve dbname="spro_bitaproducducha.bpdu_horeve" )
+ column=(type=decimal(0) updatewhereclause=yes name=bpdu_canbin dbname="spro_bitaproducducha.bpdu_canbin" )
+ retrieve="  SELECT ~"dba~".~"spro_bitaproducducha~".~"duch_codigo~",   
+         ~"dba~".~"spro_bitaproducducha~".~"codu_nropos~",   
+         ~"dba~".~"spro_bitaproducducha~".~"codu_fecini~",   
+         ~"dba~".~"spro_bitaproducducha~".~"codu_horini~",   
+         ~"dba~".~"spro_bitaproducducha~".~"bpdu_tipoev~",   
+         ~"dba~".~"spro_bitaproducducha~".~"bpdu_feceve~",   
+         ~"dba~".~"spro_bitaproducducha~".~"bpdu_horeve~",   
+         ~"dba~".~"spro_bitaproducducha~".~"bpdu_canbin~"  
+    FROM ~"dba~".~"spro_bitaproducducha~",   
+         ~"dba~".~"spro_duchacontrol~"  
+   WHERE ( ~"dba~".~"spro_bitaproducducha~".~"duch_codigo~" = ~"dba~".~"spro_duchacontrol~".~"duch_codigo~" ) and  
+         ( ( dba.spro_bitaproducducha.bpdu_tipoev = :tipoev ) AND  
+         ( Isnull(dba.spro_duchacontrol.codu_fecter,'1900/01/01') = '1900/01/01' ) )    
+" arguments=(("tipoev", number))  sort="duch_codigo A codu_nropos A " )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0" x="133" y="4" height="76" width="229" format="00" html.valueishtml="0"  name=duch_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=2 alignment="2" tabsequence=32766 border="0" color="0" x="379" y="4" height="76" width="288" format="[general]" html.valueishtml="0"  name=codu_nropos visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="1294" y="4" height="76" width="247" format="[general]" html.valueishtml="0"  name=bpdu_tipoev visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any ddlb.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=8 alignment="2" tabsequence=32766 border="0" color="0" x="2176" y="4" height="76" width="288" format="00000" html.valueishtml="0"  name=bpdu_canbin visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="0" color="0" x="686" y="4" height="76" width="320" format="[general]" html.valueishtml="0"  name=codu_fecini visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="0" color="0" x="1024" y="4" height="76" width="256" format="[time]" html.valueishtml="0"  name=codu_horini visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=32766 border="0" color="0" x="1563" y="4" height="76" width="320" format="[general]" html.valueishtml="0"  name=bpdu_feceve visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=32766 border="0" color="0" x="1897" y="4" height="76" width="256" format="[time]" html.valueishtml="0"  name=bpdu_horeve visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=footer alignment="0" text="Total Registros" border="0" color="0" x="489" y="16" height="68" width="430" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=footer alignment="2" expression="rowcount()"border="5" color="0" x="1019" y="16" height="68" width="293" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="NúmeroEstanque" border="6" color="0" x="379" y="12" height="144" width="288" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="CódigoDucha" border="6" color="0" x="133" y="12" height="144" width="229" html.valueishtml="0"  name=vama_valuni_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TipoEvento" border="6" color="0" x="1298" y="12" height="144" width="247" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="CantidadBins" border="6" color="0" x="2176" y="12" height="144" width="288" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaInicio" border="6" color="0" x="686" y="12" height="144" width="320" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="HoraInicial" border="6" color="0" x="1024" y="12" height="144" width="256" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="FechaEvento " border="6" color="0" x="1563" y="12" height="144" width="320" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="HoraEvento" border="6" color="0" x="1902" y="12" height="144" width="256" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

@@ -1,0 +1,96 @@
+﻿$PBExportHeader$dw_mant_movtofrutacomdeta_desp_cliente.srd
+$PBExportComments$Detalle de Despacho de Fruta Granel Interplanta y Devolución a Productor
+release 8;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1732 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=plde_codigo dbname="spro_movtofrutacomdeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=tpmv_codigo dbname="spro_movtofrutacomdeta.tpmv_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfco_numero dbname="spro_movtofrutacomdeta.mfco_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfcd_secuen dbname="spro_movtofrutacomdeta.mfcd_secuen" )
+ column=(type=decimal(0) updatewhereclause=yes name=plde_coorde dbname="spro_movtofrutacomdeta.plde_coorde" )
+ column=(type=decimal(0) updatewhereclause=yes name=cama_codigo dbname="spro_movtofrutacomdeta.cama_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=lofc_pltcod dbname="spro_movtofrutacomdeta.lofc_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lofc_espcod dbname="spro_movtofrutacomdeta.lofc_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lofc_lotefc dbname="spro_movtofrutacomdeta.lofc_lotefc" )
+ column=(type=decimal(0) updatewhereclause=yes name=lfcd_secuen dbname="spro_movtofrutacomdeta.lfcd_secuen" )
+ column=(type=decimal(2) updatewhereclause=yes name=mfcd_bulent dbname="spro_movtofrutacomdeta.mfcd_bulent" )
+ column=(type=decimal(3) updatewhereclause=yes name=mfcd_kgnent dbname="spro_movtofrutacomdeta.mfcd_kgnent" )
+ column=(type=decimal(3) updatewhereclause=yes name=mfcd_kilrom dbname="spro_movtofrutacomdeta.mfcd_kilrom" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=enva_nombre dbname="envases.enva_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_tipoen dbname="spro_lotesfrutacomdeta.enva_tipoen" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_codigo dbname="spro_lotesfrutacomdeta.enva_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_lotesfrutacomdeta.prod_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=mfcd_sentid dbname="spro_movtofrutacomdeta.mfcd_sentid" )
+ retrieve="  SELECT dba.spro_movtofrutacomdeta.plde_codigo,   
+         dba.spro_movtofrutacomdeta.tpmv_codigo,   
+         dba.spro_movtofrutacomdeta.mfco_numero,   
+         dba.spro_movtofrutacomdeta.mfcd_secuen,   
+         dba.spro_movtofrutacomdeta.plde_coorde,   
+         dba.spro_movtofrutacomdeta.cama_codigo,   
+         dba.spro_movtofrutacomdeta.lofc_pltcod,   
+         dba.spro_movtofrutacomdeta.lofc_espcod,   
+         dba.spro_movtofrutacomdeta.lofc_lotefc,   
+         dba.spro_movtofrutacomdeta.lfcd_secuen,   
+         dba.spro_movtofrutacomdeta.mfcd_bulent,   
+         dba.spro_movtofrutacomdeta.mfcd_kgnent,   
+         dba.spro_movtofrutacomdeta.mfcd_kilrom,   
+         dba.variedades.vari_nombre,   
+         dba.productores.prod_nombre,   
+         dba.envases.enva_nombre,   
+         dba.spro_lotesfrutacomdeta.enva_tipoen,   
+         dba.spro_lotesfrutacomdeta.enva_codigo,
+			dba.spro_lotesfrutacomdeta.prod_codigo,
+         dba.spro_movtofrutacomdeta.mfcd_sentid
+    FROM dba.variedades,   
+         dba.productores,   
+         dba.envases,   
+         dba.spro_lotesfrutacomdeta,   
+         dba.spro_movtofrutacomdeta  
+   WHERE ( dba.spro_movtofrutacomdeta.lofc_pltcod = dba.spro_lotesfrutacomdeta.lofc_pltcod ) and  
+         ( dba.spro_movtofrutacomdeta.lofc_espcod = dba.spro_lotesfrutacomdeta.lofc_espcod ) and  
+         ( dba.spro_movtofrutacomdeta.lofc_lotefc = dba.spro_lotesfrutacomdeta.lofc_lotefc ) and  
+         ( dba.spro_movtofrutacomdeta.lfcd_secuen = dba.spro_lotesfrutacomdeta.lfcd_secuen ) and  
+         ( dba.spro_lotesfrutacomdeta.lofc_espcod = dba.variedades.espe_codigo ) and  
+         ( dba.spro_lotesfrutacomdeta.vari_codigo = dba.variedades.vari_codigo ) and  
+         ( dba.spro_lotesfrutacomdeta.prod_codigo = dba.productores.prod_codigo ) and  
+         ( dba.spro_lotesfrutacomdeta.enva_tipoen = dba.envases.enva_tipoen ) and  
+         ( dba.spro_lotesfrutacomdeta.enva_codigo = dba.envases.enva_codigo )    
+" )
+text(band=detail alignment="1" text="" border="6" color="0" x="46" y="252" height="956" width="2043" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="" border="6" color="0" x="46" y="40" height="200" width="2043" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="DETALLE TRASPASO CLIENTE" border="0" color="0" x="425" y="96" height="92" width="1330" html.valueishtml="0"  name=titulo visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="" border="6" color="0" x="46" y="1224" height="376" width="2043" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Planta" border="0" color="0" x="114" y="292" height="64" width="375" html.valueishtml="0"  name=plde_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="5" color="0" x="608" y="296" height="64" width="1353" format="[general]" html.valueishtml="0"  name=plde_codigo visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_nombre dddw.datacolumn=plde_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Cámara" border="0" color="0" x="114" y="412" height="64" width="229" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="0" tabsequence=10 border="5" color="0" x="608" y="408" height="64" width="969" format="[general]" html.valueishtml="0"  name=cama_codigo visible="1" dddw.name=dw_mues_camarasfrigo dddw.displaycolumn=cama_nombre dddw.datacolumn=cama_codigo dddw.percentwidth=170 dddw.lines=4 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+groupbox(band=detail text="Lote"border="5" color="0" x="133" y="492" height="680" width="1915"  name=gb_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="0" text="Planta" border="0" color="0" x="178" y="600" height="64" width="187" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=7 alignment="0" tabsequence=20 border="5" color="0" x="608" y="592" height="64" width="969" format="[general]" html.valueishtml="0"  name=lofc_pltcod visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_nombre dddw.datacolumn=plde_codigo dddw.percentwidth=170 dddw.lines=4 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Especie" border="0" color="0" x="178" y="704" height="64" width="375" html.valueishtml="0"  name=lote_espcod_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=30 border="5" color="0" x="608" y="704" height="64" width="969" format="[general]" html.valueishtml="0"  name=lofc_espcod visible="1" dddw.name=dw_mues_especies dddw.displaycolumn=espe_nombre dddw.datacolumn=espe_codigo dddw.percentwidth=170 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.imemode=0 dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Número" border="0" color="0" x="178" y="824" height="64" width="375" html.valueishtml="0"  name=lote_codigo_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=9 alignment="0" tabsequence=40 border="5" color="0" x="608" y="816" height="64" width="334" format="00000000" html.valueishtml="0"  name=lofc_lotefc visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Variedad" border="0" color="0" x="178" y="944" height="64" width="265" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=14 alignment="0" tabsequence=32766 border="5" color="0" x="608" y="928" height="76" width="1358" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Productor" border="0" color="0" x="178" y="1064" height="64" width="283" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="5" color="0" x="608" y="1056" height="76" width="1358" format="[general]" html.valueishtml="0"  name=prod_nombre  tag="Nombre de Productor" visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Tipo de Envase" border="0" color="0" x="114" y="1268" height="64" width="443" html.valueishtml="0"  name=enva_tipoen_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Envase" border="0" color="0" x="114" y="1388" height="64" width="206" html.valueishtml="0"  name=enva_codigo_t  tag="Envase" visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+button(band=detail text="..."filename=""action="0" border="0" color="0" x="425" y="1380" height="84" width="96" vtextalign="0" htextalign="0"  name=b_buscaenvase  tag="Búsquda de Envases" visible="1~t0"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+button(band=detail text="..."filename=""action="0" border="0" color="0" x="1609" y="812" height="84" width="96" vtextalign="0" htextalign="0"  name=b_buscalotes  tag="Búsquda de Lotes" visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Secuencia" border="0" color="0" x="1006" y="820" height="64" width="306" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="2" tabsequence=50 border="5" color="0" x="1362" y="820" height="64" width="201" format="00" html.valueishtml="0"  name=lfcd_secuen visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Cantidad" border="0" color="0" x="110" y="1496" height="64" width="375" html.valueishtml="0"  name=mfgd_bulent_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="1" tabsequence=60 border="5" color="0" x="608" y="1496" height="64" width="370" format="#,##0.00" html.valueishtml="0"  name=mfcd_bulent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Kilos Netos" border="0" color="0" x="1211" y="1500" height="64" width="329" html.valueishtml="0"  name=mfgd_kgnent_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=70 border="5" color="33554432" x="1586" y="1496" height="64" width="370" format="#,##0.000" html.valueishtml="0"  name=mfcd_kgnent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+column(band=detail id=17 alignment="0" tabsequence=32766 border="5" color="0" x="608" y="1272" height="76" width="960" format="[general]" html.valueishtml="0"  name=enva_tipoen visible="1" dddw.name=dw_mues_tiposenvases dddw.displaycolumn=tien_nombre dddw.datacolumn=enva_tipoen dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any dddw.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=18 alignment="0" tabsequence=32766 border="5" color="0" x="608" y="1380" height="76" width="192" format="[general]" html.valueishtml="0"  name=enva_codigo visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="5" color="0" x="841" y="1380" height="76" width="1120" format="[general]" html.valueishtml="0"  name=enva_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.imemode=0  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

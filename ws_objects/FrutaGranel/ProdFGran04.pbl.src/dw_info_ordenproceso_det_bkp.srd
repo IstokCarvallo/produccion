@@ -1,0 +1,177 @@
+﻿$PBExportHeader$dw_info_ordenproceso_det_bkp.srd
+$PBExportComments$DataWindows Informe Detalle de Orden de Proceso.
+release 10.5;
+datawindow(units=0 timer_interval=0 color=32896 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=212 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=orpr_numero dbname="spro_ordenproceso.orpr_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="spro_ordenproceso.prod_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="spro_ordenproceso.vari_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=line_codigo dbname="spro_ordenproceso.line_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_nrotur dbname="spro_ordenproceso.orpr_nrotur" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_canbul dbname="spro_ordenproceso.orpr_canbul" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_pltcod dbname="spro_ordenprocdeta.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_espcod dbname="spro_ordenprocdeta.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_codigo dbname="spro_ordenprocdeta.lote_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=vari_nombre dbname="variedades.vari_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=line_nombre dbname="lineapacking.line_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=bultos dbname="bultos" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_niveld dbname="spro_ordenproceso.orpr_niveld" values="Productor	1/Huerto	2/Cuartel	3/" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=char(2) updatewhereclause=yes name=spro_lotesfrutagranel_frio_tipofr dbname="spro_lotesfrutagranel.frio_tipofr" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_lotesfrutagranel_pefr_codigo dbname="spro_lotesfrutagranel.pefr_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=orpr_tipord dbname="spro_ordenproceso.orpr_tipord" )
+ column=(type=decimal(0) updatewhereclause=yes name=prbr_codpre dbname="spro_lotesfrutagranel.prbr_codpre" )
+ column=(type=decimal(0) updatewhereclause=yes name=prcc_codigo dbname="spro_lotesfrutagranel.prcc_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=cont_codigo dbname="spro_ordenproceso.cont_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=etiq_codigo dbname="spro_ordenproceso.etiq_codigo" )
+ column=(type=decimal(4) updatewhereclause=yes name=lote_totnet dbname="spro_lotesfrutagranel.lote_totnet" )
+ retrieve="  SELECT opr.orpr_numero, opr.prod_codigo, opr.vari_codigo, opr.line_codigo, opr.orpr_nrotur,   
+         opr.orpr_canbul, opd.lote_pltcod, opd.lote_espcod, opd.lote_codigo, var.vari_nombre,   
+         lin.line_nombre, sum(IsNull(opd.orpd_canbul,0)) as Bultos,          opr.orpr_niveld,   
+         prd.prod_nombre, lfg.frio_tipofr, lfg.pefr_codigo, opr.orpr_tipord, lfg.prbr_codpre, 
+         lfg.prcc_codigo, opr.cont_codigo, opr.etiq_codigo, lfg.lote_totnet into #Clasif1
+    FROM dba.spro_ordenproceso as opr, dba.spro_ordenprocdeta as opd, dba.variedades as var, dba.lineapacking as lin,
+         dba.productores as prd, dba.spro_lotesfrutagranel as lfg
+   WHERE opd.plde_codigo = opr.plde_codigo
+     AND opd.orpr_tipord = opr.orpr_tipord
+     AND opd.orpr_numero = opr.orpr_numero
+     AND opd.clie_codigo = opr.clie_codigo
+     AND var.espe_codigo = opr.espe_codigo
+     AND var.vari_codigo = opr.vari_codigo
+     AND opr.plde_codigo = lin.plde_codigo
+     AND opr.line_codigo = lin.line_codigo
+     AND prd.prod_codigo = opr.prod_codigo
+     AND lfg.lote_pltcod = opd.lote_pltcod
+     AND lfg.lote_espcod = opd.lote_espcod
+     AND lfg.lote_codigo = opd.lote_codigo
+     AND(opr.plde_codigo = :Planta
+     AND opr.espe_codigo = :Especie
+     AND opr.ppre_numero = :Numero
+     AND opr.orpr_fecpro = :Fecha
+     AND opr.clie_codigo = :Cliente
+     AND opr.orpr_tipord = :Tipo
+     AND opr.cont_codigo = :Contratista)
+GROUP BY opr.orpr_numero, opr.prod_codigo, opr.vari_codigo, opr.line_codigo, opr.orpr_nrotur,   
+         opr.orpr_canbul, opd.lote_pltcod, opd.lote_espcod, opd.lote_codigo, var.vari_nombre,   
+         lin.line_nombre, opr.orpr_niveld, prd.prod_nombre, lfg.frio_tipofr, lfg.pefr_codigo, 
+         opr.orpr_tipord, lfg.prbr_codpre, lfg.prcc_codigo, opr.cont_codigo, opr.etiq_codigo, 
+         lfg.lote_totnet;
+
+select mgp.clie_codigo, mgp.plde_codigo, cl1.lote_pltcod, cl1.lote_espcod, 
+       cl1.lote_codigo, mgp.fgmb_nrotar, mgp.mfgp_tibapa, 
+       sum(mgp.mfgp_pesore) as mfgp_pesore, count(*) as cantidad,
+       sum(mgp.mfgp_pesore - cal.cale_pesoen) as mfgp_pesont into #clasif2
+  from dba.spro_movtofrutagranpesa as mgp, dba.spro_movtofrutagrandeta as mgd,
+       dba.spro_bins as bin, dba.spro_calicosechero as cal, #Clasif1 as cl1
+ where mgp.clie_codigo = mgd.clie_codigo
+   and mgp.plde_codigo = mgd.plde_codigo
+   and mgp.tpmv_codigo = mgd.tpmv_codigo
+   and mgp.mfge_numero = mgd.mfge_numero
+   and mgp.lote_codigo = mgd.lote_codigo
+   and mgd.lote_pltcod = cl1.lote_pltcod
+   and mgd.lote_espcod = cl1.lote_espcod
+   and mgd.lote_codigo = cl1.lote_codigo
+   and bin.clie_codigo = mgp.clie_codigo
+   and bin.plde_codigo = mgp.plde_codigo
+   and bin.bins_numero = mgp.bins_numero
+   and cal.enva_tipoen = bin.enva_tipoen
+   and cal.enva_codigo = bin.enva_codigo
+   and cal.cale_calida = bin.cale_calida
+   and cl1.lote_codigo = 1001
+ group by mgp.clie_codigo, mgp.plde_codigo, cl1.lote_pltcod, cl1.lote_espcod, 
+       cl1.lote_codigo, mgp.fgmb_nrotar, mgp.mfgp_tibapa;
+
+select cl1.lote_pltcod, cl1.lote_espcod, cl1.lote_codigo, 
+       sum(cl1.mfgp_pesont) as mfgp_pesont into #clasif21
+  from #clasif2 as cl1
+ group by cl1.lote_pltcod, cl1.lote_espcod, cl1.lote_codigo;
+
+select cl1.lote_pltcod, cl1.lote_espcod, cl1.lote_codigo, 
+       sum(cl1.mfgp_pesont - cal.cale_pesoen) as mfgp_pesont into #clasif3
+  from dba.spro_bins as bin, dba.spro_calicosechero as cal, #Clasif2 as cl1
+ where bin.clie_codigo = cl1.clie_codigo
+   and bin.plde_codigo = cl1.plde_codigo
+   and bin.bins_numero = cl1.mfgp_tibapa
+   and cal.enva_tipoen = bin.enva_tipoen
+   and cal.enva_codigo = bin.enva_codigo
+   and cal.cale_calida = bin.cale_calida
+ group by cl1.lote_pltcod, cl1.lote_espcod, cl1.lote_codigo;
+
+update #Clasif21 as cl1
+   set cl1.mfgp_pesont = cl3.mfgp_pesont
+  from #clasif3 as cl3
+ where cl1.lote_pltcod = cl3.lote_pltcod
+   and cl1.lote_espcod = cl3.lote_espcod
+   and cl1.lote_codigo = cl3.lote_codigo;
+
+ SELECT cl1.orpr_numero, cl1.prod_codigo, cl1.vari_codigo, cl1.line_codigo, cl1.orpr_nrotur,   
+        cl1.orpr_canbul, cl1.lote_pltcod, cl1.lote_espcod, cl1.lote_codigo, cl1.vari_nombre,   
+        cl1.line_nombre, cl1.Bultos,      cl1.orpr_niveld, cl1.prod_nombre, cl1.frio_tipofr, 
+        cl1.pefr_codigo, cl1.orpr_tipord, cl1.prbr_codpre, cl1.prcc_codigo, cl1.cont_codigo, 
+        cl1.etiq_codigo, cl3.mfgp_pesont as lote_totnet
+   from #Clasif1 as cl1, #Clasif21 as cl3
+  where cl1.lote_pltcod = cl3.lote_pltcod
+    and cl1.lote_espcod = cl3.lote_espcod
+    and cl1.lote_codigo = cl3.lote_codigo;" arguments=(("Planta", number),("Especie", number),("Numero", number),("Fecha", date),("Cliente", number),("Tipo", number),("Contratista", number))  sort="cont_codigo A orpr_numero A prod_codigo A lote_espcod A lote_codigo A vari_codigo A line_codigo A orpr_nrotur A " )
+group(level=1 header.height=0 trailer.height=64 by=("orpr_nrotur" ) header.color="536870912" trailer.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=32766 border="0" color="0" x="3163" y="4" height="52" width="192" format="#,##0" html.valueishtml="0"  name=orpr_canbul visible="1~tIF ( bultos = 0,1,0)" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=12 alignment="1" tabsequence=32766 border="0" color="0" x="3163" y="4" height="52" width="192" format="#,##0" html.valueishtml="0"  name=bultos visible="1~tIF ( bultos = 0,0,1)" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+line(band=header x1="5" y1="208" x2="3355" y2="208"  name=l_2 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="0" color="0" x="14" y="4" height="52" width="201" format="00000000" html.valueishtml="0"  name=orpr_numero visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="0" expression="'(' + String(prod_codigo, '0000') + ')' + prod_nombre"border="0" color="0" x="224" y="4" height="52" width="608" format="[GENERAL]" html.valueishtml="0"  name=compute_2 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="2" expression="String( prbr_codpre , '000') + ' - ' + String( prcc_codigo , '000')"border="0" color="0" x="841" y="4" height="52" width="206" format="[GENERAL]" html.valueishtml="0"  name=compute_3 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=32766 border="0" color="0" x="1056" y="4" height="52" width="311" format="[general]" html.valueishtml="0"  name=vari_nombre visible="1" edit.limit=30 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=32766 border="0" color="0" x="1376" y="4" height="52" width="306" format="[general]" html.valueishtml="0"  name=spro_lotesfrutagranel_frio_tipofr visible="1" dddw.name=dw_mues_tratamientofrio dddw.displaycolumn=frio_nombre dddw.datacolumn=frio_tipofr dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=16 alignment="0" tabsequence=32766 border="0" color="0" x="1691" y="4" height="52" width="183" format="[general]" html.valueishtml="0"  name=spro_lotesfrutagranel_pefr_codigo visible="1" dddw.name=dw_mues_periodofrio dddw.displaycolumn=pefr_nombre dddw.datacolumn=pefr_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=32766 border="0" color="0" x="1883" y="4" height="52" width="270" format="[general]" html.valueishtml="0"  name=etiq_codigo visible="1" dddw.name=dw_mues_etiquetas dddw.displaycolumn=etiq_nombre dddw.datacolumn=etiq_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="1" tabsequence=32766 border="0" color="0" x="2981" y="4" height="52" width="174" format="#,##0.0" html.valueishtml="0"  name=lote_totnet visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=11 alignment="0" tabsequence=32766 border="0" color="0" x="2162" y="4" height="52" width="160" format="[general]" html.valueishtml="0"  name=line_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=5 alignment="2" tabsequence=32766 border="0" color="0" x="2331" y="4" height="52" width="105" format="[general]" html.valueishtml="0"  name=orpr_nrotur visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=13 alignment="0" tabsequence=32766 border="0" color="0" x="2446" y="4" height="52" width="233" format="[general]" html.valueishtml="0"  name=orpr_niveld visible="1" ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression="String( lote_pltcod, '0000' ) + '-'+String( lote_espcod  ,'00') +'-'+ String( lote_codigo  ,'0000')"border="0" color="0" x="2688" y="4" height="52" width="265" format="[GENERAL]" html.valueishtml="0"  name=numero_lote visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=trailer.1 alignment="1" text="Total Turno" border="0" color="0" x="2501" y="4" height="44" width="457" html.valueishtml="0"  name=t_11 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="sum(lote_totnet for group 1)"border="0" color="0" x="2981" y="4" height="52" width="174" format="#,##0.0" html.valueishtml="0"  name=compute_4 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=trailer.1 alignment="1" expression="IF ( bultos = 0, sum(orpr_canbul for group 1),sum( bultos  for group 1))"border="0" color="0" x="3163" y="4" height="52" width="192" format="#,##0" html.valueishtml="0"  name=compute_5 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=summary alignment="1" expression="IF ( bultos = 0, sum(orpr_canbul for all),sum( bultos  for all))"border="0" color="0" x="3131" y="4" height="52" width="224" format="#,##0" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=summary alignment="1" text="Total Bultos" border="0" color="0" x="2651" y="8" height="44" width="457" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-7" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Número
+Orden" border="0" color="0" x="14" y="104" height="96" width="201" html.valueishtml="0"  name=reci_nombre_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Detalle Ordenes de Proceso~tif( orpr_tipord = 8, 'Detalle Ordenes de Pre-Proceso', if( orpr_tipord = 4, 'Detalle Ordenes de Proceso', 'Detalle Ordenes de Re-Embalaje' ))" border="2" color="0" x="9" y="8" height="72" width="3351" html.valueishtml="0"  name=t_13 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+line(band=header x1="9" y1="92" x2="3360" y2="92"  name=l_1 visible="1" pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="16777215" )
+text(band=header alignment="0" text="
+Productor" border="0" color="0" x="224" y="104" height="96" width="608" html.valueishtml="0"  name=cate_codigo_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Predio
+Cuartel" border="0" color="0" x="841" y="104" height="96" width="206" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="
+Variedad" border="0" color="0" x="1056" y="104" height="96" width="311" html.valueishtml="0"  name=etiq_codigo_t visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Tratam.Frio" border="0" color="0" x="1376" y="104" height="96" width="306" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Período
+Frío" border="0" color="0" x="1691" y="104" height="96" width="183" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="
+Etiqueta" border="0" color="0" x="1883" y="104" height="96" width="270" html.valueishtml="0"  name=t_9 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="Línea
+Packing" border="0" color="0" x="2162" y="104" height="96" width="160" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="
+Turno" border="0" color="0" x="2331" y="104" height="96" width="105" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text="
+Seguimiento" border="0" color="0" x="2446" y="104" height="96" width="233" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="
+Lote" border="0" color="0" x="2688" y="104" height="96" width="265" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="Kg. Net.
+Recepción" border="0" color="0" x="2953" y="104" height="96" width="210" html.valueishtml="0"  name=t_10 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="2" text="
+Bultos" border="0" color="0" x="3163" y="104" height="96" width="192" html.valueishtml="0"  name=t_16 visible="1"  font.face="Arial" font.height="-7" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

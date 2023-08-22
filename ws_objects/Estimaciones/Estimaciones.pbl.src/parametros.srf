@@ -1,0 +1,23 @@
+﻿$PBExportHeader$parametros.srf
+$PBExportComments$Lectura de Parámetros de Emporesa
+global type parametros from function_object
+end type
+
+forward prototypes
+global subroutine parametros ()
+end prototypes
+
+global subroutine parametros ();SELECT	papc_identi, papc_tempo1, papc_tempo2,
+			papc_tempo3, papc_tempo4, papc_tempo5, 
+			papc_paswor, papc_estado,papc_admin1,papc_admin2
+	INTO	:gstr_parametros.identificador, :gstr_parametros.Temporada_1, :gstr_parametros.Temporada_2,
+			:gstr_parametros.Temporada_3, :gstr_parametros.Temporada_4, :gstr_parametros.Temporada_5,
+			:gstr_parametros.clave, :gstr_parametros.estado,:gstr_parametros.admin1,:gstr_parametros.admin2
+	FROM	dbo.parampredioscuarteles;
+	
+IF SQLCA.SQLCode = -1 THEN
+	F_ErrorBaseDatos(SQLCA,"Lectura de Parametros Temporada Vigente")
+END IF
+
+end subroutine
+

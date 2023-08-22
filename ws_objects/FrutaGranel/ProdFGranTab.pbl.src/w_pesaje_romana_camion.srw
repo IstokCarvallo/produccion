@@ -1,0 +1,309 @@
+﻿$PBExportHeader$w_pesaje_romana_camion.srw
+forward
+global type w_pesaje_romana_camion from window
+end type
+type ole_puerta from olecustomcontrol within w_pesaje_romana_camion
+end type
+type pb_1 from picturebutton within w_pesaje_romana_camion
+end type
+type pb_inserta from picturebutton within w_pesaje_romana_camion
+end type
+type gb_1 from groupbox within w_pesaje_romana_camion
+end type
+type st_fondo from statictext within w_pesaje_romana_camion
+end type
+type em_kilos from editmask within w_pesaje_romana_camion
+end type
+type str_pesaje from structure within w_pesaje_romana_camion
+end type
+end forward
+
+type str_pesaje from structure
+	time		fechahora[]
+	decimal { 4 }		pesaje[]
+	decimal { 4 }		total
+	boolean		agrega
+	boolean		modifica
+	str_puertacomm		puerta
+	datawindow		dw
+	string		argum[]
+end type
+
+global type w_pesaje_romana_camion from window
+integer width = 1161
+integer height = 492
+windowtype windowtype = response!
+long backcolor = 12632256
+boolean center = true
+ole_puerta ole_puerta
+pb_1 pb_1
+pb_inserta pb_inserta
+gb_1 gb_1
+st_fondo st_fondo
+em_kilos em_kilos
+end type
+global w_pesaje_romana_camion w_pesaje_romana_camion
+
+type variables
+Long	il_fila, il_medioseg
+Double	id_kilos
+Integer	ii_pesajenuevo
+Boolean	ib_ocx
+
+Private:
+str_pesaje			wstr_pesaje
+str_puertacomm		istr_puertacomm
+end variables
+
+forward prototypes
+public function boolean existeromana (integer ai_planta)
+end prototypes
+
+public function boolean existeromana (integer ai_planta);Boolean 	lb_retorno
+Integer	li_count
+
+lb_Retorno	=	TRUE
+
+SELECT IsNull(Count(*),0)
+INTO :li_count
+FROM  dba.plantaconfromana
+WHERE  plde_codigo =: ai_planta
+AND crpl_equcon =: gstr_us.computador;	 
+	 
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla plantaconfromana")
+	lb_Retorno	=	TRUE	
+ELSEIF  li_count = 0 THEN
+	MessageBox("Atención", "Computador no Tiene Asignado Romana")
+	lb_Retorno	=	TRUE
+ELSE 
+	lb_Retorno	=	FALSE
+END IF
+
+RETURN lb_Retorno
+end function
+
+on w_pesaje_romana_camion.create
+this.ole_puerta=create ole_puerta
+this.pb_1=create pb_1
+this.pb_inserta=create pb_inserta
+this.gb_1=create gb_1
+this.st_fondo=create st_fondo
+this.em_kilos=create em_kilos
+this.Control[]={this.ole_puerta,&
+this.pb_1,&
+this.pb_inserta,&
+this.gb_1,&
+this.st_fondo,&
+this.em_kilos}
+end on
+
+on w_pesaje_romana_camion.destroy
+destroy(this.ole_puerta)
+destroy(this.pb_1)
+destroy(this.pb_inserta)
+destroy(this.gb_1)
+destroy(this.st_fondo)
+destroy(this.em_kilos)
+end on
+
+event open;Integer	li_Resultado
+Long		ll_Elemento, ll_Fila
+String	ls_Parametros
+
+
+wstr_pesaje		=	Message.PowerObjectParm
+
+pb_inserta.PictureName = '\desarrollo\bmp\aceptae.bmp'
+pb_inserta.DisabledName = '\desarrollo\bmp\aceptad.bmp'
+
+istr_puertacomm	=	wstr_pesaje.puerta
+li_resultado 		=	ConfiguracionPuerta(istr_puertacomm)
+
+IF li_resultado 	= 0 THEN
+	ls_parametros	=	String(istr_puertacomm.Baudios)+","+&
+							istr_puertacomm.Paridad+","+&
+							String(istr_puertacomm.Data)+","+&
+							String(istr_puertacomm.Parada)
+			
+	IF ExisteRomana(Integer(wstr_pesaje.argum[1])) THEN
+		MessageBox("Conexión Romana","No está instalado el OCX para conexión con Romana")
+		ib_OCX = False
+	ELSE
+		ib_OCX =	True
+		IF Ole_puerta.object.PortOpen THEN Ole_puerta.object.PortOpen = False
+		Ole_puerta.object.settings = ls_parametros
+		Ole_puerta.object.PortOpen = True
+	END IF
+END IF
+end event
+
+event timer;Integer	li_factor, li_posini, li_LarBuf
+String 	ls_string
+Double	ld_kilos
+
+Ole_Puerta.Object.inputlen =	Integer(istr_puertacomm.LargoLectura)
+
+li_LarBuf =	Ole_Puerta.Object.InBufferCount
+
+IF li_LarBuf > 0 THEN
+	ls_string =  Ole_Puerta.Object.input
+END IF
+
+li_posini = Pos(ls_string,istr_puertacomm.CadenaInicio) + Len(istr_puertacomm.CadenaInicio)
+
+IF Len(Mid(ls_string,li_posini)) < istr_puertacomm.LargoCadena THEN RETURN
+	
+IF IsNumber(Mid(ls_string,li_posini,istr_puertacomm.LargoCadena)) THEN
+	ld_kilos	=	Dec(Mid(ls_string,li_posini,istr_puertacomm.LargoCadena))
+	IF istr_puertacomm.Decimales > 0 THEN
+		li_factor	= 10 ^ istr_puertacomm.Decimales
+		ld_kilos		= Round(ld_kilos/li_factor,istr_puertacomm.Decimales)
+	END IF
+	em_kilos.Text	=	String(ld_kilos)
+END IF
+
+IF ld_kilos < istr_puertacomm.PesoMinimo THEN
+	ii_pesajenuevo	=	0
+	RETURN
+END IF
+
+IF ii_pesajenuevo = 1 THEN 
+	RETURN
+END IF
+
+IF ld_kilos = id_kilos THEN
+	il_medioseg ++
+ELSE
+	id_kilos		=	ld_kilos
+	il_medioseg =	1
+END IF
+
+IF il_medioseg / 2 >= istr_puertacomm.Estabilidad THEN
+
+	id_kilos		=	ld_kilos
+	il_medioseg	=	1
+	
+END IF
+end event
+
+type ole_puerta from olecustomcontrol within w_pesaje_romana_camion
+event oncomm ( )
+integer x = 5
+integer width = 174
+integer height = 152
+integer taborder = 30
+borderstyle borderstyle = stylelowered!
+long backcolor = 16711680
+boolean focusrectangle = false
+string binarykey = "w_pesaje_romana_camion.win"
+integer textsize = -16
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+end type
+
+type pb_1 from picturebutton within w_pesaje_romana_camion
+integer x = 882
+integer y = 264
+integer width = 155
+integer height = 132
+integer taborder = 40
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string picturename = "\desarrollo\bmp\exit.bmp"
+alignment htextalign = left!
+end type
+
+event clicked;CloseWithReturn(Parent,String(0))
+end event
+
+type pb_inserta from picturebutton within w_pesaje_romana_camion
+integer x = 882
+integer y = 84
+integer width = 155
+integer height = 132
+integer taborder = 20
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string picturename = "\desarrollo\bmp\inserte.bmp"
+string disabledname = "\desarrollo\bmp\insertd.bmp"
+alignment htextalign = left!
+end type
+
+event clicked;CloseWithReturn(Parent,Dec(em_kilos.text))//String(id_kilos))
+end event
+
+type gb_1 from groupbox within w_pesaje_romana_camion
+integer x = 818
+integer y = 8
+integer width = 288
+integer height = 444
+integer taborder = 20
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 12632256
+end type
+
+type st_fondo from statictext within w_pesaje_romana_camion
+integer x = 41
+integer y = 160
+integer width = 745
+integer height = 188
+integer textsize = -20
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "System"
+long textcolor = 33554432
+long backcolor = 12632256
+boolean border = true
+borderstyle borderstyle = styleraised!
+boolean focusrectangle = false
+end type
+
+type em_kilos from editmask within w_pesaje_romana_camion
+integer x = 78
+integer y = 192
+integer width = 667
+integer height = 120
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -16
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 16711680
+string text = "none"
+alignment alignment = right!
+borderstyle borderstyle = stylelowered!
+string mask = "#,##0.00"
+end type
+
+
+Start of PowerBuilder Binary Data Section : Do NOT Edit
+08w_pesaje_romana_camion.bin 
+2900000c00e011cfd0e11ab1a1000000000000000000000000000000000003003e0009fffe000000060000000000000000000000010000000100000000000010000000000200000001fffffffe0000000000000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd00000004fffffffefffffffefffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff006f00520074006f004500200074006e00790072000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050016ffffffffffffffff00000003000000000000000000000000000000000000000000000000000000003dba35e001c861f300000003000000c00000000000500003004c004200430049004e0045004500530045004b000000590000000000000000000000000000000000000000000000000000000000000000000000000002001cffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000260000000000500003004f0042005800430054005300450052004d0041000000000000000000000000000000000000000000000000000000000000000000000000000000000002001affffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000010000003c00000000004200500043004f00530058004f00540041005200450047000000000000000000000000000000000000000000000000000000000000000000000000000000000101001a000000020000000100000004648a5600101b2c6e0000b68214000000000000003dba35e001c861f33dba35e001c861f3000000000000000000000000fffffffefffffffefffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+23ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff006f00430079007000690072006800670020007400630028002000290039003100340039000000200000000000000000000000000000000000000000000000001234432100000008000003ed000003ed648a560100060000000100000000040000000200000025800008000000000000000000000000003f00000001000000001234432100000008000003ed000003ed648a560100060000000100000000040000000200000025800008000000000000000000000000003f00000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006f00430074006e006e00650073007400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001020012ffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000020000003c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+18w_pesaje_romana_camion.bin 
+End of PowerBuilder Binary Data Section : No Source Expected After This Point

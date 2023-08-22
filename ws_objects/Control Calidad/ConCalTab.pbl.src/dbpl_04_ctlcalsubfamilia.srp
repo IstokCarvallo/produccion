@@ -1,0 +1,12 @@
+﻿$PBExportHeader$dbpl_04_ctlcalsubfamilia.srp
+PIPELINE(source_connect=ProdRancagua_2014,destination_connect=Produccion_2014,type=update,commit=0,errors=0,keyname="ctlcalsubfamilia")
+SOURCE(name="ctlcalsubfamilia",COLUMN(type=decimal,name="ccfa_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=decimal,name="ccsf_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no)
+ COLUMN(type=varchar,name="ccsf_descrip",dbtype="varchar(40)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccsf_pidegr",dbtype="numeric(1,0)",nulls_allowed=yes))
+RETRIEVE(statement="PBSELECT(TABLE(NAME=~"dba.ctlcalsubfamilia~") COLUMN(NAME=~"dba.ctlcalsubfamilia.ccfa_codigo~")COLUMN(NAME=~"dba.ctlcalsubfamilia.ccsf_codigo~")COLUMN(NAME=~"dba.ctlcalsubfamilia.ccsf_descrip~")COLUMN(NAME=~"dba.ctlcalsubfamilia.ccsf_pidegr~"))")
+DESTINATION(name="dba.ctlcalsubfamilia",COLUMN(type=decimal,name="ccfa_codigo",dbtype="numeric(2,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=decimal,name="ccsf_codigo",dbtype="numeric(3,0)",key=yes,nulls_allowed=no,initial_value="0")
+ COLUMN(type=varchar,name="ccsf_descrip",dbtype="char(40)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="ccsf_pidegr",dbtype="numeric(1,0)",nulls_allowed=yes)
+ COLUMN(type=decimal,name="cons_control",dbtype="numeric(7,0)",nulls_allowed=yes))

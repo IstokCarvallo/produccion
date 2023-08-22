@@ -1,0 +1,90 @@
+﻿$PBExportHeader$dw_mues_ordenproceso_pesaje.srd
+release 10;
+datawindow(units=0 timer_interval=0 color=10789024 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes hidegrayline=no )
+header(height=132 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=72 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_plde_codigo dbname="spro_ordenprocdeta.plde_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpr_tipord dbname="spro_ordenprocdeta.orpr_tipord" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpr_numero dbname="spro_ordenprocdeta.orpr_numero" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpd_secuen dbname="spro_ordenprocdeta.orpd_secuen" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_pltcod dbname="spro_ordenprocdeta.lote_pltcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_espcod dbname="spro_ordenprocdeta.lote_espcod" )
+ column=(type=decimal(0) updatewhereclause=yes name=lote_codigo dbname="spro_ordenprocdeta.lote_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_tipoen dbname="spro_ordenprocdeta.enva_tipoen" )
+ column=(type=decimal(0) updatewhereclause=yes name=enva_codigo dbname="spro_ordenprocdeta.enva_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_cama_codigo dbname="spro_ordenprocdeta.cama_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpd_nroban dbname="spro_ordenprocdeta.orpd_nroban" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpd_nropos dbname="spro_ordenprocdeta.orpd_nropos" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpd_nropis dbname="spro_ordenprocdeta.orpd_nropis" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_orpd_canbul dbname="spro_ordenprocdeta.orpd_canbul" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_lotesfrutagranel_cate_codigo dbname="spro_lotesfrutagranel.cate_codigo" )
+ column=(type=char(40) updatewhereclause=yes name=envases_enva_nombre dbname="envases.enva_nombre" )
+ column=(type=decimal(3) updatewhereclause=yes name=spro_lotesfrutagrandeta_lotd_kilpro dbname="spro_lotesfrutagrandeta.lotd_kilpro" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_lotesfrutagranel_prod_codigo dbname="spro_lotesfrutagranel.prod_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_lotesfrutagranel_prbr_codpre dbname="spro_lotesfrutagranel.prbr_codpre" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_lotesfrutagranel_prcc_codigo dbname="spro_lotesfrutagranel.prcc_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=spro_ordenprocdeta_clie_codigo dbname="spro_ordenprocdeta.clie_codigo" )
+ retrieve="  SELECT dba.spro_ordenprocdeta.plde_codigo,   
+         dba.spro_ordenprocdeta.orpr_tipord,   
+         dba.spro_ordenprocdeta.orpr_numero,   
+         dba.spro_ordenprocdeta.orpd_secuen,   
+         dba.spro_ordenprocdeta.lote_pltcod,   
+         dba.spro_ordenprocdeta.lote_espcod,   
+         dba.spro_ordenprocdeta.lote_codigo,   
+         dba.spro_ordenprocdeta.enva_tipoen,   
+         dba.spro_ordenprocdeta.enva_codigo,   
+         dba.spro_ordenprocdeta.cama_codigo,   
+         dba.spro_ordenprocdeta.orpd_nroban,   
+         dba.spro_ordenprocdeta.orpd_nropos,   
+         dba.spro_ordenprocdeta.orpd_nropis,   
+         dba.spro_ordenprocdeta.orpd_canbul,   
+         dba.spro_lotesfrutagranel.cate_codigo,   
+         dba.envases.enva_nombre,   
+         dba.spro_lotesfrutagrandeta.lotd_kilpro,   
+         dba.spro_lotesfrutagranel.prod_codigo,   
+         dba.spro_lotesfrutagranel.prbr_codpre,   
+         dba.spro_lotesfrutagranel.prcc_codigo,   
+         dba.spro_ordenprocdeta.clie_codigo  
+    FROM dba.spro_ordenprocdeta,   
+         dba.spro_ordenproceso,   
+         dba.envases,   
+         dba.spro_lotesfrutagrandeta,   
+         dba.spro_lotesfrutagranel  
+   WHERE ( dba.spro_ordenproceso.plde_codigo = dba.spro_ordenprocdeta.plde_codigo ) and  
+         ( dba.spro_ordenproceso.orpr_tipord = dba.spro_ordenprocdeta.orpr_tipord ) and  
+         ( dba.spro_ordenproceso.orpr_numero = dba.spro_ordenprocdeta.orpr_numero ) and  
+         ( dba.spro_lotesfrutagranel.lote_pltcod = dba.spro_lotesfrutagrandeta.lote_pltcod ) and  
+         ( dba.spro_lotesfrutagranel.lote_espcod = dba.spro_lotesfrutagrandeta.lote_espcod ) and  
+         ( dba.spro_lotesfrutagranel.lote_codigo = dba.spro_lotesfrutagrandeta.lote_codigo ) and  
+         ( dba.spro_ordenprocdeta.lote_pltcod = dba.spro_lotesfrutagrandeta.lote_pltcod ) and  
+         ( dba.spro_ordenprocdeta.lote_espcod = dba.spro_lotesfrutagrandeta.lote_espcod ) and  
+         ( dba.spro_ordenprocdeta.lote_codigo = dba.spro_lotesfrutagrandeta.lote_codigo ) and  
+         ( dba.spro_ordenprocdeta.enva_tipoen = dba.spro_lotesfrutagrandeta.enva_tipoen ) and  
+         ( dba.spro_ordenprocdeta.enva_codigo = dba.spro_lotesfrutagrandeta.enva_codigo ) and  
+         ( dba.envases.enva_tipoen = dba.spro_ordenprocdeta.enva_tipoen ) and  
+         ( dba.envases.enva_codigo = dba.spro_ordenprocdeta.enva_codigo ) and  
+         ( dba.spro_ordenproceso.clie_codigo = dba.spro_ordenprocdeta.clie_codigo ) and  
+         ( ( dba.spro_ordenprocdeta.clie_codigo = :cliente ) AND
+		( dba.spro_ordenproceso.plde_codigo = :planta ) AND  
+         ( dba.spro_ordenproceso.orpr_tipord = 4 ) AND  
+         ( dba.spro_ordenproceso.orpr_numero = :orden ) )     
+" arguments=(("cliente", number),("planta", number),("orden", number)) )
+text(band=header alignment="2" text="Lote" border="6" color="0" x="32" y="20" height="104" width="155" html.valueishtml="0"  name=t_3 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TipoEnvase" border="6" color="0" x="210" y="20" height="104" width="466" html.valueishtml="0"  name=t_4 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=header alignment="2" text="TipoEnvase" border="6" color="0" x="699" y="20" height="104" width="443" html.valueishtml="0"  name=t_5 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=7 alignment="2" tabsequence=32766 border="0" color="0" x="32" y="12" height="52" width="155" format="[general]" html.valueishtml="0"  name=lote_codigo visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="0" color="0" x="210" y="12" height="52" width="466" format="[general]" html.valueishtml="0"  name=enva_tipoen visible="1" dddw.name=dw_mues_tipoenvase dddw.displaycolumn=tien_nombre dddw.datacolumn=enva_tipoen dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="0" color="0" x="699" y="12" height="52" width="443" format="[general]" html.valueishtml="0"  name=enva_codigo visible="1" dddw.name=dw_mues_envases dddw.displaycolumn=enva_nombre dddw.datacolumn=enva_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="10789024" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

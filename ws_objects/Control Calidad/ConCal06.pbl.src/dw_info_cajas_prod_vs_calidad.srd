@@ -1,0 +1,17 @@
+﻿$PBExportHeader$dw_info_cajas_prod_vs_calidad.srd
+release 8;
+datawindow(units=0 timer_interval=0 color=16777215 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=84 color="536870912" )
+table(column=(type=decimal(0) updatewhereclause=yes name=cajasprod dbname="cajasprod" )
+ column=(type=decimal(0) updatewhereclause=yes name=cajascali dbname="cajascali" )
+ procedure="1 execute dba.fproc_producciontotal_cajas;0 @Cliente = :Cliente, @Zona = :Zona, @Planta = :Planta, @FechaDesde = :FechaDesde, @FechaHasta = :FechaHasta, @Especie = :Especie, @Variedad = :Variedad, @Agronomo = :Agronomo, @Productor = :Productor, @Embalaje = :Embalaje, @Tipo = :Tipo" arguments=(("Cliente", number),("Zona", number),("Planta", number),("FechaDesde", date),("FechaHasta", date),("Especie", number),("Variedad", number),("Agronomo", number),("Productor", number),("Embalaje", string),("Tipo", number)) )
+text(band=header alignment="0" text="Inspeccionadas" border="0" color="33554432" x="471" y="0" height="64" width="448" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="0" text=" Producidas" border="0" color="33554432" x="0" y="0" height="64" width="402" html.valueishtml="0"  name=cajascali_t visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header alignment="1" text="% Muestreo" border="0" color="33554432" x="1051" y="0" height="64" width="334" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="1" tabsequence=32766 border="0" color="33554432" x="425" y="4" height="76" width="434" format="#,###" html.valueishtml="0"  name=cajascali visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="0" color="33554432" x="0" y="4" height="76" width="338" format="#,###" html.valueishtml="0"  name=cajasprod visible="1" edit.limit=0 edit.case=any edit.autoselect=yes edit.autohscroll=yes edit.imemode=0  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+compute(band=detail alignment="1" expression=" cajascali *100/ cajasprod "border="0" color="33554432" x="946" y="4" height="76" width="379" format="#,##0.00" html.valueishtml="0"  name=compute_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" netscapelayers="0" )

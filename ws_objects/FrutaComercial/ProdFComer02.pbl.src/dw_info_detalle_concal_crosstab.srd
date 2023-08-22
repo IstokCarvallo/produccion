@@ -1,0 +1,40 @@
+﻿$PBExportHeader$dw_info_detalle_concal_crosstab.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=4 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no  crosstab.dynamic = yes grid.lines=0 grid.columnmove=no selected.mouse=no )
+header[1](height=0 color="536870912" )
+header[2](height=128 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=64 color="536870912" )
+table(column=(type=number updatewhereclause=yes name=dade_tipodd dbname="dade_tipodd" values="Calidad	1/Condición	2/" )
+ column=(type=char(20) updatewhereclause=yes name=dade_nombre dbname="dade_nombre" )
+ column=(type=number updatewhereclause=yes name=ccde_podade dbname="ccde_podade" )
+ retrieve="SELECT dba.spro_concalcomdeta.plde_codigo,
+       dba.spro_concalcomdeta.lote_espcod,
+       dba.spro_concalcomdeta.lote_codigo,
+       dba.spro_concalcomdeta.dade_tipodd,
+       dba.spro_danosydefectos.dade_nombre,
+       dba.spro_concalcomdeta.ccde_podade,
+       lote=Convert(char(19),'')    
+  FROM dba.spro_concalcomdeta,
+       dba.spro_danosydefectos     
+ WHERE ( dba.spro_danosydefectos.espe_codigo = dba.spro_concalcomdeta.lote_espcod ) and
+       ( dba.spro_danosydefectos.dade_tipodd = dba.spro_concalcomdeta.dade_tipodd ) and
+       ( dba.spro_danosydefectos.dade_codigo = dba.spro_concalcomdeta.dade_codigo ) and  
+       ( dba.spro_danosydefectos.dade_secuen = dba.spro_concalcomdeta.dade_secuen ) and  
+       ( ( dba.spro_concalcomdeta.plde_codigo = :planta ) And    
+         ( dba.spro_concalcomdeta.ccco_folio = :folio ) And    
+         ( dba.spro_danosydefectos.vari_codigo = :variedad ) )  " arguments=(("planta", number),("folio", number),("variedad", number))  sort="dade_tipodd A dade_nombre A " )
+text(band=header[1] alignment="0" text="Sum Of Ccde Podade" border="0" color="0" x="9" y="4" height="52" width="421"  name=t_1  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[1] alignment="0" text="obj_1" border="0" color="0" x="439" y="4" height="52" width="942"  name=t_2  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="2" text="@col" border="2" color="0" x="1390" y="4" height="120" width="334"  name=ccde_podade_t  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="TipoDaño" border="2" color="0" x="9" y="4" height="120" width="421"  name=t_3  font.face="MS Sans Serif" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="0" text="Descripción" border="2" color="0" x="439" y="64" height="60" width="942"  name=t_4  font.face="MS Sans Serif" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=header[2] alignment="1" text="LOTE   " border="2" color="0" x="439" y="4" height="56" width="942"  name=t_5  font.face="MS Sans Serif" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="2" tabsequence=32766 border="2" color="33554432" x="9" y="4" height="52" width="421" format="[general]"  name=dade_tipodd ddlb.limit=0 ddlb.allowedit=no ddlb.case=any  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="2" color="33554432" x="439" y="4" height="52" width="942" format="[general]"  name=dade_nombre edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=3 alignment="2" tabsequence=32766 border="2" color="33554432" x="1390" y="4" height="52" width="334" format="#0.00"  name=ccde_podade edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes crosstab.repeat=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+ crosstab(band = foreground  crosstabonly = yes 
+ columns = "string( plde_codigo ,'0000') + string( lote_espcod ,'00') + string( lote_codigo ,'0000')" rows = "dade_tipodd, dade_nombre" values = "sum(ccde_podade for crosstab)" sourcenames = "plde_codigo, lote_espcod, lote_codigo, dade_tipodd, dade_nombre, ccde_podade, lote")
+sparse(names="dade_tipodd")htmltable(border="0" cellpadding="1" cellspacing="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )

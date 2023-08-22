@@ -1,0 +1,32 @@
+﻿$PBExportHeader$p_entradacamiones_exe.srj
+$PBExportComments$Generated Application Executable Project
+EXE:EntradaCamiones.exe,..\..\imagenes\consolafrio.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
+CMP:1,0,0,2,0,0,1
+COM:RIOblanco Spa
+DES:Sybase, Inc. Product File
+CPY:2017
+PRD:Entrada Camiones
+PVS:5.22.28022023
+PVN:5,22,2802,2023
+FVS:5.22.28022023
+FVN:5,22,2802,2023
+MAN:0,asInvoker,0
+PBD:EntradaCamiones.pbl,,1
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,nvo_sizeof,u
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,str_usuario,s
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,dw_mues_ingresocamion,d
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,uo_tipocamion,u
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,m_camiones_opcion,m
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,str_mant,s
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,w_ingresocamiones_systray,w
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,dw_info_ticketingreso,d
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,entradacamiones,a
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,uo_transportista,u
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,dw_mant_ingresocamion,d
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,w_systray,w
+OBJ:C:\Desarrollo 22\Productiva\EntradaCamiones\EntradaCamiones.pbl,bitor,f

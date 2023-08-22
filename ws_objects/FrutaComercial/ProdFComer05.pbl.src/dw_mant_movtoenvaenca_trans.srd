@@ -1,0 +1,101 @@
+﻿$PBExportHeader$dw_mant_movtoenvaenca_trans.srd
+$PBExportComments$Mantención Encabezado de Movimientos de Envases
+release 10.5;
+datawindow(units=0 timer_interval=0 color=12632256 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=720 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=plde_codigo dbname="spro_movtoenvaenca_trans.plde_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=tpmv_codigo dbname="spro_movtoenvaenca_trans.tpmv_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=meen_numero dbname="spro_movtoenvaenca_trans.meen_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=plde_coorde dbname="spro_movtoenvaenca_trans.plde_coorde" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=prod_codigo dbname="spro_movtoenvaenca_trans.prod_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=meen_guisii dbname="spro_movtoenvaenca_trans.meen_guisii" )
+ column=(type=date update=yes updatewhereclause=yes name=meen_fecmov dbname="spro_movtoenvaenca_trans.meen_fecmov" )
+ column=(type=char(40) updatewhereclause=yes name=prod_nombre dbname="productores.prod_nombre" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tran_codigo dbname="spro_movtoenvaenca_trans.tran_codigo" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=cami_patent dbname="spro_movtoenvaenca_trans.cami_patent" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=cami_patcar dbname="spro_movtoenvaenca_trans.cami_patcar" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=cami_clasifi dbname="spro_movtoenvaenca_trans.cami_clasifi" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=meen_rutcho dbname="spro_movtoenvaenca_trans.meen_rutcho" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=meen_chofer dbname="spro_movtoenvaenca_trans.meen_chofer" )
+ column=(type=char(60) update=yes updatewhereclause=yes name=meen_dirdes dbname="spro_movtoenvaenca_trans.meen_dirdes" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=meen_despac dbname="spro_movtoenvaenca_trans.meen_despac" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=meen_avisar dbname="spro_movtoenvaenca_trans.meen_avisar" )
+ column=(type=char(10) updatewhereclause=yes name=prod_rut dbname="productores.prod_rut" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tpmv_codrec dbname="spro_movtoenvaenca_trans.tpmv_codrec" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mfge_numero dbname="spro_movtoenvaenca_trans.mfge_numero" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=meen_modulo dbname="spro_movtoenvaenca_trans.meen_modulo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie_codigo dbname="spro_movtoenvaenca_trans.clie_codigo" )
+ retrieve="  SELECT ~"dba~".~"spro_movtoenvaenca_trans~".~"plde_codigo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"tpmv_codigo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_numero~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"plde_coorde~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"prod_codigo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_guisii~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_fecmov~",   
+         ~"dba~".~"productores~".~"prod_nombre~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"tran_codigo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"cami_patent~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"cami_patcar~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"cami_clasifi~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_rutcho~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_chofer~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_dirdes~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_despac~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_avisar~",   
+         ~"dba~".~"productores~".~"prod_rut~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"tpmv_codrec~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"mfge_numero~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"meen_modulo~",   
+         ~"dba~".~"spro_movtoenvaenca_trans~".~"clie_codigo~"  
+    FROM {oj ~"dba~".~"productores~" RIGHT OUTER JOIN ~"dba~".~"spro_movtoenvaenca_trans~" ON ~"dba~".~"productores~".~"prod_codigo~" = ~"dba~".~"spro_movtoenvaenca_trans~".~"prod_codigo~"}  
+   WHERE ( dba.spro_movtoenvaenca_trans.plde_codigo = :Planta ) AND  
+         ( dba.spro_movtoenvaenca_trans.tpmv_codrec = :TipoMovto ) AND  
+         ( dba.spro_movtoenvaenca_trans.mfge_numero = :Numero ) AND  
+         ( dba.spro_movtoenvaenca_trans.clie_codigo = :Cliente )    
+" update="dba.spro_movtoenvaenca_trans" updatewhere=0 updatekeyinplace=yes arguments=(("Planta", number),("TipoMovto", number),("Numero", number),("Cliente", number)) )
+text(band=detail alignment="0" text="" border="6" color="0" x="27" y="20" height="684" width="1573" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Fecha" border="0" color="0" x="1033" y="240" height="56" width="155" html.valueishtml="0"  name=meen_fecmov_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="2" tabsequence=30 border="5" color="0" x="1225" y="240" height="60" width="329" format="[shortdate]" html.valueishtml="0"  name=meen_fecmov visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="Transportista" border="0" color="0" x="1691" y="64" height="56" width="370" html.valueishtml="0"  name=tran_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Patente Camión" border="0" color="0" x="1687" y="156" height="56" width="398" html.valueishtml="0"  name=cami_patent_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Carro" border="0" color="0" x="2615" y="156" height="56" width="160" html.valueishtml="0"  name=cami_patcar_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Rut Chofer" border="0" color="0" x="1687" y="248" height="56" width="389" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Nombre Chofer" border="0" color="0" x="1687" y="340" height="56" width="389" html.valueishtml="0"  name=mfge_chofer_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=100 border="5" color="0" x="2139" y="152" height="60" width="256" format="[general]" html.valueishtml="0"  name=cami_patent visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=9 alignment="0" tabsequence=90 border="5" color="0" x="2139" y="60" height="60" width="937" format="[general]" html.valueishtml="0"  name=tran_codigo visible="1" dddw.name=dw_mues_transportista dddw.displaycolumn=tran_nombre dddw.datacolumn=tran_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=11 alignment="0" tabsequence=110 border="5" color="0" x="2821" y="152" height="60" width="256" format="[general]" html.valueishtml="0"  name=cami_patcar visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=13 alignment="0" tabsequence=120 border="5" color="0" x="2144" y="244" height="60" width="338" format="[general]" html.valueishtml="0"  name=meen_rutcho visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=14 alignment="0" tabsequence=130 border="5" color="0" x="2144" y="332" height="60" width="919" format="[general]" html.valueishtml="0"  name=meen_chofer visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+text(band=detail alignment="0" text="" border="6" color="0" x="1618" y="20" height="684" width="1504" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Guía S.I.I." border="0" color="0" x="1079" y="608" height="56" width="224" html.valueishtml="0"  name=meen_guisii_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=6 alignment="1" tabsequence=80 border="5" color="0" x="1317" y="604" height="60" width="242" format="[general]" html.valueishtml="0"  name=meen_guisii visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+button(band=detail text="..." filename="" enabled=yes action="0" border="0" color="0" x="878" y="512" height="68" width="78" vtextalign="0" htextalign="0"  name=b_buscaproductor visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+column(band=detail id=5 alignment="1" tabsequence=70 border="5" color="0" x="553" y="516" height="56" width="302" format="00000" html.valueishtml="0"  name=prod_codigo visible="1~t0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=22 alignment="1" tabsequence=60 border="5" color="0" x="553" y="424" height="56" width="1001" format="000" html.valueishtml="0"  name=clie_codigo visible="1" dddw.name=dw_mues_clienprod dddw.displaycolumn=clie_nombre dddw.datacolumn=clie_codigo dddw.percentwidth=180 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=18 alignment="0" tabsequence=40 border="5" color="0" x="553" y="516" height="56" width="302" format="@@@.@@@.@@@-@" html.valueishtml="0"  name=prod_rut visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1090519039" )
+column(band=detail id=4 alignment="1" tabsequence=50 border="5" color="0" x="553" y="332" height="60" width="1001" format="[general]" html.valueishtml="0"  name=plde_coorde visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_codnom dddw.datacolumn=plde_codigo dddw.percentwidth=180 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=3 alignment="1" tabsequence=20 border="5" color="0" x="553" y="240" height="60" width="329" format="00000000" html.valueishtml="0"  name=meen_numero visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=2 alignment="0" tabsequence=10 border="5" color="0" x="553" y="148" height="60" width="1001" format="[general]" html.valueishtml="0"  name=tpmv_codigo visible="1" dddw.name=dw_mues_spro_tipomovtofruta dddw.displaycolumn=tpmv_nombre dddw.datacolumn=tpmv_codigo dddw.percentwidth=190 dddw.lines=0 dddw.limit=0 dddw.allowedit=yes dddw.useasborder=yes dddw.case=any dddw.hscrollbar=yes dddw.vscrollbar=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=1 alignment="0" tabsequence=32766 border="5" color="0" x="553" y="60" height="60" width="1001" format="[general]" html.valueishtml="0"  name=plde_codigo visible="1" dddw.name=dw_mues_plantadesp dddw.displaycolumn=plde_nombre dddw.datacolumn=plde_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12632256" )
+text(band=detail alignment="0" text="Productor" border="0" color="0" x="64" y="528" height="56" width="389" html.valueishtml="0"  name=prod_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Cliente" border="0" color="0" x="64" y="424" height="56" width="389" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Planta Origen/Dest" border="0" color="0" x="64" y="336" height="56" width="466" html.valueishtml="0"  name=plde_coorde_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Número" border="0" color="0" x="64" y="240" height="56" width="425" html.valueishtml="0"  name=meen_numero_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Tipo Movimiento" border="0" color="0" x="64" y="152" height="56" width="421" html.valueishtml="0"  name=tpmv_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="0" text="Planta" border="0" color="0" x="64" y="60" height="60" width="389" html.valueishtml="0"  name=plde_codigo_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=32766 border="5" color="0" x="64" y="604" height="56" width="974" format="[general]" html.valueishtml="0"  name=prod_nombre visible="1" edit.limit=0 edit.case=any edit.autoselect=yes  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="0" color="0" x="992" y="504" height="76" width="512" format="[general]" html.valueishtml="0"  name=prod_codigo_1 visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16777215" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

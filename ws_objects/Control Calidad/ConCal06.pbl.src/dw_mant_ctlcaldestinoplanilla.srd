@@ -1,0 +1,141 @@
+﻿$PBExportHeader$dw_mant_ctlcaldestinoplanilla.srd
+$PBExportComments$Dw. de mantención de planilla Cualitativa
+release 12;
+datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=576 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="ctlcaldestinosdet.clie_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="ctlcaldestinosdet.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=vari_codigo dbname="ctlcaldestinosdet.vari_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=etiq_codigo dbname="ctlcaldestinosdet.etiq_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=prod_codigo dbname="ctlcaldestinosdet.prod_codigo" )
+ column=(type=char(3) updatewhereclause=yes name=vaca_calibr dbname="ctlcaldestinosdet.vaca_calibr" )
+ column=(type=char(10) updatewhereclause=yes name=emba_codigo dbname="ctlcaldestinosdet.emba_codigo" )
+ column=(type=date updatewhereclause=yes name=ccde_fecemb dbname="ctlcaldestinosdet.ccde_fecemb" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_secuen dbname="ctlcaldestinosdet.ccdd_secuen" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_paleti dbname="ctlcaldestinosdet.ccdd_paleti" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_aparie dbname="ctlcaldestinosdet.ccdd_aparie" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_nropaq dbname="ctlcaldestinosdet.ccdd_nropaq" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_nrorac dbname="ctlcaldestinosdet.ccdd_nrorac" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_cobay1 dbname="ctlcaldestinosdet.ccdd_cobay1" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_cobay2 dbname="ctlcaldestinosdet.ccdd_cobay2" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_cobay3 dbname="ctlcaldestinosdet.ccdd_cobay3" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_tamba1 dbname="ctlcaldestinosdet.ccdd_tamba1" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_tamba2 dbname="ctlcaldestinosdet.ccdd_tamba2" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_tamba3 dbname="ctlcaldestinosdet.ccdd_tamba3" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_tamba4 dbname="ctlcaldestinosdet.ccdd_tamba4" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_tamba5 dbname="ctlcaldestinosdet.ccdd_tamba5" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_forade dbname="ctlcaldestinosdet.ccdd_forade" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_foraap dbname="ctlcaldestinosdet.ccdd_foraap" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_pesras dbname="ctlcaldestinosdet.ccdd_pesras" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_pesrab dbname="ctlcaldestinosdet.ccdd_pesrab" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_recidu dbname="ctlcaldestinosdet.ccdd_recidu" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_mancha dbname="ctlcaldestinosdet.ccdd_mancha" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_desmod dbname="ctlcaldestinosdet.ccdd_desmod" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_desalt dbname="ctlcaldestinosdet.ccdd_desalt" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_deslev dbname="ctlcaldestinosdet.ccdd_deslev" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_punuba dbname="ctlcaldestinosdet.ccdd_punuba" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_pununi dbname="ctlcaldestinosdet.ccdd_pununi" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_punura dbname="ctlcaldestinosdet.ccdd_punura" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_pacida dbname="ctlcaldestinosdet.ccdd_pacida" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_opnbay dbname="ctlcaldestinosdet.ccdd_opnbay" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_coblan dbname="ctlcaldestinosdet.ccdd_coblan" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_cocris dbname="ctlcaldestinosdet.ccdd_cocris" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_codesp dbname="ctlcaldestinosdet.ccdd_codesp" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_conso2 dbname="ctlcaldestinosdet.ccdd_conso2" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_cobapa dbname="ctlcaldestinosdet.ccdd_cobapa" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_codesg dbname="ctlcaldestinosdet.ccdd_codesg" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_pardea dbname="ctlcaldestinosdet.ccdd_pardea" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_dafrio dbname="ctlcaldestinosdet.ccdd_dafrio" )
+ column=(type=decimal(1) updatewhereclause=yes name=ccdd_baacuo dbname="ctlcaldestinosdet.ccdd_baacuo" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_coprem dbname="ctlcaldestinosdet.ccdd_coprem" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_conden dbname="ctlcaldestinosdet.ccdd_conden" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_resemb dbname="ctlcaldestinosdet.ccdd_resemb" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_rescal dbname="ctlcaldestinosdet.ccdd_rescal" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_rescon dbname="ctlcaldestinosdet.ccdd_rescon" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_cobay4 dbname="ctlcaldestinosdet.ccdd_cobay4" )
+ column=(type=char(1) updatewhereclause=yes name=ccdd_rescaj dbname="ctlcaldestinosdet.ccdd_rescaj" )
+ column=(type=decimal(0) updatewhereclause=yes name=ccdd_caucajl dbname="ctlcaldestinosdet.ccdd_caucajl" )
+ column=(type=char(1) updatewhereclause=yes name=nave_tipotr dbname="ctlcaldestinosdet.nave_tipotr" )
+ column=(type=decimal(0) updatewhereclause=yes name=nave_codigo dbname="ctlcaldestinosdet.nave_codigo" )
+ retrieve="  SELECT ~"dba~".~"ctlcaldestinosdet~".~"clie_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"espe_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"vari_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"etiq_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"prod_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"vaca_calibr~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"emba_codigo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccde_fecemb~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_secuen~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_paleti~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_aparie~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_nropaq~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_nrorac~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cobay1~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cobay2~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cobay3~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_tamba1~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_tamba2~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_tamba3~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_tamba4~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_tamba5~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_forade~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_foraap~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_pesras~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_pesrab~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_recidu~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_mancha~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_desmod~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_desalt~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_deslev~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_punuba~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_pununi~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_punura~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_pacida~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_opnbay~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_coblan~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cocris~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_codesp~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_conso2~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cobapa~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_codesg~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_pardea~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_dafrio~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_baacuo~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_coprem~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_conden~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_resemb~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_rescal~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_rescon~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_cobay4~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_rescaj~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"ccdd_caucajl~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"nave_tipotr~",   
+         ~"dba~".~"ctlcaldestinosdet~".~"nave_codigo~"  
+    FROM ~"dba~".~"ctlcaldestinosdet~"  " )
+text(band=detail alignment="0" text="" border="6" color="0" x="32" y="236" height="328" width="2459" html.valueishtml="0"  name=t_3 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12639424" background.transparency="0" background.gradient.color="15793151" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="" border="6" color="0" x="32" y="20" height="200" width="2459" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="12639424" background.transparency="0" background.gradient.color="15793151" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="2" text="Detalle Planilla  Destino" border="0" color="0" x="667" y="80" height="92" width="987" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-14" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Variedad" border="0" color="0" x="87" y="452" height="64" width="265" html.valueishtml="0"  name=t_5 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Productor" border="0" color="0" x="87" y="260" height="64" width="297" html.valueishtml="0"  name=t_8 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Cliente" border="0" color="0" x="1353" y="268" height="64" width="224" html.valueishtml="0"  name=t_6 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Especie" border="0" color="0" x="87" y="360" height="64" width="233" html.valueishtml="0"  name=t_4 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="Etiqueta" border="0" color="0" x="1353" y="360" height="64" width="247" html.valueishtml="0"  name=t_7 visible="1"  font.face="Arial" font.height="-10" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=5 alignment="0" tabsequence=32766 border="5" color="0" x="416" y="268" height="60" width="873" format="00000" html.valueishtml="0"  name=prod_codigo visible="1" dddw.name=dw_mues_productores dddw.displaycolumn=prod_nomrle dddw.datacolumn=prod_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="5" color="0" x="416" y="364" height="60" width="590" format="[general]" html.valueishtml="0"  name=espe_codigo visible="1" dddw.name=dw_mues_especies dddw.displaycolumn=espe_nombre dddw.datacolumn=espe_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=3 alignment="0" tabsequence=32766 border="5" color="0" x="416" y="460" height="60" width="590" format="[general]" html.valueishtml="0"  name=vari_codigo visible="1" dddw.name=dw_mues_variedades dddw.displaycolumn=vari_nombre dddw.datacolumn=vari_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=1 alignment="1" tabsequence=32766 border="5" color="0" x="1627" y="268" height="60" width="247" format="[general]" html.valueishtml="0"  name=clie_codigo visible="1" dddw.name=none dddw.displaycolumn=none dddw.datacolumn=none dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=4 alignment="0" tabsequence=32766 border="5" color="0" x="1627" y="364" height="60" width="590" format="[general]" html.valueishtml="0"  name=etiq_codigo visible="1" dddw.name=dw_mues_etiquetas dddw.displaycolumn=etiq_nombre dddw.datacolumn=etiq_codigo dddw.percentwidth=0 dddw.lines=0 dddw.limit=0 dddw.allowedit=no dddw.useasborder=no dddw.case=any  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 
