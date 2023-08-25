@@ -1018,7 +1018,7 @@ End If
 Return FALSE
 end function
 
-public subroutine enviamailarchivo ();String			ls_asunto, ls_texto, ls_ErrorMsg, ls_tipodespa
+public subroutine enviamailarchivo ();String			ls_asunto, ls_texto, ls_tipodespa, ls_Archivo
 Long			ll_Archivo, ll_Result
 
 str_parms	lstr_parms
@@ -1034,6 +1034,8 @@ lstr_parms.string_arg[3]					=	String(1)
 ll_Archivo = 1
 
 lstr_parms.string_arg[ll_Archivo+3]		=	gs_disco+":\GeneradosSAAM\" + is_archivo //+ ".txt"
+
+ls_Archivo	= gs_disco+":\GeneradosSAAM\" + is_archivo 
 ls_tipodespa	=	Mid(is_archivo,9,1)
 
 iuo_Embarques.Existe(is_Embarque, uo_SelCliente.Codigo, True, Sqlca)
@@ -1047,9 +1049,9 @@ ls_Asunto = iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + 
 ls_texto		 =	 ls_texto + ': '+lstr_parms.string_arg[2]+' con fecha ' + String(Today(),'dd/mm/yyyy')+'.' 
 
 If Upper(ls_tipodespa) = 'P' OR Upper(ls_tipodespa) = 'N' Then
-	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto, {lstr_parms.string_arg[3]}, 0) 
+	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo}, 0) 
 Else
-	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {lstr_parms.string_arg[3]},0)
+	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo},0)
 End If	
 
 //If ll_Result < 0 Then
@@ -1316,7 +1318,7 @@ Return False
 
 end function
 
-public subroutine enviaguiasaam ();String			ls_Archivo, ls_asunto, ls_texto, ls_ErrorMsg, ls_tipodespa
+public subroutine enviaguiasaam ();String			ls_Archivo, ls_asunto, ls_texto, ls_tipodespa
 Long			ll_Fila, ll_Archivo, ll_Result, ll_nroguia
 
 str_parms	lstr_parms
@@ -1334,6 +1336,7 @@ lstr_parms.string_arg[3]	=	String(1)
 ll_Archivo = 1
 
 lstr_parms.string_arg[ll_Archivo+3]	=	is_ArchivoGuias+'.PDF'
+ls_Archivo	=	is_ArchivoGuias+'.PDF'
 ls_tipodespa	=	Mid(is_archivo,9,1)
 
 iuo_Embarques.Existe(is_Embarque, uo_SelCliente.Codigo, True, Sqlca)
@@ -1347,9 +1350,9 @@ ls_Asunto = iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + 
 ls_texto	=	 'Guía Despacho '+String(ll_nroguia)+' con fecha ' + String(Today(),'dd/mm/yyyy')+' Planta ' +String(iuo_Planta.Codigo)+'.' 
 
 If Upper(ls_tipodespa) = 'P' OR Upper(ls_tipodespa) = 'N' Then
-	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto,{lstr_parms.string_arg[3]}, 0) 
+	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto,{ls_Archivo}, 0) 
 Else
-	iuo_Mail.Of_Send(iuo_Embarcador.Mail,iuo_Planta.Mail, ls_asunto,ls_texto, {lstr_parms.string_arg[ll_Archivo+3]}, 0)
+	iuo_Mail.Of_Send(iuo_Embarcador.Mail,iuo_Planta.Mail, ls_asunto,ls_texto, {ls_Archivo}, 0)
 End If	
 
 //If ll_Result < 0 Then

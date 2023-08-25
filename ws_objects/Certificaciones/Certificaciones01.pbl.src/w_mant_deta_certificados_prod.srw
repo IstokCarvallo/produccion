@@ -201,47 +201,54 @@ end event
 event ue_antesguardar;call super::ue_antesguardar;Integer	li_cont
 String   ls_mensaje, ls_colu[]
 
-If Isnull(dw_1.GetItemNumber(il_fila, "espe_codigo")) OR dw_1.GetItemNumber (il_fila, "espe_codigo") = 0 Then
+If IsNull(dw_1.GetItemNumber(il_fila, "espe_codigo")) OR dw_1.GetItemNumber (il_fila, "espe_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nCódigo de Especie"
 	ls_colu[li_cont]	= "espe_codigo"
 End If
 
-If Isnull(dw_1.GetItemNumber(il_fila, "cert_codigo")) OR dw_1.GetItemNumber (il_fila, "cert_codigo") = 0 Then
+If IsNull(dw_1.GetItemNumber(il_fila, "cert_codigo")) OR dw_1.GetItemNumber (il_fila, "cert_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nCódigo de Empresa Certificadora"
 	ls_colu[li_cont]	= "cert_codigo"
 End If
 
-If Isnull(dw_1.GetItemNumber(il_fila, "prot_codigo")) OR dw_1.GetItemNumber (il_fila, "prot_codigo") = 0 Then
+If IsNull(dw_1.GetItemNumber(il_fila, "prot_codigo")) OR dw_1.GetItemNumber (il_fila, "prot_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nCódigo de Protocolo"
 	ls_colu[li_cont]	= "prot_codigo"
 End If
 
-If Isnull(dw_1.GetItemNumber(il_fila, "prec_codigo")) OR dw_1.GetItemNumber (il_fila, "prec_codigo") = 0 Then
+If IsNull(dw_1.GetItemNumber(il_fila, "prec_codigo")) OR dw_1.GetItemNumber (il_fila, "prec_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nCódigo de Estado"
 	ls_colu[li_cont]	= "prec_codigo"
 End If
 
-If Isnull(dw_1.GetItemNumber(il_fila, "prec_codigo")) OR dw_1.GetItemNumber (il_fila, "prec_codigo") = 0 Then
+If IsNull(dw_1.GetItemNumber(il_fila, "prec_codigo")) OR dw_1.GetItemNumber (il_fila, "prec_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nCódigo de Estado"
 	ls_colu[li_cont]	= "prec_codigo"
 End If
 
-If Isnull(dw_1.GetItemString(il_fila, "cece_nroins")) OR dw_1.GetItemString(il_fila, "cece_nroins") = "" Then
+If IsNull(dw_1.GetItemString(il_fila, "cece_nroins")) OR dw_1.GetItemString(il_fila, "cece_nroins") = "" Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nNumero de Inscripción"
 	ls_colu[li_cont]	= "cece_nroins"
 End If
 
-If Isnull(dw_1.GetItemString(il_fila, "cece_ggngap")) OR dw_1.GetItemString(il_fila, "cece_ggngap") = "" Then
+If IsNull(dw_1.GetItemString(il_fila, "cece_ggngap")) OR dw_1.GetItemString(il_fila, "cece_ggngap") = "" Then
 	li_cont ++
 	ls_mensaje			= ls_mensaje + "~nGGN GlobalGAP"
 	ls_colu[li_cont]	= "cece_ggngap"
 End If
+
+If IsNull(dw_1.GetItemNumber(il_fila, "cece_packin")) OR dw_1.GetItemNumber (il_fila, "cece_packin") = 0 Then
+	li_cont ++
+	ls_mensaje			= ls_mensaje + "~nCódigo de Packing"
+	ls_colu[li_cont]	= "cece_packin"
+End If
+
 
 If li_cont > 0 Then
 	MessageBox("Error de Consistencia", "Falta el Ingreso de :" + ls_mensaje + ".", StopSign!, Ok!)
@@ -337,6 +344,8 @@ boolean cancel = false
 end type
 
 type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_certificados_prod
+integer x = 110
+integer y = 116
 integer width = 2208
 integer height = 1780
 integer taborder = 20
