@@ -88,10 +88,16 @@ type m_recepciones from menu within m_informes
 end type
 type m_despachos0 from menu within m_informes
 end type
+type m_1 from menu within m_informes
+end type
+type m_2 from menu within m_informes
+end type
 type m_informes from m_sys_frame`m_informes within m_principal
 m_existencias m_existencias
 m_recepciones m_recepciones
 m_despachos0 m_despachos0
+m_1 m_1
+m_2 m_2
 end type
 type m_bins from menu within m_consultas
 end type
@@ -564,6 +570,8 @@ type m_informes from m_sys_frame`m_informes within m_principal
 m_existencias m_existencias
 m_recepciones m_recepciones
 m_despachos0 m_despachos0
+m_1 m_1
+m_2 m_2
 end type
 
 on m_informes.create
@@ -571,9 +579,13 @@ call super::create
 this.m_existencias=create m_existencias
 this.m_recepciones=create m_recepciones
 this.m_despachos0=create m_despachos0
+this.m_1=create m_1
+this.m_2=create m_2
 this.Item[UpperBound(this.Item)+1]=this.m_existencias
 this.Item[UpperBound(this.Item)+1]=this.m_recepciones
 this.Item[UpperBound(this.Item)+1]=this.m_despachos0
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_2
 end on
 
 on m_informes.destroy
@@ -581,6 +593,8 @@ call super::destroy
 destroy(this.m_existencias)
 destroy(this.m_recepciones)
 destroy(this.m_despachos0)
+destroy(this.m_1)
+destroy(this.m_2)
 end on
 
 type m_consultas from m_sys_frame`m_consultas within m_principal
@@ -1897,6 +1911,67 @@ gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_info_despachos, w_main, ii_columna, Original!)
 
 end event
+
+type m_1 from menu within m_informes
+end type
+
+on m_1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_2 from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_resumenrecepciones, w_main, ii_columna, Original!)
+end event
+
+on m_2.create
+call super::create
+this.text = "Resumen Recepciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_2.destroy
+call super::destroy
+end on
 
 type m_bins from menu within m_consultas
 end type
