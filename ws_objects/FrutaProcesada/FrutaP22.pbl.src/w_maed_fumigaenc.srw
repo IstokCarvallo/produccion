@@ -726,7 +726,7 @@ type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_fumigaenc
 integer x = 50
 integer y = 68
 integer width = 2885
-integer height = 752
+integer height = 756
 string dataobject = "dw_mant_fumigaenc"
 end type
 

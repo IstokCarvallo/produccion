@@ -208,7 +208,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_lotescorrel_equ
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_spro_palletencab,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_correotablas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_lineapacking,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajes,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios,d
@@ -246,7 +245,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mues_cambiaplanta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,w_emis_guia_despacho_envases,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_detalle_envases_comercial,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dddw_productores,d
-OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dddw_contratistas,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_info_cajas_despachadas,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_mail,u
@@ -418,6 +416,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_errorbasedatos,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admatipoadmiusua,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_movtofrutagranel_recepcion_cajas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_seleccion_planta_comun,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_palletfruta_elimina_imprime,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_despemba_packing_deta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_controlventanas,u
