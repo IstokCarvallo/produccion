@@ -494,6 +494,8 @@ dw_2.Object.clie_codigo[1]	=	gi_codexport
 
 iuo_Cliente.Existe(gi_CodExport, False, Sqlca) //Guia_Electronica
 
+If gstr_parEmpresa.PlantaDestino > 0 Then dw_2.Object.defe_plades[1]=	gstr_parEmpresa.PlantaDestino
+
 If gi_Emisor_Electronico = 1 Then
 	dw_2.Object.defe_guides.Protect	= 1
 	dw_2.Object.defe_guides.Color		= Rgb(255,255,255)
@@ -601,6 +603,12 @@ DO
 								dw_2.Object.defe_guiaem[1] = 0
 								dw_2.Object.defe_guides[1] =  ll_Null
 							End If
+						End If
+					End If
+					
+					If IsNull(dw_2.Object.defe_plades[1]) Then
+						If gstr_parEmpresa.PlantaDestino > 0 Then 
+							dw_2.Object.defe_plades[1]=	gstr_parEmpresa.PlantaDestino
 						End If
 					End If
 				Else
