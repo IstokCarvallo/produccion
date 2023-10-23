@@ -1019,6 +1019,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_naves,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_naves,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_recibidores,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_mant_deta_paramtemporada,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_info_archivoembarcadorguias,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_gene_inspecpaldet_pallet,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_hiscontcalidad_lote,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mues_reetidet_por_despacho,d

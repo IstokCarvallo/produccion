@@ -142,6 +142,8 @@ type dw_error from uo_dw within w_info_guia_despacho_archivo_saam
 end type
 type cb_1 from commandbutton within w_info_guia_despacho_archivo_saam
 end type
+type dw_embarcador from datawindow within w_info_guia_despacho_archivo_saam
+end type
 end forward
 
 global type w_info_guia_despacho_archivo_saam from w_para_informes
@@ -225,6 +227,7 @@ uo_selplanta uo_selplanta
 cb_rossi cb_rossi
 dw_error dw_error
 cb_1 cb_1
+dw_embarcador dw_embarcador
 end type
 global w_info_guia_despacho_archivo_saam w_info_guia_despacho_archivo_saam
 
@@ -240,7 +243,7 @@ CONSTANT String SEPARADOR = '/'
 
 Integer	ii_tipo, ii_condicion, ii_tipoemb, ii_especie, ii_controlcorreo, ii_controlws, ii_controlsaam, ii_var, ii_prod, ii_cal, ii_cli, ii_pakrot
 String		is_report, is_Recibidor, is_Direccion, is_Rut, is_archivo, is_asunto, is_tipopla, is_ciudad, is_embarque, is_correosaampuerto, &
-			is_parteemb, is_archivoguias
+			is_parteemb, is_archivoguias, is_Archivo1
 Long		il_despacho, al_planilla
 
 w_informes_guia					vinf1
@@ -263,11 +266,9 @@ end variables
 forward prototypes
 public function boolean existeguia (long al_guia)
 public subroutine enviamail ()
-public subroutine generaarchivo ()
 public function boolean valida_datos ()
 public function boolean obtiene_condicion (integer ai_cliente, integer ai_planta, long al_pallet)
 public function boolean existearchivo (integer li_cliente, integer li_planta, long ll_guia, long al_planillas, string as_tipoplanilla, string as_instructivo)
-public subroutine enviamailarchivo ()
 public function boolean existeoperacion (string operacion)
 public function boolean wf_actualiza_db (boolean borrando)
 protected function integer despacho (integer li_cliente, integer li_planta, long ll_guia)
@@ -275,6 +276,8 @@ public function boolean validadespacho (integer li_cliente, integer li_planta, l
 public subroutine enviaguiasaam ()
 protected function boolean wf_trazabilidad (integer cliente, integer planta, long numero)
 public subroutine wf_generaguia_ws ()
+public subroutine wf_generaarchivo ()
+public subroutine wf_enviamailarchivo ()
 end prototypes
 
 public function boolean existeguia (long al_guia);Integer	li_Tipova, li_tipoembq, li_embc_codigo, li_tecnic, li_cansel, li_consol, li_plades
@@ -687,159 +690,6 @@ If FileExists(lstr_parms.string_arg[ll_Archivo + 3]) Then FileDelete(lstr_parms.
 SetPointer(Arrow!)
 end subroutine
 
-public subroutine generaarchivo ();Long			ll_fila, ll_filas, ll_filadet, ll_guia, ll_numero, ll_cont, ll_planilla, ll_filcont
-String			ls_Cliente, ls_Planta, ls_Patente, ls_Archivo, ls_Registro, ls_embarque,&
-				ls_termog, ls_guia, ls_Instructivo
-double		ll_termog
-Integer		li_copallet, li_cliente,  li_Tipova, li_Planta
-Datetime    	ldt_hora
-
-ldt_hora			=	Datetime(Date(Today()),Time(Today())	)
-
-dw_6.reset()
-dw_7.reset()
-dw_4.reset()
-dw_5.reset()
-
-dw_7.SetTransObject(Sqlca)
-dw_6.SetTransObject(Sqlca)
-
-// Para actualizar el estado=1 Cerrado, una vez generado el archivo
-dw_4.SetTransObject(SQLCA)
-dw_5.SetTransObject(SQLCA)
-dw_guia.SetTransObject(SQLCA)
-
-ls_Cliente		=	String(uo_SelCliente.Codigo, '000')
-ls_Planta			=	String(uo_SelPlanta.Codigo, '0000')
-ls_guia 			=  em_nroguia.Text
-ll_guia 			=  Long(em_nroguia.Text)
-ls_Instructivo	=	is_embarque
-ls_embarque	=	is_embarque
-ll_planilla			=	al_planilla
-
-ls_Archivo	=  "RIOB" +ls_Instructivo+"-"+ string(ll_planilla) + "." + Mid(ls_Planta, 2, 3) + ls_guia
-is_archivo	=	ls_Archivo
-
-ll_filcont		=  dw_5.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
-If ll_filcont > 0 Then
-	If valida_datos() Then
-		Return
-	End If	
-End If	
-
-ll_filas			=  dw_6.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
-									  
-li_cliente = uo_SelCliente.Codigo
-
-If ll_filas = -1 Then
-	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla EMBARQUEPROD")
-ElseIf ll_filas = 0 Then
-	MessageBox("Atención", "No hay información con Operación Indicada.~r~rIngrese otra Operación.", Exclamation!, Ok!)
-Else
-	dw_6.SetSort('paen_numero')
-     dw_6.Sort()
-
-	FOR ll_fila = 1 TO ll_filas
-		ls_Patente	=	String(dw_6.Object.defe_patent[ll_fila])
-		
-		If IsNull(ls_Patente) Then ls_Patente = ''
-		
-		ls_Registro	=	dw_6.Object.embq_codigo[ll_fila]
-		ls_Registro	+=	String(dw_6.Object.defe_guides[ll_fila], '00000000')
-		ls_Registro	+=	String(dw_6.Object.reci_codigo[ll_fila], '00000')
-		ls_Registro	+=	String(dw_6.Object.plde_codigo[ll_fila], '0000')
-		ls_Registro	+=	ls_Patente + Fill(' ',6 - Len(ls_Patente))
-		ls_Registro	+=	String(dw_6.Object.espe_codigo[ll_fila], '00')
-				
-		Obtiene_condicion(dw_6.Object.clie_codigo[ll_fila],dw_6.Object.plde_codigo[ll_fila],dw_6.Object.paen_numero[ll_fila])
-			
-		If ii_condicion = 1 Then
-			ls_Registro	+=	'F'
-		ElseIf dw_6.Object.paen_inspec[ll_fila] = 0 AND ii_condicion <> 1 AND ii_condicion <> 2  Then
-			ls_Registro	+=	'N'
-		ElseIf dw_6.Object.paen_inspec[ll_fila] = 1 Then
-			ls_Registro += 'I'
-		ElseIf ii_condicion = 2 Then
-			ls_Registro	+=	'U'
-		End If
-		
-		ls_Registro	+=	ls_Cliente
-		ls_Registro	+=	String(dw_6.Object.paen_numero[ll_fila], '0000000')
-		ls_Registro	+=	String(dw_6.Object.etiq_codigo[ll_fila], '000')
-		ls_Registro	+=	String(dw_6.Object.paen_fecemb[ll_fila], 'ddmmyy')
-		ls_Registro	+=	String(dw_6.Object.prod_codigo[ll_fila], '00000')
-		ls_Registro	+=	String(dw_6.Object.emba_codigo[ll_fila], '@@@@@@@@@@')
-		ls_Registro	+=	String(dw_6.Object.vari_codigo[ll_fila], '0000')
-		ls_Registro	+=	String(dw_6.Object.pafr_calibr[ll_fila], '@@@@@')
-		ls_Registro	+=	String(dw_6.Object.pafr_ccajas[ll_fila], '0000000')
-		ls_Registro	+=	String(dw_6.Object.cate_codigo[ll_fila], '000')
-		
-		iuo_Embalaje.Existe(dw_6.Object.emba_codigo[ll_fila], False, Sqlca)
-		iuo_Envase.Existe(iuo_Embalaje.TipoEnvase, iuo_Embalaje.CodEnvase, True, Sqlca)
-		
-		If dw_6.Object.tica_codigo[ll_fila] = 1 Then
-			ls_Registro	+=	'P'
-		ElseIf dw_6.Object.tica_codigo[ll_fila] = 2 Then
-			ls_Registro	+=	'C'
-		Else
-			ls_Registro	+=	'F'
-		End If
-		
-		If iuo_Puertos.Existe(dw_6.Object.embq_ptoori[ll_fila], False, Sqlca) Then
-			ls_Registro	+=	String(iuo_Puertos.SAAM, "00")
-		End If
-		
-		ls_Registro +=String(dw_6.Object.packing[ll_fila], '0000')
-
-		If IsNull(dw_6.Object.defe_termog[ll_fila]) Then
-			ll_termog = 0
-			ls_termog = '0'
-		Else
-			ls_termog = String(dw_6.Object.defe_termog[ll_fila])
-		End If
-	   ls_Registro +=String(ls_termog, Fill("@", 15))
-		
-		If IsNull(dw_6.Object.copa_codigo[ll_fila]) Then
-			li_copallet	= 	0
-		Else
-			li_copallet =	dw_6.Object.copa_codigo[ll_fila]
-		End If
-		ls_Registro +=String(li_copallet, Fill("0", 3))
-		ls_Registro += String(iuo_Envase.IfCO)
-		
-		ll_filadet	=	dw_7.InsertRow(0)
-		dw_7.Object.registro[ll_filadet]	=	ls_Registro
-
-		If ExisteArchivo(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,dw_6.Object.defe_guides[ll_fila], al_planilla,String(-1),ls_Instructivo) Then
-			Return
-		End If
-	NEXT
-	
-	If dw_7.SaveAs(gs_disco+":\GeneradosSAAM\" + ls_Archivo, Text!, False) = -1 Then
-		MessageBox("Atención","No se pudo generar el archivo " + ls_Archivo)
-	Else
-		EnviaMailArchivo()
-		MessageBox("Atención", "Archivo " + ls_Archivo + " Generado. Avise a Computación", Exclamation!, Ok!)
-		
-		ll_filas		=  dw_4.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo,al_planilla,ll_guia,'-1',ls_Instructivo)
-													  
-		If ll_filas = -1 Then
-			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
-		ElseIf ll_filas = 0 Then
-			MessageBox("Atención", "No hay información ", Exclamation!, Ok!)
-		Else		
-			FOR ll_fila	= 1 TO ll_filas
-				dw_4.SetItem(ll_fila,'defe_estado',1)
-				ll_numero 	= dw_4.Object.defe_numero[ll_fila]
-				li_cliente 	= dw_4.Object.clie_codigo[ll_fila]
-				li_planta		= dw_4.Object.plde_codigo[ll_fila]
-		   	NEXT
-			wf_actualiza_db(False)
-		End If						  
-	End If
-End If
-end subroutine
-
 public function boolean valida_datos ();Long ll_fila, ll_cont, ll_pallet
 String	ls_mensaje
 Integer	li_cliente, li_planta
@@ -1017,54 +867,6 @@ End If
 
 Return FALSE
 end function
-
-public subroutine enviamailarchivo ();String			ls_asunto, ls_texto, ls_tipodespa, ls_Archivo
-Long			ll_Archivo, ll_Result
-
-str_parms	lstr_parms
-
-If uo_SelCliente.Codigo <> 81 Then Return
-
-SetPointer(HourGlass!)
-
-lstr_parms.string_arg[1]					=	String(1)
-lstr_parms.string_arg[2]					=	is_archivo
-lstr_parms.string_arg[3]					=	String(1)
-
-ll_Archivo = 1
-
-lstr_parms.string_arg[ll_Archivo+3]		=	gs_disco+":\GeneradosSAAM\" + is_archivo //+ ".txt"
-
-ls_Archivo	= gs_disco+":\GeneradosSAAM\" + is_archivo 
-ls_tipodespa	=	Mid(is_archivo,9,1)
-
-iuo_Embarques.Existe(is_Embarque, uo_SelCliente.Codigo, True, Sqlca)
-iuo_Embarcador.Existe(iuo_Embarques.Embarcador, True, SqlCa)
-iuo_Planta.Existe(uo_SelPlanta.Codigo, True, Sqlca)
-
-ls_Asunto = iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + SEPARADOR + &
-		String(iuo_Embarques.Operacion, '00') + '-' + iuo_Embarques.Codigo + SEPARADOR + String(iuo_Planta.Codigo, '0000') + SEPARADOR + &
-		em_nroguia.Text 
-
-ls_texto		 =	 ls_texto + ': '+lstr_parms.string_arg[2]+' con fecha ' + String(Today(),'dd/mm/yyyy')+'.' 
-
-If Upper(ls_tipodespa) = 'P' OR Upper(ls_tipodespa) = 'N' Then
-	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo}, 0) 
-Else
-	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo},0)
-End If	
-
-//If ll_Result < 0 Then
-//	messagebox("Error en el envio de mail - Error No" + string(ll_Result),ls_ErrorMsg+ "~r~nIntente enviar correo en forma manual")
-//	OpenWithParm(w_correo_archivo_saam, lstr_parms)
-//	ii_controlcorreo = 1
-//Else
-//	Messagebox("Aviso", "Envio de correo exitoso")
-//	ii_controlcorreo = 0
-//End If
-
-SetPointer(Arrow!)
-end subroutine
 
 public function boolean existeoperacion (string operacion);Integer	li_puerto
 String		ls_nave, ls_embarque
@@ -1409,6 +1211,214 @@ If dw_error.RowCount() > 0 Then dw_error.Visible = True
 Destroy luo_Rossi
 end subroutine
 
+public subroutine wf_generaarchivo ();Long			ll_fila, ll_filas, ll_filadet, ll_guia, ll_numero, ll_cont, ll_planilla, ll_filcont
+String			ls_Cliente, ls_Planta, ls_Patente, ls_Archivo, ls_Registro, ls_embarque,&
+				ls_termog, ls_guia, ls_Instructivo
+double		ll_termog
+Integer		li_copallet, li_cliente,  li_Tipova, li_Planta
+Datetime    	ldt_hora
+
+ldt_hora			=	Datetime(Date(Today()),Time(Today())	)
+
+dw_6.reset()
+dw_7.reset()
+dw_4.reset()
+dw_5.reset()
+
+dw_7.SetTransObject(Sqlca)
+dw_6.SetTransObject(Sqlca)
+
+// Para actualizar el estado=1 Cerrado, una vez generado el archivo
+dw_4.SetTransObject(SQLCA)
+dw_5.SetTransObject(SQLCA)
+dw_guia.SetTransObject(SQLCA)
+
+ls_Cliente		=	String(uo_SelCliente.Codigo, '000')
+ls_Planta			=	String(uo_SelPlanta.Codigo, '0000')
+ls_guia 			=  em_nroguia.Text
+ll_guia 			=  Long(em_nroguia.Text)
+ls_Instructivo	=	is_embarque
+ls_embarque	=	is_embarque
+ll_planilla			=	al_planilla
+
+ls_Archivo	=  "RIOB" +ls_Instructivo+"-"+ string(ll_planilla) + "." + Mid(ls_Planta, 2, 3) + ls_guia
+is_archivo	=	ls_Archivo
+
+ll_filcont		=  dw_5.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
+If ll_filcont > 0 Then
+	If valida_datos() Then
+		Return
+	End If	
+End If	
+
+ll_filas			=  dw_6.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
+									  
+li_cliente = uo_SelCliente.Codigo
+
+If ll_filas = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla EMBARQUEPROD")
+ElseIf ll_filas = 0 Then
+	MessageBox("Atención", "No hay información con Operación Indicada.~r~rIngrese otra Operación.", Exclamation!, Ok!)
+Else
+	dw_6.SetSort('paen_numero')
+     dw_6.Sort()
+
+	FOR ll_fila = 1 TO ll_filas
+		ls_Patente	=	String(dw_6.Object.defe_patent[ll_fila])
+		
+		If IsNull(ls_Patente) Then ls_Patente = ''
+		
+		ls_Registro	=	dw_6.Object.embq_codigo[ll_fila]
+		ls_Registro	+=	String(dw_6.Object.defe_guides[ll_fila], '00000000')
+		ls_Registro	+=	String(dw_6.Object.reci_codigo[ll_fila], '00000')
+		ls_Registro	+=	String(dw_6.Object.plde_codigo[ll_fila], '0000')
+		ls_Registro	+=	ls_Patente + Fill(' ',6 - Len(ls_Patente))
+		ls_Registro	+=	String(dw_6.Object.espe_codigo[ll_fila], '00')
+				
+		Obtiene_condicion(dw_6.Object.clie_codigo[ll_fila],dw_6.Object.plde_codigo[ll_fila],dw_6.Object.paen_numero[ll_fila])
+			
+		If ii_condicion = 1 Then
+			ls_Registro	+=	'F'
+		ElseIf dw_6.Object.paen_inspec[ll_fila] = 0 AND ii_condicion <> 1 AND ii_condicion <> 2  Then
+			ls_Registro	+=	'N'
+		ElseIf dw_6.Object.paen_inspec[ll_fila] = 1 Then
+			ls_Registro += 'I'
+		ElseIf ii_condicion = 2 Then
+			ls_Registro	+=	'U'
+		End If
+		
+		ls_Registro	+=	ls_Cliente
+		ls_Registro	+=	String(dw_6.Object.paen_numero[ll_fila], '0000000')
+		ls_Registro	+=	String(dw_6.Object.etiq_codigo[ll_fila], '000')
+		ls_Registro	+=	String(dw_6.Object.paen_fecemb[ll_fila], 'ddmmyy')
+		ls_Registro	+=	String(dw_6.Object.prod_codigo[ll_fila], '00000')
+		ls_Registro	+=	String(dw_6.Object.emba_codigo[ll_fila], '@@@@@@@@@@')
+		ls_Registro	+=	String(dw_6.Object.vari_codigo[ll_fila], '0000')
+		ls_Registro	+=	String(dw_6.Object.pafr_calibr[ll_fila], '@@@@@')
+		ls_Registro	+=	String(dw_6.Object.pafr_ccajas[ll_fila], '0000000')
+		ls_Registro	+=	String(dw_6.Object.cate_codigo[ll_fila], '000')
+		
+		iuo_Embalaje.Existe(dw_6.Object.emba_codigo[ll_fila], False, Sqlca)
+		iuo_Envase.Existe(iuo_Embalaje.TipoEnvase, iuo_Embalaje.CodEnvase, True, Sqlca)
+		
+		If dw_6.Object.tica_codigo[ll_fila] = 1 Then
+			ls_Registro	+=	'P'
+		ElseIf dw_6.Object.tica_codigo[ll_fila] = 2 Then
+			ls_Registro	+=	'C'
+		Else
+			ls_Registro	+=	'F'
+		End If
+		
+		If iuo_Puertos.Existe(dw_6.Object.embq_ptoori[ll_fila], False, Sqlca) Then
+			ls_Registro	+=	String(iuo_Puertos.SAAM, "00")
+		End If
+		
+		ls_Registro +=String(dw_6.Object.packing[ll_fila], '0000')
+
+		If IsNull(dw_6.Object.defe_termog[ll_fila]) Then
+			ll_termog = 0
+			ls_termog = '0'
+		Else
+			ls_termog = String(dw_6.Object.defe_termog[ll_fila])
+		End If
+	   ls_Registro +=String(ls_termog, Fill("@", 15))
+		
+		If IsNull(dw_6.Object.copa_codigo[ll_fila]) Then
+			li_copallet	= 	0
+		Else
+			li_copallet =	dw_6.Object.copa_codigo[ll_fila]
+		End If
+		ls_Registro +=String(li_copallet, Fill("0", 3))
+		ls_Registro += String(iuo_Envase.IfCO)
+		
+		ll_filadet	=	dw_7.InsertRow(0)
+		dw_7.Object.registro[ll_filadet]	=	ls_Registro
+
+		If ExisteArchivo(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,dw_6.Object.defe_guides[ll_fila], al_planilla,String(-1),ls_Instructivo) Then
+			Return
+		End If
+	NEXT
+	
+	If dw_7.SaveAs(gs_disco+":\GeneradosSAAM\" + ls_Archivo, Text!, False) = -1 Then
+		MessageBox("Atención","No se pudo generar el archivo " + ls_Archivo)
+	Else
+		If dw_Embarcador.Retrieve(uo_SelCliente.Codigo, ll_guia) > 0 Then
+			ls_Archivo	=  "INST" +ls_Instructivo+"-"+ ls_guia + '.xlsx'
+			is_Archivo1 = gs_disco+":\GeneradosSAAM\" + ls_Archivo
+			dw_Embarcador.SaveAs(gs_disco+":\GeneradosSAAM\" + ls_Archivo, XLSX!, True)
+		End If
+		
+		wf_EnviaMailArchivo()
+		MessageBox("Atención", "Archivo " + ls_Archivo + " Generado. Avise a Computación", Exclamation!, Ok!)
+		
+		ll_filas		=  dw_4.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo,al_planilla,ll_guia,'-1',ls_Instructivo)
+													  
+		If ll_filas = -1 Then
+			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
+		ElseIf ll_filas = 0 Then
+			MessageBox("Atención", "No hay información ", Exclamation!, Ok!)
+		Else		
+			FOR ll_fila	= 1 TO ll_filas
+				dw_4.SetItem(ll_fila,'defe_estado',1)
+				ll_numero 	= dw_4.Object.defe_numero[ll_fila]
+				li_cliente 	= dw_4.Object.clie_codigo[ll_fila]
+				li_planta		= dw_4.Object.plde_codigo[ll_fila]
+		   	NEXT
+			wf_actualiza_db(False)
+		End If						  
+	End If
+End If
+end subroutine
+
+public subroutine wf_enviamailarchivo ();String			ls_asunto, ls_texto, ls_tipodespa, ls_Archivo
+Long			ll_Archivo, ll_Result
+
+str_parms	lstr_parms
+
+If uo_SelCliente.Codigo <> 81 Then Return
+
+SetPointer(HourGlass!)
+
+lstr_parms.string_arg[1]					=	String(1)
+lstr_parms.string_arg[2]					=	is_archivo
+lstr_parms.string_arg[3]					=	String(1)
+
+ll_Archivo = 1
+
+lstr_parms.string_arg[ll_Archivo+3]		=	gs_disco+":\GeneradosSAAM\" + is_archivo //+ ".txt"
+
+ls_Archivo	= gs_disco+":\GeneradosSAAM\" + is_archivo 
+ls_tipodespa	=	Mid(is_archivo,9,1)
+
+iuo_Embarques.Existe(is_Embarque, uo_SelCliente.Codigo, True, Sqlca)
+iuo_Embarcador.Existe(iuo_Embarques.Embarcador, True, SqlCa)
+iuo_Planta.Existe(uo_SelPlanta.Codigo, True, Sqlca)
+
+ls_Asunto = iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + SEPARADOR + &
+		String(iuo_Embarques.Operacion, '00') + '-' + iuo_Embarques.Codigo + SEPARADOR + String(iuo_Planta.Codigo, '0000') + SEPARADOR + &
+		em_nroguia.Text 
+
+ls_texto		 =	 ls_texto + ': '+lstr_parms.string_arg[2]+' con fecha ' + String(Today(),'dd/mm/yyyy')+'.' 
+
+If Upper(ls_tipodespa) = 'P' OR Upper(ls_tipodespa) = 'N' Then
+	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo}, 0) 
+Else
+	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo},0)
+	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {is_Archivo1},0)
+End If	
+
+//If ll_Result < 0 Then
+//	messagebox("Error en el envio de mail - Error No" + string(ll_Result),ls_ErrorMsg+ "~r~nIntente enviar correo en forma manual")
+//	OpenWithParm(w_correo_archivo_saam, lstr_parms)
+//	ii_controlcorreo = 1
+//Else
+//	Messagebox("Aviso", "Envio de correo exitoso")
+//	ii_controlcorreo = 0
+//End If
+
+SetPointer(Arrow!)
+end subroutine
+
 on w_info_guia_despacho_archivo_saam.create
 int iCurrent
 call super::create
@@ -1482,6 +1492,7 @@ this.uo_selplanta=create uo_selplanta
 this.cb_rossi=create cb_rossi
 this.dw_error=create dw_error
 this.cb_1=create cb_1
+this.dw_embarcador=create dw_embarcador
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.st_2
@@ -1553,6 +1564,7 @@ this.Control[iCurrent+67]=this.uo_selplanta
 this.Control[iCurrent+68]=this.cb_rossi
 this.Control[iCurrent+69]=this.dw_error
 this.Control[iCurrent+70]=this.cb_1
+this.Control[iCurrent+71]=this.dw_embarcador
 end on
 
 on w_info_guia_despacho_archivo_saam.destroy
@@ -1627,6 +1639,7 @@ destroy(this.uo_selplanta)
 destroy(this.cb_rossi)
 destroy(this.dw_error)
 destroy(this.cb_1)
+destroy(this.dw_embarcador)
 end on
 
 event open;call super::open;Boolean rtn, lb_Cerrar = False
@@ -1638,6 +1651,8 @@ If lb_Cerrar Then
 	Close(This)
 Else
 	ii_tipo	=	Integer(Message.StringParm)
+	
+	dw_embarcador.SetTransObject(SQLCA)
 	
 	cbx_csg.Visible = False
 	cbx_csg.Checked = False 
@@ -1891,11 +1906,8 @@ Else
 		
 		If (ii_tipoemb = 7 OR ii_tipoemb = 8 OR ii_tipoemb = 9)  Then	
 			If ii_controlsaam = 0 Then
-//				If iuo_Embarcador.ArchivoPlano = 1 Then					
-//					wf_GeneraGuia_ws()
-//				Else
-					GeneraArchivo()
-//				End If
+				If iuo_Embarcador.ArchivoPlano = 1 Then wf_GeneraGuia_ws()
+				wf_GeneraArchivo()
 			End If
 		End If	
 	End If	
@@ -3405,6 +3417,7 @@ End If
 end event
 
 type cb_rossi from commandbutton within w_info_guia_despacho_archivo_saam
+boolean visible = false
 integer x = 2331
 integer y = 572
 integer width = 439
@@ -3417,6 +3430,7 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
+boolean enabled = false
 string text = "WS ROSSI"
 end type
 
@@ -3533,4 +3547,17 @@ Destroy luo_Guia
 Destroy luo_Despacho
 Destroy lds_guia
 end event
+
+type dw_embarcador from datawindow within w_info_guia_despacho_archivo_saam
+boolean visible = false
+integer x = 2578
+integer y = 312
+integer width = 192
+integer height = 148
+integer taborder = 40
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_info_archivoembarcadorguias"
+borderstyle borderstyle = stylelowered!
+end type
 
