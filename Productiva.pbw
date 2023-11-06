@@ -20,6 +20,6 @@ Save Format v3.0(19990112)
  18 "CargoProduce\\CargoProduce.pbt";
  9 "FrutaProcesada\\produccion.pbt";
 @end;
-DefaultTarget "Packing3\\Packing3.pbt";
+DefaultTarget "..\\TablasProd\\Tablas\\Catalogos.pbt";
 DefaultExportEncode "UTF-8";
-DefaultRemoteTarget "Packing3\\Packing3.pbt";
+DefaultRemoteTarget "..\\TablasProd\\Tablas\\Catalogos.pbt";

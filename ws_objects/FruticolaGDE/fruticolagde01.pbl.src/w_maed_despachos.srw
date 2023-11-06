@@ -8,8 +8,6 @@ type pb_guia from picturebutton within w_maed_despachos
 end type
 type dw_4 from uo_dw within w_maed_despachos
 end type
-type cb_1 from commandbutton within w_maed_despachos
-end type
 end forward
 
 global type w_maed_despachos from w_mant_encab_deta
@@ -22,7 +20,6 @@ event ue_imprimir2 ( )
 dw_3 dw_3
 pb_guia pb_guia
 dw_4 dw_4
-cb_1 cb_1
 end type
 global w_maed_despachos w_maed_despachos
 
@@ -318,12 +315,10 @@ call super::create
 this.dw_3=create dw_3
 this.pb_guia=create pb_guia
 this.dw_4=create dw_4
-this.cb_1=create cb_1
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.dw_3
 this.Control[iCurrent+2]=this.pb_guia
 this.Control[iCurrent+3]=this.dw_4
-this.Control[iCurrent+4]=this.cb_1
 end on
 
 on w_maed_despachos.destroy
@@ -331,7 +326,6 @@ call super::destroy
 destroy(this.dw_3)
 destroy(this.pb_guia)
 destroy(this.dw_4)
-destroy(this.cb_1)
 end on
 
 event ue_nuevo;call super::ue_nuevo;dw_2.Reset()
@@ -863,41 +857,4 @@ string dataobject = "dw_info_guia_despacho_gde"
 boolean vscrollbar = false
 boolean border = false
 end type
-
-type cb_1 from commandbutton within w_maed_despachos
-integer x = 2999
-integer y = 264
-integer width = 402
-integer height = 112
-integer taborder = 30
-boolean bringtotop = true
-integer textsize = -10
-integer weight = 400
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-string text = "none"
-end type
-
-event clicked;uo_Mail iuo_Mail
-String ls_Asunto, ls_Correo[], ls_Texto, ls_CC[], ls_BCC[], ls_Attach[]
-
-
-SetPointer(HourGlass!)
-iuo_Mail	=	Create uo_Mail
-
-ls_Correo[] = {"istok.carvallo@rioblanco.net"}
-ls_CC[] = {"carolina.madaune@rioblanco.net", "paolo.cuevas@rioblanco.net"}
-ls_BCC[] = {"istok.carvallo@rioblanco.net", "gabriel.herrera@rioblanco.net"}
-ls_Attach[] = {"C:\Desarrollo 22\Imagenes\Frutas\Carozos.jpg", "C:\Desarrollo 22\Imagenes\Frutas\Clementinas.jpg"}
-
-ls_asunto = "Prueba envio de correo"
-ls_texto  = 'Favor informar de recepcion... '
-
-iuo_mail.of_Send(ls_Correo, ls_Asunto, ls_texto, ls_Attach, 0)
-
-Destroy iuo_Mail
-SetPointer(Arrow!)
-end event
 

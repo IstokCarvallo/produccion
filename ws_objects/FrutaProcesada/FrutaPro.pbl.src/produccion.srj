@@ -116,6 +116,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP30.pbl,w_mant_deta_termogra
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_repalletdeta_sag_nuevo,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_solicitud_inspeccion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mant_sagcambiodestdeta_destino,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_cons_inspeccion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_status6,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_excel_frigorificos_pallet_condi,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,w_info_pallet_existentes_porcamara,w
@@ -175,6 +176,7 @@ OBJ:C:\Desarrollo 22\WebServices17.pbl,s01_wstraficoservice,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP51.pbl,w_gene_archivo_recepciones_cabrini,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP71.pbl,w_info_regeneracontroldespacho,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP53.pbl,dw_mues_spro_cajasprod_trans_caja,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP53.pbl,w_info_existenciamultimercado,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP68.pbl,w_info_embarque_merc_rec_var,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,w_info_palletprefrio,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
@@ -356,6 +358,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_palletencab_
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruprocee_usda,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,dw_mant_palletencab_repaletizaje1,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_maed_anulacondicion,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_cons_fumigaenc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_proc_ordencargapallet,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,w_apertura_inspeccion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP71.pbl,w_info_archivorepalletizado_generado,w
@@ -632,16 +635,15 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,w_busqueda_spro_repa
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,dw_mant_palletencab_repaletizaje_des,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,w_mant_deta_repalletdeta_salida,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_spro_repalasgenca,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_condicion,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP81.pbl,dddw_status1,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,dw_mues_modificadetalle_fruta,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_condicion,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_tipocamara_1,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP00.pbl,w_mant_mues_corrector,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP80.pbl,w_cons_control_recepcion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_mant_consulta_existencia_granel_2,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_correotablas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_arearesponsable,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP00.pbl,w_mant_deta_valofactespe,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP30.pbl,dw_mant_correlsellos,d
@@ -763,7 +765,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_info_anulaciones_s
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mant_despadestisele,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_info_destinos_selec_pallets,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP80.pbl,dw_actualiza_status_positivo_inpe,d
-OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,dw_param_transporte,d
 OBJ:C:\Desarrollo 22\WebServices17.pbl,pbdom_processinginstruction,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP30.pbl,w_info_comercial_loslirios,w
@@ -951,6 +952,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mues_inspecpalenc
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,dw_mant_mues_parrillas,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_mues_rechazo_lote_sag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_informe_vencimiento,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_cargotecnico,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP66.pbl,w_info_fumigaenc_desc_lote,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,w_mant_mues_statuspalletencab,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_buscinspecciones,d
@@ -1016,6 +1018,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_naves,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_naves,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_recibidores,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_mant_deta_paramtemporada,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_info_archivoembarcadorguias,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_gene_inspecpaldet_pallet,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_hiscontcalidad_lote,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mues_reetidet_por_despacho,d
@@ -1024,6 +1027,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_mant_deta_generapa
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,dw_mues_termometriaenca,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP67.pbl,dw_gene_archvio_condicion_graba,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_embarques_operacion,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_sellosag,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_existencia_palletpucho_fechas_gestion2,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admaaplicacces,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admaunidadadmini,d
@@ -1038,6 +1042,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,w_mant_deta_ubicacio
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,w_maed_recfruprocee_particular_rotulatrans,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,w_mant_deta_palletfruta_encab,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_mant_deta_aplic_plaguisida,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_cons_inspeccion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_busc_anulacondicion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_palletencab_busc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_mues_repalletdeta_gen_nuevo_eli,d
@@ -1277,6 +1282,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_maed_aplic_plaguis
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,dw_sele_anulaguia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_info_instructivo_emb_pallets,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,w_busc_sagcambiodestenca,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_cons_condicion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_codigopallet,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_productores_clientes,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,w_info_existencia_seguncamara,w
@@ -1406,6 +1412,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,dw_mues_arch_planos_
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_mant_instructivo_emb,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_caracteristicas_condicion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mant_fumigaenc,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_seleccion_planta_comun,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_existencia_frigopalletporcamara,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_maed_palletencab_recepcion_granel,w

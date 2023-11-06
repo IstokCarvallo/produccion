@@ -1342,7 +1342,7 @@ Else
 	If dw_7.SaveAs(gs_disco+":\GeneradosSAAM\" + ls_Archivo, Text!, False) = -1 Then
 		MessageBox("Atención","No se pudo generar el archivo " + ls_Archivo)
 	Else
-		If dw_Embarcador.Retrieve(uo_SelCliente.Codigo, ll_guia) > 0 Then
+		If dw_Embarcador.Retrieve(uo_SelCliente.Codigo, ll_Guia) > 0 Then
 			ls_Archivo	=  "INST" +ls_Instructivo+"-"+ ls_guia + '.xlsx'
 			is_Archivo1 = gs_disco+":\GeneradosSAAM\" + ls_Archivo
 			dw_Embarcador.SaveAs(gs_disco+":\GeneradosSAAM\" + ls_Archivo, XLSX!, True)
@@ -1403,8 +1403,7 @@ ls_texto		 =	 ls_texto + ': '+lstr_parms.string_arg[2]+' con fecha ' + String(To
 If Upper(ls_tipodespa) = 'P' OR Upper(ls_tipodespa) = 'N' Then
 	iuo_Mail.Of_Send(iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo}, 0) 
 Else
-	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo},0)
-	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {is_Archivo1},0)
+	iuo_Mail.Of_Send(iuo_Embarcador.Mail, iuo_Planta.Mail,ls_asunto,ls_texto, {ls_Archivo, is_Archivo1},0)
 End If	
 
 //If ll_Result < 0 Then

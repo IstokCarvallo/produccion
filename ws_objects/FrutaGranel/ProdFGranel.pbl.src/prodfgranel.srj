@@ -513,7 +513,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_seleccion_entida
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_mant_consulta_existencia_granel_2,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_correotablas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_arearesponsable,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_lineapacking,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,w_maed_movtofrutagranel_recepcereza,w
@@ -608,7 +607,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mues_cambiaplanta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,w_emis_guia_despacho_envases,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_detalle_envases_comercial,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_spro_movtograndeta_tarjas,d
-OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_seleccion_camaraysdpsag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,dw_mant_spro_madurezcosechare,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,dw_mant_mues_spro_movtocamarafgenca,d
@@ -1086,6 +1084,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_movtofrutagra
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,dw_spro_movtobins_cerezas,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_busc_spro_movtofrutagranenca_trans,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_seleccion_planta_comun,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_palletfruta_elimina_imprime,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_despemba_packing_deta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_sel_prograproceso_enca_programacion,d
