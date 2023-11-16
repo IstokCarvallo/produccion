@@ -1505,6 +1505,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_patente,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletfruta_trans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_palletfruta_rotulatrans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruproced_trans,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_guia_despacho,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,w_sele_observa_nulo,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,dw_mueve_cajaspalletfruta_origen,d

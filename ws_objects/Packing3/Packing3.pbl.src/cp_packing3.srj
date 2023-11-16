@@ -447,6 +447,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_despemba_pack
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_info_especie_variedad,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_lotecorrel_equipos,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_camarasfrigo,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_cliente,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_patente,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta,w

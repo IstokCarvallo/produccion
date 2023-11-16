@@ -1199,7 +1199,7 @@ luo_Rossi.of_SetHeaders(iuo_Embarcador.Header)
 
 luo_Rossi.of_SetAsunto(iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + SEPARADOR + &
 		String(iuo_Embarques.Operacion, '00') + '-' + iuo_Embarques.Codigo + SEPARADOR + String(uo_SelPlanta.Codigo, '0000') + SEPARADOR + &
-		em_nroguia.Text )
+		em_nroguia.Text + ' - Carga JSON Automático.')
 		
 luo_Rossi.of_SetCuerpo('')
 luo_Rossi.of_SetCorreo(uo_SelPlanta.Mail)

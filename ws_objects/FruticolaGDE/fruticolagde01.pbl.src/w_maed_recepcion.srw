@@ -24,6 +24,7 @@ uo_despachobins	iuo_Despachos
 
 DataWindowChild	idwc_Cliente, idwc_Packing, idwc_Productor, idwc_Predio, idwc_Cuartel, idwc_Especie, idwc_Variedad, idwc_Color
 end variables
+
 forward prototypes
 public subroutine habilitaencab (boolean habilita)
 public function boolean duplicado (string columna, string valor)
@@ -306,7 +307,7 @@ dw_3.Object.clie_codigo[1] 		= gi_CodExport
 dw_3.Object.plde_codigo[1] 	= gi_CodPlanta
 dw_3.Object.prod_codigo[1]	= gstr_parempresa.Productor
 dw_3.Object.rece_fecrec[1] 	= Today()
-dw_3.Object.bins_pesnet[1] 	= 400
+dw_3.Object.bins_pesnet[1] 	= gstr_parempresa.PesoNeto
 dw_3.Object.prpr_codigo[1] 	= 1
 
 HabilitaEncab(True)
@@ -324,6 +325,11 @@ istr_Mant.Argumento[2] = String(gi_CodPlanta)
 end event
 
 event ue_nuevo_detalle;il_fila = dw_1.InsertRow(0)
+
+If gstr_parempresa.Tote = 0 Then
+	dw_1.Object.bins_ccajas.Visible = False	
+	dw_1.Object.bins_ccajas_t.Visible = False	
+End If
 
 IF il_fila > 0 THEN
 	pb_eli_det.Enabled	= True
@@ -389,8 +395,15 @@ For ll_Fila = 1 To dw_1.RowCount()
 		dw_1.Object.prod_codigo[ll_Fila] 	= dw_3.Object.prod_codigo[1]
 		dw_1.Object.prpr_codigo[ll_Fila] 	= dw_3.Object.prpr_codigo[1]
 		dw_1.Object.prcc_codigo[ll_Fila] 	= dw_3.Object.prcc_codigo[1]
-		dw_1.Object.bins_estado[ll_Fila] 	= 1	
-		dw_1.Object.bins_pesnet[ll_Fila] 	= dw_3.Object.bins_pesnet[1]
+		dw_1.Object.bins_estado[ll_Fila] 	= 1
+		
+		If gstr_parempresa.Tote = 0 Then
+			dw_1.Object.bins_pesnet[ll_Fila] 	= dw_3.Object.bins_pesnet[1]
+			dw_1.Object.bins_ccajas[ll_Fila]	= 0
+		Else
+			dw_1.Object.bins_pesnet[ll_Fila] 	=  dw_1.Object.bins_ccajas[ll_Fila] * gstr_parempresa.PesoNeto
+		End If
+		
 		dw_1.Object.bins_fechac[ll_Fila] 	= Today()
 		
 		ll_New = dw_2.InsertRow(0)

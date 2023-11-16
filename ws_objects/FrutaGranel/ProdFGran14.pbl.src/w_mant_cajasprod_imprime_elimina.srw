@@ -230,14 +230,14 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 				ls_Calibre	= dw_1.Object.capr_calibr[1]
 				ls_Productor= dw_1.Object.prod_codigo[1]
 				
-				ls_QR = String(dw_1.Object.plde_codigo[1], "0000")	+	String(dw_1.Object.capr_numero[1], '00000000')	
+				//ls_QR = String(dw_1.Object.plde_codigo[1], "0000")	+	String(dw_1.Object.capr_numero[1], '00000000')	
 									
-				/*ls_QR	= 'Prod:' + ls_Productor + Char(10) 
+				ls_QR	= 'Prod:' + ls_Productor + Char(10) 
 				ls_QR	+= 'Esp:' + String(dw_1.Object.espe_codigo[1], '00') + ' / ' + String(dw_1.Object.vari_codigo[1], '0000')  + Char(10) 
 				ls_QR	+= 'Pre:' + ls_CSG + ' / ' + String(dw_1.Object.prod_cuarte[1],'000' )  + Char(10)
 				ls_QR	+= 'Emb:' + ls_Embalaje + ' / ' + ls_Calibre + Char(10)
 				ls_QR	+= String(dw_1.Object.capr_fecemb[1], 'dd/mm/yyyy')
-				*/
+				
 				ls_Ruta = iuo_QR.of_genera_qr(ls_QR)
 				dw_1.Object.p_qrcode.FileName = ls_Ruta
 	
@@ -272,15 +272,15 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					ls_Calibre	= dw_1.Object.capr_calibr[1]
 					ls_Productor= dw_1.Object.prod_codigo[1]
 					
-					ls_QR = String(dw_1.Object.plde_codigo[2], "0000")	+	String(dw_1.Object.capr_numero[2], '00000000')	
+					//ls_QR = String(dw_1.Object.plde_codigo[2], "0000")	+	String(dw_1.Object.capr_numero[2], '00000000')	
 					
-					/*
+					
 					ls_QR	= 'Prod:' + ls_Productor  + Char(10) 
 					ls_QR	+= 'Esp:' + String(dw_1.Object.espe_codigo[1], '00') + ' / ' + String(dw_1.Object.vari_codigo[1], '0000')  + Char(10) 
 					ls_QR	+= 'Pre:' + ls_CSG + ' / ' + String(dw_1.Object.prod_cuarte[1],'000' )  + Char(10)
 					ls_QR	+= 'Emb:' + ls_Embalaje + ' / ' + ls_Calibre + Char(10)
 					ls_QR	+= String(dw_1.Object.capr_fecemb[1], 'dd/mm/yyyy')
-					*/
+					
 					
 					ls_Ruta = iuo_QR.of_genera_qr(ls_QR)
 					dw_1.Object.p_qrcode.FileName = ls_Ruta
@@ -315,14 +315,14 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					ls_Calibre	= dw_1.Object.capr_calibr[1]
 					ls_Productor= dw_1.Object.prod_codigo[1]
 					
-					ls_QR = String(dw_1.Object.plde_codigo[3], "0000")	+	String(dw_1.Object.capr_numero[3], '00000000')	
-					/*
+					//ls_QR = String(dw_1.Object.plde_codigo[3], "0000")	+	String(dw_1.Object.capr_numero[3], '00000000')	
+					
 					ls_QR	= 'Prod:' + ls_Productor + Char(10) 
 					ls_QR	+= 'Esp:' + String(dw_1.Object.espe_codigo[1], '00') + ' / ' + String(dw_1.Object.vari_codigo[1], '0000')  + Char(10) 
 					ls_QR	+= 'Pre:' + ls_CSG + ' / ' + String(dw_1.Object.prod_cuarte[1],'000' )  + Char(10)
 					ls_QR	+= 'Emb:' + ls_Embalaje + ' / ' + ls_Calibre + Char(10)
 					ls_QR	+= String(dw_1.Object.capr_fecemb[1], 'dd/mm/yyyy')
-					*/
+					
 					ls_Ruta = iuo_QR.of_genera_qr(ls_QR)
 					dw_1.Object.p_qrcode.FileName = ls_Ruta
 					

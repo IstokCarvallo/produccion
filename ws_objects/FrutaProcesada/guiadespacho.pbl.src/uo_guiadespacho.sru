@@ -898,6 +898,9 @@ IF of_DatosEmpresa(Tipo) Then
 			ls_Referencia = ''
 		Else
 			ls_Referencia = Trim(ids_Source.Object.defe_glosas[1])
+			If Tipo = 1 Then
+				ls_Referencia =  ls_Referencia + ' - Fruta Certificada Global GAP, ' + f_Kilos_GGN(Cliente, Planta, Movimiento)
+			End If
 		End If
 		
 		of_InsertaRegistro('xObservaciones', Mid(ls_Referencia, 1, 120))
@@ -910,7 +913,9 @@ IF of_DatosEmpresa(Tipo) Then
 			End If
 			
 			of_InsertaRegistro('xObservaciones1', Mid(ls_Referencia, 1, 120))
-			
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source.Object.ggn[1], 1, 120))
+		ElseIf Tipo = 4  Then
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 1 Then //Guia Exportacion / Embarques
 			//Glosa 1
 			ls_Referencia = Mid('Total VGM: ' + String(ids_Source.Object.defe_totvgm[1], '#,##0.00') + &
@@ -922,7 +927,10 @@ IF of_DatosEmpresa(Tipo) Then
 			ls_Referencia = Mid('Reserva: ' + Trim(ids_Source.Object.embq_bookin[1]) + &
 								', Planilla SAG: ' + String(ids_Source.Object.defe_nrosps[1]) + ', Termografo : '  + &
 								of_GeneraTermografos(Cliente, Planta, Movimiento), 1, 120)
+								
 			of_InsertaRegistro('xObservaciones2', ls_Referencia)
+			
+			//of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP, ' + f_Kilos_GGN(Cliente, Planta, Movimiento), 1, 120))
 			
 			of_InsertaRegistro('Sello', Mid(NumerosSellos, 1, 20))
 			of_InsertaRegistro('Booking', Trim(ids_Source.Object.embq_bookin[1]))
