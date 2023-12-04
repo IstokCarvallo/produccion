@@ -10413,7 +10413,7 @@ end type
 event clicked;SetPointer(HourGlass!)
 gstr_us.OpcionActiva = This.ClassName();If Not AccesoPuntoCritico() Then Return
 
-OpenSheet(w_info_detallerecepcionespecie, w_main, columna, Original!)
+OpenSheet(w_info_detallerecepcion_especie, w_main, columna, Original!)
 end event
 
 on m_informedetallado.create

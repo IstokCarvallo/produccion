@@ -224,7 +224,7 @@ event pb_acepta::clicked;SetPointer(Arrow!)
 Integer	li_Planta, li_FrigorIfico, li_Especie, li_Grupo, li_SubGrupo, li_exportador, li_tipool, &
 			li_Variedad, li_Periodo, li_Categoria, li_NroLote, li_ConsLote,rb_espe,rb_cam, li_estado
 Long		ll_Fila, ll_Productor, ll_Camara
-String	ls_Tratamiento, ls_Consgcalib
+String		ls_Tratamiento, ls_Consgcalib
 
 dw_1.AcceptText()
 

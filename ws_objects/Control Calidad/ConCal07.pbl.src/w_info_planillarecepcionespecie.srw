@@ -323,6 +323,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_planillarecepc
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_planillarecepcionespecie
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_planillarecepcionespecie

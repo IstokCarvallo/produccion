@@ -3286,8 +3286,8 @@ Choose Case ii_especie
 		
 	Case 23
 		This.Title	= "PLANILLA RECEPCION FRUTA A PROCESO : CIRUELAS"
-		dw_4.DataObject	=	'dw_mues_ctlcalinspecalidadet_ciruelas'
-		dw_4.SetTransObject(Sqlca)
+//		dw_4.DataObject	=	'dw_mues_ctlcalinspecalidadet_ciruelas'
+//		dw_4.SetTransObject(Sqlca)
 		dw_7.DataObject	=	'dw_mues_ctlcalinspecalicondi_det_ciruelas'
 		dw_7.SetTransObject(Sqlca)
 		
@@ -3310,12 +3310,36 @@ Choose Case ii_especie
 		dw_2.Object.t_19.x					= dw_2.Object.temperatura.x
 		dw_2.Object.t_19.y					= dw_2.Object.temperatura.y
 		dw_2.Object.ccre_porexp.Width	= dw_2.Object.ccre_temper.Width
-		dw_2.Object.ccre_porexp.x		= dw_2.Object.ccre_temper.x
-		dw_2.Object.ccre_porexp.y		= dw_2.Object.ccre_temper.y
+		dw_2.Object.ccre_porexp.x			= dw_2.Object.ccre_temper.x
+		dw_2.Object.ccre_porexp.y			= dw_2.Object.ccre_temper.y
 
-		dw_2.Object.t_19.Text				= '% Cat 1'
-		dw_2.Object.t_13.Text 				= '% Cat 2'
-		dw_2.Object.fechapre.Text			= '% Comercial'
+//		dw_2.Object.t_19.Text				= '% Cat 1'
+//		dw_2.Object.t_13.Text 				= '% Cat 2'
+//		dw_2.Object.fechapre.Text			= '% Comercial'
+
+		dw_2.Object.gb_2.Visible				=	True
+		dw_2.Object.gb_2.Text					=	"Color de Cubrimiento"
+		dw_2.Object.gb_2.Width					=	1700
+		
+		dw_2.Object.ccre_pocafe.Visible		=	True
+		dw_2.Object.ccre_pocat1.Visible		=	True
+		dw_2.Object.ccre_pocat2.Visible		=	True
+		dw_2.Object.ccre_poplan.Visible		=	True
+		
+		dw_2.Object.t_31.Visible		=	True
+		dw_2.Object.t_32.Visible		=	True
+		dw_2.Object.t_33.Visible		=	True
+		dw_2.Object.t_34.Visible		=	True
+		
+		dw_2.Object.t_31.Text		=	"<40%"
+		dw_2.Object.t_32.Text		=	"40-60%"
+		dw_2.Object.t_33.Text		=	"60-80%"
+		dw_2.Object.t_34.Text		=	">80%"
+
+		dw_2.Object.t_13.Visible				=	False
+		dw_2.Object.fechapre.Visible		=	False
+		dw_2.Object.ccre_expack.Visible	=	False
+		dw_2.Object.ccre_excome.Visible	=	False
 		
 		dw_2.SetTabOrder('ccre_porexp', 221)
 		
@@ -3684,7 +3708,7 @@ If dw_2.RowCount() > 0 Then
 		End If	
 	End If
 	
-	If ii_Especie = 27 Or ii_Especie = 78 Or ii_Especie = 23 Then
+	If ii_Especie = 27 Or ii_Especie = 78 Then //Or ii_Especie = 23 Then
 			If Not wf_ValidaPorcentaje('', '0', 0) Then
 				MessageBox('Atención...', 'El porcentaje total debe ser igual 100%', Information!, Ok!)
 				Message.DoubleParm = -1
@@ -4121,7 +4145,7 @@ For ll_Fil2 = 1 To dw_4.RowCount()
 		dw_4.Object.ccic_porcen[ll_Fil2] = dw_4.Object.calc_porce[ll_Fil2]	
 	End If
 	
-	If ii_Especie = 82 Or ii_Especie = 27 Or ii_Especie = 78 Or ii_Especie = 23 Then 
+	If ii_Especie = 82 Or ii_Especie = 27 Or ii_Especie = 78 Then //Or ii_Especie = 23 Then 
 		If IsNull(dw_4.Object.ccic_cancom[ll_Fil2]) Then
 			dw_4.Object.ccic_porcom[ll_Fil2] = dec(ls_Null)
 		Else

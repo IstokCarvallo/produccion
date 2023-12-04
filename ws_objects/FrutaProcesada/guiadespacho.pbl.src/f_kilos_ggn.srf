@@ -9,7 +9,7 @@ end prototypes
 global function string f_kilos_ggn (long cliente, long planta, long numero);Decimal{2} ld_Kilos
 String  ls_retorno
 
- Select IsNull(ev.enva_pesone, 0) * Sum(pf.pafr_ccajas)
+ Select Sum(IsNull(ev.enva_pesone, 0) * pf.pafr_ccajas)
 	Into :ld_Kilos
 	  From dbo.despafrigoen de   Inner Join dbo.despafrigode dd
 																 On de.clie_codigo = dd.clie_codigo
@@ -34,7 +34,6 @@ String  ls_retorno
 		 And pf.pafr_ccajas > 0
 		 And IsNull(dd.defe_tempe2,0) <> 99.99
 		 And IsNull(pp.prpr_ggncod, '') <> ''
- Group by ev.enva_pesone
 Using SQLCA;
 	
 If SQLCA.SQLCode = -1 Then

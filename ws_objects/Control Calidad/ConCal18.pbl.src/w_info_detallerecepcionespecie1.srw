@@ -1,64 +1,64 @@
-﻿$PBExportHeader$w_info_detallerecepcionespecie.srw
+﻿$PBExportHeader$w_info_detallerecepcionespecie1.srw
 $PBExportComments$Ventana de Consulta planilla de recepcion
 forward
-global type w_info_detallerecepcionespecie from w_para_informes
+global type w_info_detallerecepcionespecie1 from w_para_informes
 end type
-type em_fechadesde from editmask within w_info_detallerecepcionespecie
+type em_fechadesde from editmask within w_info_detallerecepcionespecie1
 end type
-type st_12 from statictext within w_info_detallerecepcionespecie
+type st_12 from statictext within w_info_detallerecepcionespecie1
 end type
-type st_13 from statictext within w_info_detallerecepcionespecie
+type st_13 from statictext within w_info_detallerecepcionespecie1
 end type
-type em_fechahasta from editmask within w_info_detallerecepcionespecie
+type em_fechahasta from editmask within w_info_detallerecepcionespecie1
 end type
-type st_zona from statictext within w_info_detallerecepcionespecie
+type st_zona from statictext within w_info_detallerecepcionespecie1
 end type
-type st_33 from statictext within w_info_detallerecepcionespecie
+type st_33 from statictext within w_info_detallerecepcionespecie1
 end type
-type cbx_todosfecha from checkbox within w_info_detallerecepcionespecie
+type cbx_todosfecha from checkbox within w_info_detallerecepcionespecie1
 end type
-type st_14 from statictext within w_info_detallerecepcionespecie
+type st_14 from statictext within w_info_detallerecepcionespecie1
 end type
-type st_2 from statictext within w_info_detallerecepcionespecie
+type st_2 from statictext within w_info_detallerecepcionespecie1
 end type
-type uo_muestrazona from uo_seleccion_zonas_mod within w_info_detallerecepcionespecie
+type uo_muestrazona from uo_seleccion_zonas_mod within w_info_detallerecepcionespecie1
 end type
-type st_1 from statictext within w_info_detallerecepcionespecie
+type st_1 from statictext within w_info_detallerecepcionespecie1
 end type
-type uo_muestraplanta from uo_seleccion_planta_mod within w_info_detallerecepcionespecie
+type uo_muestraplanta from uo_seleccion_planta_mod within w_info_detallerecepcionespecie1
 end type
-type st_5 from statictext within w_info_detallerecepcionespecie
+type st_5 from statictext within w_info_detallerecepcionespecie1
 end type
-type uo_muestravariedad from uo_seleccion_variedad_mod within w_info_detallerecepcionespecie
+type uo_muestravariedad from uo_seleccion_variedad_mod within w_info_detallerecepcionespecie1
 end type
-type st_3 from statictext within w_info_detallerecepcionespecie
+type st_3 from statictext within w_info_detallerecepcionespecie1
 end type
-type gb_3 from groupbox within w_info_detallerecepcionespecie
+type gb_3 from groupbox within w_info_detallerecepcionespecie1
 end type
-type uo_muestraproductor from uo_seleccion_productor_mod within w_info_detallerecepcionespecie
+type uo_muestraproductor from uo_seleccion_productor_mod within w_info_detallerecepcionespecie1
 end type
-type st_44 from statictext within w_info_detallerecepcionespecie
+type st_44 from statictext within w_info_detallerecepcionespecie1
 end type
-type uo_muestrainspector from uo_seleccion_inspectores_mod within w_info_detallerecepcionespecie
+type uo_muestrainspector from uo_seleccion_inspectores_mod within w_info_detallerecepcionespecie1
 end type
-type dw_1 from uo_dw within w_info_detallerecepcionespecie
+type dw_1 from uo_dw within w_info_detallerecepcionespecie1
 end type
-type uo_selcliente from uo_seleccion_clientesprod within w_info_detallerecepcionespecie
+type uo_selcliente from uo_seleccion_clientesprod within w_info_detallerecepcionespecie1
 end type
-type st_4 from statictext within w_info_detallerecepcionespecie
+type st_4 from statictext within w_info_detallerecepcionespecie1
 end type
-type uo_selespecies from uo_seleccion_especie within w_info_detallerecepcionespecie
+type uo_selespecies from uo_seleccion_especie within w_info_detallerecepcionespecie1
 end type
 end forward
 
-global type w_info_detallerecepcionespecie from w_para_informes
+global type w_info_detallerecepcionespecie1 from w_para_informes
 string tag = "Informe Resumen - Control de Calidad de Recepción"
 integer x = 14
 integer y = 32
 integer width = 2373
 integer height = 1896
 string title = "INFORME DETALLADO DE RECEPCION"
-string icon = "F:\Desarrollo\Producción\FrutaProcesada\Producc.ico"
+string icon = "AppIcon!"
 em_fechadesde em_fechadesde
 st_12 st_12
 st_13 st_13
@@ -83,7 +83,7 @@ uo_selcliente uo_selcliente
 st_4 st_4
 uo_selespecies uo_selespecies
 end type
-global w_info_detallerecepcionespecie w_info_detallerecepcionespecie
+global w_info_detallerecepcionespecie1 w_info_detallerecepcionespecie1
 
 type variables
 str_busqueda      istr_busq
@@ -94,7 +94,7 @@ String	        is_report, is_nula
 
 end variables
 
-on w_info_detallerecepcionespecie.create
+on w_info_detallerecepcionespecie1.create
 int iCurrent
 call super::create
 this.em_fechadesde=create em_fechadesde
@@ -146,7 +146,7 @@ this.Control[iCurrent+22]=this.st_4
 this.Control[iCurrent+23]=this.uo_selespecies
 end on
 
-on w_info_detallerecepcionespecie.destroy
+on w_info_detallerecepcionespecie1.destroy
 call super::destroy
 destroy(this.em_fechadesde)
 destroy(this.st_12)
@@ -213,7 +213,7 @@ Else
 End If
 end event
 
-type pb_excel from w_para_informes`pb_excel within w_info_detallerecepcionespecie
+type pb_excel from w_para_informes`pb_excel within w_info_detallerecepcionespecie1
 boolean visible = true
 integer x = 1989
 integer y = 736
@@ -283,25 +283,25 @@ End If
 SetPointer(Arrow!)
 end event
 
-type st_computador from w_para_informes`st_computador within w_info_detallerecepcionespecie
+type st_computador from w_para_informes`st_computador within w_info_detallerecepcionespecie1
 end type
 
-type st_usuario from w_para_informes`st_usuario within w_info_detallerecepcionespecie
+type st_usuario from w_para_informes`st_usuario within w_info_detallerecepcionespecie1
 end type
 
-type st_temporada from w_para_informes`st_temporada within w_info_detallerecepcionespecie
+type st_temporada from w_para_informes`st_temporada within w_info_detallerecepcionespecie1
 end type
 
-type p_logo from w_para_informes`p_logo within w_info_detallerecepcionespecie
-string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
+type p_logo from w_para_informes`p_logo within w_info_detallerecepcionespecie1
+string picturename = ""
 end type
 
-type st_titulo from w_para_informes`st_titulo within w_info_detallerecepcionespecie
+type st_titulo from w_para_informes`st_titulo within w_info_detallerecepcionespecie1
 integer width = 1632
 string text = "Informe Detallado de Recepción"
 end type
 
-type pb_acepta from w_para_informes`pb_acepta within w_info_detallerecepcionespecie
+type pb_acepta from w_para_informes`pb_acepta within w_info_detallerecepcionespecie1
 string tag = "Imprimir Reporte"
 integer x = 1984
 integer y = 480
@@ -378,17 +378,16 @@ Else
 End If
 end event
 
-type pb_salir from w_para_informes`pb_salir within w_info_detallerecepcionespecie
+type pb_salir from w_para_informes`pb_salir within w_info_detallerecepcionespecie1
 string tag = "Salir [Cerrar Ventana Activa]"
 integer x = 1984
 integer y = 996
 integer taborder = 130
 boolean default = true
-string disabledname = "\desarrollo\bmp\exitd.bmp"
 string powertiptext = "Salir [Cerrar Ventana Activa]"
 end type
 
-type em_fechadesde from editmask within w_info_detallerecepcionespecie
+type em_fechadesde from editmask within w_info_detallerecepcionespecie1
 integer x = 517
 integer y = 1528
 integer width = 475
@@ -410,7 +409,7 @@ string mask = "dd/mm/yyyy"
 boolean dropdowncalendar = true
 end type
 
-type st_12 from statictext within w_info_detallerecepcionespecie
+type st_12 from statictext within w_info_detallerecepcionespecie1
 integer x = 320
 integer y = 1536
 integer width = 197
@@ -429,7 +428,7 @@ string text = "Desde"
 boolean focusrectangle = false
 end type
 
-type st_13 from statictext within w_info_detallerecepcionespecie
+type st_13 from statictext within w_info_detallerecepcionespecie1
 integer x = 1033
 integer y = 1540
 integer width = 178
@@ -448,7 +447,7 @@ string text = "Hasta"
 boolean focusrectangle = false
 end type
 
-type em_fechahasta from editmask within w_info_detallerecepcionespecie
+type em_fechahasta from editmask within w_info_detallerecepcionespecie1
 integer x = 1225
 integer y = 1528
 integer width = 475
@@ -470,7 +469,7 @@ string mask = "dd/mm/yyyy"
 boolean dropdowncalendar = true
 end type
 
-type st_zona from statictext within w_info_detallerecepcionespecie
+type st_zona from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 956
 integer width = 370
@@ -489,7 +488,7 @@ string text = "Zona Origen"
 boolean focusrectangle = false
 end type
 
-type st_33 from statictext within w_info_detallerecepcionespecie
+type st_33 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 1196
 integer width = 370
@@ -508,7 +507,7 @@ string text = "Productor"
 boolean focusrectangle = false
 end type
 
-type cbx_todosfecha from checkbox within w_info_detallerecepcionespecie
+type cbx_todosfecha from checkbox within w_info_detallerecepcionespecie1
 integer x = 1723
 integer y = 1540
 integer width = 123
@@ -546,7 +545,7 @@ RETURN 0
 
 end event
 
-type st_14 from statictext within w_info_detallerecepcionespecie
+type st_14 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 736
 integer width = 370
@@ -565,7 +564,7 @@ string text = "Especie"
 boolean focusrectangle = false
 end type
 
-type st_2 from statictext within w_info_detallerecepcionespecie
+type st_2 from statictext within w_info_detallerecepcionespecie1
 integer x = 1595
 integer y = 492
 integer width = 197
@@ -584,7 +583,7 @@ string text = "Todos"
 boolean focusrectangle = false
 end type
 
-type uo_muestrazona from uo_seleccion_zonas_mod within w_info_detallerecepcionespecie
+type uo_muestrazona from uo_seleccion_zonas_mod within w_info_detallerecepcionespecie1
 integer x = 745
 integer y = 940
 integer width = 1024
@@ -611,7 +610,7 @@ event ue_cambio;call super::ue_cambio;//IF IsNull(This.Codigo) THEN RETURN
 //END CHOOSE
 end event
 
-type st_1 from statictext within w_info_detallerecepcionespecie
+type st_1 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 1080
 integer width = 370
@@ -629,7 +628,7 @@ string text = "Frigorífico"
 boolean focusrectangle = false
 end type
 
-type uo_muestraplanta from uo_seleccion_planta_mod within w_info_detallerecepcionespecie
+type uo_muestraplanta from uo_seleccion_planta_mod within w_info_detallerecepcionespecie1
 integer x = 745
 integer y = 1060
 integer width = 1024
@@ -654,7 +653,7 @@ Choose Case This.Codigo
 End Choose
 end event
 
-type st_5 from statictext within w_info_detallerecepcionespecie
+type st_5 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 1324
 integer width = 370
@@ -672,7 +671,7 @@ string text = "Inspector"
 boolean focusrectangle = false
 end type
 
-type uo_muestravariedad from uo_seleccion_variedad_mod within w_info_detallerecepcionespecie
+type uo_muestravariedad from uo_seleccion_variedad_mod within w_info_detallerecepcionespecie1
 integer x = 745
 integer y = 820
 integer width = 1024
@@ -685,7 +684,7 @@ on uo_muestravariedad.destroy
 call uo_seleccion_variedad_mod::destroy
 end on
 
-type st_3 from statictext within w_info_detallerecepcionespecie
+type st_3 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 844
 integer width = 370
@@ -703,7 +702,7 @@ string text = "Variedad"
 boolean focusrectangle = false
 end type
 
-type gb_3 from groupbox within w_info_detallerecepcionespecie
+type gb_3 from groupbox within w_info_detallerecepcionespecie1
 integer x = 242
 integer y = 1432
 integer width = 1595
@@ -719,7 +718,7 @@ long backcolor = 553648127
 string text = " Fecha Recepción  "
 end type
 
-type uo_muestraproductor from uo_seleccion_productor_mod within w_info_detallerecepcionespecie
+type uo_muestraproductor from uo_seleccion_productor_mod within w_info_detallerecepcionespecie1
 event destroy ( )
 integer x = 745
 integer y = 1180
@@ -745,7 +744,7 @@ Choose Case This.Codigo
 End Choose
 end event
 
-type st_44 from statictext within w_info_detallerecepcionespecie
+type st_44 from statictext within w_info_detallerecepcionespecie1
 integer x = 160
 integer y = 432
 integer width = 1719
@@ -763,7 +762,7 @@ borderstyle borderstyle = styleraised!
 boolean focusrectangle = false
 end type
 
-type uo_muestrainspector from uo_seleccion_inspectores_mod within w_info_detallerecepcionespecie
+type uo_muestrainspector from uo_seleccion_inspectores_mod within w_info_detallerecepcionespecie1
 event destroy ( )
 integer x = 745
 integer y = 1308
@@ -788,7 +787,7 @@ Choose Case This.Codigo
 End Choose
 end event
 
-type dw_1 from uo_dw within w_info_detallerecepcionespecie
+type dw_1 from uo_dw within w_info_detallerecepcionespecie1
 boolean visible = false
 integer x = 1989
 integer y = 1496
@@ -861,7 +860,7 @@ End If
 SetPointer(Arrow!)
 end event
 
-type uo_selcliente from uo_seleccion_clientesprod within w_info_detallerecepcionespecie
+type uo_selcliente from uo_seleccion_clientesprod within w_info_detallerecepcionespecie1
 integer x = 745
 integer y = 612
 integer width = 901
@@ -874,7 +873,7 @@ on uo_selcliente.destroy
 call uo_seleccion_clientesprod::destroy
 end on
 
-type st_4 from statictext within w_info_detallerecepcionespecie
+type st_4 from statictext within w_info_detallerecepcionespecie1
 integer x = 306
 integer y = 612
 integer width = 370
@@ -893,7 +892,7 @@ string text = "Cliente"
 boolean focusrectangle = false
 end type
 
-type uo_selespecies from uo_seleccion_especie within w_info_detallerecepcionespecie
+type uo_selespecies from uo_seleccion_especie within w_info_detallerecepcionespecie1
 event destroy ( )
 integer x = 745
 integer y = 736

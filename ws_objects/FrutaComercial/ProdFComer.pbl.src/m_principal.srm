@@ -4471,9 +4471,7 @@ end event
 
 on m_interplantas.create
 call super::create
-this.visible = false
 this.text = "Inter &Plantas"
-this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741

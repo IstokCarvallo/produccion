@@ -101,7 +101,7 @@ w_mant_deta_movtoenvadeta						iw_mantencion_2
 
 DataWindowChild   								idwc_PltaDest, 		idwc_Transp, 	idwc_Camion, &
 														idwc_TipoMovto, 	idwc_cliente, 	idwc_productores
-DataWindow											dw_3, dw_4
+DataWindow										dw_3, dw_4
 str_variedad											istr_variedad
 str_categoria										istr_categoria
 
@@ -2892,57 +2892,47 @@ NEXT
 IF NOT lb_retorno THEN Message.DoubleParm = -1
 end event
 
-event ue_borrar;IF dw_2.RowCount() < 1 THEN RETURN
+event ue_borrar;If dw_2.RowCount() < 1 Then Return
 
 SetPointer(HourGlass!)
 
-ib_borrar		=	True
+ib_borrar			=	True
 ib_AutoCommit	=	sqlca.AutoCommit
 
 w_main.SetMicroHelp("Validando la eliminación...")
 
-IF NOT valida_password() THEN
+If Not Valida_Password() Then
 	MessageBox("Error", "No es posible anular el movimiento, ya que no posee el password correspondiente")
 	Return
-END IF
+End If
 
 Message.DoubleParm = 0
 
 This.TriggerEvent ("ue_validaborrar")
 
-IF Message.DoubleParm = -1 THEN RETURN
+If Message.DoubleParm = -1 Then Return
 
-IF dw_3.RowCount() > 0 THEN
-	dw_3.RowsMove(1, dw_3.RowCount(), Primary!, dw_3, 1, Delete!)
-END IF
+If dw_3.RowCount() > 0 Then dw_3.RowsMove(1, dw_3.RowCount(), Primary!, dw_3, 1, Delete!)
+If dw_4.RowCount() > 0 Then dw_4.RowsMove(1, dw_4.RowCount(), Primary!, dw_4, 1, Delete!)
+If dw_1.RowCount() > 0 Then dw_1.RowsMove(1, dw_1.RowCount(), Primary!, dw_1, 1, Delete!)
 
-IF dw_4.RowCount() > 0 THEN
-	dw_4.RowsMove(1, dw_4.RowCount(), Primary!, dw_4, 1, Delete!)
-END IF
+//If dw_1.DeleteRow(0) = 1 Then
+ib_Borrar	=	False
+w_main.SetMicroHelp("Anulando Registro...")
 
-IF dw_1.DeleteRow(0) = 1 THEN
-		ib_Borrar	=	False
-		
-		w_main.SetMicroHelp("Anulando Registro...")
-		
-		dw_2.Object.mfco_estmov[1]	=	0
-		
-		IF wf_actualiza_db(True) THEN
-			w_main.SetMicroHelp("Registro Borrado...")
-			
-//			iuo_traspaso.lb_LocalRemoto = True
-//			iuo_traspaso.TriggerEvent("ue_borrar")
-			
-			This.TriggerEvent("ue_nuevo")
-			SetPointer(Arrow!)
-		ELSE
-			w_main.SetMicroHelp("Registro no Borrado...")
-		END IF			
-ELSE
-	ib_Borrar	=	False
-	
-	MessageBox(This.Title,"No se puede borrar actual registro.")
-END IF
+dw_2.Object.mfco_estmov[1]	=	0
+
+If wf_actualiza_db(True) Then
+	w_main.SetMicroHelp("Registro Borrado...")			
+	This.TriggerEvent("ue_nuevo")
+	SetPointer(Arrow!)
+Else
+	w_main.SetMicroHelp("Registro no Borrado...")
+End If			
+//Else
+//	ib_Borrar	=	False
+//	MessageBox(This.Title,"No se puede borrar actual registro.")
+//End If
 end event
 
 event ue_seleccion;call super::ue_seleccion;Str_Busqueda	lstr_Busq
@@ -3100,10 +3090,11 @@ end event
 
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_maed_movtofrutacomenca_multiconex
 boolean visible = false
-integer x = 5
+integer x = 55
 integer y = 892
 integer width = 4658
 integer height = 1200
+boolean titlebar = false
 string title = "Enca enva"
 string dataobject = "dw_mant_movtoenvaenca_origen"
 boolean hscrollbar = false

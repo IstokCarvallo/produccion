@@ -3479,7 +3479,7 @@ If wf_actualiza_db(False) Then
 			ll_numero		= dw_2.Object.defe_numero[1]		
 			
 			DECLARE Traspaso_comercial PROCEDURE FOR dbo.Fproc_traspasofrutacomercial	
-					  @clienteOld 		= :li_cliente,
+					  @Cliente 		= :li_cliente,
 					  @planta 		= :li_planta,
 					  @numero 		= :ll_numero,
 					  @usuario		= :ls_usuario, 
@@ -3495,6 +3495,8 @@ If wf_actualiza_db(False) Then
 			Commit;
 			
 			Close Traspaso_comercial;
+			
+			MessageBox("Atención","Traspaso a Fruta a Comercial Terminado.",Exclamation!)
 		End If
 	End If
 Else

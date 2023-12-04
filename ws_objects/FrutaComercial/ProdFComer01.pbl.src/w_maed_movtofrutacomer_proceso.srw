@@ -1676,7 +1676,7 @@ String	ls_nombrepc
 
 li_planta  	=	Long(istr_mant.Argumento[1])
 li_especie 	=	Integer(istr_mant.Argumento[7])
-ls_nombrepc	=	gstr_us.computador
+ls_nombrepc=	gstr_us.computador
 
 SELECT loco_ultcom  
   Into :ll_lote
@@ -3674,7 +3674,7 @@ If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
 	  End If
 	End If
 
-	dw_2.Object.mfco_numero[1]				=	il_NumFruta
+	dw_2.Object.mfco_numero[1]			=	il_NumFruta
 	dw_2.Object.mfco_estmov[1] 			=  1
 
 	istr_Mant.Argumento[3] 					= 	String(il_NumFruta)
@@ -3683,12 +3683,12 @@ If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
 
 	dw_6.Object.plde_codigo[ll_Fila]		=	dw_2.Object.plde_codigo[1]
 	dw_6.Object.tpmv_codigo[ll_Fila]		=	li_TipoMovtoEnva
-	dw_6.Object.meen_numero[ll_Fila]		=  il_NumEnva
+	dw_6.Object.meen_numero[ll_Fila]	=  il_NumEnva
 
   	dw_6.Object.prod_codigo[ll_Fila]		=	dw_2.Object.prod_codigo[1]
-	dw_6.Object.meen_fecmov[ll_Fila]		=	dw_2.Object.mfco_fecmov[1]
-	dw_6.Object.meen_modulo[ll_Fila]		=	2
-	dw_6.Object.tpmv_codrec[ll_fila] 	=  li_TipoMovto
+	dw_6.Object.meen_fecmov[ll_Fila]	=	dw_2.Object.mfco_fecmov[1]
+	dw_6.Object.meen_modulo[ll_Fila]	=	2
+	dw_6.Object.tpmv_codrec[ll_fila] 		=  li_TipoMovto
 	dw_6.Object.mfge_numero[ll_fila] 	=  il_NumFruta
 
 	//Preguntar el Momento de Actualización
@@ -3710,7 +3710,7 @@ ll_numerolote 					= 	dw_3.Object.lofc_lotefc[1]
 
 dw_3.Object.lofc_totbul[1]	=	dw_4.Object.total_bulto[1]
 dw_3.Object.lofc_totkil[1]	=	dw_4.Object.total_kilos[1]
-dw_3.Object.lofc_tipool[1] =  Integer(Istr_Mant.Argumento[11])
+dw_3.Object.lofc_tipool[1]	=  Integer(Istr_Mant.Argumento[11])
 
 SELECT	IsNull(Max(lfcd_secuen), 0) + 1
 	INTO	:li_Secuencia
