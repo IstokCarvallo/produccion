@@ -107,9 +107,10 @@ uo_patente				iuo_patente
 uo_especie				iuo_especie
 uo_clienprove			iuo_clprv
 uo_calibre				iuo_calibre
-
-uo_ClientesProd	iuo_Cliente
-uo_guiadespacho	iuo_Guia
+uo_transportista		iuo_Transportista
+uo_transportista		iuo_TransportistaServ
+uo_ClientesProd		iuo_Cliente
+uo_guiadespacho		iuo_Guia
 end variables
 
 forward prototypes
@@ -2820,11 +2821,14 @@ dw_palletencahisto.SetTransObject(sqlca)
 dw_alpalletfruta.SetTransObject(sqlca)
 dw_alpalletencab.SetTransObject(sqlca)
 
-iuo_patente		=	Create uo_patente
-iuo_Especie		=	Create uo_Especie
-iuo_clprv			=	Create uo_clienprove
-iuo_Cliente		=	Create uo_ClientesProd	
-iuo_Guia			=	Create uo_GuiaDespacho
+iuo_patente					=	Create uo_patente
+iuo_Especie					=	Create uo_Especie
+iuo_clprv						=	Create uo_clienprove
+iuo_Cliente					=	Create uo_ClientesProd	
+iuo_Guia						=	Create uo_GuiaDespacho
+iuo_Transportista			=	Create uo_transportista
+iuo_TransportistaServ	=	Create uo_transportista
+
 
 // Para guardar fecha de despacho en la Palletfruta
 ids_palletfruta_fecha				=	CREATE	DataStore
@@ -3957,7 +3961,20 @@ Case "defe_especi"
 		Else
 			dw_2.SetItem(1, "defe_chfrut", is_rutchofer)
 			Return 1
-		End If					
+		End If
+		
+	Case "tran_codigo"
+		If Not iuo_Transportista.Existe(Integer(Data), True, SQLCA) Then
+			This.SetItem(1, ls_columna, ll_null)
+			Return 1
+		End If
+		
+	Case "defe_traser"
+		If Not iuo_TransportistaServ.Existe(Integer(Data), True, SQLCA) Then
+			This.SetItem(1, ls_columna, ll_null)
+			Return 1
+		End If
+		
 End Choose
 
 HabilitaIngreso(ls_columna)

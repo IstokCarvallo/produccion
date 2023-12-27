@@ -1430,6 +1430,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_prod_parempresa,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mues_paramtemporada,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_mues_facperiodos,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruproced_caja,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_transportista,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd06.pbl,w_busc_clienprove,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dddw_mercado,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP00.pbl,w_maed_spro_repalasigenca_caja_caja,w
@@ -1442,7 +1443,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_emision_ventana_
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_ordencargaenca,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_prodcuarteles,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_excel_frigorificos_palletpucho,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_transportista,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP71.pbl,w_info_reetiquetado_formatoexcel,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,str_paramplanta,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_variedades,u

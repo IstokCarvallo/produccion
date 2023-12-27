@@ -463,6 +463,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_envases,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_spro_ubicadocto,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_camarasfrigo,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_mues_lotesfrutacomdeta_reproceso,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer05.pbl,dw_pesaje_romana_origen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer01.pbl,w_mant_deta_spro_ordenventacomdeta,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipofrio,u

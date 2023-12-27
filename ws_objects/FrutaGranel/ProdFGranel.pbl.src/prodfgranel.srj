@@ -953,6 +953,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_envases,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_clientesprod,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_spro_ubicadocto,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_equipos,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,w_info_etiqetas_compactos_cajasprod,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_mues_programacionsegregadorenca,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_tipopallemba,d

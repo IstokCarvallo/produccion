@@ -49,256 +49,371 @@ FUNCTION Long 		seeVerifyUser (Long Chan, String EmailAddr) LIBRARY "SEE32.DLL"
 end prototypes
 
 type variables
-String	SMTP
-
-Constant Long SEE_MIN_RESPONSE_WAIT = 1
-Constant Long SEE_MAX_RESPONSE_WAIT = 2
-Constant Long SEE_CONNECT_WAIT = 3
-Constant Long SEE_DISABLE_MIME = 4
-Constant Long SEE_QUOTED_PRINTABLE = 8
-Constant Long SEE_AUTO_CALL_DRIVER = 9
-Constant Long SEE_FILE_PREFIX = 10
-Constant Long SEE_SLEEP_TIME = 13
-Constant Long SEE_DECODE_UNNAMED = 14
-Constant Long SEE_SMTP_PORT = 15
-Constant Long SEE_POP3_PORT = 16
-Constant Long SEE_MAX_LINE_LENGTH = 17
-Constant Long SEE_BLOCKING_MODE = 18
-Constant Long SEE_ALLOW_8BITS = 19
-Constant Long SEE_LOG_FILE = 20
-Constant Long SEE_HIDE_SAVED_MSG = 21
-Constant Long SEE_HIDE_TO_ADDR = 22
-Constant Long SEE_ADDRESS_DELIMITER = 23
-Constant Long SEE_WSACLEANUP = 24
-Constant Long SEE_PATH_DELIMITER = 25
-Constant Long SEE_ATTACH_DELIMITER = 26
-Constant Long SEE_ENABLE_IMAGE = 27
-Constant Long SEE_RAW_MODE = 28
-Constant Long SEE_ENABLE_ESMTP = 29
-Constant Long SEE_ENABLE_APOP = 30
-Constant Long SEE_ATTACH_BASE_NUMBER = 31
-Constant Long SEE_IGNORE_REJECTED = 32
-Constant Long SEE_WRITE_CONTENT_TYPE = 33
-Constant Long SEE_SET_FILE_PREFIX = 34
-Constant Long SEE_HTML_CHARSET = 35
-
-Constant Long CHARSET_BLANK = 0
-Constant Long CHARSET_US_ASCII = 1
-Constant Long CHARSET_8859 = 4
-Constant Long CHARSET_ISO_8859_1 = 4
-Constant Long CHARSET_ISO_8859_8 = 5
-Constant Long CHARSET_WIN_1252 = 6
-Constant Long CHARSET_WIN_1255 = 7
-
-Constant Long SEE_GET_ERROR_TEXT = 1
-Constant Long SEE_GET_COUNTER = 2
-Constant Long SEE_GET_RESPONSE = 3
-Constant Long SEE_GET_SOCK_ERROR = 4
-Constant Long SEE_GET_MESSAGE_BYTES_READ = 10
-Constant Long SEE_GET_ATTACH_BYTES_READ = 11
-Constant Long SEE_GET_TOTAL_BYTES_READ = 12
-Constant Long SEE_GET_MESSAGE_BYTES_SENT = 13
-Constant Long SEE_GET_ATTACH_BYTES_SENT = 14
-Constant Long SEE_GET_TOTAL_BYTES_SENT = 15
-Constant Long SEE_GET_VERSION = 16
-Constant Long SEE_GET_MSG_COUNT = 17
-Constant Long SEE_GET_MSG_SIZE = 18
-Constant Long SEE_GET_BUFFER_COUNT = 19
-Constant Long SEE_GET_CONNECT_STATUS = 20
-Constant Long SEE_GET_REGISTRATION = 21
-Constant Long SEE_GET_ATTACH_COUNT = 22
-Constant Long SEE_GET_LAST_RESPONSE = 23
-Constant Long SEE_GET_VERIFY_STATUS = 24
-Constant Long SEE_GET_SERVER_IP = 25
-Constant Long SEE_GET_BUILD = 26
-Constant Long SEE_GET_SOCKET = 27
-Constant Long SEE_GET_LOCAL_IP = 28
-Constant Long SEE_GET_ATTACH_NAMES = 29
-Constant Long SEE_GET_LAST_RECIPIENT = 30
-
-Constant Long SEE_COPY_BUFFER = 40
-Constant Long SEE_WRITE_BUFFER = 41
-
-Constant Long SEE_SET_REPLY = 50
-Constant Long SEE_SET_HEADER = 51
-Constant Long SEE_WRITE_TO_LOG = 52
-Constant Long SEE_SET_FROM = 53
-Constant Long SEE_SET_CONTENT_TYPE = 54
-Constant Long SEE_SET_TRANSFER_ENCODING = 55
-Constant Long SEE_ADD_HEADER = 56
-Constant Long SEE_SET_SECRET = 57
-Constant Long SEE_SET_USER = 58
-Constant Long SEE_SET_TEXT_MESSAGE = 59
-Constant Long SEE_FORCE_INLINE = 60
-Constant Long SEE_SET_ATTACH_CONTENT_TYPE = 61
-Constant Long SEE_AUTHENTICATE_PROTOCOL = 62
-Constant Long SEE_SET_CONTENT_TYPE_PREFIX = 63
-Constant Long SEE_ENABLE_XMAILER = 64
-
-Constant Long QUOTED_OFF = 0
-Constant Long QUOTED_PLAIN = 1
-Constant Long QUOTED_HTML = 2
-Constant Long QUOTED_RICH = 3
-Constant Long QUOTED_8859 = 4
-Constant Long QUOTED_ISO_8859_1 = 4
-Constant Long QUOTED_ISO_8859_8 = 5
-Constant Long QUOTED_WIN_1252 = 6
-Constant Long QUOTED_WIN_1255 = 7
-Constant Long QUOTED_USER = 9
-
-Constant Long INLINE_TEXT_OFF = 0
-Constant Long INLINE_TEXT_INLINE = 1
-Constant Long INLINE_TEXT_ATTACHMENT = 2
-
-Constant Long AUTHENTICATE_CRAM = 1
-Constant Long AUTHENTICATE_LOGIN = 2
-Constant Long AUTHENTICATE_PLAIN = 4
-
-Constant Long SEE_KEY_CODE = 687283244
-			
+Constant Private String	_SMTP = "smtp.office365.com"
+Constant	Private Integer _PORT = 587
+Constant Private String	_USER = "sendmail@rioblanco.net"
+Constant Private String	_PASS = "rio.blanco.2019"
 end variables
 
 forward prototypes
-public function long send_mail (string smtp_server, string email_from, string email_to, string email_cc, string email_bcc, string email_subject, string email_msg, string email_attach, ref string error_msg)
-public function long send_mailhtml (string smtp_server, string email_from, string email_to, string email_cc, string email_bcc, string email_subject, string email_msg, string email_attach, ref string error_msg)
-public subroutine of_setsmtp (string codigo)
-public function integer of_obtienesmtp ()
+private function string of_error (integer ai_codigo)
+public subroutine of_send (string email_to[], string email_cc[], string email_bcc[], string email_subject, string email_msg, string email_attach[], integer email_priority)
+public subroutine of_send (string email_to[], string email_cc[], string email_bcc[], string email_subject, string email_msg, integer email_priority)
+public subroutine of_send (string email_to[], string email_cc[], string email_subject, string email_msg, integer email_priority)
+public subroutine of_send (string email_to[], string email_subject, string email_msg, integer email_priority)
+public subroutine of_send (string email_to[], string email_subject, string email_msg, string email_attach[], integer email_priority)
+public subroutine of_send (string email_to[], string email_cc[], string email_subject, string email_msg, string email_attach[], integer email_priority)
 end prototypes
 
-public function long send_mail (string smtp_server, string email_from, string email_to, string email_cc, string email_bcc, string email_subject, string email_msg, string email_attach, ref string error_msg);Long ll_nbr_chans, ll_channel, ll_result, ll_nresult, ll_ParamIndex, ll_ParamValue, ll_largo, ll_Retorno
-String	ls_Null
+private function string of_error (integer ai_codigo);String	ls_Retorno = ''
 
-SetNull(ls_Null)
- 
-ll_largo 			= 	100
-error_msg 		= 	space(ll_largo) + char(0)
-ll_nbr_chans 	= 	1
-ll_channel 		= 	0
-seeClose (ll_channel)
-seeRelease()
+Choose Case ai_Codigo
+	Case 1  
+		ls_Retorno = 'Éxito.'
+		
+	Case -1 
+		ls_Retorno = 'Ocurrió un error general.'
+		
+	Case -2 
+		ls_Retorno = 'No se puede conectar al servicio a través del proxy.'
 
-ll_result 			= 	seeAttach(ll_nbr_chans, SEE_KEY_CODE)
+	Case -3 
+		ls_Retorno = 'No se pudo resolver el host proxy dado.'
 
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	error_msg = mid(error_msg,1,ll_nresult)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result
-End If
+	Case -4 
+		ls_Retorno = 'No se pudo resolver el host remoto proporcionado.'
 
-If (EMAIL_ATTACH = "") Then EMAIL_ATTACH = Char(0)
+	Case -5 
+		ls_Retorno = 'No se pudo conectar con el host.'
 
-//Establecemos la Conexion
-ll_result = seeSmtpConnect(ll_channel, smtp_server, email_from, email_from)
-//ll_result = seeSmtpConnectSSL(0,8801,465,smtp_server,User,Pass,email_from,email_from,NULL)
+	Case -6 
+		ls_Retorno = 'El host tiene un formato incorrecto/ilegal o falta.'
 
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	error_msg = mid(error_msg, 1, ll_nresult)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result	
-End If
+	Case -7 
+		ls_Retorno = 'El protocolo no es compatible.'
 
-ll_ParamIndex = SEE_QUOTED_PRINTABLE
-ll_ParamValue = QUOTED_PLAIN
-ll_result = seeIntegerParam(ll_channel, ll_ParamIndex, ll_ParamValue)
+	Case -8 
+		ls_Retorno = 'Error en la conexión SSL.'
 
-//Enviamos el Mail hasta el(los)destinatarios
-ll_result = seeSendEmail(ll_channel, email_to, email_cc, email_bcc, email_subject, EMAIL_MSG, EMAIL_ATTACH) 
+	Case -9 
+		ls_Retorno = 'El certificado del servidor está revocado.'
 
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result
-End If
+	Case -10 
+		ls_Retorno = 'Falló la autenticación del certificado de servicio.'
 
-seeClose (ll_channel)
-seeRelease()
+	Case -11 
+		ls_Retorno = 'Tiempo de espera de la operación.'
 
-Return 0
+	Case -12 
+		ls_Retorno = 'El servidor remoto denegó curl para iniciar sesión.'
+
+	Case -13 
+		ls_Retorno = 'Error al enviar datos de red.'
+
+	Case -14 
+		ls_Retorno = 'Fallo en la recepción de datos de red.'
+
+	Case -15 
+		ls_Retorno = 'Nombre de usuario o contraseña incorrectos.'
+
+	Case -16 
+		ls_Retorno = 'Error al leer el archivo local.'
+
+	Case -17 
+		ls_Retorno = 'No se ha especificado ningún remitente.'
+
+	Case -18 
+		ls_Retorno = 'No se han especificado destinatarios.'
+		
+End CHoose
+
+Return ls_Retorno
 end function
 
-public function long send_mailhtml (string smtp_server, string email_from, string email_to, string email_cc, string email_bcc, string email_subject, string email_msg, string email_attach, ref string error_msg);Long ll_nbr_chans, ll_channel, ll_result, ll_nresult, ll_ParamIndex, ll_ParamValue, ll_largo, ll_Retorno
-String	ls_Null, EMAIL_IMAGES, EMAIL_ALTTEXT
+public subroutine of_send (string email_to[], string email_cc[], string email_bcc[], string email_subject, string email_msg, string email_attach[], integer email_priority);Integer li_rc, i
 
+SMTPClient  lnv_SmtpClient
 
-SetNull(ls_Null)
- 
-ll_largo 			= 	100
-error_msg 		= 	space(ll_largo) + char(0)
-ll_nbr_chans 	= 	1
-ll_channel 		= 	0
-seeClose (ll_channel)
-seeRelease()
+lnv_SmtpClient = Create SMTPClient
 
-ll_result 			= 	seeAttach(ll_nbr_chans, SEE_KEY_CODE)
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
 
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	error_msg = mid(error_msg,1,ll_nresult)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
 End If
 
-If (EMAIL_ATTACH = "") Then EMAIL_ATTACH = Char(0)
-If (EMAIL_IMAGES	= "") Then EMAIL_IMAGES = Char(0)
-If (EMAIL_ALTTEXT = "") Then EMAIL_ALTTEXT = Char(0)
-
-//Establecemos la Conexion
-ll_result = seeSmtpConnect(ll_channel, smtp_server, email_from, email_from)
-
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	error_msg = mid(error_msg, 1, ll_nresult)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result	
+If Not IsNull(email_CC) Then
+	For i = 1 To UpperBound(email_CC)
+	  li_rc = lnv_SmtpClient.Message.AddCc(email_CC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
 End If
 
-ll_ParamIndex = SEE_QUOTED_PRINTABLE
-ll_ParamValue = QUOTED_PLAIN
-ll_result = seeIntegerParam(ll_channel, ll_ParamIndex, ll_ParamValue)
-
-//Enviamos el Mail hasta el(los)destinatarios
-ll_result = seeSendHTML(ll_channel, email_to, email_cc, email_bcc, email_subject, EMAIL_MSG, EMAIL_IMAGES, EMAIL_ALTTEXT, EMAIL_ATTACH) 
-
-If ll_result < 0 Then
-	ll_nresult = seeErrorText(ll_channel, ll_result, error_msg, ll_largo)
-	seeClose (ll_channel)
-	seeRelease()
-	Return ll_result
+If Not IsNull(email_BCC) Then
+	For i = 1 To UpperBound(email_BCC)
+	  li_rc = lnv_SmtpClient.Message.AddBcc(email_BCC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
 End If
 
-seeClose (ll_channel)
-seeRelease()
+If Not IsNull(email_Attach) Then
+	For i = 1 To UpperBound(email_Attach)
+	  li_rc = lnv_SmtpClient.Message.AddAttachment(email_Attach[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar documento(s) adjunto(s).")
+	  Next
+End If
 
-Return 0
-end function
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
 
-public subroutine of_setsmtp (string codigo);If IsNull(Codigo) Then Codigo = ''
-This.SMTP	= Trim(Codigo)
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
 
-
+Destroy lnv_SmtpClient
 end subroutine
 
-public function integer of_obtienesmtp ();Integer	lb_Retorno = 0
+public subroutine of_send (string email_to[], string email_cc[], string email_bcc[], string email_subject, string email_msg, integer email_priority);Integer li_rc, i
 
-If Not IsValid(gstr_ParEmpresa) Then 
-	lb_Retorno = -1
-Else
-	If IsNull(gstr_ParEmpresa.SMTP) or gstr_ParEmpresa.SMTP = '' Then
-		lb_Retorno = -2
-	Else
-		of_SetSMTP(gstr_ParEmpresa.SMTP)
-	End If
+SMTPClient  lnv_SmtpClient
+
+lnv_SmtpClient = Create SMTPClient
+
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
+
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
 End If
 
-Return lb_Retorno
-end function
+If Not IsNull(email_CC) Then
+	For i = 1 To UpperBound(email_CC)
+	  li_rc = lnv_SmtpClient.Message.AddCc(email_CC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+If Not IsNull(email_BCC) Then
+	For i = 1 To UpperBound(email_BCC)
+	  li_rc = lnv_SmtpClient.Message.AddBcc(email_BCC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
+
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
+
+Destroy lnv_SmtpClient
+end subroutine
+
+public subroutine of_send (string email_to[], string email_cc[], string email_subject, string email_msg, integer email_priority);Integer li_rc, i
+
+SMTPClient  lnv_SmtpClient
+
+lnv_SmtpClient = Create SMTPClient
+
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
+
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+If Not IsNull(email_CC) Then
+	For i = 1 To UpperBound(email_CC)
+	  li_rc = lnv_SmtpClient.Message.AddCc(email_CC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
+
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
+
+Destroy lnv_SmtpClient
+end subroutine
+
+public subroutine of_send (string email_to[], string email_subject, string email_msg, integer email_priority);Integer li_rc, i
+
+SMTPClient  lnv_SmtpClient
+
+lnv_SmtpClient = Create SMTPClient
+
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
+
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
+
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
+
+Destroy lnv_SmtpClient
+end subroutine
+
+public subroutine of_send (string email_to[], string email_subject, string email_msg, string email_attach[], integer email_priority);Integer li_rc, i
+
+SMTPClient  lnv_SmtpClient
+
+lnv_SmtpClient = Create SMTPClient
+
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
+
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+If Not IsNull(email_Attach) Then
+	For i = 1 To UpperBound(email_Attach)
+	  li_rc = lnv_SmtpClient.Message.AddAttachment(email_Attach[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar documento(s) adjunto(s).")
+	  Next
+End If
+
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
+
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
+
+Destroy lnv_SmtpClient
+end subroutine
+
+public subroutine of_send (string email_to[], string email_cc[], string email_subject, string email_msg, string email_attach[], integer email_priority);Integer li_rc, i
+
+SMTPClient  lnv_SmtpClient
+
+lnv_SmtpClient = Create SMTPClient
+
+//Sets the email-sEnder information       
+lnv_SmtpClient.Host = _SMTP
+lnv_SmtpClient.Port = _PORT
+lnv_SmtpClient.Username = _USER
+lnv_SmtpClient.password = _PASS
+lnv_SmtpClient.EnableTLS = True
+
+//Sets the email message
+lnv_SmtpClient.Message.SetSEnder(_USER,"SENDMAIL")
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.Message.TextBody = email_MSG
+lnv_SmtpClient.Message.Subject = email_Subject
+lnv_SmtpClient.message.Priority = email_Priority
+lnv_SmtpClient.message.Encoding = "UTF-8"
+//lnv_SmtpClient.LogFile("mail.log")
+
+If Not IsNull(email_To) Then
+	For i = 1 To UpperBound(email_To)
+	  li_rc = lnv_SmtpClient.Message.AddRecipient(email_To[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+If Not IsNull(email_CC) Then
+	For i = 1 To UpperBound(email_CC)
+	  li_rc = lnv_SmtpClient.Message.AddCc(email_CC[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar destinatario(s).")
+	Next
+End If
+
+If Not IsNull(email_Attach) Then
+	For i = 1 To UpperBound(email_Attach)
+	  li_rc = lnv_SmtpClient.Message.AddAttachment(email_Attach[i])
+	  If li_rc = -1 Then  MessageBox("Error","Fallo al agregar documento(s) adjunto(s).")
+	  Next
+End If
+
+//Sends the email
+li_rc = lnv_SmtpClient.Send()
+
+If li_rc <> 1 Then Messagebox('Envio Correo...', 'Email envio fallido.~r~nRetorna : ' + of_error(li_rc) + ' ('+ String(li_rc) + ').', StopSign!)
+
+Destroy lnv_SmtpClient
+end subroutine
 
 on uo_mail.create
 call super::create

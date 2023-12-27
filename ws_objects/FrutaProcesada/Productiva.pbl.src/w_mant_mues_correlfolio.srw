@@ -33,8 +33,8 @@ end variables
 
 forward prototypes
 public function boolean duplicado (string campo, string valor)
-public function boolean valida_rango (long rango, long fila)
 public subroutine wf_replicacion ()
+public function boolean wf_valida_rango (long rango, long fila)
 end prototypes
 
 public function boolean duplicado (string campo, string valor);Long		ll_fila, ll_Numero
@@ -68,7 +68,18 @@ END IF
 Return lb_Retorno
 end function
 
-public function boolean valida_rango (long rango, long fila);Long		ll_Fila, ll_Rango1, ll_Rango2
+public subroutine wf_replicacion ();Integer	ll_fila
+
+ll_fila = dw_1.GetNextModIfied(ll_fila, Primary!)
+
+If ll_fila > 0 Then
+	If iuo_grabatablas.existereplicatablas(gi_CodExport) AND gstr_apl.CodigoSistema = 23 Then
+		iuo_grabatablas.replicatabla_correlfolio(dw_1)	
+	End If	
+End If	
+end subroutine
+
+public function boolean wf_valida_rango (long rango, long fila);Long		ll_Fila, ll_Rango1, ll_Rango2
 Boolean	lb_Retorno = False
 
 For ll_fila = 1 To dw_1.Rowcount()
@@ -83,17 +94,6 @@ Next
 
 Return lb_Retorno
 end function
-
-public subroutine wf_replicacion ();Integer	ll_fila
-
-ll_fila = dw_1.GetNextModIfied(ll_fila, Primary!)
-
-If ll_fila > 0 Then
-	If iuo_grabatablas.existereplicatablas(gi_CodExport) AND gstr_apl.CodigoSistema = 23 Then
-		iuo_grabatablas.replicatabla_correlfolio(dw_1)	
-	End If	
-End If	
-end subroutine
 
 on w_mant_mues_correlfolio.create
 int iCurrent
@@ -437,7 +437,7 @@ Choose Case ls_Columna
 		End If
 		
 	Case "spco_corini"
-		If Duplicado(ls_Columna, Data) Or valida_rango(Long(Data), Row)  Then
+		If Duplicado(ls_Columna, Data) Or wf_valida_rango(Long(Data), Row)  Then
 			This.SetItem(Row, ls_Columna, Long(li_Null))
 			Return 1
 		Else
@@ -451,7 +451,7 @@ Choose Case ls_Columna
 			Return 1
 		End If
 		
-		If valida_rango(Long(Data), Row) Then
+		If wf_valida_rango(Long(Data), Row) Then
 			This.SetItem(Row, ls_Columna, Long(li_Null))
 			Return 1
 		End If	

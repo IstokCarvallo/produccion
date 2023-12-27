@@ -1587,6 +1587,7 @@ Choose Case ls_columna
 				iuo_Ventana.of_Disponible(Integer(istr_mant.Argumento[1]), Long(istr_mant.argumento[6]), dw_2.Object.paen_tipopa[1], SQLCA)
 			End If
 		End If
+		
 		istr_mant.Argumento[2] = data
 		
 	Case "paen_feccon"
