@@ -614,9 +614,9 @@ End If
 			//	sle_1.Text								=	"ImprimiEndo Adhesivos en Formato GS1"
 			ls_fecha									=	String(dw_1.Object.pafr_fecemb[1])
 			ls_fecha									=	Left(ls_fecha, 2) + Mid(ls_fecha, 4, 2) + Right(ls_fecha, 2)
-			dw_16.Object.Ole_1.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha + "\F" + &
+			dw_16.Object.Ole_1.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha /*+ "\F" + &
 															"21" + String(gl_packing, "0000") +  &
-															String(ll_inicio, '00000000')
+															String(ll_inicio, '00000000')*/
 			
 			If ll_fill + 1 <= dw_2.RowCount() Then
 				
@@ -625,9 +625,9 @@ End If
 				ll_nrocaja = dw_2.Object.capr_numero[ll_fill + 1]
 				gl_packing = dw_2.Object.plde_codigo[ll_fill + 1]
 								
-				dw_16.Object.Ole_2.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha + "\F" + &
+				dw_16.Object.Ole_2.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha /*+ "\F" + &
 																"21" + String(gl_packing, "0000") + &
-																String(ll_final, '00000000')
+																String(ll_final, '00000000')*/
 			End If																	
 			
 			dw_16.AcceptText()
@@ -671,10 +671,10 @@ End If
 					End If
 					
 					ll_productor		=	long(dw_1.Object.prod_codigo[1])
-					ls_codigo			=	"01" + ls_gtin_numero + "13" + ls_fecha /*+  String(ll_productor, '00000')*/ + "\F"
-					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  + "\F"
+					ls_codigo			=	"01" + ls_gtin_numero + "13" + ls_fecha /*+  String(ll_productor, '00000') + "\F"*/
+					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  //+ "\F"
 //					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
-					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.pafr_copack[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
+//					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.pafr_copack[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
 					
 					/*
 					Codigo QR

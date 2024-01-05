@@ -335,8 +335,8 @@ If li_formato = 2 Then
 			//	sle_1.Text							=	"ImprimiEndo Adhesivos en Formato GS1"
 			ls_fecha									=	String(dw_1.Object.pafr_fecemb[1])
 			ls_fecha									=	Left(ls_fecha, 2) + Mid(ls_fecha, 4, 2) + Right(ls_fecha, 2)
-			dw_16.Object.Ole_1.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha + "\F" + "21" + String(gl_packing, "0000") + &
-														String(ll_inicio, '00000000')
+			dw_16.Object.Ole_1.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha /*+ "\F" + "21" + String(gl_packing, "0000") + &
+														String(ll_inicio, '00000000')*/
 			
 			If ll_FilaPallet + 1 <= dw_1.RowCount() Then
 				
@@ -345,9 +345,9 @@ If li_formato = 2 Then
 				ll_nrocaja = dw_1.Object.pafr_secuen[ll_FilaPallet + 1]
 				gl_packing = dw_1.Object.pafr_copack[ll_FilaPallet + 1]
 												
-				dw_16.Object.Ole_2.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha + "\F" + &
+				dw_16.Object.Ole_2.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha /*+ "\F" + &
 																"21" + String(gl_packing, "0000") + &
-																String(ll_final, '00000000')
+																String(ll_final, '00000000')*/
 			End If
 			//Voice Pick Code 
 			iuo_voicecode	=	Create uo_voicecode
@@ -402,10 +402,10 @@ Else
 					End If
 					
 					ll_productor		=	long(dw_1.Object.prod_codigo[1])
-					ls_codigo			=	"01" + ls_gtin_numero + "13" + ls_fecha /*+  String(ll_productor, '00000')*/ + "\F"
-					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  + "\F"
+					ls_codigo			=	"01" + ls_gtin_numero + "13" + ls_fecha /*+  String(ll_productor, '00000') + "\F"*/
+					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG // + "\F"
 //					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
-					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.pafr_copack[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
+//					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.pafr_copack[1], "0000") +	String(ll_nrocaja, '00000000') + "\F"
 					
 					/*
 					Codigo QR

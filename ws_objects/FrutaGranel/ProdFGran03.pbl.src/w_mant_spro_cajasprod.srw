@@ -23,7 +23,7 @@ end type
 end forward
 
 global type w_mant_spro_cajasprod from w_mant_directo
-integer width = 3145
+integer width = 3246
 integer height = 1384
 string title = "Mantención de Cajas - Cambio de Características"
 boolean minbox = false
@@ -150,37 +150,32 @@ Long							ll_fila
 
 luo_correl		=	CREATE uo_lotescorrelequipo_gr
 
-IF NOT luo_correl.ExisteCorrel(dw_planta.Object.plde_codigo[1],99, &
-										 gstr_us.computador, TRUE, sqlca) THEN						
-	RETURN
-ELSE
+If NOT luo_correl.ExisteCorrel(dw_planta.Object.plde_codigo[1],99, gstr_us.computador, TRUE, sqlca) Then						
+	Return
+Else
 	dw_7.DataObject					=	luo_correl.loco_dwcomp
 	dw_7.SetTransObject(SQLCA)
-END IF
+End If
 
-IF gstr_paramplanta.codigoespecie = 11 THEN 
+If gstr_paramplanta.codigoespecie = 11 Then 
 	dw_7.DataObject = "dw_info_spro_cajasprod_uvas"
 	dw_7.SetTransObject(Sqlca)
-END IF
+End If
 
-IF dw_7.DataObject = "dw_info_spro_cajasprod_pomaceas" THEN
-	ll_Fila = dw_7.Retrieve(dw_1.Object.clie_codigo[1], &
-									dw_1.Object.plde_codigo[1], &
-							 		ii_caja, sle_Camara.Text)
+If dw_7.DataObject = "dw_info_spro_cajasprod_pomaceas" Then
+	ll_Fila = dw_7.Retrieve(dw_1.Object.clie_codigo[1], dw_1.Object.plde_codigo[1], ii_caja, sle_Camara.Text)
 	FOR ll_Fila = 1 TO dw_7.RowCount()
 		dw_7.Object.envo_descrip.visible		=	1
 	NEXT
 
-ELSE
-	ll_Fila = dw_7.Retrieve(dw_cliente.Object.clie_codigo[1], &
-						dw_planta.Object.plde_codigo[1], &
-						ii_caja, ii_caja, 1)
-END IF
+Else
+	ll_Fila = dw_7.Retrieve(dw_cliente.Object.clie_codigo[1], dw_planta.Object.plde_codigo[1], ii_caja, ii_caja, 1)
+End If
 
-IF ll_fila < 1 THEN 
+If ll_fila < 1 Then 
 	MessageBox("Error", "No se encuentra el numero de caja.", Exclamation!)
 	Return
-END IF
+End If
 
 dw_7.Print(False, True)
 end subroutine

@@ -220,9 +220,9 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					End If
 					
 					ll_productor		=	long(dw_1.Object.prod_codigo[1])
-					ls_codigo			=	"01" + dw_1.Object.emba_nroint[1] + "13" + ls_fecha /*+  String(ll_productor, '00000')*/ + "\F"
-					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  + "\F"
-					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[1], "0000") +	String(dw_1.Object.capr_numero[1], '00000000') + "\F"
+					ls_codigo			=	"01" + dw_1.Object.emba_nroint[1] + "13" + ls_fecha /*+  String(ll_productor, '00000') + "\F"*/
+					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  /*+ "\F"
+					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[1], "0000") +	String(dw_1.Object.capr_numero[1], '00000000') + "\F"*/
 					
 					dw_1.Object.Ole_1.Object.BarCode	=	iuo_clie.Barras
 					dw_1.Object.Ole_1.Object.Text 		= 	ls_codigo	
@@ -265,9 +265,9 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					End If
 					
 					ll_productor		=	long(dw_1.Object.prod_codigo[2])
-					ls_codigo			=	"01" + dw_1.Object.emba_nroint[2] + "13" + ls_fecha /*+  String(ll_productor, '00000')*/ + "\F"
-					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  + "\F"
-					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[2], "0000") +	String(dw_1.Object.capr_numero[2], '00000000') + "\F"
+					ls_codigo			=	"01" + dw_1.Object.emba_nroint[2] + "13" + ls_fecha /*+  String(ll_productor, '00000') + "\F"*/
+					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  /*+ "\F"
+					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[2], "0000") +	String(dw_1.Object.capr_numero[2], '00000000') + "\F"*/
 					
 					dw_1.Object.Ole_2.Object.BarCode	=	iuo_clie.Barras
 					If ll_filafinal <> ll_fila Then
@@ -298,9 +298,9 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					End If
 					
 					ll_productor		=	long(dw_1.Object.prod_codigo[3])
-					ls_codigo			=	"01" + dw_1.Object.emba_nroint[3] + "13" + ls_fecha /*+  String(ll_productor, '00000')*/ + "\F"
-					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  + "\F"
-					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[3], "0000") +	String(dw_1.Object.capr_numero[3], '00000000') + "\F"
+					ls_codigo			=	"01" + dw_1.Object.emba_nroint[3] + "13" + ls_fecha /*+  String(ll_productor, '00000') + "\F"*/
+					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG /*+ "\F"
+					ls_codigo			=	ls_codigo	 +	"21" + String(dw_1.Object.plde_codigo[3], "0000") +	String(dw_1.Object.capr_numero[3], '00000000') + "\F"*/
 					
 					dw_1.Object.Ole_3.Object.BarCode	=	iuo_clie.Barras
 					dw_1.Object.Ole_3.Object.Text 		= 	ls_codigo

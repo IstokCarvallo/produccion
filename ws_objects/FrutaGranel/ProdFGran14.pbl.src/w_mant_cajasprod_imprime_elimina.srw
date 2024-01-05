@@ -220,8 +220,8 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 
 				ls_codigo			=	"01" + dw_1.Object.emba_nroint[1] + "13" + ls_fecha //+ "\F"
 				ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  //+ "\F"
-				ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[1], "0000") 
-				ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[1], '00000000')	
+			//	ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[1], "0000") 
+			//	ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[1], '00000000')	
 				
 				/*
 				Codigo QR
@@ -262,8 +262,8 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 
 					ls_codigo			=	"01" + dw_1.Object.emba_nroint[2] + "13" + ls_fecha //+ "\F"
 					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  //+ "\F"
-					ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[2], "0000") 
-					ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[2], '00000000')
+				//	ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[2], "0000") 
+				//	ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[2], '00000000')
 						
 					/*
 					Codigo QR
@@ -305,8 +305,8 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 
 					ls_codigo			=	"01" + dw_1.Object.emba_nroint[3] + "13" + ls_fecha //+ "\F"
 					ls_codigo			=	ls_codigo	 +	"10" + ls_CSG  //+ "\F"
-					ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[3], "0000") 
-					ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[3], '00000000')
+				//	ls_codigo			=	ls_codigo	+	"21" + String(dw_1.Object.plde_codigo[3], "0000") 
+				//	ls_codigo			=	ls_codigo	+	String(dw_1.Object.capr_numero[3], '00000000')
 						
 					/*
 					Codigo QR

@@ -2089,22 +2089,15 @@ vinf.dw_1.SetTransObject(sqlca)
 fila = vinf.dw_1.Retrieve(dw_2.Object.plde_codigo[1], dw_2.Object.mfee_tipdoc[1], &
 								  dw_2.Object.mfee_docrel[1], dw_2.Object.clie_codigo[1])
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-
-ELSE
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN
-	   	F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	
-  	END IF
-
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 end event
 
 event ue_borrar;Long	ll_Fila 
