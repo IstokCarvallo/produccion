@@ -38,7 +38,7 @@ ls_calibre	=	dw_1.GetItemString(il_fila,"vaca_calibr")
 ld_fecini		=	dw_1.Object.vafa_fecini[il_fila]
 ld_fecter		=	dw_1.Object.vafa_fecter[il_fila]
 ls_embalaje =	dw_1.Object.emba_codigo[il_fila]
-ls_TipoVida	=	String(dw_1.Object.emba_codigo[il_fila])
+ls_TipoVida	=	String(dw_1.Object.emba_tipvid[il_fila])
 
 CHOOSE CASE as_columna
 	CASE "espe_codigo"
@@ -383,7 +383,6 @@ Choose Case ls_Columna
 			This.SetItem(Row, "vafa_fecini", iuo_Semana.Desde)
 			This.SetItem(Row, "vafa_fecter", iuo_Semana.Hasta)
 		End If
-		
 		
 	Case "espe_codigo"
 		If Duplicado(ls_Columna,data) Then
