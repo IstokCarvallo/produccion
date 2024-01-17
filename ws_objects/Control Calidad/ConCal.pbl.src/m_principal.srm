@@ -10492,9 +10492,7 @@ end type
 
 on m_carozos2.create
 call super::create
-this.visible = false
-this.text = "Carozos"
-this.enabled = false
+this.text = "Ciruelas"
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -10516,7 +10514,10 @@ on m_carozos2.destroy
 call super::destroy
 end on
 
-event clicked;messagebox("Atención","El Informe está en Proceso de Elaboración")
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva = This.ClassName();If Not AccesoPuntoCritico() Then Return
+
+OpenSheetWithParm(w_inf_recepcion_tipo_embarque, "23", w_main, columna, Original!)
 end event
 
 type m_cerezas2 from menu within m_informeresumen

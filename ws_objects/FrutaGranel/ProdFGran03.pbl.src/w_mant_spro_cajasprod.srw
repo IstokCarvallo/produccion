@@ -262,8 +262,7 @@ DO
 	ll_fila	= dw_1.Retrieve(ii_cliente, ii_planta, ii_caja)
 	
 	IF ll_fila = -1 THEN
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.",Information!, RetryCancel!)
 	ELSEIF ll_fila > 0 THEN
 		dw_1.SetRow(1)
 		dw_1.SetFocus()

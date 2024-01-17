@@ -1973,6 +1973,7 @@ end type
 
 on m_file.create
 call super::create
+this.text = "t"
 end on
 
 on m_file.destroy

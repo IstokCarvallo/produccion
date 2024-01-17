@@ -3238,6 +3238,7 @@ If IsNull(dw_2.Object.defe_chofer[1]) OR dw_2.Object.defe_chofer[1] = '' Then
 End If	
 	
 If dw_2.Object.tica_codigo[1] = 2 Then
+	
 	If IsNull(dw_2.Object.defe_selnav[1]) OR dw_2.Object.defe_selnav[1] = '' Then
 		MessageBox("Error de Consistencia", "Falta Sello Cia. Naviera.", StopSign!, Ok!)
 		dw_2.SetColumn("defe_selnav")
@@ -3974,6 +3975,9 @@ Case "defe_especi"
 			This.SetItem(1, ls_columna, ll_null)
 			Return 1
 		End If
+		
+	Case "defe_selnav"
+		This.SetItem(1, "defe_selcon", Data)
 		
 End Choose
 

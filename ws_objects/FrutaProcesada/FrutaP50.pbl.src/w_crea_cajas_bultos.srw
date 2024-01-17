@@ -682,7 +682,9 @@ End If
 					ls_Embalaje = dw_1.Object.emba_codigo[1]
 					ls_Calibre	= dw_1.Object.pafr_calibr[1]
 					
-					ls_QR	= 'Prod:' + String(ll_Productor, '00000') + Char(10) 
+					
+					ls_QR	=  String(dw_1.Object.plde_codigo[1], "0000") +	String(ll_nrocaja, '00000000') + Char(10) 
+					ls_QR	+= 'Prod:' + String(ll_Productor, '00000') + Char(10) 
 					ls_QR	+= 'Esp:' + String(dw_1.Object.espe_codigo[1], '00') + ' / ' + String(dw_1.Object.vari_codigo[1], '0000')  + Char(10) 
 					ls_QR	+= 'Pred:' + ls_CSG + ' / ' + String(dw_1.Object.pafr_cuart4[1],'000' )  + Char(10)
 					ls_QR	+= 'Emb:' + ls_Embalaje + ' / ' + ls_Calibre + Char(10)

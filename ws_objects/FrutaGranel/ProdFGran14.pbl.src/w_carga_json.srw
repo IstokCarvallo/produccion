@@ -53,6 +53,7 @@ global w_carga_json w_carga_json
 type variables
 Private Constant	String	_URL = 'https://rioblanco-api-packing.azurewebsites.net/'
 end variables
+
 forward prototypes
 public function boolean wf_graba (boolean borrando)
 public function boolean wf_envase (integer tipo, integer envase)
@@ -226,6 +227,7 @@ If dw_Embalaje.RowCount() > 0 Then
 			dw_1.Object.copa_Codigo[ll_Busca] 		= dw_embalaje.Object.copa_Codigo[ll_Fila]
 			dw_1.Object.emba_Flgusn[ll_Busca] 		= dw_embalaje.Object.emba_Flgusn[ll_Fila]
 			dw_1.Object.emba_Atmosf[ll_Busca] 		= dw_embalaje.Object.emba_Atmosf[ll_Fila]
+			dw_1.Object.emba_Descri[ll_Busca] 		= dw_embalaje.Object.emba_Descri[ll_Fila]
 			wf_Inserta('Se actualiza embalaje:'  + Upper(embalaje))
 		End If
 	Next

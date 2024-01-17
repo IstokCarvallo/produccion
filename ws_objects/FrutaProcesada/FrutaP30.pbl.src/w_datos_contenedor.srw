@@ -175,7 +175,6 @@ ls_columna = dwo.Name
 
 CHOOSE CASE ls_columna
 	CASE "defe_nrcont"
-		
 		ls_digito 	= f_digito_verifica_contene(data) 
 		IF ls_digito = '10' THEN
 			ls_digito = '0'
@@ -192,7 +191,6 @@ CHOOSE CASE ls_columna
 	CASE "defe_orcont"
 	
 	CASE "sello"		
-		
 		ll_sello	=	Long(data)
 		
 		IF buscasellos(ll_sello) = False THEN
@@ -206,8 +204,8 @@ end event
 type pb_salir from picturebutton within w_datos_contenedor
 integer x = 2784
 integer y = 212
-integer width = 300
-integer height = 245
+integer width = 302
+integer height = 244
 integer taborder = 40
 integer textsize = -10
 integer weight = 700

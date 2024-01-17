@@ -517,7 +517,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_busc_destinos,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_recibimercado,u
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal03.pbl,dw_mues_ctlcalplacualinspuvaenc,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcaldestinosenc_resolucionlot,d
-OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal18.pbl,w_info_detallerecepcionespecie,w
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal18.pbl,w_inf_recepcion_tipo_embarque,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_embalajesprod,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal05.pbl,dw_info_ctlcapesocajaproductor,d
@@ -534,6 +533,7 @@ OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal09.pbl,dw_mant_ctlcalplani
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_etiquetas,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_deta_planillainspdestinodet,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal15.pbl,w_maed_ctlcalplanilladestino,w
+OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal07.pbl,w_info_detallerecepcion_especie,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_correo_error,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_tipoembalaje,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_naves,d

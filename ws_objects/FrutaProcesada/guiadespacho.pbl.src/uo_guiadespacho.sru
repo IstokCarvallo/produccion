@@ -674,7 +674,7 @@ Else
 	of_InsertaRegistro('Monto Total', '0')
 	of_InsertaRegistro('xMontoEscrito', '')
 	of_InsertaRegistro('xObservaciones', Mid(ids_Source_Frut.Object.defe_glosa[1], 1, 120))
-	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
+	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)

@@ -8,16 +8,19 @@ type dw_3 from datawindow within w_mant_despemba_packing
 end type
 type dw_4 from datawindow within w_mant_despemba_packing
 end type
+type cb_guia from commandbutton within w_mant_despemba_packing
+end type
 end forward
 
 global type w_mant_despemba_packing from w_mant_encab_deta_csd
-integer width = 3438
-integer height = 1944
+integer width = 3639
+integer height = 2292
 string menuname = ""
 event ue_imprimir2 ( )
 dw_5 dw_5
 dw_3 dw_3
 dw_4 dw_4
+cb_guia cb_guia
 end type
 global w_mant_despemba_packing w_mant_despemba_packing
 
@@ -450,10 +453,12 @@ call super::create
 this.dw_5=create dw_5
 this.dw_3=create dw_3
 this.dw_4=create dw_4
+this.cb_guia=create cb_guia
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.dw_5
 this.Control[iCurrent+2]=this.dw_3
 this.Control[iCurrent+3]=this.dw_4
+this.Control[iCurrent+4]=this.cb_guia
 end on
 
 on w_mant_despemba_packing.destroy
@@ -461,6 +466,7 @@ call super::destroy
 destroy(this.dw_5)
 destroy(this.dw_3)
 destroy(this.dw_4)
+destroy(this.cb_guia)
 end on
 
 event open;call super::open;dw_1.SetTransObject(sqlca)
@@ -699,35 +705,35 @@ Else
 	F_Membrete(vinf.dw_1)
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 
-	If Not ib_Anulada Then
-		If MessageBox("Guia Despacho", "¿Desea imprimir Guía de Despacho SII?", Question!, YesNo!) = 1 Then
-			If gi_Emisor_Electronico = 1 Then
-				If dw_2.Object.defe_guiaem[1] = 0 Then 
-					ll_Guia = iuo_Guia.of_emiteguia_fruticola(li_Planta, li_Cliente, ll_Despacho)
-					If ll_Guia > 0 Then
-						If iuo_Guia.of_GeneraLibroGuia(1) Then 
-							iuo_Guia.of_RecuperaPDF(ll_Guia,vinf.dw_1.Object.defe_fecdes[1], 1)
-							dw_2.Object.defe_guides[1] = ll_Guia
-							dw_2.Object.defe_guiaem[1] = 1
-							TriggerEvent('ue_guardar')
-							PostEvent("ue_imprimir2")
-						Else
-							MessageBox('Alerta', 'No se pudo actualziar Libro de guias de despacho.', Information!, OK!)
-						End If
-					End If
-				Else
-					iuo_Guia.of_RecuperaPDF(dw_2.Object.defe_guides[1],vinf.dw_1.Object.defe_fecdes[1], 1)
-					PostEvent("ue_imprimir2")
-				End If
-			Else
-				PostEvent("ue_imprimir2")
-			End If
-		Else
-			PostEvent("ue_imprimir2")
-		End If
-	Else
-		PostEvent("ue_imprimir2")
-	End If
+//	If Not ib_Anulada Then
+//		If MessageBox("Guia Despacho", "¿Desea imprimir Guía de Despacho SII?", Question!, YesNo!) = 1 Then
+//			If gi_Emisor_Electronico = 1 Then
+//				If dw_2.Object.defe_guiaem[1] = 0 Then 
+//					ll_Guia = iuo_Guia.of_emiteguia_fruticola(li_Planta, li_Cliente, ll_Despacho)
+//					If ll_Guia > 0 Then
+//						If iuo_Guia.of_GeneraLibroGuia(1) Then 
+//							iuo_Guia.of_RecuperaPDF(ll_Guia,vinf.dw_1.Object.defe_fecdes[1], 1)
+//							dw_2.Object.defe_guides[1] = ll_Guia
+//							dw_2.Object.defe_guiaem[1] = 1
+//							TriggerEvent('ue_guardar')
+//							PostEvent("ue_imprimir2")
+//						Else
+//							MessageBox('Alerta', 'No se pudo actualziar Libro de guias de despacho.', Information!, OK!)
+//						End If
+//					End If
+//				Else
+//					iuo_Guia.of_RecuperaPDF(dw_2.Object.defe_guides[1],vinf.dw_1.Object.defe_fecdes[1], 1)
+//					PostEvent("ue_imprimir2")
+//				End If
+//			Else
+//				PostEvent("ue_imprimir2")
+//			End If
+//		Else
+//			PostEvent("ue_imprimir2")
+//		End If
+//	Else
+//		PostEvent("ue_imprimir2")
+//	End If
 End If
 
 SetPointer(Arrow!)
@@ -775,9 +781,17 @@ IF li_respuesta = 1 AND dw_1.GetSelectedRow(0) > 0 THEN
 END IF
 end event
 
+event resize;call super::resize;
+IF cb_guia.Visible THEN
+	cb_guia.x			=	pb_salir.x
+	cb_guia.y			=	pb_salir.y + 255
+	cb_guia.width		=	300
+END IF
+end event
+
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_mant_despemba_packing
 integer x = 78
-integer y = 1164
+integer y = 1324
 integer width = 2926
 integer height = 660
 string title = "Detalle del Despacho"
@@ -879,13 +893,13 @@ integer y = 1040
 end type
 
 type pb_ins_det from w_mant_encab_deta_csd`pb_ins_det within w_mant_despemba_packing
-integer x = 3086
-integer y = 1376
+integer x = 3013
+integer y = 1572
 end type
 
 type pb_eli_det from w_mant_encab_deta_csd`pb_eli_det within w_mant_despemba_packing
-integer x = 3086
-integer y = 1548
+integer x = 3013
+integer y = 1744
 end type
 
 type pb_buscar from w_mant_encab_deta_csd`pb_buscar within w_mant_despemba_packing
@@ -894,8 +908,8 @@ end type
 
 type dw_5 from datawindow within w_mant_despemba_packing
 boolean visible = false
-integer x = 2953
-integer y = 1204
+integer x = 2469
+integer y = 1132
 integer width = 215
 integer height = 132
 integer taborder = 50
@@ -921,8 +935,8 @@ end type
 
 type dw_4 from datawindow within w_mant_despemba_packing
 boolean visible = false
-integer x = 2912
-integer y = 976
+integer x = 2062
+integer y = 1084
 integer width = 302
 integer height = 192
 integer taborder = 40
@@ -932,4 +946,78 @@ string dataobject = "dw_mues_arch_planos_cajasprod_despaemba"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
+
+type cb_guia from commandbutton within w_mant_despemba_packing
+integer x = 3099
+integer y = 1328
+integer width = 302
+integer height = 112
+integer taborder = 80
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "GUIA SII"
+end type
+
+event clicked;Integer	li_planta, li_cliente, respuesta
+Long		ll_despacho, ll_fila_e, ll_fila_dl, ll_Guia, ll_Fila
+
+DataStore 	lds_DataStore
+
+dw_2.AcceptText()
+
+li_Planta 		=	dw_2.Object.plde_codigo[1]
+li_Cliente		=	dw_2.Object.clie_codigo[1]
+ll_Despacho	=	dw_2.Object.defe_numero[1]
+
+
+lds_datastore = CREATE datastore
+lds_datastore.DataObject = "dw_info_despafrigoen"
+lds_datastore.SetTransObject (SQLCA)
+
+ll_fila = lds_datastore.Retrieve(li_cliente, li_planta, ll_despacho)
+
+If ll_fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf ll_fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
+
+	If Not ib_Anulada Then
+		If MessageBox("Guia Despacho", "¿Desea imprimir Guía de Despacho SII?", Question!, YesNo!) = 1 Then
+			If gi_Emisor_Electronico = 1 Then
+				If dw_2.Object.defe_guiaem[1] = 0 Then 
+					ll_Guia = iuo_Guia.of_emiteguia_fruticola(li_Planta, li_Cliente, ll_Despacho)
+					If ll_Guia > 0 Then
+						If iuo_Guia.of_GeneraLibroGuia(1) Then 
+							iuo_Guia.of_RecuperaPDF(ll_Guia,lds_datastore.Object.defe_fecdes[1], 1)
+							dw_2.Object.defe_guides[1] = ll_Guia
+							dw_2.Object.defe_guiaem[1] = 1
+							TriggerEvent('ue_guardar')
+							PostEvent("ue_imprimir2")
+						Else
+							MessageBox('Alerta', 'No se pudo actualziar Libro de guias de despacho.', Information!, OK!)
+						End If
+					End If
+				Else
+					iuo_Guia.of_RecuperaPDF(dw_2.Object.defe_guides[1],lds_datastore.Object.defe_fecdes[1], 1)
+					PostEvent("ue_imprimir2")
+				End If
+			Else
+				PostEvent("ue_imprimir2")
+			End If
+		Else
+			PostEvent("ue_imprimir2")
+		End If
+	Else
+		PostEvent("ue_imprimir2")
+	End If
+End If
+
+SetPointer(Arrow!)
+end event
 
