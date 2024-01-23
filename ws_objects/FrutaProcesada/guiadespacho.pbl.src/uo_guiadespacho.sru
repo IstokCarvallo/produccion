@@ -924,7 +924,8 @@ IF of_DatosEmpresa(Tipo) Then
 								Trim(ids_Source.Object.defe_term02[1]) + '/' + Trim(ids_Source.Object.defe_term03[1]),1,120)		
 			of_InsertaRegistro('xObservaciones1', ls_Referencia)
 			//Glosa 2
-			ls_Referencia = Mid('Reserva: ' + Trim(ids_Source.Object.embq_bookin[1]) + &
+			ls_Referencia = Mid('Sello Naviera: ' + Trim(ids_Source.Object.defe_selnav[1]) + &
+								', Reserva: ' + Trim(ids_Source.Object.embq_bookin[1]) + &
 								', Planilla SAG: ' + String(ids_Source.Object.defe_nrosps[1]) + ', Termografo : '  + &
 								of_GeneraTermografos(Cliente, Planta, Movimiento), 1, 120)
 								

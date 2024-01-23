@@ -3286,6 +3286,13 @@ If dw_2.Object.tica_codigo[1] = 2 Then
 		dw_2.SetColumn("tpco_codigo")
 		Message.DoubleParm = -1
 	End If
+	
+	If IsNull(dw_2.Object.defe_taraco[1]) OR dw_2.Object.defe_taraco[1] = 0 Then
+		MessageBox("Error de Consistencia", "Falta Tara del Camion.", StopSign!, Ok!)
+		dw_2.SetColumn("tpco_codigo")
+		Message.DoubleParm = -1
+	End If
+	
 End If	
 
 If dw_2.Object.defe_consol[1] = 1 Then
@@ -3843,7 +3850,7 @@ Case "defe_plasag"
 			This.Object.tpco_codigo[1] = li_tipocontenedor
 			This.Object.defe_totkgb[1] = ll_totkgb
 			This.Object.defe_taraco[1] = ll_taraco
-			This.Object.defe_totvgm[1] = ll_totvgm
+//			This.Object.defe_totvgm[1] = ll_totvgm
 		End If	
 	Else
 		This.SetItem(1, 'defe_nturno', ls_null)
@@ -3868,7 +3875,7 @@ Case "tica_codigo"
 		This.SetItem(1, 'defe_tipoca', String(ls_null))
 		This.SetItem(1, 'defe_totkgb', Long(ls_null))
 		This.SetItem(1, 'defe_taraco', Long(ls_null))
-		This.SetItem(1, 'defe_totvgm', Long(ls_null))
+//		This.SetItem(1, 'defe_totvgm', Long(ls_null))
 		ii_blockcont = 0
 	End If	
 	

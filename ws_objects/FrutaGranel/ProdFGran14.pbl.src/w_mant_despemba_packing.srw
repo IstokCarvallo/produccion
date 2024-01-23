@@ -798,6 +798,9 @@ string title = "Detalle del Despacho"
 string dataobject = "dw_mues_despafrigode"
 end type
 
+event dw_1::losefocus;//
+end event
+
 type dw_2 from w_mant_encab_deta_csd`dw_2 within w_mant_despemba_packing
 integer x = 37
 integer y = 36
