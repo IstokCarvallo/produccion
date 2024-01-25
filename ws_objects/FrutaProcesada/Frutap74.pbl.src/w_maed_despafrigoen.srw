@@ -3983,8 +3983,8 @@ Case "defe_especi"
 			Return 1
 		End If
 		
-	Case "defe_selnav"
-		This.SetItem(1, "defe_selcon", Data)
+//	Case "defe_selnav"
+//		This.SetItem(1, "defe_selcon", Data)
 		
 End Choose
 

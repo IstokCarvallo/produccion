@@ -22,31 +22,15 @@ type variables
 w_mant_deta_recfruprocee iw_mantencion
 
 DataWindowChild	dw_puerto, dw_planta, dw_ptaori, dw_fruta, idwc_patente
-Integer 	ii_recepcion, ii_cliente, ii_planta, ii_estado, ii_controlaaceso,ii_borra=0, ii_controlpallet, ii_TipoEnt, ii_Packing
-Boolean	ib_existe_folio, ib_primera_entrada, ib_conectado
-Long     il_pallet, il_folio, il_numero, il_NroCaja
-Date     id_mespro 
-String   is_Archivo, is_mensaje
+Integer 				ii_recepcion, ii_cliente, ii_planta, ii_estado, ii_controlaaceso,ii_borra=0, ii_controlpallet, ii_TipoEnt, ii_Packing
+Boolean				ib_existe_folio, ib_primera_entrada, ib_conectado
+Long     				il_pallet, il_folio, il_numero, il_NroCaja
+Date     				id_mespro 
+String   				is_Archivo, is_mensaje
 
 
-
-uo_pallet_trans			iuo_pallet
-uo_especie				iuo_especie
-uo_variedades			iuo_variedades
-uo_embalajesprod		iuo_embalajesprod
-uo_etiquetas			iuo_etiquetas
-uo_tipofrio				iuo_tipofrio	
-uo_status				iuo_status	
-uo_tipopallet			iuo_tipopallet	
-uo_condicion			iuo_condicion	
-uo_codigopallet			iuo_codigopallet	
-uo_destinos				iuo_destinos
-uo_productores			iuo_productores	
-uo_calibre				iuo_calibre
-uo_categoria        	 	iuo_categoria
-uo_tratamiento       	iuo_tratamiento
-uo_frutarecepcion		iuo_frutarecepcion
 uo_patente				iuo_patente
+uo_plantadesp			iuo_Planta
 
 Transaction	sqlconec
 
@@ -378,49 +362,49 @@ li_planta	=	dw_2.Object.plde_codigo[1]
 ll_nfolio 	=	dw_2.Object.rfpe_numero[1]
 li_cliente	=  dw_2.Object.clie_codigo[1]
 
-CHOOSE CASE as_columna
-	CASE "plde_codigo"
+Choose Case as_columna
+	Case "plde_codigo"
 		li_planta	=	Integer(as_valor)
 		
-	CASE "rfpe_numero"
+	Case "rfpe_numero"
 		ll_nfolio 	=	Long(as_valor)
 		
-	CASE "clie_codigo"
+	Case "clie_codigo"
 		li_cliente 	=	Integer(as_valor)	
 		
-END CHOOSE
+End Choose
 
 SELECT  	rfpe_tipoen
 INTO	:li_tipoen
 FROM	dbo.recfruprocee
 WHERE	plde_codigo	=	:li_planta
-AND	rfpe_numero	=	:ll_nfolio
-AND	rfpe_estado = 2;
+AND	rfpe_numero	=	:ll_nfolio;
+//AND	rfpe_estado = 2;
 			
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_errorbasedatos(sqlca,"Lectura tabla RecFruProcee")
-	RETURN False
-ELSEIF sqlca.SQLCode = 0 THEN
+	Return False
+ElseIf sqlca.SQLCode = 0 Then
 	MessageBox("Atención","Recepción ya es Definitiva, Ingrese Otra Recepción.")
-	RETURN True
-ELSE
-	IF IsNull(ll_nfolio) THEN
+	Return True
+Else
+	If IsNull(ll_nfolio) Then
 		istr_mant.argumento[1]	= String(li_planta)
 		istr_mant.argumento[2]	= String(ll_nfolio)
 		istr_mant.argumento[3]	= String(li_cliente)
 		ib_existe_folio	=	False
-		RETURN False
-	ELSE
-		SELECT  	count()
+		Return False
+	Else
+		SELECT  	count(*)
 		INTO	:li_cont
 		FROM	dbo.recfruprocee
 		WHERE	plde_codigo	=	:li_planta
 		AND	rfpe_numero	=	:ll_nfolio;
 		
-		IF li_cont = 0 THEN
+		If li_cont = 0 Then
 			MessageBox("Atención","Número de Documento No ha sido generado. Ingrese Otro.")
 			ib_existe_folio	=	False
-		ELSE
+		Else
 			istr_mant.argumento[1]	= String(li_planta)
 			istr_mant.argumento[2]	= String(ll_nfolio)
 			istr_mant.argumento[3]	= String(li_cliente) 
@@ -429,18 +413,18 @@ ELSE
 			dw_2.SetItem(1, "clie_codigo",li_cliente)
 			dw_2.SetItem(1, "plde_codigo",li_planta)
 			This.TriggerEvent("ue_recuperadatos")
-			IF li_tipoen = 1 THEN
+			If li_tipoen = 1 Then
 				dw_ptaori.Setfilter("plde_tipopl=2")
 				dw_ptaori.Filter()
-			ELSE
+			Else
 				dw_ptaori.Setfilter("plde_tipopl=1")
 				dw_ptaori.Filter()
-			END IF
+			End If
 			ib_existe_folio	=	True
-		END IF	
-		RETURN True
-	END IF
-END IF
+		End If	
+		Return True
+	End If
+End If
 
 end function
 
@@ -826,6 +810,7 @@ Call Super::Open
 dw_2.Object.rfpe_tipoen[1] = 3
 sqlconec					=	CREATE Transaction
 iuo_patente				=	CREATE	uo_patente
+iuo_Planta				=	Create uo_plantadesp
 
 IF ii_controlaaceso = 1 THEN
 	IF NOT coneccionbase() THEN
@@ -834,7 +819,7 @@ IF ii_controlaaceso = 1 THEN
 		dw_2.Object.rfpe_patent.Dddw.Name				=	'dw_mues_controlacceso'
 		dw_2.Object.rfpe_patent.Dddw.DisplayColumn	=	'ctac_patent'
 		dw_2.Object.rfpe_patent.Dddw.DataColumn		=	'ctac_patent'
-		dw_2.Object.rfpe_patent.Dddw.AllowEdit			=  True
+		dw_2.Object.rfpe_patent.Dddw.AllowEdit		=  True
 		dw_2.Object.rfpe_patent.Dddw.HScrollBar		=  True
 		dw_2.Object.rfpe_patent.Dddw.VScrollBar		=  True
 		dw_2.Object.rfpe_patent.Dddw.Case 				= 	"Upper"
@@ -1263,74 +1248,51 @@ SetNull(li_Nulo)
 
 ls_columna = GetColumnName()
 
-CHOOSE CASE ls_columna
-	CASE "clie_codigo"
+Choose Case ls_columna
+	Case "clie_codigo"
 		istr_mant.argumento[3]	= data
 		
-		
-	CASE "plde_codigo"
-		IF Not ExisteFolio(ls_columna, data) THEN
+	Case "plde_codigo"
+		If Not iuo_Planta.Existe(Long(Data), True, SQLCA) Then
 			This.SetItem(1, "plde_codigo", li_Nulo)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-		istr_mant.argumento[1]  = data
+		istr_mant.argumento[1]  = String(iuo_Planta.Codigo)
 		
-	CASE "embq_codigo"
-		IF NoExisteEmbarque(ls_columna, data) THEN
+	Case "embq_codigo"
+		If NoExisteEmbarque(ls_columna, data) Then
 			This.SetItem(1, ls_columna, ls_nula)
-			RETURN 1
-		END IF	
+			Return 1
+		End If	
 		
-	CASE "rfpe_numero"
-		IF Not ExisteFolio(ls_columna, data) THEN
+	Case "rfpe_numero"
+		If Not ExisteFolio(ls_columna, data) Then
 			This.SetItem(1, "rfpe_numero", ll_Nulo)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "rfpe_tarjas"
+	Case "rfpe_tarjas"
 		istr_mant.argumento[4]	= data
 		
-	CASE "rfpe_tardef"
+	Case "rfpe_tardef"
 		istr_mant.argumento[11]	= data
 
-//	CASE "rfpe_tipoen"
-//		IF (data='1') THEN
-//			istr_mant.argumento[31] = '1'
-//			istr_mant.argumento[13] = '2'
-//			dw_ptaori.Setfilter("plde_tipopl=2")
-//			dw_ptaori.Filter()
-//		ELSE
-//			istr_mant.argumento[31] = '-1'
-//		   IF (data='2') OR (data='6') THEN
-//			   istr_mant.argumento[13] = '1'
-//			   dw_ptaori.Setfilter("plde_tipopl=1")
-//			   dw_ptaori.Filter()
-//		   END IF
-//		istr_mant.argumento[20] = data
-//	  END IF
-//		
-	CASE "rfpe_ptaori"
-		IF NoexistePlanta(data) THEN
+	Case "rfpe_ptaori"
+		If NoexistePlanta(data) Then
 			This.SetItem(Row, ls_Columna, li_Nulo)
-			RETURN 1
-		ELSE 
+			Return 1
+		Else 
 			istr_mant.argumento[21]=data
-	END IF
+	End If
 		
-		
-	CASE "rfpe_fecrec"
-//		IF Not f_validafechatempo(date(data)) THEN
-//			This.SetItem(Row, ls_Columna, ld_nula)
-//			RETURN 1
-//		END IF
+	Case "rfpe_fecrec"
 			istr_mant.argumento[38]=data
 		
-	CASE "rfpe_nrores"
+	Case "rfpe_nrores"
 		istr_mant.argumento[30]	= data	
-		
 
-END CHOOSE
+End Choose
 
 HabilitaIngreso(ls_Columna)
 end event
