@@ -45,8 +45,8 @@ end type
 end forward
 
 global type w_gene_archivo_despacho from window
-integer width = 2359
-integer height = 1200
+integer width = 3045
+integer height = 1888
 boolean titlebar = true
 boolean controlmenu = true
 windowtype windowtype = response!

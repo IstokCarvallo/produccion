@@ -149,7 +149,7 @@ end forward
 global type w_info_guia_despacho_archivo_saam from w_para_informes
 integer x = 14
 integer y = 32
-integer width = 2839
+integer width = 2967
 integer height = 2532
 string title = "Módulo de Despacho"
 boolean minbox = false
@@ -1741,6 +1741,13 @@ Else
 	iuo_Despacho		=	Create uo_Despachos
 	iuo_Mail				=	Create uo_Mail
 	
+	If Upper(gstr_us.Nombre) = 'ISTOK.CARVALLO' Or Upper(gstr_us.Nombre) = 'GABRIEL.PONCE'  Or &
+		Upper(gstr_us.Nombre) = 'CAMILO.HERNANDEZ' Or Upper(gstr_us.Nombre) = 'JEFFREY.ROBLES' Or &
+		Upper(gstr_us.Nombre) = 'NICOLAS.ZUNIGA' Or Upper(gstr_us.Nombre) = 'fABIAN.MIRANDA'  Or &
+		Upper(gstr_us.Nombre) = 'DANIELLA.CONTRERAS' Then
+		cb_rossi.Visible = True
+	End If
+	
 	pb_acepta.Enabled = False
 End If
 end event
@@ -3176,20 +3183,20 @@ String	ls_cliente, ls_planta, ls_DirectorioAct, ls_Archivo, ls_FtoGuiaDespa, ls_
 			ls_Ruta, ls_parteemb, ls_texto, ls_Instructivo, ls_embarque
 
 li_cliente	=	uo_SelCliente.Codigo
-IF ii_cli = 1 THEN
+If ii_cli = 1 Then
 	
   SELECT clie_rnombr, clie_ftodes
     INTO :ls_cliente  , :ls_FtoGuiaDespa
     FROM dbo.clientesprod  
    WHERE clie_codigo= :li_cliente ;
-ELSE
+Else
 	//ls_cliente	=	idwc_cliente.GetItemString(idwc_cliente.GetRow(),"clie_nombre")
 	SELECT clie_nombre , clie_ftodes 
     INTO :ls_cliente  , :ls_FtoGuiaDespa
     FROM dbo.clientesprod  
    WHERE clie_codigo= :li_cliente ;
 	
-END IF
+End If
 ls_planta	=	uo_SelPlanta.Nombre
 
 istr_info.titulo	= 'EMISION GUIA DE DESPACHO'
@@ -3210,139 +3217,139 @@ ll_nroguia	=	Long(em_nroguia.Text)
 		AND	clie_codigo	=	:li_cliente
 		AND	defe_guides	=	:ll_nroguia;
 
-IF ii_tipo	=	1 THEN
-	IF validadespacho(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,Long(em_nroguia.Text)) THEN
+If ii_tipo	=	1 Then
+	If validadespacho(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,Long(em_nroguia.Text)) Then
 		Return
-	END IF
+	End If
 	
-	IF cbx_6.Checked THEN
+	If cbx_6.Checked Then
 		li_vari = -9
-	END IF	
+	End If	
 	
-	IF cbx_7.Checked THEN
+	If cbx_7.Checked Then
 		li_emba = -9
-	END IF
+	End If
 	
-	IF cbx_8.Checked THEN
+	If cbx_8.Checked Then
 		li_calib = -9
-	END IF
+	End If
 	
-	IF cbx_Resumen.Checked THEN
+	If cbx_Resumen.Checked Then
 		li_control = 1
-	ELSE	
+	Else	
 		li_control = 0
-	END IF
+	End If
 		
-	IF cbx_valores.Checked THEN  		
-		IF ii_tipo = 1 THEN
+	If cbx_valores.Checked Then  		
+		If ii_tipo = 1 Then
 			OpenWithParm(vinf, istr_info)
 			vinf.dw_1.DataObject	= "dw_info_guiadespacho_validadatos"
 			vinf.dw_1.SetTransObject(sqlca)
 					
 			fila = vinf.dw_1.Retrieve(li_cliente, li_planta, ll_nroguia,Integer(istr_mant.argumento[25]),ii_var, ii_prod, ii_cal,li_vari,li_emba,li_calib,li_control, iuo_Despacho.Despacho)
 			
-			IF fila = -1 THEN
+			If fila = -1 Then
 				MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 								"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-			ELSEIF fila = 0 THEN				
+			ElseIf fila = 0 Then				
 				MessageBox("Atención","Valores de Embarques Correctos.")
 				Return
-			ELSEIF fila > 0 THEN
+			ElseIf fila > 0 Then
 				F_Membrete(vinf.dw_1)
-				IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf1.dw_1, istr_info.titulo)
+				If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf1.dw_1, istr_info.titulo)
 				MessageBox("Atención","Faltan Datos en Tabla EmbarValores.")
 				Return
-			END IF					 
-		END IF	
-	END IF	
-	IF ii_tipo = 1 THEN
-		IF li_cliente <> 590  THEN
-			IF IsNull(ls_FtoGuiaDespa) OR ls_FtoGuiaDespa = '' THEN
+			End If					 
+		End If	
+	End If	
+	If ii_tipo = 1 Then
+		If li_cliente <> 590  Then
+			If IsNull(ls_FtoGuiaDespa) OR ls_FtoGuiaDespa = '' Then
 				vinf1.dw_1.DataObject = is_report
-			ELSE
+			Else
 				vinf1.dw_1.DataObject	= ls_FtoGuiaDespa
-			END IF
-		ELSE	
-			IF ls_FtoGuiaDespa = '' THEN
+			End If
+		Else	
+			If ls_FtoGuiaDespa = '' Then
 				vinf1.dw_1.DataObject = 'dw_info_guia_despacho_lirios'
-			ELSE
+			Else
 				vinf1.dw_1.DataObject	= ls_FtoGuiaDespa
-			END IF
-		END IF
-	END IF	
+			End If
+		End If
+	End If	
 
 	vinf1.dw_1.SetTransObject(sqlca)
 	fila = vinf1.dw_1.Retrieve(li_cliente, li_planta, ll_nroguia,Integer(istr_mant.argumento[25]),ii_var, ii_prod, ii_cal,li_vari,li_emba,li_calib,li_control, iuo_Despacho.Despacho)
 	
-	IF cbx_Resumen.Checked THEN
-		vinf1.dw_1.Modify("DataWindow.Summary.Height.AutoSize")
-	ELSE	
-		vinf1.dw_1.Modify("DataWindow.Summary.Height = 72")
-	END IF
-END IF
+	If cbx_Resumen.Checked Then
+		vinf1.dw_1.ModIfy("DataWindow.Summary.Height.AutoSize")
+	Else	
+		vinf1.dw_1.ModIfy("DataWindow.Summary.Height = 72")
+	End If
+End If
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
- ELSE
+ Else
 	F_Membrete(vinf1.dw_1)
 	
-	IF ii_tipo	=	1 THEN
-		IF li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9 THEN
+	If ii_tipo	=	1 Then
+		If li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9 Then
 			FOR ll_Fila	=  1 TO fila
 				vinf1.dw_1.SetItem(ll_Fila, "embc_nombre", em_recibidor.text)
 				vinf1.dw_1.SetItem(ll_Fila, "embc_nrorut", em_rut.text)
 				vinf1.dw_1.SetItem(ll_Fila, "embc_direcc", em_direccion.text)
 				vinf1.dw_1.SetItem(ll_Fila, "embc_ciudad", em_ciudad.Text)
 			NEXT			
-		END IF
+		End If
 		
-		IF li_tipoembq = 11 THEN
+		If li_tipoembq = 11 Then
 			FOR ll_Fila	=  1 TO fila
-				IF em_recibidor.text <> '' THEN
+				If em_recibidor.text <> '' Then
 					vinf1.dw_1.SetItem(ll_Fila, "embc_nombre", em_recibidor.text)
-				END IF	
-				IF em_rut.text <> '' THEN
+				End If	
+				If em_rut.text <> '' Then
 					vinf1.dw_1.SetItem(ll_Fila, "embc_nrorut", em_rut.text)
-				END IF	
-				IF em_direccion.text <> '' THEN
+				End If	
+				If em_direccion.text <> '' Then
 					vinf1.dw_1.SetItem(ll_Fila, "embc_direcc", em_direccion.text)
-				END IF
-				IF em_ciudad.Text <> '' THEN
+				End If
+				If em_ciudad.Text <> '' Then
 					vinf1.dw_1.SetItem(ll_Fila, "embc_ciudad", em_ciudad.Text)
-				END IF	
+				End If	
 			NEXT			
-		END IF
-	END IF
+		End If
+	End If
 	
-	IF ii_tipo	=	1 THEN
-		vinf1.dw_1.Modify("t_guia.text = '" + em_nroguia.Text + "'")
+	If ii_tipo	=	1 Then
+		vinf1.dw_1.ModIfy("t_guia.text = '" + em_nroguia.Text + "'")
 		vinf1.dw_1.SaveAs("C:\GeneradosSaam\"+'GD' +String(li_cliente)+''+String(li_planta)+''+String(ll_nroguia)+'.PDF', PDF!, TRUE)
-		vinf1.dw_1.Modify("t_puerto.text = '" + em_puerto.Text + "'")
+		vinf1.dw_1.ModIfy("t_puerto.text = '" + em_puerto.Text + "'")
 		
-		IF li_planta = 81 THEN
-			vinf1.dw_1.Modify("t_glosa.text = '" + em_glosaespecial.Text + "'")
-		END IF	
+		If li_planta = 81 Then
+			vinf1.dw_1.ModIfy("t_glosa.text = '" + em_glosaespecial.Text + "'")
+		End If	
 		
-		IF li_cliente = 590 THEN
-			vinf1.dw_1.Modify("t_tipomv.text = '" + em_tipomv.Text + "'")
-			vinf1.dw_1.Modify("t_nomrespon.text = '" + em_nomdespachador.Text + "'")
-			vinf1.dw_1.Modify("t_puerto.text = '" + em_puerto.Text + "'")
-			vinf1.dw_1.Modify("t_destino.text = '" + em_destino.Text + "'")
-		END IF	
-	END IF
-	vinf1.dw_1.Modify("t_observa.text = '" + em_observa.text + "'")	
+		If li_cliente = 590 Then
+			vinf1.dw_1.ModIfy("t_tipomv.text = '" + em_tipomv.Text + "'")
+			vinf1.dw_1.ModIfy("t_nomrespon.text = '" + em_nomdespachador.Text + "'")
+			vinf1.dw_1.ModIfy("t_puerto.text = '" + em_puerto.Text + "'")
+			vinf1.dw_1.ModIfy("t_destino.text = '" + em_destino.Text + "'")
+		End If	
+	End If
+	vinf1.dw_1.ModIfy("t_observa.text = '" + em_observa.text + "'")	
 	
-	vinf1.dw_1.Modify("t_cansellos.text = '" + em_cansellos.text + "'")
-	vinf1.dw_1.Modify("t_ubisellos.text = '" + em_ubisellos.text + "'")
-	vinf1.dw_1.Modify("t_numsellos.text = '" + em_numsellos.text + "'")
+	vinf1.dw_1.ModIfy("t_cansellos.text = '" + em_cansellos.text + "'")
+	vinf1.dw_1.ModIfy("t_ubisellos.text = '" + em_ubisellos.text + "'")
+	vinf1.dw_1.ModIfy("t_numsellos.text = '" + em_numsellos.text + "'")
 	
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf1.dw_1, istr_info.titulo)
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf1.dw_1, istr_info.titulo)
 	pb_acepta.Enabled = True
 	vinf1.dw_1.GroupCalc()
-END IF
+End If
 
 SetPointer(Arrow!)				
 end event
@@ -3417,10 +3424,10 @@ end event
 
 type cb_rossi from commandbutton within w_info_guia_despacho_archivo_saam
 boolean visible = false
-integer x = 2331
-integer y = 572
-integer width = 439
-integer height = 112
+integer x = 2341
+integer y = 816
+integer width = 594
+integer height = 108
 integer taborder = 40
 boolean bringtotop = true
 integer textsize = -10
@@ -3429,8 +3436,7 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
-boolean enabled = false
-string text = "WS ROSSI"
+string text = "WS Embarcador"
 end type
 
 event clicked;//uo_ws_embarcador	luo_Rossi

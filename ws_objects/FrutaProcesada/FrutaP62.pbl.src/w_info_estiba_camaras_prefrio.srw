@@ -20,8 +20,6 @@ type st_8 from statictext within w_info_estiba_camaras_prefrio
 end type
 type dw_camara from datawindow within w_info_estiba_camaras_prefrio
 end type
-type tit_peso from statictext within w_info_estiba_camaras_prefrio
-end type
 type st_variedad from statictext within w_info_estiba_camaras_prefrio
 end type
 type cbx_variedad from checkbox within w_info_estiba_camaras_prefrio
@@ -51,8 +49,6 @@ end type
 type cbx_1 from checkbox within w_info_estiba_camaras_prefrio
 end type
 type cbx_camaras from checkbox within w_info_estiba_camaras_prefrio
-end type
-type gb_3 from groupbox within w_info_estiba_camaras_prefrio
 end type
 type st_7 from statictext within w_info_estiba_camaras_prefrio
 end type
@@ -86,7 +82,7 @@ global type w_info_estiba_camaras_prefrio from w_para_informes
 integer x = 14
 integer y = 32
 integer width = 2560
-integer height = 2036
+integer height = 2276
 string title = "Informe Estiba Cámaras"
 boolean minbox = false
 boolean maxbox = false
@@ -102,7 +98,6 @@ st_3 st_3
 dw_especie dw_especie
 st_8 st_8
 dw_camara dw_camara
-tit_peso tit_peso
 st_variedad st_variedad
 cbx_variedad cbx_variedad
 em_variedad em_variedad
@@ -118,7 +113,6 @@ em_embalaje em_embalaje
 cb_buscaembalaje cb_buscaembalaje
 cbx_1 cbx_1
 cbx_camaras cbx_camaras
-gb_3 gb_3
 st_7 st_7
 cbx_2 cbx_2
 st_9 st_9
@@ -249,7 +243,6 @@ this.st_3=create st_3
 this.dw_especie=create dw_especie
 this.st_8=create st_8
 this.dw_camara=create dw_camara
-this.tit_peso=create tit_peso
 this.st_variedad=create st_variedad
 this.cbx_variedad=create cbx_variedad
 this.em_variedad=create em_variedad
@@ -265,7 +258,6 @@ this.em_embalaje=create em_embalaje
 this.cb_buscaembalaje=create cb_buscaembalaje
 this.cbx_1=create cbx_1
 this.cbx_camaras=create cbx_camaras
-this.gb_3=create gb_3
 this.st_7=create st_7
 this.cbx_2=create cbx_2
 this.st_9=create st_9
@@ -289,36 +281,34 @@ this.Control[iCurrent+6]=this.st_3
 this.Control[iCurrent+7]=this.dw_especie
 this.Control[iCurrent+8]=this.st_8
 this.Control[iCurrent+9]=this.dw_camara
-this.Control[iCurrent+10]=this.tit_peso
-this.Control[iCurrent+11]=this.st_variedad
-this.Control[iCurrent+12]=this.cbx_variedad
-this.Control[iCurrent+13]=this.em_variedad
-this.Control[iCurrent+14]=this.cb_buscavariedad
-this.Control[iCurrent+15]=this.sle_variedad
-this.Control[iCurrent+16]=this.st_5
-this.Control[iCurrent+17]=this.cbx_calibre
-this.Control[iCurrent+18]=this.em_calidad
-this.Control[iCurrent+19]=this.st_10
-this.Control[iCurrent+20]=this.cbx_especie
-this.Control[iCurrent+21]=this.st_2
-this.Control[iCurrent+22]=this.em_embalaje
-this.Control[iCurrent+23]=this.cb_buscaembalaje
-this.Control[iCurrent+24]=this.cbx_1
-this.Control[iCurrent+25]=this.cbx_camaras
-this.Control[iCurrent+26]=this.gb_3
-this.Control[iCurrent+27]=this.st_7
-this.Control[iCurrent+28]=this.cbx_2
-this.Control[iCurrent+29]=this.st_9
-this.Control[iCurrent+30]=this.st_11
-this.Control[iCurrent+31]=this.st_12
-this.Control[iCurrent+32]=this.st_13
-this.Control[iCurrent+33]=this.st_14
-this.Control[iCurrent+34]=this.em_responsable
-this.Control[iCurrent+35]=this.em_fecha
-this.Control[iCurrent+36]=this.em_inicio
-this.Control[iCurrent+37]=this.em_termino
-this.Control[iCurrent+38]=this.em_giro
-this.Control[iCurrent+39]=this.cbx_bloquea
+this.Control[iCurrent+10]=this.st_variedad
+this.Control[iCurrent+11]=this.cbx_variedad
+this.Control[iCurrent+12]=this.em_variedad
+this.Control[iCurrent+13]=this.cb_buscavariedad
+this.Control[iCurrent+14]=this.sle_variedad
+this.Control[iCurrent+15]=this.st_5
+this.Control[iCurrent+16]=this.cbx_calibre
+this.Control[iCurrent+17]=this.em_calidad
+this.Control[iCurrent+18]=this.st_10
+this.Control[iCurrent+19]=this.cbx_especie
+this.Control[iCurrent+20]=this.st_2
+this.Control[iCurrent+21]=this.em_embalaje
+this.Control[iCurrent+22]=this.cb_buscaembalaje
+this.Control[iCurrent+23]=this.cbx_1
+this.Control[iCurrent+24]=this.cbx_camaras
+this.Control[iCurrent+25]=this.st_7
+this.Control[iCurrent+26]=this.cbx_2
+this.Control[iCurrent+27]=this.st_9
+this.Control[iCurrent+28]=this.st_11
+this.Control[iCurrent+29]=this.st_12
+this.Control[iCurrent+30]=this.st_13
+this.Control[iCurrent+31]=this.st_14
+this.Control[iCurrent+32]=this.em_responsable
+this.Control[iCurrent+33]=this.em_fecha
+this.Control[iCurrent+34]=this.em_inicio
+this.Control[iCurrent+35]=this.em_termino
+this.Control[iCurrent+36]=this.em_giro
+this.Control[iCurrent+37]=this.cbx_bloquea
 end on
 
 on w_info_estiba_camaras_prefrio.destroy
@@ -332,7 +322,6 @@ destroy(this.st_3)
 destroy(this.dw_especie)
 destroy(this.st_8)
 destroy(this.dw_camara)
-destroy(this.tit_peso)
 destroy(this.st_variedad)
 destroy(this.cbx_variedad)
 destroy(this.em_variedad)
@@ -348,7 +337,6 @@ destroy(this.em_embalaje)
 destroy(this.cb_buscaembalaje)
 destroy(this.cbx_1)
 destroy(this.cbx_camaras)
-destroy(this.gb_3)
 destroy(this.st_7)
 destroy(this.cbx_2)
 destroy(this.st_9)
@@ -426,6 +414,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_estiba_camaras
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_estiba_camaras_prefrio
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_estiba_camaras_prefrio
@@ -450,7 +439,7 @@ If IsNull(istr_mant.argumento[3]) Then
 End If
 
 li_cliente 		=	Integer(istr_mant.argumento[1])
-li_planta		=	Integer(istr_mant.argumento[2])
+li_planta			=	Integer(istr_mant.argumento[2])
 li_camara		=	Integer(istr_mant.argumento[3])
 li_especie		=	Integer(istr_mant.argumento[4])
 li_variedad		=	Integer(istr_mant.argumento[5])
@@ -703,25 +692,6 @@ else
 end if 	
 
 end event
-
-type tit_peso from statictext within w_info_estiba_camaras_prefrio
-boolean visible = false
-integer x = 562
-integer y = 1904
-integer width = 183
-integer height = 64
-boolean bringtotop = true
-integer textsize = -10
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-long backcolor = 12632256
-string text = "Peso"
-borderstyle borderstyle = styleraised!
-boolean focusrectangle = false
-end type
 
 type st_variedad from statictext within w_info_estiba_camaras_prefrio
 integer x = 306
@@ -1174,22 +1144,6 @@ ELSE
 END IF
 
 end event
-
-type gb_3 from groupbox within w_info_estiba_camaras_prefrio
-boolean visible = false
-integer x = 183
-integer y = 1820
-integer width = 1614
-integer height = 280
-integer taborder = 120
-integer textsize = -10
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Arial"
-long backcolor = 12632256
-end type
 
 type st_7 from statictext within w_info_estiba_camaras_prefrio
 integer x = 247
