@@ -28,7 +28,7 @@ table(column=(type=decimal(0) updatewhereclause=yes name=exportador_c dbname="Ex
  column=(type=date updatewhereclause=yes name=fecha_cosecha dbname="fecha_cosecha" )
  column=(type=date updatewhereclause=yes name=fecha_recepcion dbname="Fecha_recepcion" )
  column=(type=decimal(0) updatewhereclause=yes name=guia dbname="guia" )
- column=(type=decimal(0) updatewhereclause=yes name=bins dbname="Bins" )
+ column=(type=decimal(0) updatewhereclause=yes name=bins dbname="Bultos" )
  column=(type=decimal(2) updatewhereclause=yes name=kilos_netos dbname="Kilos_Netos" )
  column=(type=decimal(2) updatewhereclause=yes name=cat_1 dbname="Cat_1" )
  column=(type=decimal(2) updatewhereclause=yes name=cat_2 dbname="cat_2" )

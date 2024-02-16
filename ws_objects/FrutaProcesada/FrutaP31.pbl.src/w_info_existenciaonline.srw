@@ -13,7 +13,7 @@ end forward
 
 global type w_info_existenciaonline from w_para_informes
 integer width = 2597
-integer height = 1180
+integer height = 1344
 event ue_listo ( )
 st_1 st_1
 dw_1 dw_1
@@ -218,7 +218,7 @@ ELSE
 		Return -1
 	End If
 
-	If dw_1.SaveAs(ls_File, Excel8!, True) = -1 Then
+	If dw_1.SaveAs(ls_File, Excel!, True) = -1 Then
 		MessageBox('Error', 'No se pùdo generar archivo ('+ ls_file +') con informción solicitda.' , StopSign!, OK! )
 		Return -1
 	Else
@@ -253,6 +253,7 @@ string facename = "Tahoma"
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_existenciaonline
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_existenciaonline
@@ -287,7 +288,7 @@ type st_1 from statictext within w_info_existenciaonline
 integer x = 247
 integer y = 408
 integer width = 1897
-integer height = 552
+integer height = 660
 integer textsize = -10
 integer weight = 700
 fontcharset fontcharset = ansi!
@@ -318,7 +319,7 @@ type st_mensaje from statictext within w_info_existenciaonline
 integer x = 302
 integer y = 480
 integer width = 1783
-integer height = 360
+integer height = 516
 boolean bringtotop = true
 integer textsize = -12
 integer weight = 700
@@ -328,7 +329,7 @@ fontfamily fontfamily = script!
 string facename = "Comic Sans MS"
 long textcolor = 65535
 long backcolor = 553648127
-borderstyle borderstyle = StyleLowered!
+borderstyle borderstyle = stylelowered!
 boolean focusrectangle = false
 end type
 

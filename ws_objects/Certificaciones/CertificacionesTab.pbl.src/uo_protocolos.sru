@@ -10,37 +10,36 @@ end type
 global uo_protocolos uo_protocolos
 
 type variables
-Long	Codigo
+Long	Codigo, Asigna_GGN
 String	Nombre, Abrevi
 
 end variables
 
 forward prototypes
-public function boolean existe (integer ai_codigo, boolean ab_mensaje, transaction at_transaccion)
+public function boolean of_existe (integer ai_codigo, boolean ab_mensaje, transaction at_transaccion)
 end prototypes
 
-public function boolean existe (integer ai_codigo, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+public function boolean of_existe (integer ai_codigo, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
 
-SELECT		prot_codigo, prot_nombre, prot_abrevi
-	INTO		:Codigo,:Nombre,:Abrevi
+SELECT		prot_codigo, prot_nombre, prot_abrevi, IsNull(prot_nroggn, 0)
+	INTO		:Codigo,:Nombre,:Abrevi, :Asigna_GGN
 	FROM		dbo.cert_protocolo
 	WHERE	prot_codigo	=	:ai_Codigo
 	USING	at_Transaccion; 
 	
-IF at_Transaccion.SQLCode = -1 THEN
+If at_Transaccion.SQLCode = -1 Then
 	F_ErrorBaseDatos(at_Transaccion, "Lectura de Tabla Protocolos")
-	
 	lb_Retorno	=	False
-ELSEIF at_Transaccion.SQLCode = 100 THEN
+ElseIf at_Transaccion.SQLCode = 100 Then
 	lb_Retorno	=	False
 
-	IF ab_Mensaje THEN
+	If ab_Mensaje Then
 		MessageBox("Atención", "Código de Protocolo " + String(ai_Codigo) + &
 					", no ha sido Ingresado.~r~rIngrese o seleccione otro Código.")	
-	END IF
-END IF
+	End If
+End If
 
-RETURN lb_Retorno
+Return lb_Retorno
 end function
 
 on uo_protocolos.create

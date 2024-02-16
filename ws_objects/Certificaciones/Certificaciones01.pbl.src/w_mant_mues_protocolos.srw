@@ -6,7 +6,7 @@ end forward
 
 global type w_mant_mues_protocolos from w_mant_tabla
 string tag = "Protocolos"
-integer width = 2130
+integer width = 2405
 string title = "Protocolos"
 end type
 global w_mant_mues_protocolos w_mant_mues_protocolos
@@ -14,6 +14,27 @@ global w_mant_mues_protocolos w_mant_mues_protocolos
 type variables
 w_mant_deta_protocolos iw_mantencion
 end variables
+
+forward prototypes
+public subroutine wf_replicacion ()
+end prototypes
+
+public subroutine wf_replicacion ();Integer	ll_fila
+
+uo_grabatablas		luo_grabatablas
+
+luo_grabatablas = Create uo_grabatablas
+
+ll_fila = dw_1.GetNextModified(ll_fila, Primary!)
+
+If ll_fila > 0 Then 
+	If luo_grabatablas.existereplicatablas(gi_CodExport) Then
+		luo_grabatablas.replicatabla_protocolo(dw_1)
+	End If
+End If
+
+Destroy luo_grabatablas
+end subroutine
 
 event ue_nuevo;istr_mant.borra	= False
 istr_mant.agrega	= True
@@ -38,19 +59,14 @@ lstr_info.titulo	= "MAESTRO DE PROTOCOLOS"
 lstr_info.copias	= 1
 
 OpenWithParm(vinf,lstr_info)
-
 vinf.dw_1.DataObject = "dw_info_protocolos"
-
 vinf.dw_1.SetTransObject(sqlca)
-
 fila = vinf.dw_1.Retrieve()
 
 IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
 ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 ELSE
 	F_Membrete(vinf.dw_1)
 	vinf.dw_1.Modify('DataWindow.Print.Preview = Yes')
@@ -139,6 +155,7 @@ ordenar	= "Código:prot_codigo,Nombre:prot_nombre"
 
 
 
+
 end event
 
 event ue_modifica;call super::ue_modifica;IF dw_1.RowCount() > 0 THEN
@@ -152,7 +169,7 @@ end event
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_protocolos
 integer x = 73
 integer y = 64
-integer width = 1563
+integer width = 1797
 integer height = 1608
 string dataobject = "dw_mues_protocolos"
 boolean hscrollbar = true
@@ -165,39 +182,39 @@ integer width = 1563
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_protocolos
-integer x = 1819
-integer y = 148
+integer x = 1943
+integer y = 64
 end type
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_protocolos
 boolean visible = false
-integer x = 1819
-integer y = 444
+integer x = 1943
+integer y = 360
 end type
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_protocolos
-integer x = 1819
-integer y = 792
+integer x = 1943
+integer y = 708
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_protocolos
-integer x = 1819
-integer y = 616
+integer x = 1943
+integer y = 532
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_protocolos
-integer x = 1819
-integer y = 976
+integer x = 1943
+integer y = 892
 integer height = 152
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_protocolos
-integer x = 1819
-integer y = 1180
+integer x = 1943
+integer y = 1096
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_protocolos
-integer x = 1819
-integer y = 1548
+integer x = 1943
+integer y = 1464
 end type
 

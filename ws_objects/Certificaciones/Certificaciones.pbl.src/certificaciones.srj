@@ -22,17 +22,19 @@ PBD:..\..\TablasProd\Tablas\TabProd06.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProdTab.pbl,,1
 PBD:..\..\AdmUsuar.pbl,,1
 PBD:..\..\ObjePubl.pbl,,1
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mensaje,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_maed_admagruposistemas,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_admausuaropcio,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,dddw_codnumero,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_acerca_de,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admatipoadmiusua,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,parempresa,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_zoom,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_mant,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_imprimir,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admasucursales,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie_mod,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_odbc,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie_mod,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_osversioninfo,s
 OBJ:C:\Desarrollo 22\Productiva\Certificaciones\CertificacionesTab.pbl,uo_seleccion_prodestadocert_mod,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
@@ -166,6 +168,7 @@ OBJ:C:\Desarrollo 22\Productiva\Certificaciones\Certificaciones01.pbl,dw_mues_ce
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_estadocertific,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_zonas,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_fondo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_grabatablas,u
 OBJ:C:\Desarrollo 22\Productiva\Certificaciones\CertificacionesTab.pbl,uo_imagenes,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fechahora,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta,w

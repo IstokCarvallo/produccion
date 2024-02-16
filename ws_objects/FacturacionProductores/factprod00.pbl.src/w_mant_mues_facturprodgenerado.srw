@@ -466,10 +466,12 @@ end event
 
 event ue_modifica;call super::ue_modifica;IF dw_1.RowCount() > 0 THEN
 	
+	istr_mant.argumento[1]	=	String(uo_SelCliente.Codigo)
+	istr_mant.argumento[2]	=	String(uo_SelPlanta.Codigo)
 	
 	istr_mant.argumento[5]	=	String(dw_1.Object.espe_codigo[il_fila])
 	istr_mant.argumento[6]	=	String(dw_1.Object.vari_codigo[il_fila])
-   istr_mant.argumento[15] = '1'
+   	istr_mant.argumento[15] = '1'
 	
 	istr_mant.agrega			= 	False
 	istr_mant.borra			= 	False
@@ -504,11 +506,9 @@ SetPointer(Arrow!)
 end event
 
 event ue_antesguardar;call super::ue_antesguardar;Long		ll_fila, ll_filas, ll_prod
-Integer	li_secuencia, li_zona, li_cliente, li_planta
+Integer	li_secuencia, li_zona
 Date		ld_fecha
 
-li_cliente	=	Integer(istr_mant.argumento[1])
-li_planta	=	Integer(istr_mant.argumento[2])
 li_zona	   =	Integer(istr_mant.argumento[9])
 ll_prod     =  Long(istr_mant.argumento[4])
 ld_fecha		=	Date(istr_mant.argumento[3])
@@ -516,10 +516,10 @@ ld_fecha		=	Date(istr_mant.argumento[3])
 SELECT	Max(fade_secuen)
 	INTO	:li_secuencia
 	FROM	dbo.facturproddeta
-	WHERE	clie_codigo =	:li_cliente
+	WHERE	clie_codigo =	:uo_SelCliente.Codigo
 	AND	zona_codigo	=	:li_zona
 	AND	prod_codigo	=	:ll_prod
-	AND	plde_codigo	=	:li_planta
+	AND	plde_codigo	=	:uo_SelPlanta.Codigo
 	AND   faen_fechaf =  :ld_fecha;
 
 IF Isnull(li_secuencia) THEN li_secuencia = 0

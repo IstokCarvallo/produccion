@@ -215,7 +215,7 @@ event itemchanged;Integer	li_Nula
 
 SetNull(li_Nula)
 
-IF iuo_Protocolos.Existe(Integer(data), True, sqlca) THEN
+IF iuo_Protocolos.of_Existe(Integer(data), True, sqlca) THEN
 	Codigo	=	iuo_Protocolos.Codigo
 	Nombre	=	iuo_Protocolos.Nombre
 ELSE

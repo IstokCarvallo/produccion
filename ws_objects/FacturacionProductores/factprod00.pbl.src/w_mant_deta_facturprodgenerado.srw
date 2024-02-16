@@ -239,8 +239,7 @@ idwc_especie.Retrieve()
 idwc_variedad.Retrieve(Integer(istr_mant.Argumento[5]))
 idwc_calibre.Retrieve(Integer(istr_mant.Argumento[5]), Integer(istr_mant.Argumento[6]))
 
-//dw_1.SetTransObject(sqlca)
-//istr_mant.dw.ShareData(dw_1)
+
 end event
 
 type pb_ultimo from w_mant_detalle`pb_ultimo within w_mant_deta_facturprodgenerado

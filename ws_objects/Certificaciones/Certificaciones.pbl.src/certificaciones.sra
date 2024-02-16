@@ -58,8 +58,13 @@ string appicon = "\Desarrollo 17\Imagenes\Sistemas\Certificaciones.ico"
 string appruntimeversion = "22.0.0.1900"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean ultrafast = false
 boolean bignoreservercertificate = false
 uint ignoreservercertificate = 0
+long webview2distribution = 0
+boolean webview2checkx86 = false
+boolean webview2checkx64 = false
+string webview2url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/"
 end type
 global certificaciones certificaciones
 
@@ -158,6 +163,7 @@ IF Message.DoubleParm <> 1 THEN
 END IF
 
 IF AccesoSistemaValido() THEN
+	ParEmpresa()
 	Open(w_main)
 ELSE
 	HALT

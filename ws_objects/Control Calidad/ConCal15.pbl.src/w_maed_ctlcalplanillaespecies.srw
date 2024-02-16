@@ -3618,7 +3618,10 @@ End If
 
 vinf.dw_1.SetTransObject(sqlca)
 
-If iuo_Especies.Codigo = 23 Or iuo_Especies.Codigo = 82 Then
+If iuo_Especies.Codigo = 23 Then
+	fila	=	vinf.dw_1.Retrieve(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], dw_2.Object.ccre_numero[1],iuo_Especies.Codigo, &
+							-1, -1, -1, -1, -1, Date('19000101'), Today(), 1)
+ElseIf iuo_Especies.Codigo = 82 Then
 	fila	=	vinf.dw_1.Retrieve(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], dw_2.Object.ccre_numero[1],iuo_Especies.Codigo, &
 							-1, -1, -1, -1, -1, Date('19000101'), Today())
 ElseIf iuo_Especies.Codigo =41 Then
@@ -5029,7 +5032,7 @@ integer taborder = 30
 end type
 
 type tab_1 from tab within w_maed_ctlcalplanillaespecies
-integer x = 78
+integer x = 119
 integer y = 908
 integer width = 4421
 integer height = 1196

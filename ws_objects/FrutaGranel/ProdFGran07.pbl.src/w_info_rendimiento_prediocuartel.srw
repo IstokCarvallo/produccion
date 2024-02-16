@@ -140,6 +140,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_rendimiento_pr
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_rendimiento_prediocuartel
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_rendimiento_prediocuartel

@@ -200,12 +200,11 @@ SetNull(li_Nula)
 
 dw_seleccion.PostEvent(Clicked!)
 
-IF iuo_Protocolos.Existe(Integer(data), True, sqlca) THEN
+IF iuo_Protocolos.of_Existe(Integer(data), True, sqlca) THEN
 	Codigo	=	iuo_Protocolos.Codigo
 	Nombre	=	iuo_Protocolos.Nombre
 ELSE
 	This.SetItem(1, "codigo", li_Nula)
-
 	RETURN 1
 END IF
 

@@ -71,7 +71,7 @@ global type w_info_planillarecepcionespecie from w_para_informes
 string tag = "Consulta Planilla - Control de Calidad de Recepción"
 integer x = 14
 integer y = 32
-integer width = 2619
+integer width = 2761
 integer height = 2376
 string title = "CONSULTA PLANILLA  DE RECEPCION"
 string icon = "F:\Desarrollo\Producción\FrutaProcesada\Producc.ico"
@@ -130,7 +130,7 @@ public subroutine wf_visibilidad (integer ai_especie);If ai_Especie = 26 Or ai_E
 	rb_Planta.Visible		=	False
 	rb_Productor.Visible	=	False
 	st_6.height				=	1180
-ElseIf ai_Especie = 21 OR ai_Especie = 41  Then
+ElseIf ai_Especie = 21 OR ai_Especie = 41  OR ai_Especie = 23  Then
 	gb_4.Visible 				= 	True
 	rb_Planta.Visible			= 	True
 	rb_Productor.Visible		= 	True
@@ -361,25 +361,18 @@ Else
   	End If
 End If
 
+If rb_Planta.Checked Then
+	li_visible = 1
+Else
+	li_visible = 0
+End If
+
 OpenWithParm(vinf,istr_info)
 
 If uo_MuestraEspecies.Codigo = 21  Then
 	vinf.dw_1.DataObject = "dw_info_planillarecepespenc"
-	
-	If rb_Planta.Checked Then
-		li_visible = 1
-	Else
-		li_visible = 0
-	End If
 ElseIf uo_MuestraEspecies.Codigo = 41 Then
-	vinf.dw_1.DataObject = "dw_info_planillarecepkiwisenc"
-	
-	If rb_Planta.Checked Then
-		li_visible = 1
-	Else
-		li_visible = 0
-	End If
-	
+	vinf.dw_1.DataObject = "dw_info_planillarecepkiwisenc"	
 ElseIf uo_MuestraEspecies.Codigo = 27 Or uo_MuestraEspecies.Codigo = 78 Then	
 	vinf.dw_1.DataObject = "dw_info_planillarecepnaraenc1"
 ElseIf uo_MuestraEspecies.Codigo = 26 Or uo_MuestraEspecies.Codigo = 36 Then	
@@ -401,10 +394,14 @@ End If
 
 vinf.dw_1.SetTransObject(sqlca)	
 
-If uo_MuestraEspecies.Codigo = 23 Or uo_MuestraEspecies.Codigo = 82 Then
+If uo_MuestraEspecies.Codigo = 23 Then
 	li_fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_MuestraPlanta.Codigo, -1, uo_MuestraEspecies.Codigo, uo_MuestraVariedad.Codigo, &
 									uo_MuestraZona.Codigo, uo_MuestraProductor.Codigo, uo_MuestraInspector.Codigo, ii_Tipo, &
-									ld_FechaEmbaini, ld_FechaEmbafin)									
+									ld_FechaEmbaini, ld_FechaEmbafin, li_visible)	
+ElseIf uo_MuestraEspecies.Codigo = 82 Then
+	li_fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_MuestraPlanta.Codigo, -1, uo_MuestraEspecies.Codigo, uo_MuestraVariedad.Codigo, &
+									uo_MuestraZona.Codigo, uo_MuestraProductor.Codigo, uo_MuestraInspector.Codigo, ii_Tipo, &
+									ld_FechaEmbaini, ld_FechaEmbafin)	
 ElseIf uo_MuestraEspecies.Codigo = 41 Then
 	li_fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_MuestraEspecies.Codigo, uo_MuestraVariedad.Codigo, &
 				uo_MuestraZona.Codigo, uo_MuestraPlanta.Codigo, uo_MuestraProductor.Codigo, &

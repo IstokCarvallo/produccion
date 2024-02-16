@@ -449,11 +449,11 @@ end type
 
 type p_logo from w_para_informes`p_logo within w_info_cajas_despachadas
 integer y = 4
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_cajas_despachadas
 integer width = 3259
-fontcharset fontcharset = ansi!
 string text = "Informe de Cajas Despachadas"
 end type
 
@@ -475,62 +475,58 @@ sle_estado.text	=	"Iniciando Exportación"
 istr_info.titulo	= 	"INFORME DE CAJAS DESPACHADAS"
 istr_info.copias	= 	1
 
-IF cbx_ordentodo.Checked THEN
+If cbx_ordentodo.Checked Then
 	ll_nroOrden		= 	-1
-	IF cbx_consproc.Checked THEN	ll_nroOrden	= 	-9
-ELSE
+	If cbx_consproc.Checked Then	ll_nroOrden	= 	-9
+Else
 	ll_nroOrden 	= 	Long(em_orden.Text)
-END IF
+End If
 
-IF cbx_todospallet.Checked	THEN
+If cbx_todospallet.Checked	Then
 	ll_pallet		=	-1
-	IF cbx_conscajas.Checked THEN	ll_pallet	= 	-9
-ELSE
+	If cbx_conscajas.Checked Then	ll_pallet	= 	-9
+Else
 	ll_pallet		=	Long(em_pallet.Text)
-END IF
+End If
 
-IF cbx_1.Checked THEN
+If cbx_1.Checked Then
 	li_movto 	= 	-1
-	IF cbx_2.Checked THEN li_movto = -9
-	
-ELSE
+	If cbx_2.Checked Then li_movto = -9
+Else
 	li_movto	=	Integer(sle_movto.Text)
-		
-END IF
+End If
 
-IF cbx_embalaje.Checked THEN
+If cbx_embalaje.Checked Then
 	ls_embalaje 	= '-1'
 	
-	IF cbx_consembalaje.Checked THEN	ls_embalaje 	= '-9'
-ELSE
+	If cbx_consembalaje.Checked Then	ls_embalaje 	= '-9'
+Else
 	ls_embalaje 	= 	em_embalaje.Text
-	
-END IF
+End If
 
-IF cbx_calidad.Checked THEN
+If cbx_calidad.Checked Then
 	ls_calidad 	= '-1'
-	IF cbx_conscalidad.Checked THEN	ls_calidad 	= '-9'
+	If cbx_conscalidad.Checked Then	ls_calidad 	= '-9'
 	
-ELSE
+Else
 	ls_calidad 	= 	em_calidad.Text
-	
-END IF
+End If
 
-IF cbx_fecemb.Checked THEN
+If cbx_fecemb.Checked Then
 	li_consfecha 	= 	1
-ELSE
+Else
 	li_consfecha	=	0
-END IF
-IF cbx_etiqueta.Checked THEN
-	li_etiqueta 	= -1
-	IF cbx_consetiqueta.Checked THEN	li_etiqueta 	= -9
-	
-ELSE
-	li_etiqueta 	= 	dw_etiqueta.object.etiq_codigo[1]
-	
-END IF
+End If
 
-IF cbx_fecemb.Checked THEN li_ConsFecha = 1
+If cbx_etiqueta.Checked Then
+	li_etiqueta 	= -1
+	If cbx_consetiqueta.Checked Then	li_etiqueta 	= -9
+	
+Else
+	li_etiqueta 	= 	dw_etiqueta.object.etiq_codigo[1]
+End If
+
+If cbx_fecemb.Checked Then li_ConsFecha = 1
 
 ld_desde			=	Date(em_desde.Text)
 ld_hasta			=	Date(em_hasta.Text)
@@ -545,36 +541,33 @@ fila = vinf.dw_1.Retrieve(uo_Selplanta.codigo,	uo_SelCliente.Codigo,	uo_SelDesti
 								  uo_SelVariedad.codigo,ls_embalaje,				ls_calidad,					li_consfecha, 				&
 								  ll_pallet, 				li_conscajas)
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
 	
-	vinf.dw_1.Modify("Cliente.text = '" + uo_SelCliente.Nombre + "'")
+	vinf.dw_1.ModIfy("Cliente.text = '" + uo_SelCliente.Nombre + "'")
 	
-	vinf.dw_1.Modify('DataWindow.Print.Preview = Yes')
-	vinf.dw_1.Modify('DataWindow.Print.Preview.Zoom = 75')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview = Yes')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview.Zoom = 75')
 	
-	IF cbx_exporta.Checked THEN
+	If cbx_exporta.Checked Then
 
 		RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)
 		
-		ls_Archivo				= '\Cajas Embaladas del ' + String(ld_desde) + " al " + String(ld_desde) + '.xls'
+		ls_Archivo= '\Cajas Embaladas del ' + String(ld_desde) + " al " + String(ld_desde) + '.xls'
 		vinf.dw_1.SaveAs(ls_ruta + ls_archivo, Excel!,True) 
-		sle_estado.text		= 	"Listo"
+		sle_estado.text	= 	"Listo"
 		Close(vinf)
 //		sle_estado.Visible	=	False
 //		cbx_exporta.Checked	=	False
-	ELSE
+	Else
 		vinf.Visible			= 	True
 		vinf.Enabled			= 	True
-	END IF
-END IF
-
+	End If
+End If
 
 sle_estado.Visible	=	False
 

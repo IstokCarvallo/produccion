@@ -15,6 +15,27 @@ type variables
 w_mant_deta_categorias_cert iw_mantencion
 end variables
 
+forward prototypes
+public subroutine wf_replicacion ()
+end prototypes
+
+public subroutine wf_replicacion ();Integer	ll_fila
+
+uo_grabatablas		luo_grabatablas
+
+luo_grabatablas = Create uo_grabatablas
+
+ll_fila = dw_1.GetNextModified(ll_fila, Primary!)
+
+If ll_fila > 0 Then 
+	If luo_grabatablas.existereplicatablas(gi_CodExport) Then
+		luo_grabatablas.replicatabla_certcategoria(dw_1)
+	End If
+End If
+
+Destroy luo_grabatablas
+end subroutine
+
 event ue_nuevo;istr_mant.borra	= False
 istr_mant.agrega	= True
 
