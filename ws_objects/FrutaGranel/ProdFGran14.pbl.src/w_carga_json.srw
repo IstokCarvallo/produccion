@@ -29,8 +29,8 @@ global type w_carga_json from w_para_informes
 string tag = "Generacion de Archivos XML"
 integer x = 14
 integer y = 32
-integer width = 2583
-integer height = 1696
+integer width = 2501
+integer height = 1756
 boolean minbox = false
 boolean maxbox = false
 boolean resizable = false
@@ -61,6 +61,7 @@ public function boolean wf_embalaje (string embalaje)
 public subroutine wf_inserta (string mensaje)
 public function boolean wf_tipopallemba (long cliente, string embalaje)
 public function boolean wf_gtin (long cliente, string embalaje)
+public function boolean wf_calibre (integer especie, integer tipo, integer envase)
 end prototypes
 
 public function boolean wf_graba (boolean borrando);Boolean	lb_AutoCommit, lb_Retorno
@@ -179,6 +180,7 @@ lnv_RestClient.RetrieveOne(dw_embalaje, ls_URL)
 If dw_Embalaje.RowCount() > 0 Then
 
 	wf_Envase(dw_Embalaje.Object.enva_tipoen[1], dw_Embalaje.Object.enva_codigo[1])
+	wf_Calibre(dw_Embalaje.Object.espe_codigo[1], dw_Embalaje.Object.enva_tipoen[1], dw_Embalaje.Object.enva_codigo[1])
 	
 	dw_1.DataObject = 'dw_mues_embalajesprod_mantvig'
 	dw_1.SetTransObject(SQLCA)
@@ -344,6 +346,51 @@ Destroy lnv_RestClient
 Return lb_Retorno
 end function
 
+public function boolean wf_calibre (integer especie, integer tipo, integer envase);Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+dw_2.DataObject = 'dw_mues_calibresenvase'
+dw_1.DataObject = 'dw_mues_calibresenvase'
+dw_1.SetTransObject(SQLCA)
+dw_1.Retrieve(Especie, Tipo, Envase)
+
+ls_URL = _URL + 'api/CalibresEnvase/Retrieve/' + String(Especie) + '/'  + String(Tipo) + '/'  + String(Envase)
+lnv_RestClient.Retrieve(dw_2, ls_URL)
+
+For ll_Fila = 1 To dw_2.RowCount()
+	ls_Busca = 'espe_codigo = ' + String(Especie ) + ' and enva_tipoen = ' + String(Tipo) + &
+					' and enva_codigo = '  + String(Envase) + ' and caen_calibr = "' + dw_2.Object.caen_Calibr[ll_Fila] + '"' 
+	ll_Busca = dw_1.Find(ls_Busca, 1, dw_1.RowCount(), Primary!)
+	
+	If ll_Busca = 0 Then
+		dw_2.RowsCopy(ll_Fila, ll_Fila, Primary!, dw_1, 1, Primary!)
+		wf_Inserta('Se inserto Calibre :'  + dw_2.Object.caen_Calibr[ll_Fila])
+	Else	 
+		dw_1.Object.caen_Grupoc[ll_Busca]	= dw_2.Object.caen_Grupoc[ll_Fila]
+		dw_1.Object.caen_Calest[ll_Busca]	= dw_2.Object.caen_Calest[ll_Fila]
+		dw_1.Object.caen_Column[ll_Busca]	= dw_2.Object.caen_Column[ll_Fila]
+		dw_1.Object.caen_Ordena[ll_Busca]	= dw_2.Object.caen_Ordena[ll_Fila]
+		dw_1.Object.caen_Cales2[ll_Busca]	= dw_2.Object.caen_Cales2[ll_Fila]
+		dw_1.Object.caen_Pordis[ll_Busca]	= dw_2.Object.caen_Pordis[ll_Fila]
+		dw_1.Object.caen_Pordi2[ll_Busca]	= dw_2.Object.caen_Pordi2[ll_Fila]
+
+		wf_Inserta('Se actualizo Calibre :'  + dw_2.Object.caen_Calibr[1])
+	End If
+Next
+
+If wf_Graba(False) Then wf_Inserta('Se grabo Calibre para envase tipo:'  + String(Tipo) + ', Codigo Envase: ' + String(Envase, '00'))
+
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
+
 on w_carga_json.create
 int iCurrent
 call super::create
@@ -397,6 +444,7 @@ End If
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_carga_json
+integer taborder = 0
 end type
 
 type st_computador from w_para_informes`st_computador within w_carga_json
@@ -495,7 +543,7 @@ event destroy ( )
 integer x = 777
 integer y = 492
 integer height = 100
-integer taborder = 40
+integer taborder = 10
 boolean bringtotop = true
 end type
 
@@ -527,7 +575,7 @@ integer x = 2107
 integer y = 920
 integer width = 215
 integer height = 164
-integer taborder = 11
+integer taborder = 0
 boolean bringtotop = true
 boolean enabled = false
 boolean vscrollbar = false
@@ -539,7 +587,7 @@ integer x = 2103
 integer y = 1108
 integer width = 215
 integer height = 164
-integer taborder = 21
+integer taborder = 0
 boolean bringtotop = true
 boolean enabled = false
 boolean vscrollbar = false
@@ -550,7 +598,6 @@ integer x = 311
 integer y = 760
 integer width = 1650
 integer height = 700
-integer taborder = 50
 boolean bringtotop = true
 integer textsize = -8
 integer weight = 700
@@ -586,7 +633,7 @@ integer x = 2103
 integer y = 1296
 integer width = 215
 integer height = 164
-integer taborder = 31
+integer taborder = 0
 boolean bringtotop = true
 boolean enabled = false
 boolean vscrollbar = false
@@ -599,7 +646,7 @@ integer x = 782
 integer y = 168
 integer width = 402
 integer height = 112
-integer taborder = 40
+integer taborder = 50
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 400

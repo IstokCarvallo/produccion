@@ -259,7 +259,7 @@ Else
 	
 	
 	If dw_4.SaveAs(ls_ruta + ls_archivo, CSV!, FALSE) = -1 Then
-		MessageBox("Error", "No se logro Almacenar el archivo generado en la carpeta especIficada~n~r" + &
+		MessageBox("Error", "No se logro Almacenar el archivo generado en la carpeta especificada~n~r" + &
 						ls_ruta + ls_archivo+"~n~r" + "No se pudo concretar envio Automático de E-Mail", StopSign!)
 		Return
 	Else
@@ -669,6 +669,7 @@ If il_NroDespa > 0 Then
 End If
 
 dw_3.ResetUpdate()
+
 FOR li_filas = 1 TO dw_3.RowCount()
 	dw_3.SetItemStatus(li_filas, "paen_estado", Primary!, DataModIfied!)
 NEXT
@@ -704,36 +705,6 @@ ElseIf fila = 0 Then
 Else
 	F_Membrete(vinf.dw_1)
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-
-//	If Not ib_Anulada Then
-//		If MessageBox("Guia Despacho", "¿Desea imprimir Guía de Despacho SII?", Question!, YesNo!) = 1 Then
-//			If gi_Emisor_Electronico = 1 Then
-//				If dw_2.Object.defe_guiaem[1] = 0 Then 
-//					ll_Guia = iuo_Guia.of_emiteguia_fruticola(li_Planta, li_Cliente, ll_Despacho)
-//					If ll_Guia > 0 Then
-//						If iuo_Guia.of_GeneraLibroGuia(1) Then 
-//							iuo_Guia.of_RecuperaPDF(ll_Guia,vinf.dw_1.Object.defe_fecdes[1], 1)
-//							dw_2.Object.defe_guides[1] = ll_Guia
-//							dw_2.Object.defe_guiaem[1] = 1
-//							TriggerEvent('ue_guardar')
-//							PostEvent("ue_imprimir2")
-//						Else
-//							MessageBox('Alerta', 'No se pudo actualziar Libro de guias de despacho.', Information!, OK!)
-//						End If
-//					End If
-//				Else
-//					iuo_Guia.of_RecuperaPDF(dw_2.Object.defe_guides[1],vinf.dw_1.Object.defe_fecdes[1], 1)
-//					PostEvent("ue_imprimir2")
-//				End If
-//			Else
-//				PostEvent("ue_imprimir2")
-//			End If
-//		Else
-//			PostEvent("ue_imprimir2")
-//		End If
-//	Else
-//		PostEvent("ue_imprimir2")
-//	End If
 End If
 
 SetPointer(Arrow!)

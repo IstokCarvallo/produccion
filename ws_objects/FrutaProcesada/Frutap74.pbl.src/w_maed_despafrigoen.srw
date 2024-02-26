@@ -3238,7 +3238,6 @@ If IsNull(dw_2.Object.defe_chofer[1]) OR dw_2.Object.defe_chofer[1] = '' Then
 End If	
 	
 If dw_2.Object.tica_codigo[1] = 2 Then
-	
 	If IsNull(dw_2.Object.defe_selnav[1]) OR dw_2.Object.defe_selnav[1] = '' Then
 		MessageBox("Error de Consistencia", "Falta Sello Cia. Naviera.", StopSign!, Ok!)
 		dw_2.SetColumn("defe_selnav")
@@ -3292,11 +3291,10 @@ If dw_2.Object.tica_codigo[1] = 2 Then
 		dw_2.SetColumn("tpco_codigo")
 		Message.DoubleParm = -1
 	End If
-	
 End If	
 
 If dw_2.Object.defe_consol[1] = 1 Then
-	If isnull(dw_2.Object.defe_plades[1]) OR dw_2.Object.defe_plades[1] = 0 Then
+	If IsNull(dw_2.Object.defe_plades[1]) OR dw_2.Object.defe_plades[1] = 0 Then
 		MessageBox("Error de Consistencia", "Falta Planta Destino.", StopSign!, Ok!)
 		dw_2.SetColumn("defe_plades")
 		Message.DoubleParm = -1
@@ -3373,15 +3371,15 @@ End If
 dw_6.Reset()
 
 If Not ib_existe_folioD	Then
-	If isnull(dw_2.Object.defe_numero[1]) OR dw_2.Object.defe_numero[1] = 0 Then
-		ll_nuevofolio=BusNuevoFolioDespa(Integer(istr_mant.argumenTo[3]),Integer(istr_mant.argumenTo[1]))
+	If IsNull(dw_2.Object.defe_numero[1]) OR dw_2.Object.defe_numero[1] = 0 Then
+		ll_nuevofolio=BusNuevoFolioDespa(Integer(istr_mant.Argumento[3]),Integer(istr_mant.Argumento[1]))
 		il_Folio	=	ll_nuevofolio
 		
 		If il_Folio > 0 Then
 			dw_2.Object.defe_numero[1]	= ll_nuevofolio
 			dw_2.SetItem(1, "defe_numero",ll_nuevofolio)
 		
-			istr_mant.argumenTo[2]	= String(ll_nuevofolio)
+			istr_mant.Argumento[2]	= String(ll_nuevofolio)
 			
 			For li_fillas = 1 To dw_1.RowCount()
 				 dw_1.Object.defe_numero[li_fillas]	= ll_nuevofolio
@@ -3408,6 +3406,8 @@ Message.DoubleParm = 0
 
 TriggerEvent("ue_antesguardar")
 
+If Message.DoubleParm = -1  Then RETURN
+
 If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
 	(dw_2.Object.defe_tiposa[1] = 7 Or dw_2.Object.defe_tiposa[1] = 8 Or dw_2.Object.defe_tiposa[1] = 9 Or &
 	dw_2.Object.defe_tiposa[1] = 10 Or dw_2.Object.defe_tiposa[1] = 11 Or dw_2.Object.defe_tiposa[1] = 30)Then
@@ -3426,8 +3426,6 @@ If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
 		End If
 	End If
 End If
-
-If Message.DoubleParm = -1  Then RETURN
 
 If wf_actualiza_db(False) Then
 	w_main.SetMicroHelp("Información Grabada.")

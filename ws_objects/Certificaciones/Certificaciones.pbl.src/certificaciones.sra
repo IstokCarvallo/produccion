@@ -118,7 +118,297 @@ end prototypes
 type variables
 Constant	Date		id_FechaLiberacion	= Today()
 Constant	Time		it_HoraLiberacion		= Now()
+Private Constant	String	_URL = 'https://rioblanco-api-certificacion.azurewebsites.net/'
 end variables
+
+forward prototypes
+public subroutine wf_cargacertificaciones ()
+public function boolean wf_protocolos ()
+public function boolean wf_grabar (datastore ds_1)
+public function boolean wf_certificadoras ()
+public function boolean wf_categorias ()
+public function boolean wf_estados ()
+public function boolean wf_certificadoproductor ()
+end prototypes
+
+public subroutine wf_cargacertificaciones ();Integer li_Respuesta 
+
+li_Respuesta = MessageBox('Atencion', 'Se procedera a actulizar informacion certificaciones.~n~nDesea Continuar?', Information!, YesNo!, 2)
+
+If li_Respuesta = 1 Then
+	SetPointer(HourGlass!)
+	
+	wf_Protocolos()
+	wf_Categorias()
+	wf_Certificadoras()
+	wf_Estados()
+	wf_CertificadoProductor()
+	
+	 MessageBox('Atencion', 'Proceso de carga Terminado', Information!, OK!)
+End If
+
+SetPointer(Arrow!)
+Return
+end subroutine
+
+public function boolean wf_protocolos ();Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+DataStore	ds_1, ds_2
+
+ds_1	= Create DataStore
+ds_2	= Create DataStore
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+ds_2.DataObject = 'dw_mues_protocolos'
+ls_URL = _URL + 'api/Protocolos/Retrieve' 
+lnv_RestClient.Retrieve(ds_2, ls_URL)
+
+If ds_2.RowCount() > 0 Then
+	
+	ds_1.DataObject = 'dw_mues_protocolos'
+	ds_1.SetTransObject(SQLCA)
+	ds_1.Retrieve()
+	
+	For ll_Fila = 1 To ds_2.RowCount()		  
+		ls_Busca = 'prot_codigo = '  + String(ds_2.Object.prot_Codigo[ll_Fila])
+		
+		ll_Busca = ds_1.Find(ls_Busca, 1, ds_1.RowCount(), Primary!)
+	
+		If ll_Busca = 0 Then
+			ds_2.RowsCopy(ll_Fila, ll_Fila, Primary!, ds_1, 1, Primary!)
+		Else	 
+			ds_1.Object.prot_Nombre[ll_Busca]	= ds_2.Object.prot_Nombre[ll_Fila]
+			ds_1.Object.prot_Abrevi[ll_Busca]		= ds_2.Object.prot_Abrevi[ll_Fila]
+			ds_1.Object.prot_Nroggn[ll_Busca]	= ds_2.Object.prot_Nroggn[ll_Fila]
+		End If
+	Next
+	wf_Grabar(ds_1) 
+End If
+
+Destroy ds_1
+Destroy ds_2
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
+
+public function boolean wf_grabar (datastore ds_1);Boolean	lb_AutoCommit, lb_Retorno
+
+lb_AutoCommit		=	sqlca.AutoCommit
+sqlca.AutoCommit	=	False
+
+If ds_1.Update(True, False) = 1 Then
+	Commit;
+	If sqlca.SQLCode <> 0 Then
+		F_ErrorBaseDatos(sqlca, 'Carga de Certificaciones')
+		RollBack;
+	Else
+		lb_Retorno	=	True
+		ds_1.ResetUpdate()
+	End If
+Else
+	F_ErrorBaseDatos(sqlca, 'Carga de Certificaciones')
+	RollBack;
+End If
+
+sqlca.AutoCommit	=	lb_AutoCommit
+
+Return lb_Retorno
+end function
+
+public function boolean wf_certificadoras ();Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+DataStore	ds_1, ds_2
+
+ds_1	= Create DataStore
+ds_2	= Create DataStore
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+ds_2.DataObject = 'dw_mues_certificadoras'
+ls_URL = _URL + 'api/Certificadoras/Retrieve' 
+lnv_RestClient.Retrieve(ds_2, ls_URL)
+
+If ds_2.RowCount() > 0 Then
+	
+	ds_1.DataObject = 'dw_mues_certificadoras'
+	ds_1.SetTransObject(SQLCA)
+	ds_1.Retrieve()
+	
+	For ll_Fila = 1 To ds_2.RowCount()		  
+		ls_Busca = 'cert_codigo = '  + String(ds_2.Object.cert_Codigo[ll_Fila])
+		
+		ll_Busca = ds_1.Find(ls_Busca, 1, ds_1.RowCount(), Primary!)
+	
+		If ll_Busca = 0 Then
+			ds_2.RowsCopy(ll_Fila, ll_Fila, Primary!, ds_1, 1, Primary!)
+		Else	 
+			ds_1.Object.cert_Nombre[ll_Busca]	= ds_2.Object.cert_Nombre[ll_Fila]
+			ds_1.Object.cert_Abrevi[ll_Busca]		= ds_2.Object.cert_Abrevi[ll_Fila]
+		End If
+	Next
+	wf_Grabar(ds_1) 
+End If
+
+Destroy ds_1
+Destroy ds_2
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
+
+public function boolean wf_categorias ();Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+DataStore	ds_1, ds_2
+
+ds_1	= Create DataStore
+ds_2	= Create DataStore
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+ds_2.DataObject = 'dw_mues_categorias_cert'
+ls_URL = _URL + 'api/Categorias/Retrieve' 
+lnv_RestClient.Retrieve(ds_2, ls_URL)
+
+If ds_2.RowCount() > 0 Then
+	
+	ds_1.DataObject = 'dw_mues_categorias_cert'
+	ds_1.SetTransObject(SQLCA)
+	ds_1.Retrieve()
+	
+	For ll_Fila = 1 To ds_2.RowCount()		  
+		ls_Busca = 'cace_codigo = '  + String(ds_2.Object.cace_Codigo[ll_Fila])
+		
+		ll_Busca = ds_1.Find(ls_Busca, 1, ds_1.RowCount(), Primary!)
+	
+		If ll_Busca = 0 Then
+			ds_2.RowsCopy(ll_Fila, ll_Fila, Primary!, ds_1, 1, Primary!)
+		Else	 
+			ds_1.Object.cace_Nombre[ll_Busca]	= ds_2.Object.cace_Nombre[ll_Fila]
+			ds_1.Object.cace_Abrevi[ll_Busca]		= ds_2.Object.cace_Abrevi[ll_Fila]
+		End If
+	Next
+	wf_Grabar(ds_1) 
+End If
+
+Destroy ds_1
+Destroy ds_2
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
+
+public function boolean wf_estados ();Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+DataStore	ds_1, ds_2
+
+ds_1	= Create DataStore
+ds_2	= Create DataStore
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+ds_2.DataObject = 'dw_mues_estadocertific'	
+ls_URL = _URL + 'api/Estado/Retrieve' 
+lnv_RestClient.Retrieve(ds_2, ls_URL)
+
+If ds_2.RowCount() > 0 Then
+	
+	ds_1.DataObject = 'dw_mues_estadocertific'
+	ds_1.SetTransObject(SQLCA)
+	ds_1.Retrieve()
+	
+	For ll_Fila = 1 To ds_2.RowCount()		  
+		ls_Busca = 'prec_codigo = '  + String(ds_2.Object.prec_Codigo[ll_Fila])
+		
+		ll_Busca = ds_1.Find(ls_Busca, 1, ds_1.RowCount(), Primary!)
+	
+		If ll_Busca = 0 Then
+			ds_2.RowsCopy(ll_Fila, ll_Fila, Primary!, ds_1, 1, Primary!)
+		Else	 
+			ds_1.Object.prec_Nombre[ll_Busca]	= ds_2.Object.prec_Nombre[ll_Fila]
+			ds_1.Object.prec_Abrevi[ll_Busca]		= ds_2.Object.prec_Abrevi[ll_Fila]
+		End If
+	Next
+	wf_Grabar(ds_1) 
+End If
+
+Destroy ds_1
+Destroy ds_2
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
+
+public function boolean wf_certificadoproductor ();Boolean 		lb_Retorno = True
+RESTClient	lnv_RestClient
+String 		ls_URL, ls_Busca
+Long			ll_Busca, ll_New, ll_Fila
+DataStore	ds_1, ds_2
+
+ds_1	= Create DataStore
+ds_2	= Create DataStore
+
+lnv_RestClient	=	Create RESTClient
+lnv_RestClient.SetRequestHeader ("Content-Type", "application/json;charset=UTF-8")
+
+ds_2.DataObject = 'dw_mues_certificacionprod'	
+ls_URL = _URL + 'api/CertificacionProd/Retrieve' 
+lnv_RestClient.Retrieve(ds_2, ls_URL)
+
+If ds_2.RowCount() > 0 Then
+	
+	ds_1.DataObject = 'dw_mues_certificacionprod'
+	ds_1.SetTransObject(SQLCA)
+	ds_1.Retrieve()
+	
+	For ll_Fila = 1 To ds_2.RowCount()		  
+		ls_Busca = 'prod_Codigo = '  + String(ds_2.Object.prod_Codigo[ll_Fila]) + ' And prpr_Codigo = ' + String(ds_2.Object.prpr_Codigo[ll_Fila]) + &
+						' and espe_Codigo = '  + String(ds_2.Object.espe_Codigo[ll_Fila]) + ' And prot_Codigo = ' + String(ds_2.Object.prot_Codigo[ll_Fila])
+		ll_Busca = ds_1.Find(ls_Busca, 1, ds_1.RowCount(), Primary!)
+	
+		If ll_Busca = 0 Then
+			ds_2.RowsCopy(ll_Fila, ll_Fila, Primary!, ds_1, 1, Primary!)
+		Else	 
+			ds_1.Object.cert_Codigo[ll_Busca]		= ds_2.Object.cert_Codigo[ll_Fila]
+			ds_1.Object.cace_Codigo[ll_Busca]	= ds_2.Object.cace_Codigo[ll_Fila]			
+			ds_1.Object.prec_Codigo[ll_Busca]	= ds_2.Object.prec_Codigo[ll_Fila]
+			ds_1.Object.cece_Nroins[ll_Busca]		= ds_2.Object.cece_Nroins[ll_Fila]
+			ds_1.Object.cece_Ggngap[ll_Busca]	= ds_2.Object.cece_Ggngap[ll_Fila]
+			ds_1.Object.cece_Fecaud[ll_Busca]	= ds_2.Object.cece_Fecaud[ll_Fila]
+			ds_1.Object.cece_Fecexp[ll_Busca]	= ds_2.Object.cece_Fecexp[ll_Fila]
+			ds_1.Object.cece_Fecins[ll_Busca]		= ds_2.Object.cece_Fecins[ll_Fila]
+			ds_1.Object.cece_Feesau[ll_Busca]	= ds_2.Object.cece_Feesau[ll_Fila]
+			ds_1.Object.cece_Montos[ll_Busca]	= ds_2.Object.cece_Montos[ll_Fila]
+			ds_1.Object.cece_Observ[ll_Busca]	= ds_2.Object.cece_Observ[ll_Fila]
+			ds_1.Object.cece_Rutas[ll_Busca]		= ds_2.Object.cece_Rutas[ll_Fila]
+			ds_1.Object.cert_Codigo[ll_Busca]		= ds_2.Object.cert_Codigo[ll_Fila]
+			ds_1.Object.cece_Archiv[ll_Busca]		= ds_2.Object.cece_Archiv[ll_Fila]
+			ds_1.Object.cece_Recert[ll_Busca]	= ds_2.Object.cece_Recert[ll_Fila]
+			ds_1.Object.cece_Packin[ll_Busca]		= ds_2.Object.cece_Packin[ll_Fila]
+		End If
+	Next
+	wf_Grabar(ds_1) 
+End If
+
+Destroy ds_1
+Destroy ds_2
+Destroy lnv_RestClient
+
+Return lb_Retorno
+end function
 
 on certificaciones.create
 appname="certificaciones"
@@ -164,6 +454,8 @@ END IF
 
 IF AccesoSistemaValido() THEN
 	ParEmpresa()
+	If gstr_parempresa.Certificacion = 1 Then wf_CargaCertificaciones()
+	
 	Open(w_main)
 ELSE
 	HALT

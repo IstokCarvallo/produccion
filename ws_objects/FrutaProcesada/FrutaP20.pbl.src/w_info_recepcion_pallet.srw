@@ -427,6 +427,7 @@ ELSE
 	F_Membrete(vinf.dw_1)
 	vinf.dw_1.Modify("guia.text = '" + ls_nroguia + "'")
 	vinf.dw_1.Modify("t_reembala.text = '" + ls_reembala + "'")		
+	vinf.dw_1.Modify('DataWindow.Zoom = 95')
 	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 END IF
 SetPointer(Arrow!)
