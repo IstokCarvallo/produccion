@@ -101,6 +101,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_codigoarance,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mant_camion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dw_mues_lineapacking,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_spro_correltipomovto,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,uo_centroemisor,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,w_mant_deta_lotesfrutagranel_recepcereza,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_exismovtodeta,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_busc_spro_ordenproceso,w
@@ -171,6 +172,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_recibidores,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_spro_motivodespacho,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_filtro_turnos_personal,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran10.pbl,dw_mues_faenasturno_fecha_solofaena,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_correldoctoelectronico,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_fechamovto,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_movtofrutagranel_mantreembala,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mant_movtofrutagranenca,d
@@ -385,6 +387,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_deta_camarasfrigo,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,w_maed_movtofrutagranel_encabprod,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_seleccion_tarjas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_pallets_trasvasije,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_cajasprod_imprime_elimina,w
@@ -512,7 +515,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_seleccion_entida
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_mant_consulta_existencia_granel_2,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_correotablas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_arearesponsable,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_lineapacking,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,w_maed_movtofrutagranel_recepcereza,w
@@ -607,7 +609,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mues_cambiaplanta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,w_emis_guia_despacho_envases,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_detalle_envases_comercial,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_spro_movtograndeta_tarjas,d
-OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_seleccion_camaraysdpsag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,dw_mant_spro_madurezcosechare,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,dw_mant_mues_spro_movtocamarafgenca,d
@@ -896,6 +897,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoenvase,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especies,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mant_embalajes_envases,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_contratista,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_correldoctoelectronico,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_exportadores,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mant_movtoenvaenca_recepfruta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,dw_selectividad_tarjas_lotes,d
@@ -953,6 +955,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_envases,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_clientesprod,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_spro_ubicadocto,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_equipos,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,w_info_etiqetas_compactos_cajasprod,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_mues_programacionsegregadorenca,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_tipopallemba,d
@@ -1084,6 +1087,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_movtofrutagra
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,dw_spro_movtobins_cerezas,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_busc_spro_movtofrutagranenca_trans,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_seleccion_planta_comun,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_qr,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_palletfruta_elimina_imprime,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_despemba_packing_deta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_sel_prograproceso_enca_programacion,d
@@ -1186,6 +1190,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_faenas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_faenaspacking,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_faenaspackingtarifas,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_salidalineapacking,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,uo_seleccion_centroemisor,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_productores,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta_csd,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran11.pbl,dw_adhesivo_encabezado,d

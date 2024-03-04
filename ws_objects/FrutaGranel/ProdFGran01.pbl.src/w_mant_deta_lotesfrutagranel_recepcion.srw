@@ -101,6 +101,7 @@ public subroutine calculafechaestimada (integer ai_columna, string ai_horas)
 public function long cargaagronomo (string as_columna, string as_valor)
 public function boolean validaingresolote (boolean ab_mensaje)
 public subroutine recupera_packing (long al_productor)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_nuevo_detalle();Integer	li_Lote, li_fila, li_preservafila
@@ -1220,6 +1221,23 @@ RETURN
 
 end subroutine
 
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
+end function
+
 on w_mant_deta_lotesfrutagranel_recepcion.create
 int iCurrent
 call super::create
@@ -1846,7 +1864,7 @@ dw_1.x			=	37 + Round((maximo - dw_1.Width) / 2, 0)
 dw_1.y			=	37
 
 dw_6.x			=	dw_1.x
-dw_6.y			=	dw_1.Height
+dw_6.y			=	dw_1.Height + 20
 dw_6.Width		=	dw_1.Width
 
 dw_3.x			=	37 + Round((maximo - dw_3.Width) / 2, 0)
@@ -1996,7 +2014,7 @@ type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_lotesfrutagranel_recep
 integer x = 69
 integer y = 92
 integer width = 3762
-integer height = 804
+integer height = 832
 string dataobject = "dw_mant_spro_lotesfrutagranel_recepcion"
 end type
 
@@ -2055,6 +2073,8 @@ Choose Case ls_columna
 				
 				recupera_packing(Long(Data))
 				CargaAgronomo(ls_columna, data)
+				
+				This.Object.lote_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row])
 			End If	
 				
 	Case "clie_codigo"
@@ -2074,7 +2094,7 @@ Choose Case ls_columna
 		Else		
 			idwc_Cuartel.Retrieve(This.Object.prod_codigo[Row],Integer(data))
 			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-				
+			This.Object.lote_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row])
 			CargaAgronomo(ls_columna, data)
 		End If
 		
@@ -2345,7 +2365,7 @@ end type
 
 type dw_6 from datawindow within w_mant_deta_lotesfrutagranel_recepcion
 integer x = 69
-integer y = 884
+integer y = 928
 integer width = 3753
 integer height = 332
 integer taborder = 20
@@ -2389,8 +2409,8 @@ END CHOOSE
 end event
 
 type dw_3 from uo_dw within w_mant_deta_lotesfrutagranel_recepcion
-integer x = 37
-integer y = 1232
+integer x = 50
+integer y = 1308
 integer width = 2949
 integer height = 1056
 integer taborder = 50

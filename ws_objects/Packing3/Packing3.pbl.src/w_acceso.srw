@@ -5,6 +5,7 @@ end type
 end forward
 
 global type w_acceso from w_acceso_usuario
+windowanimationstyle openanimation = topslide!
 end type
 global w_acceso w_acceso
 

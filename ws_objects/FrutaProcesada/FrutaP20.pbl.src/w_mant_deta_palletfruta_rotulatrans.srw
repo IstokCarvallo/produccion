@@ -28,11 +28,12 @@ public function boolean noexistecalibre (string as_valor)
 public function boolean duplicado (string campo)
 public function boolean noexisteproductor (string ls_columna)
 public subroutine buscaprod ()
-public function boolean varificaproductor (long ll_productor)
 public function boolean noexistepredio (long ai_productor, integer ai_predio)
 public function boolean noexisteproductorrotulado (string ls_columna)
 public function boolean noexistecuartel (long al_productor, integer ai_predio, integer ai_cuartel, integer ai_especie, integer ai_variedad)
 public function boolean noexistecategoria (integer categoria)
+public function boolean wf_verificaproductor (long ll_productor)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public function boolean existevariecab (integer as_valor);Integer	li_especie, li_variedad, li_cliente
@@ -202,31 +203,6 @@ dw_1.Modify("buscaprod.border = 6")
 RETURN
 end subroutine
 
-public function boolean varificaproductor (long ll_productor); Integer li_cont=0, li_cliente,li_planta
- 
- li_cliente	=	Integer(istr_mant.argumento[1])
- li_planta	=	Integer(istr_mant.argumento[21])
-
- SELECT count (prod_codigo) 
- INTO :li_cont  
- FROM dbo.prodpacking  
- WHERE prod_codigo = :ll_productor AND  
-       plde_codigo = :li_planta;
-			
-IF (sqlca.sqlcode)= -1 THEN
-	F_errorbasedatos(sqlca,"Lectura tabla Prodpacking")
-	RETURN FALSE
-ELSEIF li_cont>0 THEN
-	RETURN TRUE
-ELSE
-	MessageBox("Atención", "Código de Productor No Asignado a Packing Origen.", &
-					Exclamation!, OK!)
-	RETURN FALSE
-END IF
-
-
-end function
-
 public function boolean noexistepredio (long ai_productor, integer ai_predio);Integer li_existe
 
 SELECT Count(prod_codigo) 
@@ -349,6 +325,48 @@ Long		ll_cont
 	END IF
 
 Return lb_retorna
+end function
+
+public function boolean wf_verificaproductor (long ll_productor); Integer li_cont=0, li_cliente,li_planta
+ 
+ li_cliente	=	Integer(istr_mant.argumento[1])
+ li_planta	=	Integer(istr_mant.argumento[21])
+
+ SELECT count (prod_codigo) 
+ INTO :li_cont  
+ FROM dbo.prodpacking  
+ WHERE prod_codigo = :ll_productor AND  
+       plde_codigo = :li_planta;
+			
+IF (sqlca.sqlcode)= -1 THEN
+	F_errorbasedatos(sqlca,"Lectura tabla Prodpacking")
+	RETURN FALSE
+ELSEIF li_cont>0 THEN
+	RETURN TRUE
+ELSE
+	MessageBox("Atención", "Código de Productor No Asignado a Packing Origen.", &
+					Exclamation!, OK!)
+	RETURN FALSE
+END IF
+
+
+end function
+
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio, Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
 end function
 
 on w_mant_deta_palletfruta_rotulatrans.create
@@ -695,7 +713,7 @@ type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_palletfruta_rotulatran
 integer x = 78
 integer y = 112
 integer width = 3291
-integer height = 1376
+integer height = 1372
 string dataobject = "dw_mant_palletfruta_rotulatrans"
 end type
 
@@ -744,23 +762,14 @@ Choose Case ls_columna
 	Case "prod_codigo"
 		dw_1.SetItem(il_fila, "pafr_cuart1", Integer(ls_Nula))
 		dw_1.SetItem(il_fila, "pafr_huert1", Integer(ls_Nula))
-		
-//		If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_Nula))
-//		End If
-		
-//		If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_huert4", Integer(ls_Nula))
-//		End If	
 		
 		If  NoExisteProductor(data) Then
 			dw_1.SetItem(il_fila, ls_columna, Long(ls_Nula))
 			Return 1
-			
 		ElseIf istr_mant.Argumento[20]='1' Then
-			
 			istr_mant.argumento[50] = data
-			
 			dw_1.GetChild("pafr_huert1", idwc_predio)
 			idwc_predio.SetTransObject(SQLCA)
 			ll_Prod	=	Long(data)
@@ -770,19 +779,15 @@ Choose Case ls_columna
 				idwc_predio.InsertRow(0)
 			End If
 			
-//			If IsNull(dw_1.Object.pafr_prdrot[il_fila]) Then
-				dw_1.SetItem(il_fila, "pafr_prdrot", Long(data))
-				istr_mant.argumento[51] = data
-//			End If
-			
-//			If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
-				dw_1.GetChild("pafr_huert4", idwc_prediorot)
-				idwc_prediorot.SetTransObject(SQLCA)
-				If idwc_PredioRot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
-//			End If
-			
-			If Not VarificaProductor(Integer(Data)) Then Return 1
+			This.SetItem(il_fila, "pafr_prdrot", Long(data))
+			istr_mant.argumento[51] = data
 
+			This.GetChild("pafr_huert4", idwc_prediorot)
+			idwc_prediorot.SetTransObject(SQLCA)
+			If idwc_PredioRot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
+			
+			If Not wf_VerificaProductor(Integer(Data)) Then Return 1
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row])
 		End If
 		
 	Case "pafr_huert1"
@@ -797,18 +802,16 @@ Choose Case ls_columna
 			dw_1.GetChild("pafr_cuart1", idwc_cuartel)
 			idwc_cuartel.SetTransObject(SQLCA)
 			idwc_cuartel.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
+						
+			dw_1.SetItem(il_fila, "pafr_huert4", Integer(data))
+			istr_mant.argumento[53] = data
+
+			dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
+			idwc_cuartelrot.SetTransObject(SQLCA)
+			idwc_cuartelrot.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
+			dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_nula))
 			
-//			If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
-				dw_1.SetItem(il_fila, "pafr_huert4", Integer(data))
-				istr_mant.argumento[53] = data
-//			End If
-			
-//			If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
-				dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
-				idwc_cuartelrot.SetTransObject(SQLCA)
-				idwc_cuartelrot.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
-				dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_nula))
-//			End If	
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Integer(Data), This.Object.espe_codigo[Row])
 		End If
 		
 	Case "pafr_calibr"
@@ -852,7 +855,8 @@ Choose Case ls_columna
 			
 			If idwc_prediorot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
 			
-			If Not VarificaProductor(Integer(Data)) Then Return 1
+			If Not wf_VerificaProductor(Integer(Data)) Then Return 1
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row])
 		End If	
 		
 	Case "pafr_huert4"
@@ -865,6 +869,9 @@ Choose Case ls_columna
 			dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
 			idwc_cuartelrot.SetTransObject(SQLCA)
 			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.pafr_varrot[row])
+			
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.pafr_prdrot[Row], Integer(Data), This.Object.espe_codigo[Row])
+			
 		End If
 		
 		istr_mant.argumento[53] = data

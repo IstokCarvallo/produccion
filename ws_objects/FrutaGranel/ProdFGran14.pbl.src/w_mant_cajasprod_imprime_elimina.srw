@@ -1001,7 +1001,6 @@ integer height = 296
 integer taborder = 50
 boolean bringtotop = true
 string title = "none"
-string dataobject = "dw_info_spro_cajasprod_pomaceas_70x52"
 boolean livescroll = true
 borderstyle borderstyle = styleraised!
 end type

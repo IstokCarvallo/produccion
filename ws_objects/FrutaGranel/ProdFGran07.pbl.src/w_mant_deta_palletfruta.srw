@@ -5,8 +5,8 @@ end type
 end forward
 
 global type w_mant_deta_palletfruta from w_mant_detalle_csd
-integer width = 3323
-integer height = 1660
+integer width = 3406
+integer height = 1732
 end type
 global w_mant_deta_palletfruta w_mant_deta_palletfruta
 
@@ -36,6 +36,7 @@ public function boolean buscanombreembalaje (string as_embalaje)
 public function boolean verificaproductor (long al_productor)
 public subroutine cuentacajas ()
 public function boolean noexistecalibre (string as_valor, string as_columna)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public subroutine buscaprod ();dw_1.ModIfy("buscaprod.border = 0")
@@ -300,6 +301,23 @@ Else
 End If
 
 End function
+
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
+end function
 
 on w_mant_deta_palletfruta.create
 call super::create
@@ -788,7 +806,7 @@ end type
 type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_palletfruta
 integer x = 96
 integer width = 2807
-integer height = 1328
+integer height = 1476
 string dataobject = "dw_mant_palletfruta"
 end type
 
@@ -811,6 +829,7 @@ Choose Case ls_columna
 		ElseIf idwc_Predio.Retrieve(Long(Data)) = 0 Then
 			MessageBox("Atención", "Productor no tiene definido Predios")
 		Else
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.espe_codigo[Row])
 			This.Object.prod_codrot[row]	=	Long(Data)
 			
 			idwc_Cuartel.Reset()
@@ -820,8 +839,7 @@ Choose Case ls_columna
 		If idwc_Prediorot.Retrieve(Long(Data)) = 0 Then
 			
 		Else
-			This.Object.prod_codrot[row]	=	Long(Data)
-			
+			This.Object.prod_codrot[row]	=	Long(Data)	
 			idwc_Cuarterot.Reset()
 			idwc_Cuarterot.InsertRow(0)
 		End If
@@ -833,7 +851,7 @@ Choose Case ls_columna
 		ElseIf idwc_Prediorot.Retrieve(Long(Data)) = 0 Then
 			MessageBox("Atención", "Productor no tiene definido Predios Rotulados")
 		Else
-					
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row])
 			idwc_Cuarterot.Reset()
 			idwc_Cuarterot.InsertRow(0)
 		End If
@@ -871,6 +889,7 @@ Choose Case ls_columna
 			Return 1
 		End If
 		
+		This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row])
 		This.Object.pafr_huert1[row] = Long(data)
 		
 	Case "pafr_huert1"
@@ -884,6 +903,8 @@ Choose Case ls_columna
 							"Ingrese o Seleccione otro Predio o Productor.")
 			dw_1.SetItem(row, ls_columna, Integer(ls_Nula))
 			Return 1
+		Else
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codrot[Row], Long(Data), This.Object.espe_codigo[Row])
 		End If	
 
 	Case "prcc_codigo"
@@ -1007,7 +1028,7 @@ Choose Case ls_columna
 			
 		
 End Choose
-End event
+end event
 
 event dw_1::clicked;call super::clicked;String	ls_columna
 

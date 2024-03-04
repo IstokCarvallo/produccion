@@ -38,7 +38,7 @@ end forward
 
 global type w_maed_recfruprocee_particular_rotulatrans from w_mant_encab_deta_csd
 integer width = 3936
-integer height = 2232
+integer height = 2456
 string title = "RECEPCION DE PALLETS TRANSITORIO"
 string menuname = ""
 event ue_imprimir ( )
@@ -170,7 +170,7 @@ Else
 	F_Membrete(vinf.dw_1)
   	vinf.dw_1.ModIfy("guia.text = '" + ls_recepcion + "'")
 	vinf.dw_1.ModIfy("fruta.text = '" + ls_descri + "'")  
-	vinf.dw_1.Object.DataWindow.Zoom = 95
+	vinf.dw_1.Object.DataWindow.Zoom = 93
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
 
@@ -705,24 +705,24 @@ DO WHILE  FileRead(ll_Filas, ls_Registro)>=1
 			END IF	
 		END IF
 	END IF	
-	IF li_tabla	=	4	THEN
-						
+	
+	IF li_tabla	=	4	THEN		
 		ll_pallet1	=	Long(Mid(ls_Registro, 5, 8))
 		li_espe		=	Integer(Mid(ls_Registro, 13, 2))
-		li_vari		=	Integer(Mid(ls_Registro, 15, 4))
+		li_vari			=	Integer(Mid(ls_Registro, 15, 4))
 		ls_emba		=	Trim((Mid(ls_Registro, 19, 10)))
 		ll_prod		=	Long(Mid(ls_Registro, 29, 5))
 		li_cond		=	Integer(Mid(ls_Registro, 34, 1))
-		li_etiq		=	Integer(Mid(ls_Registro, 35, 4))
+		li_etiq			=	Integer(Mid(ls_Registro, 35, 4))
 		li_plde		=	Integer(Mid(ls_Registro, 39, 4))
 		ls_calib		=	Mid(ls_Registro, 43, 3)
 		ll_secuencia	=	Long(Mid(ls_Registro, 46, 8))
-		ll_totcaja	=	Integer(Mid(ls_Registro, 54, 7))
-		li_lote		=	Integer(Mid(ls_Registro, 61, 4))
-		li_copack	=	Integer(Mid(ls_Registro, 74, 4))
-		li_variro	=	Integer(Mid(ls_Registro, 69, 4))
-		ll_prdrot	=	Integer(Mid(ls_Registro, 73, 5))
-		ls_calrot	=	Mid(ls_Registro, 78, 3)
+		ll_totcaja		=	Integer(Mid(ls_Registro, 54, 7))
+		li_lote			=	Integer(Mid(ls_Registro, 61, 4))
+		li_copack		=	Integer(Mid(ls_Registro, 74, 4))
+		li_variro		=	Integer(Mid(ls_Registro, 69, 4))
+		ll_prdrot		=	Integer(Mid(ls_Registro, 73, 5))
+		ls_calrot		=	Mid(ls_Registro, 78, 3)
 		ll_huerto1	=	Integer(Mid(ls_Registro, 81, 5))
 		ll_cuarte1	=	Integer(Mid(ls_Registro, 87, 5))
 		ld_fechaemb =	Date(String(Mid(ls_Registro, 91, 2)+'-'+Mid(ls_Registro, 93, 2)+'-'+Mid(ls_Registro, 95, 4) ))
@@ -772,18 +772,18 @@ DO WHILE  FileRead(ll_Filas, ls_Registro)>=1
 	END IF
 		
 	IF li_tabla	=	5 THEN
-		li_tipoin	=	Integer(Mid(ls_Registro, 2, 1))
+		li_tipoin		=	Integer(Mid(ls_Registro, 2, 1))
 		ll_numero	=	Long(Mid(ls_Registro, 3, 8))
-		li_clie		=	Integer(Mid(ls_Registro, 11, 3))
-		li_plat		=	Integer(Mid(ls_Registro, 14, 4))
+		li_clie			=	Integer(Mid(ls_Registro, 11, 3))
+		li_plat			=	Integer(Mid(ls_Registro, 14, 4))
 		li_secu		=	Integer(Mid(ls_Registro, 18, 2))
 		li_dest		=	Integer(Mid(ls_Registro, 20, 3))
-		ld_fechai	=	Date(String(Mid(ls_Registro, 23, 2)+'-'+Mid(ls_Registro, 25, 2)+'-'+Mid(ls_Registro, 27, 4) ))
-		li_esp		=	Integer(Mid(ls_Registro, 31, 2))
-		li_var		=	Integer(Mid(ls_Registro, 33, 4))
+		ld_fechai		=	Date(String(Mid(ls_Registro, 23, 2)+'-'+Mid(ls_Registro, 25, 2)+'-'+Mid(ls_Registro, 27, 4) ))
+		li_esp			=	Integer(Mid(ls_Registro, 31, 2))
+		li_var			=	Integer(Mid(ls_Registro, 33, 4))
 		ls_emb		=	Trim(Mid(ls_Registro, 37, 10))
 		ls_tpem		=	Trim(Mid(ls_Registro, 47, 5))
-		li_todpal	=	Integer(Mid(ls_Registro, 52, 1))
+		li_todpal		=	Integer(Mid(ls_Registro, 52, 1))
 		ls_calidad	=	Mid(ls_Registro, 53, 3)
 		
 		li_count = 0
@@ -859,29 +859,29 @@ DO WHILE  FileRead(ll_Filas, ls_Registro)>=1
 		li_plde		=	Integer(Mid(ls_Registro, 5, 4))  
 		ll_NumCaja	=	Long(Mid(ls_Registro, 9, 8))		
 		li_espe		=	Integer(Mid(ls_Registro, 17, 2))
-		li_vari		=	Integer(Mid(ls_Registro, 19, 4))			
+		li_vari			=	Integer(Mid(ls_Registro, 19, 4))			
 		ll_prod		=	Long(Mid(ls_Registro, 23, 5))
-		li_predio	=	Integer(Mid(ls_Registro, 28, 3))
+		li_predio		=	Integer(Mid(ls_Registro, 28, 3))
 		ll_huerto1	=	Integer(Mid(ls_Registro, 31, 3))			
 		ll_cuarte1	=	Integer(Mid(ls_Registro, 34, 3))			
 		ls_emba		=	Trim((Mid(ls_Registro, 37, 10)))
-		li_etiq		=	Integer(Mid(ls_Registro, 47, 3))			
+		li_etiq			=	Integer(Mid(ls_Registro, 47, 3))			
 		ld_fechaemb =	Date(String(Mid(ls_Registro, 50, 2)+'-'+Mid(ls_Registro, 52, 2)+'-'+Mid(ls_Registro, 54, 4) ))
 		ls_calib		=	Mid(ls_Registro, 58, 3)			
 		ll_embala	=	Long(Mid(ls_Registro, 61, 8))
-		ll_selecc	=	Long(Mid(ls_Registro, 69, 8))
+		ll_selecc		=	Long(Mid(ls_Registro, 69, 8))
 		ll_pesado	=	Long(Mid(ls_Registro, 77, 8))		
 		ls_cean14	=	Trim(Mid(ls_Registro, 85, 14))
-		ll_pallet1	=	Long(Mid(ls_Registro, 99, 8))					
+		ll_pallet1		=	Long(Mid(ls_Registro, 99, 8))					
 		ls_regcap	=	Trim(Mid(ls_Registro, 107, 100))
-		li_estado	=	Integer(Mid(ls_Registro, 207, 1))			
-		li_variro	=	Integer(Mid(ls_Registro, 208, 4))
+		li_estado		=	Integer(Mid(ls_Registro, 207, 1))			
+		li_variro		=	Integer(Mid(ls_Registro, 208, 4))
 		ll_Numgia	=	Long(Mid(ls_Registro, 212, 8))			
-		li_categoria=	Integer(Mid(ls_Registro, 220, 3))
-		li_copack	=	Integer(Mid(ls_Registro, 223, 4))
-		ll_Docrel	=	Long(Mid(ls_Registro, 227, 8))			
-		ld_horact   =  Time(String(Mid(ls_Registro, 235, 2)+':'+Mid(ls_Registro, 237, 2)+':'+Mid(ls_Registro, 239, 2) ))						
-		ld_fechaing =	Date(String(Mid(ls_Registro, 241, 2)+'-'+Mid(ls_Registro,243, 2)+'-'+Mid(ls_Registro, 245, 4) ))					
+		li_categoria	=	Integer(Mid(ls_Registro, 220, 3))
+		li_copack		=	Integer(Mid(ls_Registro, 223, 4))
+		ll_Docrel		=	Long(Mid(ls_Registro, 227, 8))			
+		ld_horact   	=  Time(String(Mid(ls_Registro, 235, 2)+':'+Mid(ls_Registro, 237, 2)+':'+Mid(ls_Registro, 239, 2) ))						
+		ld_fechaing 	=	Date(String(Mid(ls_Registro, 241, 2)+'-'+Mid(ls_Registro,243, 2)+'-'+Mid(ls_Registro, 245, 4) ))					
 		li_lote		=	Integer(Mid(ls_Registro, 249, 4))
 						
 		li_count = 0
@@ -933,373 +933,19 @@ dw_1.SetRedraw(True)
 Message.DoubleParm = li_retorno
 end event
 
-event ue_imprimir2();//SetPointer(HourGlass!)
-//
-//String	ls_Impresora	=	"Datamax", &
-//			ls_Especie, ls_Variedad, ls_Categoria, ls_Codigo1, ls_Codigo2, &
-//			ls_Codigo3, ls_FDAProd, ls_Packing, ls_ComunaPack, ls_ProvinPack, &
-//			ls_Calibre, ls_Predio, ls_ProdComuna, ls_ProdProvincia, ls_Embalaje, &
-//			ls_ComuProvPack, ls_plde_razsoc
-//Integer	li_Productor, li_Predio, li_Cuartel, li_Cuarte1, li_Huerto, &
-//         li_Etiqueta, li_nrlote, li_Cliente, li_Planta, li_Especie, &
-//			li_Region, li_Provin, li_Comuna
-//Long		ll_Fila, ll_Trabajo, ll_numero, ll_productor
-//Decimal	ld_KgsNeto, ld_LbsNeto
-//Date		ld_FechaEmbalaje
-//
-//ll_Trabajo	=	PrintOpen()
-//
-//ll_Fila = dw_16.Retrieve(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]),il_NroCaja)
-//					
-//IF IsNull(dw_16.Object.prod_huerto[1]) THEN li_Huerto = 1
-//IF IsNull(dw_16.Object.prod_cuarte[1]) THEN li_Cuarte1 = 1
-//IF IsNull(dw_16.Object.etiq_codigo[1]) OR &
-//   dw_16.Object.etiq_codigo[1] = 0 THEN li_Etiqueta = 1
-//
-//
-//ls_Codigo1	 		=	'01278' + String(dw_16.Object.clie_codigo[1], '000') + &
-//							String(dw_16.Object.espe_codigo[1], '00000') + &
-//							String(dw_16.Object.vari_codigo[1], '00') + '010' + &
-//							String(dw_16.Object.plde_codigo[1], '0000') + &
-//							String(dw_16.Object.capr_fecemb[1], 'ddmmyy') + &
-//							dw_16.Object.emba_codigo[1]
-//							
-//ls_Codigo2	 		=	'93'+ String(dw_16.Object.prod_codigo[1] ,'0000')+ & 
-//                     String(li_Huerto ,'000')+ &
-//							String(li_Cuarte1 ,'000')+ &
-//							dw_16.Object.capr_calibr[1] + &
-//							String(li_Etiqueta ,'00') 
-//							
-//ls_Codigo3	 		=	String(dw_16.Object.zona_codigo[1], '00') + &
-//                     String(dw_16.Object.plde_codigo[1], '0000') + &
-//                     String(dw_16.Object.capr_numero[1], '0000000000')
-//							
-//ls_Variedad  		=  dw_16.Object.vari_nombre[1]
-//li_Especie			=	dw_16.Object.espe_codigo[1]
-//ls_Especie   		=  dw_16.Object.espe_noming[1]
-//ld_KgsNeto  		=  dw_16.Object.enva_pesone[1]
-//ld_LbsNeto  		=	Round(dw_16.Object.enva_pesone[1] * 2.2046,0)
-//ls_FDAProd   		=  String(dw_16.Object.plde_insfda[1])
-//ls_Packing   		=  dw_16.Object.plde_nombre[1]
-//
-//ls_ComunaPack  	=  dw_16.Object.comu_nombre[1]
-//ls_ProvinPack		=	dw_16.Object.prov_nombre[1]
-//ls_ComuProvPack	=	ls_ComunaPack + "-" + ls_ProvinPAck
-//
-//ls_Calibre     	=  dw_16.Object.capr_calibr[1]
-//li_Productor   	=  dw_16.Object.prod_codigo[1]
-//li_Cuartel     	=  dw_16.Object.prod_cuarte[1]
-//ls_ProdComuna  	=  dw_16.Object.prod_comuna[1]
-//ls_ProdProvincia  =  dw_16.Object.prod_provin[1]
-//ls_Embalaje    	=  dw_16.Object.emba_codigo[1]
-//ld_FechaEmbalaje	=  dw_16.Object.capr_fecemb[1]
-////ls_Predio			=	dw_16.Object.xxxxx[1] + " / C" + String(li_Predio)
-//ls_plde_razsoc		=	dw_16.Object.plde_razsoc[1]
-//
-//
-//IF ls_Categoria = "" OR IsNull(ls_Categoria) THEN
-//	ls_Categoria = 'CAT 1'
-//END IF
-//
-//IF IsNull(li_Predio) THEN li_Predio	=  dw_16.Object.prod_predio[1]
-//
-//li_Cliente 	=	dw_16.Object.clie_codigo[1]
-//li_Planta	=	dw_16.Object.plde_codigo[1]
-//ll_Numero	=	dw_16.Object.capr_numero[1]
-//
-//SELECT capr_nrlote,prod_codigo INTO :li_nrlote,  :ll_productor
-//FROM dbo.spro_cajasprod
-//WHERE CLIE_CODIGO	=	:li_cliente
-//AND   PLDE_CODIGO	=	:li_Planta
-//AND	CAPR_NUMERO	=	:ll_Numero;
-//
-//SELECT IsNull(prbr_codpre,0), IsNull(prcc_codigo,0) INTO :li_Predio,:li_cuartel
-//FROM dbo.spro_lotesfrutagranel
-//WHERE lote_pltcod=:li_Planta
-//AND   lote_espcod=:li_Especie
-//AND   lote_codigo=:li_nrlote;
-//
-//SELECT prpr_nombre INTO :ls_Predio
-//FROM dbo.spro_prodpredio
-//WHERE prpr_codigo	=	:li_Predio;
-//
-//IF IsNull(ls_Predio) THEN 
-//	ls_Predio	=  ''
-//ELSE
-//	ls_Predio	=  ls_Predio+" / "+String(li_cuartel,'00')
-//END IF	
-//	
-//CHOOSE CASE ls_Impresora
-//	CASE "Zebra"
-//		Print(ll_Trabajo, "^XA")
-//		Print(ll_Trabajo, "^FO90,400^A0B,55,46^CI13^FR^FD" + ls_Variedad + "^FS")
-//		Print(ll_Trabajo, "^FO94,45^A0B,40,37^CI13^FR^FD"+ ls_Categoria + "^FS")
-//		Print(ll_Trabajo, "^FO150,413^A0B,39,37^CI13^FR^FD" + ls_Especie + "^FS")
-//		Print(ll_Trabajo, "^FO195,344^A0B,25,21^CI13^FR^FDNet Weight: " + &
-//								Trim(String(ld_KgsNeto, "0.0")) + " KG - " + &
-//								Trim(String(ld_LbsNeto, "##0")) + " LBS. NET^FS")
-//		Print(ll_Trabajo, "^FO271,727^A0B,23,19^CI13^FR^FDFDA CODE:^FS")
-//		Print(ll_Trabajo, "^FO234,407^A0B,23,20^CI13^FR^FDPACKING IDENTIFICATION^FS")
-//		Print(ll_Trabajo, "^FO307,740^A0B,23,19^CI13^FR^FDNOMBRE:^FS")
-//		Print(ll_Trabajo, "^FO367,698^A0B,23,19^CI13^FR^FDComuna/Prov:  ^FS")
-//		Print(ll_Trabajo, "^FO273,546^A0B,32,26^CI13^FR^FD" + ls_FDAProd + "^FS")
-//		Print(ll_Trabajo, "^FO308,350^A0B,28,23^CI13^FR^FDEXPORTADORA RIO BLANCO LTDA.^FS")
-//		Print(ll_Trabajo, "^FO336,448^A0B,28,23^CI13^FR^FD" + ls_Packing + "^FS")
-//		Print(ll_Trabajo, "^FO368,482^A0B,28,23^CI13^FR^FD" + ls_ComuProvPack + "^FS")
-//		Print(ll_Trabajo, "^FO414,407^A0B,23,19^CI13^FR^FDGROWER IDENTIFICATION^FS")
-//		Print(ll_Trabajo, "^FO447,753^A0B,23,19^CI13^FR^FDCODE:   ^FS")
-//		Print(ll_Trabajo, "^FO440,237^A0B,47,39^CI13^FR^FD" + &
-//								String(dw_16.Object.vari_codigo[1], '00') + "^FS")
-//		Print(ll_Trabajo, "^FO507,748^A0B,23,19^CI13^FR^FDPREDIO: ^FS")
-//		Print(ll_Trabajo, "^FO543,698^A0B,23,19^CI13^FR^FDComuna/Prov:  ^FS")
-//		Print(ll_Trabajo, "^FO544,472^A0B,28,23^CI13^FR^FD" + ls_ProdComuna + " / " + &
-//								ls_ProdProvincia + "^FS")
-//		Print(ll_Trabajo, "^FO176,64^A0B,31,25^CI13^FR^FdboG^FS")
-//		Print(ll_Trabajo, "^FO296,50^A0B,55,46^CI13^FR^FD" + ls_Calibre + "^FS")
-//		Print(ll_Trabajo, "^FO430,41^A0B,55,46^CI13^FR^FD" + ls_Embalaje + "^FS")
-//		Print(ll_Trabajo, "^FO522,37^A0B,39,32^CI13^FR^FD" + &
-//								String(ld_FechaEmbalaje, 'ddmmyy') + "^FS")
-//		Print(ll_Trabajo, "^BY3,3.0^FO590,80^BCB,88,Y,N,N^FR^FD>:" + ls_Codigo3 + "^FS")
-//		Print(ll_Trabajo, "^FO444,525^A0B,48,39^CI13^FR^FD" + String(li_Productor, '0000') + &
-//								" / " + String(li_Predio, '000') + "^FS")
-//		Print(ll_Trabajo, "^FO508,472^A0B,28,23^CI13^FR^FD" + ls_Predio + "^FS")
-//		Print(ll_Trabajo, "^FO138,2^GB0,847,2^FS")
-//		Print(ll_Trabajo, "^FO226,2^GB0,841,2^FS")
-//		Print(ll_Trabajo, "^FO406,2^GB0,841,2^FS")
-//		Print(ll_Trabajo, "^FO578,2^GB0,841,2^FS")
-//		Print(ll_Trabajo, "^FO74,182^GB504,0,2^FS")
-//		Print(ll_Trabajo, "^FO498,2^GB0,180,2^FS")
-//		Print(ll_Trabajo, "^XZ")
-//		
-//	CASE "AccuMax"
-//      Print(ll_Trabajo, "^@60,3")
-//		Print(ll_Trabajo, "^W70")
-//		Print(ll_Trabajo, "^H10")
-//		Print(ll_Trabajo, "^P1")
-//		Print(ll_Trabajo, "^S4")
-//		Print(ll_Trabajo, "^AT")
-//		Print(ll_Trabajo, "^C1")
-//		Print(ll_Trabajo, "^R0")
-//		Print(ll_Trabajo, "~Q+0")
-//		Print(ll_Trabajo, "^O0")
-//		Print(ll_Trabajo, "^D0")
-//		Print(ll_Trabajo, "^E14")
-//		Print(ll_Trabajo, "~R200")
-//		Print(ll_Trabajo, "^%")
-//		Print(ll_Trabajo, "")
-//		Print(ll_Trabajo, "Dy2-me-dd")
-//		Print(ll_Trabajo, "Th:m:s")
-//		Print(ll_Trabajo, "BQ,379,400,2,6,60,3,1," + ls_Codigo2)
-//		Print(ll_Trabajo, "BQ,473,360,2,5,40,3,1," + ls_Codigo3)
-//		Print(ll_Trabajo, "AE,4,355,1,1,0,3," + ls_Variedad)
-//		Print(ll_Trabajo, "AC,48,358,1,1,0,3,"+ ls_Especie)
-//		Print(ll_Trabajo, "AA,76,426,1,1,0,3,Net Weight: " + &
-//								Trim(String(ld_KgsNeto, "0.0")) + " KG - " + &
-//								Trim(String(ld_LbsNeto, "##0")) + " LBS. NET")
-//		Print(ll_Trabajo, "AB,10,75,1,1,0,3," + ls_Categoria)
-//		Print(ll_Trabajo, "AD,138,96,1,1,0,0,")
-//		Print(ll_Trabajo, "AE,122,14,1,1,0,0,")
-//		Print(ll_Trabajo, "BQ,258,470,2,6,59,3,1," + ls_Codigo1)
-//		Print(ll_Trabajo, "Lo,48,0,48,478")
-//		Print(ll_Trabajo, "Lo,0,79,249,80")
-//		Print(ll_Trabajo, "Lo,96,0,96,478")
-//		Print(ll_Trabajo, "AB,59,66,1,1,0,3,BAG")
-//		Print(ll_Trabajo, "AA,98,396,1,1,0,3,PACKING IDENTIFICATION")
-//		Print(ll_Trabajo, "AA,116,478,1,1,0,3,FDA Code")
-//		Print(ll_Trabajo, "AA,134,478,1,1,0,3,Nombre")
-//		Print(ll_Trabajo, "AA,152,478,1,1,0,3,Comuna / Provincia")
-//		Print(ll_Trabajo, "AA,118,311,1,1,0,3," + ls_FDAProd)
-//		Print(ll_Trabajo, "AA,136,311,1,1,0,3," + ls_Packing)
-//		Print(ll_Trabajo, "AA,153,311,1,1,0,3," + ls_ComunaPack)
-//		Print(ll_Trabajo, "Lo,176,0,176,478")
-//		Print(ll_Trabajo, "AD,120,70,1,1,0,3," + ls_Calibre)
-//		Print(ll_Trabajo, "AA,180,398,1,1,0,3,GROWER IDENTIFICATION")
-//		Print(ll_Trabajo, "AA,196,478,1,1,0,3,CODE")
-//		Print(ll_Trabajo, "AB,194,312,1,1,0,3," + String(li_Productor, '0000') + &
-//								" / " + String(li_Predio, '000'))
-//		Print(ll_Trabajo, "AA,212,478,1,1,0,3,Predio")
-//		Print(ll_Trabajo, "AA,213,311,1,1,0,3," + ls_Predio + " / C" + &
-//								String(li_Cuartel, '001'))
-//		Print(ll_Trabajo, "AA,226,478,1,1,0,3,Comuna / Provincia")
-//		Print(ll_Trabajo, "AA,227,311,1,1,0,3," + ls_ProdComuna + " / " + &
-//								ls_ProdProvincia)
-//		Print(ll_Trabajo, "Lo,248,0,248,478")
-//		Print(ll_Trabajo, "Lo,221,47,222,48")
-//		Print(ll_Trabajo, "Lo,216,0,216,79")
-//		Print(ll_Trabajo, "AC,181,78,1,1,0,3," + ls_Embalaje)
-//		Print(ll_Trabajo, "AB,217,79,1,1,0,3," + String(ld_FechaEmbalaje, 'ddmmyy'))
-//		Print(ll_Trabajo, "$")
-//		
-//		
-//   CASE "Datamax"		
-//		
-////
-////
-////
-////      Print(ll_Trabajo, "qC")
-////      Print(ll_Trabajo, "n")
-////      Print(ll_Trabajo, "e")
-////      Print(ll_Trabajo, "c0000")
-////      Print(ll_Trabajo, "RN")
-////      Print(ll_Trabajo, "Kf0000")
-////      Print(ll_Trabajo, "V0")
-////      Print(ll_Trabajo, "M0635")
-////      Print(ll_Trabajo, "L")
-////      Print(ll_Trabajo, "A2")
-////      Print(ll_Trabajo, "D11")
-////      Print(ll_Trabajo, "z")
-////      Print(ll_Trabajo, "PG")
-////      Print(ll_Trabajo, "SG")
-////      Print(ll_Trabajo, "H14")
-////      Print(ll_Trabajo, "131100002140049"+ls_Variedad)
-////      Print(ll_Trabajo, "121100002160139CAT 1")
-////      Print(ll_Trabajo, "1X1100002140003l01670001")
-////      Print(ll_Trabajo, "1X1100001060003l01690001")
-////      Print(ll_Trabajo, "1X1100001920003l01670001")
-////      Print(ll_Trabajo, "1X1100001470003l01680001")
-////      Print(ll_Trabajo, "121100001950142BAG")
-////      Print(ll_Trabajo, "121100002000044CHERRIES")
-////      Print(ll_Trabajo, "111100001830030Packing Identification")
-////      Print(ll_Trabajo, "111100001370017Grower Identification")
-////      Print(ll_Trabajo, "121100001660142JJD")
-////      Print(ll_Trabajo, "121100001330139CE19")
-////      Print(ll_Trabajo, "1X1100001250138l00350001")
-////      Print(ll_Trabajo, "121100001100139230567")
-////      Print(ll_Trabajo, "1A210260066003009004112345678")
-////      Print(ll_Trabajo, "111100001740001FDA CODE")
-////      Print(ll_Trabajo, "111100001670001NOMBRE")
-////      Print(ll_Trabajo, "111100001520001Comuna/Prov.")
-////      Print(ll_Trabajo, "11110000173003977777777777")
-////      Print(ll_Trabajo, "111100001670039Exp.Rio Blanco Ltda.")
-////      Print(ll_Trabajo, "111100001590039Planta Graneros")
-////      Print(ll_Trabajo, "111100001520054Graneros")
-////      Print(ll_Trabajo, "111100001520089 / ")
-////      Print(ll_Trabajo, "111100001520096Cachapoal")
-////      Print(ll_Trabajo, "111100001290001CODE")
-////      Print(ll_Trabajo, "111100001200001PREDIO")
-////      Print(ll_Trabajo, "111100001110001Comuna-Prov.")
-////      Print(ll_Trabajo, "111100001290043444")
-////      Print(ll_Trabajo, "111100001290057 / ")
-////      Print(ll_Trabajo, "111100001290073555")
-////      Print(ll_Trabajo, "12110000132012231")
-////      Print(ll_Trabajo, "1Y1100001190088")
-////      Print(ll_Trabajo, "111100001110090 /")
-////      Print(ll_Trabajo, "111100001110100Cachapoa")
-////      Print(ll_Trabajo, "111100001110057Granero")
-////      Print(ll_Trabajo, "101100001930106LBS. NET")
-////      Print(ll_Trabajo, "11110000194008411.0")
-////      Print(ll_Trabajo, "101100001930065KN - ")
-////      Print(ll_Trabajo, "1111000019400505.0")
-////      Print(ll_Trabajo, "111100001940001New Weight")
-////      Print(ll_Trabajo, "111100001190117C001")
-////      Print(ll_Trabajo, "111100001190043Fundo El Molino ")
-////      Print(ll_Trabajo, "1X1100001060137l00010107")
-////      Print(ll_Trabajo, "^01")
-////      Print(ll_Trabajo, "Q0001")
-////      Print(ll_Trabajo, "E")
-//
-//		Print(ll_Trabajo, "qC")
-//		Print(ll_Trabajo, "n")
-//		Print(ll_Trabajo, "e")
-//		Print(ll_Trabajo, "c0000")
-//		Print(ll_Trabajo, "RN")
-//		Print(ll_Trabajo, "Kf0000")
-//		Print(ll_Trabajo, "V0")
-//		Print(ll_Trabajo, "M0635")
-//		Print(ll_Trabajo, "L")
-//		Print(ll_Trabajo, "A2")
-//		Print(ll_Trabajo, "D11")
-//		Print(ll_Trabajo, "z")
-//		Print(ll_Trabajo, "PG")
-//		Print(ll_Trabajo, "SG")
-//		Print(ll_Trabajo, "H14")
-//		Print(ll_Trabajo, "131100002140049" + ls_Variedad)
-//		Print(ll_Trabajo, "121100002160139" + ls_Categoria)
-//		Print(ll_Trabajo, "1X1100002140003l01670001")
-//		Print(ll_Trabajo, "1X1100001060003l01690001")
-//		Print(ll_Trabajo, "1X1100001920003l01670001")
-//		Print(ll_Trabajo, "1X1100001470003l01680001")
-//		Print(ll_Trabajo, "121100001950142BAG")
-//		Print(ll_Trabajo, "121100002000044" + ls_Especie)
-//		Print(ll_Trabajo, "111100001830030Packing Identification")
-//		Print(ll_Trabajo, "111100001370017Grower Identification")
-//		Print(ll_Trabajo, "121100001660142" + ls_Calibre)
-//		Print(ll_Trabajo, "121100001330139" + ls_Embalaje)
-//		Print(ll_Trabajo, "1X1100001250138l00350001")
-//		Print(ll_Trabajo, "121100001100139" + String(ld_FechaEmbalaje, 'ddmmyy'))
-//		Print(ll_Trabajo, "1A2102600660030" + ls_Codigo3)
-//		Print(ll_Trabajo, "111100001740001FDA CODE")
-//		Print(ll_Trabajo, "111100001670001NOMBRE")
-//		Print(ll_Trabajo, "111100001520001Comuna/Prov.")
-//		Print(ll_Trabajo, "111100001730039" + ls_FDAProd)
-//		Print(ll_Trabajo, "111100001670039" + ls_plde_razsoc)
-//		Print(ll_Trabajo, "111100001590039" + ls_Packing )
-//		Print(ll_Trabajo, "111100001520054" + ls_ComuProvPack)
-//		Print(ll_Trabajo, "111100001520089") // / ")
-//		Print(ll_Trabajo, "111100001520096")//Cachapoal)
-//		Print(ll_Trabajo, "111100001290001CODE")
-//		Print(ll_Trabajo, "111100001200001PREDIO")
-//		Print(ll_Trabajo, "111100001110001Comuna-Prov.")
-//		Print(ll_Trabajo, "111100001290043" + String(li_Productor, '0000'))
-//		Print(ll_Trabajo, "111100001290057 / ")
-//		Print(ll_Trabajo, "111100001290073" + String(li_Predio, '000'))
-//		Print(ll_Trabajo, "121100001320122" + String(dw_16.Object.vari_codigo[1], '00'))
-//		Print(ll_Trabajo, "1Y1100001190088")
-//		Print(ll_Trabajo, "111100001110090")//)
-//		Print(ll_Trabajo, "111100001110100" )
-//		Print(ll_Trabajo, "111100001110057" + ls_ProdComuna + '/' + ls_ProdProvincia)
-//		Print(ll_Trabajo, "101100001930106")//LBS. NET")
-//		Print(ll_Trabajo, "111100001940084")// + String(ld_LbsNeto))
-//		Print(ll_Trabajo, "101100001930065")//KN - ")
-//		Print(ll_Trabajo, "111100001940050" )//+ String(ld_KgsNeto))
-//		Print(ll_Trabajo, "111100001940001New Weight KN - " + String(ld_KgsNeto) + " LBS. NET " + String(ld_LbsNeto))
-//		Print(ll_Trabajo, "111100001190117" + String(li_cuartel))
-//		Print(ll_Trabajo, "111100001190043" + Left(ls_Predio, len(ls_predio) - 4))
-//		Print(ll_Trabajo, "1X1100001060137l00010107")
-//		Print(ll_Trabajo, "^01")
-//		Print(ll_Trabajo, "Q0001")
-//		Print(ll_Trabajo, "E")		
-//		
-//		
-//		
-//	CASE ELSE
-//		ll_Fila	=	dw_16.Retrieve(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]),il_NroCaja)
-//		
-//		IF ll_Fila = -1 THEN
-//			MessageBox( "Error en Base de Datos", &
-//							"Se ha producido un error en Base " + &
-//							"de Datos : ~n" + sqlca.SQLErrText, StopSign!, OK!)
-//		ELSEIF ll_Fila = 0 THEN
-//			MessageBox( "No Existe información", &
-//							"No Existe información para este informe.", &
-//							StopSign!, OK!)
-//		ELSE
-//			dw_16.Print()
-//		END IF
-//		
-//END CHOOSE
-//
-//PrintClose(ll_Trabajo)
-//
-//SetPointer(Arrow!)
-
-SetPointer(HourGlass!)
+event ue_imprimir2();SetPointer(HourGlass!)
 
 Long		ll_Fila
 
 ll_Fila = dw_16.Retrieve(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]),il_NroCaja)
 
-IF ll_Fila = -1 THEN
-	MessageBox( "Error en Base de Datos", &
-					"Se ha producido un error en Base " + &
-					"de Datos : ~n" + sqlca.SQLErrText, StopSign!, OK!)
-ELSEIF ll_Fila = 0 THEN
-	MessageBox( "No Existe información", &
-					"No Existe información para este informe.", &
-					StopSign!, OK!)
-ELSE
+If ll_Fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de Datos : ~n" + sqlca.SQLErrText, StopSign!, OK!)
+ElseIf ll_Fila = 0 Then
+	MessageBox( "No Existe información", "No Existe información para este informe.", StopSign!, OK!)
+Else
 	dw_16.Print()
-END IF
+End If
 		
 SetPointer(Arrow!)
 
@@ -2571,11 +2217,8 @@ event open;Integer li_codigo
 li_codigo				=	gi_codgen  /* Si Código de parempresa es igual a 1 se efectua la transacción para REBAJE DE EXISTENCIA*/
 ii_controlaaceso	=	gi_controlacceso
 
-IF Not F_ValidaFechaTempo(Today()) THEN
-   Messagebox('Atención','Aclare Fecha Actual Temporada con Informática')
-END IF
-
-IF gi_CodExport = 300 THEN dw_2.Object.plde_codigo.dddw.Name	=	"dw_mues_plantadesp"
+If Not F_ValidaFechaTempo(Today()) Then Messagebox('Atención','Aclare Fecha Actual Temporada con Informática')
+If gi_CodExport = 300 Then dw_2.Object.plde_codigo.dddw.Name	=	"dw_mues_plantadesp"
 
 dw_2.GetChild("plde_codigo", dw_planta)
 dw_2.GetChild("rfpe_ptaori", dw_ptaori)
@@ -2614,9 +2257,9 @@ dw_5.SetTransObject(sqlca)
 dw_6.SetTransObject(sqlca)
 dw_11.SetTransObject(sqlca)
 dw_12.SetTransObject(sqlca)
-dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
+dw_1.ModIfy("datawindow.message.title='Error '+ is_titulo")
 dw_1.SetRowFocusIndicator(Hand!)
-dw_1.Modify("DataWindow.Footer.Height = 110")
+dw_1.ModIfy("DataWindow.Footer.Height = 110")
 
 istr_mant.dw				= dw_1
 istr_mant.solo_consulta = False
@@ -2665,10 +2308,10 @@ iuo_patente				=	CREATE	uo_patente
 sqlexis					=	CREATE Transaction
 sqlconec					=	CREATE Transaction
 
-IF ii_controlaaceso = 1 THEN
-	IF NOT coneccionbase() THEN
+If ii_controlaaceso = 1 Then
+	If NOT coneccionbase() Then
 		MessageBox("Sin Conexión", "No Existe Conexión a Base Control de Acceso.", StopSign!, Ok!)	
-	ELSE
+	Else
 		dw_2.Object.rfpe_patent.Dddw.Name				=	'dw_mues_controlacceso'
 		dw_2.Object.rfpe_patent.Dddw.DisplayColumn	=	'ctac_patent'
 		dw_2.Object.rfpe_patent.Dddw.DataColumn		=	'ctac_patent'
@@ -2676,26 +2319,26 @@ IF ii_controlaaceso = 1 THEN
 		dw_2.Object.rfpe_patent.Dddw.HScrollBar		=  True
 		dw_2.Object.rfpe_patent.Dddw.VScrollBar		=  True
 		dw_2.Object.rfpe_patent.Dddw.Case 				= 	"Upper"
-		dw_2.Modify("rfpe_patent.dddw.Limit=10")
-		dw_2.Modify("rfpe_patent.Dddw.PercentWidth=200")
+		dw_2.ModIfy("rfpe_patent.dddw.Limit=10")
+		dw_2.ModIfy("rfpe_patent.Dddw.PercentWidth=200")
 	
 		dw_2.GetChild("rfpe_patent", idwc_patente)
 		idwc_patente.SetTransObject(sqlconec)
 		idwc_patente.Retrieve()
-	END IF	
-END IF	
+	End If	
+End If	
 //DISCONNECT USING sqlconec;
 
-IF li_codigo = 1 THEN	
-	IF NOT ConexionExistencia() THEN
+If li_codigo = 1 Then	
+	If NOT ConexionExistencia() Then
 		MessageBox("Sin Conexión", "No Existe Conexión a Existencia.", StopSign!, Ok!)	
-		RETURN
-	END IF
-END IF
+		Return
+	End If
+End If
 
 pb_nuevo.PostEvent(Clicked!)
-ib_primera_entrada = True
-gb_Repalletizado = False
+ib_primera_entrada	= True
+gb_Repalletizado 		= False
 
 iuo_pallet       = CREATE   uo_pallet_trans
 
@@ -3342,10 +2985,10 @@ End If
 end event
 
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_maed_recfruprocee_particular_rotulatrans
-integer x = 41
-integer y = 1056
+integer x = 46
+integer y = 984
 integer width = 3419
-integer height = 1044
+integer height = 1160
 integer taborder = 100
 string title = "Detalle de Pallets"
 string dataobject = "dw_mues_recfruproced_trans"
@@ -3654,8 +3297,8 @@ end type
 type pb_recupera from picturebutton within w_maed_recfruprocee_particular_rotulatrans
 string tag = "Busca Recepciones Transmitidas"
 boolean visible = false
-integer x = 3419
-integer y = 1828
+integer x = 3534
+integer y = 1180
 integer width = 302
 integer height = 244
 integer taborder = 110
@@ -3710,7 +3353,7 @@ END IF
 end event
 
 type pb_captura from picturebutton within w_maed_recfruprocee_particular_rotulatrans
-integer x = 3429
+integer x = 3506
 integer y = 2088
 integer width = 302
 integer height = 244

@@ -1731,7 +1731,7 @@ DO
 		Return
 	End If	
 	
-	li_valida = dw_1.importfile(path)
+	li_valida = dw_1.ImportFile(path)
 
 	If li_valida = 0 Then		
 		pb_salir.SetFocus()

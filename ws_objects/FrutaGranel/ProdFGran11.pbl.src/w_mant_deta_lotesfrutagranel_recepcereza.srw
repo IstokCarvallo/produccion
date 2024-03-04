@@ -101,6 +101,7 @@ public function integer carganropesmax ()
 public subroutine cargapalletgranel ()
 public function boolean validaguia (string as_columna, long al_valor)
 public subroutine recupera_packing (long al_productor)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_nuevo_detalle();Integer	li_Lote, li_fila, li_preservafila, li_actual
@@ -1030,6 +1031,23 @@ END IF
 RETURN 
 end subroutine
 
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
+end function
+
 on w_mant_deta_lotesfrutagranel_recepcereza.create
 int iCurrent
 call super::create
@@ -1652,7 +1670,7 @@ type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_lotesfrutagranel_recep
 integer x = 69
 integer y = 108
 integer width = 3753
-integer height = 792
+integer height = 828
 string dataobject = "dw_mant_spro_lotesfrutagranel_recepcion"
 end type
 
@@ -1663,167 +1681,158 @@ SetNull(li_null)
 
 ls_columna = dwo.Name
 
-CHOOSE CASE ls_columna
-	CASE "prod_rut"
+Choose Case ls_columna
+	Case "prod_rut"
 		is_rutprod = F_verrut(data, True)
-		IF is_rutprod <> "" THEN
 		
-			IF Not iuo_Productor.ExisteRutProd(is_rutprod, li_Cantidad, True, sqlca) THEN
+		If is_rutprod <> "" Then
+			If Not iuo_Productor.ExisteRutProd(is_rutprod, li_Cantidad, True, sqlca) Then
 				This.SetItem(Row, "prod_rut", String(li_Null))
 				This.SetItem(Row, "prod_nombre", String(li_Null))
 				This.SetItem(Row, "prod_codigo", li_Null)
-				RETURN 1
-			ELSEIF NOT ValidaGuia("prod_codigo", iuo_Productor.Codigo) THEN
+				Return 1
+			ElseIf NOT ValidaGuia("prod_codigo", iuo_Productor.Codigo) Then
 				This.SetItem(Row, "prod_codigo", li_Null)
 				This.SetItem(Row, "prod_rut", String(li_Null))
 				This.SetItem(Row, "prod_nombre", String(li_Null))
 				This.SetItem(Row, "lote_guisii", li_Null)
-				RETURN 1
-			ELSEIF li_Cantidad = 1 THEN
+				Return 1
+			ElseIf li_Cantidad = 1 Then
 				This.Object.prod_nombre[Row]	=	iuo_Productor.Nombre
 				This.Object.prod_codigo[Row]	=	iuo_Productor.Codigo
 				idwc_Predio.Retrieve(iuo_Productor.Codigo)
-			ELSE
+			Else
 				SeleccionaProductor()
-			END IF
-		ELSE
+			End If
+		Else
 			This.SetItem(Row, ls_Columna, String(li_Null))
 			This.SetItem(Row, "prod_nombre", String(li_Null))
 			This.SetItem(Row, "prod_codigo", li_Null)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "lote_guisii"
-		IF NOT ValidaGuia(dwo.name, long(data)) THEN
-//			This.SetItem(Row, "prod_codigo", li_Null)
-//			This.SetItem(Row, "prod_rut", String(li_Null))
-//			This.SetItem(Row, "prod_nombre", String(li_Null))
+	Case "lote_guisii"
+		If NOT ValidaGuia(dwo.name, long(data)) Then
 			This.SetItem(Row, "lote_guisii", li_Null)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "prod_codigo"
+	Case "prod_codigo"
 			
-			IF Not iuo_Productor.Existe(Long(Data),True, sqlca) THEN
+			If Not iuo_Productor.Existe(Long(Data),True, sqlca) Then
 				This.SetItem(Row, ls_Columna, li_Null)
 				This.SetItem(Row, "prod_rut", String(li_Null))
 				This.SetItem(Row, "prod_nombre", String(li_Null))
-				RETURN 1
-			ELSEIF NOT ValidaGuia(dwo.name, long(data)) THEN
+				Return 1
+			ElseIf NOT ValidaGuia(dwo.name, long(data)) Then
 				This.SetItem(Row, ls_Columna, li_Null)
 				This.SetItem(Row, "prod_rut", String(li_Null))
 				This.SetItem(Row, "prod_nombre", String(li_Null))
 				This.SetItem(Row, "lote_guisii", li_Null)
-				RETURN 1
-			ELSE
+				Return 1
+			Else
 				This.Object.prod_nombre[Row]	=	iuo_Productor.Nombre
 				This.Object.prod_rut[Row]		=	iuo_Productor.Rut
 				idwc_Predio.Retrieve(Long(Data))
 				idwc_Cuartel.Reset()
 				
-				//idwc_certificacion.Retrieve(Integer(data), This.Object.prbr_codpre[row], This.Object.lote_espcod[row])
-			END IF	
+				//idwc_certIficacion.Retrieve(Integer(data), This.Object.prbr_codpre[row], This.Object.lote_espcod[row])
+				This.Object.lote_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row])
+			End If	
 			
 			recupera_packing(Long(Data))
 				
-	CASE "clie_codigo"
+	Case "clie_codigo"
+		If NoExisteCliente(Integer(Data)) Then
+			This.SetItem(Row, ls_Columna, li_Null)
+			Return 1
+		End If	
 		
-			IF NoExisteCliente(Integer(Data)) THEN
-				This.SetItem(Row, ls_Columna, li_Null)
-				RETURN 1
-			END IF	
-			
-			idwc_Variedad.SetTransObject(SQLCA)
-			idwc_Variedad.Retrieve(Integer(istr_mant.argumento[5]))
-			idwc_Variedad.InsertRow(0)		
-			
-	CASE "prbr_codpre"
-		IF NOT iuo_ProdPredio.Existe(Integer(data),This.Object.prod_codigo[Row],&
-											  True,SQLCA) THEN
+		idwc_Variedad.SetTransObject(SQLCA)
+		idwc_Variedad.Retrieve(Integer(istr_mant.argumento[5]))
+		idwc_Variedad.InsertRow(0)		
+		
+	Case "prbr_codpre"
+		If NOT iuo_ProdPredio.Existe(Integer(data),This.Object.prod_codigo[Row],&
+											  True,SQLCA) Then
 			This.Object.prbr_codpre[Row]	=	li_null
-			RETURN 1
-		ELSE		
+			Return 1
+		Else		
 			This.Object.prcc_codigo[Row]	=	li_null
 			idwc_Cuartel.Retrieve(This.Object.prod_codigo[Row],Integer(data))
 			idwc_Cuartel.SetFilter("espe_codigo = " + istr_mant.argumento[5])
 			idwc_Cuartel.Filter()
-			idwc_certificacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-		END IF
+			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
+			This.Object.lote_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row])
+		End If
 		
-	CASE "prcc_codigo"
-		
-		IF NOT iuo_Cuartel.Existe(This.Object.prod_codigo[Row],&
-										  This.Object.prbr_codpre[Row],&
-										  Integer(istr_mant.argumento[5]),&
-										  Integer(data), True, SQLCA,&
-										  Integer(istr_mant.argumento[10])) THEN
+	Case "prcc_codigo"
+		If NOT iuo_Cuartel.Existe(This.Object.prod_codigo[Row], This.Object.prbr_codpre[Row], Integer(istr_mant.argumento[5]),&
+										  Integer(data), True, SQLCA, Integer(istr_mant.argumento[10])) Then
 			This.Object.prcc_codigo[Row]	=	li_null
 			This.Object.vari_codigo[Row]	=	li_null
-			RETURN 1
-		ELSE		
+			Return 1
+		Else		
 			This.Object.vari_codigo[Row]	=	iuo_Cuartel.Variedad
-		END IF
+		End If
 		
-	CASE "lote_tipcom"
-		IF Integer(data) = 0 THEN
+	Case "lote_tipcom"
+		If Integer(data) = 0 Then
 			This.Object.lote_porcas[Row]		=	0
 			This.Object.lote_porcas.Protect	=	1
-		ELSE
+		Else
 			This.Object.lote_porcas.Protect	=	0
-		END IF
+		End If
 	
-	CASE "vari_codigo"
-		IF Not iuo_variedad.Existe(dw_1.Object.lote_espcod[Row], &
-										Integer(Data), True, sqlca) THEN
+	Case "vari_codigo"
+		If Not iuo_variedad.Existe(dw_1.Object.lote_espcod[Row], Integer(Data), True, sqlca) Then
 			This.SetItem(il_Fila, ls_Columna, li_Null)			
-			RETURN 1
-		END IF
+			Return 1
+		End If
 	
-	CASE "cama_codigo"
-		IF Not iuo_Camara.Existe(dw_1.Object.lote_pltcod[Row], &
-										 Integer(Data), True, sqlca) THEN
+	Case "cama_codigo"
+		If Not iuo_Camara.Existe(dw_1.Object.lote_pltcod[Row], Integer(Data), True, sqlca) Then
 			This.SetItem(il_Fila, "cama_codigo", li_Null)
-			
-			RETURN 1
-		ELSE
-			IF iuo_Camara.Codigo > 0 THEN
-				IF NOT iuo_tratamientofrio.ofp_recupera_tratamientofrio(sqlca, String(iuo_Camara.TipoFrio), true) THEN
+			Return 1
+		Else
+			If iuo_Camara.Codigo > 0 Then
+				If NOT iuo_tratamientofrio.ofp_recupera_tratamientofrio(sqlca, String(iuo_Camara.TipoFrio), true) Then
 					This.SetItem(il_Fila, 'frio_tipofr', li_Null)
-				ELSE
+				Else
 					This.Object.frio_tipofr[Row]	=	iuo_Camara.TipoFrio
 					dw_1.Object.lote_desvrd[Row]	= 	iuo_tratamientofrio.ii_frio_cndesp
-				END IF
-			END IF
-		END IF
+				End If
+			End If
+		End If
 
-	CASE "frio_tipofr"
-		IF NOT iuo_tratamientofrio.ofp_recupera_tratamientofrio(sqlca, data, true) THEN
+	Case "frio_tipofr"
+		If NOT iuo_tratamientofrio.ofp_recupera_tratamientofrio(sqlca, data, true) Then
 			This.SetItem(il_Fila, ls_Columna, li_Null)			
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_1.Object.lote_desvrd[row] = iuo_tratamientofrio.ii_frio_cndesp
-		END IF
+		End If
 		
-	CASE "pefr_codigo"
-		IF NOT iuo_tratamientofrio.periodofrio(sqlca, Integer(data), true) THEN
+	Case "pefr_codigo"
+		If NOT iuo_tratamientofrio.periodofrio(sqlca, Integer(data), true) Then
 			This.Object.pefr_codigo[Row]	=	li_Null			
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "lote_conhid"
-		IF data <> '0' AND data <> '1' AND data <> '2' THEN
+	Case "lote_conhid"
+		If data <> '0' AND data <> '1' AND data <> '2' Then
 			This.Object.lote_conhid[Row]	=	li_Null			
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "nice_codigo"
-		IF NOT iuo_certi.Existe(This.Object.prod_codigo[Row], This.Object.prbr_codpre[Row], &
-								      This.Object.lote_espcod[Row], Integer(data), True, SQLCA) THEN
+	Case "nice_codigo"
+		If NOT iuo_certi.Existe(This.Object.prod_codigo[Row], This.Object.prbr_codpre[Row], &
+								      This.Object.lote_espcod[Row], Integer(data), True, SQLCA) Then
 			This.Object.nice_codigo[Row]	=	li_Null			
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-END CHOOSE
+End Choose
 end event
 
 event dw_1::buttonclicked;call super::buttonclicked;CHOOSE CASE dwo.Name

@@ -74,13 +74,13 @@ public subroutine habilitaencab (boolean habilita)
 public subroutine buscaenvase ()
 public function boolean existevariedad (integer li_columna, integer cliente)
 public function boolean noexistecliente (integer cliente)
-public function boolean creacion_cajas ()
 public function boolean buscanombreembalaje (string as_embalaje)
 public subroutine cargacajas ()
 public function boolean existetipoembalaje (string as_codigo, boolean ab_captura)
 public subroutine wf_bloqueacolumnas ()
 public function string cargacodigo (integer ai_cliente, long al_planta, long al_pallet, integer ai_procedencia)
 protected function boolean wf_actualiza_db (boolean borrando)
+public function boolean wf_creacion_cajas ()
 end prototypes
 
 event ue_imprimir;SetPointer(HourGlass!)
@@ -143,7 +143,7 @@ End event
 
 event ue_imprimir_tarjas();Integer li_fila, li_find
 
-If Creacion_Cajas() Then
+If wf_Creacion_Cajas() Then
 	OpenSheetWithParm(w_mant_cajasprod_imprime_elimina,"2", w_main, 1, Original!)
 	w_mant_cajasprod_imprime_elimina.Visible 					= 	False
 	w_mant_cajasprod_imprime_elimina.dw_lotes.DataObject	=	"dw_mues_palletfruta_elimina_imprime_alter"
@@ -613,77 +613,6 @@ End If
 Return False
 End function
 
-public function boolean creacion_cajas ();Integer 	li_fila, li_cliente, li_secuencia, li_control
-Long		ll_pallet, ll_planta
-String 	ls_pcname, ls_Formato
-
-RegistryGet("HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ComputerName\ComputerName", "ComputerName", RegString!, ls_pcname)
-
-li_cliente	=	dw_2.Object.clie_codigo[1]
-ll_planta	=	dw_2.Object.plde_codigo[1]
-ll_pallet	=	dw_2.Object.paen_numero[1]
-
-SELECT loco_dwcomp
-  INTO :ls_Formato
-  FROM dbo.spro_correlcompequipo
- WHERE plde_codigo = :ll_planta
-   AND Upper(equi_nombre) = Upper(:ls_pcname);
-	
-If sqlca.SQLCode = -1 Then
-	F_errorbasedatos(sqlca,"Lectura tabla Correativos de Compactos")
-	Return False
-	
-ElseIf sqlca.SQLCode = 100 Then
-	MessageBox("Atención", "Nombre de Equipo No Tiene Asignado Formato de Compactos, Debe Asignar previamente.", &
-					Exclamation!, OK!)
-	Return False
-	
-Else
-	FOR li_fila	=	1 TO dw_1.RowCount()
-		li_secuencia	=	dw_1.Object.pafr_secuen[li_fila]
-		
-		If li_secuencia > 999 Then
-			MEssageBox("Error de datos", "Imposible crear caja, ya que el correlativo indica que es una caja valida")
-		Else
-				
-			DECLARE creacioncaja PROCEDURE FOR dbo.fgran_creacion_caja_porbultos  
-				@Cliente 	= :li_cliente,   
-				@planta 		= :ll_planta,   
-				@Pallet 		= :ll_pallet,   
-				@Secuencia 	= :li_secuencia,   
-				@computador = :ls_pcname 
-			USING SQLCA;
-			
-			EXECUTE creacioncaja;
-			
-			If SQLCA.SQLCode = -1 Then
-				F_ErrorBaseDatos(sqlca, "Lectura del Procedimiento Almacenado " + &
-												"fgran_creacion_caja_porbultos" )
-										
-				sle_mensa.text	=	"Secuencia " + String(li_secuencia) + " imposible de crear"
-				
-			Else
-				sle_mensa.text	=	"Secuencia " + String(li_secuencia) + " creada satisfactoriamente"
-				li_control	++
-			End If	
-				
-			CLOSE creacioncaja;
-			
-		End If
-	NEXT
-	
-	If li_control = dw_1.RowCount() Then
-		COMMIT;
-		Return True
-		
-	Else
-		ROLLBACK;
-		Return False
-		
-	End If
-End If
-End function
-
 public function boolean buscanombreembalaje (string as_embalaje);String	ls_nombre
 Integer 	li_cliente, li_tipoen, li_envase
 
@@ -873,6 +802,71 @@ End If
 sqlca.AutoCommit	=	lb_AutoCommit
 
 Return lb_Retorno
+end function
+
+public function boolean wf_creacion_cajas ();Integer 	li_fila, li_cliente, li_secuencia, li_control
+Long		ll_pallet, ll_planta
+String 	ls_pcname, ls_Formato
+
+RegistryGet("HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ComputerName\ComputerName", "ComputerName", RegString!, ls_pcname)
+
+li_cliente	=	dw_2.Object.clie_codigo[1]
+ll_planta	=	dw_2.Object.plde_codigo[1]
+ll_pallet	=	dw_2.Object.paen_numero[1]
+
+SELECT loco_dwcomp
+  INTO :ls_Formato
+  FROM dbo.spro_correlcompequipo
+ WHERE plde_codigo = :ll_planta
+   AND Upper(equi_nombre) = Upper(:ls_pcname);
+	
+If sqlca.SQLCode = -1 Then
+	F_errorbasedatos(sqlca,"Lectura tabla Correativos de Compactos")
+	Return False
+	
+ElseIf sqlca.SQLCode = 100 Then
+	MessageBox("Atención", "Nombre de Equipo No Tiene Asignado Formato de Compactos, Debe Asignar previamente.", &
+					Exclamation!, OK!)
+	Return False
+	
+Else
+	FOR li_fila	=	1 TO dw_1.RowCount()
+		li_secuencia	=	dw_1.Object.pafr_secuen[li_fila]
+		
+		If li_secuencia > 999 Then
+			MEssageBox("Error de datos", "Imposible crear caja, ya que el correlativo indica que es una caja valida")
+		Else	
+			DECLARE creacioncaja PROCEDURE FOR dbo.fgran_creacion_caja_porbultos  
+				@Cliente 	= :li_cliente,   
+				@planta 		= :ll_planta,   
+				@Pallet 		= :ll_pallet,   
+				@Secuencia 	= :li_secuencia,   
+				@computador = :ls_pcname 
+			USING SQLCA;
+			
+			EXECUTE creacioncaja;
+			
+			If SQLCA.SQLCode = -1 Then
+				F_ErrorBaseDatos(sqlca, "Lectura del Procedimiento Almacenado fgran_creacion_caja_porbultos" )
+										
+				sle_mensa.text	=	"Secuencia " + String(li_secuencia) + " imposible de crear"
+			Else
+				sle_mensa.text	=	"Secuencia " + String(li_secuencia) + " creada satisfactoriamente"
+				li_control	++
+			End If	
+			
+			CLOSE creacioncaja;
+		End If
+	NEXT
+	
+	If li_control = dw_1.RowCount() Then
+		COMMIT;
+		Return True
+	Else
+		ROLLBACK;
+		Return False
+	End If
+End If
 end function
 
 event open;/*
@@ -1628,10 +1622,13 @@ Choose Case ls_columna
 			This.SetItem(Row, ls_Columna, ls_Null)
 			Return 1
 		Else
+			This.Object.enva_tipoen.Color 	= 	RGB(255,255,255)
+			This.Object.enva_codigo.Color 	= 	RGB(255,255,255)
+			
 			This.SetItem(Row, 'copa_codigo', iuo_Embalajes.BasePallet)
 			This.Object.enva_tipoen[1]	=	iuo_Embalajes.TipoEnvase
 			This.Object.enva_codigo[1]	=	iuo_Embalajes.CodEnvase
-	
+		
 			istr_Mant.Argumento[7]		=	String(iuo_Embalajes.TipoEnvase)
 			istr_Mant.Argumento[8]		=	String(iuo_Embalajes.CodEnvase)
 	
@@ -1848,7 +1845,7 @@ vtextalign vtextalign = vcenter!
 end type
 
 event clicked;Parent.TriggerEvent("ue_imprimir_tarjas")
-End event
+end event
 
 type pb_cambio_folio from picturebutton within w_maed_palletencab
 string tag = "Cambio de Folio Pallet"

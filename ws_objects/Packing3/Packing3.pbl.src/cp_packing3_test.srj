@@ -168,6 +168,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesousuarios,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_deta_camarasfrigo,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_cajasprod_imprime_elimina,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dw_busq_mues_doctoprocesopack,d
 OBJ:C:\Desarrollo 22\Productiva\Packing3\Packing3.pbl,w_acceso,w

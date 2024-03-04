@@ -1145,7 +1145,7 @@ dw_6.AcceptText()
 
 li_cliente = dw_2.Object.clie_codigo[1]
 
-IF dw_4.RowCount() > 0 THEN
+If dw_4.RowCount() > 0 Then
 //	ll_prodrot  = dw_4.Object.pafr_prdrot[1]
 //	ll_predrot  = dw_4.Object.pafr_huert4[1]
 //	ll_cuarrot  = dw_4.Object.pafr_cuart4[1]
@@ -1154,12 +1154,12 @@ IF dw_4.RowCount() > 0 THEN
 	ll_predrot  = 99999
 	ll_cuarrot  = 99999
 	ll_rotpak	= 99999
-ELSE
+Else
 	ll_prodrot  = 999999
 	ll_predrot  = 99999
 	ll_cuarrot  = 99999
 	ll_rotpak	= 99999
-END IF
+End If
 
 FOR ll_Fila = 1 TO dw_6.RowCount()
 	ll_BFilaRep	=	dw_1.Find("paen_nroori = " + String(dw_6.Object.paen_numero[ll_Fila]) + &
@@ -1167,67 +1167,65 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 					 " AND paen_numero = " + String(dw_3.Object.paen_numero[1]), + &
 					1, dw_1.RowCount())
 
-	IF ll_BFilaRep > 0 THEN
+	If ll_BFilaRep > 0 Then
 		
 		ll_BFilaPD	=	dw_4.Find("paen_numero = " + String(dw_3.Object.paen_numero[1]) + &
 					 " AND pafr_secuen = " + String(dw_1.Object.pafr_secuen[ll_BFilaRep]), &
 					 1, dw_4.RowCount())
 										 
     	ll_caja_traspa = dw_6.Object.caja_traspa[ll_Fila]
-//		IF ll_caja_traspa	> 0 THEN
-//			IF ll_BFilaPD > 0 THEN
+//		If ll_caja_traspa	> 0 Then
+//			If ll_BFilaPD > 0 Then
 //				dw_1.Object.pafr_ccajas[ll_BFilaRep]	=	dw_1.Object.pafr_ccajas[ll_BFilaRep] + dw_6.Object.caja_traspa[ll_Fila]
 //			//	dw_4.Object.pafr_ccajas[ll_BFilaPD]		=	dw_4.Object.pafr_ccajas[ll_BFilaPD] + dw_6.Object.caja_traspa[ll_Fila]
 //				dw_6.Object.pafr_ccajas[ll_Fila]			=	dw_6.Object.pafr_ccajas[ll_Fila] - dw_6.Object.caja_traspa[ll_Fila]
 //				dw_6.Object.caja_traspa[ll_Fila]    	=  0	
-//			END IF
-//		END IF
-	END IF
-	//ELSE
+//			End If
+//		End If
+	End If
+	//Else
 		
 		ll_caja_traspa = dw_6.Object.caja_traspa[ll_Fila]
-		IF ll_caja_traspa	> 0 THEN
+		If ll_caja_traspa	> 0 Then
 			
-//			IF dw_4.RowCount() > 0 THEN
+//			If dw_4.RowCount() > 0 Then
 //				li_secuen = dw_4.Object.pafr_secuen[dw_4.RowCount()] + 1
-//			ELSE
+//			Else
 //				li_secuen = 1
-//			END IF	
+//			End If	
 			
-			IF dw_4.RowCount() > 0 THEN
+			If dw_4.RowCount() > 0 Then
 				FOR li_secuencia = 1 TO dw_4.RowCount()
-					IF dw_4.Object.pafr_secuen[li_secuencia] < 9999 THEN
+					If dw_4.Object.pafr_secuen[li_secuencia] < 9999 Then
 						li_secuen = dw_4.Object.pafr_secuen[li_secuencia] + 1
-					END IF	
+					End If	
 				NEXT	
-			END IF
+			End If
 			
-			IF li_secuen = 0 THEN
-				li_secuen = 1
-			END IF	
+			If li_secuen = 0 Then li_secuen = 1
 			
 			dw_6.GetChild("pafr_calibr", idwc_calorig)
 			dw_4.GetChild("pafr_calibr", idwc_caldest)
 			
-			IF idwc_calorig.Retrieve(0) = 0 THEN
+			If idwc_calorig.Retrieve(0) = 0 Then
 				idwc_calorig.InsertRow(0)
-			END IF
+			End If
 			
-			IF idwc_caldest.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 THEN
+			If idwc_caldest.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 Then
 				idwc_caldest.InsertRow(0)
-			END IF
+			End If
 			
 			dw_4.GetChild("vari_codigo", idwc_variedesdeta)
 			idwc_variedesdeta.SetTransObject(SqlCa)
-			IF idwc_variedesdeta.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 THEN
+			If idwc_variedesdeta.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 Then
 				idwc_variedesdeta.InsertRow(0)
-			END IF
+			End If
 			
 			dw_4.GetChild("pafr_calrot", idwc_calrot)
 			idwc_calrot.SetTransObject(SqlCa)
-			IF idwc_calrot.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 THEN
+			If idwc_calrot.Retrieve(dw_6.Object.espe_codigo[ll_Fila]) = 0 Then
 				idwc_calrot.InsertRow(0)
-			END IF
+			End If
 						
 			ll_Nuevo	=	dw_4.InsertRow(0)
 			
@@ -1235,11 +1233,11 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 			dw_4.Object.plde_codigo[ll_Nuevo]	=	dw_6.Object.plde_codigo[ll_Fila]
 			dw_4.Object.paen_numero[ll_Nuevo]	=	dw_3.Object.paen_numero[1]
 			
-			IF dw_6.Object.pafr_secuen[ll_Fila] > 9999 THEN
+			If dw_6.Object.pafr_secuen[ll_Fila] > 9999 Then
 				dw_4.Object.pafr_secuen[ll_Nuevo]	=	dw_6.Object.pafr_secuen[ll_Fila]   //ll_Nuevo
-			ELSE
+			Else
 				dw_4.Object.pafr_secuen[ll_Nuevo]	=	li_secuen
-			END IF	
+			End If	
 			
 			dw_4.Object.espe_codigo[ll_Nuevo]	=	dw_6.Object.espe_codigo[ll_Fila]
 			dw_4.Object.vari_codigo[ll_Nuevo]	=	dw_6.Object.vari_codigo[ll_Fila]
@@ -1247,13 +1245,13 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 			dw_4.Object.pafr_varrot[ll_Nuevo]	=	dw_6.Object.pafr_varrot[ll_Fila]
 			dw_4.Object.prod_codigo[ll_Nuevo]	=	dw_6.Object.prod_codigo[ll_Fila]
 			
-			//IF ll_prodrot 	= 999999 THEN
+			//If ll_prodrot 	= 999999 Then
 				dw_4.Object.pafr_prdrot[ll_Nuevo]	=	dw_6.Object.pafr_prdrot[ll_Fila]
 				dw_4.Object.pafr_huert4[ll_Nuevo]	=	dw_6.Object.pafr_huert4[ll_Fila]
-         	dw_4.Object.pafr_cuart4[ll_Nuevo]	=	dw_6.Object.pafr_cuart4[ll_Fila]
+         		dw_4.Object.pafr_cuart4[ll_Nuevo]	=	dw_6.Object.pafr_cuart4[ll_Fila]
 				dw_4.Object.pafr_rotpak[ll_Nuevo]	=	dw_6.Object.pafr_rotpak[ll_Fila]
 				
-				IF li_repe_tipopa <> 7 THEN
+				If li_repe_tipopa <> 7 Then
 					dw_4.Object.pafr_huert2[ll_Nuevo]	=	dw_6.Object.pafr_huert2[ll_Fila]
 					dw_4.Object.pafr_huert3[ll_Nuevo]	=	dw_6.Object.pafr_huert3[ll_Fila]
 					dw_4.Object.pafr_cuart2[ll_Nuevo]	=	dw_6.Object.pafr_cuart2[ll_Fila]
@@ -1262,26 +1260,26 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 					dw_4.Object.pafr_barra2[ll_Nuevo]	=	dw_6.Object.pafr_barra2[ll_Fila]
 					dw_4.Object.pafr_barra3[ll_Nuevo]	=	dw_6.Object.pafr_barra3[ll_Fila]
 					dw_4.Object.pafr_barra4[ll_Nuevo]	=	dw_6.Object.pafr_barra4[ll_Fila]
-				END IF
+				End If
 					
-//			ELSE
-//				IF li_cliente = gi_CodExport THEN
+//			Else
+//				If li_cliente = gi_CodExport Then
 //					dw_4.Object.pafr_prdrot[ll_Nuevo]	=	ll_prodrot
 //					dw_4.Object.pafr_huert4[ll_Nuevo]	=	ll_predrot
 //					dw_4.Object.pafr_cuart4[ll_Nuevo]	=	ll_cuarrot
 //					dw_4.Object.pafr_rotpak[ll_Nuevo]	=  ll_rotpak
-//				ELSE	
+//				Else	
 //					dw_4.Object.pafr_prdrot[ll_Nuevo]	=	dw_6.Object.pafr_prdrot[ll_Fila]
 //					dw_4.Object.pafr_huert4[ll_Nuevo]	=	dw_6.Object.pafr_huert4[ll_Fila]
 //         		dw_4.Object.pafr_cuart4[ll_Nuevo]	=	dw_6.Object.pafr_cuart4[ll_Fila]
 //					dw_4.Object.pafr_rotpak[ll_Nuevo]	=	dw_6.Object.pafr_rotpak[ll_Fila]
-//				END IF	
-//			END IF	
+//				End If	
+//			End If	
 			
 			dw_4.Object.emba_codigo[ll_Nuevo]	=	dw_6.Object.emba_codigo[ll_Fila]
 			dw_4.Object.etiq_codigo[ll_Nuevo]	=	dw_6.Object.etiq_codigo[ll_Fila]
 	     	dw_4.Object.pafr_huert1[ll_Nuevo]	=	dw_6.Object.pafr_huert1[ll_Fila]
-         dw_4.Object.pafr_cuart1[ll_Nuevo]	=	dw_6.Object.pafr_cuart1[ll_Fila]
+         	dw_4.Object.pafr_cuart1[ll_Nuevo]	=	dw_6.Object.pafr_cuart1[ll_Fila]
 			dw_4.Object.pafr_nrlote[ll_Nuevo]	=	dw_6.Object.pafr_nrlote[ll_Fila]
 			dw_4.Object.pafr_calibr[ll_Nuevo]   =	dw_6.Object.pafr_calibr[ll_Fila]
 			dw_4.Object.pafr_fecemb[ll_Nuevo]	=	dw_6.Object.pafr_fecemb[ll_Fila]
@@ -1299,45 +1297,45 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 			dw_4.Object.cate_codigo[ll_nuevo]   = 	dw_6.Object.cate_codigo[ll_Fila]
 			dw_4.Object.pafr_catrot[ll_nuevo]   = 	dw_6.Object.pafr_catrot[ll_Fila]
 			
-			IF isnull(dw_6.Object.pafr_nroori[ll_Fila]) OR &
-					dw_6.Object.pafr_nroori[ll_Fila] = 0 THEN
+			If isnull(dw_6.Object.pafr_nroori[ll_Fila]) OR &
+					dw_6.Object.pafr_nroori[ll_Fila] = 0 Then
 					
 				dw_4.Object.pafr_nroori[ll_nuevo] = dw_6.Object.paen_numero[ll_Fila]
-			ELSE	
+			Else	
 				dw_4.Object.pafr_nroori[ll_nuevo] = dw_6.Object.pafr_nroori[ll_Fila]
-			END IF
+			End If
 			
-			IF isnull(dw_6.Object.pafr_secori[ll_Fila]) OR &
-						dw_6.Object.pafr_secori[ll_Fila] = 0 THEN
+			If isnull(dw_6.Object.pafr_secori[ll_Fila]) OR &
+						dw_6.Object.pafr_secori[ll_Fila] = 0 Then
 						
 				dw_4.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secuen[ll_Fila]
-			ELSE	
+			Else	
 				dw_4.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secori[ll_Fila]
-			END IF
+			End If
 			
 			dw_4.accepttext()
 
 			//Inserta los Pallet			
 			ll_NuevoDet	=	dw_1.InsertRow(0)
 			li_repe_tipopa = dw_2.Object.repe_tipopa[1]
-			IF li_repe_tipopa = 1 OR li_repe_tipopa = 3 OR li_repe_tipopa = 7 THEN
+			If li_repe_tipopa = 1 OR li_repe_tipopa = 3 OR li_repe_tipopa = 7 Then
 				dw_1.Object.plde_codigo[ll_NuevoDet]	=	dw_6.Object.plde_codigo[ll_Fila]
 				dw_1.Object.clie_codigo[ll_NuevoDet]	=	dw_6.Object.clie_codigo[ll_Fila]
 				dw_1.Object.repe_secuen[ll_NuevoDet]	=  ll_NuevoDet
 				
-				IF li_repe_tipopa = 3 OR li_repe_tipopa = 7 THEN
+				If li_repe_tipopa = 3 OR li_repe_tipopa = 7 Then
 					dw_1.Object.paen_numero[ll_NuevoDet]	=	dw_3.Object.paen_numero[1]
 					dw_1.Object.paen_nroori[ll_NuevoDet]	=	dw_5.Object.paen_numero[1]
 					dw_1.Object.plde_codigo[ll_NuevoDet]	=	dw_6.Object.plde_codigo[ll_Fila]
 					dw_1.Object.pafr_ccajas[ll_NuevoDet]	=	dw_6.Object.caja_traspa[ll_Fila]
 					dw_1.Object.repd_totcao[ll_NuevoDet]	=	dw_6.Object.pafr_ccajas[ll_Fila]
-				ELSEIF li_repe_tipopa = 1 THEN
+				ElseIf li_repe_tipopa = 1 Then
 					dw_1.Object.paen_numero[ll_NuevoDet]	=	dw_5.Object.paen_numero[1]
 					dw_1.Object.paen_nroori[ll_NuevoDet]	=	dw_3.Object.paen_numero[1]
 					dw_1.Object.plde_codigo[ll_NuevoDet]	=	dw_6.Object.plde_codigo[ll_Fila]
 					dw_1.Object.pafr_ccajas[ll_NuevoDet]	=	dw_6.Object.caja_traspa[ll_Fila]
 					dw_1.Object.repd_totcao[ll_NuevoDet]	=	dw_6.Object.pafr_ccajas[ll_Fila]
-				END IF
+				End If
 				
 				dw_1.Object.plde_codigo[ll_NuevoDet]	=	dw_6.Object.plde_codigo[ll_Fila]
 				dw_1.Object.pafr_secuen[ll_NuevoDet]	=	dw_6.Object.pafr_secuen[ll_Fila]
@@ -1353,7 +1351,7 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 				dw_1.Object.repd_marcad[ll_NuevoDet]	=	is_marca
 				dw_1.Object.repd_marcao[ll_NuevoDet]	=	is_marcao
 				dw_1.Object.pafr_fecing[ll_NuevoDet]	=	dw_6.Object.pafr_fecing[ll_Fila]
-			ELSE
+			Else
 				dw_1.Object.plde_codigo[ll_NuevoDet]	=	dw_6.Object.plde_codigo[ll_Fila]
 				dw_1.Object.clie_codigo[ll_NuevoDet]	=	dw_4.Object.clie_codigo[ll_nuevo]
 				dw_1.Object.paen_numero[ll_NuevoDet]	=	dw_5.Object.paen_numero[1]
@@ -1375,7 +1373,7 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 				dw_1.Object.repd_marcao[ll_NuevoDet]	=	is_marcao
 				dw_1.Object.pafr_fecing[ll_NuevoDet]	=	dw_6.Object.pafr_fecing[ll_Fila]
 				
-			END IF	
+			End If	
 							
 			li_planta  = dw_3.Object.plde_codigo[1]
 			li_cliente = dw_3.Object.clie_codigo[1]
@@ -1393,26 +1391,26 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 			dw_6.Object.cajas[ll_Fila]					=	dw_6.Object.pafr_ccajas[ll_Fila] - dw_6.Object.caja_traspa[ll_Fila]
 			dw_6.Object.pafr_ccajas[ll_Fila]			=	dw_6.Object.pafr_ccajas[ll_Fila] - dw_6.Object.caja_traspa[ll_Fila]
 						
-			IF li_repe_tipopa = 1 OR li_repe_tipopa = 2 OR li_repe_tipopa = 7 THEN
+			If li_repe_tipopa = 1 OR li_repe_tipopa = 2 OR li_repe_tipopa = 7 Then
 				dw_5.Object.paen_estado[1]            =  1
-			ELSE
+			Else
 				dw_6.Object.caja_traspa[ll_Fila]     	=	0
 				dw_5.Object.paen_estado[1]             =	3
-			END IF
+			End If
 			
 			ll_paen_numero = dw_3.Object.paen_numero[1]
-			IF ExistePallet(ll_paen_numero,False) THEN
+			If ExistePallet(ll_paen_numero,False) Then
 				dw_1.Object.repd_tipood[ll_NuevoDet]	= 1
-			ELSE	
+			Else	
 				dw_1.Object.repd_tipood[ll_NuevoDet]	= 2
-			END IF	
+			End If	
 		
 			ll_pafr_ccajas = dw_6.Object.pafr_ccajas[ll_Fila]
-			IF ll_pafr_ccajas = 0 OR IsNull(ll_pafr_ccajas) THEN
+			If ll_pafr_ccajas = 0 OR IsNull(ll_pafr_ccajas) Then
 				dw_1.Object.repd_marcao[ll_NuevoDet]	=	'E'
-			END IF
-		END IF
-	//END IF
+			End If
+		End If
+	//End If
 NEXT
 
 end subroutine

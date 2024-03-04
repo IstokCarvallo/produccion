@@ -464,6 +464,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_cargostecnicos,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_maed_tipotransportes_nave,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_mant_deta_planificallegadadeta,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_palletencabhisto_inpe,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mant_palletencab_cambioprodcalstatus,d

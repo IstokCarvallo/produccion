@@ -29,7 +29,7 @@ w_mant_despemba_packing_deta			w_mantencion
 
 uo_Patente			iuo_patente
 uo_UsuarPlanta		iuo_UsuaPlta
-uo_ClientesProd		iuo_Cliente
+uo_ClientesProd	iuo_Cliente
 uo_guiadespacho	iuo_Guia
 
 Datastore			ids_CorrelMovim
@@ -40,14 +40,14 @@ String					is_rutchofer
 end variables
 
 forward prototypes
-public subroutine habilitaingreso (string columna)
 protected function boolean wf_actualiza_db (boolean borrando)
-public subroutine habilitaencab (boolean habilita)
 public subroutine wf_envia_mail ()
 public function string wf_rescatacorreo (integer ai_planta)
 public function boolean wf_existefolio (string as_columna, string as_valor)
 public function string wf_buscaformato (long al_planta)
 public function long wf_busnuevofoliodespa (integer ai_cliente, integer ai_planta)
+public subroutine wf_habilitaingreso (string columna)
+public subroutine wf_habilitaencab (boolean habilita)
 end prototypes
 
 event ue_imprimir2();Integer	li_planta, li_cliente, respuesta
@@ -105,28 +105,6 @@ End If
 
 SetPointer(Arrow!)
 end event
-
-public subroutine habilitaingreso (string columna);Date	ld_fecha
-Boolean	lb_estado = True
-
-dw_2.AcceptText()
-
-If dw_2.RowCount() > 0 Then
-	//IsNull(dw_2.Object.defe_numero[1]) OR dw_2.Object.defe_numero[1] = 0 OR &
-	If IsNull(dw_2.Object.plde_codigo[1]) Or dw_2.Object.plde_codigo[1] = 0 Or &		
-		IsNull(dw_2.Object.defe_fecdes[1]) Or dw_2.Object.defe_fecdes[1] = ld_fecha Or &
-		IsNull(dw_2.Object.defe_cancaj[1]) Or dw_2.Object.defe_cancaj[1] = 0 Or &
-		IsNull(dw_2.Object.defe_cantar[1]) Or dw_2.Object.defe_cantar[1] = 0 Then
-
-		lb_estado = False
-	End If
-End If
-
-pb_grabar.Enabled	=	lb_estado
-pb_ins_det.Enabled  	= 	lb_estado
-pb_eli_det.Enabled  	= 	lb_estado
-pb_imprimir.Enabled 	= 	lb_estado
-end subroutine
 
 protected function boolean wf_actualiza_db (boolean borrando);Boolean	lb_AutoCommit, lb_Retorno
 
@@ -195,48 +173,6 @@ sqlca.AutoCommit	=	lb_AutoCommit
 RETURN lb_Retorno
 end function
 
-public subroutine habilitaencab (boolean habilita);If Habilita Then
-	dw_2.Object.clie_codigo.Protect	= 0
-	dw_2.Object.plde_codigo.Protect 	= 0
-	dw_2.Object.defe_numero.Protect	= 0
-	dw_2.Object.defe_fecdes.Protect 	= 0
-	dw_2.Object.defe_horade.Protect 	= 0
-	
-	dw_2.Object.defe_numero.Color	=	0
-	dw_2.Object.clie_codigo.Color 		=	0
-	dw_2.Object.plde_codigo.Color 	=	0
-	dw_2.Object.defe_fecdes.Color		= 	0
-	dw_2.Object.defe_horade.Color 	= 	0
-	
-	dw_2.Object.defe_numero.BackGround.Color	=	Rgb(255,255,255)
-	dw_2.Object.clie_codigo.BackGround.Color 		=	Rgb(255,255,255)
-	dw_2.Object.plde_codigo.BackGround.Color 	=	Rgb(255,255,255)
-	dw_2.Object.defe_fecdes.BackGround.Color		= 	Rgb(255,255,255)
-	dw_2.Object.defe_horade.BackGround.Color 	= 	Rgb(255,255,255)
-	
-	dw_2.SetColumn("defe_numero")
-	dw_2.SetFocus()
-Else
-	dw_2.Object.defe_numero.Protect	= 1
-	dw_2.Object.clie_codigo.Protect	= 1
-	dw_2.Object.plde_codigo.Protect	= 1
-	dw_2.Object.defe_fecdes.Protect	= 1
-	dw_2.Object.defe_horade.Protect	= 1
-	
-	dw_2.Object.defe_numero.Color	=	Rgb(255,255,255)
-	dw_2.Object.clie_codigo.Color 		=	Rgb(255,255,255)
-	dw_2.Object.plde_codigo.Color 	=	Rgb(255,255,255)
-	dw_2.Object.defe_fecdes.Color		= 	Rgb(255,255,255)
-	dw_2.Object.defe_horade.Color 	= 	Rgb(255,255,255)
-	
-	dw_2.Object.defe_numero.BackGround.Color	=	553648127
-	dw_2.Object.clie_codigo.BackGround.Color 		=	553648127
-	dw_2.Object.plde_codigo.BackGround.Color 	=	553648127
-	dw_2.Object.defe_fecdes.BackGround.Color 	=	553648127
-	dw_2.Object.defe_horade.BackGround.Color 	=	553648127
-End If
-end subroutine
-
 public subroutine wf_envia_mail ();String			ls_DirectorioAct, ls_rut, ls_Contenedor, ls_Archivo,  ls_ArchivoP, ls_embarques, ls_ruta
 Long			ll_Fila, ll_Archivo, ll_guia
 Boolean		lb_Existe
@@ -302,14 +238,14 @@ li_cliente	=	dw_2.Object.clie_codigo[1]
 li_planta	=	dw_2.Object.plde_codigo[1]
 ll_nfolio 	=	dw_2.Object.defe_numero[1]
 
-CHOOSE CASE as_columna
-	CASE "plde_codigo"
+Choose Case as_columna
+	Case "plde_codigo"
 		li_planta	=	Integer(as_valor)
 		
-	CASE "defe_numero"
+	Case "defe_numero"
 		ll_nfolio 	=	Long(as_valor)
 		
-END CHOOSE
+End Choose
 
 SELECT	Count(*)
 	INTO	:li_existe
@@ -319,10 +255,10 @@ SELECT	Count(*)
 	And   clie_codigo =  :li_cliente 
 	Using SQLCA;
 				
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_errorbasedatos(sqlca,"Lectura tabla Despafrigoen")
-	RETURN False
-ELSEIF li_existe > 0 THEN
+	Return False
+ElseIf li_existe > 0 Then
 	istr_mant.argumento[1]	= String(li_planta)
 	istr_mant.argumento[2]	= String(ll_nfolio)
 	ib_existe_folioD				=	TRUE
@@ -331,17 +267,17 @@ ELSEIF li_existe > 0 THEN
 	istr_mant.argumento[3]	= 	String(dw_2.Object.clie_codigo[1])
 	istr_mant.argumento[4]	= 	String(dw_2.Object.defe_cantar[1])
 	istr_mant.argumento[8]	=	String(dw_2.Object.defe_cancaj[1])
-   RETURN False
-ELSE
-	IF IsNull(ll_nfolio) THEN
+   Return False
+Else
+	If IsNull(ll_nfolio) Then
 		istr_mant.argumento[1]	= String(li_planta)
 		istr_mant.argumento[2]	= String(ll_nfolio)
-		RETURN False
-	ELSE
+		Return False
+	Else
 	    MessageBox("Atención","Número de Documento No ha sido generado. Ingrese Otro.")
-	   RETURN True
-	END IF	
-END IF
+	   Return True
+	End If	
+End If
 
 
 
@@ -447,6 +383,70 @@ End If
 Return ll_Numero
 end function
 
+public subroutine wf_habilitaingreso (string columna);Date	ld_fecha
+Boolean	lb_estado = True
+
+dw_2.AcceptText()
+
+If dw_2.RowCount() > 0 Then
+	//IsNull(dw_2.Object.defe_numero[1]) OR dw_2.Object.defe_numero[1] = 0 OR &
+	If IsNull(dw_2.Object.plde_codigo[1]) Or dw_2.Object.plde_codigo[1] = 0 Or &		
+		IsNull(dw_2.Object.defe_fecdes[1]) Or dw_2.Object.defe_fecdes[1] = ld_fecha Or &
+		IsNull(dw_2.Object.defe_cancaj[1]) Or dw_2.Object.defe_cancaj[1] = 0 Or &
+		IsNull(dw_2.Object.defe_cantar[1]) Or dw_2.Object.defe_cantar[1] = 0 Then
+
+		lb_estado = False
+	End If
+End If
+
+pb_grabar.Enabled	=	lb_estado
+pb_ins_det.Enabled  	= 	lb_estado
+pb_eli_det.Enabled  	= 	lb_estado
+pb_imprimir.Enabled 	= 	lb_estado
+end subroutine
+
+public subroutine wf_habilitaencab (boolean habilita);If Habilita Then
+	dw_2.Object.clie_codigo.Protect	= 0
+	dw_2.Object.plde_codigo.Protect 	= 0
+	dw_2.Object.defe_numero.Protect	= 0
+	dw_2.Object.defe_fecdes.Protect 	= 0
+	dw_2.Object.defe_horade.Protect 	= 0
+	
+	dw_2.Object.defe_numero.Color	=	0
+	dw_2.Object.clie_codigo.Color 		=	0
+	dw_2.Object.plde_codigo.Color 	=	0
+	dw_2.Object.defe_fecdes.Color		= 	0
+	dw_2.Object.defe_horade.Color 	= 	0
+	
+	dw_2.Object.defe_numero.BackGround.Color	=	Rgb(255,255,255)
+	dw_2.Object.clie_codigo.BackGround.Color 		=	Rgb(255,255,255)
+	dw_2.Object.plde_codigo.BackGround.Color 	=	Rgb(255,255,255)
+	dw_2.Object.defe_fecdes.BackGround.Color		= 	Rgb(255,255,255)
+	dw_2.Object.defe_horade.BackGround.Color 	= 	Rgb(255,255,255)
+	
+	dw_2.SetColumn("defe_numero")
+	dw_2.SetFocus()
+Else
+	dw_2.Object.defe_numero.Protect	= 1
+	dw_2.Object.clie_codigo.Protect	= 1
+	dw_2.Object.plde_codigo.Protect	= 1
+	dw_2.Object.defe_fecdes.Protect	= 1
+	dw_2.Object.defe_horade.Protect	= 1
+	
+	dw_2.Object.defe_numero.Color	=	Rgb(255,255,255)
+	dw_2.Object.clie_codigo.Color 		=	Rgb(255,255,255)
+	dw_2.Object.plde_codigo.Color 	=	Rgb(255,255,255)
+	dw_2.Object.defe_fecdes.Color		= 	Rgb(255,255,255)
+	dw_2.Object.defe_horade.Color 	= 	Rgb(255,255,255)
+	
+	dw_2.Object.defe_numero.BackGround.Color	=	553648127
+	dw_2.Object.clie_codigo.BackGround.Color 		=	553648127
+	dw_2.Object.plde_codigo.BackGround.Color 	=	553648127
+	dw_2.Object.defe_fecdes.BackGround.Color 	=	553648127
+	dw_2.Object.defe_horade.BackGround.Color 	=	553648127
+End If
+end subroutine
+
 on w_mant_despemba_packing.create
 int iCurrent
 call super::create
@@ -476,6 +476,7 @@ dw_4.SetTransObject(sqlca)
 dw_5.SetTransObject(sqlca)
 
 ids_CorrelMovim	=	Create DataStore
+
 iuo_UsuaPlta		=	Create uo_usuarplanta
 iuo_Cliente			=	Create uo_ClientesProd	
 iuo_Guia				=	Create uo_GuiaDespacho
@@ -516,7 +517,7 @@ dw_3.SetRedraw(False)
 dw_3.Reset()
 dw_3.SetRedraw(True)
 
-HabilitaEncab(True)
+wf_HabilitaEncab(True)
 end event
 
 event ue_nuevo_detalle;call super::ue_nuevo_detalle;Integer			li_filas, li_filaInsertada, li_find
@@ -597,7 +598,7 @@ DO
 					dw_1.SetRow(1)
 					dw_1.SelectRow(1,True)
 					dw_1.SetFocus()
-					HabilitaEncab(False)
+					wf_HabilitaEncab(False)
 					
 					If gi_Emisor_Electronico = 1 Then
 						If dw_2.Object.defe_guiaem[1] = 1 Then
@@ -827,19 +828,19 @@ Choose Case ls_columna
 			Return 1
 		End If	
 		
-	CASE "defe_chfrut"
+	Case "defe_chfrut"
 		is_rutchofer = F_verrut(data, True)
-		IF is_rutchofer = "" THEN
+		If is_rutchofer = "" Then
 			dw_2.SetItem(1, "defe_chfrut", ls_Null)
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_2.SetItem(1, "defe_chfrut", is_rutchofer)
-			RETURN 1
-		END IF		
+			Return 1
+		End If		
 
 End Choose
 
-HabilitaIngreso(ls_columna)
+wf_HabilitaIngreso(ls_columna)
 end event
 
 type pb_nuevo from w_mant_encab_deta_csd`pb_nuevo within w_mant_despemba_packing
@@ -862,8 +863,8 @@ integer y = 808
 end type
 
 type pb_salir from w_mant_encab_deta_csd`pb_salir within w_mant_despemba_packing
-integer x = 3122
-integer y = 1040
+integer x = 3113
+integer y = 1108
 end type
 
 type pb_ins_det from w_mant_encab_deta_csd`pb_ins_det within w_mant_despemba_packing
@@ -922,8 +923,8 @@ borderstyle borderstyle = stylelowered!
 end type
 
 type cb_guia from commandbutton within w_mant_despemba_packing
-integer x = 3099
-integer y = 1328
+integer x = 3086
+integer y = 1396
 integer width = 302
 integer height = 112
 integer taborder = 80
