@@ -575,8 +575,15 @@ event modified;If IsNull(This.Text) Then Return
 
 em_desde.Text		=	'01/' + This.Text
 em_hasta.Text		=	String(RelativeDate(Date('01/' + Mid(String(RelativeDate(Date(em_desde.Text), 31)), 4, 7)), -1))
-
 dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), -1)
+
+If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), Date('01/' + This.Text)) Then
+	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
+	em_desde.Text = ''
+	em_desde.SetFocus()
+End If
+
+
 end event
 
 type st_6 from statictext within w_proc_genera_facturacion

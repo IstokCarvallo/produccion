@@ -48,7 +48,7 @@ uo_recibidores					iuo_recibidores
 uo_tipopallet					iuo_tipopallet
 uo_productores					iuo_productores
 uo_lotesfrutagranel			iuo_Lote
-uo_spro_ordenproceso			iuo_spro_ordenproceso
+uo_spro_ordenproceso		iuo_spro_ordenproceso
 uo_spro_palletencab			iuo_spro_palletencab
 uo_spro_movtofrutaembaenca	iuo_spro_movtofrutaembaenca
 uo_camarasfrigo				iuo_camara
@@ -89,6 +89,7 @@ public subroutine buscacuartel ()
 public function boolean existepredio (integer al_productor, integer ai_predio)
 public function boolean existecuartel (long al_productor, integer ai_predio, integer ai_cuartel)
 public function string cargacodigo (integer ai_cliente, long al_planta, long al_pallet, integer ai_procedencia)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_recuperapallet();Long		ll_fila_d, ll_fila_e, respuesta
@@ -1026,17 +1027,10 @@ OpenWithParm(w_busc_cuartel, lstr_Busq)
 
 lstr_Busq	= Message.PowerObjectParm
 
-//IF il_fila < 1 then 
 IF lstr_Busq.Argum[1] <> "" THEN
 	dw_4.Object.pafr_cuart1[il_Fila] = integer(lstr_Busq.argum[1])
 	dw_4.Object.prcc_nombre[il_Fila] = lstr_Busq.argum[2]
-
-	
 END IF
-//ELSE
-	
-	
-//END IF
 end subroutine
 
 public function boolean existepredio (integer al_productor, integer ai_predio);Integer	li_Cantidad, li_cliente, li_Planta
@@ -1109,6 +1103,23 @@ CLOSE Codigo;
 
 RETURN ls_respuesta 
 
+end function
+
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
 end function
 
 on w_maed_movtofrutaemba_proceso.create
@@ -2341,160 +2352,164 @@ ls_Columna = dwo.Name
 
 SetNull(ls_Nula)
 
-CHOOSE CASE ls_Columna
-	CASE "emba_codigo"
+Choose Case ls_Columna
+	Case "emba_codigo"
 		ls_embalaje = dw_4.Object.emba_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not ExisteEmbalaje(Integer(istr_Mant.Argumento[9]),  &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not ExisteEmbalaje(Integer(istr_Mant.Argumento[9]),  &
 										 Integer(istr_Mant.Argumento[10]), &
-										 dw_3.Object.etiq_codigo[1],Data) THEN
+										 dw_3.Object.etiq_codigo[1],Data) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
 				This.SetItem(row, "emba_nombre", ls_Nula)
-				RETURN 1
-			ELSE
+				Return 1
+			Else
 				This.SetItem(row, "emba_nombre", is_embalaje)
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, ls_Embalaje)
-			RETURN 1
-			
-		END IF
+			Return 1
+		End If
 		
-	CASE "cate_codigo"
+	Case "cate_codigo"
 		li_categoria = dw_4.Object.cate_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not iuo_categorias.Existe(Integer(Data),True,SqlCa) THEN
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not iuo_categorias.Existe(Integer(Data),True,SqlCa) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_categoria)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_calibr"
+	Case "pafr_calibr"
 		ls_Calibre	=	dw_4.Object.pafr_calibr[row]
 		Data			=	Data//Mid(Data + "   ", 1, 3)
 		
-		IF IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
 								  		Integer(istr_Mant.Argumento[9]), &
 								  		Integer(istr_Mant.Argumento[10]), &
-										Data, istr_calibre) THEN
+										Data, istr_calibre) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
-				RETURN 1
-			ELSE
+				Return 1
+			Else
 				dw_4.Object.pafr_calrot[row]	=	Data
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, ls_calibre)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_calrot"
+	Case "pafr_calrot"
 		ls_Calibre	=	dw_4.Object.pafr_calrot[row]
 		Data			=	Data//Mid(Data + "   ", 1, 3)
 		
-		IF IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
 								  		Integer(istr_Mant.Argumento[9]), &
 								  		Integer(istr_Mant.Argumento[10]), &
-										Data, istr_calibre) THEN
+										Data, istr_calibre) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, ls_calibre)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_ccajas"
+	Case "pafr_ccajas"
 		li_ccaj = This.Object.pafr_ccajas[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
 			
-			IF IsNull(This.Object.pafr_ccajas[row]) THEN
+			If IsNull(This.Object.pafr_ccajas[row]) Then
 				li_Cajas	=	0
-			ELSE
+			Else
 				li_Cajas	=	This.GetItemNumber(row, "pafr_ccajas")
-			END IF
+			End If
 			
 			li_Cajas	=	This.GetItemNumber(1, "total_cajas") - &
 							li_Cajas + Integer(Data)
 			
-			IF li_Cajas > iuo_tipopallet.cajas THEN
+			If li_Cajas > iuo_tipopallet.cajas Then
 				MessageBox("Atención", "Cantidad de Cajas Total sobrepasa la~r" + &
 								"Cantidad de Cajas del Pallet (" + &
 								Trim(String(iuo_tipopallet.cajas, "#,##0")) + &
 								").~r~rRevise cantidades registradas.")
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 				
-				RETURN 1
-			ELSEIF li_Cajas = iuo_tipopallet.Cajas THEN
+				Return 1
+			ElseIf li_Cajas = iuo_tipopallet.Cajas Then
 				dw_3.Object.paen_tipopa[1] = 1
-			ELSE
+			Else
 				dw_3.Object.paen_tipopa[1] = 2
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_ccaj)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "lote_codigo"
+	Case "lote_codigo"
 		li_loteing = dw_4.Object.lote_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not iuo_Lote.Existe(This.Object.plde_origen[row], &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not iuo_Lote.Existe(This.Object.plde_origen[row], &
 						Integer(istr_Mant.Argumento[8]), Integer(Data), &
 						True, Sqlca) &
 				OR Not iuo_Lote.ExisteOrdenProceso(Integer(istr_Mant.Argumento[2]), &
 						Integer(istr_Mant.Argumento[5]), Integer(istr_Mant.Argumento[6]), &
 						This.Object.plde_origen[row], Integer(istr_Mant.Argumento[8]), &
-						Integer(Data), True, Sqlca) THEN
+						Integer(Data), True, Sqlca) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 				
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			Else
+				This.Object.pafr_huert1[Row] = iuo_Lote.Predio
+				This.Object.pafr_cuart1[Row] = iuo_Lote.CentroCosto
+				This.Object.pafr_ggncod[Row] = iuo_Lote.GGN
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_loteing)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 				
-	CASE "pafr_huert1"
-		IF existepredio(dw_2.Object.prod_codigo[1],Integer(data)) THEN
+	Case "pafr_huert1"
+		If existepredio(dw_2.Object.prod_codigo[1],Integer(data)) Then
 			MessageBox("Atención","El predio ingesado no existe.")
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			This.Object.prbr_codpre[Row] = Integer(Data)
-		END IF		
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(dw_2.Object.prod_codigo[Row], Integer(Data), dw_2.Object.espe_codigo[Row])
+		End If		
 	
-	CASE "pafr_cuart1"
-		IF existecuartel(dw_2.Object.prod_codigo[1],dw_4.Object.pafr_huert1[row],Integer(data)) THEN
+	Case "pafr_cuart1"
+		If existecuartel(dw_2.Object.prod_codigo[1],dw_4.Object.pafr_huert1[row],Integer(data)) Then
 			MessageBox("Atención","El predio ingesado no existe.")
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_4.Object.prcc_nombre[il_fila] = is_nomcuartel
 			This.Object.prcc_codigo[Row] = Integer(Data)
-		END IF		
+		End If		
 			
-	CASE "vari_codrot"
-		IF NOT iuo_variedades.existe(dw_2.Object.espe_codigo[1],integer(data),TRUE,SQLCA) THEN
+	Case "vari_codrot"
+		If NOT iuo_variedades.existe(dw_2.Object.espe_codigo[1],integer(data),TRUE,SQLCA) Then
 			This.SetItem(row, ls_columna, Integer(ls_Nula))
-			RETURN 1
-		END IF
-END CHOOSE
+			Return 1
+		End If
+End Choose
 
 Captura_Totales()
 end event

@@ -74,6 +74,7 @@ public function boolean wf_actualiza_db ()
 public subroutine wf_buscaorden ()
 public subroutine wf_conecta ()
 public subroutine wf_activacajas ()
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_antesguardar();Long	ll_fila 
@@ -288,6 +289,23 @@ Loop
 
 dw_2.SetRedraw(True)
 end subroutine
+
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
+end function
 
 on w_cargacajas_systray.create
 int iCurrent
@@ -509,7 +527,7 @@ Decimal{2}	ll_Step
 String 		codCaja,  Proceso, Lote, codLinea, codTurno, Salida, codEspecie, codVariedadReal, codVariedadRotulada, codEmbalaje,&
 				codConfeccion, codMarca , CalibreColor, codCAT, codProductorReal, CSGProductorReal, codClienteProductorReal, &
 				codProductorRotulado, CSGProductorRotulado, codClienteProductorRotulado, codProductorCompacto_ORD, SDP_ORD, &
-				codPredio_ORD, codCuartel_ORD, codCliente_ORD, NumeroPalet, codTipoPalet
+				codPredio_ORD, codCuartel_ORD, codCliente_ORD, NumeroPalet, codTipoPalet, codGGN
 Datetime		FechaProduccion, FechaPaletizaje 
 Integer		codTipoTarja
 
@@ -562,6 +580,9 @@ For ll_Fila = 1 To dw_2.RowCount()
 				FechaPaletizaje 					=	dw_4.Object.FechaPaletizaje[ll_Fila_D]
 				codTipoTarja  						=	dw_4.Object.TipoPallet[ll_Fila_D]
 				codTipoPalet						=	dw_4.Object.codTipoPalet[ll_Fila_D]
+				codGGN								=	wf_AsignaGGN(Long(dw_4.Object.codProductorReal[ll_Fila_D]), &
+																				Integer(dw_4.Object.codPredio_ORD[ll_Fila_D]), &
+																				Integer(dw_4.Object.codEspecie[ll_Fila_D]))
 
 				DECLARE	InsertaCajas PROCEDURE FOR dbo.UNITEC_InsertaCajas
 							@codCaja  								=	:codCaja,
@@ -593,7 +614,8 @@ For ll_Fila = 1 To dw_2.RowCount()
 							@NumeroPalet  						=	:NumeroPalet,
 							@FechaPaletizaje  					=	:FechaPaletizaje,
 							@codTipoTarja  						=	:codTipoTarja,
-							@codTipoPalet							=	:codTipoPalet
+							@codTipoPalet							=	:codTipoPalet,
+							@GGN									=	:codGGN
 					USING SQLCA ;
 							
 					EXECUTE InsertaCajas  ;	

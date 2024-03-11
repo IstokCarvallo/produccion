@@ -755,7 +755,7 @@ im_menu		=	m_principal
 dw_1.SetTransObject(sqlca)
 dw_2.SetTransObject(sqlca)
 dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
-dw_1.SetRowFocusIndicator(Hand!)
+//dw_1.SetRowFocusIndicator(Hand!)
 dw_1.Modify("DataWindow.Footer.Height = 110")
 
 istr_mant.dw						=	dw_1
@@ -763,8 +763,7 @@ istr_mant.UsuarioSoloConsulta	=	OpcionSoloConsulta()
 
 pb_nuevo.PostEvent(Clicked!)
 
-GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, &
-							This.Title, "Acceso a Aplicación", 1)
+GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, This.Title, "Acceso a Aplicación", 1)
 								
 dw_enca.SetTransObject(SQLCA)
 dw_1.SetTransObject(SQLCA)
@@ -782,8 +781,8 @@ idwc_planta.SetTransObject(sqlca)
 idwc_cliente.Retrieve()
 idwc_planta.Retrieve()
 
-istr_busq.argum[1] = string(gi_CodExport)
-istr_busq.argum[3] = string(gi_CodPlanta)
+istr_busq.argum[1] = String(gi_CodExport)
+istr_busq.argum[3] = String(gi_CodPlanta)
 istr_busq.argum[5] = '0'
 
 dw_enca.Object.clie_codigo[li_row] = gi_CodExport
@@ -1154,64 +1153,64 @@ end event
 
 event dw_1::buttonclicked;call super::buttonclicked;Integer 	li_plde_codigo, li_especie, li_variedad, li_etiqueta,li_clie_codigo, li_destino, li_inspeccion,&
 			li_status,li_ret, li_i, li_first, li_j, li_productor, li_secuencia, li_rechazo
-String ls_embalaje, ls_calibre, ls_nota
-Date fecemb_desde, fecemb_hasta
-Long	ll_cont,ll_dese_numero
+String 	ls_embalaje, ls_calibre, ls_nota
+Date 		fecemb_desde, fecemb_hasta
+Long		ll_cont,ll_dese_numero
+
 datawindowchild dwc_variedad
 
 dw_6.SetTransObject(sqlca)
 
-li_clie_codigo = dw_enca.Object.Clie_Codigo[1]
+li_clie_codigo 	= dw_enca.Object.Clie_Codigo[1]
 li_especie		= -1
 li_variedad		= -1
 ls_embalaje		= '*'
 li_etiqueta		= -1
 ls_calibre		= 'TOD'
-li_productor	= -1
+li_productor		= -1
 li_destino		= -1
-li_inspeccion  = -1
+li_inspeccion  	= -1
 li_status  		= -1
 li_secuencia 	= -1
 li_rechazo		= 0
 ls_nota			= '-1'
 		
-CHOOSE CASE dwo.name
-		
-	CASE "b_pallets" 
+Choose Case dwo.name	
+	Case "b_pallets" 
 		li_plde_codigo = dw_enca.object.plde_codigo[dw_enca.GetRow()]
 		
-		IF NOT isnull(THIS.object.espe_codigo[row]) THEN li_especie		= THIS.object.espe_codigo[row]
-		IF NOT isnull(THIS.object.vari_codigo[row]) THEN li_variedad	= THIS.object.vari_codigo[row]
-		IF NOT isnull(THIS.object.emba_codigo[row]) THEN ls_embalaje	= THIS.object.emba_codigo[row]
-		IF NOT isnull(THIS.object.etiq_codigo[row]) THEN li_etiqueta	= THIS.object.etiq_codigo[row]
-		IF NOT isnull(THIS.object.paen_calibr[row]) THEN ls_calibre 	= THIS.object.paen_calibr[row]
-		IF NOT isnull(THIS.object.prod_codigo[row]) THEN li_productor 	= THIS.object.prod_codigo[row]
-		IF NOT isnull(THIS.object.dest_codigo[row]) THEN li_destino 	= THIS.object.dest_codigo[row]
-		IF NOT isnull(THIS.object.dese_secdet[row]) THEN li_secuencia 	= THIS.object.dese_secdet[row]
-		IF NOT isnull(THIS.object.inpe_numero[row]) THEN li_inspeccion = THIS.object.inpe_numero[row]
-		IF NOT isnull(THIS.object.stat_codigo[row]) THEN li_status 		= THIS.object.stat_codigo[row]
-		IF NOT isnull(THIS.object.dese_rechaz[row]) THEN li_rechazo 	= THIS.object.dese_rechaz[row]	
-		IF NOT isnull(THIS.object.pafr_barra2[row]) THEN ls_nota 		= THIS.object.pafr_barra2[row]
+		If NOT isnull(THIS.object.espe_codigo[row]) Then li_especie		= THIS.object.espe_codigo[row]
+		If NOT isnull(THIS.object.vari_codigo[row]) Then li_variedad	= THIS.object.vari_codigo[row]
+		If NOT isnull(THIS.object.emba_codigo[row]) Then ls_embalaje	= THIS.object.emba_codigo[row]
+		If NOT isnull(THIS.object.etiq_codigo[row]) Then li_etiqueta	= THIS.object.etiq_codigo[row]
+		If NOT isnull(THIS.object.paen_calibr[row]) Then ls_calibre 	= THIS.object.paen_calibr[row]
+		If NOT isnull(THIS.object.prod_codigo[row]) Then li_productor 	= THIS.object.prod_codigo[row]
+		If NOT isnull(THIS.object.dest_codigo[row]) Then li_destino 	= THIS.object.dest_codigo[row]
+		If NOT isnull(THIS.object.dese_secdet[row]) Then li_secuencia 	= THIS.object.dese_secdet[row]
+		If NOT isnull(THIS.object.inpe_numero[row]) Then li_inspeccion = THIS.object.inpe_numero[row]
+		If NOT isnull(THIS.object.stat_codigo[row]) Then li_status 		= THIS.object.stat_codigo[row]
+		If NOT isnull(THIS.object.dese_rechaz[row]) Then li_rechazo 	= THIS.object.dese_rechaz[row]	
+		If NOT isnull(THIS.object.pafr_barra2[row]) Then ls_nota 		= THIS.object.pafr_barra2[row]
 		
-		IF ISDATE(String(THIS.object.dese_fecini[row], 'dd-mm-yyyy')) THEN 
+		If ISDATE(String(THIS.object.dese_fecini[row], 'dd-mm-yyyy')) Then 
 			fecemb_desde						= THIS.object.dese_fecini[row]
-		ELSE
+		Else
 			fecemb_desde						= Date('01-01-1900')
 			THIS.object.dese_fecini[row] 	= fecemb_desde
-		END IF
+		End If
 		
-		IF ISDATE(String(THIS.object.dese_fecter[row], 'dd-mm-yyyy')) THEN 
+		If ISDATE(String(THIS.object.dese_fecter[row], 'dd-mm-yyyy')) Then 
 			fecemb_hasta						= Date(THIS.object.dese_fecter[row])
-		ELSE
+		Else
 			fecemb_hasta						= Date(string(Today(), 'dd-mm-yyyy'))
 			THIS.object.dese_fecter[row] 	= fecemb_hasta
-		END IF
+		End If
 		
 		ll_cont = dw_6.Retrieve(li_clie_codigo, li_plde_codigo, dw_1.object.dese_numero[row],ii_tipo)
 		
-		IF ll_cont > 0 THEN
+		If ll_cont > 0 Then
 			dw_pallets.Retrieve(li_clie_codigo, li_plde_codigo, dw_1.object.dese_numero[row],ii_tipo)
-		END IF
+		End If
 		
 		dw_4.SetTransObject(SQLCA)
 		
@@ -1223,32 +1222,29 @@ CHOOSE CASE dwo.name
 		
 		dw_1.Object.dese_secuen[row] = row
 		
-		IF li_ret > 0 THEN
-			
+		If li_ret > 0 Then
 			FOR li_i = 1 TO dw_4.RowCount()
 				dw_4.object.dese_secuen[li_i] = dw_1.object.dese_secuen[row]
-			NEXT
-						
-		ELSE
+			NEXT		
+		Else
 			Messagebox("Atención","No existe Pallets que cumplan con los parametros de busqueda", Exclamation!)
-		END IF
+		End If
 		
-	CASE "b_secuencia"
+	Case "b_secuencia"
 		istr_busq.argum[11] = string(dw_1.object.espe_codigo[row])
 		istr_busq.argum[12] = string(dw_1.object.dest_codigo[row])
 		
-		IF dw_1.object.dest_codigo[row] <> -1 THEN
-				
+		If dw_1.object.dest_codigo[row] <> -1 Then
 			OpenWithParm(w_busc_secuencia_destino, istr_busq)
 			
 			istr_busq = Message.PowerObjectParm
 			
-			IF istr_busq.argum[10] <> "" THEN
+			If istr_busq.argum[10] <> "" Then
 				dw_1.Object.dese_secdet[row] = integer(istr_busq.argum[13])
-			END IF	
-		END IF	
+			End If	
+		End If	
 		
-END CHOOSE
+End Choose
 
 
 

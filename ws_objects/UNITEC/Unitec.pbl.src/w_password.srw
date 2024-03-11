@@ -28,8 +28,6 @@ end type
 global w_password w_password
 
 type variables
-Str_mant		istr_mant
-
 Integer		ii_Errores
 end variables
 

@@ -8386,7 +8386,9 @@ end on
 type m_cambiodenrosdepallet from menu within m_cajasembaladas0
 end type
 
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+event clicked;SetPointer(HourGlass!)
+IF NOT AccesoPuntoCritico() THEN Return
+
 OpenSheetWithParm(w_cambio_general_folio_pallets, "1", w_main, ii_columna, Original!)
 end event
 

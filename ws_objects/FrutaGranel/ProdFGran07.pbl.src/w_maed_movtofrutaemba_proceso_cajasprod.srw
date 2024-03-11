@@ -2563,115 +2563,118 @@ ls_Columna = dwo.Name
 
 SetNull(ls_Nula)
 
-CHOOSE CASE ls_Columna
-	CASE "emba_codigo"
+Choose Case ls_Columna
+	Case "emba_codigo"
 		ls_embalaje = dw_4.Object.emba_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not ExisteEmbalaje(Integer(istr_Mant.Argumento[9]),  &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not ExisteEmbalaje(Integer(istr_Mant.Argumento[9]),  &
 										 Integer(istr_Mant.Argumento[10]), &
-										 dw_3.Object.etiq_codigo[1],Data) THEN
+										 dw_3.Object.etiq_codigo[1],Data) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
 				This.SetItem(row, "emba_nombre", ls_Nula)
-				RETURN 1
-			ELSE
+				Return 1
+			Else
 				This.SetItem(row, "emba_nombre", is_embalaje)
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, ls_Embalaje)
-			RETURN 1
-			
-		END IF
+			Return 1
+		End If
 		
-	CASE "cate_codigo"
+	Case "cate_codigo"
 		li_categoria = dw_4.Object.cate_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not iuo_categorias.Existe(Integer(Data),True,SqlCa) THEN
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not iuo_categorias.Existe(Integer(Data),True,SqlCa) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_categoria)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_calibr"
+	Case "pafr_calibr"
 		ls_Calibre	=	dw_4.Object.pafr_calibr[row]
 		Data			=	Mid(Data + "   ", 1, 3)
 		
-		IF IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not ExisteCalibre(Integer(istr_Mant.Argumento[8]), &
 								  		Integer(istr_Mant.Argumento[9]), &
 								  		Integer(istr_Mant.Argumento[10]), &
-										Data, istr_calibre) THEN
+										Data, istr_calibre) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, ls_calibre)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_ccajas"
+	Case "pafr_ccajas"
 		li_ccaj = This.Object.pafr_ccajas[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
 			
-			IF IsNull(This.Object.pafr_ccajas[row]) THEN
+			If IsNull(This.Object.pafr_ccajas[row]) Then
 				li_Cajas	=	0
-			ELSE
+			Else
 				li_Cajas	=	This.GetItemNumber(row, "pafr_ccajas")
-			END IF
+			End If
 			
 			li_Cajas	=	This.GetItemNumber(1, "total_cajas") - &
 							li_Cajas + Integer(Data)
 			
-			IF li_Cajas > iuo_tipopallet.Cajas THEN
+			If li_Cajas > iuo_tipopallet.Cajas Then
 				MessageBox("Atención", "Cantidad de Cajas Total sobrepasa la~r" + &
 								"Cantidad de Cajas del Pallet (" + &
 								Trim(String(iuo_tipopallet.Cajas, "#,##0")) + &
 								").~r~rRevise cantidades registradas.")
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 				
-				RETURN 1
-			ELSEIF li_Cajas = iuo_tipopallet.Cajas THEN
+				Return 1
+			ElseIf li_Cajas = iuo_tipopallet.Cajas Then
 				dw_3.Object.paen_tipopa[1] = 1
-			ELSE
+			Else
 				dw_3.Object.paen_tipopa[1] = 2
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_ccaj)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "lote_codigo"
+	Case "lote_codigo"
 		li_loteing = dw_4.Object.lote_codigo[row]
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
-			IF Not iuo_Lote.Existe(This.Object.plde_origen[row], &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
+			If Not iuo_Lote.Existe(This.Object.plde_origen[row], &
 						Integer(istr_Mant.Argumento[8]), Integer(Data), &
 						True, Sqlca) &
 				OR Not iuo_Lote.ExisteOrdenProceso(Integer(istr_Mant.Argumento[2]), &
 						Integer(istr_Mant.Argumento[5]), Integer(istr_Mant.Argumento[6]), &
 						This.Object.plde_origen[row], Integer(istr_Mant.Argumento[8]), &
-						Integer(Data), True, Sqlca) THEN
+						Integer(Data), True, Sqlca) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 				
-				RETURN 1
-			END IF
-		ELSE	
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
+				Return 1
+			Else
+				This.Object.pafr_huert1[Row] = iuo_Lote.Predio
+				This.Object.pafr_cuart1[Row] = iuo_Lote.CentroCosto
+				This.Object.pafr_ggncod[Row] = iuo_Lote.GGN
+			End If
+		Else	
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 			This.SetItem(row, ls_Columna, li_loteing)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-END CHOOSE
+End Choose
 
 Captura_Totales()
 end event

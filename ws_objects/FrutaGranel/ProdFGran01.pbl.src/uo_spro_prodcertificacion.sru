@@ -51,10 +51,10 @@ public function boolean existe (long al_prod, integer ai_predio, integer ai_espe
 
 select distinct prot_codigo into :prec_codigo
   from dbo.cert_certificacion_prod
- where "prod_codigo"	=	:al_prod
- 	and "prpr_codigo"	=	:ai_predio
-	and "espe_codigo"	=	:ai_espe
-	and "prot_codigo"	=	:ai_nice
+ where prod_codigo	=	:al_prod
+ 	and prpr_codigo	=	:ai_predio
+	and espe_codigo	=	:ai_espe
+	and prot_codigo	=	:ai_nice
  USING at_Transaccion;
 
 IF at_Transaccion.SQLCode = -1 THEN

@@ -123,6 +123,7 @@ public subroutine ciclo_compacto ()
 public function boolean validamaxcajas ()
 public function string rescatadw ()
 public function integer buscacontratistaembaladora (long al_embaladora)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public function boolean noexistecliente (integer cliente);String ls_nombre
@@ -703,19 +704,19 @@ end subroutine
 
 protected function boolean wf_actualiza_db (boolean borrando);long ll_filasdetalle
 
-If dw_1.UpDate() = 1 THEN 
+If dw_1.UpDate() = 1 Then 
 	Commit;
 	
 	dw_1.ResetUpdate()
 	If sqlca.sqlcode <> 0 Then
 		F_ErrorBaseDatos(sqlca,This.title)
 		Return False
-	ELSE
+	Else
 		//
-		IF dw_1.RowCount() > 0 THEN
+		If dw_1.RowCount() > 0 Then
 			ll_FilasDetalle										=	dw_8.InsertRow(0)
 			dw_8.Object.pafr_secuen[ll_filasdetalle]		=	dw_1.Object.capr_numero[1]
-			dw_8.Object.emba_codigo[ll_filasdetalle]	=	dw_1.Object.Emba_codigo[1]
+			dw_8.Object.emba_codigo[ll_filasdetalle]	=	dw_1.Object.emba_codigo[1]
 			dw_8.Object.pafr_calibr[ll_filasdetalle]		=	dw_1.Object.capr_calibr[1]
 			dw_8.Object.pafr_calrot[ll_filasdetalle]		=	dw_1.Object.capr_calrot[1]
 			dw_8.Object.lote_codigo[ll_filasdetalle]		=	dw_1.Object.capr_nrlote[1]
@@ -737,15 +738,16 @@ If dw_1.UpDate() = 1 THEN
 			dw_8.Object.pafr_huert1[ll_filasdetalle]		=	dw_1.Object.prod_huerto[1]
 			dw_8.Object.pafr_cuart1[ll_filasdetalle]		=	dw_1.Object.prod_cuarte[1]
 			dw_8.Object.cont_codigo[ll_filasdetalle]		=	dw_1.Object.cont_codigo[1]
-			ii_cajasactuales										=	ii_cajasactuales + 1
+			dw_8.Object.pafr_ggncod[ll_filasdetalle]		=	wf_AsignaGGN(dw_1.Object.prod_codigo[1], dw_1.Object.prod_huerto[1], Integer(istr_mant.argumento[2]))
+			ii_cajasactuales									=	ii_cajasactuales + 1
 			//
 			
-			IF IsValid(w_maed_movtofrutaemba_proceso_cajasprod) THEN
-				IF ii_totalcajas = ii_cajasactuales THEN
+			If IsValid(w_maed_movtofrutaemba_proceso_cajasprod) Then
+				If ii_totalcajas = ii_cajasactuales Then
 					w_maed_movtofrutaemba_proceso_cajasprod.TriggerEvent("ue_guardar")
-				END IF
-			END IF
-		END IF
+				End If
+			End If
+		End If
 		
 		Return True
 	End If
@@ -867,6 +869,23 @@ ELSEIF sqlca.SQLCode = 100 THEN
 END IF
 
 Return li_contratista
+end function
+
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
 end function
 
 on w_info_etiqetas_compactos_cajasprod.create

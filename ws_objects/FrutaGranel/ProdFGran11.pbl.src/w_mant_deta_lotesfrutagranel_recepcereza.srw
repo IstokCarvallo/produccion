@@ -1718,7 +1718,6 @@ Choose Case ls_columna
 		End If
 		
 	Case "prod_codigo"
-			
 			If Not iuo_Productor.Existe(Long(Data),True, sqlca) Then
 				This.SetItem(Row, ls_Columna, li_Null)
 				This.SetItem(Row, "prod_rut", String(li_Null))
