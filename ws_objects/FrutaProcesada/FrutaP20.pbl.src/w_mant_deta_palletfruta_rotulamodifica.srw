@@ -6,7 +6,7 @@ end forward
 
 global type w_mant_deta_palletfruta_rotulamodifica from w_mant_detalle_csd
 integer width = 3817
-integer height = 1680
+integer height = 1804
 end type
 global w_mant_deta_palletfruta_rotulamodifica w_mant_deta_palletfruta_rotulamodifica
 
@@ -35,6 +35,7 @@ public function boolean noexistepredio (long ai_productor, integer ai_predio)
 public function boolean noexisteproductorrotulado (string ls_columna)
 public function boolean noexistecuartel (long al_productor, integer ai_predio, integer ai_cuartel, integer ai_especie, integer ai_variedad)
 public function boolean noexistecategoria (integer categoria)
+public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public function boolean existevariecab (integer as_valor);Integer	li_especie, li_variedad, li_cliente
@@ -344,6 +345,23 @@ Long		ll_cont
 Return lb_retorna
 end function
 
+public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
+
+uo_Certificaciones	iuo_Certificacion
+iuo_Certificacion	=	Create uo_Certificaciones
+
+
+If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
+	If iuo_Certificacion.of_Existe(Productor, Predio, Especie, False, SQLCA) Then
+		ls_Retorno = iuo_Certificacion.GGN
+	End If
+End If
+
+Destroy iuo_Certificacion
+
+Return ls_Retorno
+end function
+
 on w_mant_deta_palletfruta_rotulamodifica.create
 call super::create
 end on
@@ -363,25 +381,21 @@ idwc_valrot.Retrieve(Integer(istr_mant.argumento[3]))
 
 dw_1.GetChild("pafr_huert1", idwc_predio)
 idwc_predio.SetTransObject(Sqlca)
-IF idwc_predio.Retrieve(dw_1.Object.prod_codigo[il_fila]) = 0 THEN
-	idwc_predio.InsertRow(0)
-END IF
+If idwc_predio.Retrieve(dw_1.Object.prod_codigo[il_fila]) = 0 Then idwc_predio.InsertRow(0)
 
 dw_1.GetChild("pafr_huert4", idwc_prediorot)
 idwc_prediorot.SetTransObject(SQLCA)
-IF idwc_prediorot.Retrieve(dw_1.Object.pafr_prdrot[il_fila]) = 0 THEN
-	idwc_prediorot.InsertRow(0)
-END IF
+If idwc_prediorot.Retrieve(dw_1.Object.pafr_prdrot[il_fila]) = 0 Then idwc_prediorot.InsertRow(0)
 
 dw_1.GetChild("pafr_cuart1", idwc_cuartel)
 idwc_cuartel.SetTransObject(SQLCA)
-idwc_cuartel.Retrieve(dw_1.Object.Prod_codigo[il_fila],dw_1.Object.pafr_huert1[il_fila],dw_1.Object.espe_codigo[il_fila],dw_1.Object.vari_codigo[il_fila])
+idwc_cuartel.Retrieve(dw_1.Object.prod_codigo[il_fila],dw_1.Object.pafr_huert1[il_fila],dw_1.Object.espe_codigo[il_fila],dw_1.Object.vari_codigo[il_fila])
 			
 dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
 idwc_cuartelrot.SetTransObject(SQLCA)
 idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[il_fila],dw_1.Object.pafr_huert4[il_fila],dw_1.Object.espe_codigo[il_fila],dw_1.Object.pafr_varrot[il_fila])
 
-IF istr_mant.agrega THEN
+If istr_mant.Agrega Then
 	dw_1.SetItem(il_fila, "prod_codigo", dw_1.GetItemNumber(dw_1.GetRow(),'prod_codigo'))
 	dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 	dw_1.SetItem(il_fila, "paen_numero", Long(istr_mant.argumento[2]))
@@ -398,15 +412,15 @@ IF istr_mant.agrega THEN
 //	dw_1.SetItem(il_fila, "pafr_copack", Long(istr_mant.argumento[21]))
 //	dw_1.SetItem(il_fila, "pafr_rotpak", Long(istr_mant.argumento[21]))
 	dw_1.SetItem(il_fila, "pafr_fecing", Date(istr_mant.argumento[39]))
-END IF
+End If
 
-IF istr_mant.agrega = False and istr_mant.borra = False THEN
+If Not istr_mant.Agrega And Not istr_mant.Borra Then
 	istr_mant.argumento[11]=String(Long(istr_mant.argumento[11])+Long(ias_campo[11]))
 //dw_1.SetItem(il_fila, "pafr_fecemb", Date(istr_mant.argumento[28]))
-ELSE
+Else
 	dw_1.SetItem(il_fila, "pafr_ccajas", Integer(istr_mant.argumento[11]))
 //	dw_1.SetItem(il_fila, "pafr_fecemb", Date(istr_mant.argumento[28]))
-END IF
+End If
 
 
 end event
@@ -489,13 +503,13 @@ PostEvent("ue_recuperadatos")
 istr_mant = Message.PowerObjectParm
 istr_mant.argumento[24] = istr_mant.argumento[24]
 
-IF istr_mant.argumento[16]='1' THEN
+If istr_mant.argumento[16]='1' Then
 	dw_1.Enabled	=	False
-END IF
+End If
 
-IF istr_mant.solo_consulta = True THEN
+If istr_mant.solo_consulta = True Then
 	dw_1.Enabled	=	False
-END IF
+End If
 
 dw_1.GetChild("espe_codigo", dw_especies)
 dw_1.GetChild("vari_codigo", dw_variedades)
@@ -586,7 +600,7 @@ type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_palletfruta_rotulamodi
 integer x = 73
 integer y = 88
 integer width = 3296
-integer height = 1412
+integer height = 1584
 string dataobject = "dw_mant_palletfruta_rotula"
 end type
 
@@ -597,15 +611,15 @@ SetNull(ls_Nula)
 
 ls_columna = dwo.name
 
-CHOOSE CASE ls_columna
-	CASE "pafr_embrea"
+Choose Case ls_columna
+	Case "pafr_embrea"
 		istr_mant.Argumento[7]=Data
 		
-		IF isnull(dw_1.Object.emba_codigo[il_fila]) THEN
+		If IsNull(dw_1.Object.emba_codigo[il_fila]) Then
 			dw_1.SetItem(il_fila, "emba_codigo", data)
-		END IF	
+		End If	
 
-	CASE "vari_codigo"
+	Case "vari_codigo"
 		istr_mant.argumento[58] = String(existevariedad_relacionada(Integer(istr_mant.argumento[3]),integer(data)))
 		
 		dw_1.Object.pafr_varrot[il_fila] = Integer(istr_mant.argumento[58])
@@ -614,176 +628,182 @@ CHOOSE CASE ls_columna
 		dw_1.SetItem(il_fila, "pafr_cuart1", Long(ls_Nula))
 		dw_1.SetItem(il_fila, "pafr_calibr", ls_Nula)
 		
-		IF isnull(dw_1.Object.pafr_varrot[il_fila]) OR Isnull(Integer(istr_mant.argumento[58])) THEN
+		If IsNull(dw_1.Object.pafr_varrot[il_fila]) OR IsNull(Integer(istr_mant.argumento[58])) Then
 			dw_1.SetItem(il_fila, "pafr_varrot", Integer(data))
 			istr_mant.argumento[58] = data
-		END IF
+		End If
 		
-		IF isnull(dw_1.Object.pafr_cuart4[il_fila]) THEN
+		If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_cuart4", Long(ls_Nula))
-		END IF
+		End If
 		
-		IF isnull(dw_1.Object.pafr_calrot[il_fila]) THEN
+		If IsNull(dw_1.Object.pafr_calrot[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_calrot", ls_Nula)
-		END IF
+		End If
 		
-	CASE "pafr_varrot"
+	Case "pafr_varrot"
 		dw_1.SetItem(il_fila, "pafr_cuart4", Long(ls_Nula))
 		dw_1.SetItem(il_fila, "pafr_calrot", ls_Nula)
 			
-	CASE "prod_codigo"
+	Case "prod_codigo"
 		dw_1.SetItem(il_fila, "pafr_cuart1", Integer(ls_Nula))
 		dw_1.SetItem(il_fila, "pafr_huert1", Integer(ls_Nula))
 		
-		IF isnull(dw_1.Object.pafr_cuart4[il_fila]) THEN
+		If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_Nula))
-		END IF
+		End If
 		
-		IF isnull(dw_1.Object.pafr_huert4[il_fila]) THEN
+		If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_huert4", Integer(ls_Nula))
-		END IF	
+		End If	
 		
-		IF  NoExisteProductor(data) THEN
+		If  NoExisteProductor(data) Then
 			dw_1.SetItem(il_fila, ls_columna, Long(ls_Nula))
-			RETURN 1
-		ELSEIF istr_mant.Argumento[20]='1' OR istr_mant.Argumento[20]='6'THEN
+			Return 1
+		ElseIf istr_mant.Argumento[20]='1' OR istr_mant.Argumento[20]='6'Then
 			dw_1.GetChild("pafr_huert1", idwc_predio)
 			idwc_predio.SetTransObject(SQLCA)
 			ll_Prod	=	Long(data)
 			
 			dw_1.SetItem(il_fila, "pafr_huert1", Long(ls_Nula))
-			IF idwc_predio.Retrieve(ll_Prod) = 0 THEN
+			If idwc_predio.Retrieve(ll_Prod) = 0 Then
 				idwc_predio.InsertRow(0)
-			END IF
+			End If
 			
-			IF isnull(dw_1.Object.pafr_prdrot[il_fila]) THEN
+			If IsNull(dw_1.Object.pafr_prdrot[il_fila]) Then
 				dw_1.SetItem(il_fila, "pafr_prdrot", Long(data))
-			END IF
+			End If
 			
-			IF isnull(dw_1.Object.pafr_huert4[il_fila]) THEN
+			If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
 				dw_1.GetChild("pafr_huert4", idwc_prediorot)
 				idwc_prediorot.SetTransObject(SQLCA)
-				IF idwc_prediorot.Retrieve(ll_Prod) = 0 THEN
+				If idwc_prediorot.Retrieve(ll_Prod) = 0 Then
 					idwc_prediorot.InsertRow(0)
-				END IF
-			END IF
+				End If
+			End If
 			
-			IF Not Varificaproductor(Integer(Data)) THEN RETURN 1
-		END IF
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row])
+			
+			If Not VarIficaproductor(Integer(Data)) Then Return 1
+		End If
 				
-	CASE "pafr_huert1"		
+	Case "pafr_huert1"		
 		dw_1.SetItem(il_fila, "pafr_cuart1", Integer(ls_Nula))
 		
-		IF Not noexistepredio(dw_1.Object.Prod_codigo[row],integer(data)) THEN
-			dw_1.SetItem(row, "pafr_huert1", integer(ls_nula))
+		If Not noexistepredio(dw_1.Object.Prod_codigo[Row],integer(data)) Then
+			dw_1.SetItem(Row, "pafr_huert1", integer(ls_nula))
 			Return 1
-		ELSE
+		Else
 			dw_1.GetChild("pafr_cuart1", idwc_cuartel)
 			idwc_cuartel.SetTransObject(SQLCA)
-			idwc_cuartel.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
+			idwc_cuartel.Retrieve(dw_1.Object.Prod_codigo[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.vari_codigo[Row])
 			
-			IF isnull(dw_1.Object.pafr_huert4[il_fila]) THEN
+			If IsNull(dw_1.Object.pafr_huert4[il_fila]) Then
 				dw_1.SetItem(il_fila, "pafr_huert4", Integer(data))
-			END IF
+			End If
 			
-			IF isnull(dw_1.Object.pafr_cuart4[il_fila]) THEN
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row])
+			
+			If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 				dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
 				idwc_cuartelrot.SetTransObject(SQLCA)
-				idwc_cuartelrot.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
+				idwc_cuartelrot.Retrieve(dw_1.Object.Prod_codigo[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.vari_codigo[Row])
 				dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_nula))
-			END IF	
-		END IF
+			End If	
+		End If
 		
-	CASE "pafr_calibr"
-		IF NoExisteCalibre(data) OR Duplicado(Upper(data)) THEN
+	Case "pafr_calibr"
+		If NoExisteCalibre(data) OR Duplicado(Upper(data)) Then
 			dw_1.SetItem(il_fila, ls_columna, Upper(ias_campo[12]))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-		IF isnull(dw_1.Object.pafr_calrot[il_fila]) THEN
+		If IsNull(dw_1.Object.pafr_calrot[il_fila]) Then
 			dw_1.SetItem(il_fila, "pafr_calrot", data)
-		END IF
+		End If
 		
-	CASE "pafr_ccajas"
-		
-		IF Long(data) < 0 THEN
+	Case "pafr_ccajas"
+		If Long(data) < 0 Then
 			dw_1.SetItem(il_fila, ls_columna, Long(istr_mant.Argumento[11]))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-		IF Long(data) > Long(istr_mant.Argumento[11]) THEN
+		If Long(data) > Long(istr_mant.Argumento[11]) Then
 			MessageBox("Atención", "Cajas ingresadas sobrepasan las " + istr_mant.Argumento[11] + &
 							" cajas del Pallet")
 			dw_1.SetItem(il_fila, ls_columna, Long(istr_mant.Argumento[11]))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "pafr_prdrot"
+	Case "pafr_prdrot"
 		dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_Nula))
 		dw_1.SetItem(il_fila, "pafr_huert4", Integer(ls_Nula))
 		
-		IF  noexisteproductorrotulado(data) THEN
+		If  noexisteproductorrotulado(data) Then
 			dw_1.SetItem(il_fila, ls_columna, Long(ls_Nula))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_1.GetChild("pafr_huert4", idwc_prediorot)
 			idwc_prediorot.SetTransObject(SQLCA)
 			ll_Prod	=	Long(data)
-			IF idwc_prediorot.Retrieve(ll_Prod) = 0 THEN
+			If idwc_prediorot.Retrieve(ll_Prod) = 0 Then
 				idwc_prediorot.InsertRow(0)
-			END IF
+			End If
 			
-			IF Not Varificaproductor(Integer(Data)) THEN RETURN 1
-		END IF	
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row])
+			If Not VarIficaproductor(Integer(Data)) Then Return 1
+		End If	
 		
-	CASE "pafr_huert4"
+	Case "pafr_huert4"
 		dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_Nula))
-		IF Not noexistepredio(dw_1.Object.pafr_prdrot[row],integer(data)) THEN
-			dw_1.SetItem(row, "pafr_huert4", integer(ls_nula))
+		If Not noexistepredio(dw_1.Object.pafr_prdrot[Row],integer(data)) Then
+			dw_1.SetItem(Row, "pafr_huert4", integer(ls_nula))
 			Return 1
-		ELSE
+		Else
 			dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
 			idwc_cuartelrot.SetTransObject(SQLCA)
-			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.pafr_varrot[row])
-		END IF
+			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.pafr_varrot[Row])
+			
+			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.pafr_prdrot[Row], Long(Data), This.Object.espe_codigo[Row])
+		End If
 		
-	CASE "pafr_cuart1"
-		IF Not noexistecuartel(dw_1.Object.Prod_codigo[row],dw_1.Object.pafr_huert1[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row]) THEN
-			dw_1.SetItem(row, "pafr_cuart1", integer(ls_nula))
+	Case "pafr_cuart1"
+		If Not noexistecuartel(dw_1.Object.Prod_codigo[Row],dw_1.Object.pafr_huert1[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.vari_codigo[Row]) Then
+			dw_1.SetItem(Row, "pafr_cuart1", integer(ls_nula))
 			Return 1
-		END IF
+		End If
 		
-		IF isnull(dw_1.Object.pafr_cuart4[il_fila]) THEN
-			dw_1.SetItem(row, "pafr_cuart4", integer(data))
-		END IF	
+		If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
+			dw_1.SetItem(Row, "pafr_cuart4", integer(data))
+		End If	
 	
-	CASE "pafr_cuart4"
-		IF Not noexistecuartel(dw_1.Object.pafr_prdrot[row],dw_1.Object.pafr_huert4[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.pafr_varrot[row]) THEN
-			dw_1.SetItem(row, "pafr_cuart4", integer(ls_nula))
+	Case "pafr_cuart4"
+		If Not noexistecuartel(dw_1.Object.pafr_prdrot[Row],dw_1.Object.pafr_huert4[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.pafr_varrot[Row]) Then
+			dw_1.SetItem(Row, "pafr_cuart4", integer(ls_nula))
 			Return 1
-		END IF
+		End If
 		
-	CASE "pafr_fecemb"	
-		IF isnull(dw_1.Object.pafr_fecrot[il_fila]) THEN
-			dw_1.SetItem(row, "pafr_fecrot", Date(data))
-		END IF
+	Case "pafr_fecemb"	
+		If IsNull(dw_1.Object.pafr_fecrot[il_fila]) Then
+			dw_1.SetItem(Row, "pafr_fecrot", Date(data))
+		End If
 		
-	CASE "cate_codigo"
-		IF noexistecategoria(Integer(Data)) THEN
+	Case "cate_codigo"
+		If noexistecategoria(Integer(Data)) Then
 			dw_1.SetItem(il_fila, ls_columna, Integer(ls_Nula))
 			dw_1.SetItem(il_fila, "pafr_catrot", Integer(ls_Nula))
-			RETURN 1
-		ELSE	
-			dw_1.SetItem(row, "pafr_catrot", Integer(data))
-		END IF
+			Return 1
+		Else	
+			dw_1.SetItem(Row, "pafr_catrot", Integer(data))
+		End If
 		
-	CASE "pafr_catrot"
-		IF noexistecategoria(Integer(Data)) THEN
+	Case "pafr_catrot"
+		If noexistecategoria(Integer(Data)) Then
 			dw_1.SetItem(il_fila, ls_columna, Integer(ls_Nula))
-			RETURN 1
-		END IF			
+			Return 1
+		End If			
 		
-END CHOOSE
+End Choose
 end event
 
 event dw_1::clicked;call super::clicked;String	ls_columna
