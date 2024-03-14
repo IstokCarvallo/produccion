@@ -52,7 +52,7 @@ type variables
 Constant Private String	_SMTP = "smtp.office365.com"
 Constant	Private Integer _PORT = 587
 Constant Private String	_USER = "sendmail@rioblanco.net"
-Constant Private String	_PASS = "rio.blanco.2019"
+Constant Private String	_PASS = "Rh32NSene_%654"
 end variables
 
 forward prototypes

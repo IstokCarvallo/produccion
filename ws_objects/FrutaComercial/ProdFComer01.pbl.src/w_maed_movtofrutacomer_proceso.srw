@@ -2324,11 +2324,11 @@ lstr_Busq.Argum[3] 	= 	""
 lstr_Busq.Argum[4] 	= 	""
 lstr_Busq.Argum[5] 	=	""
 
-IF dw_4.RowCount() > 0 THEN
+If dw_4.RowCount() > 0 Then
 	MessageBox("Protección de Datos", "El proceso en pantalla ya posee un lote, "+&
 												 "no es posible cargar archivo", Exclamation!)
 	Return
-END IF
+End If
 
 SetNull(is_ArchPlan)
 
@@ -2336,78 +2336,78 @@ OpenWithParm(w_busc_lotescomdeta_archivo, lstr_Busq)
 
 lstr_Busq				= 	Message.PowerObjectParm
 
-IF lstr_Busq.Argum[2] <> "" THEN
+If lstr_Busq.Argum[2] <> "" Then
 	dw_locomar.Retrieve(Integer(lstr_Busq.Argum[1]), &
 							     Long(lstr_Busq.Argum[2]), &
 							     Long(lstr_Busq.Argum[3]), &
 								   	(lstr_Busq.Argum[4]))
-	IF dw_locomar.RowCount() > 0 THEN
+	If dw_locomar.RowCount() > 0 Then
 	li_fila = 1
 	
-		IF dw_lce.Retrieve(dw_locomar.Object.lofc_pltcod[li_fila], &
+		If dw_lce.Retrieve(dw_locomar.Object.lofc_pltcod[li_fila], &
 								 dw_locomar.Object.lofc_espcod[li_fila], &
 								 dw_locomar.Object.lofc_lotefc[li_fila], &
 								 dw_locomar.Object.lfcd_archiv[li_fila]) < 1 OR &
 			dw_lcd.Retrieve(dw_locomar.Object.lofc_pltcod[li_fila], &
 								 dw_locomar.Object.lofc_espcod[li_fila], &
 								 dw_locomar.Object.lofc_lotefc[li_fila], &
-								 dw_locomar.Object.lfcd_archiv[li_fila]) < 1 THEN
+								 dw_locomar.Object.lfcd_archiv[li_fila]) < 1 Then
 			MessageBox("Error", "No se ha podido recuperar los datos del lote " + &
 									  String(dw_locomar.Object.lofc_lotefc[li_fila]))
-		ELSE
+		Else
 			
-			IF dw_lce.Object.prod_codigo[1] <> dw_2.Object.prod_codigo[1] THEN
+			If dw_lce.Object.prod_codigo[1] <> dw_2.Object.prod_codigo[1] Then
 				MessageBox("Error", "El Productor del Lote en el archivo no corresponde "+ &
 										  "al Productor del Proceso" + &
 										  String(dw_lce.Object.prod_codigo[1]) + '-' + &
 										  String(dw_2.Object.prod_codigo[1]), StopSign!)
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
-			IF dw_lce.Object.lofc_espcod[1] <> dw_2.Object.espe_codigo[1] THEN
+			If dw_lce.Object.lofc_espcod[1] <> dw_2.Object.espe_codigo[1] Then
 				MessageBox("Error", "La Especie del Lote en el archivo no corresponde "+ &
 										  "a la Especie del Proceso" + &
 										  String(dw_lce.Object.lofc_espcod[1]) + '-' + &
 										  String(dw_2.Object.espe_codigo[1]), StopSign!)
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
 			FOR li_detalle = 1 TO dw_lcd.RowCount()
-				IF dw_lcd.Object.vari_codigo[li_detalle] <> dw_2.Object.vari_codigo[1] THEN
+				If dw_lcd.Object.vari_codigo[li_detalle] <> dw_2.Object.vari_codigo[1] Then
 					MessageBox("Error", "La Variedad del Lote en el archivo no corresponde "+ &
 											  "a la Variedad del Proceso " + &
 											  String(dw_lcd.Object.vari_codigo[li_detalle]) + '-' + &
 											  String(dw_2.Object.vari_codigo[1]), StopSign!)
 					TriggerEvent("ue_nuevo")
 					Return
-				END IF
+				End If
 			NEXT
 			
 			dw_3.SetItem(1, "lofc_espcod", dw_lce.Object.lofc_espcod[1])
-			IF dw_3_ItemChanged(1, "lofc_espcod", String(dw_lce.Object.lofc_espcod[1])) = 1 THEN 
+			If dw_3_ItemChanged(1, "lofc_espcod", String(dw_lce.Object.lofc_espcod[1])) = 1 Then 
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
 			dw_3.SetItem(1, "lofc_totbul", dw_lce.Object.lofc_totbul[1])
-			IF dw_3_ItemChanged(1, "lofc_totbul", String(dw_lce.Object.lofc_totbul[1])) = 1 THEN 
+			If dw_3_ItemChanged(1, "lofc_totbul", String(dw_lce.Object.lofc_totbul[1])) = 1 Then 
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
 			dw_3.SetItem(1, "lofc_totkil", dw_lce.Object.lofc_totkil[1])
-			IF dw_3_ItemChanged(1, "lofc_totkil", String(dw_lce.Object.lofc_totkil[1])) = 1 THEN 
+			If dw_3_ItemChanged(1, "lofc_totkil", String(dw_lce.Object.lofc_totkil[1])) = 1 Then 
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
 			dw_3.SetItem(1, "lofc_tipool", dw_lce.Object.lofc_tipool[1])
-			IF dw_3_ItemChanged(1, "lofc_tipool", String(dw_lce.Object.lofc_tipool[1])) = 1 THEN 
+			If dw_3_ItemChanged(1, "lofc_tipool", String(dw_lce.Object.lofc_tipool[1])) = 1 Then 
 				TriggerEvent("ue_nuevo")
 				Return
-			END IF
+			End If
 			
 			FOR li_detalle = 1 TO dw_lcd.RowCount()
 				tab_1.SelectedTab = 1
@@ -2416,383 +2416,383 @@ IF lstr_Busq.Argum[2] <> "" THEN
 				CHOOSE CASE dw_4.DataObject 
 					CASE "dw_mues_lotesfrutacomdeta_proceso_bins"/*------------------------------------*/
 						dw_4.SetItem(il_fila, "lofc_espcod", dw_lcd.Object.lofc_espcod[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lofc_lotefc", dw_3.Object.lofc_lotefc[1])
-						IF dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_secuen", dw_lcd.Object.lfcd_secuen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_nturno", dw_lcd.Object.lfcd_nturno[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_fecham", dw_lcd.Object.lfcd_fecham[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "vari_codigo", dw_lcd.Object.vari_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "frio_tipofr", dw_lcd.Object.frio_tipofr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "pefr_codigo", dw_lcd.Object.pefr_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "bins_numero", dw_lcd.Object.bins_numero[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "bins_numero", String(dw_lcd.Object.bins_numero[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "bins_numero", String(dw_lcd.Object.bins_numero[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "enva_tipoen", dw_lcd.Object.enva_tipoen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "enva_codigo", dw_lcd.Object.enva_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "cale_calida", dw_lcd.Object.cale_calida[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "refe_gcalib", dw_lcd.Object.refe_gcalib[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "refe_calibr", dw_lcd.Object.refe_calibr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_tipool", dw_lcd.Object.lfcd_tipool[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "cate_codigo", dw_lcd.Object.cate_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_bultos", dw_lcd.Object.lfcd_bultos[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 								
 						dw_4.SetItem(il_fila, "lfcd_kilbru", dw_lcd.Object.lfcd_kilbru[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_kilpro", dw_lcd.Object.lfcd_kilpro[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 					
 						dw_4.SetItem(il_fila, "lfcd_kilnet", dw_lcd.Object.lfcd_kilnet[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
 					CASE "dw_mues_lotesfrutacomdeta_proceso_bp"/*------------------------------------*/
 						dw_4.SetItem(il_fila, "lofc_espcod", dw_lcd.Object.lofc_espcod[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
 						dw_4.SetItem(il_fila, "lofc_lotefc", dw_3.Object.lofc_lotefc[1])
-						IF dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_secuen", dw_lcd.Object.lfcd_secuen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_secuen", dw_lcd.Object.lfcd_secuen[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_nturno", dw_lcd.Object.lfcd_nturno[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_nturno", dw_lcd.Object.lfcd_nturno[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_fecham", dw_lcd.Object.lfcd_fecham[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_fecham", dw_lcd.Object.lfcd_fecham[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "vari_codigo", dw_lcd.Object.vari_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "vari_codigo", dw_lcd.Object.vari_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "frio_tipofr", dw_lcd.Object.frio_tipofr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "frio_tipofr", dw_lcd.Object.frio_tipofr[li_detalle])
+						If dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "pefr_codigo", dw_lcd.Object.pefr_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "pefr_codigo", dw_lcd.Object.pefr_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "bins_numero", dw_lcd.Object.bins_numero[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "bins_numero", String(dw_lcd.Object.bins_numero[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "bins_numero", dw_lcd.Object.bins_numero[li_detalle])
+						If dw_4_ItemChanged(il_fila, "bins_numero", String(dw_lcd.Object.bins_numero[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "enva_tipoen", dw_lcd.Object.enva_tipoen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "enva_tipoen", dw_lcd.Object.enva_tipoen[li_detalle])
+						If dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "enva_codigo", dw_lcd.Object.enva_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "enva_codigo", dw_lcd.Object.enva_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "cale_calida", dw_lcd.Object.cale_calida[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "cale_calida", dw_lcd.Object.cale_calida[li_detalle])
+						If dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "refe_gcalib", dw_lcd.Object.refe_gcalib[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "refe_gcalib", dw_lcd.Object.refe_gcalib[li_detalle])
+						If dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "refe_calibr", dw_lcd.Object.refe_calibr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "refe_calibr", dw_lcd.Object.refe_calibr[li_detalle])
+						If dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_bultos", dw_lcd.Object.lfcd_bultos[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_bultos", dw_lcd.Object.lfcd_bultos[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_tipool", dw_lcd.Object.lfcd_tipool[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_tipool", dw_lcd.Object.lfcd_tipool[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "cate_codigo", dw_lcd.Object.cate_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "cate_codigo", dw_lcd.Object.cate_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilobp", dw_lcd.Object.lfcd_kilobp[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilobp", String(dw_lcd.Object.lfcd_kilobp[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilobp", dw_lcd.Object.lfcd_kilobp[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilobp", String(dw_lcd.Object.lfcd_kilobp[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilbru", dw_lcd.Object.lfcd_kilbru[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilbru", dw_lcd.Object.lfcd_kilbru[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilpro", dw_lcd.Object.lfcd_kilpro[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilpro", dw_lcd.Object.lfcd_kilpro[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilnet", dw_lcd.Object.lfcd_kilnet[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilnet", dw_lcd.Object.lfcd_kilnet[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-					CASE ELSE/*------------------------------------------------------------------------------*/
+					CASE Else/*------------------------------------------------------------------------------*/
 		 				dw_4.SetItem(il_fila, "lofc_espcod", dw_lcd.Object.lofc_espcod[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 THEN 
+						If dw_4_ItemChanged(il_fila, "lofc_espcod", String(dw_lcd.Object.lofc_espcod[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lofc_lotefc", dw_3.Object.lofc_lotefc[1])
-						IF dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lofc_lotefc", dw_3.Object.lofc_lotefc[1])
+						If dw_4_ItemChanged(il_fila, "lofc_lotefc", String(dw_3.Object.lofc_lotefc[1])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_secuen", dw_lcd.Object.lfcd_secuen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_secuen", dw_lcd.Object.lfcd_secuen[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_secuen", String(dw_lcd.Object.lfcd_secuen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_nturno", dw_lcd.Object.lfcd_nturno[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_nturno", dw_lcd.Object.lfcd_nturno[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_nturno", String(dw_lcd.Object.lfcd_nturno[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_fecham", dw_lcd.Object.lfcd_fecham[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_fecham", dw_lcd.Object.lfcd_fecham[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_fecham", String(dw_lcd.Object.lfcd_fecham[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "vari_codigo", dw_lcd.Object.vari_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "vari_codigo", dw_lcd.Object.vari_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "vari_codigo", String(dw_lcd.Object.vari_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "frio_tipofr", dw_lcd.Object.frio_tipofr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "frio_tipofr", dw_lcd.Object.frio_tipofr[li_detalle])
+						If dw_4_ItemChanged(il_fila, "frio_tipofr", String(dw_lcd.Object.frio_tipofr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "pefr_codigo", dw_lcd.Object.pefr_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "pefr_codigo", dw_lcd.Object.pefr_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "pefr_codigo", String(dw_lcd.Object.pefr_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "enva_tipoen", dw_lcd.Object.enva_tipoen[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "enva_tipoen", dw_lcd.Object.enva_tipoen[li_detalle])
+						If dw_4_ItemChanged(il_fila, "enva_tipoen", String(dw_lcd.Object.enva_tipoen[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "enva_codigo", dw_lcd.Object.enva_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "enva_codigo", dw_lcd.Object.enva_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "enva_codigo", String(dw_lcd.Object.enva_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "cale_calida", dw_lcd.Object.cale_calida[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "cale_calida", dw_lcd.Object.cale_calida[li_detalle])
+						If dw_4_ItemChanged(il_fila, "cale_calida", String(dw_lcd.Object.cale_calida[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_bultos", dw_lcd.Object.lfcd_bultos[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_bultos", dw_lcd.Object.lfcd_bultos[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_bultos", String(dw_lcd.Object.lfcd_bultos[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_tipool", dw_lcd.Object.lfcd_tipool[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_tipool", dw_lcd.Object.lfcd_tipool[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_tipool", String(dw_lcd.Object.lfcd_tipool[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "cate_codigo", dw_lcd.Object.cate_codigo[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "cate_codigo", dw_lcd.Object.cate_codigo[li_detalle])
+						If dw_4_ItemChanged(il_fila, "cate_codigo", String(dw_lcd.Object.cate_codigo[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "refe_gcalib", dw_lcd.Object.refe_gcalib[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "refe_gcalib", dw_lcd.Object.refe_gcalib[li_detalle])
+						If dw_4_ItemChanged(il_fila, "refe_gcalib", String(dw_lcd.Object.refe_gcalib[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "refe_calibr", dw_lcd.Object.refe_calibr[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "refe_calibr", dw_lcd.Object.refe_calibr[li_detalle])
+						If dw_4_ItemChanged(il_fila, "refe_calibr", String(dw_lcd.Object.refe_calibr[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilobp", dw_lcd.Object.lfcd_kilobp[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilobp", String(dw_lcd.Object.lfcd_kilobp[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilobp", dw_lcd.Object.lfcd_kilobp[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilobp", String(dw_lcd.Object.lfcd_kilobp[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilbru", dw_lcd.Object.lfcd_kilbru[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilbru", dw_lcd.Object.lfcd_kilbru[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilbru", String(dw_lcd.Object.lfcd_kilbru[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilpro", dw_lcd.Object.lfcd_kilpro[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilpro", dw_lcd.Object.lfcd_kilpro[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilpro", String(dw_lcd.Object.lfcd_kilpro[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
-         			dw_4.SetItem(il_fila, "lfcd_kilnet", dw_lcd.Object.lfcd_kilnet[li_detalle])
-						IF dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 THEN 
+         				dw_4.SetItem(il_fila, "lfcd_kilnet", dw_lcd.Object.lfcd_kilnet[li_detalle])
+						If dw_4_ItemChanged(il_fila, "lfcd_kilnet", String(dw_lcd.Object.lfcd_kilnet[li_detalle])) = 1 Then 
 							TriggerEvent("ue_nuevo")
 							Return
-						END IF
+						End If
 						
 						
-				END CHOOSE
+				End CHOOSE
 				
 			NEXT
 			
 			is_ArchPlan	=	lstr_Busq.Argum[4]
 			
-		END IF
-	END IF
-END IF
+		End If
+	End If
+End If
 end subroutine
 
 public function integer dw_3_itemchanged (long row, string columna, string data);String	ls_Columna, ls_Null, ls_Fecha
@@ -3039,13 +3039,13 @@ This.ParentWindow().ToolBarVisible	=	True
 im_menu.Item[1].Item[6].Enabled		=	True
 im_menu.Item[7].Visible					=	True
 
-IF gstr_paramplanta.binsabins OR gstr_paramplanta.bultobins THEN
+If gstr_paramplanta.binsabins OR gstr_paramplanta.bultobins Then
 	tab_1.tp_1.dw_detalle.DataObject = "dw_mues_lotesfrutacomdeta_proceso_bins"
-ELSEIF gstr_paramplanta.palletdebins then
+ElseIf gstr_paramplanta.palletdebins Then
 	tab_1.tp_1.dw_detalle.DataObject = "dw_mues_lotesfrutacomdeta_proceso_bp"
-ELSE
+Else
 	tab_1.tp_1.dw_detalle.DataObject = "dw_mues_lotesfrutacomdeta_proceso"
-END IF
+End If
 
 dw_4											=	tab_1.tp_1.dw_detalle
 dw_5											=	tab_1.tp_2.dw_envases
@@ -3066,9 +3066,9 @@ dw_locomar.SetTransObject(sqlca)
 dw_lce.SetTransObject(sqlca)
 dw_lcd.SetTransObject(sqlca)
 
-dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
+dw_1.ModIfy("datawindow.message.title='Error '+ is_titulo")
 dw_4.SetRowFocusIndicator(Hand!)
-dw_4.Modify("DataWindow.Footer.Height = 77")
+dw_4.ModIfy("DataWindow.Footer.Height = 77")
 
 istr_mant.dw						=	dw_1
 istr_mant.UsuarioSoloConsulta	=	OpcionSoloConsulta()
@@ -3100,28 +3100,28 @@ idwc_Cuartel.SetTransObject(SQLCA)
 idwc_Predio.SetTransObject(SQLCA)
 
 idwc_planta.Retrieve()
-IF idwc_especie.Retrieve() = 0 THEN
+If idwc_especie.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Especie")
 	idwc_especie.InsertRow(0)
-END IF
+End If
 
-IF idwc_tipofrio.Retrieve() = 0 THEN
+If idwc_tipofrio.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Tipo de Frío")
 	idwc_tipofrio.InsertRow(0)
-END IF
+End If
 
-IF idwc_periodofrio.Retrieve() = 0 THEN
+If idwc_periodofrio.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Periodo de Frío")
 	idwc_periodofrio.InsertRow(0)
-END IF
+End If
 
-IF idwc_productor.Retrieve() = 0 THEN
+If idwc_productor.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Productores")
 	idwc_productor.InsertRow(0)
-ELSE
+Else
 	idwc_productor.SetSort("prod_nombre A")
 	idwc_productor.Sort()
-END IF
+End If
 
 If idwc_Predio.Retrieve(-1) = 0 Then
 	MessageBox("Atención", "Falta Registrar Predios")
@@ -3133,33 +3133,34 @@ If idwc_Cuartel.Retrieve(-1, -1) = 0 Then
 	idwc_Cuartel.InsertRow(0)
 End If
 
-IF idwc_categoria.Retrieve() = 0 THEN
+If idwc_categoria.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Categoría")
 	idwc_categoria.InsertRow(0)
-ELSE
+Else
 	idwc_categoria.SetSort("cate_nombre A")
 	idwc_categoria.Sort()
 
 	idwc_categoria.SetFilter("cate_embala <> 1")
 	idwc_categoria.Filter()
-END IF
+End If
 
-IF idwc_tipoenvase.Retrieve() = 0 THEN
+If idwc_tipoenvase.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Tipo de Envase")
 	idwc_tipoenvase.InsertRow(0)
-ELSE
+Else
 	idwc_TipoEnvase.SetSort("tien_nombre A")
 	idwc_TipoEnvase.Sort()
 	
 	idwc_TipoEnvase.SetFilter("tien_usoenv = 1")
 	idwc_TipoEnvase.Filter() 
-END IF
+End If
 
-IF gstr_paramplanta.usaapc = 1 THEN
+If gstr_paramplanta.usaapc = 1 Then
 	dw_3.Object.b_lote.Visible = 1
-ELSE
+Else
 	dw_3.Object.b_lote.Visible = 0
-END IF
+End If
+
 GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, This.Title, "Acceso a Aplicación", 1)
 
 istr_Mant.Argumento[1]	=	String(gstr_ParamPlanta.CodigoPlanta)	// Planta
@@ -3172,27 +3173,27 @@ il_acttar					=	0
 buscar	= "Turno:Nlfcd_turno,Tipo Envase:Nenva_tipoen,Envase:Nenva_codigo,Calibre:Srefe_calibr"
 ordenar	= "Turno:lfcd_turno,Tipo Envase:enva_tipoen,Envase:enva_codigo,Calibre:refe_calibr"
 
-IF NOT gstr_paramplanta.binsabins AND NOT gstr_paramplanta.bultobins THEN
+If NOT gstr_paramplanta.binsabins AND NOT gstr_paramplanta.bultobins Then
 	em_kilos.Visible	=	False
-END IF
+End If
 
 li_resultado 	=	ConfiguracionPuerta(istr_puertacomm)
 
-IF li_resultado = 0 THEN
+If li_resultado = 0 Then
 	ls_parametros	=	String(istr_puertacomm.Baudios)+","+&
 							istr_puertacomm.Paridad+","+&
 							String(istr_puertacomm.Data)+","+&
 							String(istr_puertacomm.Parada)
 			
-	IF NOT ib_OCX THEN
+	If NOT ib_OCX Then
 		MessageBox("Conexión Romana","No está instalado el OCX para conexión con Romana")
-	ELSE
-		IF Ole_puerta.object.PortOpen THEN Ole_puerta.object.PortOpen = False
+	Else
+		If Ole_puerta.object.PortOpen Then Ole_puerta.object.PortOpen = False
 		Ole_puerta.object.settings	=	ls_parametros
 		Ole_puerta.object.PortOpen	= True	
 		Timer(0.2)
-	END IF
-END IF
+	End If
+End If
 end event
 
 event ue_recuperadatos;Long	ll_fila_d, ll_fila_e, respuesta,  ll_docrel, ll_control
@@ -4440,28 +4441,28 @@ SetNull(ls_Null)
 
 ls_Columna = dwo.name
  
-CHOOSE CASE ls_Columna
-	CASE "lofc_lotefc"
+Choose Case ls_Columna
+	Case "lofc_lotefc"
 		dw_4.reset()
 		//dw_5.reset()		
 		dw_3.reset()		
-		IF Existelote(long(data)) THEN
+		If Existelote(long(data)) Then
          istr_mant.argumento[6] = Data
 			Parent.TriggerEvent("ue_recuperadatos")
-		ELSEIF istr_Mant.Argumento[11] = "1" AND gstr_paramplanta.PoolVenta <> 1 AND &
-															gstr_paramplanta.PoolVenta <> 5 THEN
+		ElseIf istr_Mant.Argumento[11] = "1" AND gstr_paramplanta.PoolVenta <> 1 AND &
+															gstr_paramplanta.PoolVenta <> 5 Then
 			dw_3.SetItem(1,"lofc_lotefc",long(ls_null))
 			Return 1
-		ELSEIF istr_Mant.Argumento[11] = "2" AND gstr_paramplanta.PoolVenta <> 1 AND &
-															gstr_paramplanta.PoolVenta <> 4 THEN
+		ElseIf istr_Mant.Argumento[11] = "2" AND gstr_paramplanta.PoolVenta <> 1 AND &
+															gstr_paramplanta.PoolVenta <> 4 Then
 			dw_3.SetItem(1,"lofc_lotefc",long(ls_null))
 //			dw_3.SetItem(1, "prod_codigo", iuo_spro_ordenproceso.Productor)
 //			dw_3.SetItem(1, "prod_nombre", iuo_spro_ordenproceso.NombreProductor)
 			Return 1
-		ELSEIF Loteconmov(Long(Data)) THEN
+		ElseIf Loteconmov(Long(Data)) Then
 				dw_3.SetItem(1,"lofc_lotefc",long(ls_null))			
-				RETURN 1
-		ELSE
+				Return 1
+		Else
 			dw_3.InsertRow(0)
 			dw_3.object.lofc_lotefc[1] =	Integer(Data)
 			dw_3.Object.lofc_pltcod[1]	=	Integer(istr_Mant.Argumento[1])
@@ -4470,33 +4471,31 @@ CHOOSE CASE ls_Columna
 			dw_3.Object.lofc_totkil[1]	=	0
 			dw_3.SetItem(1, "prod_codigo", iuo_spro_ordenproceso.Productor)
 			dw_3.SetItem(1, "prod_nombre", iuo_spro_ordenproceso.NombreProductor)			
-		END IF	
+		End If	
 
-	CASE "prod_codigo"
-		IF NOT iuo_productores.Existe(long(Data),True,SqlCa) THEN
+	Case "prod_codigo"
+		If NOT iuo_productores.Existe(long(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
 			This.SetItem(1, "prod_nombre", ls_Null)
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			This.SetItem(1, "prod_nombre", iuo_productores.Nombre)
-		END IF
+		End If
 
-END CHOOSE
+End Choose
 			
 HabilitaIngreso(ls_columna)
 end event
 
 event buttonclicked;long ll_lote
 
-CHOOSE CASE dwo.name
-
-	CASE "b_nuevolote"
+Choose Case dwo.name
+	Case "b_nuevolote"
 		dw_3.Reset()
 		dw_3.insertrow(0)
 		ll_lote = dw_3.Object.lofc_lotefc[1]		
-   	ll_lote = Nuevolote(ll_lote) + TipoRecepcion(istr_Mant.Argumento[11], &
-					 Date(istr_Mant.Argumento[12]))
-      dw_3.Object.lofc_lotefc[1] = ll_lote
+   		ll_lote = Nuevolote(ll_lote) + TipoRecepcion(istr_Mant.Argumento[11], Date(istr_Mant.Argumento[12]))
+   	   	dw_3.Object.lofc_lotefc[1] = ll_lote
 		dw_4.Reset()
 		 
 		dw_3.SetColumn("prod_codigo")
@@ -4504,16 +4503,15 @@ CHOOSE CASE dwo.name
 
 		HabilitaIngreso("prod_codigo")
 		
-	CASE "b_lote"
-		IF NOT IsNull(dw_2.Object.mfco_docrel[1]) AND dw_2.Object.mfco_docrel[1] > 0 THEN
+	Case "b_lote"
+		If NOT IsNull(dw_2.Object.mfco_docrel[1]) AND dw_2.Object.mfco_docrel[1] > 0 Then
 			BuscaLote()
-			
-		END IF
+		End If
 		
-	CASE "b_prodrot"
+	Case "b_prodrot"
 		BuscaProductor()
 
-END CHOOSE
+End Choose
 end event
 
 event itemerror;call super::itemerror;RETURN 1

@@ -84,13 +84,16 @@ of_EnviaCorreo()
 
 end subroutine
 
-public function integer of_enviacorreo ();String		ls_Error
+public function integer of_enviacorreo ();String		ls_Error, ls_Correo[]
 Integer	li_Respuesta
 
 //li_Respuesta =  iuo_Correo.Send_Mail("192.168.150.245","<SendMail@rioblanco.net>", _Correo, "", "", _Asunto, _Cuerpo, "", ls_Error)
-li_Respuesta =  iuo_Correo.Send_Mail("192.168.150.245","<SendMail@rioblanco.net>", "<istok.carvallo@rioblanco.net>", "", "", _Asunto, _Cuerpo, "", ls_Error)
+//li_Respuesta =  iuo_Correo.Send_Mail("192.168.150.245","<SendMail@rioblanco.net>", "<istok.carvallo@rioblanco.net>", "", "", _Asunto, _Cuerpo, "", ls_Error)
+ls_correo = {"<istok.carvallo@rioblanco.net>"}
+	
+iuo_Correo.of_Send(ls_Correo, _Asunto, _Cuerpo,0)
 
-If (li_Respuesta < 0) Then MessageBox("Error No" + string(li_Respuesta), ls_Error)
+//If (li_Respuesta < 0) Then MessageBox("Error No" + string(li_Respuesta), ls_Error)
 
 Return li_Respuesta
 end function
