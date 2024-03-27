@@ -1349,13 +1349,13 @@ end event
 
 event ue_guardar;Integer	li_Agrupa, li_plantaori, li_despacho
 
-IF cbx_agrupa.Checked THEN
+If cbx_agrupa.Checked Then
 	li_Agrupa = 1
-ELSE
+Else
 	li_Agrupa = 0
-END IF
+End If
 //
-IF dw_1.AcceptText() = -1 THEN RETURN
+If dw_1.AcceptText() = -1 Then Return
 
 SetPointer(HourGlass!)
 
@@ -1363,16 +1363,16 @@ w_main.SetMicroHelp("Grabando información...")
 Message.DoubleParm = 0
 TriggerEvent("ue_antesguardar")
 
-IF Message.DoubleParm = 0 THEN
+If Message.DoubleParm = 0 Then
 	
 	Delete from dbo.spro_cajasprod_trans;
 	Commit;
 	
-   IF wf_actualiza_db(False) THEN
+   If wf_actualiza_db(False) Then
 		pb_imprimir.Enabled = TRUE
 		w_main.SetMicroHelp("Información Grabada.")
 		
-		IF busca_tipopallet() THEN
+		If busca_tipopallet() Then
 			MessageBox( "Atención", "No es Posible Grabar datos Por Falta de Tipo Pallet, Proceda por Mantención.", &
 			Information!, Ok!)
 			Delete From dbo.spro_cajasprod_trans;
@@ -1380,67 +1380,66 @@ IF Message.DoubleParm = 0 THEN
 			
 			Close(w_captura_archivo_cajas_trans)
 			Return;
-		END IF	
+		End If	
 		
 		li_plantaori 	= Integer(is_plantaori)
 		
-		IF cbx_despacho.Checked THEN
+		If cbx_despacho.Checked Then
 			li_despacho = 1
-		ELSE
+		Else
 			li_despacho = 0
-		END IF	
+		End If	
 		
-		IF cbx_despacho.Checked THEN
+		If cbx_despacho.Checked Then
 			DECLARE Traspaso_recepcion PROCEDURE FOR dbo.Fproc_Recepcion_tablas_despachadas
 					  @Agrupa 		= :li_Agrupa,
 					  @pld_destino = :uo_SelPlantas.Codigo,
 					  @pld_origen = :li_plantaori,
 					  @embarque = :is_embarque,
-					  @gendespacho = :li_despacho;
+					  @gEndespacho = :li_despacho;
 			EXECUTE Traspaso_recepcion;
 					
-			IF sqlca.SQLCode = -1 THEN
+			If sqlca.SQLCode = -1 Then
 				F_ErrorBaseDatos(sqlca, "Lectura Procedimiento Fproc_Recepcion_tablas_despachadas")
 				Return
-			END IF	
+			End If	
 			 
 			commit;
 			CLOSE Traspaso_recepcion;
 			MessageBox( "Atención", "El Proceso a Concluído Satisfactoriamente.", &
 				Information!, Ok!)
 			pb_imprimir.Enabled	= True
-		ELSE	
+		Else	
 			DECLARE Traspaso_recepcion_trans PROCEDURE FOR dbo.Fproc_Recepcion_tablas_despachadas_trans
 					  @Agrupa 		= :li_Agrupa,
 					  @pld_destino = :uo_SelPlantas.Codigo,
 					  @pld_origen = :li_plantaori,
 					  @embarque = :is_embarque,
-					  @gendespacho = :li_despacho;
+					  @gEndespacho = :li_despacho;
 			EXECUTE Traspaso_recepcion_trans;
 					
-			IF sqlca.SQLCode = -1 THEN
+			If sqlca.SQLCode = -1 Then
 				F_ErrorBaseDatos(sqlca, "Lectura Procedimiento Fproc_Recepcion_tablas_despachadas_trans")
 				Return
-			END IF	
+			End If	
 			 
-			commit;
+			Commit;
 			CLOSE Traspaso_recepcion_trans;
 			MessageBox( "Atención", "El Proceso a Concluído Satisfactoriamente.", &
 				Information!, Ok!)
 			pb_imprimir.Enabled	= True
-		END IF	
-   ELSE
+		End If	
+   Else
 	   w_main.SetMicroHelp("No se puede Grabar información.")
 	   Message.DoubleParm = -1
-		
-	   RETURN
-	END IF
-ELSE
+	   Return
+	End If
+Else
 	w_main.SetMicroHelp("No se puede Grabar información.")
    Message.DoubleParm = -1
 	pb_grabar.Enabled	 = False
-   RETURN
-END IF
+   Return
+End If
 end event
 
 event ue_modifica_detalle;call super::ue_modifica_detalle;IF dw_1.RowCount() > 0 THEN
@@ -1615,8 +1614,8 @@ type pb_eliminar from w_mant_encab_deta`pb_eliminar within w_captura_archivo_caj
 boolean visible = false
 integer x = 4325
 integer y = 1072
-string picturename = "\desarrollo\bmp\anulae.bmp"
-string disabledname = "\desarrollo\bmp\anulad.bmp"
+string picturename = "\Desarrollo 22\Imagenes\Botones\nulo.png"
+string disabledname = "\Desarrollo 22\Imagenes\Botones\nulo-bn.png"
 long backcolor = 553648127
 end type
 
@@ -1714,8 +1713,8 @@ end type
 type pb_archivo from picturebutton within w_captura_archivo_cajas_despachadas
 integer x = 4325
 integer y = 892
-integer width = 233
-integer height = 196
+integer width = 302
+integer height = 244
 integer taborder = 20
 boolean bringtotop = true
 integer textsize = -10

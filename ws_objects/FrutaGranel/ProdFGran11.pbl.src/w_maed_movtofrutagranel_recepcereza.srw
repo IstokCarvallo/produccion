@@ -4940,58 +4940,56 @@ istr_mant.Agrega	=	True
 	
 lb_estado			=	istr_mant.Solo_Consulta
 
-IF li_tabpage <> 1 THEN
+If li_tabpage <> 1 Then
 	lstr_mant.argumento				=	istr_mant.argumento
 	lstr_mant.dw						=	istr_mant.dw
 	lstr_mant.dw2						=	istr_mant.dw2
 	lstr_mant.Agrega					=	istr_mant.Agrega
-	lstr_mant.Borra					=	istr_mant.Borra
+	lstr_mant.Borra						=	istr_mant.Borra
 	lstr_mant.Solo_Consulta			=	istr_mant.Solo_Consulta
 	lstr_mant.respuesta				=	istr_mant.respuesta
 	lstr_mant.tipo						=	istr_mant.tipo
 	lstr_mant.usuariosoloconsulta	=	istr_mant.usuariosoloconsulta
 	
 	ProductoresLotes(lstr_mant.productores)
-END IF
+End If
 
-CHOOSE CASE li_tabpage
-	CASE 1
-		IF ib_Destare THEN
+Choose Case li_tabpage
+	Case 1
+		If ib_Destare Then
 			istr_mant.Solo_Consulta	=	True
-		END IF
+		End If
 
-		IF Integer(istr_mant.argumento[7]) = 0 THEN
-			IF iuo_Correlativo.Obtiene_Correlativo(Integer(istr_mant.argumento[1]),&
-																Integer(istr_mant.argumento[5]),&
-																True, SQLCA) THEN
-															
+		If Integer(istr_mant.argumento[7]) = 0 Then
+			If iuo_Correlativo.Obtiene_Correlativo(Integer(istr_mant.argumento[1]), Integer(istr_mant.argumento[5]), True, SQLCA) Then
 				istr_mant.argumento[7]			=	String(iuo_Correlativo.Correl_LoteFG)
-			ELSE
+			Else
 				lb_Salir	=	True
-			END IF
-		END IF
+			End If
+		End If
 		
-		IF Not lb_Salir THEN
+		If Not lb_Salir Then
 			istr_mant.dw	=	dw_3
 			istr_mant.dw2	=	dw_6
+			istr_Mant.Argumento[8] = String(dw_2.Object.mfge_fecmov[1])
 			
 			OpenWithParm(iw_mantencion_1, istr_mant)
 			istr_mant.Solo_Consulta	=	lb_estado
 			
-			IF NOT gstr_paramplanta.bultobins THEN
+			If NOT gstr_paramplanta.bultobins Then
 				AsignaPeso()
-			END IF
-		END IF
+			End If
+		End If
 	
-		IF NOT istr_mant.Solo_Consulta THEN
+		If NOT istr_mant.Solo_Consulta Then
 			Captura_totales()
 			CargaEnvases()
-		END IF
+		End If
 
-	CASE 2
-		IF ib_Destare THEN
+	Case 2
+		If ib_Destare Then
 			lstr_mant.Solo_Consulta	=	True
-		END IF
+		End If
 		
 		lstr_mant.dw	=	dw_5
 		SetNull(lstr_mant.dw2)
@@ -4999,38 +4997,38 @@ CHOOSE CASE li_tabpage
 		OpenWithParm(iw_mantencion_2, lstr_mant)
 		lstr_mant.Solo_Consulta	=	lb_estado
 
-	CASE 3
+	Case 3
 		lstr_mant.dw	=	dw_7
 		SetNull(lstr_mant.dw2)
 		lstr_mant.Argumento[4]	=	'2'
 		OpenWithParm(iw_mantencion_2, lstr_mant)
-END CHOOSE
+End Choose
 
-IF dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida THEN HabilitaEncab(False)
+If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida Then HabilitaEncab(False)
 
-IF dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida THEN
+If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida Then
 	pb_eliminar.Enabled	=	True
 	pb_grabar.Enabled		=	True
 	pb_eli_det.Enabled	=	True
-END IF
+End If
 
-CHOOSE CASE li_tabpage 
-	CASE 1
-		IF Not lb_Salir THEN
+Choose Case li_tabpage 
+	Case 1
+		If Not lb_Salir Then
 			istr_mant	=	Message.PowerObjectParm
 			
 			dw_3.SetRow(il_Fila)
 			dw_3.SelectRow(il_Fila, True)
-		END IF
-	CASE 2
+		End If
+	Case 2
 		
 		dw_5.SetRow(il_Fila)
 		dw_5.SelectRow(il_Fila, True)
-	CASE 3
+	Case 3
 		
 		dw_7.SetRow(il_Fila)
 		dw_7.SelectRow(il_Fila, True)
-END CHOOSE
+End Choose
 
 dw_6.SetFilter("")
 dw_6.Filter()

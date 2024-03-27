@@ -35,7 +35,6 @@ public function boolean noexistepredio (long ai_productor, integer ai_predio)
 public function boolean noexisteproductorrotulado (string ls_columna)
 public function boolean noexistecuartel (long al_productor, integer ai_predio, integer ai_cuartel, integer ai_especie, integer ai_variedad)
 public function boolean noexistecategoria (integer categoria)
-public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public function boolean existevariecab (integer as_valor);Integer	li_especie, li_variedad, li_cliente
@@ -343,23 +342,6 @@ Long		ll_cont
 	END IF
 
 Return lb_retorna
-end function
-
-public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
-
-uo_Certificaciones	iuo_Certificacion
-iuo_Certificacion	=	Create uo_Certificaciones
-
-
-If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio, Especie, False, SQLCA) Then
-		ls_Retorno = iuo_Certificacion.GGN
-	End If
-End If
-
-Destroy iuo_Certificacion
-
-Return ls_Retorno
 end function
 
 on w_mant_deta_palletfruta_rotulamodifica.create
@@ -682,7 +664,7 @@ Choose Case ls_columna
 				End If
 			End If
 			
-			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
 			
 			If Not VarIficaproductor(Integer(Data)) Then Return 1
 		End If
@@ -702,7 +684,7 @@ Choose Case ls_columna
 				dw_1.SetItem(il_fila, "pafr_huert4", Integer(data))
 			End If
 			
-			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
 			
 			If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 				dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
@@ -750,7 +732,7 @@ Choose Case ls_columna
 				idwc_prediorot.InsertRow(0)
 			End If
 			
-			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
 			If Not VarIficaproductor(Integer(Data)) Then Return 1
 		End If	
 		
@@ -764,7 +746,7 @@ Choose Case ls_columna
 			idwc_cuartelrot.SetTransObject(SQLCA)
 			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.pafr_varrot[Row])
 			
-			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(This.Object.pafr_prdrot[Row], Long(Data), This.Object.espe_codigo[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.pafr_prdrot[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
 		End If
 		
 	Case "pafr_cuart1"

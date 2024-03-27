@@ -101,7 +101,6 @@ public function integer carganropesmax ()
 public subroutine cargapalletgranel ()
 public function boolean validaguia (string as_columna, long al_valor)
 public subroutine recupera_packing (long al_productor)
-public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_nuevo_detalle();Integer	li_Lote, li_fila, li_preservafila, li_actual
@@ -1031,23 +1030,6 @@ END IF
 RETURN 
 end subroutine
 
-public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
-
-uo_Certificaciones	iuo_Certificacion
-iuo_Certificacion	=	Create uo_Certificaciones
-
-
-If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
-		ls_Retorno = iuo_Certificacion.GGN
-	End If
-End If
-
-Destroy iuo_Certificacion
-
-Return ls_Retorno
-end function
-
 on w_mant_deta_lotesfrutagranel_recepcereza.create
 int iCurrent
 call super::create
@@ -1736,7 +1718,7 @@ Choose Case ls_columna
 				idwc_Cuartel.Reset()
 				
 				//idwc_certIficacion.Retrieve(Integer(data), This.Object.prbr_codpre[row], This.Object.lote_espcod[row])
-				This.Object.lote_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row])
+				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]))
 			End If	
 			
 			recupera_packing(Long(Data))
@@ -1762,7 +1744,7 @@ Choose Case ls_columna
 			idwc_Cuartel.SetFilter("espe_codigo = " + istr_mant.argumento[5])
 			idwc_Cuartel.Filter()
 			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-			This.Object.lote_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row])
+			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]))
 		End If
 		
 	Case "prcc_codigo"

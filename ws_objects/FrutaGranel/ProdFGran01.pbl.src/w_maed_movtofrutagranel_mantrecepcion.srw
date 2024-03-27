@@ -4512,15 +4512,17 @@ DO
 		dw_2.Object.destare.Visible	=	True
 		istr_Mant.Solo_Consulta			=	False
 		
-		istr_mant.Argumento[5]	=	String(dw_2.Object.espe_codigo[1])
-		istr_mant.Argumento[11] = String(dw_2.Object.mfge_totbul[1])
+		istr_mant.Argumento[5]		= String(dw_2.Object.espe_codigo[1])
+		istr_mant.Argumento[11]	= String(dw_2.Object.mfge_totbul[1])
+		istr_mant.Argumento[8] 		= String(dw_2.Object.mfge_fecmov[1])
 		
 		If Not manbin_especie(dw_2.Object.plde_codigo[1], dw_2.Object.espe_codigo[1], True, sqlca) Then
-			TriggerEVent("ue_nuevo")
+			TriggerEvent("ue_nuevo")
 			Return
 		End If
 		
 		dw_2.SetRedraw(True)
+		
 		If Not gb_RecepcionDeProceso Then
 			iuo_Camion.Existe(1, dw_2.Object.cami_patent[1], True, sqlca)
 		End If

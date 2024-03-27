@@ -19,7 +19,7 @@ End variables
 global type w_maed_palletencab from w_mant_encab_deta_csd
 string tag = "Mantención de Pallets"
 integer width = 4082
-integer height = 2204
+integer height = 2344
 string title = "Mantenedor de Pallet"
 string menuname = ""
 windowstate windowstate = maximized!
@@ -63,7 +63,6 @@ end variables
 forward prototypes
 public function boolean existeembalaje (string as_codigo)
 public subroutine habilitaingreso ()
-public subroutine cuentacajas ()
 public function boolean existecalibres ()
 public function boolean existecondicion (integer as_valor)
 public function boolean existeplanta (integer as_valor)
@@ -76,11 +75,12 @@ public function boolean existevariedad (integer li_columna, integer cliente)
 public function boolean noexistecliente (integer cliente)
 public function boolean buscanombreembalaje (string as_embalaje)
 public subroutine cargacajas ()
-public function boolean existetipoembalaje (string as_codigo, boolean ab_captura)
 public subroutine wf_bloqueacolumnas ()
 public function string cargacodigo (integer ai_cliente, long al_planta, long al_pallet, integer ai_procedencia)
 protected function boolean wf_actualiza_db (boolean borrando)
 public function boolean wf_creacion_cajas ()
+public subroutine wf_cuentacajas ()
+public function boolean wf_existetipoembalaje (string as_codigo, boolean ab_captura)
 end prototypes
 
 event ue_imprimir;SetPointer(HourGlass!)
@@ -299,17 +299,6 @@ End If
 pb_ins_det.Enabled = lb_estado
 end subroutine
 
-public subroutine cuentacajas ();Long	ll_fila, ll_cajas
-
-ll_cajas	=	0
-
-FOR ll_fila = 1 TO dw_1.RowCount()
-	ll_cajas = ll_cajas + dw_1.Object.pafr_ccajas[ll_fila]
-NEXT
-
-dw_2.Object.paen_ccajas[1]	=	ll_cajas
-End subroutine
-
 public function boolean existecalibres ();Integer	li_Cantidad, li_Especie, li_TipoEnvase, li_Envase
 
 li_Especie		=	dw_2.Object.espe_codigo[1]
@@ -456,7 +445,7 @@ ElseIf li_cantid > 0 Then
 	istr_mant.argumento[13] = String(dw_2.Object.cate_codigo[1])
 	istr_mant.argumento[14] = dw_2.Object.emba_codigo[1]
 	
-	ExisteTipoEmbalaje(dw_2.Object.tpen_codigo[1],False)
+	wf_ExisteTipoEmbalaje(dw_2.Object.tpen_codigo[1],False)
 //	ExistePlanta(dw_2.Object.plde_codigo[1])
 	
 	lb_retorno = FALSE
@@ -465,7 +454,7 @@ Else
 End If
 
 Return lb_retorno
-End function
+end function
 
 public subroutine habilitaencab (boolean habilita);If Habilita Then
 	dw_2.Object.clie_codigo.Protect					=	0
@@ -658,41 +647,6 @@ public subroutine cargacajas ();//Integer	li_fila, li_cajas
 //istr_mant.argumento[11]	=	String(Long(istr_mant.argumento[11]) - li_cajas)
 End subroutine
 
-public function boolean existetipoembalaje (string as_codigo, boolean ab_captura);String	ls_embala
-Integer	li_TipoEnvase, li_CodEnvase, li_cliente
-Long		ll_altura
-
-li_TipoEnvase	=	dw_2.Object.enva_tipoen[1]
-li_CodEnvase	=	dw_2.Object.enva_codigo[1]
-ls_embala		=	dw_2.Object.emba_codigo[1]
-li_cliente			=	dw_2.Object.clie_codigo[1]
-
-SELECT	tpem_cancaj, tpem_altura
-	INTO	:il_CajasTipoPallet, :ll_altura
-	FROM	dbo.tipopallemba
-	WHERE	clie_codigo	=	:li_cliente
-	AND	emba_codigo	=	:ls_embala
-	AND	tpem_codigo	=	:as_codigo ;
-		
-If sqlca.SQLCode = -1 Then
-	F_errorbasedatos(sqlca,"Lectura tabla tipopallemba")
-	Return False
-ElseIf sqlca.SQLCode = 100 Then
-	MessageBox("Atención","Tipo de Pallet no Existe.~rIngrese Otro.", Exclamation!, Ok!)
-	Return False
-Else
-	istr_mant.Argumento[11]	= 	String(il_CajasTipoPallet)
-	istr_mant.Argumento[20]	= 	String(il_CajasTipoPallet)
-	dw_2.Object.paen_altura[1]	=	ll_altura
-//	ii_cajas							=	il_CajasTipoPallet
-	CuentaCajas()
-	
-	Return True
-End If
-
-Return False
-end function
-
 public subroutine wf_bloqueacolumnas ();
 End subroutine
 
@@ -869,6 +823,52 @@ Else
 End If
 end function
 
+public subroutine wf_cuentacajas ();Long	ll_fila, ll_cajas
+
+ll_cajas	=	0
+
+FOR ll_fila = 1 TO dw_1.RowCount()
+	ll_cajas = ll_cajas + dw_1.Object.pafr_ccajas[ll_fila]
+NEXT
+
+dw_2.Object.paen_ccajas[1]	=	ll_cajas
+end subroutine
+
+public function boolean wf_existetipoembalaje (string as_codigo, boolean ab_captura);String	ls_embala
+Integer	li_TipoEnvase, li_CodEnvase, li_cliente
+Long		ll_altura
+
+li_TipoEnvase	=	dw_2.Object.enva_tipoen[1]
+li_CodEnvase	=	dw_2.Object.enva_codigo[1]
+ls_embala		=	dw_2.Object.emba_codigo[1]
+li_cliente			=	dw_2.Object.clie_codigo[1]
+
+SELECT	tpem_cancaj, tpem_altura
+	INTO	:il_CajasTipoPallet, :ll_altura
+	FROM	dbo.tipopallemba
+	WHERE	clie_codigo	=	:li_cliente
+	AND	emba_codigo	=	:ls_embala
+	AND	tpem_codigo	=	:as_codigo ;
+		
+If sqlca.SQLCode = -1 Then
+	F_errorbasedatos(sqlca,"Lectura tabla tipopallemba")
+	Return False
+ElseIf sqlca.SQLCode = 100 Then
+	MessageBox("Atención","Tipo de Pallet no Existe.~rIngrese Otro.", Exclamation!, Ok!)
+	Return False
+Else
+	istr_mant.Argumento[11]	= 	String(il_CajasTipoPallet)
+	istr_mant.Argumento[20]	= 	String(il_CajasTipoPallet)
+	dw_2.Object.paen_altura[1]	=	ll_altura
+//	ii_cajas							=	il_CajasTipoPallet
+	wf_CuentaCajas()
+	
+	Return True
+End If
+
+Return False
+end function
+
 event open;/*
 		Argumentos					:		[1]	=	Código de Exportador
 												[2]	=	Numero de Pallet
@@ -1016,7 +1016,7 @@ End event
 
 event ue_nuevo_detalle;istr_mant.borra		= False
 istr_mant.agrega	= True
-CuentaCajas()
+wf_CuentaCajas()
 
 If ExisteCalibres() Then
 	istr_mant.Argumento[90]		= 	String(dw_2.Object.paen_ccajas[1])
@@ -1034,13 +1034,13 @@ If ExisteCalibres() Then
 	
 	dw_1.SetRow(il_fila)
 	dw_1.SelectRow(il_fila,True)
-	CuentaCajas()
+	wf_CuentaCajas()
 Else
 	MessageBox("Atención", "Falta Registrar Calibres para Especie (" + & 
 					String(dw_2.Object.espe_codigo[1], '00') + ") - Tipo de Envase (" + &
 					String(dw_2.Object.enva_tipoen[1]) + ") - Envase (" + String(dw_2.Object.enva_codigo[1], '000') + ")")
 End If
-End event
+end event
 
 event ue_recuperadatos;call super::ue_recuperadatos;Long		ll_fila_d, ll_fila_e
 Integer	li_Respuesta
@@ -1091,7 +1091,7 @@ DO
 				idwc_tippen.InsertRow(0)
 			End If	
 			
-			ExisteTipoEmbalaje(dw_2.Object.tpen_codigo[1],True)
+			wf_ExisteTipoEmbalaje(dw_2.Object.tpen_codigo[1],True)
 		End If
 		
 		DO
@@ -1120,7 +1120,7 @@ DO
 					dw_1.SetFocus()
 					
 					HabilitaEncab(False)
-					CuentaCajas()
+					wf_CuentaCajas()
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
 							Commit;
@@ -1249,6 +1249,7 @@ Integer	li_Planta, li_cliente, li_Secuencia
 String		ls_Null
 
 Message.DoubleParm	=	0
+dw_2.AcceptText()
 
 SetNull(ls_Null)
 
@@ -1257,7 +1258,7 @@ If dw_1.RowCount() <= 0 Then
 	Return
 End If
 
-CuentaCajas()
+wf_CuentaCajas()
 
 If dw_1.Object.Total_cajas[1] = il_CajasTipoPallet Then //	Pallet CompleTo
 	dw_2.Object.paen_tipopa[1]	=	1
@@ -1336,7 +1337,7 @@ event activate;If dw_1.rowcount() > 0 Then
 End If
 End event
 
-event ue_modIfica_detalle;
+event ue_modifica_detalle;
 If dw_1.RowCount() > 0 Then
 	istr_mant.agrega = False
 	
@@ -1348,9 +1349,9 @@ If dw_1.RowCount() > 0 Then
 	End If
 	
 	OpenWithParm(iw_mantencion, istr_mant)
-	cuentacajas()
+	wf_Cuentacajas()
 End If
-End event
+end event
 
 event ue_guardar;If dw_1.AcceptText() = -1 Then Return
 
@@ -1537,7 +1538,7 @@ boolean hsplitscroll = true
 end type
 
 event dw_2::itemchanged;call super::itemchanged;Long		ll_null, ll_fila
-String	ls_columna, ls_Null, ls_Fecha
+String		ls_columna, ls_Null, ls_Fecha
 Date 		ldt_fecha
 
 DataWIndowChild	dw_calibres
@@ -1554,7 +1555,7 @@ Choose Case ls_columna
 			This.SetItem(row,"clie_codigo",Integer(ls_Null))
 			Return 1
 		Else
-			dw_2.GetChild("espe_codigo", dw_especie)
+			This.GetChild("espe_codigo", dw_especie)
 			dw_especie.SetTransObject(sqlca)
 			dw_especie.Retrieve(integer(data))
 			istr_mant.Argumento[1] = data
@@ -1572,13 +1573,13 @@ Choose Case ls_columna
 		End If
 		
 	Case "paen_numero"
-		If dw_2.Object.paen_tipopa[1] = 1 Then
+		If This.Object.paen_tipopa[1] = 1 Then
 			If ExistePallet(data)  Or Not iuo_Ventana.ValidaRango(Integer(istr_mant.Argumento[1]), Long(istr_mant.argumento[6]), Long(Data), 1, 0, 0, 0) Then
 				ii_yaexiste = 1
-				dw_2.SetItem(1, "paen_numero", ll_null)
+				This.SetItem(1, "paen_numero", ll_null)
 				Return 1
 			Else
-				iuo_Ventana.of_Disponible(Integer(istr_mant.Argumento[1]), Long(istr_mant.argumento[6]), dw_2.Object.paen_tipopa[1], SQLCA)
+				iuo_Ventana.of_Disponible(Integer(istr_mant.Argumento[1]), Long(istr_mant.argumento[6]), This.Object.paen_tipopa[1], SQLCA)
 			End If
 		End If
 		
@@ -1600,16 +1601,16 @@ Choose Case ls_columna
 		If iuo_especie.Existe(Integer(Data),True,SqlCa) Then
 			istr_mant.argumento[3]	= data
 		Else
-			dw_2.SetItem(1, ls_Columna, Integer(ls_Null))
-			dw_2.SetItem(1, "vari_nombre", "")
-			dw_2.SetItem(1, "vari_codigo", ll_null)
+			This.SetItem(1, ls_Columna, Integer(ls_Null))
+			This.SetItem(1, "vari_nombre", "")
+			This.SetItem(1, "vari_codigo", ll_null)
 			Return 1
 		End If
 
 	Case "vari_codigo"
 		If NOT ExisteVariedad(Integer(data),gi_codexport) Then
-			dw_2.SetItem(1, "vari_nombre", "")
-			dw_2.SetItem(1, "vari_codigo", ll_null)
+			This.SetItem(1, "vari_nombre", "")
+			This.SetItem(1, "vari_codigo", ll_null)
 			Return 1
 		End If
 					
@@ -1656,7 +1657,7 @@ Choose Case ls_columna
 		Else
 			istr_Mant.Argumento[8]	=	Data
 			This.SetItem(1, "enva_nombre", istr_envase.Nombre)
-			dw_2.GetChild("tpen_codigo", idwc_tippen)
+			This.GetChild("tpen_codigo", idwc_tippen)
 			idwc_tippen.SetTransObject(SqlCa)
 		 	If idwc_tippen.Retrieve(istr_envase.TipoEnvase,istr_envase.Codigo)=0 Then
 				idwc_tippen.InsertRow(0) 
@@ -1664,12 +1665,12 @@ Choose Case ls_columna
 		End If
 
 	Case "tpen_codigo"
-//		If dw_2.object.paen_tipopa[Row] = 1 Then
-			If ExisteTipoEmbalaje(data, False) = False Then
-				dw_2.SetItem(1, ls_Columna, ls_Null)
+//		If This.object.paen_tipopa[Row] = 1 Then
+			If wf_ExisteTipoEmbalaje(data, False) = False Then
+				This.SetItem(1, ls_Columna, ls_Null)
 				Return 1
-//			End If
-		End If
+			End If
+//		End If
 
 	Case "etiq_codigo"
 		If iuo_etiquetas.Existe(Integer(Data),True,SqlCa) Then

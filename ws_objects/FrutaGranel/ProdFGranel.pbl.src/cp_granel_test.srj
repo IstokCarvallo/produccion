@@ -1164,6 +1164,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_periodofrio,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoerror,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_prodconectividad,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mant_movtoenvaenca_emision,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_asignaggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_calibres_etiq,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_busc_cuartel,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mant_bitaproducduchadet,d

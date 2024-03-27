@@ -4189,11 +4189,11 @@ SetNull(ls_Null)
 
 ls_Columna = dwo.name
 
-CHOOSE CASE ls_Columna
-	CASE "clie_codigo"
-		IF Not iuo_cliente.existe(integer(data),True,Sqlca) THEN
+Choose Case ls_Columna
+	Case "clie_codigo"
+		If Not iuo_cliente.existe(integer(data),True,Sqlca) Then
 			This.SetItem(1, "clie_codigo", integer(ls_Null))
-		ELSE
+		Else
 			istr_Mant.Argumento[16]	= Data
 			This.SetItem(1, "mfco_docrel", Long(ls_Null))
 			This.SetItem(1, "prod_nombre", Integer(ls_Null))
@@ -4201,13 +4201,12 @@ CHOOSE CASE ls_Columna
 			This.SetItem(1, "pefr_codigo", Integer(ls_Null))
 			This.SetItem(1, "espe_codigo", Integer(ls_Null))
 			This.SetItem(1, "vari_nombre", ls_Null)
-		END IF
+		End If
 		
-	CASE "plde_codigo"
-
-		IF Not iuo_planta.existe(integer(data),True,Sqlca) THEN
+	Case "plde_codigo"
+		If Not iuo_planta.existe(integer(data),True,Sqlca) Then
 			This.SetItem(1, "plde_codigo", integer(ls_Null))
-		ELSE	
+		Else	
 			istr_Mant.Argumento[1]	= Data
 			This.SetItem(1, "mfco_docrel", Long(ls_Null))
 			This.SetItem(1, "prod_nombre", Integer(ls_Null))
@@ -4215,9 +4214,9 @@ CHOOSE CASE ls_Columna
 			This.SetItem(1, "pefr_codigo", Integer(ls_Null))
 			This.SetItem(1, "espe_codigo", Integer(ls_Null))
 			This.SetItem(1, "vari_nombre", ls_Null)
-		END IF
+		End If
 		       
-	CASE "mfco_tipdoc" 
+	Case "mfco_tipdoc" 
 		istr_Mant.Argumento[4]	= Data
 		This.SetItem(1, "mfco_docrel", Long(ls_Null))
 		This.SetItem(1, "prod_nombre", Integer(ls_Null))
@@ -4226,10 +4225,9 @@ CHOOSE CASE ls_Columna
 		This.SetItem(1, "espe_codigo", Integer(ls_Null))
 		This.SetItem(1, "vari_nombre", ls_Null)
 
-	CASE "mfco_docrel"
-		IF iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
-												  This.Object.mfco_tipdoc[1], &
-												  Long(Data), True, SqlCa, iuo_cliente.Codigo)       THEN
+	Case "mfco_docrel"
+		If iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), This.Object.mfco_tipdoc[1], &
+												  Long(Data), True, SqlCa, iuo_Cliente.Codigo) Then
 			istr_Mant.Argumento[5]	= Data
 			istr_Mant.Argumento[7]	= String(iuo_spro_ordenproceso.Especie)
 			istr_Mant.Argumento[20]	= String(iuo_spro_ordenproceso.productor)
@@ -4238,7 +4236,7 @@ CHOOSE CASE ls_Columna
 			iuo_spro_ordenproceso.CapturaReferencias(1,0,1,0,0,False,Sqlca)
 
 			///////////////////////////////////////////////////////////////
-			IF NOT manbin_especie(Integer(istr_Mant.Argumento[1]), iuo_spro_ordenproceso.Especie, True, sqlca) THEN
+			If NOT manbin_especie(Integer(istr_Mant.Argumento[1]), iuo_spro_ordenproceso.Especie, True, sqlca) Then
 				This.SetItem(1, "prod_codigo", long(ls_Null))
 				This.SetItem(1, "prod_nombre", ls_Null)
 				This.SetItem(1, "frio_tipofr", ls_Null)
@@ -4248,16 +4246,16 @@ CHOOSE CASE ls_Columna
 				This.SetItem(1, "vari_nombre", ls_Null)
 				This.SetItem(1, ls_Columna, Long(ls_Null))
 				dw_3.Enabled = False
-				RETURN 1
-			END IF
+				Return 1
+			End If
 			///////////////////////////////////////////////////////////////
-			IF gstr_paramplanta.binsabins OR gstr_paramplanta.bultobins THEN
+			If gstr_ParamPlanta.BinsaBins OR gstr_ParamPlanta.BultoBins Then
 				dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso_bins"
-			ELSEIF gstr_paramplanta.palletdebins then
+			ElseIf gstr_ParamPlanta.PalletdeBins Then
 				dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso_bp"
-			ELSE
+			Else
 				dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso"
-			END IF
+			End If
 			
 			dw_4.SetTransObject(sqlca)
 			
@@ -4277,13 +4275,13 @@ CHOOSE CASE ls_Columna
 			istr_Mant.Argumento[21]	= String(iuo_spro_ordenproceso.NombreProductor)
 			dw_3.Enabled = True
 			
-			IF buscamovto(Integer(istr_Mant.Argumento[4]),Long(data)) THEN
+			If buscamovto(Integer(istr_Mant.Argumento[4]),Long(data)) Then
 				Parent.TriggerEvent("ue_recuperadatos")
 				
-			ELSE
+			Else
 				Istr_Mant.Argumento[6] = String(nuevofoliolote())
 				
-				IF Long(Istr_Mant.Argumento[6]) < 1 THEN
+				If Long(Istr_Mant.Argumento[6]) < 1 Then
 					This.SetItem(1, "prod_codigo", long(ls_Null))
 					This.SetItem(1, "prod_nombre", ls_Null)
 					This.SetItem(1, "frio_tipofr", ls_Null)
@@ -4293,21 +4291,21 @@ CHOOSE CASE ls_Columna
 					This.SetItem(1, "vari_nombre", ls_Null)
 					This.SetItem(1, ls_Columna, Long(ls_Null))
 					dw_3.Enabled = False
-					RETURN 1
-				ELSE
-					IF dw_3.Retrieve(Integer(Istr_Mant.Argumento[1]), Integer(Istr_Mant.Argumento[7]), &
-										  Integer(Istr_Mant.Argumento[6])) <= 0 THEN
+					Return 1
+				Else
+					If dw_3.Retrieve(Integer(Istr_Mant.Argumento[1]), Integer(Istr_Mant.Argumento[7]), &
+										  Integer(Istr_Mant.Argumento[6])) <= 0 Then
 						dw_3.InsertRow(0)
 						dw_3.SetItem(1, "lofc_pltcod", Integer(Istr_Mant.Argumento[1]))						
 						dw_3.SetItem(1, "lofc_espcod", iuo_spro_ordenproceso.Especie)			
 						dw_3.SetItem(1, "prod_codigo", iuo_spro_ordenproceso.Productor)
 						dw_3.SetItem(1, "prod_nombre", iuo_spro_ordenproceso.NombreProductor)
 						dw_3.Object.lofc_lotefc[1] = Long(Istr_Mant.Argumento[6])
-					END IF
-				END IF
+					End If
+				End If
 				
-			END IF	
-		ELSE
+			End If	
+		Else
 			This.SetItem(1, "prod_codigo", long(ls_Null))
 			This.SetItem(1, "prod_nombre", ls_Null)
 			This.SetItem(1, "frio_tipofr", ls_Null)
@@ -4317,18 +4315,17 @@ CHOOSE CASE ls_Columna
 			This.SetItem(1, "vari_nombre", ls_Null)
 			This.SetItem(1, ls_Columna, Long(ls_Null))
 			dw_3.Enabled = False
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "mfco_numero"
-		
-		IF ExisteMovimiento(Long(Data)) THEN
+	Case "mfco_numero"
+		If ExisteMovimiento(Long(Data)) Then
 			istr_Mant.Argumento[3]	=	Data
 			This.SetItem(1, "mfco_docrel", Integer(istr_Mant.Argumento[5]))	
-			IF iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
+			If iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
 												 	  integer(istr_mant.Argumento[4]), &
 												  	  Long(istr_Mant.Argumento[5]), &
-													  True, SqlCa, iuo_cliente.Codigo)       THEN
+													  True, SqlCa, iuo_cliente.Codigo)       Then
 				
 				istr_Mant.Argumento[7]	= String(iuo_spro_ordenproceso.Especie)
 				HabilitaLote()
@@ -4342,20 +4339,19 @@ CHOOSE CASE ls_Columna
 				This.SetItem(1, "vari_codigo", iuo_spro_ordenproceso.variedad)
 				This.SetItem(1, "vari_nombre", iuo_spro_ordenproceso.NombreVariedad)
 			
-			END IF
+			End If
 			
 			Parent.TriggerEvent("ue_recuperadatos")
-
-		ELSE
+		Else
 			This.SetItem(1, ls_Columna, Long(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "mfco_fecmov"
+	Case "mfco_fecmov"
 		ls_Fecha	=	Data
 		This.SetItem(1, ls_Columna, Date(Mid(ls_Fecha,1,10)))
 
-END CHOOSE
+End Choose
 
 HabilitaIngreso(ls_columna)
 end event
@@ -4811,6 +4807,8 @@ Choose Case ls_Columna
 				
 			idwc_Predio.Retrieve(dw_2.Object.prod_codigo[1])
 			idwc_Cuartel.Retrieve(dw_2.Object.prod_codigo[1],  iuo_Predio.Codigo)
+			
+			This.Object.lfcd_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Long(Data), dw_2.Object.espe_codigo[1], iuo_spro_OrdenProceso.FechaOrden)
 		End If
 		
 	Case "prcc_codigo"

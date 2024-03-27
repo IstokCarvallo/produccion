@@ -256,43 +256,43 @@ event ue_antesguardar;Long	ll_fila = 1
 Integer	li_cont
 String	ls_mensaje, ls_colu[]
 
-IF dw_1.RowCount() > 0 THEN
+If dw_1.RowCount() > 0 Then
    FOR ll_fila = 1 TO dw_1.RowCount()
-		 IF dw_1.GetItemStatus(ll_fila, 0, Primary!) = New! THEN
+		 If dw_1.GetItemStatus(ll_fila, 0, Primary!) = New! Then
 			 dw_1.DeleteRow(ll_fila)
 			 ll_fila --
-		 END IF
+		 End If
    NEXT
-END IF
+End If
 
 FOR ll_Fila	= 1 TO dw_1.RowCount()
-	IF Isnull(dw_1.Object.plde_codigo[ll_fila]) OR dw_1.Object.plde_codigo[ll_fila] = 0 THEN
+	If Isnull(dw_1.Object.plde_codigo[ll_fila]) OR dw_1.Object.plde_codigo[ll_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nPlanta"
 		ls_colu[li_cont]	= "plde_codigo"
-	END IF
+	End If
 	
-	IF Isnull(dw_1.Object.spco_corini[ll_fila]) OR dw_1.Object.spco_corini[ll_fila] = 0 THEN
+	If Isnull(dw_1.Object.spco_corini[ll_fila]) OR dw_1.Object.spco_corini[ll_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nCorrelativo Inicio"
 		ls_colu[li_cont]	= "spco_corini"
-	END IF
+	End If
 	
-	IF Isnull(dw_1.Object.spco_corter[ll_fila]) OR dw_1.Object.spco_corter[ll_fila] = 0 THEN
+	If Isnull(dw_1.Object.spco_corter[ll_fila]) OR dw_1.Object.spco_corter[ll_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nCorrelativo Término"
 		ls_colu[li_cont]	= "spco_corter"
-	END IF
+	End If
 	
-	IF li_cont > 0 THEN
+	If li_cont > 0 Then
 		MessageBox("Error de Consistencia", "Falta el ingreso de :" + ls_mensaje + ".", StopSign!, Ok!)
 		dw_1.SetColumn(ls_colu[1])
 		dw_1.SetFocus()
 		Message.DoubleParm = -1
 		Return
-	END IF
+	End If
 	
-	dw_1.Object.clie_codigo[ll_Fila] = uo_SelCliente.Codigo
+	If IsNull(dw_1.Object.clie_codigo[ll_Fila]) Then  dw_1.Object.clie_codigo[ll_Fila] = uo_SelCliente.Codigo
 NEXT
 end event
 

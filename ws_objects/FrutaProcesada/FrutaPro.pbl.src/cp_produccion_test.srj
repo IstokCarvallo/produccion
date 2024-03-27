@@ -1525,6 +1525,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_destinosag,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantadesp_tipo,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_prodconectividad,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoerror,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_asignaggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaPBasura.pbl,dw_pf_test,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP81.pbl,dddw_pesoneto,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_despacho_fruta_fumigada,w

@@ -17,11 +17,11 @@ Date 		Fecha_Auditoria, Fecha_Expiracion, Fecha_Inscripcion, Fecha_Est_Audiroria
 end variables
 
 forward prototypes
-public function boolean of_existe (long al_productor, integer ai_predio, integer ai_especie, boolean ab_mensaje, transaction at_transaccion)
-private function boolean of_existeprotocolo (long al_productor, integer ai_predio, integer ai_especie, integer ai_protocolo, boolean ab_mensaje, transaction at_transaccion)
+public function boolean of_existe (long al_productor, integer ai_predio, integer ai_especie, date ad_fecha, boolean ab_mensaje, transaction at_transaccion)
+private function boolean of_existeprotocolo (long al_productor, integer ai_predio, integer ai_especie, integer ai_protocolo, date ad_fecha, boolean ab_mensaje, transaction at_transaccion)
 end prototypes
 
-public function boolean of_existe (long al_productor, integer ai_predio, integer ai_especie, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+public function boolean of_existe (long al_productor, integer ai_predio, integer ai_especie, date ad_fecha, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
 Integer	li_Cantidad
 
 SELECT	Count(*)
@@ -67,7 +67,7 @@ Else
 			F_ErrorBaseDatos(At_Transaccion,"Lectura de Tabla de Certificacion de Productores")	
 			lb_Retorno =  False
 		Else
-			lb_Retorno = of_ExisteProtocolo(Productor, Predio, Especie, Protocolo, False, SQLCA)
+			lb_Retorno = of_ExisteProtocolo(Productor, Predio, Especie, Protocolo, ad_Fecha, False, SQLCA)
 		End If
 	End IF
 End If
@@ -75,7 +75,7 @@ End If
 Return lb_Retorno
 end function
 
-private function boolean of_existeprotocolo (long al_productor, integer ai_predio, integer ai_especie, integer ai_protocolo, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+private function boolean of_existeprotocolo (long al_productor, integer ai_predio, integer ai_especie, integer ai_protocolo, date ad_fecha, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
 Integer	li_Dias
 
 
@@ -103,13 +103,13 @@ ElseIf sqlca.SQLCode = 100 Then
 	End  If	
 	lb_Retorno =  False
 Else
-	li_Dias = DaysAfter(Today(), Fecha_Expiracion)
+	li_Dias = DaysAfter(ad_Fecha, Fecha_Expiracion)
 	
 	If li_Dias <= 0 Then
 		MessageBox("Atencion", "Certificacion a Expirado con fecha: " + String(Fecha_Expiracion, "dd/mm/yyyy"), Exclamation!, OK!)
 		lb_Retorno =  False
-	ElseIf li_Dias < 31 Then
-		MessageBox("Atencion", "Quedan " + String(li_Dias, '00')+ "dias, para que llege a su vencimiento la certificacion.", Exclamation!, OK!)
+	ElseIf li_Dias < 30 Then
+		MessageBox("Atencion", "Quedan " + String(li_Dias, '00')+ " dias, para que llege a su vencimiento la certificacion.", Exclamation!, OK!)
 	End If	
 End If
 

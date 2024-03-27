@@ -101,7 +101,6 @@ public subroutine calculafechaestimada (integer ai_columna, string ai_horas)
 public function long cargaagronomo (string as_columna, string as_valor)
 public function boolean validaingresolote (boolean ab_mensaje)
 public subroutine recupera_packing (long al_productor)
-public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_nuevo_detalle();Integer	li_Lote, li_fila, li_preservafila
@@ -1221,23 +1220,6 @@ RETURN
 
 end subroutine
 
-public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
-
-uo_Certificaciones	iuo_Certificacion
-iuo_Certificacion	=	Create uo_Certificaciones
-
-
-If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
-		ls_Retorno = iuo_Certificacion.GGN
-	End If
-End If
-
-Destroy iuo_Certificacion
-
-Return ls_Retorno
-end function
-
 on w_mant_deta_lotesfrutagranel_recepcion.create
 int iCurrent
 call super::create
@@ -2074,7 +2056,7 @@ Choose Case ls_columna
 				recupera_packing(Long(Data))
 				CargaAgronomo(ls_columna, data)
 				
-				This.Object.lote_ggncod[Row] = wf_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row])
+				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]))
 			End If	
 				
 	Case "clie_codigo"
@@ -2094,7 +2076,7 @@ Choose Case ls_columna
 		Else		
 			idwc_Cuartel.Retrieve(This.Object.prod_codigo[Row],Integer(data))
 			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-			This.Object.lote_ggncod[Row] = wf_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row])
+			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]))
 			CargaAgronomo(ls_columna, data)
 		End If
 		
@@ -2211,10 +2193,11 @@ If Integer(istr_mant.argumento[5]) = 26 OR Integer(istr_mant.argumento[5]) = 27 
 End If
 end event
 
-event dw_1::buttonclicked;call super::buttonclicked;CHOOSE CASE dwo.Name
-	CASE "buscaproductor"
-		IF NOT istr_Mant.Solo_Consulta THEN	buscaproductor(Integer(istr_mant.argumento[10]) )	
-END CHOOSE
+event dw_1::buttonclicked;call super::buttonclicked;Choose Case dwo.Name
+	Case "buscaproductor"
+		If Not istr_Mant.Solo_Consulta Then buscaproductor(Integer(istr_mant.argumento[10]) )	
+		
+End Choose
 end event
 
 event dw_1::itemfocuschanged;call super::itemfocuschanged;IF is_rutprod <> "" THEN

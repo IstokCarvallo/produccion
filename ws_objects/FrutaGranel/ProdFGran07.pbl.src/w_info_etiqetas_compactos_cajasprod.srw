@@ -123,7 +123,6 @@ public subroutine ciclo_compacto ()
 public function boolean validamaxcajas ()
 public function string rescatadw ()
 public function integer buscacontratistaembaladora (long al_embaladora)
-public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 public function boolean noexistecliente (integer cliente);String ls_nombre
@@ -738,7 +737,7 @@ If dw_1.UpDate() = 1 Then
 			dw_8.Object.pafr_huert1[ll_filasdetalle]		=	dw_1.Object.prod_huerto[1]
 			dw_8.Object.pafr_cuart1[ll_filasdetalle]		=	dw_1.Object.prod_cuarte[1]
 			dw_8.Object.cont_codigo[ll_filasdetalle]		=	dw_1.Object.cont_codigo[1]
-			dw_8.Object.pafr_ggncod[ll_filasdetalle]		=	wf_AsignaGGN(dw_1.Object.prod_codigo[1], dw_1.Object.prod_huerto[1], Integer(istr_mant.argumento[2]))
+			dw_8.Object.pafr_ggncod[ll_filasdetalle]		=	f_AsignaGGN(dw_1.Object.prod_codigo[1], dw_1.Object.prod_huerto[1], Integer(istr_mant.argumento[2]), Date(istr_mant.argumento[5]))
 			ii_cajasactuales									=	ii_cajasactuales + 1
 			//
 			
@@ -748,7 +747,6 @@ If dw_1.UpDate() = 1 Then
 				End If
 			End If
 		End If
-		
 		Return True
 	End If
 Else
@@ -871,23 +869,6 @@ END IF
 Return li_contratista
 end function
 
-public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
-
-uo_Certificaciones	iuo_Certificacion
-iuo_Certificacion	=	Create uo_Certificaciones
-
-
-If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
-		ls_Retorno = iuo_Certificacion.GGN
-	End If
-End If
-
-Destroy iuo_Certificacion
-
-Return ls_Retorno
-end function
-
 on w_info_etiqetas_compactos_cajasprod.create
 int iCurrent
 call super::create
@@ -997,7 +978,7 @@ li_Planta		=		Integer(istr_mant.argumento[1])
 li_Especie	=		Integer(istr_mant.argumento[2])
 ll_Numero	=		Long(istr_mant.argumento[3])
 li_Cliente		=		Integer(istr_mant.argumento[4])
-ldt_FechaProc	=		Date(istr_mant.argumento[5])
+ldt_FechaProc	=	Date(istr_mant.argumento[5])
 
 istr_Mant.Argumento[13] = string(li_Cliente	)
 

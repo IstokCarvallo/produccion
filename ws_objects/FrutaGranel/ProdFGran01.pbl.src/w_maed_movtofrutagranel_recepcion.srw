@@ -5124,6 +5124,7 @@ ib_Destare							=	False
 istr_Mant.Argumento[3]			=	''
 istr_mant.Argumento[5]			=	String(dw_2.Object.espe_codigo[1])
 istr_mant.Argumento[7]			=	'0'
+istr_mant.Argumento[8]			=	String(idt_FechaSistema,'dd/mm/yyyy')
 il_NumFruta							=	0
 il_NumEnva							=	0
 
@@ -5895,154 +5896,152 @@ Time		lt_Hora
 ls_Columna = dwo.Name
 SetNull(ls_Nula)
  
-CHOOSE CASE ls_Columna
-	CASE "clie_codigo"
-		IF NoExisteCliente(Integer(data)) THEN
-			This.SetItem(row,"clie_codigo",Integer(ls_Nula))
-			RETURN 1
-			
-		ELSE
+Choose Case ls_Columna
+	Case "clie_codigo"
+		If NoExisteCliente(Integer(data)) Then
+			This.SetItem(Row,"clie_codigo",Integer(ls_Nula))
+			Return 1
+		Else
 			dw_2.GetChild("espe_codigo", idwc_especie)
 			idwc_especie.SetTransObject(sqlca)
 			idwc_especie.Retrieve(integer(data))
 			istr_mant.Argumento[10] = data
 			set_tarjas(Integer(data), This.Object.plde_codigo[1])
-			
-		END IF	
+		End If	
 	
-	CASE "mfge_numero"
-		IF NOT ExisteRecepcion(gstr_ParamPlanta.CodigoPlanta, Integer(istr_mant.argumento[2]), Long(data),Integer(istr_mant.argumento[10])) THEN
-			This.SetItem(row,"mfge_numero",Long(ls_Nula))
+	Case "mfge_numero"
+		If NOT ExisteRecepcion(gstr_ParamPlanta.CodigoPlanta, Integer(istr_mant.argumento[2]), Long(data),Integer(istr_mant.argumento[10])) Then
+			This.SetItem(Row,"mfge_numero",Long(ls_Nula))
 			This.SetFocus()
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			istr_mant.Argumento[3] = Data
-		END IF
+		End If
 
-	CASE "mfge_fecmov"
+	Case "mfge_fecmov"
 		ld_Fecha	=	Date(Mid(String(date(data),'dd/mm/yyyy'),1,10))
 		
-		IF NOT iuo_FechaMovto.Valida_FechaMovto(ld_Fecha) THEN
-			This.SetItem(row,"mfge_fecmov",Date(ls_Nula))
+		If NOT iuo_FechaMovto.Valida_FechaMovto(ld_Fecha) Then
+			This.SetItem(Row,"mfge_fecmov",Date(ls_Nula))
 			This.SetFocus()
-			RETURN 1
-		END IF	
+			Return 1
+		Else
+			istr_mant.Argumento[8]	=	Data
+		End If	
 
-	CASE "espe_codigo"
-		IF Not manbin_especie(This.Object.plde_codigo[row], Integer(Data), True, sqlca) THEN
-			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		ELSEIF Not iuo_Especie.Existe(Integer(Data), True, sqlca) THEN
-			This.SetItem(row, ls_Columna, Integer(ls_Nula))
+	Case "espe_codigo"
+		If Not manbin_especie(This.Object.plde_codigo[Row], Integer(Data), True, sqlca) Then
+			This.SetItem(Row, ls_Columna, Integer(ls_Nula))
+			Return 1
+		ElseIf Not iuo_Especie.Existe(Integer(Data), True, sqlca) Then
+			This.SetItem(Row, ls_Columna, Integer(ls_Nula))
 			
-			RETURN 1
-		ELSEIF NOT iuo_Especie.ExisteCorrelativoLote(gstr_ParamPlanta.CodigoPlanta,Integer(Data),True,SQLCA) THEN
-			This.SetItem(row, ls_Columna, Integer(ls_Nula))
+			Return 1
+		ElseIf NOT iuo_Especie.ExisteCorrelativoLote(gstr_ParamPlanta.CodigoPlanta,Integer(Data),True,SQLCA) Then
+			This.SetItem(Row, ls_Columna, Integer(ls_Nula))
 			
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			istr_mant.argumento[5]	=	data
 			istr_mant.argumento[7]	=	'0'
-			IF iuo_especie.kildec = 1 THEN
+			If iuo_especie.kildec = 1 Then
 				ii_kildec = 2
-			ELSE
+			Else
 				ii_kildec = 0
-			END If
+			End If
 			
 			idwc_Variedad.SetTransObject(SQLCA)
 			idwc_Variedad.Retrieve(Integer(data))
-		END IF
+		End If
 
-	CASE "tran_codigo"
-		IF Not iuo_Transport.Existe(Integer(Data), True, sqlca) THEN
-			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			
-			RETURN 1
-		END IF
+	Case "tran_codigo"
+		If Not iuo_Transport.Existe(Integer(Data), True, sqlca) Then
+			This.SetItem(Row, ls_Columna, Integer(ls_Nula))
+			Return 1
+		End If
 
-	CASE "cami_patent"
-		IF data <> "" AND Not iuo_Camion.Existe(1, Data, True, sqlca) THEN
-			This.SetItem(row, ls_Columna, ls_Nula)
+	Case "cami_patent"
+		If data <> "" AND Not iuo_Camion.Existe(1, Data, True, sqlca) Then
+			This.SetItem(Row, ls_Columna, ls_Nula)
 			
-			RETURN 1
-		ELSE
-			This.Object.cami_patcar[row]	=	iuo_Camion.PateCarro
-			This.Object.mfge_rutcho[row]	=	iuo_Camion.RutChofer
+			Return 1
+		Else
+			This.Object.cami_patcar[Row]	=	iuo_Camion.PateCarro
+			This.Object.mfge_rutcho[Row]	=	iuo_Camion.RutChofer
 			is_rut = iuo_Camion.RutChofer
-			This.Object.mfge_chofer[row]	=	iuo_Camion.Chofer
-		END IF
+			This.Object.mfge_chofer[Row]	=	iuo_Camion.Chofer
+		End If
 
-	CASE "mfge_rutcho"
-		
+	Case "mfge_rutcho"
 		is_rut = F_verrut(data, True)
-		IF is_rut = "" THEN
-			dw_2.SetItem(row, "mfge_rutcho", ls_Nula)
-			dw_2.SetItem(row, "mfge_chofer", ls_Nula)
-			RETURN 1
-		ELSE
-			IF NoExisteChofer(Data) THEN
-				dw_2.SetItem(row, "mfge_rutcho", ls_Nula)
-				dw_2.SetItem(row, "mfge_chofer", ls_Nula)
-				RETURN 1
-			ELSE	
-				dw_2.SetItem(row, "mfge_chofer",is_chofer)
-			END IF
-		END IF
+		If is_rut = "" Then
+			dw_2.SetItem(Row, "mfge_rutcho", ls_Nula)
+			dw_2.SetItem(Row, "mfge_chofer", ls_Nula)
+			Return 1
+		Else
+			If NoExisteChofer(Data) Then
+				dw_2.SetItem(Row, "mfge_rutcho", ls_Nula)
+				dw_2.SetItem(Row, "mfge_chofer", ls_Nula)
+				Return 1
+			Else	
+				dw_2.SetItem(Row, "mfge_chofer",is_chofer)
+			End If
+		End If
 	
-	CASE "refg_tkbent", "refg_tkbenc", "refg_tkbsal", "refg_tkbsac"
-		IF Not This.uf_validate(row) THEN
-			This.SetItem(row,ls_Columna,Dec(ls_Nula))
-			RETURN 1
-		ELSE
+	Case "refg_tkbent", "refg_tkbenc", "refg_tkbsal", "refg_tkbsac"
+		If Not This.uf_validate(Row) Then
+			This.SetItem(Row,ls_Columna,Dec(ls_Nula))
+			Return 1
+		Else
 			captura_Totales()
-		END IF
+		End If
 		
-	CASE "mfge_totbul"
-		IF Integer(data) > 9999 OR Integer(data) < 0 THEN
-			This.SetItem(row,"mfge_totbul",Integer(ls_Nula))
-			RETURN 1
-		END IF
+	Case "mfge_totbul"
+		If Integer(data) > 9999 OR Integer(data) < 0 Then
+			This.SetItem(Row,"mfge_totbul",Integer(ls_Nula))
+			Return 1
+		End If
 
-	CASE "fecha_sal"
+	Case "fecha_sal"
 		ld_Fecha	=	Date(String(Mid(data,1,10),'dd/mm/yyyy'))
 		
-		IF NOT iuo_FechaMovto.Valida_FechaMovto(date(ld_Fecha)) OR &
-			ld_Fecha < This.Object.mfge_fecmov[row] THEN
+		If NOT iuo_FechaMovto.Valida_FechaMovto(date(ld_Fecha)) OR &
+			ld_Fecha < This.Object.mfge_fecmov[Row] Then
 			MessageBox("Atención","Fecha de Salida no puede ser anterior a Fecha de Entrada")
-			This.SetItem(row,"fecha_sal",SetNull(ld_Fecha))
-			RETURN 1
-		END IF
+			This.SetItem(Row,"fecha_sal",SetNull(ld_Fecha))
+			Return 1
+		End If
 		
 		
-	CASE "refg_horasa"
+	Case "refg_horasa"
 		lt_Hora	=	Time(This.Object.fecha_sal[Row])
 	
-		IF Time(data) < This.Object.refg_horaen[row] THEN
+		If Time(data) < This.Object.refg_horaen[Row] Then
 			MessageBox("Atención","Hora de Salida no puede ser anterior a Hora de Entrada")
-			This.SetItem(row,"refg_horasa",SetNull(lt_Hora))
-			RETURN 1
-		END IF
+			This.SetItem(Row,"refg_horasa",SetNull(lt_Hora))
+			Return 1
+		End If
 		
-	CASE "defg_docrel"
-		IF Data <> "" and Data <> "0" THEN
-			IF Not Existedocproceso(gstr_ParamPlanta.CodigoPlanta,Integer(Data)) THEN
+	Case "defg_docrel"
+		If Data <> "" and Data <> "0" Then
+			If Not Existedocproceso(gstr_ParamPlanta.CodigoPlanta,Integer(Data)) Then
 				dw_2.SetItem(1, 'defg_docrel', integer(ls_Nula))
-				RETURN 1
-			ELSE
-				dw_2.Object.defg_docrel[row]		=	Integer(Data)
-			END IF
+				Return 1
+			Else
+				dw_2.Object.defg_docrel[Row]		=	Integer(Data)
+			End If
 			dw_2.AcceptText()
-		END IF
+		End If
 		
-END CHOOSE
+End Choose
 
-IF ls_Columna <> 'mfge_numero' THEN
+If ls_Columna <> 'mfge_numero' Then
 	HabilitaIngreso(ls_Columna)
 	
-	IF ib_Salida THEN
+	If ib_Salida Then
 		HabilitaGrabacion(ls_Columna)
-	END IF
-END IF
+	End If
+End If
 end event
 
 event dw_2::buttonclicked;call super::buttonclicked;Long 				ll_Fila

@@ -2013,7 +2013,7 @@ Else
 		End If
 		
 		ll_nroguia = dw_2.Object.defe_guides[1]
-		ids_archivo				=	CREATE	DataStore
+		ids_archivo	=	CREATE	DataStore
 		ls_Archivo3	=	"\Guia Despacho-"+String(ll_nroguia)+".xls"
 		ids_archivo.DataObject	=	'dw_info_anexo_resumen_guia_despacho'
 		ids_archivo.SetTransObject(sqlca)
@@ -2982,7 +2982,7 @@ DO
 								If li_respuesta = 1 Then							
 									dw_2.SetItem(1, 'defe_guides', ll_Null)
 									dw_2.Object.defe_guiaem[1] = 0
-									If Not iuo_Guia.of_generaanulaguia(li_cliente, li_planta, ll_guia, ll_folio, 70, &
+									If Not iuo_Guia.of_GeneraAnulaGuia(li_cliente, li_planta, ll_guia, ll_folio, 70, &
 																		dw_2.Object.embq_codigo[1], 1, 'Por Apertura de Despacho.') Then
 										MessageBox('Error', 'No se pudo cargar la tabla de Guias Nulas')
 									End If								
@@ -3754,13 +3754,14 @@ CHOOSE Case ls_columna
 		End If
 		
 		iuo_Cliente.Existe(This.Object.clie_codigo[1], False, Sqlca)
+		
 		If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
-		(Integer(Data) = 7 Or Integer(Data) = 8 Or Integer(Data) = 9 Or &
-		Integer(Data) = 10 Or Integer(Data) = 11 Or Integer(Data) = 30)Then 
+				(Integer(Data) = 7 Or Integer(Data) = 8 Or Integer(Data) = 9 Or &
+				Integer(Data) = 10 Or Integer(Data) = 11 Or Integer(Data) = 30)Then 
+				
 			This.Object.defe_guides.Protect	= 1
 			This.Object.defe_guides.Color		= Rgb(255,255,255)
 			This.Object.defe_guides.BackGround.Color	= 553648127
-//			This.SetItem(Row, "defe_guides", Long(ls_Null))
 		Else
 			This.Object.defe_guides.Protect 	= 0
 			This.Object.defe_guides.Color		= 0
@@ -3981,9 +3982,6 @@ Case "defe_especi"
 			Return 1
 		End If
 		
-//	Case "defe_selnav"
-//		This.SetItem(1, "defe_selcon", Data)
-		
 End Choose
 
 HabilitaIngreso(ls_columna)
@@ -3994,47 +3992,47 @@ end event
 
 event dw_2::clicked;call super::clicked;str_mant	lstr_mant
 
-CHOOSE CASE dwo.name
-	CASE "buscaembarque"
+Choose Case dwo.name
+	Case "buscaembarque"
 		buscaembarque()
 	
-	CASE "buscacliente"
+	Case "buscacliente"
 		buscacliente()
    		//HabilitaIngreso('clie_codigo')
-	CASE "b_termografo"
-		
-		IF isnull(dw_2.Object.defe_term01[row]) THEN
+			
+	Case "b_termografo"	
+		If isnull(dw_2.Object.defe_term01[Row]) Then
 			istr_mant3.argumento[1] = ''
-		ELSE
-			istr_mant3.argumento[1] = dw_2.Object.defe_term01[row] 
-		END IF
+		Else
+			istr_mant3.argumento[1] = dw_2.Object.defe_term01[Row] 
+		End If
 		
-		IF isnull(dw_2.Object.defe_term02[row] ) THEN
+		If isnull(dw_2.Object.defe_term02[Row] ) Then
 			istr_mant3.argumento[2] = ''
-		ELSE
-			istr_mant3.argumento[2] = dw_2.Object.defe_term02[row] 
-		END IF	
+		Else
+			istr_mant3.argumento[2] = dw_2.Object.defe_term02[Row] 
+		End If	
 		
-		IF  isnull(dw_2.Object.defe_term03[row]) THEN 
+		If  isnull(dw_2.Object.defe_term03[Row]) Then 
 			istr_mant3.argumento[3] = ''	
-		ELSE
-			istr_mant3.argumento[3] = dw_2.Object.defe_term03[row] 
-		END IF
+		Else
+			istr_mant3.argumento[3] = dw_2.Object.defe_term03[Row] 
+		End If
 		
 		OpenWithParm(w_incluye_termografos, istr_mant3)
 		istr_mant3 = Message.PowerObjectParm		
 			
-		dw_2.Object.defe_term01[row] = istr_mant3.argumento[1]
-		dw_2.Object.defe_term02[row] = istr_mant3.argumento[2]
-		dw_2.Object.defe_term03[row] = istr_mant3.argumento[3]
+		dw_2.Object.defe_term01[Row] = istr_mant3.argumento[1]
+		dw_2.Object.defe_term02[Row] = istr_mant3.argumento[2]
+		dw_2.Object.defe_term03[Row] = istr_mant3.argumento[3]
 
-	CASE "b_cont"
-		IF ii_blockcont = 1 THEN 
+	Case "b_cont"
+		If ii_blockcont = 1 Then 
 			lstr_mant.dw = dw_2
 			OpenWithParm(w_datos_contenedor, lstr_mant)
 			lstr_mant = Message.PowerObjectParm		
-		END If
-END CHOOSE
+		End If
+End Choose
 end event
 
 event dw_2::add_row;call super::add_row;Clipboard("")
@@ -4052,7 +4050,6 @@ event dw_2::itemfocuschanged;call super::itemfocuschanged;
 //END IF
 
 CHOOSE CASE dwo.name
-		
 	CASE "defe_nrcont"
 		cb_limpia.PostEvent(Clicked!)
 		

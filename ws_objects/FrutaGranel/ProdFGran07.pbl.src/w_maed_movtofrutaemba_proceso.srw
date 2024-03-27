@@ -89,7 +89,6 @@ public subroutine buscacuartel ()
 public function boolean existepredio (integer al_productor, integer ai_predio)
 public function boolean existecuartel (long al_productor, integer ai_predio, integer ai_cuartel)
 public function string cargacodigo (integer ai_cliente, long al_planta, long al_pallet, integer ai_procedencia)
-public function string wf_asignaggn (long productor, integer predio, integer especie)
 end prototypes
 
 event ue_recuperapallet();Long		ll_fila_d, ll_fila_e, respuesta
@@ -1103,23 +1102,6 @@ CLOSE Codigo;
 
 RETURN ls_respuesta 
 
-end function
-
-public function string wf_asignaggn (long productor, integer predio, integer especie);String	ls_retorno = ""
-
-uo_Certificaciones	iuo_Certificacion
-iuo_Certificacion	=	Create uo_Certificaciones
-
-
-If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio,  Especie, False, SQLCA) Then
-		ls_Retorno = iuo_Certificacion.GGN
-	End If
-End If
-
-Destroy iuo_Certificacion
-
-Return ls_Retorno
 end function
 
 on w_maed_movtofrutaemba_proceso.create
@@ -2491,7 +2473,7 @@ Choose Case ls_Columna
 			Return 1
 		Else
 			This.Object.prbr_codpre[Row] = Integer(Data)
-			This.Object.pafr_ggncod[Row] = wf_AsignaGGN(dw_2.Object.prod_codigo[Row], Integer(Data), dw_2.Object.espe_codigo[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Integer(Data), dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1])
 		End If		
 	
 	Case "pafr_cuart1"
@@ -2556,7 +2538,6 @@ ls_Columna = dwo.name
 
 CHOOSE CASE ls_Columna
 	CASE "emba_codigo"
-		
 		IF Not cargaembalaje(data) THEN
 			
 			THIS.object.Emba_codigo[row] = ls_null
@@ -2582,9 +2563,7 @@ CHOOSE CASE ls_Columna
 			is_embacodigo	=	data
 		END IF
 		
-		
 	CASE "paen_numero"
-
 		pb_eli_det.enabled = FALSE
 		pb_ins_det.enabled = FALSE
 		IF isnull(dw_2.Object.mfee_docrel[1]) THEN
@@ -2727,13 +2706,10 @@ CHOOSE CASE ls_Columna
 		ELSE
 			istr_Mant.Argumento[10]	=	String(istr_envase.Codigo)
 			This.SetItem(1, "tpen_codigo", ls_Null)
-
 		END IF
 
 	CASE "tpen_codigo"
-		IF iuo_tipopallet.existe_porembalaje(Integer(istr_Mant.Argumento[1]),&
-														 is_embacodigo, &
-														 Data, True, SqlCa) THEN
+		IF iuo_tipopallet.existe_porembalaje(Integer(istr_Mant.Argumento[1]), is_embacodigo, Data, True, SqlCa) THEN
 			This.SetItem(1, "paen_altura", iuo_tipopallet.Altura)
 		ELSE
 			This.SetItem(1, ls_Columna, ls_Null)
@@ -2842,7 +2818,7 @@ type dw_5 from datawindow within w_maed_movtofrutaemba_proceso
 string tag = "Muestra todos los Pallet del Movimiento"
 boolean visible = false
 integer x = 1312
-integer y = 1716
+integer y = 1712
 integer width = 2971
 integer height = 428
 integer taborder = 120
