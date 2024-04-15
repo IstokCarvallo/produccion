@@ -36,7 +36,7 @@ end forward
 global type w_mant_mues_roleo_embq from w_mant_tabla
 integer width = 2798
 integer height = 1920
-string title = "Mantencion Parrillas / Pallets / Temperaturas"
+string title = "Roleo solo cambio de Instructivo Embarque"
 event ue_validaregistro ( )
 uo_selplanta uo_selplanta
 uo_selcliente uo_selcliente

@@ -1260,6 +1260,7 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 					dw_4.Object.pafr_barra2[ll_Nuevo]	=	dw_6.Object.pafr_barra2[ll_Fila]
 					dw_4.Object.pafr_barra3[ll_Nuevo]	=	dw_6.Object.pafr_barra3[ll_Fila]
 					dw_4.Object.pafr_barra4[ll_Nuevo]	=	dw_6.Object.pafr_barra4[ll_Fila]
+//					dw_4.Object.pafr_ggncod[ll_Nuevo]	=	dw_6.Object.pafr_ggncod[ll_Fila]
 				End If
 					
 //			Else
@@ -1280,34 +1281,31 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 			dw_4.Object.etiq_codigo[ll_Nuevo]	=	dw_6.Object.etiq_codigo[ll_Fila]
 	     	dw_4.Object.pafr_huert1[ll_Nuevo]	=	dw_6.Object.pafr_huert1[ll_Fila]
          	dw_4.Object.pafr_cuart1[ll_Nuevo]	=	dw_6.Object.pafr_cuart1[ll_Fila]
-			dw_4.Object.pafr_nrlote[ll_Nuevo]	=	dw_6.Object.pafr_nrlote[ll_Fila]
-			dw_4.Object.pafr_calibr[ll_Nuevo]   =	dw_6.Object.pafr_calibr[ll_Fila]
+			dw_4.Object.pafr_nrlote[ll_Nuevo]		=	dw_6.Object.pafr_nrlote[ll_Fila]
+			dw_4.Object.pafr_calibr[ll_Nuevo]   	=	dw_6.Object.pafr_calibr[ll_Fila]
 			dw_4.Object.pafr_fecemb[ll_Nuevo]	=	dw_6.Object.pafr_fecemb[ll_Fila]
 			dw_4.Object.pafr_ccajas[ll_Nuevo]	=	dw_6.Object.caja_traspa[ll_Fila]
 			dw_4.Object.prod_nombre[ll_Nuevo]	=	dw_6.Object.prod_nombre[ll_Fila]
 			dw_4.Object.cond_codigo[ll_Nuevo]	=	dw_6.Object.cond_codigo[ll_Fila]
-			dw_4.Object.pafr_cjssal[ll_Nuevo]	=	dw_4.Object.pafr_ccajas[ll_Nuevo]
+			dw_4.Object.pafr_cjssal[ll_Nuevo]		=	dw_4.Object.pafr_ccajas[ll_Nuevo]
 			dw_4.Object.pafr_fecing[ll_Nuevo]	=	dw_6.Object.pafr_fecing[ll_Fila]
 			dw_4.Object.pafr_copack[ll_nuevo]   = 	dw_6.Object.pafr_copack[ll_Fila]
-			dw_4.Object.pafr_docrel[ll_nuevo]   = 	dw_6.Object.pafr_docrel[ll_Fila]
-			dw_4.Object.pafr_calrot[ll_nuevo]   = 	dw_6.Object.pafr_calrot[ll_Fila]
-			dw_4.Object.pafr_fecrot[ll_nuevo]   = 	dw_6.Object.pafr_fecrot[ll_Fila]
+			dw_4.Object.pafr_docrel[ll_nuevo]   	= 	dw_6.Object.pafr_docrel[ll_Fila]
+			dw_4.Object.pafr_calrot[ll_nuevo]   	= 	dw_6.Object.pafr_calrot[ll_Fila]
+			dw_4.Object.pafr_fecrot[ll_nuevo]   	= 	dw_6.Object.pafr_fecrot[ll_Fila]
 			dw_4.Object.pafr_embrea[ll_nuevo]   = 	dw_6.Object.pafr_embrea[ll_Fila]
 			dw_4.Object.cama_nombre[ll_nuevo]   = 	dw_6.Object.cama_nombre[ll_Fila]
-			dw_4.Object.cate_codigo[ll_nuevo]   = 	dw_6.Object.cate_codigo[ll_Fila]
-			dw_4.Object.pafr_catrot[ll_nuevo]   = 	dw_6.Object.pafr_catrot[ll_Fila]
+			dw_4.Object.cate_codigo[ll_nuevo]   	= 	dw_6.Object.cate_codigo[ll_Fila]
+			dw_4.Object.pafr_catrot[ll_nuevo]  	= 	dw_6.Object.pafr_catrot[ll_Fila]
+			dw_4.Object.pafr_ggncod[ll_Nuevo]	=	dw_6.Object.pafr_ggncod[ll_Fila]
 			
-			If isnull(dw_6.Object.pafr_nroori[ll_Fila]) OR &
-					dw_6.Object.pafr_nroori[ll_Fila] = 0 Then
-					
+			If IsNull(dw_6.Object.pafr_nroori[ll_Fila]) OR dw_6.Object.pafr_nroori[ll_Fila] = 0 Then
 				dw_4.Object.pafr_nroori[ll_nuevo] = dw_6.Object.paen_numero[ll_Fila]
 			Else	
 				dw_4.Object.pafr_nroori[ll_nuevo] = dw_6.Object.pafr_nroori[ll_Fila]
 			End If
 			
-			If isnull(dw_6.Object.pafr_secori[ll_Fila]) OR &
-						dw_6.Object.pafr_secori[ll_Fila] = 0 Then
-						
+			If IsNull(dw_6.Object.pafr_secori[ll_Fila]) OR dw_6.Object.pafr_secori[ll_Fila] = 0 Then
 				dw_4.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secuen[ll_Fila]
 			Else	
 				dw_4.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secori[ll_Fila]
@@ -1346,7 +1344,7 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 				dw_1.Object.prod_codigo[ll_NuevoDet]	=	dw_6.Object.prod_codigo[ll_Fila]
 				dw_1.Object.emba_codigo[ll_NuevoDet]	=	dw_6.Object.emba_codigo[ll_Fila]
 				dw_1.Object.etiq_codigo[ll_NuevoDet]	=	dw_6.Object.etiq_codigo[ll_Fila]
-				dw_1.Object.pafr_calibr[ll_NuevoDet]	=	dw_6.Object.pafr_calibr[ll_Fila]
+				dw_1.Object.pafr_calibr[ll_NuevoDet]		=	dw_6.Object.pafr_calibr[ll_Fila]
 				dw_1.Object.pafr_secori[ll_NuevoDet]	=	dw_6.Object.pafr_secuen[ll_Fila]
 				dw_1.Object.repd_marcad[ll_NuevoDet]	=	is_marca
 				dw_1.Object.repd_marcao[ll_NuevoDet]	=	is_marcao
@@ -1364,7 +1362,7 @@ FOR ll_Fila = 1 TO dw_6.RowCount()
 				dw_1.Object.prod_codigo[ll_NuevoDet]	=	dw_4.Object.prod_codigo[ll_nuevo]
 				dw_1.Object.emba_codigo[ll_NuevoDet]	=	dw_4.Object.emba_codigo[ll_nuevo]
 				dw_1.Object.etiq_codigo[ll_NuevoDet]	=	dw_4.Object.etiq_codigo[ll_nuevo]
-				dw_1.Object.pafr_calibr[ll_NuevoDet]	=	dw_4.Object.pafr_calibr[ll_nuevo]
+				dw_1.Object.pafr_calibr[ll_NuevoDet]		=	dw_4.Object.pafr_calibr[ll_nuevo]
 				dw_1.Object.pafr_ccajas[ll_NuevoDet]	=	dw_6.Object.caja_traspa[ll_Fila]
 				dw_1.Object.paen_nroori[ll_NuevoDet]	=	dw_3.Object.paen_numero[1]
 				dw_1.Object.pafr_secori[ll_NuevoDet]	=	dw_6.Object.pafr_secuen[ll_Fila]
@@ -1630,9 +1628,9 @@ ll_find2	=	ids_palletencabhisto.Find ( "clie_codigo = " + String(li_cliente) + &
 								" AND paen_numero = " + String(ll_pallet) + &
 								" AND plde_codigo = " + String(li_planta), 1, ids_palletencabhisto.RowCount() )
 								
-IF tipo = 1 THEN 
-	IF il_existe > 0 THEN
-		IF ll_find = 0 THEN
+If tipo = 1 Then 
+	If il_existe > 0 Then
+		If ll_find = 0 Then
 			ll_fila	= ids_palletencabhisto.InsertRow(0)
 				
 			ids_palletencabhisto.SetItem(ll_fila,"clie_codigo",dw_3.Object.clie_codigo[1])
@@ -1668,10 +1666,10 @@ IF tipo = 1 THEN
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_pexpor",dw_3.Object.paen_pexpor[1])
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_pmixto",dw_3.Object.paen_pmixto[1])
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_proces",numero)
-		END IF		
-	END IF
+		End If		
+	End If
 	
-	IF ll_find2 = 0 THEN 
+	If ll_find2 = 0 Then 
 		ll_fila	= ids_palletencabhisto.InsertRow(0)
 	
 		ids_palletencabhisto.SetItem(ll_fila,"clie_codigo",dw_5.Object.clie_codigo[1])
@@ -1708,9 +1706,9 @@ IF tipo = 1 THEN
 		ids_palletencabhisto.SetItem(ll_fila,"pahi_pmixto",dw_5.Object.paen_pmixto[1])
 		ids_palletencabhisto.SetItem(ll_fila,"pahi_proces",numero)
 		ids_palletencabhisto.SetItem(ll_fila,"cajas_traspa",dw_6.Object.total_traspa[1])
-	END IF			
-ELSE
-	IF ll_find2 = 0 THEN 
+	End If			
+Else
+	If ll_find2 = 0 Then 
 		FOR ll_fila_d = 1 TO dw_6.RowCount()	
 			ll_fila	= 	ids_palletfrutahisto.InsertRow(0)   
 			ids_palletfrutahisto.SetItem(ll_fila,"clie_codigo",dw_6.Object.clie_codigo[ll_fila_d])
@@ -1747,11 +1745,12 @@ ELSE
 			ids_palletfrutahisto.SetItem(ll_fila,"pafr_embrea",dw_6.Object.pafr_embrea[ll_fila_d])
 			ids_palletfrutahisto.SetItem(ll_fila,"cate_codigo",dw_6.Object.cate_codigo[ll_fila_d])
 			ids_palletfrutahisto.SetItem(ll_fila,"pafr_catrot",dw_6.Object.pafr_catrot[ll_fila_d])
+			ids_palletfrutahisto.SetItem(ll_fila,"pafr_ggncod",dw_6.Object.pafr_ggncod[ll_fila_d])
 		NEXT
-	END IF
+	End If
 	
-	IF il_existe > 0 THEN
-		IF ll_find = 0 THEN
+	If il_existe > 0 Then
+		If ll_find = 0 Then
 			FOR ll_fila_d = 1 TO dw_4.RowCount()	
 				ll_fila	= 	ids_palletfrutahisto.InsertRow(0)   
 					
@@ -1788,10 +1787,11 @@ ELSE
 				ids_palletfrutahisto.SetItem(ll_fila,"pafr_embrea",dw_4.Object.pafr_embrea[ll_fila_d])
 				ids_palletfrutahisto.SetItem(ll_fila,"cate_codigo",dw_4.Object.cate_codigo[ll_fila_d])
 				ids_palletfrutahisto.SetItem(ll_fila,"pafr_catrot",dw_4.Object.pafr_catrot[ll_fila_d])
+				ids_palletfrutahisto.SetItem(ll_fila,"pafr_ggncod",dw_4.Object.pafr_ggncod[ll_fila_d])
 			NEXT
-		END IF
-	END IF	
-END IF
+		End If
+	End If	
+End If
 
 RETURN
 end subroutine
@@ -1887,9 +1887,9 @@ ll_find2	=	ids_palletencabhisto.Find ( "clie_codigo = " + String(li_cliente) + &
 						" AND paen_numero = " + String(ll_pallet2) + &
 						" AND plde_codigo = " + String(li_planta), 1, ids_palletencabhisto.RowCount() )
 								
-IF tipo = 1 THEN  
+If tipo = 1 Then  
 	
-	IF ll_find2 = 0 THEN
+	If ll_find2 = 0 Then
 		ll_fila	= ids_palletencabhisto.InsertRow(0)
 		
 		ids_palletencabhisto.SetItem(ll_fila,"clie_codigo",dw_5.Object.clie_codigo[1])
@@ -1926,10 +1926,10 @@ IF tipo = 1 THEN
 		ids_palletencabhisto.SetItem(ll_fila,"pahi_pmixto",dw_5.Object.paen_pmixto[1])
 		ids_palletencabhisto.SetItem(ll_fila,"pahi_proces",numero)
 		ids_palletencabhisto.SetItem(ll_fila,"cajas_traspa",dw_6.Object.total_traspa[1])	
-	END IF
+	End If
 
-	IF il_existe > 0 THEN
-		IF ll_find = 0 THEN
+	If il_existe > 0 Then
+		If ll_find = 0 Then
 			ll_fila	= ids_palletencabhisto.InsertRow(0)
 			
 			ids_palletencabhisto.SetItem(ll_fila,"clie_codigo",dw_3.Object.clie_codigo[1])
@@ -1965,10 +1965,10 @@ IF tipo = 1 THEN
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_pexpor",dw_3.Object.paen_pexpor[1])
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_pmixto",dw_3.Object.paen_pmixto[1])
 			ids_palletencabhisto.SetItem(ll_fila,"pahi_proces",numero)
-		END IF
-	END IF
-ELSE
-	IF ll_find2 = 0 THEN
+		End If
+	End If
+Else
+	If ll_find2 = 0 Then
 		FOR ll_fila_d = 1 TO dw_6.RowCount()	
 			ll_fila	= 	ids_palletfrutahisto.InsertRow(0)   
 			
@@ -2006,11 +2006,12 @@ ELSE
 			ids_palletfrutahisto.SetItem(ll_fila,"pafr_embrea",dw_6.Object.pafr_embrea[ll_fila_d])
 			ids_palletfrutahisto.SetItem(ll_fila,"cate_codigo",dw_6.Object.cate_codigo[ll_fila_d])
 			ids_palletfrutahisto.SetItem(ll_fila,"pafr_catrot",dw_6.Object.pafr_catrot[ll_fila_d])
+			ids_palletfrutahisto.SetItem(ll_fila,"pafr_ggncod",dw_6.Object.pafr_ggncod[ll_fila_d])
 		NEXT	
-	END IF	
+	End If	
 	
-	IF il_existe > 0 THEN
-		IF ll_find = 0 THEN
+	If il_existe > 0 Then
+		If ll_find = 0 Then
 			FOR ll_fila_d2 = 1 TO dw_4.RowCount()	
 				ll_fila	= 	ids_palletfrutahisto.InsertRow(0)   
 				
@@ -2047,10 +2048,11 @@ ELSE
 				ids_palletfrutahisto.SetItem(ll_fila,"pafr_embrea",dw_4.Object.pafr_embrea[ll_fila_d2])
 				ids_palletfrutahisto.SetItem(ll_fila,"cate_codigo",dw_4.Object.cate_codigo[ll_fila_d2])
 				ids_palletfrutahisto.SetItem(ll_fila,"pafr_catrot",dw_4.Object.pafr_catrot[ll_fila_d2])
+				ids_palletfrutahisto.SetItem(ll_fila,"pafr_ggncod",dw_4.Object.pafr_ggncod[ll_fila_d2])
 			NEXT
-		END IF
-	END IF	
-END IF
+		End If
+	End If	
+End If
 
 RETURN
 end subroutine
@@ -2188,23 +2190,23 @@ ids_palletencabnuevo.SetTransObject(sqlca)
 
 li_tiporepa = dw_2.Object.repe_tipopa[1]
 
-//IF dw_4.RowCount() > 0 THEN
+//If dw_4.RowCount() > 0 Then
 //	li_secuen = dw_4.Object.pafr_secuen[dw_4.RowCount()] + 1
-//ELSE
+//Else
 //	li_secuen = 1
-//END IF
+//End If
 
 FOR ll_fila = 1 TO dw_4.Rowcount() 
 	
-//	IF dw_4.RowCount() > 0 THEN
+//	If dw_4.RowCount() > 0 Then
 //		FOR li_secuencia = 1 TO dw_4.RowCount()
-//			IF dw_4.Object.pafr_secuen[li_secuencia] < 999 THEN
+//			If dw_4.Object.pafr_secuen[li_secuencia] < 999 Then
 //				li_secuen = dw_4.Object.pafr_secuen[li_secuencia] + 1
-//			END IF	
+//			End If	
 //		NEXT	
-//	ELSE
+//	Else
 //		li_secuen = 1
-//	END IF
+//	End If
 	
 	ll_Nuevo = ids_palletfrutanuevo.InsertRow(0)
 	
@@ -2212,11 +2214,11 @@ FOR ll_fila = 1 TO dw_4.Rowcount()
 	ids_palletfrutanuevo.Object.plde_codigo[ll_Nuevo]	=	dw_4.Object.plde_codigo[ll_Fila]
 	ids_palletfrutanuevo.Object.paen_numero[ll_Nuevo]	=	dw_4.Object.paen_numero[ll_Fila]
 	
-	//IF dw_4.Object.pafr_secuen[ll_Fila] > 999 THEN
+	//If dw_4.Object.pafr_secuen[ll_Fila] > 999 Then
 		ids_palletfrutanuevo.Object.pafr_secuen[ll_Nuevo]	=	dw_4.Object.pafr_secuen[ll_Fila]
-	//ELSE
+	//Else
 	//	ids_palletfrutanuevo.Object.pafr_secuen[ll_Nuevo]	=	li_secuen
-	//END IF	
+	//End If	
 	
 	ids_palletfrutanuevo.Object.espe_codigo[ll_Nuevo]	=	dw_4.Object.espe_codigo[ll_Fila]
 	ids_palletfrutanuevo.Object.vari_codigo[ll_Nuevo]	=	dw_4.Object.vari_codigo[ll_Fila]
@@ -2249,8 +2251,9 @@ FOR ll_fila = 1 TO dw_4.Rowcount()
 	ids_palletfrutanuevo.Object.cama_nombre[ll_nuevo]	=	dw_4.Object.cama_nombre[ll_Fila]
 	ids_palletfrutanuevo.Object.cate_codigo[ll_nuevo]	=	dw_4.Object.cate_codigo[ll_Fila]
 	ids_palletfrutanuevo.Object.pafr_catrot[ll_nuevo]	=	dw_4.Object.pafr_catrot[ll_Fila]
+	ids_palletfrutanuevo.Object.pafr_ggncod[ll_nuevo]	=	dw_4.Object.pafr_ggncod[ll_Fila]
 	
-	IF li_tiporepa <> 7 THEN
+	If li_tiporepa <> 7 Then
 		ids_palletfrutanuevo.Object.pafr_huert2[ll_Nuevo]	=	dw_4.Object.pafr_huert2[ll_Fila]
 		ids_palletfrutanuevo.Object.pafr_huert3[ll_Nuevo]	=	dw_4.Object.pafr_huert3[ll_Fila]
 		ids_palletfrutanuevo.Object.pafr_cuart2[ll_Nuevo]	=	dw_4.Object.pafr_cuart2[ll_Fila]
@@ -2259,23 +2262,22 @@ FOR ll_fila = 1 TO dw_4.Rowcount()
 		ids_palletfrutanuevo.Object.pafr_barra2[ll_Nuevo]	=	dw_4.Object.pafr_barra2[ll_Fila]
 		ids_palletfrutanuevo.Object.pafr_barra3[ll_Nuevo]	=	dw_4.Object.pafr_barra3[ll_Fila]
 		ids_palletfrutanuevo.Object.pafr_barra4[ll_Nuevo]	=	dw_4.Object.pafr_barra4[ll_Fila]
-	END IF	
-//	IF isnull(dw_4.Object.pafr_nroori[ll_Fila]) OR &
-//					dw_4.Object.pafr_nroori[ll_Fila] = 0 THEN
+	End If	
+//	If IsNull(dw_4.Object.pafr_nroori[ll_Fila]) OR &
+//					dw_4.Object.pafr_nroori[ll_Fila] = 0 Then
 //					
 //		ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_4.Object.paen_numero[ll_Fila]
-//	ELSE	
-
+//	Else
 		ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_4.Object.pafr_nroori[ll_Fila]
-//	END IF
+//	End If
 	
-//	IF isnull(dw_4.Object.pafr_secori[ll_Fila]) OR &
-//				dw_4.Object.pafr_secori[ll_Fila] = 0 THEN
+//	If IsNull(dw_4.Object.pafr_secori[ll_Fila]) OR &
+//				dw_4.Object.pafr_secori[ll_Fila] = 0 Then
 //				
 //		ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_4.Object.pafr_secuen[ll_Fila]
-//	ELSE	
+//	Else	
 		ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_4.Object.pafr_secori[ll_Fila]
-//	END IF
+//	End If
 		
 	
 NEXT
@@ -2291,7 +2293,7 @@ SELECT count(*)
 	AND	clie_codigo = :li_cliente
 	AND	plde_codigo = :li_planta;
 
-IF ll_cont > 0 THEN
+If ll_cont > 0 Then
 	FOR ll_nuevo2 = 1 TO dw_3.RowCount()
 		ids_palletencabupdate.Object.paen_ccajas[ll_nuevo2] =   dw_3.Object.paen_ccajas[1] + dw_6.Object.total_traspa[1]
 		ids_palletencabupdate.Object.paen_numero[ll_nuevo2] =   dw_3.Object.paen_numero[1] 
@@ -2306,18 +2308,18 @@ IF ll_cont > 0 THEN
 	ids_palletencabupdate.ResetUpdate()
 	
 	FOR ll_fil = 1 TO ids_palletencabupdate.RowCount()
-		IF il_cantidad <> 0 OR ids_palletencabupdate.RowCount() > 0  THEN
-			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_ccajas", Primary!, DataModified!) 
-			ids_palletencabupdate.SetItemStatus(ll_fil,"clie_codigo", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"plde_codigo", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_numero", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_inspec", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"emba_codigo", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"vari_codigo", Primary!, DataModified!)
-			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_varrot", Primary!, DataModified!)
-		END IF
+		If il_cantidad <> 0 OR ids_palletencabupdate.RowCount() > 0  Then
+			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_ccajas", Primary!, DataModIfied!) 
+			ids_palletencabupdate.SetItemStatus(ll_fil,"clie_codigo", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"plde_codigo", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_numero", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_inspec", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"emba_codigo", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"vari_codigo", Primary!, DataModIfied!)
+			ids_palletencabupdate.SetItemStatus(ll_fil,"paen_varrot", Primary!, DataModIfied!)
+		End If
 	NEXT	
-ELSE	
+Else	
 		
 	FOR ll_fila1 = 1 TO dw_3.RowCount()
 		ll_nuevo1 = ids_palletencabnuevo.InsertRow(0)
@@ -2374,9 +2376,8 @@ ELSE
 		ids_palletencabnuevo.Object.paen_pcopda[ll_nuevo1] =   dw_3.Object.paen_pcopda[ll_fila1] 
 		ids_palletencabnuevo.Object.paen_ccajas[ll_nuevo1] =   dw_3.Object.paen_ccajas[ll_fila1] 
 		ids_palletencabnuevo.Object.tmvp_codigo[ll_nuevo1]	=   3 
-		
 	NEXT
-END IF
+End If
 end subroutine
 
 public function boolean cuadrar_cajas (integer al_tipo);Integer li_cantidad, li_exportador, li_planta
@@ -2456,17 +2457,17 @@ ll_pallet 		= dw_3.Object.paen_numero[1]
 li_tipopa 		= dw_3.Object.paen_tipopa[1]
 li_tiporepa	= dw_2.Object.repe_tipopa[1]
 
-//IF dw_4.RowCount() > 0 THEN
+//If dw_4.RowCount() > 0 Then
 //	ll_prodrot  = dw_4.Object.pafr_prdrot[1]
 //	ll_predrot  = dw_4.Object.pafr_huert4[1]
 //	ll_cuarrot  = dw_4.Object.pafr_cuart4[1]
 //	ll_rotpak	= dw_4.Object.pafr_rotpak[1]
-//ELSE
+//Else
 	ll_prodrot 	= 999999
 	ll_predrot  = 99999
 	ll_cuarrot  = 99999
 	ll_rotpak	= 99999
-//END IF
+//End If
 
 SELECT count(*) 
 	INTO :il_cantidad
@@ -2475,24 +2476,24 @@ SELECT count(*)
 	AND plde_codigo = :li_planta
 	AND paen_numero = :ll_pallet;
  
-IF li_tiporepa  = 2 OR li_tiporepa  = 1  THEN
-	IF ids_palletfrutanuevo.RowCount() > 0  THEN
+If li_tiporepa  = 2 OR li_tiporepa  = 1  Then
+	If ids_palletfrutanuevo.RowCount() > 0  Then
 		FOR ll_busca = 1 TO ids_palletfrutanuevo.RowCount()
-			IF ids_palletfrutanuevo.Object.pafr_secuen[ll_busca] < 99999 THEN
+			If ids_palletfrutanuevo.Object.pafr_secuen[ll_busca] < 99999 Then
 				li_secuen = ids_palletfrutanuevo.Object.pafr_secuen[ll_busca] + 1
-			END IF	
+			End If	
 		NEXT	
-	END IF
-END IF	
+	End If
+End If	
 
-IF li_tiporepa  = 7 THEN
+If li_tiporepa  = 7 Then
 	FOR ll_fila = 1 TO dw_4.Rowcount() 
 		
 		ll_BFilaPD	=	ids_palletfrutanuevo.Find("paen_numero = " + String(dw_4.Object.paen_numero[1]) + &
 					 " AND pafr_secuen = " + String(dw_4.Object.pafr_secuen[ll_fila]), &
 					 1, ids_palletfrutanuevo.RowCount())
 		
-		IF ll_BFilaPD = 0 THEN
+		If ll_BFilaPD = 0 Then
 			ll_Nuevo = ids_palletfrutanuevo.InsertRow(0)
 			
 			ids_palletfrutanuevo.Object.clie_codigo[ll_Nuevo]		=	dw_4.Object.clie_codigo[ll_Fila]
@@ -2530,45 +2531,46 @@ IF li_tiporepa  = 7 THEN
 			ids_palletfrutanuevo.Object.cama_nombre[ll_nuevo]	=	dw_4.Object.cama_nombre[ll_Fila]
 			ids_palletfrutanuevo.Object.cate_codigo[ll_nuevo]		=	dw_4.Object.cate_codigo[ll_Fila]
 			ids_palletfrutanuevo.Object.pafr_catrot[ll_nuevo]		=	dw_4.Object.pafr_catrot[ll_Fila]
+			ids_palletfrutanuevo.Object.pafr_ggncod[ll_nuevo]		=	dw_4.Object.pafr_ggncod[ll_Fila]
 						
 		//	dw_6.Object.caja_traspa[ll_fila] = 0
 			
-			IF isnull(dw_4.Object.pafr_nroori[ll_Fila]) OR dw_4.Object.pafr_nroori[ll_Fila] = 0 THEN
+			If IsNull(dw_4.Object.pafr_nroori[ll_Fila]) OR dw_4.Object.pafr_nroori[ll_Fila] = 0 Then
 				ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_4.Object.paen_numero[ll_Fila]
-			ELSE	
+			Else	
 				ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_4.Object.pafr_nroori[ll_Fila]
-			END IF
+			End If
 			
-			IF isnull(dw_4.Object.pafr_secori[ll_Fila]) OR dw_4.Object.pafr_secori[ll_Fila] = 0 THEN
+			If IsNull(dw_4.Object.pafr_secori[ll_Fila]) OR dw_4.Object.pafr_secori[ll_Fila] = 0 Then
 				ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_4.Object.pafr_secuen[ll_Fila]
-			ELSE	
+			Else	
 				ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_4.Object.pafr_secori[ll_Fila]
-			END IF
-		END IF
+			End If
+		End If
 	NEXT
 	
 	FOR ll_fila = 1 TO dw_6.Rowcount() 
 		dw_6.Object.caja_traspa[ll_fila] = 0
 	NEXT	
 
-END IF	
+End If	
 
-IF li_tiporepa  <> 7 THEN
+If li_tiporepa  <> 7 Then
 
 	FOR ll_fila = 1 TO dw_6.Rowcount() 
 		ll_caja_traspa = dw_6.Object.caja_traspa[ll_fila]
-		IF ll_caja_traspa > 0 THEN
+		If ll_caja_traspa > 0 Then
 				
-	//		IF li_secuen = 0 THEN
+	//		If li_secuen = 0 Then
 	//			li_secuen = 1
-	//			IF ids_palletfrutanuevo.RowCount() > 0 THEN
+	//			If ids_palletfrutanuevo.RowCount() > 0 Then
 	//				FOR li_secuencia = 1 TO ids_palletfrutanuevo.RowCount()
-	//					IF ids_palletfrutanuevo.Object.pafr_secuen[li_secuencia] < 9999 THEN
+	//					If ids_palletfrutanuevo.Object.pafr_secuen[li_secuencia] < 9999 Then
 	//						li_secuen = ids_palletfrutanuevo.Object.pafr_secuen[ids_palletfrutanuevo.RowCount()] + 1
-	//					END IF	
+	//					End If	
 	//				NEXT	
-	//			END IF
-	//		END IF	
+	//			End If
+	//		End If	
 			
 			ll_Nuevo = ids_palletfrutanuevo.InsertRow(0)
 			
@@ -2576,20 +2578,20 @@ IF li_tiporepa  <> 7 THEN
 			ids_palletfrutanuevo.Object.plde_codigo[ll_Nuevo]		=	dw_6.Object.plde_codigo[ll_Fila]
 			ids_palletfrutanuevo.Object.paen_numero[ll_Nuevo]	=	dw_3.Object.paen_numero[1]
 			
-			IF li_secuen = 0 THEN
-				IF dw_4.RowCount() > 0 THEN
+			If li_secuen = 0 Then
+				If dw_4.RowCount() > 0 Then
 					li_secuen = dw_4.Object.Pafr_secuen[dw_4.RowCount()]	
-				ELSE	
+				Else	
 					li_secuen = 1
-				END IF	
-			END IF	
+				End If	
+			End If	
 			
-			IF dw_6.Object.pafr_secuen[ll_Fila] > 99999 THEN
+			If dw_6.Object.pafr_secuen[ll_Fila] > 99999 Then
 				ids_palletfrutanuevo.Object.pafr_secuen[ll_Nuevo]	=	dw_6.Object.pafr_secuen[ll_Fila]
-			ELSE
+			Else
 				ids_palletfrutanuevo.Object.pafr_secuen[ll_Nuevo]	=	li_secuen
 				li_secuen  ++
-			END IF	
+			End If	
 			
 			ids_palletfrutanuevo.Object.espe_codigo[ll_Nuevo]	=	dw_6.Object.espe_codigo[ll_Fila]
 			ids_palletfrutanuevo.Object.vari_codigo[ll_Nuevo]		=	dw_6.Object.vari_codigo[ll_Fila]
@@ -2597,24 +2599,24 @@ IF li_tiporepa  <> 7 THEN
 			ids_palletfrutanuevo.Object.pafr_varrot[ll_Nuevo]		=	dw_6.Object.pafr_varrot[ll_Fila]
 			ids_palletfrutanuevo.Object.prod_codigo[ll_Nuevo]	=	dw_6.Object.prod_codigo[ll_Fila]
 			
-			//IF ll_prodrot = 999999 THEN
+			//If ll_prodrot = 999999 Then
 				ids_palletfrutanuevo.Object.pafr_prdrot[ll_Nuevo]	=	dw_6.Object.pafr_prdrot[ll_Fila]
 				ids_palletfrutanuevo.Object.pafr_huert4[ll_Nuevo] 	=	dw_6.Object.pafr_huert4[ll_Fila]
 				ids_palletfrutanuevo.Object.pafr_cuart4[ll_Nuevo] 	=	dw_6.Object.pafr_cuart4[ll_Fila]
 				ids_palletfrutanuevo.Object.pafr_rotpak[ll_Nuevo] 	=	dw_6.Object.pafr_rotpak[ll_Fila]
-	//		ELSE	
-	//			IF li_cliente = gi_CodExport THENyyyy
+	//		Else	
+	//			If li_cliente = gi_CodExport Thenyyyy
 	//				ids_palletfrutanuevo.Object.pafr_prdrot[ll_Nuevo]	=	ll_prodrot
 	//				ids_palletfrutanuevo.Object.pafr_huert4[ll_Nuevo] 	=	ll_predrot
 	//				ids_palletfrutanuevo.Object.pafr_cuart4[ll_Nuevo] 	=	ll_cuarrot
 	//				ids_palletfrutanuevo.Object.pafr_rotpak[ll_Nuevo] 	=	ll_rotpak
-	//			ELSE
+	//			Else
 	//				ids_palletfrutanuevo.Object.pafr_prdrot[ll_Nuevo]	=	dw_6.Object.pafr_prdrot[ll_Fila]
 	//				ids_palletfrutanuevo.Object.pafr_huert4[ll_Nuevo] 	=	dw_6.Object.pafr_huert4[ll_Fila]
 	//				ids_palletfrutanuevo.Object.pafr_cuart4[ll_Nuevo] 	=	dw_6.Object.pafr_cuart4[ll_Fila]
 	//				ids_palletfrutanuevo.Object.pafr_rotpak[ll_Nuevo] 	=	dw_6.Object.pafr_rotpak[ll_Fila]
-	//			END IF	
-	//		END IF	
+	//			End If	
+	//		End If	
 				
 			ids_palletfrutanuevo.Object.emba_codigo[ll_Nuevo]	=	dw_6.Object.emba_codigo[ll_Fila]
 			ids_palletfrutanuevo.Object.etiq_codigo[ll_Nuevo]	=	dw_6.Object.etiq_codigo[ll_Fila]
@@ -2648,47 +2650,49 @@ IF li_tiporepa  <> 7 THEN
 			ids_palletfrutanuevo.Object.cama_nombre[ll_Nuevo]	=	dw_6.Object.cama_nombre[ll_Fila]
 			ids_palletfrutanuevo.Object.cate_codigo[ll_Nuevo]	=	dw_6.Object.cate_codigo[ll_Fila]
 			ids_palletfrutanuevo.Object.pafr_catrot[ll_Nuevo]	=	dw_6.Object.pafr_catrot[ll_Fila]
+			ids_palletfrutanuevo.Object.pafr_ggncod[ll_Nuevo]	=	dw_6.Object.pafr_ggncod[ll_Fila]
 			
-			IF li_tiporepa  = 2 AND li_tiporepa  = 1 THEN
+			
+			If li_tiporepa  = 2 AND li_tiporepa  = 1 Then
 				li_secuen = li_secuen + 1
-			END IF	
+			End If	
 			
 			dw_6.Object.caja_traspa[ll_fila] = 0
 			
-			IF isnull(dw_6.Object.pafr_nroori[ll_Fila]) OR dw_6.Object.pafr_nroori[ll_Fila] = 0 THEN
+			If IsNull(dw_6.Object.pafr_nroori[ll_Fila]) OR dw_6.Object.pafr_nroori[ll_Fila] = 0 Then
 				ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_6.Object.paen_numero[ll_Fila]
-			ELSE	
+			Else	
 				ids_palletfrutanuevo.Object.pafr_nroori[ll_nuevo] = dw_6.Object.pafr_nroori[ll_Fila]
-			END IF
+			End If
 			
-			IF isnull(dw_6.Object.pafr_secori[ll_Fila]) OR dw_6.Object.pafr_secori[ll_Fila] = 0 THEN
+			If IsNull(dw_6.Object.pafr_secori[ll_Fila]) OR dw_6.Object.pafr_secori[ll_Fila] = 0 Then
 				ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secuen[ll_Fila]
-			ELSE	
+			Else	
 				ids_palletfrutanuevo.Object.pafr_secori[ll_nuevo] = dw_6.Object.pafr_secori[ll_Fila]
-			END IF
-		END IF
+			End If
+		End If
 	NEXT
-END IF		
+End If		
 
 FOR ll_fila1 = 1 TO dw_3.RowCount()
 
 	fila_find =  ids_palletencabnuevo.Find("paen_numero = " + String(dw_3.Object.paen_numero[ll_fila1]),&
 							1, ids_palletencabnuevo.RowCount())
-	IF fila_find = 0 THEN
-		IF il_cantidad = 0 THEN
+	If fila_find = 0 Then
+		If il_cantidad = 0 Then
 			ll_nuevo1 = ids_palletencabnuevo.InsertRow(0)
 			
 			ids_palletencabnuevo.Object.clie_codigo[ll_nuevo1] 		=   dw_5.Object.clie_codigo[ll_fila1]    
 			ids_palletencabnuevo.Object.paen_numero[ll_nuevo1]	=   dw_3.Object.paen_numero[ll_fila1]    
 			ids_palletencabnuevo.Object.plde_codigo[ll_nuevo1] 		=   dw_5.Object.plde_codigo[1]    
 			
-			IF li_tiporepa = 1 OR li_tiporepa = 2 OR li_tiporepa = 7 THEN
+			If li_tiporepa = 1 OR li_tiporepa = 2 OR li_tiporepa = 7 Then
 				ids_palletencabnuevo.Object.paen_tipopa[ll_nuevo1] =   dw_3.Object.paen_tipopa[ll_fila1]    
 				ids_palletencabnuevo.Object.tpem_codigo[ll_nuevo1] =   dw_3.Object.tpem_codigo[ll_fila1]
-			ELSE
+			Else
 				ids_palletencabnuevo.Object.paen_tipopa[ll_nuevo1]	=   dw_5.Object.paen_tipopa[ll_fila1]    
 				ids_palletencabnuevo.Object.tpem_codigo[ll_nuevo1]	=   dw_5.Object.tpem_codigo[ll_fila1] 
-			END IF
+			End If
 			
 			ids_palletencabnuevo.Object.espe_codigo[ll_nuevo1]	=   dw_5.Object.espe_codigo[ll_fila1]    
 			ids_palletencabnuevo.Object.vari_codigo[ll_nuevo1] 	=   dw_5.Object.vari_codigo[ll_fila1]    
@@ -2737,7 +2741,7 @@ FOR ll_fila1 = 1 TO dw_3.RowCount()
 			ids_palletencabnuevo.Object.paen_pcopda[ll_nuevo1] =   dw_5.Object.paen_pcopda[ll_fila1] 
 			ids_palletencabnuevo.Object.tmvp_codigo[ll_nuevo1]	=  3 
 			
-		ELSE
+		Else
 			ll_nuevo1 = ids_palletencabupdate.InsertRow(0)
 			ids_palletencabupdate.Object.clie_codigo[ll_nuevo1] =   dw_3.Object.clie_codigo[ll_fila1]    
 			ids_palletencabupdate.Object.paen_numero[ll_nuevo1] =   dw_3.Object.paen_numero[ll_fila1]    
@@ -2792,14 +2796,14 @@ FOR ll_fila1 = 1 TO dw_3.RowCount()
 			ids_palletencabupdate.Object.tmvp_codigo[ll_nuevo1] =   3 
 			ids_palletencabupdate.Object.paen_inspec[ll_nuevo1] =   dw_3.Object.paen_inspec[ll_fila1]
 			
-		END IF	
-	ELSE
+		End If	
+	Else
 		ll_nuevo1act = ids_palletencabupdate.InsertRow(0)
-		IF dw_6.RowCount() > 0 THEN
+		If dw_6.RowCount() > 0 Then
 			ids_palletencabupdate.Object.paen_ccajas[ll_nuevo1act] =   dw_3.Object.paen_ccajas[1] + dw_6.Object.total_traspa[1]
-		ELSE
+		Else
 			ids_palletencabupdate.Object.paen_ccajas[ll_nuevo1act] =   dw_3.Object.paen_ccajas[1] 
-		END IF
+		End If
 		ids_palletencabupdate.Object.paen_numero[ll_nuevo1act] =   dw_3.Object.paen_numero[1] 
 		ids_palletencabupdate.Object.clie_codigo[ll_nuevo1act] =   dw_3.Object.clie_codigo[1] 
 		ids_palletencabupdate.Object.plde_codigo[ll_nuevo1act] =   dw_3.Object.plde_codigo[1]
@@ -2809,21 +2813,21 @@ FOR ll_fila1 = 1 TO dw_3.RowCount()
 		ids_palletencabupdate.Object.emba_codigo[ll_nuevo1act] =   dw_3.Object.emba_codigo[1]
 		ids_palletencabupdate.Object.vari_codigo[ll_nuevo1act] =   dw_3.Object.vari_codigo[1]
 		ids_palletencabupdate.Object.paen_varrot[ll_nuevo1act] =   dw_3.Object.paen_varrot[1]
-	END IF		
+	End If		
 NEXT
 
 ids_palletencabupdate.ResetUpdate()
 
 FOR ll_fil = 1 TO ids_palletencabupdate.RowCount()
-	IF il_cantidad <> 0 OR ids_palletencabupdate.RowCount() > 0  THEN
-		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_ccajas", Primary!, DataModified!) 
-		ids_palletencabupdate.SetItemStatus(ll_fil,"tpem_codigo", Primary!, DataModified!) 
-		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_inspec", Primary!, DataModified!)
-		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_tipopa", Primary!, DataModified!)
-		ids_palletencabupdate.SetItemStatus(ll_fil,"emba_codigo", Primary!, DataModified!)
-		ids_palletencabupdate.SetItemStatus(ll_fil,"vari_codigo", Primary!, DataModified!)
-		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_varrot", Primary!, DataModified!)
-	END IF
+	If il_cantidad <> 0 OR ids_palletencabupdate.RowCount() > 0  Then
+		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_ccajas", Primary!, DataModIfied!) 
+		ids_palletencabupdate.SetItemStatus(ll_fil,"tpem_codigo", Primary!, DataModIfied!) 
+		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_inspec", Primary!, DataModIfied!)
+		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_tipopa", Primary!, DataModIfied!)
+		ids_palletencabupdate.SetItemStatus(ll_fil,"emba_codigo", Primary!, DataModIfied!)
+		ids_palletencabupdate.SetItemStatus(ll_fil,"vari_codigo", Primary!, DataModIfied!)
+		ids_palletencabupdate.SetItemStatus(ll_fil,"paen_varrot", Primary!, DataModIfied!)
+	End If
 NEXT	
 end subroutine
 

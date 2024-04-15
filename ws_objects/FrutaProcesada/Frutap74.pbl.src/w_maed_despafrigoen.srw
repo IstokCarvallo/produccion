@@ -172,18 +172,15 @@ vinf.dw_1.SetTransObject(sqlca)
 
 fila = vinf.dw_1.Retrieve(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]),Long(istr_mant.argumento[2]))
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN
-		F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	END IF
-END IF
+	vinf.dw_1.Modify('DataWindow.Zoom = 90')
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
@@ -3219,23 +3216,26 @@ event ue_antesguardar;call super::ue_antesguardar;Long		ll_filas, ll_fila_d,ll_f
 ll_destino 	= 	dw_2.Object.defe_plades[1]
 ll_guiades	=	dw_2.Object.defe_guides[1]
 
-If IsNull(dw_2.Object.defe_chfrut[1]) OR dw_2.Object.defe_chfrut[1] = '' Then
-	MessageBox("Error de Consistencia", "Falta Número RUT Chofer.", StopSign!, Ok!)
-	dw_2.SetColumn("defe_chfrut")
-	Message.DoubleParm = -1
-End If	
 
-If IsNull(dw_2.Object.defe_celcho[1]) OR dw_2.Object.defe_celcho[1] = '' Then
-	MessageBox("Error de Consistencia", "Falta Número Celular Chofer.", StopSign!, Ok!)
-	dw_2.SetColumn("defe_celcho")
-	Message.DoubleParm = -1
-End If	
-
-If IsNull(dw_2.Object.defe_chofer[1]) OR dw_2.Object.defe_chofer[1] = '' Then
-	MessageBox("Error de Consistencia", "Falta Nombre Chofer.", StopSign!, Ok!)
-	dw_2.SetColumn("defe_chofer")
-	Message.DoubleParm = -1
-End If	
+If dw_2.Object.defe_tiposa[1] <> 33 Then // Salida Tipo Siniestro
+	If IsNull(dw_2.Object.defe_chfrut[1]) OR dw_2.Object.defe_chfrut[1] = '' Then
+		MessageBox("Error de Consistencia", "Falta Número RUT Chofer.", StopSign!, Ok!)
+		dw_2.SetColumn("defe_chfrut")
+		Message.DoubleParm = -1
+	End If	
+	
+	If IsNull(dw_2.Object.defe_celcho[1]) OR dw_2.Object.defe_celcho[1] = '' Then
+		MessageBox("Error de Consistencia", "Falta Número Celular Chofer.", StopSign!, Ok!)
+		dw_2.SetColumn("defe_celcho")
+		Message.DoubleParm = -1
+	End If	
+	
+	If IsNull(dw_2.Object.defe_chofer[1]) OR dw_2.Object.defe_chofer[1] = '' Then
+		MessageBox("Error de Consistencia", "Falta Nombre Chofer.", StopSign!, Ok!)
+		dw_2.SetColumn("defe_chofer")
+		Message.DoubleParm = -1
+	End If	
+End If
 	
 If dw_2.Object.tica_codigo[1] = 2 Then
 	If IsNull(dw_2.Object.defe_selnav[1]) OR dw_2.Object.defe_selnav[1] = '' Then
@@ -3322,13 +3322,15 @@ End If
 
 If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
 	(dw_2.Object.defe_tiposa[1] = 7 Or dw_2.Object.defe_tiposa[1] = 8 Or dw_2.Object.defe_tiposa[1] = 9 Or &
-	dw_2.Object.defe_tiposa[1] = 10 Or dw_2.Object.defe_tiposa[1] = 11 Or dw_2.Object.defe_tiposa[1] = 30)Then
+	dw_2.Object.defe_tiposa[1] = 10 Or dw_2.Object.defe_tiposa[1] = 11 Or dw_2.Object.defe_tiposa[1] = 30) Then
 Else
-	If IsNull(dw_2.Object.defe_guides[1]) Or dw_2.Object.defe_guides[1] = 0 Then
-		MessageBox("Error de Consistencia", "Falta Número Guía Despacho.", StopSign!, Ok!)
-		dw_2.SetColumn("defe_guides")
-		Message.DoubleParm = -1
-	End If	
+	If  dw_2.Object.defe_tiposa[1]  <> 33 Then
+		If IsNull(dw_2.Object.defe_guides[1]) Or dw_2.Object.defe_guides[1] = 0 Then
+			MessageBox("Error de Consistencia", "Falta Número Guía Despacho.", StopSign!, Ok!)
+			dw_2.SetColumn("defe_guides")
+			Message.DoubleParm = -1
+		End If	
+	End If
 End If
 
 If Message.DoubleParm = -1 Then Return
@@ -3739,6 +3741,7 @@ CHOOSE Case ls_columna
 		istr_mant.argumento[27] = data
 		
 		If data = '10' Then This.Object.defe_traspa[1]	=	0
+		If data = '33' Then This.Object.tica_codigo[1]	=	4
 		
 		If data <> '11' Then
 			This.Object.defe_plades[1]	=	Integer(ll_null)

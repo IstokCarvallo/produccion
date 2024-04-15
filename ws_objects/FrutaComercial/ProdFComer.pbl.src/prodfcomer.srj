@@ -195,6 +195,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesousuarios,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_deta_embalajes_envase,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_deta_camarasfrigo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer04.pbl,dw_mant_receplotesfrutacomenc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer05.pbl,w_maed_movtofrutacomenca_multiconex,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
@@ -575,6 +576,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_periodofrio,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer07.pbl,w_busc_lotescomdeta_archivo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_asignaggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_gene_spro_lotesfrutacomenc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,w_maed_spro_concalcom,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_busc_grupovariedad,w

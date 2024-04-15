@@ -24,7 +24,7 @@ end forward
 
 global type w_mant_spro_cajasprod from w_mant_directo
 integer width = 3246
-integer height = 1384
+integer height = 1484
 string title = "Mantención de Cajas - Cambio de Características"
 boolean minbox = false
 boolean maxbox = false
@@ -391,10 +391,10 @@ integer taborder = 40
 end type
 
 type dw_1 from w_mant_directo`dw_1 within w_mant_spro_cajasprod
-integer x = 37
-integer y = 432
+integer x = 41
+integer y = 452
 integer width = 2656
-integer height = 792
+integer height = 860
 boolean titlebar = true
 string title = "Datos Originales Caja"
 string dataobject = "dw_mant_mues_spro_cajasprod_anterior"
