@@ -737,7 +737,7 @@ If dw_1.UpDate() = 1 Then
 			dw_8.Object.pafr_huert1[ll_filasdetalle]		=	dw_1.Object.prod_huerto[1]
 			dw_8.Object.pafr_cuart1[ll_filasdetalle]		=	dw_1.Object.prod_cuarte[1]
 			dw_8.Object.cont_codigo[ll_filasdetalle]		=	dw_1.Object.cont_codigo[1]
-			dw_8.Object.pafr_ggncod[ll_filasdetalle]		=	f_AsignaGGN(dw_1.Object.prod_codigo[1], dw_1.Object.prod_huerto[1], Integer(istr_mant.argumento[2]), Date(istr_mant.argumento[5]))
+			dw_8.Object.pafr_ggncod[ll_filasdetalle]		=	f_AsignaGGN(dw_1.Object.prod_codigo[1], dw_1.Object.prod_huerto[1], Integer(istr_mant.argumento[2]), Date(istr_mant.argumento[5]), False)
 			ii_cajasactuales									=	ii_cajasactuales + 1
 			//
 			

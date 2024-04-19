@@ -722,7 +722,7 @@ Choose Case ls_columna
 				End If
 			End If
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 			If Not VarIficaproductor(Integer(Data))Then Return 1
 		End If
@@ -749,7 +749,7 @@ Choose Case ls_columna
 				dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_nula))
 			End If	
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 		End If
 		
@@ -791,7 +791,7 @@ Choose Case ls_columna
 			
 			If idwc_prediorot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 			If Not VarIficaproductor(Integer(Data))Then Return 1
 		End If	

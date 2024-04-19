@@ -664,7 +664,7 @@ Choose Case ls_columna
 				End If
 			End If
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 			If Not VarIficaproductor(Integer(Data)) Then Return 1
 		End If
@@ -684,7 +684,7 @@ Choose Case ls_columna
 				dw_1.SetItem(il_fila, "pafr_huert4", Integer(data))
 			End If
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 			If IsNull(dw_1.Object.pafr_cuart4[il_fila]) Then
 				dw_1.GetChild("pafr_cuart4", idwc_cuartelrot)
@@ -732,7 +732,7 @@ Choose Case ls_columna
 				idwc_prediorot.InsertRow(0)
 			End If
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			If Not VarIficaproductor(Integer(Data)) Then Return 1
 		End If	
 		
@@ -746,7 +746,7 @@ Choose Case ls_columna
 			idwc_cuartelrot.SetTransObject(SQLCA)
 			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[Row],integer(data),dw_1.Object.espe_codigo[Row],dw_1.Object.pafr_varrot[Row])
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.pafr_prdrot[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.pafr_prdrot[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		End If
 		
 	Case "pafr_cuart1"

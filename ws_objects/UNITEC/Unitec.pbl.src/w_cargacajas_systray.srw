@@ -565,7 +565,7 @@ For ll_Fila = 1 To dw_2.RowCount()
 				codGGN								=	f_AsignaGGN(Long(dw_4.Object.codProductorReal[ll_Fila_D]), &
 																				Integer(dw_4.Object.codPredio_ORD[ll_Fila_D]), &
 																				Integer(dw_4.Object.codEspecie[ll_Fila_D]),&
-																				Date(dw_4.Object.FechaProduccion[ll_Fila_D]))
+																				Date(dw_4.Object.FechaProduccion[ll_Fila_D]), False)
 
 				DECLARE	InsertaCajas PROCEDURE FOR dbo.UNITEC_InsertaCajas
 							@codCaja  								=	:codCaja,

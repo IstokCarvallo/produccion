@@ -811,7 +811,7 @@ Choose Case ls_columna
 		ElseIf idwc_Predio.Retrieve(Long(Data)) = 0 Then
 			MessageBox("Atención", "Productor no tiene definido Predios")
 		Else
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			This.Object.prod_codrot[row]	=	Long(Data)
 			
 			idwc_Cuartel.Reset()
@@ -833,7 +833,7 @@ Choose Case ls_columna
 		ElseIf idwc_Prediorot.Retrieve(Long(Data)) = 0 Then
 			MessageBox("Atención", "Productor no tiene definido Predios Rotulados")
 		Else
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			idwc_Cuarterot.Reset()
 			idwc_Cuarterot.InsertRow(0)
 		End If
@@ -871,7 +871,7 @@ Choose Case ls_columna
 			Return 1
 		End If
 		
-		This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+		This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		This.Object.pafr_huert1[row] = Long(data)
 		
 	Case "pafr_huert1"
@@ -886,7 +886,7 @@ Choose Case ls_columna
 			dw_1.SetItem(row, ls_columna, Integer(ls_Nula))
 			Return 1
 		Else
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codrot[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codrot[Row], Long(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		End If	
 
 	Case "prcc_codigo"

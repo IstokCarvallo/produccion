@@ -31,6 +31,7 @@ SELECT	Count(*)
 	WHERE	c.prod_codigo	=	:al_Productor
 		AND c.prpr_codigo = :ai_Predio
 		And c.espe_codigo = :ai_Especie
+		And :ad_Fecha Between c.cece_fecaud and c.cece_fecexp
         	And p.prot_nroggn = 1
 	Using	At_Transaccion;
 
@@ -45,12 +46,16 @@ ElseIf sqlca.SQLCode = 100 Then
 	lb_Retorno =  False
 Else
 	If li_Cantidad = 0 Then 
-		MessageBox("Atencion", "Productor: " + String(al_Productor, '00000') + ", Predio: " + String(ai_Predio, '000') + &
-						", Especie Codigo: " + String(ai_Especie, '00') + ",  no tiene certificacion registrada.~rFavor verifique informacion ingresada.")
+		If ab_Mensaje Then
+			MessageBox("Atencion", "Productor: " + String(al_Productor, '00000') + ", Predio: " + String(ai_Predio, '000') + &
+							", Especie Codigo: " + String(ai_Especie, '00') + ",  no tiene certificacion vigente registrada.~rFavor verifique informacion ingresada.")
+		End If
 		lb_Retorno =  False
 	ElseIf li_Cantidad > 1 Then 
-		MessageBox("Atencion", "Productor: " + String(al_Productor, '00000') + ", Predio: " + String(ai_Predio, '000') + &
-						", Especie Codigo: " + String(ai_Especie, '00') + ",  tiene mas de una certificacion registrada, para asignar GGN.~rFavor verifique informacion ingresada.")
+		If ab_Mensaje Then
+			MessageBox("Atencion", "Productor: " + String(al_Productor, '00000') + ", Predio: " + String(ai_Predio, '000') + &
+							", Especie Codigo: " + String(ai_Especie, '00') + ",  tiene mas de una certificacion registrada, para asignar GGN.~rFavor verifique informacion ingresada.")
+		End If
 		lb_Retorno =  False
 	Else
 		SELECT	c.prod_codigo, c.prpr_codigo, c.prot_codigo, c.espe_codigo
@@ -60,6 +65,7 @@ Else
 			WHERE	c.prod_codigo	=	:al_Productor
 				  AND c.prpr_codigo = :ai_Predio
 				  And c.espe_codigo = :ai_Especie
+				  And :ad_Fecha Between c.cece_fecaud and c.cece_fecexp
 				  And p.prot_nroggn = 1
 			Using	At_Transaccion;
 		
@@ -67,7 +73,7 @@ Else
 			F_ErrorBaseDatos(At_Transaccion,"Lectura de Tabla de Certificacion de Productores")	
 			lb_Retorno =  False
 		Else
-			lb_Retorno = of_ExisteProtocolo(Productor, Predio, Especie, Protocolo, ad_Fecha, False, SQLCA)
+			lb_Retorno = of_ExisteProtocolo(Productor, Predio, Especie, Protocolo, ad_Fecha, ab_Mensaje, SQLCA)
 		End If
 	End IF
 End If
@@ -90,6 +96,7 @@ SELECT	prod_codigo, prpr_codigo, espe_codigo, cert_codigo, prot_codigo, cace_cod
 		AND prpr_codigo = :ai_Predio
 		And espe_codigo = :ai_Especie
 		And prot_codigo = :ai_Protocolo
+		And :ad_Fecha Between cece_fecaud and cece_fecexp
 	Using	At_Transaccion;
 
 If At_Transaccion.SqlCode = -1 Then
@@ -106,10 +113,10 @@ Else
 	li_Dias = DaysAfter(ad_Fecha, Fecha_Expiracion)
 	
 	If li_Dias <= 0 Then
-		MessageBox("Atencion", "Certificacion a Expirado con fecha: " + String(Fecha_Expiracion, "dd/mm/yyyy"), Exclamation!, OK!)
+		If ab_Mensaje Then  MessageBox("Atencion", "Certificacion a Expirado con fecha: " + String(Fecha_Expiracion, "dd/mm/yyyy"), Exclamation!, OK!)
 		lb_Retorno =  False
 	ElseIf li_Dias < 30 Then
-		MessageBox("Atencion", "Quedan " + String(li_Dias, '00')+ " dias, para que llege a su vencimiento la certificacion.", Exclamation!, OK!)
+		If ab_Mensaje Then  MessageBox("Atencion", "Quedan " + String(li_Dias, '00')+ " dias, para que llege a su vencimiento la certificacion.", Exclamation!, OK!)
 	End If	
 End If
 

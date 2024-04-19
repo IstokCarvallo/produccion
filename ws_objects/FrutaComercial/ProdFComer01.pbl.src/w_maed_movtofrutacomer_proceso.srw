@@ -1419,7 +1419,7 @@ Date		ld_fecha
 
 li_planta  	= 	dw_2.Object.plde_codigo[1]
 li_tiponum 	= 	Integer(istr_mant.argumento[2])
-li_cliente	=	dw_2.Object.clie_codigo[1]
+li_cliente		=	dw_2.Object.clie_codigo[1]
  
 SELECT	mfco_numero, mfco_fecmov
 	INTO	:ll_nrodocto, :ld_fecha
@@ -1453,7 +1453,6 @@ IF SqlCa.SQLCode = -1 THEN
 	RETURN False
 ELSEIF SqlCa.SQLCode <> 100 AND ll_lote <> 0 THEN
 	istr_mant.argumento[6]	=	String(ll_lote)
-	
 ELSE
 	istr_mant.argumento[6]	=	String(nuevofoliolote())
 	
@@ -3031,10 +3030,10 @@ iuo_lotes						=	Create uo_lotesfrutacomer
 iuo_Predio					=	Create uo_ProdPredio
 iuo_Cuartel					=	Create uo_ProdCuarteles
 
-This.Height									= 	2500
-im_menu										= 	m_principal
+This.Height					= 	2500
+im_menu						= 	m_principal
+This.Icon						=	Gstr_apl.Icono
 
-This.Icon									=	Gstr_apl.Icono
 This.ParentWindow().ToolBarVisible	=	True
 im_menu.Item[1].Item[6].Enabled		=	True
 im_menu.Item[7].Visible					=	True
@@ -3180,10 +3179,8 @@ End If
 li_resultado 	=	ConfiguracionPuerta(istr_puertacomm)
 
 If li_resultado = 0 Then
-	ls_parametros	=	String(istr_puertacomm.Baudios)+","+&
-							istr_puertacomm.Paridad+","+&
-							String(istr_puertacomm.Data)+","+&
-							String(istr_puertacomm.Parada)
+	ls_parametros	=	String(istr_puertacomm.Baudios)+","+istr_puertacomm.Paridad+","+&
+							String(istr_puertacomm.Data)+","+String(istr_puertacomm.Parada)
 			
 	If NOT ib_OCX Then
 		MessageBox("Conexión Romana","No está instalado el OCX para conexión con Romana")
@@ -3205,14 +3202,9 @@ DO
 	dw_3.SetRedraw(False)
 	dw_3.Reset()
 	dw_4.SetRedraw(False)
-	If dw_2.Retrieve(Integer(istr_Mant.Argumento[1]), &
-						  Integer(istr_Mant.Argumento[2]), &
-						  Long(istr_Mant.Argumento[3])) = -1 OR &
-		dw_3.Retrieve(Integer(istr_Mant.Argumento[1]), &
-						  Integer(istr_Mant.Argumento[7]), &
-						  Long(istr_Mant.Argumento[6])) =  -1 Then
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
+	If dw_2.Retrieve(Integer(istr_Mant.Argumento[1]),  Integer(istr_Mant.Argumento[2]), Long(istr_Mant.Argumento[3])) = -1 OR &
+		dw_3.Retrieve(Integer(istr_Mant.Argumento[1]), Integer(istr_Mant.Argumento[7]), Long(istr_Mant.Argumento[6])) =  -1 Then
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
 	Else
 	 	DO
 			ll_Fila_d = dw_1.Retrieve(Integer(istr_Mant.Argumento[1]), &
@@ -3871,16 +3863,16 @@ OpenWithParm(w_busc_movtofrutacomenca, lstr_busq)
 
 lstr_busq	=	Message.PowerObjectParm
 
-IF lstr_Busq.Argum[1] <> "" THEN
+If lstr_Busq.Argum[1] <> "" Then
 	istr_Mant.Argumento[1]	=	lstr_Busq.Argum[1]
 	istr_Mant.Argumento[2]	=	lstr_Busq.Argum[2]
 	istr_Mant.Argumento[3]	=	lstr_Busq.Argum[3]
 	istr_Mant.Argumento[4]	=	lstr_Busq.Argum[10]
 	istr_Mant.Argumento[5]	=	lstr_Busq.Argum[11]
 
-	IF iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
+	If iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
 									  	  Integer(istr_mant.Argumento[4]), &
-									  	  Long(istr_Mant.Argumento[5]), True, SqlCa, iuo_cliente.Codigo) THEN
+									  	  Long(istr_Mant.Argumento[5]), True, SqlCa, iuo_cliente.Codigo) Then
 
 		istr_Mant.Argumento[7]	= String(iuo_spro_ordenproceso.Especie)
 		iuo_spro_ordenproceso.CapturaReferencias(1,0,1,0,0,False,Sqlca)
@@ -3906,53 +3898,46 @@ IF lstr_Busq.Argum[1] <> "" THEN
 		dw_3.Enabled = True
 		HabilitaLote()
 
-	END IF
+	End If
 
 	dw_2.SetItem(1, "mfco_docrel", Integer(istr_Mant.Argumento[5]))	
-	IF iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), &
-										  integer(istr_mant.Argumento[4]), &
-										  Long(istr_Mant.Argumento[5]), True, SqlCa, iuo_cliente.Codigo) THEN
+	If iuo_spro_ordenproceso.Existe(Integer(istr_Mant.Argumento[1]), integer(istr_mant.Argumento[4]), &
+										  Long(istr_Mant.Argumento[5]), True, SqlCa, iuo_cliente.Codigo) Then
 		
 		istr_Mant.Argumento[7]	= String(iuo_spro_ordenproceso.Especie)
 		istr_Mant.Argumento[12] = Mid(String(iuo_spro_ordenproceso.FechaOrden),1,10)				
 		HabilitaLote()
 		iuo_spro_ordenproceso.CapturaReferencias(1,0,1,0,0,False,Sqlca)
 
-	END IF
-				IF (istr_Mant.Argumento[11] = "1" AND gstr_paramplanta.PoolVenta <> 1 AND &
-				                       					 gstr_paramplanta.PoolVenta <> 5) OR &
-				   (istr_Mant.Argumento[11] = "2" AND gstr_Paramplanta.PoolRetiro <> 1 AND &
-																 gstr_Paramplanta.PoolRetiro <> 4) THEN
+	End If
 	
-		Istr_Mant.Argumento[6] = String(Nuevolote(ll_lote) + TipoRecepcion(istr_Mant.Argumento[11], &
-												  Date(Mid(istr_Mant.Argumento[12],1,10))))
+	If (istr_Mant.Argumento[11] = "1" And gstr_paramplanta.PoolVenta <> 1 And gstr_paramplanta.PoolVenta <> 5) Or &
+		(istr_Mant.Argumento[11] = "2" And gstr_Paramplanta.PoolRetiro <> 1 And gstr_Paramplanta.PoolRetiro <> 4) Then
+	
+		Istr_Mant.Argumento[6] = String(Nuevolote(ll_lote) + TipoRecepcion(istr_Mant.Argumento[11], Date(Mid(istr_Mant.Argumento[12],1,10))))
 		dw_3.Object.lofc_lotefc[1] = Long(Istr_Mant.Argumento[6])
-	ELSE
+	Else
 		ExisteLote(0)
-	END IF
+	End If
 	
-	IF istr_Mant.Argumento[6] <> "0" AND Existelote(Integer(Istr_Mant.Argumento[6])) THEN
+	If BuscaMovto(Integer(istr_Mant.Argumento[4]), Integer(istr_Mant.Argumento[5])) Then
 		TriggerEvent("ue_recuperadatos")
-	ELSEIF (Istr_Mant.Argumento[11] = "1") AND &
-			 gstr_paramplanta.PoolVenta = 5 OR gstr_paramplanta.PoolVenta = 1 THEN 
-			 dw_3.Object.lofc_lotefc[1] = Integer("")
-			 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
-	ELSEIF (Istr_Mant.Argumento[11] = "2") AND &
-			 gstr_paramplanta.PoolRetiro = 1 OR gstr_paramplanta.PoolRetiro = 4 THEN 
-			 dw_3.Object.lofc_lotefc[1] = Integer("")
-			 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
-	ELSE
-			 dw_3.Object.lofc_lotefc[1] = Integer(Istr_Mant.Argumento[6])
-			 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
-			 Habilitaencab(False)
-			 dw_5.Retrieve(Integer(istr_Mant.Argumento[1]), &
-								Integer(istr_Mant.Argumento[2]), &
-									Long(istr_Mant.Argumento[3]),1, iuo_cliente.Codigo)
-			 
-	END IF
+	ElseIf (Istr_Mant.Argumento[11] = "1") And gstr_paramplanta.PoolVenta = 5 Or gstr_paramplanta.PoolVenta = 1 Then 
+		 dw_3.Object.lofc_lotefc[1] = Integer("")
+		 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
+	ElseIf (Istr_Mant.Argumento[11] = "2") And gstr_paramplanta.PoolRetiro = 1 Or gstr_paramplanta.PoolRetiro = 4 Then 
+		 dw_3.Object.lofc_lotefc[1] = Integer("")
+		 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
+	Else
+		 dw_3.Object.lofc_lotefc[1] = Integer(Istr_Mant.Argumento[6])
+		 dw_2.Object.mfco_numero[1] = Integer(Istr_Mant.Argumento[3])
+		 Habilitaencab(False)
+		 dw_5.Retrieve(Integer(istr_Mant.Argumento[1]), Integer(istr_Mant.Argumento[2]), Long(istr_Mant.Argumento[3]),1, iuo_cliente.Codigo)
+	End If
 
 	HabilitaLote()
-END IF
+End If
+
 HabilitaIngreso("mfco_docrel")
 end event
 
@@ -4275,9 +4260,8 @@ Choose Case ls_Columna
 			istr_Mant.Argumento[21]	= String(iuo_spro_ordenproceso.NombreProductor)
 			dw_3.Enabled = True
 			
-			If buscamovto(Integer(istr_Mant.Argumento[4]),Long(data)) Then
+			If BuscaMovto(Integer(istr_Mant.Argumento[4]),Long(data)) Then
 				Parent.TriggerEvent("ue_recuperadatos")
-				
 			Else
 				Istr_Mant.Argumento[6] = String(nuevofoliolote())
 				
@@ -4808,7 +4792,7 @@ Choose Case ls_Columna
 			idwc_Predio.Retrieve(dw_2.Object.prod_codigo[1])
 			idwc_Cuartel.Retrieve(dw_2.Object.prod_codigo[1],  iuo_Predio.Codigo)
 			
-			This.Object.lfcd_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Long(Data), dw_2.Object.espe_codigo[1], iuo_spro_OrdenProceso.FechaOrden)
+			This.Object.lfcd_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Long(Data), dw_2.Object.espe_codigo[1], iuo_spro_OrdenProceso.FechaOrden, True)
 		End If
 		
 	Case "prcc_codigo"

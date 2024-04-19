@@ -769,7 +769,7 @@ Choose Case ls_columna
 			If idwc_PredioRot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
 			
 			If Not wf_VerificaProductor(Integer(Data)) Then Return 1
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert1[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		End If
 		
 	Case "pafr_huert1"
@@ -793,7 +793,7 @@ Choose Case ls_columna
 			idwc_cuartelrot.Retrieve(dw_1.Object.Prod_codigo[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.vari_codigo[row])
 			dw_1.SetItem(il_fila, "pafr_cuart4", Integer(ls_nula))
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Integer(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Integer(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		End If
 		
 	Case "pafr_calibr"
@@ -838,7 +838,7 @@ Choose Case ls_columna
 			If idwc_prediorot.Retrieve(ll_Prod) = 0 Then idwc_prediorot.InsertRow(0)
 			
 			If Not wf_VerificaProductor(Integer(Data)) Then Return 1
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.pafr_huert4[Row], This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 		End If	
 		
 	Case "pafr_huert4"
@@ -852,7 +852,7 @@ Choose Case ls_columna
 			idwc_cuartelrot.SetTransObject(SQLCA)
 			idwc_cuartelrot.Retrieve(dw_1.Object.pafr_prdrot[row],integer(data),dw_1.Object.espe_codigo[row],dw_1.Object.pafr_varrot[row])
 			
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.pafr_prdrot[Row], Integer(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(This.Object.pafr_prdrot[Row], Integer(Data), This.Object.espe_codigo[Row], This.Object.pafr_fecemb[Row], True)
 			
 		End If
 		

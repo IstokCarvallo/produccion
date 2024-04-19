@@ -337,11 +337,11 @@ If iuo_Especie.Codigo = 21 Then//Cerezas
 	End If	
 ElseIf iuo_Especie.Codigo = 23 Then//Ciruelas
 	vinf.dw_1.DataObject = "dw_inf_recepcion_ciruelas"
-//	vinf.dw_1.Object.DataWindow.Zoom = 88
+//	vinf.dw_1.Object.DataWindow.Zoom = 85
 ElseIf iuo_Especie.Codigo = 41 Then
 	If rb_planta.Checked Then
 		vinf.dw_1.DataObject = "dw_infrecrecepcion_kiwis"
-		vinf.dw_1.Object.DataWindow.Zoom = 78
+		vinf.dw_1.Object.DataWindow.Zoom = 80
 	ElseIf rb_Existencia.Checked Then
 		vinf.dw_1.DataObject = "dw_infrecrecepcion_kiwis_exis"
 		vinf.dw_1.Object.DataWindow.Zoom = 80

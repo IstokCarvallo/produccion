@@ -3,17 +3,17 @@ global type f_asignaggn from function_object
 end type
 
 forward prototypes
-global function string f_asignaggn (long productor, integer predio, integer especie, date fecha)
+global function string f_asignaggn (long productor, integer predio, integer especie, date fecha, boolean mensaje)
 end prototypes
 
-global function string f_asignaggn (long productor, integer predio, integer especie, date fecha);String	ls_retorno = ""
+global function string f_asignaggn (long productor, integer predio, integer especie, date fecha, boolean mensaje);String	ls_retorno = ""
 
 uo_Certificaciones	iuo_Certificacion
 iuo_Certificacion	=	Create uo_Certificaciones
 
 
 If Not IsNull(Productor) And Not IsNull(Predio) And Not IsNull(Especie) Then 
-	If iuo_Certificacion.of_Existe(Productor, Predio, Especie, Fecha, False, SQLCA) Then
+	If iuo_Certificacion.of_Existe(Productor, Predio, Especie, Fecha, Mensaje, SQLCA) Then
 		ls_Retorno = iuo_Certificacion.GGN
 	End If
 End If

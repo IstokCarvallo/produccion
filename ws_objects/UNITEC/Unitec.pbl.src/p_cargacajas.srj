@@ -12,6 +12,7 @@ FVN:5,21,3009,2021
 MAN:0,asInvoker,0
 PBD:Unitec.pbl,,1
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,m_consulta_sis,m
+OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,dw_mant_orden,d
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,f_fechahora,f
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,w_systray,w
@@ -24,6 +25,7 @@ OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,unitec,a
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,m_carga_opcion,m
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,dw_mues_detallecajas,d
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,dw_mues_ordenesproceso,d
+OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,f_asignaggn,f
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,str_usuario,s
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\Productiva\UNITEC\Unitec.pbl,w_busc_spro_ordenproceso,w

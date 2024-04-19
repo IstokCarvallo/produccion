@@ -1718,7 +1718,7 @@ Choose Case ls_columna
 				idwc_Cuartel.Reset()
 				
 				//idwc_certIficacion.Retrieve(Integer(data), This.Object.prbr_codpre[row], This.Object.lote_espcod[row])
-				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]))
+				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]), True)
 			End If	
 			
 			recupera_packing(Long(Data))
@@ -1744,7 +1744,7 @@ Choose Case ls_columna
 			idwc_Cuartel.SetFilter("espe_codigo = " + istr_mant.argumento[5])
 			idwc_Cuartel.Filter()
 			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]))
+			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_Mant.Argumento[8]), True)
 		End If
 		
 	Case "prcc_codigo"

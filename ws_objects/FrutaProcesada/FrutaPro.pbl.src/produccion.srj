@@ -1,5 +1,5 @@
 ﻿$PBExportHeader$produccion.srj
-EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
+EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,0,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
 CMP:1,0,0,2,0,0,1
 COM:PRAGMATIC TECNOLOGIA E INFORMATICA
 DES:Fruta Procesada

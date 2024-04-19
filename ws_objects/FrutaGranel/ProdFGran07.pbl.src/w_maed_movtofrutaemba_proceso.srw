@@ -2473,7 +2473,7 @@ Choose Case ls_Columna
 			Return 1
 		Else
 			This.Object.prbr_codpre[Row] = Integer(Data)
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Integer(Data), dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1])
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Integer(Data), dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1], True)
 		End If		
 	
 	Case "pafr_cuart1"

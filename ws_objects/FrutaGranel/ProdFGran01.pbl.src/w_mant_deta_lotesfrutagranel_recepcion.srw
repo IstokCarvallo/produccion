@@ -2056,7 +2056,7 @@ Choose Case ls_columna
 				recupera_packing(Long(Data))
 				CargaAgronomo(ls_columna, data)
 				
-				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]))
+				This.Object.lote_ggncod[Row] = f_AsignaGGN(Long(Data), This.Object.prbr_codpre[Row], This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]), True)
 			End If	
 				
 	Case "clie_codigo"
@@ -2076,7 +2076,7 @@ Choose Case ls_columna
 		Else		
 			idwc_Cuartel.Retrieve(This.Object.prod_codigo[Row],Integer(data))
 			idwc_certIficacion.Retrieve(This.Object.prod_codigo[Row],Integer(data),This.Object.lote_espcod[row])
-			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]))
+			This.Object.lote_ggncod[Row] = f_AsignaGGN(This.Object.prod_codigo[Row], Long(Data), This.Object.lote_espcod[Row], Date(istr_mant.Argumento[8]), True)
 			CargaAgronomo(ls_columna, data)
 		End If
 		
