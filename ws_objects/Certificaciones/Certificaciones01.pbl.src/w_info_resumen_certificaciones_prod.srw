@@ -171,7 +171,6 @@ Else
 	uo_SelPredio.Seleccion(True, False)
 	uo_SelPredio.Todos(True)
 	uo_SelEstado.Seleccion(True,False)
-
 End If
 end event
 

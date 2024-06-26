@@ -236,14 +236,14 @@ Blob 		lbl_data, lbl_temp
 
 ll_File = FileOpen(as_archivo, StreamMode!)
 
-Do While FileRead(ll_file, lbl_temp) > 0
+Do While FileReadEx(ll_file, lbl_temp) > 0
 	lbl_data += lbl_temp
 Loop
 
-FileClose(ll_file)
+//FileClose(ll_file)
 
 If ll_File = 1 Then
-	FileRead(ll_file, lbl_data)
+	FileReadEx (ll_file, lbl_data)
 	FileClose(ll_file)
 	at_Transaccion.AutoCommit = True
 		

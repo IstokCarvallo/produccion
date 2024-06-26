@@ -2456,9 +2456,11 @@ Choose Case ls_Columna
 				
 				Return 1
 			Else
-				This.Object.pafr_huert1[Row] = iuo_Lote.Predio
-				This.Object.pafr_cuart1[Row] = iuo_Lote.CentroCosto
-				This.Object.pafr_ggncod[Row] = iuo_Lote.GGN
+				This.Object.pafr_huert1[Row]	= iuo_Lote.Predio
+				This.Object.pafr_cuart1[Row]	= iuo_Lote.CentroCosto
+				This.Object.pafr_ggncod[Row]	= iuo_Lote.GGN
+				This.Object.prcc_codigo[Row]	= iuo_Lote.CentroCosto
+				This.Object.prbr_codpre[Row]	= iuo_Lote.Predio
 			End If
 		Else	
 			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
@@ -2496,25 +2498,23 @@ End Choose
 Captura_Totales()
 end event
 
-event buttonclicked;call super::buttonclicked;CHOOSE CASE dwo.name
+event buttonclicked;call super::buttonclicked;Choose Case dwo.name
 		
-	CASE "b_embalaje"
-		IF isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
-		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])THEN
+	Case "b_embalaje"
+		If isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
 			BuscaEmbalaje()
-		ELSE
-			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible Modificar.")
-		END IF	
-
+		Else
+			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
+		End If	
 		
-	CASE "b_cuartel"
-		IF NOT isnull(dw_2.Object.prod_codigo[1]) OR NOT isnull(dw_4.Object.pafr_huert1[row]) THEN
+	Case "b_cuartel"
+		If NOT isnull(dw_2.Object.prod_codigo[1]) OR NOT isnull(dw_4.Object.pafr_huert1[row]) Then
 			istr_Mant.Argumento[20] = String(dw_4.Object.pafr_huert1[row])
 			buscacuartel()
-		
-		END IF	
+		End If	
 
-END CHOOSE
+End Choose
 end event
 
 type dw_3 from uo_dw within w_maed_movtofrutaemba_proceso

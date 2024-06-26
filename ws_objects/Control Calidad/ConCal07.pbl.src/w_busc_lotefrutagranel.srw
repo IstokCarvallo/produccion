@@ -46,7 +46,7 @@ Tab_1.TabPage_1.dw_especies.GetChild("espe_codigo", idwc_espe)
 idwc_planta.SetTransObject(sqlca)
 idwc_espe.SetTransObject(sqlca)
 
-IF istr_busq.argum[5] =	'RECEPCION' THEN
+If istr_busq.argum[5] =	'RECEPCION' Then
 	dw_1.DataObject	=	"dw_mues_lotesfrutagranel"
 	Tab_1.TabPage_1.uo_SelCliente.Visible = True
 	Tab_1.TabPage_1.st_3.Visible = True
@@ -54,7 +54,7 @@ IF istr_busq.argum[5] =	'RECEPCION' THEN
 	Tab_1.TabPage_1.uo_SelCliente.Seleccion(False, False)
 	Tab_1.TabPage_1.uo_SelCliente.Codigo = Long(istr_Busq.Argum[8])
 	Tab_1.TabPage_1.uo_SelCliente.dw_Seleccion.Object.Codigo[1] = Long(istr_Busq.Argum[8])
-ElseIf istr_busq.argum[5] =	'Comercial' THEN
+ElseIf istr_busq.argum[5] =	'Comercial' Then
 	dw_1.DataObject	=	"dw_mues_lotescomercial"
 ELSE
 	dw_1.DataObject	=	"dw_mues_lotesdescartafruta"
@@ -64,7 +64,7 @@ ELSE
 	Tab_1.TabPage_1.uo_SelCliente.Seleccion(False, False)
 	Tab_1.TabPage_1.uo_SelCliente.Codigo = Long(istr_Busq.Argum[8])
 	Tab_1.TabPage_1.uo_SelCliente.dw_Seleccion.Object.Codigo[1] = Long(istr_Busq.Argum[8])
-END IF
+End If
 
 dw_1.SetTransObject(sqlca)
 

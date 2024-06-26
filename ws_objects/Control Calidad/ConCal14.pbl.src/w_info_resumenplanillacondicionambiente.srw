@@ -178,12 +178,12 @@ end on
 event open;call super::open;Boolean	lb_Cerrar
 
 IF IsNull(uo_SelProductor.Codigo) 	THEN lb_Cerrar	=	True
-IF IsNull(uo_SelEspecie.Codigo) 		THEN lb_Cerrar	=	True
-IF IsNull(uo_SelVariedad.Codigo)		THEN lb_Cerrar	=	True
+IF IsNull(uo_SelEspecie.Codigo) 	THEN lb_Cerrar	=	True
+IF IsNull(uo_SelVariedad.Codigo)	THEN lb_Cerrar	=	True
 IF IsNull(uo_SelZonas.Codigo) 		THEN lb_Cerrar	=	True
 IF IsNull(uo_SelPredio.Codigo) 		THEN lb_Cerrar	=	True
 IF IsNull(uo_SelCuartel.Codigo)		THEN lb_Cerrar	=	True
-IF IsNull(uo_SelCamaras.Codigo)		THEN lb_Cerrar	=	True
+IF IsNull(uo_SelCamaras.Codigo)	THEN lb_Cerrar	=	True
 IF IsNull(uo_SelPlanta.Codigo)		THEN lb_Cerrar	=	True
 
 If lb_Cerrar Then
@@ -227,11 +227,12 @@ type st_temporada from w_para_informes`st_temporada within w_info_resumenplanill
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_resumenplanillacondicionambiente
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_resumenplanillacondicionambiente
 integer x = 293
-integer y = 256
+integer y = 304
 integer width = 1833
 string text = "Condición y Ambiente en Camara AC"
 end type
@@ -252,7 +253,6 @@ ld_FechaEmbaini = Date(em_desde.Text)
 ld_FechaEmbafin = Date(em_hasta.Text)
 
 istr_info.titulo	= 'RESUMEN CONDICION DE ' + Upper(uo_SelEspecie.Nombre)
-
 OpenWithParm(vinf,istr_info)
 
 If uo_SelEspecie.Codigo = 41 Then
@@ -263,17 +263,15 @@ vinf.dw_1.SetTransObject(sqlca)
 li_fila = vinf.dw_1.Retrieve(gi_CodExport, -1, uo_SelEspecie.Codigo, -1, uo_SelVariedad.Codigo, uo_SelZonas.Codigo, uo_SelProductor.Codigo, &
 						uo_SelPredio.Codigo, uo_SelCuartel.Codigo, uo_SelCamaras.Codigo, -1, ld_FechaEmbaini, ld_FechaEmbafin)
 						  
-IF li_fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF li_fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+If li_fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf li_fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Object.DataWindow.Zoom = 75
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	vinf.dw_1.Object.DataWindow.Zoom = 70
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event

@@ -723,6 +723,21 @@ Else
 	istr_busq	= Message.PowerObjectParm
 	
 	If istr_busq.argum[3] <> "" Then
+		
+		
+		dw_2.GetChild("prod_codigo", idwc_productores) 
+		idwc_productores.SetTransObject(sqlca)
+		idwc_productores.Retrieve(dw_2.Object.zona_codigo[1])	
+		
+		dw_2.GetChild("prbr_codpre", idwc_predio)
+		idwc_predio.SetTransObject(sqlca)
+		idwc_predio.Retrieve(Long(istr_busq.argum[5]))
+		
+		dw_2.GetChild("prcc_codigo", idwc_cuartel)
+		idwc_cuartel.SetTransObject(sqlca)
+		idwc_cuartel.Retrieve(Long(istr_busq.argum[5]), Integer(istr_busq.argum[8]))
+		
+		
 		dw_2.Object.lote_codigo[1] =	Integer(istr_busq.argum[2])
 		dw_2.Object.plde_codigo[1] =	Integer(istr_busq.argum[3])
 		dw_2.Object.prod_codigo[1] =	Long(istr_busq.argum[5])

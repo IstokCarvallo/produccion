@@ -50,7 +50,7 @@ table(column=(type=decimal(0) updatewhereclause=no name=cliente_c dbname="client
  column=(type=long updatewhereclause=no name=sobrecalibre dbname="sobrecalibre" )
  column=(type=long updatewhereclause=no name=abanicos dbname="Abanicos" )
  column=(type=long updatewhereclause=no name=planos dbname="planos" )
- column=(type=long updatewhereclause=no name=homb_caidos dbname="homb_caidos" )
+ column=(type=long updatewhereclause=no name=homb_caidos dbname="Redon_Calug" )
  column=(type=long updatewhereclause=no name=otros_defo dbname="otros_defo" )
  column=(type=long updatewhereclause=no name=herida_cic dbname="herida_cic" )
  column=(type=long updatewhereclause=no name=insectos dbname="insectos" )

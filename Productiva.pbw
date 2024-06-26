@@ -20,6 +20,6 @@ Save Format v3.0(19990112)
  18 "CargoProduce\\CargoProduce.pbt";
  9 "FrutaProcesada\\produccion.pbt";
 @end;
-DefaultTarget "Control Calidad\\Control Calidad.pbt";
+DefaultTarget "FrutaComercial\\Fruta Comercial.pbt";
 DefaultExportEncode "UTF-8";
-DefaultRemoteTarget "Control Calidad\\Control Calidad.pbt";
+DefaultRemoteTarget "FrutaComercial\\Fruta Comercial.pbt";

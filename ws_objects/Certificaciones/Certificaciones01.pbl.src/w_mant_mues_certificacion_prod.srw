@@ -14,7 +14,7 @@ end forward
 
 global type w_mant_mues_certificacion_prod from w_mant_tabla
 string tag = "Certificaciones Productor"
-integer width = 3835
+integer width = 3570
 string title = "Certificaciones Productor"
 uo_selproductor uo_selproductor
 st_1 st_1
@@ -90,31 +90,27 @@ event ue_imprimir;SetPointer(HourGlass!)
 Long		fila
 str_info	lstr_info
 
-lstr_info.titulo	= "MOVIMIENTOS DE CERTIFICACION PRODUCTOR"
+lstr_info.titulo	= "MOVIMIENTOS DE CERTIfICACION PRODUCTOR"
 lstr_info.copias	= 1
 
 OpenWithParm(vinf,lstr_info)
-
-vinf.dw_1.DataObject = "dw_info_certificacion_prod"
-
+vinf.dw_1.DataObject = "dw_info_certIficacion_prod"
 vinf.dw_1.SetTransObject(sqlca)
-
 fila = vinf.dw_1.Retrieve(uo_SelProductor.Codigo, uo_SelPredio.Codigo)
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
+If fila = -1 Then
+	MessageBox("Error en Base de Datos", "Se ha producido un error en Base " + &
 					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+ElseIf fila = 0 Then
+	MessageBox("No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify('DataWindow.Print.Preview = Yes')
-	vinf.dw_1.Modify('DataWindow.Print.Preview.Zoom = 75')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview = Yes')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview.Zoom = 75')
 
 	vinf.Visible	= True
 	vinf.Enabled	= True
-END IF
+End If
 
 SetPointer(Arrow!)
 end event
@@ -307,7 +303,8 @@ end type
 
 event pb_nuevo::clicked;call super::clicked;uo_SelProductor.Bloquear(False)
 uo_SelPredio.Bloquear(False)
-uo_SelPredio.Filtra(0)
+
+uo_SelPredio.Filtra(-1)
 uo_SelProductor.LimpiarDatos()
 uo_SelPredio.LimpiarDatos()
 end event

@@ -341,10 +341,10 @@ ElseIf iuo_Especie.Codigo = 23 Then//Ciruelas
 ElseIf iuo_Especie.Codigo = 41 Then
 	If rb_planta.Checked Then
 		vinf.dw_1.DataObject = "dw_infrecrecepcion_kiwis"
-		vinf.dw_1.Object.DataWindow.Zoom = 80
+		vinf.dw_1.Object.DataWindow.Zoom = 75
 	ElseIf rb_Existencia.Checked Then
 		vinf.dw_1.DataObject = "dw_infrecrecepcion_kiwis_exis"
-		vinf.dw_1.Object.DataWindow.Zoom = 80
+		vinf.dw_1.Object.DataWindow.Zoom = 75
 	End If
 End If
 

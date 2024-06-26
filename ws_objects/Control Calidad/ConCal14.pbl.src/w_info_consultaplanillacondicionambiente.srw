@@ -237,6 +237,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_consultaplanil
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_consultaplanillacondicionambiente
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_consultaplanillacondicionambiente
@@ -278,7 +279,7 @@ ElseIf li_fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.ModIfy('DataWindow.Zoom = 94')
+//	vinf.dw_1.ModIfy('DataWindow.Zoom = 94')
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
 end event

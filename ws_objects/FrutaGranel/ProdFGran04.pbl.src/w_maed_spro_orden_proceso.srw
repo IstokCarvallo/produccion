@@ -19,6 +19,8 @@ type dw_5 from uo_dw within w_maed_spro_orden_proceso
 end type
 type dw_4 from uo_dw within w_maed_spro_orden_proceso
 end type
+type cbx_op from checkbox within w_maed_spro_orden_proceso
+end type
 end forward
 
 global type w_maed_spro_orden_proceso from w_mant_encab_deta_csd
@@ -35,6 +37,7 @@ dw_3 dw_3
 dw_7 dw_7
 dw_5 dw_5
 dw_4 dw_4
+cbx_op cbx_op
 end type
 global w_maed_spro_orden_proceso w_maed_spro_orden_proceso
 
@@ -788,6 +791,7 @@ this.dw_3=create dw_3
 this.dw_7=create dw_7
 this.dw_5=create dw_5
 this.dw_4=create dw_4
+this.cbx_op=create cbx_op
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.cb_detalle
 this.Control[iCurrent+2]=this.cb_acepta
@@ -797,6 +801,7 @@ this.Control[iCurrent+5]=this.dw_3
 this.Control[iCurrent+6]=this.dw_7
 this.Control[iCurrent+7]=this.dw_5
 this.Control[iCurrent+8]=this.dw_4
+this.Control[iCurrent+9]=this.cbx_op
 end on
 
 on w_maed_spro_orden_proceso.destroy
@@ -809,6 +814,7 @@ destroy(this.dw_3)
 destroy(this.dw_7)
 destroy(this.dw_5)
 destroy(this.dw_4)
+destroy(this.cbx_op)
 end on
 
 event ue_nuevo;Long		ll_modif
@@ -1492,7 +1498,12 @@ istr_info.copias	= 1
 
 OpenWithParm(vinf,istr_info)
 DataWindowChild	ldwc_especies
-vinf.dw_1.DataObject = "dw_info_programa_procesos_diarios"
+
+If cbx_op.Checked Then
+	vinf.dw_1.DataObject = "dw_info_programa_procesos_diarios_op"
+Else
+	vinf.dw_1.DataObject = "dw_info_programa_procesos_diarios"
+End If
 
 vinf.dw_1.GetChild("espe_codigo",ldwc_especies)
 ldwc_especies.SetTransObject(SQLCA)
@@ -1528,9 +1539,10 @@ END IF
 
 dw_2.x					= 37 + Round((maximo - dw_2.width) / 2, 0)
 dw_2.y					= 37
+cbx_op.x					=	dw_2.x + dw_2.Width - cbx_op.Width
 
-dw_4.y					=	dw_2.y + dw_2.Height + 30
-dw_5.y					=	dw_4.y
+dw_4.y					=	dw_2.y + dw_2.Height + cbx_op.Height + 10
+dw_5.y					=	dw_4.y 
 st_1.y						=	dw_4.y
 
 dw_4.Width				= dw_1.Width - st_1.Width - 50
@@ -1538,7 +1550,7 @@ dw_5.Width				= dw_1.Width - st_1.Width - 50
 dw_1.Width				= dw_1.Width - 50
 
 dw_1.x					= 37 + Round((maximo - dw_1.width) / 2, 0)
-dw_1.y					= 90 + dw_2.Height + st_1.Height
+dw_1.y					= 135 + dw_2.Height + st_1.Height
 dw_1.Height				= This.WorkSpaceHeight() - dw_1.y - 41
 end event
 
@@ -2249,4 +2261,21 @@ event clicked;IF row > 0 THEN
 	END IF
 END IF
 end event
+
+type cbx_op from checkbox within w_maed_spro_orden_proceso
+integer x = 2661
+integer y = 308
+integer width = 503
+integer height = 80
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 33554432
+long backcolor = 553648127
+string text = "Orden x SDP"
+end type
 

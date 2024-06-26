@@ -443,108 +443,106 @@ Date			ld_desde, 		ld_hasta
 
 SetPointer(HourGlass!)
 
-IF cbx_exporta.Checked THEN
+If cbx_exporta.Checked Then
 	sle_estado.text	=	"Iniciando Exportación"
-END IF
+End If
 
 istr_info.titulo	= "INFORME DE CAJAS"
 istr_info.copias	= 1
 
-IF cbx_cont.Checked THEN
+If cbx_cont.Checked Then
 	li_contratista	= 	-1
-ELSE
+Else
 	dw_contratista.AcceptText()
 	li_contratista = 	dw_contratista.Object.cont_codigo[1]
-END IF
+End If
 
-IF cbx_ordentodo.Checked THEN
+If cbx_ordentodo.Checked Then
 	ll_nroOrden	= 	-1
-	IF cbx_consproc.Checked THEN	ll_nroOrden	= 	-9
-ELSE
+	If cbx_consproc.Checked Then	ll_nroOrden	= 	-9
+Else
 	ll_nroOrden 	= 	Long(em_orden.Text)
-END IF
+End If
 
-IF cbx_todospallet.Checked	THEN
+If cbx_todospallet.Checked	Then
 	ll_pallet	=	-1
-ELSE
+Else
 	ll_pallet	=	Long(em_pallet.Text)
-END IF
+End If
 
-IF cbx_conscajas.Checked THEN	li_conscajas	= 	-9
+If cbx_conscajas.Checked Then	li_conscajas	= 	-9
 
-IF cbx_embalaje.Checked THEN
+If cbx_embalaje.Checked Then
 	ls_embalaje 	= '-1'
-ELSE
+Else
 	ls_embalaje 	= 	em_embalaje.Text
-END IF
+End If
 
-IF cbx_calidad.Checked THEN
+If cbx_calidad.Checked Then
 	ls_calidad 	= '-1'
-ELSE
+Else
 	ls_calidad 	= 	em_calidad.Text
-END IF
+End If
 
 ld_desde			=	Date(em_desde.Text)
 ld_hasta			=	Date(em_hasta.Text)
 
 OpenWithParm(vinf, istr_info)
 
-IF ii_informe = 1 THEN
-	IF rb_3.Checked THEN
+If ii_informe = 1 Then
+	If rb_3.Checked Then
 		vinf.dw_1.DataObject = "dw_info_cajas_variedad"
-	ELSE
+	Else
 		vinf.dw_1.DataObject = "dw_info_cajas"
-	END IF
-ELSE
-	IF NOT cbx_exporta.Checked THEN
+	End If
+Else
+	If NOT cbx_exporta.Checked Then
 		vinf.dw_1.DataObject = "dw_infopallets_spro_palletfruta"
-	ELSE
+	Else
 		vinf.dw_1.DataObject = "dw_infopallets_spro_palletfruta"
-	END IF
-END IF
+	End If
+End If
 
 
 vinf.dw_1.SetTransObject(sqlca)
 
-IF ii_informe = 1 THEN
+If ii_informe = 1 Then
 	fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo,uo_Selplanta.codigo, ii_tipoorden,ll_nroorden,&
 								 uo_SelProductor.codigo,uo_SelEspecie.codigo,uo_SelVariedad.codigo, ls_embalaje,&
 								 ls_calidad,ld_desde, ld_hasta, li_conscajas, li_contratista)
 								 
-ELSE
+Else
 	fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo,uo_Selplanta.codigo, ii_tipoorden,ll_nroorden,&
 								 uo_SelProductor.codigo,uo_SelEspecie.codigo,uo_SelVariedad.codigo, ls_embalaje,&
-								 ls_calidad,ld_desde, ld_hasta,ll_pallet, li_conscajas)
-								 
-END IF
+								 ls_calidad,ld_desde, ld_hasta,ll_pallet, li_conscajas)				 
+End If
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
 	
-	vinf.dw_1.Modify("Cliente.text = '" + uo_SelCliente.Nombre + "'")
+	vinf.dw_1.ModIfy("Cliente.text = '" + uo_SelCliente.Nombre + "'")
 	
-	IF cbx_det.Checked THEN
-		vinf.dw_1.Modify('Dw_1.Visible = ' + '1')
-	ELSE
-		vinf.dw_1.Modify('Dw_1.Visible = ' + '0')
-	END IF
+	If cbx_det.Checked Then
+		vinf.dw_1.ModIfy('Dw_1.Visible = ' + '1')
+	Else
+		vinf.dw_1.ModIfy('Dw_1.Visible = ' + '0')
+	End If
 	
-	IF cbx_exporta.Checked THEN
+	If cbx_exporta.Checked Then
 		RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)
-		ls_Archivo				= '\Cajas Embaladas del ' + String(ld_desde) + " al " + String(ld_desde) + '.xls'
+		ls_Archivo = '\Cajas Embaladas del ' + String(ld_desde) + " al " + String(ld_desde) + '.xls'
 		vinf.dw_1.SaveAs(ls_ruta + ls_archivo, Excel!,True) 
 		sle_estado.text		= 	"Listo"
 		Close(vinf)
-	ELSE
-		IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	END IF
-END IF
+	Else
+		If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+		vinf.dw_1.Modify('DataWindow.Zoom = 90')
+	End If
+End If
 
 SetPointer(Arrow!)
 end event

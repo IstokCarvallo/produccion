@@ -1812,6 +1812,8 @@ type m_gestionfruticola from menu within m_informes
 m_88 m_88
 m_89 m_89
 end type
+type m_122 from menu within m_informes
+end type
 type m_ from menu within m_informes
 end type
 type m_resumendefacturaciónproductor from menu within m_informes
@@ -1892,6 +1894,7 @@ m_110 m_110
 m_estadísticos m_estadísticos
 m_85 m_85
 m_gestionfruticola m_gestionfruticola
+m_122 m_122
 m_ m_
 m_resumendefacturaciónproductor m_resumendefacturaciónproductor
 m_-12 m_-12
@@ -2648,6 +2651,7 @@ m_110 m_110
 m_estadísticos m_estadísticos
 m_85 m_85
 m_gestionfruticola m_gestionfruticola
+m_122 m_122
 m_ m_
 m_resumendefacturaciónproductor m_resumendefacturaciónproductor
 m_-12 m_-12
@@ -2672,6 +2676,7 @@ destroy(this.m_110)
 destroy(this.m_estadísticos)
 destroy(this.m_85)
 destroy(this.m_gestionfruticola)
+destroy(this.m_122)
 destroy(this.m_)
 destroy(this.m_resumendefacturaciónproductor)
 destroy(this.m_-12)
@@ -2695,6 +2700,7 @@ this.m_110=create m_110
 this.m_estadísticos=create m_estadísticos
 this.m_85=create m_85
 this.m_gestionfruticola=create m_gestionfruticola
+this.m_122=create m_122
 this.m_=create m_
 this.m_resumendefacturaciónproductor=create m_resumendefacturaciónproductor
 this.m_-12=create m_-12
@@ -2714,6 +2720,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_110
 this.Item[UpperBound(this.Item)+1]=this.m_estadísticos
 this.Item[UpperBound(this.Item)+1]=this.m_85
 this.Item[UpperBound(this.Item)+1]=this.m_gestionfruticola
+this.Item[UpperBound(this.Item)+1]=this.m_122
 this.Item[UpperBound(this.Item)+1]=this.m_
 this.Item[UpperBound(this.Item)+1]=this.m_resumendefacturaciónproductor
 this.Item[UpperBound(this.Item)+1]=this.m_-12
@@ -23323,6 +23330,41 @@ gstr_us.OpcionActiva	=	This.ClassName()
 
 OpenSheet(w_info_gestionfruticola, w_main, columna, Original!)
 end event
+
+type m_122 from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+
+gstr_us.OpcionActiva	=	This.ClassName()
+OpenSheet(w_info_balancemaza, w_main, columna, Original!)
+
+end event
+
+on m_122.create
+call super::create
+this.text = "Balance Maza"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_122.destroy
+call super::destroy
+end on
 
 type m_ from menu within m_informes
 end type

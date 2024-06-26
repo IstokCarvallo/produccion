@@ -354,6 +354,7 @@ string facename = "Tahoma"
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_tiemposfrutacaliente
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_tiemposfrutacaliente
@@ -770,7 +771,7 @@ end on
 
 type st_10 from statictext within w_info_tiemposfrutacaliente
 integer x = 1710
-integer y = 1024
+integer y = 1004
 integer width = 288
 integer height = 64
 integer taborder = 40
