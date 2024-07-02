@@ -167,6 +167,7 @@ public subroutine buscalote ()
 public function integer dw_3_itemchanged (long row, string columna, string data)
 public function integer dw_4_itemchanged (long row, string columna, string data)
 public function boolean wf_existetarja (long tarja)
+public function boolean wf_duplicado (string as_valor)
 end prototypes
 
 event ue_validaregistro();Integer	li_cont
@@ -2964,6 +2965,21 @@ End If
 Return lb_Retorno
 end function
 
+public function boolean wf_duplicado (string as_valor);String 	Tarjas
+Long 		ll_fila
+
+Tarjas	=	as_valor
+
+ll_fila 	= 	dw_4.Find("fgmb_nrotar = " + Tarjas, 1, dw_4.RowCount())
+
+If ll_fila > 0 Then 
+	MessageBox("Error","Registro ya fue ingresado anteriormente",Information!, Ok!)
+	Return  True
+Else 
+	Return  False
+End If
+end function
+
 on w_maed_movtofrutacomer_proceso.create
 int iCurrent
 call super::create
@@ -4696,21 +4712,21 @@ Dec{2}	ld_Bultos
 Dec{3}	ld_KNetos
 decimal	ldec_kilosant
 
-CHOOSE CASE dwo.name
-		CASE "b_envase"
+Choose Case dwo.name
+		Case "b_envase"
 		BuscaEnvase()
 		
-	CASE "b_calicosexero"
+	Case "b_calicosexero"
 		BuscaCalidad()
 		
-	CASE "neto"
+	Case "neto"
 		//Boton provisorio para calcular peso neto del Lote
 		If NOT DestaraFila(row) Then
 			MessageBox("Error", "Ingrese todos los parametros antes de Destarar Bultos")
 			This.Object.lfcd_kilnet[row]	=	0
 		End If
 		
-	CASE "romana"
+	Case "romana"
 		If gstr_paramplanta.binsabins OR gstr_paramplanta.bultobins Then
 			
 			If (istr_puertacomm.pesajebins = 1 AND Dec(em_kilos.Text) >= istr_puertacomm.PesoMinimo) OR &
@@ -4763,10 +4779,10 @@ CHOOSE CASE dwo.name
 			This.Object.lfcd_kilpro[il_Fila]	=	Round((This.Object.lfcd_kilbru[row] - ldec_kilosant) / ld_Bultos, 3)
 	End If
 	
-	CASE "b_tarja"
+	Case "b_tarja"
 		il_secuencia = This.Object.lfcd_secuen[row]
 		w_maed_movtofrutacomer_proceso.TriggerEvent("imprime_tarja")
-End CHOOSE
+End Choose
 end event
 
 event itemchanged;String	ls_Columna, ls_Null
@@ -4802,7 +4818,8 @@ Choose Case ls_Columna
 		End If
 		
 	Case "fgmb_nrotar"
-		If ExisteTarja(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], Long(data)) Or wf_ExisteTarja(Long(data)) Then
+		If ExisteTarja(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], Long(data)) Or &
+					wf_ExisteTarja(Long(data)) Or wf_Duplicado(Data) Then
 			This.SetItem(row, ls_columna, Integer(ls_null))
 			This.SetColumn(ls_columna)
 			This.SetFocus()
@@ -4828,10 +4845,10 @@ Choose Case ls_Columna
 				This.SetFocus()
 				Return 1
 			Else
-				THIS.Object.Enva_tipoen[row]	=	iuo_bins.enva_tipoen
-				THIS.Object.Enva_codigo[row]	=	iuo_bins.Enva_codigo
-				THIS.Object.enva_nombre[row]=	iuo_bins.enva_nombre
-				THIS.Object.cale_calida[row]	=	iuo_bins.cale_calida
+				This.Object.Enva_tipoen[row]	=	iuo_bins.enva_tipoen
+				This.Object.Enva_codigo[row]	=	iuo_bins.Enva_codigo
+				This.Object.enva_nombre[row]=	iuo_bins.enva_nombre
+				This.Object.cale_calida[row]	=	iuo_bins.cale_calida
 			End If
 			
 			il_bins[row]	=	Long(data)
@@ -4877,8 +4894,8 @@ Choose Case ls_Columna
 		This.Object.lfcd_kilpro[il_Fila]	=	Round((Dec(Data) - ldec_kilosant) / ld_Bultos, 3)
 
 	Case "cale_calida"
-		If iuo_calidad.Existe(THIS.object.enva_tipoen[row], THIS.object.enva_codigo[row], data, TRUE, sqlca) Then
-			THIS.Object.cale_nombre[row] = iuo_calidad.nombre
+		If iuo_calidad.Existe(This.object.enva_tipoen[row], This.object.enva_codigo[row], data, TRUE, sqlca) Then
+			This.Object.cale_nombre[row] = iuo_calidad.nombre
 		Else
 			This.SetItem(row, "cale_calida", ls_Null)
 			Return 1

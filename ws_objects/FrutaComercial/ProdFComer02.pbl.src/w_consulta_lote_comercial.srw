@@ -19,7 +19,7 @@ end type
 global w_consulta_lote_comercial w_consulta_lote_comercial
 
 type variables
-DataWindowChild	idwc_variedades,idwc_especies
+DataWindowChild	idwc_Especies, idwc_Productor
 end variables
 
 forward prototypes
@@ -85,6 +85,10 @@ event open;call super::open;dw_2.SetTransObject(sqlca)
 dw_3.GetChild("lofc_espcod",idwc_especies)
 idwc_especies.SetTransObject(SQLCA)
 idwc_especies.Retrieve(gstr_parempresa.empr_codexp)
+
+dw_3.GetChild("prod_codigo",idwc_Productor)
+idwc_Productor.SetTransObject(SQLCA)
+idwc_Productor.Retrieve(-1)
 
 dw_3.SetTransObject(sqlca)
 

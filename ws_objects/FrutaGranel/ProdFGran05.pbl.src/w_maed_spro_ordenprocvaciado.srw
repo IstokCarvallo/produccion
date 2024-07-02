@@ -39,609 +39,26 @@ str_mant											istr_mant2
 end variables
 
 forward prototypes
-public subroutine buscacalidad (string as_calidad)
-public subroutine buscadetallelotes ()
-public subroutine habilitaencab (boolean habilita)
-public function long buscabultos (string as_lote, integer ai_tipoenva, integer ai_enva)
-public function long buscalotesrepetidos (string as_lote, integer is_tipoen, integer is_envase, long al_fila)
-public function boolean duplicado (string as_columna, string as_valor)
-public function boolean habilitabultos (string as_columna, string as_valor)
-public subroutine buscaorden ()
-public function long buscabultosyaingresados (string as_lote, integer ai_tipoen, integer ai_envase)
-public subroutine habilitadetalle (string as_columna)
-public subroutine actualizatotalbultos (string as_lote, integer is_tipoen, integer is_envase, long al_fila, long al_bultos)
-public function boolean existeencabezado (long al_numero)
-public function boolean noexistecliente (integer al_codigo)
-public subroutine llenanombres (long al_productor, integer ai_especie, integer ai_variedad, integer ai_cliente)
 protected function boolean wf_actualiza_db (boolean borrando)
-public subroutine eliminarbins (integer ai_row)
 public subroutine pesooriginalbins ()
-public subroutine pesooriginalbultos ()
-public subroutine pesosbultoabulto ()
-public function boolean historial ()
-public function boolean tienetarjas (long al_numero)
+public function boolean wf_tienetarjas (long al_numero)
+public function boolean wf_noexistecliente (integer al_codigo)
+public subroutine wf_llenanombres (long al_productor, integer ai_especie, integer ai_variedad, integer ai_cliente)
+public function boolean wf_historial ()
+public subroutine wf_eliminarbins (integer ai_row)
+public function boolean wf_existeencabezado (long al_numero)
+public subroutine wf_actualizatotalbultos (string as_lote, integer is_tipoen, integer is_envase, long al_fila, long al_bultos)
+public function long wf_buscabultos (string as_lote, integer ai_tipoenva, integer ai_enva)
+public function long wf_buscabultosyaingresados (string as_lote, integer ai_tipoen, integer ai_envase)
+public subroutine wf_buscacalidad (string as_calidad)
+public subroutine wf_buscadetallelotes ()
+public function long wf_buscalotesrepetidos (string as_lote, integer is_tipoen, integer is_envase, long al_fila)
+public subroutine wf_buscaorden ()
+public function boolean wf_habilitabultos (string as_columna, string as_valor)
+public subroutine wf_habilitadetalle (string as_columna)
+public subroutine wf_habilitaencab (boolean habilita)
+public function boolean wf_duplicado (string as_columna, string as_valor)
 end prototypes
-
-public subroutine buscacalidad (string as_calidad);String   ls_Nombre
-Integer  li_tipoenva, li_codenva
-
-li_tipoenva	=	istr_Envase.TipoEnvase
-li_codenva	=	istr_Envase.codigo
-
-SELECT	cale_nombre
-	INTO	:ls_Nombre
-	FROM	dbo.spro_calicosechero
-  WHERE	enva_tipoen	=	:li_tipoenva
-    AND  enva_codigo =  :li_codenva
-	 AND  cale_calida =  :as_calidad;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Calidad de Envases")
-
-ELSEIF sqlca.SQLCode<>100 THEN
-	dw_1.object.cale_nombre[il_fila]=ls_nombre
-END IF
-end subroutine
-
-public subroutine buscadetallelotes ();Str_busqueda	lstr_busq
-
-lstr_busq.argum[1]	=	istr_mant.argumento[1]
-lstr_busq.argum[2]	=  istr_mant.argumento[2]
-lstr_busq.argum[3]	=  istr_mant.argumento[3]
-lstr_busq.argum[4]	=  istr_mant.argumento[16]
-
-OpenWithParm(w_busc_detalle_lotesvaciados, lstr_busq)
-
-lstr_busq	= Message.PowerObjectParm
-
-IF lstr_busq.argum[1] = "" THEN
-	dw_1.SetColumn("lote_codigo")
-	dw_1.SetFocus()
-ELSE
-	dw_1.Object.lote[il_fila] = 	lstr_busq.argum[4]
-	
-	dw_1.Object.lote_pltcod[il_fila] = 	Integer(lstr_busq.argum[9])
-	dw_1.Object.lote_espcod[il_fila] = 	Integer(lstr_busq.argum[10])
-	dw_1.Object.lote_codigo[il_fila] = 	Integer(lstr_busq.argum[11])	
-
-	dw_1.Object.enva_tipoen[il_fila]	=	Integer(lstr_busq.argum[5])
-	
-	dw_1.GetChild("enva_codigo", idwc_envase)
-	idwc_envase.SetTransObject(SqlCa)
-	idwc_envase.Retrieve(integer(lstr_busq.argum[5]))
-	
-	dw_1.Object.enva_codigo[il_fila]	=	integer(lstr_busq.argum[6])
-	dw_1.Object.enva_nombre[il_fila]	=	lstr_busq.argum[7]
-	dw_1.Object.opvd_canbul[il_fila]	=	long(lstr_busq.argum[8])
-	dw_1.Object.bultostot[il_fila]	=	long(lstr_busq.argum[8])
-	
-	ExisteEnvase(Integer(lstr_busq.argum[5]),Integer(lstr_busq.argum[6]) , istr_Envase)
-	
-	dw_1.GetChild("cale_calida", idwc_calidad)
-	idwc_calidad.SetTransObject(SqlCa)
-	idwc_calidad.Retrieve(Integer(lstr_busq.argum[5]),integer(lstr_busq.argum[6]))
-	
-	HabilitaBultos("lote",(lstr_busq.argum[4]))
-	
-	dw_1.Setcolumn("opvd_canbul")
-	dw_1.SetFocus()
-END IF
-
-RETURN
-end subroutine
-
-public subroutine habilitaencab (boolean habilita);IF Habilita THEN
-	dw_2.Object.clie_codigo.Protect				=	0
-	dw_2.Object.opve_fecvac.Protect				=	0
-	dw_2.Object.opve_turno.Protect				=	0
-	dw_2.Object.orpr_tipord.Protect				=	0
-	dw_2.Object.orpr_numero.Protect				=	0
-	dw_2.Object.line_codigo.Protect				=	0
-
-	dw_2.Object.clie_codigo.Color		=	0
-	dw_2.Object.opve_fecvac.Color	=	0
-	dw_2.Object.opve_turno.Color		= 	0	
-	dw_2.Object.orpr_tipord.Color		=	0
-	dw_2.Object.orpr_numero.Color	=	0
-	dw_2.Object.line_codigo.Color		=	0	
-	
-	dw_2.Object.clie_codigo.BackGround.Color		=	RGB(255,255,255)
-	dw_2.Object.opve_fecvac.BackGround.Color		=	RGB(255,255,255)
-	dw_2.Object.opve_turno.BackGround.Color		=	RGB(255,255,255)
-	dw_2.Object.orpr_tipord.BackGround.Color		=	RGB(255,255,255)
-	dw_2.Object.orpr_numero.BackGround.Color	=	RGB(255,255,255)
-	dw_2.Object.line_codigo.BackGround.Color		=	RGB(255,255,255)
-	
-	dw_2.Object.b_orden.visible					=  1
-ELSE
-	dw_2.Object.clie_codigo.Protect				=	1
-	dw_2.Object.opve_fecvac.Protect				=	1
-	dw_2.Object.opve_turno.Protect				=	1
-	dw_2.Object.orpr_tipord.Protect				=	1
-	dw_2.Object.orpr_numero.Protect				=	1
-	dw_2.Object.line_codigo.Protect				=	1
-
-	dw_2.Object.clie_codigo.Color		=	RGB(255,255,255)
-	dw_2.Object.opve_fecvac.Color	=	RGB(255,255,255)
-	dw_2.Object.opve_turno.Color		=	RGB(255,255,255)
-	//dw_2.Object.orpr_tipord.Color		=	RGB(255,255,255)
-	dw_2.Object.orpr_numero.Color	=	RGB(255,255,255)
-	dw_2.Object.line_codigo.Color		=	RGB(255,255,255)
-	
-	dw_2.Object.clie_codigo.BackGround.Color		=	553648127
-	dw_2.Object.opve_fecvac.BackGround.Color		=	553648127
-	dw_2.Object.opve_turno.BackGround.Color		=	553648127
-	dw_2.Object.orpr_tipord.BackGround.Color		=	553648127
-	dw_2.Object.orpr_numero.BackGround.Color	=	553648127
-	dw_2.Object.line_codigo.BackGround.Color		=	553648127
-	
-	dw_2.Object.b_orden.visible					=  0
-END IF
-end subroutine
-
-public function long buscabultos (string as_lote, integer ai_tipoenva, integer ai_enva);String   ls_Nombre, ls_envase, ls_codenva
-Integer  li_tipodoc, li_orden, li_lotepl, li_lotesp, li_lote, li_tipomov, li_Cliente
-Long     ll_Bultos, ll_numero
-
-li_tipodoc	=	Integer(istr_mant.argumento[2])
-li_orden		=	Integer(istr_mant.argumento[3])
-li_Cliente	=	Integer(istr_mant.argumento[16])
-
-li_lotepl   =	Integer(Mid(as_lote,1,4))
-li_lotesp	=	Integer(mid(as_lote,5,2))
-li_lote		=	Integer(mid(as_lote,7,10))
-
-SELECT	distinct tpmv_codigo, mfge_numero
-	INTO	:li_tipomov, :ll_numero
-	FROM	dbo.spro_movtofrutagranenca
-  WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
-    AND 	tpmv_codigo =  21
-    AND  defg_tipdoc =  :li_Tipodoc
-	 AND  defg_docrel =  :li_orden
-	 AND  clie_codigo =  :li_Cliente; 
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Movimiento de Fruta Encabezado")
-
-ELSEIF sqlca.SQLCode<>100 THEN
-	
-	 SELECT	mfgd_bulent
-		INTO	:ll_Bultos
-		FROM	dbo.spro_movtofrutagrandeta
-  	  WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
-   	 AND  tpmv_codigo =  :li_tipomov
-		 AND  mfge_numero =  :ll_numero
-		 AND  lote_pltcod =  :li_lotepl
-		 AND  lote_espcod	=	:li_lotesp
-		 AND  lote_codigo	=	:li_lote
-		 AND  enva_tipoen =  :ai_tipoenva
-		 AND  enva_codigo =  :ai_enva
-		 AND  clie_codigo =  :li_Cliente;
-   
-	IF sqlca.SQLCode = -1 THEN
-	   F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Movimiento de Fruta Detalle")
-   ELSEIF sqlca.SQLCode<>100 THEN
-		
-   END IF
-
-END IF
-
-Return ll_Bultos
-end function
-
-public function long buscalotesrepetidos (string as_lote, integer is_tipoen, integer is_envase, long al_fila);Long ll_bultos, ll_fila
-Integer li_tipoen, li_envase
-String ls_lotefila
-
-ll_bultos=0
-
-FOR ll_fila=1 TO dw_1.RowCount()
-   IF ll_fila<>al_fila THEN
-		ls_lotefila=dw_1.Object.lote[ll_fila]
-		li_tipoen  =dw_1.Object.enva_tipoen[ll_fila]
-		li_envase  =dw_1.Object.enva_codigo[ll_fila]
-		
-		IF as_lote=ls_lotefila AND is_tipoen=li_tipoen AND is_envase=li_envase THEN
-			ll_bultos = ll_bultos + dw_1.Object.opvd_canbul[ll_fila]
-		END IF
-		
-	END IF
-NEXT	
-RETURN ll_bultos
-end function
-
-public function boolean duplicado (string as_columna, string as_valor);Long		ll_Fila
-string   ls_loteco1, ls_tipoen1, ls_envase1, ls_planta1, ls_hora1
-string   ls_loteco2, ls_tipoen2, ls_envase2, ls_planta2, ls_hora2
-
-ls_loteco1 = string(dw_1.Object.lote_codigo[il_fila])
-ls_planta1 = string(dw_1.Object.lote_pltcod[il_fila])
-ls_tipoen1 = string(dw_1.Object.enva_tipoen[il_fila])
-ls_envase1 = string(dw_1.Object.enva_codigo[il_fila])
-ls_hora1   = string(dw_1.Object.opvd_horava[il_fila],"hh:mm")
-
-CHOOSE CASE as_columna
-	CASE "lote_codigo"
-		ls_loteco1 = as_valor
-	
-	CASE "lote_pltcod"
-		ls_planta1 = as_valor
-		
-	CASE "enva_tipoen"
-		ls_tipoen1 = as_valor	
-	
-	CASE "enva_codigo"
-		ls_envase1 = as_valor
-		
-	CASE "opvd_harava"
-		ls_hora1 = MID(as_valor,12,5)	
-		
-END CHOOSE		
-
-FOR ll_fila=1 To dw_1.Rowcount()
-	IF ll_fila<>il_fila THEN
-      ls_loteco2 = string(dw_1.Object.lote_codigo[ll_fila])
-		ls_planta2 = string(dw_1.Object.lote_pltcod[ll_fila])
-		ls_tipoen2 = string(dw_1.Object.enva_tipoen[ll_fila])
-		ls_envase2 = string(dw_1.Object.enva_codigo[ll_fila])
-		ls_hora2   = string(dw_1.Object.opvd_horava[ll_fila],"hh:mm")
-	
-		IF ls_loteco1 = ls_loteco2 AND ls_planta1 = ls_planta2 AND ls_tipoen1 = ls_tipoen2 AND &
-		   ls_envase1 = ls_envase2 AND ls_hora1   = ls_hora2 THEN
-			MessageBox("Error", "La hora de vaciado para el lote ya fue ingresada anteriormente", Information!, Ok!)
-			RETURN True
-		END IF	
-	END IF
-NEXT	
-
-RETURN False
-
-end function
-
-public function boolean habilitabultos (string as_columna, string as_valor);Boolean	lb_Estado = True
-Long     ll_Bultos, ll_bultosrep, ll_bultosyaingresados
-String   ls_lote, ls_null
-Integer  li_tipo, li_enva
-
-SetNull(ls_Null)
- 
-IF as_Columna <> "lote" AND &
-	((dw_1.Object.lote[il_fila] = "") OR isnull(dw_1.Object.lote[il_fila])) THEN
-	lb_Estado = False
-END IF
-	
-IF as_Columna <> "enva_tipoen" AND &
-	((dw_1.Object.enva_tipoen[il_fila] = 0) OR (IsNull(dw_1.Object.enva_tipoen[il_fila]))) THEN
-	lb_Estado = False
-END IF
-	
-IF as_Columna <> "enva_codigo" AND &
-	(dw_1.Object.enva_codigo[il_fila] = 0 OR IsNull(dw_1.Object.enva_codigo[il_fila])) THEN
-	lb_Estado = False
-END IF
-
-IF lb_estado THEN
-	ls_lote	=	dw_1.Object.lote[il_fila]
-	li_tipo	=	dw_1.Object.enva_tipoen[il_fila]
-	li_enva	=	dw_1.Object.enva_codigo[il_fila]
-	
-	IF as_columna="lote" 		 THEN ls_lote	=	as_valor
-	IF as_columna="enva_tipoen" THEN li_tipo	=	integer(as_valor)
-	IF as_columna="enva_codigo" THEN li_enva	=	integer(as_valor)
-	
-	IF ls_lote<>"" AND isnull(li_tipo)=FALSE AND isnull(li_enva)=FALSE THEN
-		
-		ll_Bultos=BuscaBultos(ls_lote,li_tipo, li_enva)
-		
-		IF ll_Bultos<= 0 THEN
-			MessageBox("Atención","Número de Lote Ingresado No posee Bultos de Movimiento. Debe Ingresar Otro.")
-			dw_1.Object.lote[il_fila]				=	ls_null
-			dw_1.Object.lote_codigo[il_fila]    =  integer(ls_null)
-			dw_1.Object.enva_tipoen[il_fila]		=	Integer(ls_null)
-			dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
-			dw_1.Object.enva_nombre[il_fila]		=	ls_null
-			dw_1.Object.cale_calida[il_fila]		=	ls_null
-			dw_1.Object.cale_nombre[il_fila]		=	ls_null
-			dw_1.Object.opvd_canbul[il_fila]		=	long(ls_null)
-			dw_1.Object.bultostot[il_fila]		=	long(ls_null)
-			
-			RETURN FALSE
-		ELSE	
-			IF dw_1.RowCount()>1 THEN			  
-				ll_bultosrep = buscalotesrepetidos(ls_lote,li_tipo,li_enva,il_fila)
-			ELSE	 
-				ll_bultosrep = 0
-			END IF	 
-			
-		   ll_bultosyaingresados = buscabultosyaingresados(ls_lote,li_tipo,li_enva)
-			
-		   IF isnull(ll_bultosyaingresados) THEN ll_bultosyaingresados = 0
-			
-			ll_bultos = ll_bultos - ll_bultosyaingresados - ll_bultosrep
-			IF ll_bultos<=0 THEN
-				MessageBox("Atención","El lote ya fue ingresado en su totalidad. Debe Ingresar Otro.")
-				dw_1.Object.lote[il_fila]				=	ls_null
-				dw_1.Object.lote_codigo[il_fila]    =  integer(ls_null)
-				dw_1.Object.enva_tipoen[il_fila]		=	Integer(ls_null)
-				dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
-				dw_1.Object.enva_nombre[il_fila]		=	ls_null
-				dw_1.Object.cale_calida[il_fila]		=	ls_null
-				dw_1.Object.cale_nombre[il_fila]		=	ls_null
-				dw_1.Object.opvd_canbul[il_fila]		=	long(ls_null)
-				dw_1.Object.bultostot[il_fila]		=	long(ls_null)
-				dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
-				
-				RETURN FALSE
-				
-			ELSE
-				dw_1.Object.opvd_canbul[il_fila] 	=	ll_Bultos
-				dw_1.Object.bultostot[il_fila]   	=	0      //ll_bultos 
-				actualizatotalbultos(ls_lote,li_tipo, li_enva,il_fila,0)
-			END IF
-      END IF			
-	END IF	
-END IF	
-
-RETURN TRUE
-end function
-
-public subroutine buscaorden ();Str_Busqueda	lstr_busq
-String ls_Nula
-SetNull(ls_nula)
-
-lstr_busq.argum[1]	=	istr_mant.argumento[1]
-lstr_busq.argum[2]	=	"0"
-lstr_busq.argum[3]	=  istr_mant.argumento[2]
-lstr_busq.argum[4]	=  istr_mant.argumento[16]
-
-OpenWithParm(w_busc_spro_ordenproceso, lstr_busq)
-
-lstr_busq	=	Message.PowerObjectParm
-
-IF lstr_busq.argum[1] <> "" and lstr_busq.argum[1] <> "0" THEN
-	
-	IF iuo_ordenproceso.Existe(gstr_ParamPlanta.CodigoPlanta,&
-											Integer(istr_Mant.Argumento[2]), &
-											Integer(lstr_busq.argum[6]),True,Sqlca, &
-											Integer(istr_mant.argumento[16])) THEN	
-		IF Not manbin_especie(gstr_ParamPlanta.CodigoPlanta, iuo_ordenproceso.especie, True, sqlca) THEN
-			dw_2.SetItem(1,"orpr_numero", Integer(ls_Nula))
-			RETURN
-			
-		END IF
-		
-		IF Not TieneTarjas(Integer(lstr_busq.argum[6])) THEN
-			dw_2.SetItem(1,"orpr_numero", Integer(ls_Nula))
-			RETURN
-			
-		END IF
-		
-		istr_mant.argumento[3]	= lstr_busq.argum[6]
-		dw_2.SetItem(1,"orpr_numero",long(lstr_busq.argum[6]))
-		
-		IF existeencabezado(Long(istr_mant.argumento[3])) THEN
-			TriggerEvent("ue_recuperadatos")
-			
-		ELSE
-			dw_2.Object.line_codigo[1] = iuo_ordenproceso.linea
-			dw_2.object.orpr_fecpro[1] = iuo_ordenproceso.fechaorden
-			dw_2.object.prod_codigo[1] = iuo_ordenproceso.productor
-			dw_2.object.espe_codigo[1] = iuo_ordenproceso.especie
-			dw_2.object.vari_codigo[1] = iuo_ordenproceso.variedad
-			dw_2.Object.orpr_estado[1] = iuo_ordenproceso.estado
-
-			IF date(string(iuo_ordenproceso.fechaorden,"dd/mm/yyyy")) > &
-				date(string(dw_2.Object.opve_fecvac[1],"dd/mm/yyyy")) THEN
-				dw_2.Object.opve_fecvac[1] = iuo_ordenproceso.fechaorden
-			END IF	
-
-			LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,&
-							 iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
-			Habilitadetalle("orpr_numero")
-		END IF
-	ELSE
-		dw_2.SetItem(1,"orpr_numero",long(ls_Nula))
-		
-	END IF
-END IF
-end subroutine
-
-public function long buscabultosyaingresados (string as_lote, integer ai_tipoen, integer ai_envase);Long 		ll_fila, ll_bultos=0
-Integer 	li_lotepl, li_lotesp, li_lote, li_turno, li_turnofila, li_Cliente
-Date 		ldt_fechava, ldt_fechafila
-
-li_lotepl   =	Integer(Mid(as_lote,1,4))
-li_lotesp	=	Integer(mid(as_lote,5,2))
-li_lote		=	Integer(mid(as_lote,7,10))
-ldt_fechava =  dw_2.Object.opve_fecvac[1]
-li_turno		=  dw_2.Object.opve_turno[1]
-li_Cliente	=	Integer(istr_mant.argumento[16])
-
-dw_3.SetFilter("lote_pltcod = " + string(li_lotepl) + " AND " + &
-               "lote_espcod = " + string(li_lotesp) + " AND " + &
-               "lote_codigo = " + string(li_lote)   + " AND " + &
-               "clie_codigo = " + string(li_Cliente) + " AND " + &
-					"enva_tipoen = " + string(ai_tipoen) + " AND " + &
-					"enva_codigo = " + string(ai_envase) )
-dw_3.Filter()					
-
-FOR ll_fila = 1 TO dw_3.RowCount()
-	li_turnofila 	=	dw_3.Object.opve_turno[ll_fila]
-	ldt_fechafila 	=	dw_3.Object.opve_fecvac[ll_fila]
-	IF li_turnofila <> li_turno OR ldt_fechafila  <> ldt_fechava THEN
-		
-		ll_bultos = ll_bultos + dw_3.Object.opvd_canbul[ll_fila]
-		
-	END IF	 
-NEXT	
-
-IF isnull(ll_bultos) THEN ll_Bultos = 0
-
-dw_3.SetFilter("")
-dw_3.Filter()
-
-RETURN ll_bultos
-
-end function
-
-public subroutine habilitadetalle (string as_columna);Boolean	lb_Estado = True
-Date     ldt_fecha, ld_fechavac
-Integer  li_planta, li_tipord, li_turnovac, li_Cliente
-Long     ll_orden
-
-li_Cliente	=	Integer(istr_mant.argumento[16])
-
-IF as_Columna <> "opve_fecvac" AND &
-	(dw_2.Object.opve_fecvac[1] = ldt_fecha) THEN
-	lb_Estado = False
-END IF
-	
-IF as_Columna <> "orpr_numero" AND &
-	(dw_2.Object.orpr_numero[1] = 0 OR IsNull(dw_2.Object.orpr_numero[1])) THEN
-	lb_Estado = False
-END IF
-	
-IF as_Columna <> "opve_turno" AND &
-	(dw_2.Object.opve_turno[1] = 0 OR IsNull(dw_2.Object.opve_turno[1])) THEN
-	lb_Estado = False
-END IF
-
-IF as_Columna <> "opve_estado" AND &
-	(dw_2.Object.opve_estado[1] = "C" OR IsNull(dw_2.Object.opve_estado[1])) THEN
-	lb_Estado = False
-END IF
-
-IF lb_estado THEN
-  pb_ins_det.Enabled = lb_estado
-  dw_2.accepttext()
-  li_planta 	=	dw_2.Object.plde_codigo[1]
-  li_tipord 	=	dw_2.Object.orpr_tipord[1]
-  ll_orden		=	dw_2.Object.orpr_numero[1]
-  ld_fechavac 	=	dw_2.Object.opve_fecvac[1]
-  li_turnovac  =  dw_2.Object.opve_turno[1]  
-  dw_3.SetTransObject(SQLCA)
-  dw_3.Retrieve(li_planta,li_tipord, ll_orden,li_Cliente)
-  
-END IF	
-
-end subroutine
-
-public subroutine actualizatotalbultos (string as_lote, integer is_tipoen, integer is_envase, long al_fila, long al_bultos);Long    ll_fila
-Integer li_tipoen, li_envase
-String  ls_lotefila
-
-FOR ll_fila=1 TO dw_1.RowCount()
-   IF ll_fila<>al_fila THEN
-		ls_lotefila=dw_1.Object.lote[ll_fila]
-		li_tipoen  =dw_1.Object.enva_tipoen[ll_fila]
-		li_envase  =dw_1.Object.enva_codigo[ll_fila]
-		
-		IF as_lote=ls_lotefila AND is_tipoen=li_tipoen AND is_envase=li_envase THEN
-			
-			dw_1.Object.bultostot[ll_fila] = al_bultos
-		END IF
-		
-	END IF
-NEXT	
-
-end subroutine
-
-public function boolean existeencabezado (long al_numero);Boolean	lb_Retorno
-Integer	li_Planta, li_tpmv, li_Cantidad, li_turno, li_Cliente
-Date     ldt_fecha
-String	ls_fecha
-
-ldt_Fecha		=	Date(left(istr_Mant.Argumento[4], 10))
-li_tpmv			=	Integer(istr_Mant.Argumento[2])
-li_turno       =  Integer(istr_Mant.Argumento[5])
-ls_fecha			=	String(ldt_fecha,'yyyymmdd')
-li_Cliente		=	Integer(istr_mant.argumento[16])
-
-SELECT	Count(*)
-	INTO	:li_Cantidad
-	FROM	dbo.spro_ordenprocvacenca as sop
-	WHERE	sop.plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
-	AND   sop.orpr_tipord	=	:li_tpmv
-	AND	sop.orpr_numero	=	:al_numero
-	AND 	Convert(char(10),sop.opve_fecvac,112)	=	:ls_fecha
-	AND 	sop.opve_turno		=	:li_turno
-	AND   sop.clie_codigo   =  :li_Cliente;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_ordenprocvaenca")
-	
-	RETURN FALSE
-ELSEIF sqlca.SQLCode <> 100 and li_cantidad>0 THEN
-
-	lb_Retorno	=	True
-
-END IF
-
-RETURN lb_Retorno
-end function
-
-public function boolean noexistecliente (integer al_codigo);Integer	li_cliente
-
-SELECT clie_codigo
-INTO	:li_cliente
-FROM	dbo.clientesprod
-WHERE	clie_codigo	=	:al_codigo;
-	
-IF sqlca.SQLCode = -1 THEN
-		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla ClientesProd" )
-		Return True			
-ELSEIF sqlca.SQLCode = 100 THEN
-		messagebox("Atención","No Existe Código Seleccionado en Tabla ")			
-		Return True						
-END IF
-
-Return False
-
-end function
-
-public subroutine llenanombres (long al_productor, integer ai_especie, integer ai_variedad, integer ai_cliente);String   ls_Nombre, ls_envase, ls_codenva
-Integer  li_tipoenva, li_codenva, ls_enavse
-
-SELECT	prod_nombre
-	INTO	:ls_Nombre
-	FROM	dbo.productores
-  WHERE	prod_codigo	=	:al_productor;
-//  AND    clie_codigo =  :ai_cliente;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Productor")
-
-ELSEIF sqlca.SQLCode<>100 THEN
-	dw_2.object.prod_nombre[1]=ls_nombre
-END IF
-
-SELECT	espe_nombre
-	INTO	:ls_Nombre
-	FROM	dbo.especies
-  WHERE	espe_codigo	=	:ai_especie;
-//  AND    clie_codigo =  :ai_cliente;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Especie")
-
-ELSEIF sqlca.SQLCode<>100 THEN
-	dw_2.object.espe_nombre[1]=ls_nombre
-END IF
-
-SELECT	vari_nombre
-	INTO	:ls_Nombre
-	FROM	dbo.variedades
-  WHERE	espe_codigo	=	:ai_especie
-    AND  vari_codigo =  :ai_variedad;
-//    AND  clie_codigo =  :ai_cliente;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Variedades")
-
-ELSEIF sqlca.SQLCode<>100 THEN
-	dw_2.object.vari_nombre[1]=ls_nombre
-END IF
-end subroutine
 
 protected function boolean wf_actualiza_db (boolean borrando);Boolean	lb_AutoCommit, lb_Retorno
 
@@ -655,7 +72,7 @@ sqlca.AutoCommit	=	False
 IF Borrando THEN
 	IF dw_1.Update(True, False) = 1 THEN
 		IF dw_2.Update(True, False) = 1 THEN
-			IF Historial() THEN
+			IF wf_Historial() THEN
 				Commit;
 				
 				IF sqlca.SQLCode <> 0 THEN
@@ -685,7 +102,7 @@ ELSE
 	IF dw_2.Update(True, False) = 1 THEN
 		IF dw_1.Update(True, False) = 1 THEN
 			IF dw_4.Update(True, False) = 1 THEN
-				IF Historial() THEN
+				IF wf_Historial() THEN
 					Commit;
 					
 					IF sqlca.SQLCode <> 0 THEN
@@ -722,20 +139,6 @@ sqlca.AutoCommit	=	lb_AutoCommit
 
 RETURN lb_Retorno
 end function
-
-public subroutine eliminarbins (integer ai_row);Integer li_i
-
-FOR li_i 	=	1 TO dw_4.RowCount()
-	
-	IF dw_4.Object.opva_secuen[li_i] = ai_row THEN
-		dw_4.DeleteRow(li_i)
-		li_i = li_i - 1
-	ELSEIF dw_4.Object.opva_secuen[li_i] > ai_row THEN
-		dw_4.Object.opva_secuen[li_i] = dw_4.Object.opva_secuen[li_i] - 1
-	END IF
-	
-NEXT
-end subroutine
 
 public subroutine pesooriginalbins ();//Long 		ll_NroTar1, ll_NroTar2, ll_NroTar3, ll_fila, ll_lote, li_tarja
 //Integer	li_TipEn, li_CodEn, li_bultos, li_Cliente, li_Planta, li_Numero, li_especie, li_tipoenva, li_envase
@@ -831,153 +234,100 @@ public subroutine pesooriginalbins ();//Long 		ll_NroTar1, ll_NroTar2, ll_NroTar
 //END IF
 end subroutine
 
-public subroutine pesooriginalbultos ();//Long 		ll_NroTar1, ll_NroTar2, ll_NroTar3, ll_fila, ll_lote, li_tarja
-//Integer	li_TipEn, li_CodEn, li_bultos, li_Cliente, li_Planta, li_Numero, li_especie, li_tipoenva, li_envase
-//String	ls_Calid, ls_calidad
-//Decimal	ldec_KilOri, ldec_Tara,ld_tarabasepallet
-//	
-//ll_fila 			=	dw_1.GetRow() 
-//
-//IF ll_fila < 1 THEN RETURN
-//
-//ll_NroTar1	=	dw_1.Object.opve_nrtar1[ll_fila]
-//ll_NroTar2	=	dw_1.Object.opve_nrtar2[ll_fila]
-//ll_NroTar3	=	dw_1.Object.opve_nrtar3[ll_fila]
-//li_bultos	=	dw_1.Object.opvd_canbul[ll_fila]
-//li_TipEn		=	dw_1.Object.enva_tipoen[ll_fila]
-//li_CodEn		=	dw_1.Object.enva_codigo[ll_fila]
-//ls_Calid		=	dw_1.Object.cale_calida[ll_fila]
-//ll_lote		=	dw_1.Object.lote_codigo[ll_fila]
-//
-//IF istr_mant2.Argumento[3] <> '9' THEN
-//
-//	SELECT Sum(mfgp.mfgp_pesore)
-//	  INTO :ldec_KilOri
-//	  FROM dbo.spro_movtofrutagranpesa as mfgp
-//	 WHERE mfgp.fgmb_nrotar IN (:ll_NroTar1, :ll_NroTar2, :ll_NroTar3)
-//		AND lote_codigo = :ll_lote;
-//	
-//	IF sqlca.SQLCode <> 0 THEN
-//		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Spro_MovtoFrutaGranPesa")
-//	ELSE
-//		
-//		IF gstr_paramplanta.palletdebins THEN
-//			li_Cliente 	= 	Integer(istr_Mant.Argumento[1])
-//			li_Planta 	= 	Integer(istr_Mant.Argumento[2])
-//			li_Numero	=	Integer(istr_mant.Argumento[4])
-//			ll_lote		=	dw_1.Object.lote_codigo[il_fila]
-//			li_especie	=	dw_1.Object.lote_espcod[il_fila]
-//			li_tarja		=	dw_1.Object.fgmb_tibapa[il_fila]
-//			
-//			SELECT enva_tipoen, enva_codigo, cale_calida
-//			  INTO :li_TipoEnva, :li_Envase, :ls_Calidad
-//			  FROM dbo.spro_bins
-//			 WHERE( clie_codigo	=	:li_cliente	)
-//				AND( plde_codigo	=	:li_Planta	)
-//				AND( bins_numero	=	:li_tarja	);
-//					
-//			IF sqlca.SQLCode < 0 THEN
-//				F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Movimiento de Envases")
-//			ELSEIF sqlca.SQLCode = 100 THEN
-//				MessageBox("Error", "No se encuentra el Movimiento de Envase Correspondiente a este Bulto")
-//				RETURN
-//			END IF
-//			
-//			SELECT cale_pesoen
-//			  INTO :ld_tarabasepallet
-//			  FROM dbo.spro_calicosechero
-//			 WHERE enva_tipoen =	 :li_TipoEnva
-//				AND enva_codigo =  :li_Envase
-//				AND cale_calida =  :ls_Calidad;
-//			IF sqlca.SQLCode <> 0 THEN
-//				F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Calidad de Envases")
-//				RETURN
-//			END IF
-//		END IF
-//		
-//		SELECT cale_pesoen
-//		  INTO :ldec_Tara
-//		  FROM dbo.spro_calicosechero
-//		 WHERE enva_tipoen = :li_TipEn
-//			AND enva_codigo = :li_CodEn
-//			AND cale_calida = :ls_Calid;
-//		 
-//		IF sqlca.SQLCode <> 0 THEN
-//			F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Calidad de Envases")
-//		ELSE
-//			dw_1.object.opvd_kilori[ll_fila]	=	Round(ldec_KilOri - (ldec_tara * li_bultos) - ld_tarabasepallet, 2)
-//		END IF	
-//	END IF
-//ELSE
-//	SELECT	Sum(lfgd.lfcd_kilnet)
-//		INTO	:ldec_KilOri
-//		FROM	dbo.spro_lotesfrutacomdeta as lfgd
-//		WHERE 	lfgd.fgmb_nrotar IN (:ll_NroTar1, :ll_NroTar2, :ll_NroTar3)
-//			 AND	lfgd.lofc_lotefc = :ll_lote;
-//			 
-//	IF sqlca.SQLCode <> 0 THEN
-//		F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Lotes Comerciales")
-//		dw_1.object.opvd_kilori[ll_fila]	=	0
-//	ELSE
-//		dw_1.object.opvd_kilori[ll_fila]	=	Round(ldec_KilOri, 2)
-//	END IF	
-//
-//END IF
+public function boolean wf_tienetarjas (long al_numero);Boolean	lb_Retorno = True
+Integer	li_Planta, li_tpmv, li_Cantidad, li_turno, li_Cliente
+
+li_tpmv			=	Integer(istr_Mant.Argumento[2])
+li_turno       =  Integer(istr_Mant.Argumento[5])
+li_Cliente		=	Integer(istr_mant.argumento[16])
+
+SELECT	Count(*)
+	INTO	:li_Cantidad
+	FROM	dbo.spro_ordenprocdeta_cajasprod as sop
+	WHERE	sop.plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
+	AND   sop.orpr_tipord	=	:li_tpmv
+	AND	sop.orpr_numero	=	:al_numero
+	AND   sop.clie_codigo   =  :li_Cliente
+	AND 	sop.capr_estado	=	1;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_ordenprocdeta_cajasprod")
+	
+	RETURN FALSE
+ELSEIF li_cantidad < 1 THEN
+	MessageBox("Validación de Adhesivos", "No se encuentran adhesivos aprobados para "	+ 	& 
+													  "la orden que se intenta vaciar.~r~n" 			+	&
+													  "Favor de dar aviso a encargado de packing")
+	Return False
+END IF
+
+RETURN lb_Retorno
+end function
+
+public function boolean wf_noexistecliente (integer al_codigo);Integer	li_cliente
+
+SELECT clie_codigo
+INTO	:li_cliente
+FROM	dbo.clientesprod
+WHERE	clie_codigo	=	:al_codigo;
+	
+IF sqlca.SQLCode = -1 THEN
+		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla ClientesProd" )
+		Return True			
+ELSEIF sqlca.SQLCode = 100 THEN
+		messagebox("Atención","No Existe Código Seleccionado en Tabla ")			
+		Return True						
+END IF
+
+Return False
+
+end function
+
+public subroutine wf_llenanombres (long al_productor, integer ai_especie, integer ai_variedad, integer ai_cliente);String   ls_Nombre, ls_envase, ls_codenva
+Integer  li_tipoenva, li_codenva, ls_enavse
+
+SELECT	prod_nombre
+	INTO	:ls_Nombre
+	FROM	dbo.productores
+  WHERE	prod_codigo	=	:al_productor;
+//  AND    clie_codigo =  :ai_cliente;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Productor")
+
+ELSEIF sqlca.SQLCode<>100 THEN
+	dw_2.object.prod_nombre[1]=ls_nombre
+END IF
+
+SELECT	espe_nombre
+	INTO	:ls_Nombre
+	FROM	dbo.especies
+  WHERE	espe_codigo	=	:ai_especie;
+//  AND    clie_codigo =  :ai_cliente;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Especie")
+
+ELSEIF sqlca.SQLCode<>100 THEN
+	dw_2.object.espe_nombre[1]=ls_nombre
+END IF
+
+SELECT	vari_nombre
+	INTO	:ls_Nombre
+	FROM	dbo.variedades
+  WHERE	espe_codigo	=	:ai_especie
+    AND  vari_codigo =  :ai_variedad;
+//    AND  clie_codigo =  :ai_cliente;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Variedades")
+
+ELSEIF sqlca.SQLCode<>100 THEN
+	dw_2.object.vari_nombre[1]=ls_nombre
+END IF
 end subroutine
 
-public subroutine pesosbultoabulto ();Integer	li_filas, li_planta, li_especie, li_TipEnv, li_CodEnv
-Long		ll_lote, ll_bultos
-decimal	ldec_kilos_prom_originales, ldec_kilos_tara
-String		ls_calidad
-
-FOR li_filas = 1 to dw_1.RowCount()
-	li_planta	=	dw_1.Object.lote_pltcod[li_filas]
-	li_especie	=	dw_1.Object.lote_espcod[li_filas]
-	ll_lote		=	dw_1.Object.lote_codigo[li_filas]
-	li_TipEnv	=	dw_1.Object.enva_tipoen[li_filas]
-	li_CodEnv	=	dw_1.Object.enva_codigo[li_filas]
-	ls_calidad	=	dw_1.Object.cale_calida[li_filas]
-	ll_bultos	=	dw_1.Object.opvd_canbul[li_filas]
-	
-	dw_1.Object.opvd_pesone[li_filas] 	=	0	//peso neto vaciado
-	dw_1.Object.opvd_pesobr[li_filas] 	=	0 	//peso bruto vaciado
-	dw_1.Object.opvd_kilpro[li_filas] 	=	0	//peso promedio neto
-	dw_1.Object.opvd_kilori[li_filas] 	=	0	//peso neto original	
-	
-	SELECT lote_kilpro INTO :ldec_kilos_prom_originales
-		FROM dbo.spro_lotesfrutagranel
-		WHERE lote_pltcod	=	:li_planta
-		  AND lote_espcod	=	:li_especie
-		  AND lote_codigo	=	:ll_lote;
-	
-	IF sqlca.SQLCode <> 0 THEN
-		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Spro_MovtoFrutaGranPesa")
-	ELSE
-		SELECT cale_pesoen INTO :ldec_kilos_tara
-			FROM dbo.spro_calicosechero
-			WHERE enva_tipoen	=	:li_TipEnv
-				AND enva_codigo	=	:li_CodEnv
-				AND cale_calida	=	:ls_calidad;
-				
-		IF sqlca.SQLCode <> 0 THEN
-			F_ErrorBaseDatos(sqlca, "Lectura de Tabla Spro_MovtoFrutaGranPesa")
-		ELSE
-			//peso neto vaciado
-			dw_1.Object.opvd_pesone[li_filas] 	=	ldec_kilos_prom_originales * ll_bultos 
-			//peso bruto vaciado
-			dw_1.Object.opvd_pesobr[li_filas] 	= 	( ldec_kilos_prom_originales * ll_bultos ) + ( ldec_kilos_tara * ll_bultos )
-			//peso promedio neto
-			dw_1.Object.opvd_kilpro[li_filas]	=	ldec_kilos_prom_originales
-			//peso neto original
-			dw_1.Object.opvd_kilori[li_filas]	=	ldec_kilos_prom_originales * ll_bultos 
-		END IF
-		
-	END IF
-	
-NEXT
-end subroutine
-
-public function boolean historial ();Boolean			lb_retorno	=	True
+public function boolean wf_historial ();Boolean			lb_retorno	=	True
 Integer			ll_fila
 DwItemStatus	li_dwitemstatus
 Integer			li_cliente, li_tipord, li_codmod, li_tipmov
@@ -1047,34 +397,536 @@ END IF
 Return lb_retorno
 end function
 
-public function boolean tienetarjas (long al_numero);Boolean	lb_Retorno = True
-Integer	li_Planta, li_tpmv, li_Cantidad, li_turno, li_Cliente
+public subroutine wf_eliminarbins (integer ai_row);Integer li_i
 
+FOR li_i 	=	1 TO dw_4.RowCount()
+	
+	IF dw_4.Object.opva_secuen[li_i] = ai_row THEN
+		dw_4.DeleteRow(li_i)
+		li_i = li_i - 1
+	ELSEIF dw_4.Object.opva_secuen[li_i] > ai_row THEN
+		dw_4.Object.opva_secuen[li_i] = dw_4.Object.opva_secuen[li_i] - 1
+	END IF
+	
+NEXT
+end subroutine
+
+public function boolean wf_existeencabezado (long al_numero);Boolean	lb_Retorno
+Integer	li_Planta, li_tpmv, li_Cantidad, li_turno, li_Cliente
+Date     ldt_fecha
+String	ls_fecha
+
+ldt_Fecha		=	Date(left(istr_Mant.Argumento[4], 10))
 li_tpmv			=	Integer(istr_Mant.Argumento[2])
 li_turno       =  Integer(istr_Mant.Argumento[5])
+ls_fecha			=	String(ldt_fecha,'yyyymmdd')
 li_Cliente		=	Integer(istr_mant.argumento[16])
 
 SELECT	Count(*)
 	INTO	:li_Cantidad
-	FROM	dbo.spro_ordenprocdeta_cajasprod as sop
+	FROM	dbo.spro_ordenprocvacenca as sop
 	WHERE	sop.plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
 	AND   sop.orpr_tipord	=	:li_tpmv
 	AND	sop.orpr_numero	=	:al_numero
-	AND   sop.clie_codigo   =  :li_Cliente
-	AND 	sop.capr_estado	=	1;
+	AND 	Convert(char(10),sop.opve_fecvac,112)	=	:ls_fecha
+	AND 	sop.opve_turno		=	:li_turno
+	AND   sop.clie_codigo   =  :li_Cliente;
 	
 IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_ordenprocdeta_cajasprod")
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_ordenprocvaenca")
 	
 	RETURN FALSE
-ELSEIF li_cantidad < 1 THEN
-	MessageBox("Validación de Adhesivos", "No se encuentran adhesivos aprobados para "	+ 	& 
-													  "la orden que se intenta vaciar.~r~n" 			+	&
-													  "Favor de dar aviso a encargado de packing")
-	Return False
+ELSEIF sqlca.SQLCode <> 100 and li_cantidad>0 THEN
+
+	lb_Retorno	=	True
+
 END IF
 
 RETURN lb_Retorno
+end function
+
+public subroutine wf_actualizatotalbultos (string as_lote, integer is_tipoen, integer is_envase, long al_fila, long al_bultos);Long    ll_fila
+Integer li_tipoen, li_envase
+String  ls_lotefila
+
+FOR ll_fila=1 TO dw_1.RowCount()
+   IF ll_fila<>al_fila THEN
+		ls_lotefila=dw_1.Object.lote[ll_fila]
+		li_tipoen  =dw_1.Object.enva_tipoen[ll_fila]
+		li_envase  =dw_1.Object.enva_codigo[ll_fila]
+		
+		IF as_lote=ls_lotefila AND is_tipoen=li_tipoen AND is_envase=li_envase THEN
+			
+			dw_1.Object.bultostot[ll_fila] = al_bultos
+		END IF
+		
+	END IF
+NEXT	
+
+end subroutine
+
+public function long wf_buscabultos (string as_lote, integer ai_tipoenva, integer ai_enva);String   ls_Nombre, ls_envase, ls_codenva
+Integer  li_tipodoc, li_orden, li_lotepl, li_lotesp, li_lote, li_tipomov, li_Cliente
+Long     ll_Bultos, ll_numero
+
+li_tipodoc	=	Integer(istr_mant.argumento[2])
+li_orden		=	Integer(istr_mant.argumento[3])
+li_Cliente	=	Integer(istr_mant.argumento[16])
+
+li_lotepl   =	Integer(Mid(as_lote,1,4))
+li_lotesp	=	Integer(mid(as_lote,5,2))
+li_lote		=	Integer(mid(as_lote,7,10))
+
+SELECT	distinct tpmv_codigo, mfge_numero
+	INTO	:li_tipomov, :ll_numero
+	FROM	dbo.spro_movtofrutagranenca
+  WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
+    AND 	tpmv_codigo =  21
+    AND  defg_tipdoc =  :li_Tipodoc
+	 AND  defg_docrel =  :li_orden
+	 AND  clie_codigo =  :li_Cliente; 
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Movimiento de Fruta Encabezado")
+
+ELSEIF sqlca.SQLCode<>100 THEN
+	
+	 SELECT	mfgd_bulent
+		INTO	:ll_Bultos
+		FROM	dbo.spro_movtofrutagrandeta
+  	  WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta
+   	 AND  tpmv_codigo =  :li_tipomov
+		 AND  mfge_numero =  :ll_numero
+		 AND  lote_pltcod =  :li_lotepl
+		 AND  lote_espcod	=	:li_lotesp
+		 AND  lote_codigo	=	:li_lote
+		 AND  enva_tipoen =  :ai_tipoenva
+		 AND  enva_codigo =  :ai_enva
+		 AND  clie_codigo =  :li_Cliente;
+   
+	IF sqlca.SQLCode = -1 THEN
+	   F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Movimiento de Fruta Detalle")
+   ELSEIF sqlca.SQLCode<>100 THEN
+		
+   END IF
+
+END IF
+
+Return ll_Bultos
+end function
+
+public function long wf_buscabultosyaingresados (string as_lote, integer ai_tipoen, integer ai_envase);Long 		ll_fila, ll_bultos=0
+Integer 	li_lotepl, li_lotesp, li_lote, li_turno, li_turnofila, li_Cliente
+Date 		ldt_fechava, ldt_fechafila
+
+li_lotepl   =	Integer(Mid(as_lote,1,4))
+li_lotesp	=	Integer(mid(as_lote,5,2))
+li_lote		=	Integer(mid(as_lote,7,10))
+ldt_fechava =  dw_2.Object.opve_fecvac[1]
+li_turno		=  dw_2.Object.opve_turno[1]
+li_Cliente	=	Integer(istr_mant.argumento[16])
+
+dw_3.SetFilter("lote_pltcod = " + string(li_lotepl) + " AND " + &
+               "lote_espcod = " + string(li_lotesp) + " AND " + &
+               "lote_codigo = " + string(li_lote)   + " AND " + &
+               "clie_codigo = " + string(li_Cliente) + " AND " + &
+					"enva_tipoen = " + string(ai_tipoen) + " AND " + &
+					"enva_codigo = " + string(ai_envase) )
+dw_3.Filter()					
+
+FOR ll_fila = 1 TO dw_3.RowCount()
+	li_turnofila 	=	dw_3.Object.opve_turno[ll_fila]
+	ldt_fechafila 	=	dw_3.Object.opve_fecvac[ll_fila]
+	IF li_turnofila <> li_turno OR ldt_fechafila  <> ldt_fechava THEN
+		
+		ll_bultos = ll_bultos + dw_3.Object.opvd_canbul[ll_fila]
+		
+	END IF	 
+NEXT	
+
+IF isnull(ll_bultos) THEN ll_Bultos = 0
+
+dw_3.SetFilter("")
+dw_3.Filter()
+
+RETURN ll_bultos
+
+end function
+
+public subroutine wf_buscacalidad (string as_calidad);String   ls_Nombre
+Integer  li_tipoenva, li_codenva
+
+li_tipoenva	=	istr_Envase.TipoEnvase
+li_codenva	=	istr_Envase.codigo
+
+SELECT	cale_nombre
+	INTO	:ls_Nombre
+	FROM	dbo.spro_calicosechero
+  WHERE	enva_tipoen	=	:li_tipoenva
+    AND  enva_codigo =  :li_codenva
+	 AND  cale_calida =  :as_calidad;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Calidad de Envases")
+
+ELSEIF sqlca.SQLCode<>100 THEN
+	dw_1.object.cale_nombre[il_fila]=ls_nombre
+END IF
+end subroutine
+
+public subroutine wf_buscadetallelotes ();Str_busqueda	lstr_busq
+
+lstr_busq.argum[1]	=	istr_mant.argumento[1]
+lstr_busq.argum[2]	=  istr_mant.argumento[2]
+lstr_busq.argum[3]	=  istr_mant.argumento[3]
+lstr_busq.argum[4]	=  istr_mant.argumento[16]
+
+OpenWithParm(w_busc_detalle_lotesvaciados, lstr_busq)
+
+lstr_busq	= Message.PowerObjectParm
+
+IF lstr_busq.argum[1] = "" THEN
+	dw_1.SetColumn("lote_codigo")
+	dw_1.SetFocus()
+ELSE
+	dw_1.Object.lote[il_fila] = 	lstr_busq.argum[4]
+	
+	dw_1.Object.lote_pltcod[il_fila] = 	Integer(lstr_busq.argum[9])
+	dw_1.Object.lote_espcod[il_fila] = 	Integer(lstr_busq.argum[10])
+	dw_1.Object.lote_codigo[il_fila] = 	Integer(lstr_busq.argum[11])	
+
+	dw_1.Object.enva_tipoen[il_fila]	=	Integer(lstr_busq.argum[5])
+	
+	dw_1.GetChild("enva_codigo", idwc_envase)
+	idwc_envase.SetTransObject(SqlCa)
+	idwc_envase.Retrieve(integer(lstr_busq.argum[5]))
+	
+	dw_1.Object.enva_codigo[il_fila]	=	integer(lstr_busq.argum[6])
+	dw_1.Object.enva_nombre[il_fila]	=	lstr_busq.argum[7]
+	dw_1.Object.opvd_canbul[il_fila]	=	long(lstr_busq.argum[8])
+	dw_1.Object.bultostot[il_fila]	=	long(lstr_busq.argum[8])
+	
+	ExisteEnvase(Integer(lstr_busq.argum[5]),Integer(lstr_busq.argum[6]) , istr_Envase)
+	
+	dw_1.GetChild("cale_calida", idwc_calidad)
+	idwc_calidad.SetTransObject(SqlCa)
+	idwc_calidad.Retrieve(Integer(lstr_busq.argum[5]),integer(lstr_busq.argum[6]))
+	
+	wf_HabilitaBultos("lote",(lstr_busq.argum[4]))
+	
+	dw_1.Setcolumn("opvd_canbul")
+	dw_1.SetFocus()
+END IF
+
+RETURN
+end subroutine
+
+public function long wf_buscalotesrepetidos (string as_lote, integer is_tipoen, integer is_envase, long al_fila);Long ll_bultos, ll_fila
+Integer li_tipoen, li_envase
+String ls_lotefila
+
+ll_bultos=0
+
+FOR ll_fila=1 TO dw_1.RowCount()
+   IF ll_fila<>al_fila THEN
+		ls_lotefila=dw_1.Object.lote[ll_fila]
+		li_tipoen  =dw_1.Object.enva_tipoen[ll_fila]
+		li_envase  =dw_1.Object.enva_codigo[ll_fila]
+		
+		IF as_lote=ls_lotefila AND is_tipoen=li_tipoen AND is_envase=li_envase THEN
+			ll_bultos = ll_bultos + dw_1.Object.opvd_canbul[ll_fila]
+		END IF
+		
+	END IF
+NEXT	
+RETURN ll_bultos
+end function
+
+public subroutine wf_buscaorden ();Str_Busqueda	lstr_busq
+String ls_Nula
+SetNull(ls_nula)
+
+lstr_busq.argum[1]	=	istr_mant.argumento[1]
+lstr_busq.argum[2]	=	"0"
+lstr_busq.argum[3]	=  istr_mant.argumento[2]
+lstr_busq.argum[4]	=  istr_mant.argumento[16]
+
+OpenWithParm(w_busc_spro_ordenproceso, lstr_busq)
+
+lstr_busq	=	Message.PowerObjectParm
+
+IF lstr_busq.argum[1] <> "" and lstr_busq.argum[1] <> "0" THEN
+	
+	IF iuo_ordenproceso.Existe(gstr_ParamPlanta.CodigoPlanta,&
+											Integer(istr_Mant.Argumento[2]), &
+											Integer(lstr_busq.argum[6]),True,Sqlca, &
+											Integer(istr_mant.argumento[16])) THEN	
+		IF Not manbin_especie(gstr_ParamPlanta.CodigoPlanta, iuo_ordenproceso.especie, True, sqlca) THEN
+			dw_2.SetItem(1,"orpr_numero", Integer(ls_Nula))
+			RETURN
+			
+		END IF
+		
+		IF Not wf_TieneTarjas(Integer(lstr_busq.argum[6])) THEN
+			dw_2.SetItem(1,"orpr_numero", Integer(ls_Nula))
+			RETURN
+			
+		END IF
+		
+		istr_mant.argumento[3]	= lstr_busq.argum[6]
+		dw_2.SetItem(1,"orpr_numero",long(lstr_busq.argum[6]))
+		
+		IF wf_ExisteEncabezado(Long(istr_mant.argumento[3])) THEN
+			TriggerEvent("ue_recuperadatos")
+			
+		ELSE
+			dw_2.Object.line_codigo[1] = iuo_ordenproceso.linea
+			dw_2.object.orpr_fecpro[1] = iuo_ordenproceso.fechaorden
+			dw_2.object.prod_codigo[1] = iuo_ordenproceso.productor
+			dw_2.object.espe_codigo[1] = iuo_ordenproceso.especie
+			dw_2.object.vari_codigo[1] = iuo_ordenproceso.variedad
+			dw_2.Object.orpr_estado[1] = iuo_ordenproceso.estado
+
+			IF date(string(iuo_ordenproceso.fechaorden,"dd/mm/yyyy")) > &
+				date(string(dw_2.Object.opve_fecvac[1],"dd/mm/yyyy")) THEN
+				dw_2.Object.opve_fecvac[1] = iuo_ordenproceso.fechaorden
+			END IF	
+
+			wf_LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,&
+							 iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
+			wf_Habilitadetalle("orpr_numero")
+		END IF
+	ELSE
+		dw_2.SetItem(1,"orpr_numero",long(ls_Nula))
+		
+	END IF
+END IF
+end subroutine
+
+public function boolean wf_habilitabultos (string as_columna, string as_valor);Boolean	lb_Estado = True
+Long     ll_Bultos, ll_bultosrep, ll_bultosyaingresados
+String   ls_lote, ls_null
+Integer  li_tipo, li_enva
+
+SetNull(ls_Null)
+ 
+IF as_Columna <> "lote" AND &
+	((dw_1.Object.lote[il_fila] = "") OR isnull(dw_1.Object.lote[il_fila])) THEN
+	lb_Estado = False
+END IF
+	
+IF as_Columna <> "enva_tipoen" AND &
+	((dw_1.Object.enva_tipoen[il_fila] = 0) OR (IsNull(dw_1.Object.enva_tipoen[il_fila]))) THEN
+	lb_Estado = False
+END IF
+	
+IF as_Columna <> "enva_codigo" AND &
+	(dw_1.Object.enva_codigo[il_fila] = 0 OR IsNull(dw_1.Object.enva_codigo[il_fila])) THEN
+	lb_Estado = False
+END IF
+
+IF lb_estado THEN
+	ls_lote	=	dw_1.Object.lote[il_fila]
+	li_tipo	=	dw_1.Object.enva_tipoen[il_fila]
+	li_enva	=	dw_1.Object.enva_codigo[il_fila]
+	
+	IF as_columna="lote" 		 THEN ls_lote	=	as_valor
+	IF as_columna="enva_tipoen" THEN li_tipo	=	integer(as_valor)
+	IF as_columna="enva_codigo" THEN li_enva	=	integer(as_valor)
+	
+	IF ls_lote<>"" AND isnull(li_tipo)=FALSE AND isnull(li_enva)=FALSE THEN
+		
+		ll_Bultos=wf_BuscaBultos(ls_lote,li_tipo, li_enva)
+		
+		IF ll_Bultos<= 0 THEN
+			MessageBox("Atención","Número de Lote Ingresado No posee Bultos de Movimiento. Debe Ingresar Otro.")
+			dw_1.Object.lote[il_fila]				=	ls_null
+			dw_1.Object.lote_codigo[il_fila]    =  integer(ls_null)
+			dw_1.Object.enva_tipoen[il_fila]		=	Integer(ls_null)
+			dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
+			dw_1.Object.enva_nombre[il_fila]		=	ls_null
+			dw_1.Object.cale_calida[il_fila]		=	ls_null
+			dw_1.Object.cale_nombre[il_fila]		=	ls_null
+			dw_1.Object.opvd_canbul[il_fila]		=	long(ls_null)
+			dw_1.Object.bultostot[il_fila]		=	long(ls_null)
+			
+			RETURN FALSE
+		ELSE	
+			IF dw_1.RowCount()>1 THEN			  
+				ll_bultosrep = wf_buscalotesrepetidos(ls_lote,li_tipo,li_enva,il_fila)
+			ELSE	 
+				ll_bultosrep = 0
+			END IF	 
+			
+		   ll_bultosyaingresados = wf_buscabultosyaingresados(ls_lote,li_tipo,li_enva)
+			
+		   IF isnull(ll_bultosyaingresados) THEN ll_bultosyaingresados = 0
+			
+			ll_bultos = ll_bultos - ll_bultosyaingresados - ll_bultosrep
+			IF ll_bultos<=0 THEN
+				MessageBox("Atención","El lote ya fue ingresado en su totalidad. Debe Ingresar Otro.")
+				dw_1.Object.lote[il_fila]				=	ls_null
+				dw_1.Object.lote_codigo[il_fila]    =  integer(ls_null)
+				dw_1.Object.enva_tipoen[il_fila]		=	Integer(ls_null)
+				dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
+				dw_1.Object.enva_nombre[il_fila]		=	ls_null
+				dw_1.Object.cale_calida[il_fila]		=	ls_null
+				dw_1.Object.cale_nombre[il_fila]		=	ls_null
+				dw_1.Object.opvd_canbul[il_fila]		=	long(ls_null)
+				dw_1.Object.bultostot[il_fila]		=	long(ls_null)
+				dw_1.Object.enva_codigo[il_fila]		=	Integer(ls_null)
+				
+				RETURN FALSE
+				
+			ELSE
+				dw_1.Object.opvd_canbul[il_fila] 	=	ll_Bultos
+				dw_1.Object.bultostot[il_fila]   	=	0      //ll_bultos 
+				wf_actualizatotalbultos(ls_lote,li_tipo, li_enva,il_fila,0)
+			END IF
+      END IF			
+	END IF	
+END IF	
+
+RETURN TRUE
+end function
+
+public subroutine wf_habilitadetalle (string as_columna);Boolean	lb_Estado = True
+Date     ldt_fecha, ld_fechavac
+Integer  li_planta, li_tipord, li_turnovac, li_Cliente
+Long     ll_orden
+
+li_Cliente	=	Integer(istr_mant.argumento[16])
+
+IF as_Columna <> "opve_fecvac" AND &
+	(dw_2.Object.opve_fecvac[1] = ldt_fecha) THEN
+	lb_Estado = False
+END IF
+	
+IF as_Columna <> "orpr_numero" AND &
+	(dw_2.Object.orpr_numero[1] = 0 OR IsNull(dw_2.Object.orpr_numero[1])) THEN
+	lb_Estado = False
+END IF
+	
+IF as_Columna <> "opve_turno" AND &
+	(dw_2.Object.opve_turno[1] = 0 OR IsNull(dw_2.Object.opve_turno[1])) THEN
+	lb_Estado = False
+END IF
+
+IF as_Columna <> "opve_estado" AND &
+	(dw_2.Object.opve_estado[1] = "C" OR IsNull(dw_2.Object.opve_estado[1])) THEN
+	lb_Estado = False
+END IF
+
+IF lb_estado THEN
+  pb_ins_det.Enabled = lb_estado
+  dw_2.accepttext()
+  li_planta 	=	dw_2.Object.plde_codigo[1]
+  li_tipord 	=	dw_2.Object.orpr_tipord[1]
+  ll_orden		=	dw_2.Object.orpr_numero[1]
+  ld_fechavac 	=	dw_2.Object.opve_fecvac[1]
+  li_turnovac  =  dw_2.Object.opve_turno[1]  
+  dw_3.SetTransObject(SQLCA)
+  dw_3.Retrieve(li_planta,li_tipord, ll_orden,li_Cliente)
+  
+END IF	
+
+end subroutine
+
+public subroutine wf_habilitaencab (boolean habilita);IF Habilita THEN
+	dw_2.Object.clie_codigo.Protect				=	0
+	dw_2.Object.opve_fecvac.Protect				=	0
+	dw_2.Object.opve_turno.Protect				=	0
+	dw_2.Object.orpr_tipord.Protect				=	0
+	dw_2.Object.orpr_numero.Protect				=	0
+	dw_2.Object.line_codigo.Protect				=	0
+
+	dw_2.Object.clie_codigo.Color		=	0
+	dw_2.Object.opve_fecvac.Color	=	0
+	dw_2.Object.opve_turno.Color		= 	0	
+	dw_2.Object.orpr_tipord.Color		=	0
+	dw_2.Object.orpr_numero.Color	=	0
+	dw_2.Object.line_codigo.Color		=	0	
+	
+	dw_2.Object.clie_codigo.BackGround.Color		=	RGB(255,255,255)
+	dw_2.Object.opve_fecvac.BackGround.Color		=	RGB(255,255,255)
+	dw_2.Object.opve_turno.BackGround.Color		=	RGB(255,255,255)
+	dw_2.Object.orpr_tipord.BackGround.Color		=	RGB(255,255,255)
+	dw_2.Object.orpr_numero.BackGround.Color	=	RGB(255,255,255)
+	dw_2.Object.line_codigo.BackGround.Color		=	RGB(255,255,255)
+	
+	dw_2.Object.b_orden.visible					=  1
+ELSE
+	dw_2.Object.clie_codigo.Protect				=	1
+	dw_2.Object.opve_fecvac.Protect				=	1
+	dw_2.Object.opve_turno.Protect				=	1
+	dw_2.Object.orpr_tipord.Protect				=	1
+	dw_2.Object.orpr_numero.Protect				=	1
+	dw_2.Object.line_codigo.Protect				=	1
+
+	dw_2.Object.clie_codigo.Color		=	RGB(255,255,255)
+	dw_2.Object.opve_fecvac.Color	=	RGB(255,255,255)
+	dw_2.Object.opve_turno.Color		=	RGB(255,255,255)
+	//dw_2.Object.orpr_tipord.Color		=	RGB(255,255,255)
+	dw_2.Object.orpr_numero.Color	=	RGB(255,255,255)
+	dw_2.Object.line_codigo.Color		=	RGB(255,255,255)
+	
+	dw_2.Object.clie_codigo.BackGround.Color		=	553648127
+	dw_2.Object.opve_fecvac.BackGround.Color		=	553648127
+	dw_2.Object.opve_turno.BackGround.Color		=	553648127
+	dw_2.Object.orpr_tipord.BackGround.Color		=	553648127
+	dw_2.Object.orpr_numero.BackGround.Color	=	553648127
+	dw_2.Object.line_codigo.BackGround.Color		=	553648127
+	
+	dw_2.Object.b_orden.visible					=  0
+END IF
+end subroutine
+
+public function boolean wf_duplicado (string as_columna, string as_valor);Long		ll_Fila
+string   ls_loteco1, ls_tipoen1, ls_envase1, ls_planta1, ls_hora1
+string   ls_loteco2, ls_tipoen2, ls_envase2, ls_planta2, ls_hora2
+
+ls_loteco1 = string(dw_1.Object.lote_codigo[il_fila])
+ls_planta1 = string(dw_1.Object.lote_pltcod[il_fila])
+ls_tipoen1 = string(dw_1.Object.enva_tipoen[il_fila])
+ls_envase1 = string(dw_1.Object.enva_codigo[il_fila])
+ls_hora1   = string(dw_1.Object.opvd_horava[il_fila],"hh:mm")
+
+CHOOSE CASE as_columna
+	CASE "lote_codigo"
+		ls_loteco1 = as_valor
+	
+	CASE "lote_pltcod"
+		ls_planta1 = as_valor
+		
+	CASE "enva_tipoen"
+		ls_tipoen1 = as_valor	
+	
+	CASE "enva_codigo"
+		ls_envase1 = as_valor
+		
+	CASE "opvd_harava"
+		ls_hora1 = MID(as_valor,12,5)	
+		
+END CHOOSE		
+
+FOR ll_fila=1 To dw_1.Rowcount()
+	IF ll_fila<>il_fila THEN
+      ls_loteco2 = string(dw_1.Object.lote_codigo[ll_fila])
+		ls_planta2 = string(dw_1.Object.lote_pltcod[ll_fila])
+		ls_tipoen2 = string(dw_1.Object.enva_tipoen[ll_fila])
+		ls_envase2 = string(dw_1.Object.enva_codigo[ll_fila])
+		ls_hora2   = string(dw_1.Object.opvd_horava[ll_fila],"hh:mm")
+	
+		IF ls_loteco1 = ls_loteco2 AND ls_planta1 = ls_planta2 AND ls_tipoen1 = ls_tipoen2 AND &
+		   ls_envase1 = ls_envase2 AND ls_hora1   = ls_hora2 THEN
+			MessageBox("Error", "La hora de vaciado para el lote ya fue ingresada anteriormente", Information!, Ok!)
+			RETURN True
+		END IF	
+	END IF
+NEXT	
+
+RETURN False
+
 end function
 
 on w_maed_spro_ordenprocvaciado.create
@@ -1234,7 +1086,7 @@ dw_1.GetChild("enva_codigo", idwc_envase)
 idwc_envase.SetTransObject(SqlCa)
 idwc_envase.Retrieve(0)
 
-habilitaencab(TRUE)
+wf_habilitaencab(TRUE)
 dw_2.SetColumn("opve_turno")
 end event
 
@@ -1292,17 +1144,17 @@ DO
 					         	String(dw_1.Object.lote_espcod[ll_row],'00') + &
 					 				String(dw_1.Object.lote_codigo[ll_row],'0000')
 					 					 
-					 ll_bultos=BuscaBultos(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
+					 ll_bultos=wf_BuscaBultos(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
 					                       dw_1.Object.enva_codigo[ll_row])
 								  
 					 IF dw_1.RowCount()>1 THEN			  
-					 	ll_bultosrep = buscalotesrepetidos(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
+					 	ll_bultosrep = wf_buscalotesrepetidos(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
 					                                      dw_1.Object.enva_codigo[ll_row], ll_row)
 					 ELSE	 
 						ll_bultosrep = 0
 					 END IF	 
 					 			
-		   		 ll_bultosyaingresados = buscabultosyaingresados(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
+		   		 ll_bultosyaingresados = wf_buscabultosyaingresados(ls_lote,dw_1.Object.enva_tipoen[ll_row],&
 					                                                 dw_1.Object.enva_codigo[ll_row])
 			
 		   		 IF isnull(ll_bultosyaingresados) THEN ll_bultosyaingresados = 0
@@ -1343,7 +1195,7 @@ DO
 				
 				pb_imprimir.Enabled	=	True
 			
-				HabilitaEncab(False)
+				wf_HabilitaEncab(False)
 				pb_ins_det.SetFocus()
 			END IF
 				dw_2.SetRedraw(True)
@@ -1385,7 +1237,7 @@ IF NOT gstr_paramplanta.binsabins AND NOT gstr_paramplanta.palletdebins AND NOT 
 	
 	dw_1.SetItemStatus(il_fila,0,Primary!,NotModified!)
 	
-	habilitaencab(False)
+	wf_habilitaencab(False)
 	
 	dw_1.SetRow(il_fila)
 	dw_1.SetColumn(1)
@@ -1445,9 +1297,7 @@ ib_borrar = True
 w_main.SetMicroHelp("Validando la eliminación de detalle...")
 
 Message.DoubleParm = 0
-
 This.TriggerEvent ("ue_validaborrar_detalle")
-
 IF Message.DoubleParm = -1 THEN RETURN
 
 IF MessageBox("Eliminación de Registro", "Está seguro de Eliminar este Registro", Question!, YesNo!) = 1 THEN
@@ -1457,8 +1307,8 @@ IF MessageBox("Eliminación de Registro", "Está seguro de Eliminar este Registr
 	li_envas = dw_1.Object.enva_codigo[il_fila]
 	IF dw_1.DeleteRow(0) = 1 THEN
 		ib_borrar = False
-		IF NOT gstr_paramplanta.binsabins THEN eliminarbins(il_fila)
-		actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
+		IF NOT gstr_paramplanta.binsabins THEN wf_EliminarBins(il_fila)
+		wf_ActualizaTotalBultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
 		w_main.SetMicroHelp("Borrando Registro...")
 		SetPointer(Arrow!)
 	ELSE
@@ -1558,7 +1408,7 @@ FOR ll_Fila = 1 TO dw_1.RowCount()
 		
 		IF NOT gstr_paramplanta.binsabins THEN
 			IF gstr_paramplanta.palletdebins THEN
-				PesoOriginalBultos()
+				//PesoOriginalBultos()
 			ELSE
 				//PesosBultoABulto()
 			END IF
@@ -1604,7 +1454,7 @@ If lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" Then
 				Return
 			End If
 			
-			If Not TieneTarjas(Integer(lstr_busq.argum[3])) Then
+			If Not wf_TieneTarjas(Integer(lstr_busq.argum[3])) Then
 				dw_2.SetItem(1,"orpr_numero", Integer(ls_Nula))
 				Return
 			End If
@@ -1615,7 +1465,7 @@ If lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" Then
 			istr_mant.argumento[4]	= lstr_busq.argum[4]
 			istr_mant.argumento[5]	= lstr_busq.argum[5]
 			
-			If existeencabezado(Long(istr_mant.argumento[3])) Then
+			If wf_ExisteEncabezado(Long(istr_mant.argumento[3])) Then
 				TriggerEvent("ue_recuperadatos")
 			Else
 				dw_2.Object.line_codigo[1] = iuo_ordenproceso.linea
@@ -1626,7 +1476,7 @@ If lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" Then
 				dw_2.Object.orpr_estado[1] = iuo_ordenproceso.estado
 				dw_2.Object.clie_codigo[1] = Integer(istr_mant.argumento[16])
 				
-				LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
+				wf_LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
      		End If	
 		Else
 			dw_2.SetItem(1,"orpr_numero",long(ls_Nula))
@@ -1775,132 +1625,131 @@ SetNull(ls_Nula)
 
 ls_Columna = dwo.Name
 
-CHOOSE CASE ls_Columna
-
-	CASE "enva_tipoen"
+Choose Case ls_Columna
+	Case "enva_tipoen"
 		ll_bultos= dw_1.Object.opvd_canbul[il_fila] + dw_1.Object.bultostot[il_fila]
 		ls_lote  = dw_1.Object.lote[il_fila]
 		li_tipen = dw_1.Object.enva_tipoen[il_fila]
 		li_envas = dw_1.Object.enva_codigo[il_fila]	
-		IF NOT ExisteEnvase(Integer(Data), 0, istr_Envase) OR Duplicado("enva_tipoen", Data)THEN
+		If NOT ExisteEnvase(Integer(Data), 0, istr_Envase) OR wf_Duplicado("enva_tipoen", Data)Then
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		ELSE
-			IF istr_envase.UsoEnvase <> 1 THEN
+			Return 1
+		Else
+			If istr_envase.UsoEnvase <> 1 Then
 				messagebox("Atención","El tipo de envase ingresado no es de uso cosechero. Ingrese o seleccione otro.")
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 			   This.SetItem(row, "enva_nombre", ls_Nula)
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
-				RETURN 1
-			END IF	
+				Return 1
+			End If	
 			dw_1.GetChild("enva_codigo", idwc_envase)
 			idwc_envase.SetTransObject(SqlCa)
 			idwc_envase.Retrieve(integer(data))
-			actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
+			wf_actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
 			
-			IF NOT HabilitaBultos("enva_tipoen",data) THEN
+			If NOT wf_HabilitaBultos("enva_tipoen",data) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 			   This.SetItem(row, "enva_nombre", ls_Nula)
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
-				RETURN 1
-			END IF	
-		END IF
+				Return 1
+			End If	
+		End If
 
-	CASE "enva_codigo"
+	Case "enva_codigo"
 		ll_bultos= dw_1.Object.opvd_canbul[il_fila] + dw_1.Object.bultostot[il_fila]
 		ls_lote  = dw_1.Object.lote[il_fila]
 		li_tipen = dw_1.Object.enva_tipoen[il_fila]
 		li_envas = dw_1.Object.enva_codigo[il_fila]	
-		IF NOT ExisteEnvase(istr_Envase.TipoEnvase, Integer(Data), istr_Envase) OR Duplicado("enva_codigo", Data) THEN
+		If NOT ExisteEnvase(istr_Envase.TipoEnvase, Integer(Data), istr_Envase) OR wf_Duplicado("enva_codigo", Data) Then
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
 			This.SetItem(row, "enva_nombre", ls_Nula)
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_1.GetChild("cale_calida", idwc_calidad)
 			idwc_calidad.SetTransObject(SqlCa)
 			idwc_calidad.Retrieve(istr_Envase.TipoEnvase,integer(data))
 			This.Object.enva_nombre[row]	=	istr_Envase.Nombre
- 		   actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
-			IF NOT HabilitaBultos("enva_codigo",data) THEN
+ 		   	wf_actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
+			If NOT wf_HabilitaBultos("enva_codigo",data) Then
 				This.SetItem(row, ls_Columna, Integer(ls_Nula))
 			   This.SetItem(row, "enva_nombre", ls_Nula)
-				RETURN 1
-			END IF	
-		END IF
+				Return 1
+			End If	
+		End If
 	
-	CASE "lote"
-		IF Len(Data)<10 THEN
+	Case "lote"
+		If Len(Data)<10 Then
 			MessageBox("Atención","Número de Lote Ingresado Incorrectamente. Debe Ingresar 10 Dígitos.")
 			This.SetItem(row, ls_Columna, ls_Nula)
-			RETURN 1
-		ELSE
-			IF NOT HabilitaBultos("lote",data) THEN
+			Return 1
+		Else
+			If NOT wf_HabilitaBultos("lote",data) Then
 				This.SetItem(row, ls_Columna, ls_Nula)
-				RETURN 1
-			END IF	
-		END IF	
+				Return 1
+			End If	
+		End If	
 		
-	CASE "opvd_horava"
-		 IF Duplicado("opvd_horava", Data) THEN
+	Case "opvd_horava"
+		 If wf_Duplicado("opvd_horava", Data) Then
 			This.SetItem(row, ls_Columna, lt_fechahora)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "opvd_canbul"
+	Case "opvd_canbul"
 		ll_bultos = dw_1.Object.opvd_canbul[il_fila]
-		IF dwo.Type = 'column' THEN
-			IF Not This.uf_validate(row) THEN
+		If dwo.Type = 'column' Then
+			If Not This.uf_validate(row) Then
 				This.SetItem(row,"opvd_canbul",Integer(ls_Nula))
-				RETURN 1
-			END IF
-		END IF
+				Return 1
+			End If
+		End If
 		ll_total =  dw_1.Object.bultostot[row] + ll_bultos
-		IF (Long(Data) > ll_total) THEN //dw_1.Object.bultostot[row]) then  
+		If (Long(Data) > ll_total) Then //dw_1.Object.bultostot[row]) Then  
 			MessageBox("Atención","Número de Bultos Ingresado Sobrepasa a los Bultos del Movimiento.")
 			This.SetItem(row, ls_Columna, ll_bultos)
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_1.Object.bultostot[row] = ll_total - Long(Data)
-			actualizatotalbultos(dw_1.Object.lote[il_fila],dw_1.Object.enva_tipoen[il_fila], &
+			wf_actualizatotalbultos(dw_1.Object.lote[il_fila],dw_1.Object.enva_tipoen[il_fila], &
 			                     dw_1.Object.enva_codigo[il_fila],il_fila,dw_1.Object.bultostot[row])
-		END IF
+		End If
 		
-   CASE "cale_calida"
-		BuscaCalidad(data)
+   Case "cale_calida"
+		wf_BuscaCalidad(data)
 		
-	CASE "lote_codigo"
+	Case "lote_codigo"
 		ll_bultos= dw_1.Object.opvd_canbul[il_fila] + dw_1.Object.bultostot[il_fila]
 		ls_lote  = dw_1.Object.lote[il_fila]
 		li_tipen = dw_1.Object.enva_tipoen[il_fila]
 		li_envas = dw_1.Object.enva_codigo[il_fila]	
-		IF isnull(dw_1.Object.lote_pltcod[row]) OR dw_1.Object.lote_pltcod[row]=0 THEN
+		If isnull(dw_1.Object.lote_pltcod[row]) OR dw_1.Object.lote_pltcod[row]=0 Then
 			MessageBox("Atención","Primero ingrese una planta para el lote.")
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-		IF Duplicado("lote_codigo", Data) THEN
+		If wf_Duplicado("lote_codigo", Data) Then
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		li_Lote = Integer(data)
 		dw_1.Object.lote[row] = String(dw_1.Object.lote_pltcod[row],'0000') + &
 										String(dw_1.Object.lote_espcod[row],'00') + &
 										String(li_Lote,'0000')
-		actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
-		IF NOT HabilitaBultos("lote",dw_1.Object.lote[row]) THEN
+		wf_actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
+		If NOT wf_HabilitaBultos("lote",dw_1.Object.lote[row]) Then
 			This.SetItem(row, ls_Columna, ls_Nula)
-			RETURN 1
-		END IF	
+			Return 1
+		End If	
 		
 		
-	CASE "lote_pltcod"
+	Case "lote_pltcod"
 		ll_bultos= dw_1.Object.opvd_canbul[il_fila] + dw_1.Object.bultostot[il_fila]
 		ls_lote  = dw_1.Object.lote[il_fila]
 		li_tipen = dw_1.Object.enva_tipoen[il_fila]
 		li_envas = dw_1.Object.enva_codigo[il_fila]	
 		
-		actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
+		wf_actualizatotalbultos(ls_lote,li_tipen, li_envas,0,ll_bultos)
 		
 		This.SetItem(row,"lote" , ls_Nula)
 		This.SetItem(row,"lote_codigo",integer(ls_Nula))
@@ -1910,14 +1759,14 @@ CHOOSE CASE ls_Columna
 		This.SetItem(row,"opvd_canbul" ,long(ls_Nula))
 		This.SetItem(row,"bultostot" , long(ls_Nula))
 		
-		IF Not iuo_plantalote.existe(integer(data),True,Sqlca) OR Duplicado("lote_pltcod", Data)THEN
+		If Not iuo_plantalote.existe(integer(data),True,Sqlca) OR wf_Duplicado("lote_pltcod", Data)Then
 			This.SetItem(row,"lote" , ls_Nula)
 			this.SetItem(row,"lote_codigo",integer(ls_Nula))
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
-			RETURN 1
-		END IF	
+			Return 1
+		End If	
 		
-END CHOOSE
+End Choose
 end event
 
 event type long dw_1::dwnkey(keycode key, unsignedlong keyflags);il_fila = This.GetRow()
@@ -1946,13 +1795,11 @@ event dw_1::getfocus;//
 end event
 
 event dw_1::buttonclicked;call super::buttonclicked;
-CHOOSE CASE dwo.Name
-	
-	CASE "b_lotes"
-       BuscaDetalleLotes() 
-				
+Choose Case dwo.Name
+	Case "b_lotes"
+       wf_BuscaDetalleLotes() 
 
-END CHOOSE
+End Choose
 end event
 
 event dw_1::constructor;call super::constructor;This.Uf_add_validation('opvd_canbul > 0 and opvd_canbul <= 9999','Valores fuera de rango para cantidad de bultos')
@@ -1986,43 +1833,38 @@ SetNull(li_null)
 
 ls_columna = dwo.Name
 
-CHOOSE CASE ls_columna
-		
-	CASE "clie_codigo"
-		
-			IF NoExisteCliente(Integer(Data)) THEN
+Choose Case ls_columna
+	Case "clie_codigo"
+			If wf_NoExisteCliente(Integer(Data)) Then
 				This.SetItem(row, ls_Columna, li_Null)
-				RETURN 1
-			END IF	
+				Return 1
+			End If	
 			
 			istr_mant.argumento[16]	=	data
 		
-	CASE "orpr_numero"	
-		
-		IF iuo_ordenproceso.Existe(gstr_ParamPlanta.CodigoPlanta,&
-											Integer(istr_Mant.Argumento[2]), &
-											Long(data),True,Sqlca,&
-											Integer(istr_mant.argumento[16])) THEN	
+	Case "orpr_numero"
+		If iuo_ordenproceso.Existe(gstr_ParamPlanta.CodigoPlanta, Integer(istr_Mant.Argumento[2]), &
+											Long(data),True,Sqlca, Integer(istr_mant.argumento[16])) Then	
 											
 			istr_mant.argumento[3]	= data
 			
-			IF Not manbin_especie(This.Object.plde_codigo[row], iuo_ordenproceso.especie, True, sqlca) THEN
+			If Not manbin_especie(This.Object.plde_codigo[row], iuo_ordenproceso.especie, True, sqlca) Then
 				dw_2.SetItem(1,"orpr_numero",ll_Null)
-				RETURN 1
-			END IF
+				Return 1
+			End If
 			
-			IF istr_mant.argumento[2] <> '5' and istr_mant.argumento[2] <> '8'  THEN
-				IF NOT gstr_paramplanta.packing THEN
-					IF Not TieneTarjas(Long(Data)) THEN
+			If istr_mant.argumento[2] <> '5' and istr_mant.argumento[2] <> '8'  Then
+				If NOT gstr_paramplanta.packing Then
+					If Not wf_TieneTarjas(Long(Data)) Then
 						dw_2.SetItem(1,"orpr_numero",ll_Null)
-						RETURN 1
-					END IF
-				END IF
-			END IF
+						Return 1
+					End If
+				End If
+			End If
 			
-			IF existeencabezado(Long(Data)) THEN
-				parent.TriggerEvent("ue_recuperadatos")
-			ELSE
+			If wf_ExisteEncabezado(Long(Data)) Then
+				Parent.TriggerEvent("ue_recuperadatos")
+			Else
 				dw_2.Object.line_codigo[1] = iuo_ordenproceso.linea
 				dw_2.object.orpr_fecpro[1] = iuo_ordenproceso.fechaorden
 				dw_2.object.prod_codigo[1] = iuo_ordenproceso.productor
@@ -2030,55 +1872,51 @@ CHOOSE CASE ls_columna
 				dw_2.object.vari_codigo[1] = iuo_ordenproceso.variedad
 				dw_2.Object.orpr_estado[1] = iuo_ordenproceso.estado
 				
-				IF iuo_ordenproceso.fechaorden > &
-				   dw_2.Object.opve_fecvac[1] THEN
+				If iuo_ordenproceso.FechaOrden > &
+				   dw_2.Object.opve_fecvac[1] Then
 					dw_2.Object.opve_fecvac[1] = iuo_ordenproceso.fechaorden
 					istr_Mant.Argumento[4]     = String(iuo_ordenproceso.fechaorden,'dd/mm/yyyy')
-				END IF	
+				End If	
 				
-				LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,&
-				             iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
+				wf_LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie, iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
 				
-     		END IF
+     		End If
 			 dw_1.Enabled	=	True
-		ELSE
+		Else
 			dw_2.SetItem(1,"orpr_numero",ll_Null)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "orpr_tipord"	
+	Case "orpr_tipord"	
 		istr_mant.argumento[2] = Data
 		dw_2.SetItem(1,"orpr_numero",ll_Null)
 		
-	CASE "opve_fecvac"
+	Case "opve_fecvac"
 		ld_fecha = date(mid(data,1,10))
-		IF  ld_fecha > date(idt_fechasistema) THEN
+		If  ld_fecha > date(idt_fechasistema) Then
 			MessageBox("Atención","La fecha del vaciado no puede ser mayor a la fecha actual.")
 			dw_2.SetItem(1,"opve_fecvac",date(idt_fechasistema))
 			Return 1
-		ELSEIF ld_fecha<dw_2.Object.orpr_fecpro[1] THEN
+		ElseIf ld_fecha<dw_2.Object.orpr_fecpro[1] Then
 			MessageBox("Atención","La fecha del vaciado no puede ser menor a la fecha de la Orden.")
 			dw_2.SetItem(1,"opve_fecvac",date(idt_fechasistema))
 			Return 1
-		ELSE	
+		Else	
 			istr_Mant.Argumento[4] = String(Date(mid(data,1,10)),'dd/mm/yyyy')
-			IF existeencabezado(dw_2.Object.orpr_numero[1]) THEN
-				parent.TriggerEvent("ue_recuperadatos")
-			END IF 
-		END IF	
-
+			If wf_ExisteEncabezado(dw_2.Object.orpr_numero[1]) Then
+				Parent.TriggerEvent("ue_recuperadatos")
+			End If 
+		End If	
 	
-	CASE "opve_turno"
+	Case "opve_turno"
 		istr_mant.argumento[5] = Data
-		IF istr_mant.argumento[3] <> "" THEN
-			IF iuo_ordenproceso.Existe(gstr_ParamPlanta.CodigoPlanta,&
-												Integer(istr_Mant.Argumento[2]), &
-												Long(istr_Mant.Argumento[3]),True,Sqlca,&
-												Integer(istr_mant.argumento[16])) THEN	
+		If istr_mant.argumento[3] <> "" Then
+			If iuo_OrdenProceso.Existe(gstr_ParamPlanta.CodigoPlanta, Integer(istr_Mant.Argumento[2]), &
+												Long(istr_Mant.Argumento[3]),True,Sqlca, Integer(istr_mant.argumento[16])) Then	
 										
-				IF existeencabezado(long(istr_Mant.Argumento[3])) THEN
-					parent.TriggerEvent("ue_recuperadatos")
-				ELSE
+				If wf_ExisteEncabezado(long(istr_Mant.Argumento[3])) Then
+					Parent.TriggerEvent("ue_recuperadatos")
+				Else
 					dw_2.Object.line_codigo[1] = iuo_ordenproceso.linea
 					dw_2.object.orpr_fecpro[1] = iuo_ordenproceso.fechaorden
 					dw_2.object.prod_codigo[1] = iuo_ordenproceso.productor
@@ -2086,16 +1924,14 @@ CHOOSE CASE ls_columna
 					dw_2.object.vari_codigo[1] = iuo_ordenproceso.variedad
 					dw_2.Object.orpr_estado[1] = iuo_ordenproceso.estado
 					
-					LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie,&
-									 iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
+					wf_LlenaNombres(iuo_ordenproceso.productor,iuo_ordenproceso.especie, iuo_ordenproceso.variedad,Integer(istr_mant.argumento[16]))
 					
-				END IF
-			END IF		  
-		END IF
-		
-END CHOOSE
+				End If
+			End If		  
+		End If		
+End Choose
 
-Habilitadetalle(ls_columna)
+wf_Habilitadetalle(ls_columna)
 
 end event
 
@@ -2103,13 +1939,11 @@ event dw_2::buttonclicked;call super::buttonclicked;string ls_columna
 
 ls_columna = dwo.Name
 
-CHOOSE CASE ls_columna
+Choose Case ls_columna
+	Case "b_orden"
+		wf_buscaorden()
 		
-	CASE "b_orden"
-		
-		buscaorden()
-		
-END CHOOSE		
+End Choose
 end event
 
 type pb_nuevo from w_mant_encab_deta_csd`pb_nuevo within w_maed_spro_ordenprocvaciado
