@@ -1720,41 +1720,40 @@ Dec{6}		ld_Total, ld_Porcentaje, ld_Unitario
 
 SetNull(ls_Nula)
 
-CHOOSE CASE dwo.name
-
-	CASE "mfgp_pesore"
+Choose Case dwo.name
+	Case "mfgp_pesore"
 		dw_1.AcceptText()
 		dw_1.GroupCalc()
 
-		em_difpor.Text = String(Calculo(dw_1.Object.total[1], Dec(em_pesref.Text)))
+		em_dIfpor.Text = String(Calculo(dw_1.Object.total[1], Dec(em_pesref.Text)))
 
-	CASE "fgmb_nrotar"
-		IF NOT Existetarja(long(data), Integer(wstr_pesaje.argum[10]), Integer(wstr_pesaje.argum[1])) THEN
+	Case "fgmb_nrotar"
+		If NOT Existetarja(long(data), Integer(wstr_pesaje.argum[10]), Integer(wstr_pesaje.argum[1])) Then
 			lds_bins	=	Create DataStore
 			lds_bins.DataObject = "dw_pesaje_romana"
 			lds_bins.SetTransObject(sqlca)
 			This.RowsCopy(1, This.FilteredCount(), Filter!, lds_bins, 1, Primary!)
-			IF lds_bins.Find("fgmb_nrotar = " + data, 1, lds_bins.RowCount()) > 0 OR &
-				     This.Find("fgmb_nrotar = " + data, 1, This.RowCount()) > 0 THEN
+			If lds_bins.Find("fgmb_nrotar = " + data, 1, lds_bins.RowCount()) > 0 OR &
+				     This.Find("fgmb_nrotar = " + data, 1, This.RowCount()) > 0 Then
 				MessageBox("Error"," La tarja digitada ya ha sido ingresada")
 				This.SetItem(row, "fgmb_nrotar", Integer(ls_nula))
 				This.SetColumn("fgmb_nrotar")
 				Return 1
-			END IF
-		ELSE
+			End If
+		Else
 			This.SetItem(row, "fgmb_nrotar", Long(ls_nula))
 			This.SetColumn("fgmb_nrotar")
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "bins_numero"
-		IF Not iuo_bins.Existe(Integer(wstr_pesaje.argum[10]), Integer(wstr_pesaje.argum[1]), long(data), sqlca, TRUE) THEN
+	Case "bins_numero"
+		If Not iuo_bins.Existe(Integer(wstr_pesaje.argum[10]), Integer(wstr_pesaje.argum[1]), long(data), sqlca, TRUE) Then
 			This.SetItem(row, "bins_numero", Integer(ls_nula))
 			This.SetColumn("bins_numero")
-			RETURN 1
-		ELSE
-			IF gstr_paramplanta.aplicaporc = 1 THEN 
-				IF gstr_paramplanta.binsabins THEN
+			Return 1
+		Else
+			If gstr_paramplanta.aplicaporc = 1 Then 
+				If gstr_paramplanta.binsabins Then
 					ld_Envase									=	iuo_Peso.PesoEnvase(Integer(wstr_pesaje.argum[10]), &
 																								     Long(wstr_pesaje.argum[1]), &
 																								     Long(data), 0, False, Sqlca)
@@ -1767,30 +1766,30 @@ CHOOSE CASE dwo.name
 					dw_1.Object.mfgp_pesore[row]			=	ld_Unitario
 					dw_1.Object.mfgp_valref[row]			=	ld_total
 					dw_1.Object.mfgp_porcen[row]			=	gstr_paramplanta.porcentaje
-				END IF
+				End If
 				
-			END IF
+			End If
 			
-		END IF 
-	CASE "mfgp_fechac"
+		End If 
+	Case "mfgp_fechac"
 
 		ld_FechaSistema	=	F_FechaHora()
 		
-		IF Date(data) > Date(ld_FechaSistema)  THEN
+		If Date(data) > Date(ld_FechaSistema)  Then
 			MessageBox("Atención","Fecha de Cosecha no puede ser superior a Fecha Actual de Sistema")
 			This.SetItem(row, "mfgp_fechac", Date(ld_FechaSistema))
 			This.SetColumn("mfgp_fechac")
-			RETURN 1
-		ELSEIF iuo_temporada.ExisteTempActual(False, SQLCA) THEN
-			IF Date(data) < Date(iuo_temporada.FechaInicio)  THEN
+			Return 1
+		ElseIf iuo_temporada.ExisteTempActual(False, SQLCA) Then
+			If Date(data) < Date(iuo_temporada.FechaInicio)  Then
 				MessageBox("Atención","Fecha de Cosecha no puede ser inferior a Fecha de inicio de la temporada")
 				This.SetItem(row, "mfgp_fechac", Date(ld_FechaSistema))
 				This.SetColumn("mfgp_fechac")
-				RETURN 1
-			END IF
-		END IF
+				Return 1
+			End If
+		End If
 		
-END CHOOSE
+End Choose
 end event
 
 event buttonclicked;String		ls_columna

@@ -1056,6 +1056,7 @@ string facename = "Tahoma"
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_embarque_resumido
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_embarque_resumido
@@ -1098,39 +1099,39 @@ li_emba = len(ls_embalaje)
 FOR li_emba2 = 1 TO li_emba
 	ls_string = mid(ls_embalaje,li_emba2,1)
 	
-	IF ls_string <> ',' THEN
+	If ls_string <> ',' Then
 		ls_construye = ls_construye+ls_string
-	ELSE
-		IF ls_construyelike1 = '' THEN
+	Else
+		If ls_construyelike1 = '' Then
 			ls_construyelike1 = ' emba_codigo like '+''+"'%"+ls_construye+"%'"+''
 			ls_construye = ''
-		ELSE	
-			IF ls_construyelike = '' THEN
+		Else	
+			If ls_construyelike = '' Then
 				ls_construyelike = ls_construyelike1 +' or emba_codigo like '+''+"'%"+ls_construye+"%'"+''
-			ELSE
+			Else
 				ls_construyelike = ls_construyelike +' or emba_codigo like '+''+"'%"+ls_construye+"%'"+''
-			END IF
+			End If
 			ls_construye = ''
-		END IF	
-	END IF	
+		End If	
+	End If	
 NEXT	
 
-IF ls_construyelike = '' THEN
+If ls_construyelike = '' Then
 	ls_construyelike = ls_construyelike1
-END IF	
+End If	
 
-IF cbx_seleccion.Checked = True THEN
+If cbx_seleccion.Checked = True Then
 	vinf.dw_1.DataObject = "dw_info_embarques_resumidos_precua"
 	li_Predio				= 1
-ELSE
+Else
 	vinf.dw_1.DataObject = "dw_info_embarques_resumidos"
 	li_Predio				= 0
-END IF
+End If
 vinf.dw_1.SetTransObject(sqlca)
 
-IF cbx_operacion.Checked=False THEN
+If cbx_operacion.Checked=False Then
 	istr_mant.argumento[33]	=	String(dw_operaciones.Object.oper_codigo[1])
-END IF
+End If
 
 //productor
 ls_lista = uo_selproductor.Lista
@@ -1138,47 +1139,47 @@ ls_lista = uo_selproductor.Lista
 /*
 Especies
 */
-IF IsNull(uo_selespecie.Codigo)THEN
+If IsNull(uo_selespecie.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Especie Previamente",Exclamation!)
 	uo_selespecie.dw_Seleccion.SetFocus()
-	RETURN
-END IF
+	Return
+End If
 
 /*
 tipo Productor
 */
-IF IsNull(uo_seltipoproductor.Codigo)THEN
+If IsNull(uo_seltipoproductor.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Tipo Productor Previamente",Exclamation!)
 	uo_seltipoproductor.dw_Seleccion.SetFocus()
-	RETURN
-END IF
+	Return
+End If
 
 /*
 Variedad
 */
-IF IsNull(uo_selvariedad.Codigo)THEN
+If IsNull(uo_selvariedad.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Variedad Previamente",Exclamation!)
 	uo_selvariedad.dw_Seleccion.SetFocus()
-	RETURN
-END IF
+	Return
+End If
 
-IF cbx_varirotula.Checked THEN
+If cbx_varirotula.Checked Then
 	li_varirotula = 1
-ELSE
+Else
 	li_varirotula = 0
-END IF
+End If
 
-IF cbx_produrotula.Checked THEN
+If cbx_produrotula.Checked Then
 	li_prodrotula = 1
-ELSE
+Else
 	li_prodrotula = 0
-END IF
+End If
 
-IF cbx_excluye.Checked THEN
+If cbx_excluye.Checked Then
 	li_incluye = 1
-ELSE	
+Else	
 	li_incluye = 0
-END IF	
+End If	
 
 li_cliente 		=	Integer(istr_mant.argumento[1])
 li_planta			=	Integer(istr_mant.argumento[3])
@@ -1195,47 +1196,47 @@ li_operacion		=	Integer(istr_mant.argumento[33])
 li_zona			=	Integer(istr_mant.argumento[40])
 li_packing		=  Integer(istr_mant.argumento[46])
 
-IF istr_mant.argumento[41] = '-9' THEN
+If istr_mant.argumento[41] = '-9' Then
 	li_puerto   	=  -1
 	li_puertocons	=	-9
-ELSE
+Else
 	li_puerto   	=  Integer(istr_mant.argumento[41])
    li_puertocons	=	0
-END IF
+End If
 
-IF cbx_fecemb.checked THEN
+If cbx_fecemb.checked Then
 	istr_mant.argumento[42] = "0"
-ELSE
+Else
 	istr_mant.argumento[42] = "1"
-END IF	
+End If	
 
-IF cbx_trans.Checked  THEN
+If cbx_trans.Checked  Then
 	ls_transpor = 'Todos'
-ELSE
+Else
 	ls_transpor = iuo_transportista.nombre
-END IF
+End If
 
-IF cbx_tica.Checked  THEN
+If cbx_tica.Checked  Then
 	ls_tipocamion = 'Todos'
-ELSE
+Else
 	ls_tipocamion = iuo_tipocamion.nombre
-END IF
+End If
 
 texto_desde		=  f_fecha_texto(String(ld_desde), 1)
 texto_hasta		=	f_fecha_texto(String(ld_hasta), 1)
 texto_fecha		=	"Desde El :  " + texto_desde + "   Hasta El :  " + texto_hasta
 
-IF cbx_peso.Checked=False THEN
+If cbx_peso.Checked=False Then
 	ls_cajas = "Bultos"
 	istr_mant.argumento[11]	=	"1"
-ELSE
+Else
 	istr_mant.argumento[11]	=	String(dw_pesoneto.Object.enva_pesone[1])
 	ls_cajas						=	"Base " + istr_mant.argumento[11] 
-END IF
+End If
 
-IF cbx_embalaje.Checked OR cbx_consembalaje.Checked THEN
+If cbx_embalaje.Checked OR cbx_consembalaje.Checked Then
 	ls_construyelike = "'Z' = 'Z'"
-END IF
+End If
 
 li_consplanta		=	Integer(istr_mant.argumento[13])
 li_consproductor	=	Integer(istr_mant.argumento[14])
@@ -1256,28 +1257,28 @@ fila	=	vinf.dw_1.Retrieve(li_cliente, uo_selespecie.Codigo, li_planta, &
 									 li_puertocons, Integer(istr_mant.argumento[42]), &
 									 Integer(istr_mant.argumento[43]),Integer(istr_mant.argumento[44]),&
 									 li_Predio,Integer(istr_mant.argumento[45]),li_varirotula,ll_norden,il_guia,&
-									 li_packing,li_incluye,uo_seltipoproductor.Codigo,ls_lista,ls_construyelike,ii_calificacion,&
+									 li_packing,li_incluye,uo_seltipoproductor.Codigo,ls_lista,ls_construyelike,ii_calIficacion,&
 									 Date(istr_mant.argumento[50]),Date(istr_mant.argumento[51]),li_prodrotula,ii_exportador)
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
 
-ELSEIF fila = 0 THEN
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", &
 	             StopSign!, Ok!)
 
-ELSE
+Else
 	   F_Membrete(vinf.dw_1)
 //		vinf.dw_1.Object.titulo_informe.text = 'Producción Historica'
-		vinf.dw_1.Modify("fechas.text = '" + texto_fecha + "'")
-		vinf.dw_1.Modify("Cajas.text = '" + ls_cajas + "'")
-		vinf.dw_1.Modify("transportista.text = '" + ls_transpor + "'")
-		vinf.dw_1.Modify("tipocamion.text = '" + ls_tipocamion + "'")
-	IF gs_Ambiente <> 'Windows' THEN
+		vinf.dw_1.ModIfy("fechas.text = '" + texto_fecha + "'")
+		vinf.dw_1.ModIfy("Cajas.text = '" + ls_cajas + "'")
+		vinf.dw_1.ModIfy("transportista.text = '" + ls_transpor + "'")
+		vinf.dw_1.ModIfy("tipocamion.text = '" + ls_tipocamion + "'")
+	If gs_Ambiente <> 'Windows' Then
 		F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	END IF
-END IF
+	End If
+End If
 
 SetPointer(Arrow!)				
 end event

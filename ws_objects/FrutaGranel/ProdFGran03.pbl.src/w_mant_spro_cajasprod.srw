@@ -8,10 +8,6 @@ type st_2 from statictext within w_mant_spro_cajasprod
 end type
 type st_3 from statictext within w_mant_spro_cajasprod
 end type
-type dw_cliente from uo_dw within w_mant_spro_cajasprod
-end type
-type dw_planta from uo_dw within w_mant_spro_cajasprod
-end type
 type sle_caja from singlelineedit within w_mant_spro_cajasprod
 end type
 type dw_7 from datawindow within w_mant_spro_cajasprod
@@ -19,6 +15,10 @@ end type
 type sle_camara from singlelineedit within w_mant_spro_cajasprod
 end type
 type st_camara from statictext within w_mant_spro_cajasprod
+end type
+type uo_selplanta from uo_seleccion_plantas within w_mant_spro_cajasprod
+end type
+type uo_selcliente from uo_seleccion_clientesprod within w_mant_spro_cajasprod
 end type
 end forward
 
@@ -33,17 +33,17 @@ event ue_validapassword ( )
 st_1 st_1
 st_2 st_2
 st_3 st_3
-dw_cliente dw_cliente
-dw_planta dw_planta
 sle_caja sle_caja
 dw_7 dw_7
 sle_camara sle_camara
 st_camara st_camara
+uo_selplanta uo_selplanta
+uo_selcliente uo_selcliente
 end type
 global w_mant_spro_cajasprod w_mant_spro_cajasprod
 
 type variables
-Integer 				ii_cliente, ii_planta, ii_nro
+Integer 				ii_nro
 Long					ii_caja
 
 DataWindowChild	idwc_categorias, idwc_productor
@@ -109,9 +109,9 @@ ls_Calibre		=	dw_1.Object.capr_calibr[1]
 
 IF dw_1.ModifiedCount() > 0 THEN
 	DECLARE ModificaCajas PROCEDURE FOR dbo.Fgran_Modifica_Caract_CajasProd    
-		@Planta 		=	:ii_planta,   
-		@Cliente 	=	:ii_cliente,   
-		@Numero 		=	:ii_caja,   
+		@Planta 		=	:uo_SelPlanta.Codigo,   
+		@Cliente 	=	:uo_SelCliente.Codigo,   
+		@Numero 	=	:ii_caja,   
 		@Categoria	=	:li_categoria,   
 		@Etiqueta 	=	:li_etiqueta,
 		@Embalaje	=	:ls_embalaje,
@@ -150,7 +150,7 @@ Long							ll_fila
 
 luo_correl		=	CREATE uo_lotescorrelequipo_gr
 
-If NOT luo_correl.ExisteCorrel(dw_planta.Object.plde_codigo[1],99, gstr_us.computador, TRUE, sqlca) Then						
+If NOT luo_correl.ExisteCorrel(uo_SelPlanta.Codigo,99, gstr_us.computador, TRUE, sqlca) Then						
 	Return
 Else
 	dw_7.DataObject					=	luo_correl.loco_dwcomp
@@ -167,9 +167,8 @@ If dw_7.DataObject = "dw_info_spro_cajasprod_pomaceas" Then
 	FOR ll_Fila = 1 TO dw_7.RowCount()
 		dw_7.Object.envo_descrip.visible		=	1
 	NEXT
-
 Else
-	ll_Fila = dw_7.Retrieve(dw_cliente.Object.clie_codigo[1], dw_planta.Object.plde_codigo[1], ii_caja, ii_caja, 1)
+	ll_Fila = dw_7.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, ii_caja, ii_caja, 1)
 End If
 
 If ll_fila < 1 Then 
@@ -184,7 +183,7 @@ public function boolean validaproceso ();uo_spro_ordenproceso	luo_op
 
 luo_op	=	Create uo_spro_ordenproceso
 
-luo_op.Existe(ii_planta, 4, ii_nro, TRUE, SQLCA, ii_cliente)
+luo_op.Existe(uo_SelPlanta.Codigo, 4, ii_nro, TRUE, SQLCA, uo_SelCliente.Codigo)
 
 IF luo_op.Estado = 5 THEN
 	MessageBox("Protección Integridad de datos", "imposible modificar caja, pues pertenece ~r~n"+&
@@ -222,22 +221,22 @@ call super::create
 this.st_1=create st_1
 this.st_2=create st_2
 this.st_3=create st_3
-this.dw_cliente=create dw_cliente
-this.dw_planta=create dw_planta
 this.sle_caja=create sle_caja
 this.dw_7=create dw_7
 this.sle_camara=create sle_camara
 this.st_camara=create st_camara
+this.uo_selplanta=create uo_selplanta
+this.uo_selcliente=create uo_selcliente
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.st_2
 this.Control[iCurrent+3]=this.st_3
-this.Control[iCurrent+4]=this.dw_cliente
-this.Control[iCurrent+5]=this.dw_planta
-this.Control[iCurrent+6]=this.sle_caja
-this.Control[iCurrent+7]=this.dw_7
-this.Control[iCurrent+8]=this.sle_camara
-this.Control[iCurrent+9]=this.st_camara
+this.Control[iCurrent+4]=this.sle_caja
+this.Control[iCurrent+5]=this.dw_7
+this.Control[iCurrent+6]=this.sle_camara
+this.Control[iCurrent+7]=this.st_camara
+this.Control[iCurrent+8]=this.uo_selplanta
+this.Control[iCurrent+9]=this.uo_selcliente
 end on
 
 on w_mant_spro_cajasprod.destroy
@@ -245,21 +244,19 @@ call super::destroy
 destroy(this.st_1)
 destroy(this.st_2)
 destroy(this.st_3)
-destroy(this.dw_cliente)
-destroy(this.dw_planta)
 destroy(this.sle_caja)
 destroy(this.dw_7)
 destroy(this.sle_camara)
 destroy(this.st_camara)
+destroy(this.uo_selplanta)
+destroy(this.uo_selcliente)
 end on
 
-event ue_recuperadatos;call super::ue_recuperadatos;Integer li_Planta
-Long	ll_fila, respuesta
+event ue_recuperadatos;call super::ue_recuperadatos;Long	ll_fila, respuesta
 
-dw_planta.AcceptText()
-li_Planta = dw_planta.Object.plde_codigo[1]
+
 DO
-	ll_fila	= dw_1.Retrieve(ii_cliente, ii_planta, ii_caja)
+	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, ii_caja)
 	
 	IF ll_fila = -1 THEN
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.",Information!, RetryCancel!)
@@ -295,46 +292,36 @@ LOOP WHILE respuesta = 1
 IF respuesta = 2 THEN Close(This)
 end event
 
-event open;x				= 0
-y				= 0
-im_menu	= m_principal
+event open;call super::open;Boolean	lb_Cerrar
 
-This.ParentWindow().ToolBarVisible	=	True
-im_menu.Item[1].Item[6].Enabled		=	True
-im_menu.Item[7].Visible					=	False
-This.Icon									=	Gstr_apl.Icono
+If IsNull(uo_SelCliente.Codigo) Then lb_Cerrar = True
+If IsNull(uo_SelPlanta.Codigo) Then lb_Cerrar = True
 
-dw_1.SetTransObject(sqlca)
-dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
+If lb_Cerrar Then
+	Close(This)
+Else
+	This.Width	=	dw_1.width + 540
+	This.Height	=	1600	
 
-istr_mant.UsuarioSoloConsulta	=	OpcionSoloConsulta()
-istr_mant.Solo_Consulta			=	istr_mant.UsuarioSoloConsulta
+	dw_1.SetRowFocusIndicator(Off!)
+	dw_1.Modify("DataWindow.Footer.Height = 0")
+	
+	uo_SelPlanta.Seleccion(False, False)
+	uo_SelCliente.Seleccion(False, False)
+	uo_SelPlanta.Inicia(gstr_ParamPlanta.CodigoPlanta)
+	uo_SelCliente.Inicia(gi_CodExport)
+	
+	IF gi_CodExport = 81 OR  gi_CodExport = 15 THEN
+		sle_camara.Visible	=	False
+		st_camara.Visible		=	False
+	ELSE
+		sle_camara.Visible	=	True
+		st_camara.Visible		=	True
+	End If
+	
+	If Not IsNull(gstr_paramplanta.PassPack) AND Trim(gstr_paramplanta.PassPack) <> '' Then PostEvent("ue_validapassword")
 
-GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, This.Title, "Acceso a Aplicación", 1)
-
-dw_planta.SetTransObject(SQLCA)
-dw_planta.InsertRow(0)
-dw_planta.Object.plde_codigo[1] 	=	gstr_ParamPlanta.CodigoPlanta
-
-dw_cliente.SetTransObject(SQLCA)
-dw_cliente.InsertRow(0)
-dw_cliente.SetItem(1, "clie_codigo", gi_CodExport)
-
-IF gi_CodExport = 81 OR  gi_CodExport = 15 THEN
-	sle_camara.Visible	=	False
-	st_camara.Visible		=	False
-ELSE
-	sle_camara.Visible	=	True
-	st_camara.Visible		=	True
-END IF	
-
-ii_cliente	= 	gi_CodExport
-ii_planta	=	gstr_ParamPlanta.CodigoPlanta
-
-IF NOT IsNull(gstr_paramplanta.PassPack) AND Trim(gstr_paramplanta.PassPack) <> '' THEN
-	PostEvent("ue_validapassword")
-END IF
-
+End If
 end event
 
 type st_encabe from w_mant_directo`st_encabe within w_mant_spro_cajasprod
@@ -394,7 +381,7 @@ type dw_1 from w_mant_directo`dw_1 within w_mant_spro_cajasprod
 integer x = 41
 integer y = 452
 integer width = 2656
-integer height = 860
+integer height = 904
 boolean titlebar = true
 string title = "Datos Originales Caja"
 string dataobject = "dw_mant_mues_spro_cajasprod_anterior"
@@ -415,9 +402,9 @@ CHOOSE CASE ls_columna
 END CHOOSE		
 end event
 
-event dw_1::itemchanged;call super::itemchanged;Integer					li_Null, li_cliente
-String					ls_Columna, ls_Null
-Str_Busqueda			lstr_busq
+event dw_1::itemchanged;call super::itemchanged;Integer			li_Null
+String				ls_Columna, ls_Null
+Str_Busqueda	lstr_busq
 
 uo_embalajesprod		luo_embalajes
 uo_etiquetas			luo_etiqueta
@@ -447,8 +434,7 @@ CHOOSE CASE ls_Columna
 		END IF
 		
 	CASE "emba_codigo"
-		li_cliente = dw_cliente.Object.clie_codigo[1]
-		IF NOT luo_embalajes.Existe(li_cliente,data, True, SQLCA) THEN
+		IF NOT luo_embalajes.Existe(uo_SelCliente.Codigo,data, True, SQLCA) THEN
 			THIS.SetItem(row, ls_columna, ls_null)
 			Return 1
 		END IF
@@ -512,70 +498,6 @@ long backcolor = 553648127
 string text = "Nro. Caja"
 boolean focusrectangle = false
 end type
-
-type dw_cliente from uo_dw within w_mant_spro_cajasprod
-integer x = 631
-integer y = 100
-integer width = 1170
-integer height = 100
-integer taborder = 60
-boolean bringtotop = true
-string dataobject = "dddw_clientesprod"
-boolean vscrollbar = false
-boolean border = false
-end type
-
-event itemchanged;call super::itemchanged;String	ls_Columna[], ls_null
-
-SetNull(ls_null)
-
-IF ExisteCliente(Integer(data), ls_Columna[]) THEN
-	istr_mant.argumento[1]	=	data
-	ii_cliente = integer(data)
-ELSE
-	This.SetItem(1, "clie_codigo", ls_null)
-	RETURN 3
-	SetNull(ii_cliente)
-END IF
-
-IF Integer(data) = 81 THEN
-	sle_camara.Visible	=	False
-	st_camara.Visible		=	False
-ELSE
-	sle_camara.Visible	=	True
-	st_camara.Visible		=	True
-END IF
-end event
-
-type dw_planta from uo_dw within w_mant_spro_cajasprod
-integer x = 631
-integer y = 192
-integer width = 1170
-integer height = 100
-integer taborder = 70
-boolean bringtotop = true
-string dataobject = "dddw_planta"
-boolean vscrollbar = false
-boolean border = false
-end type
-
-event itemchanged;call super::itemchanged;String	ls_Columna[], ls_null
-Integer	li_Cliente
-
-SetNull(ls_null)
-
-li_Cliente	=	Integer(ii_cliente)
-
-IF NOT Existeplanta(Integer(data)) THEN
-	This.SetItem(1, "plde_codigo",Long(ls_null))
-	RETURN 3
-	SetNull(ii_planta)
-ELSE
-	istr_mant.Argumento[3] 	= 	Data
-	ii_planta 						= 	Integer(data)
-END IF
-		
-end event
 
 type sle_caja from singlelineedit within w_mant_spro_cajasprod
 integer x = 640
@@ -645,4 +567,38 @@ long backcolor = 553648127
 string text = "Camara"
 boolean focusrectangle = false
 end type
+
+type uo_selplanta from uo_seleccion_plantas within w_mant_spro_cajasprod
+event destroy ( )
+integer x = 631
+integer y = 192
+integer height = 96
+integer taborder = 70
+boolean bringtotop = true
+end type
+
+on uo_selplanta.destroy
+call uo_seleccion_plantas::destroy
+end on
+
+type uo_selcliente from uo_seleccion_clientesprod within w_mant_spro_cajasprod
+integer x = 631
+integer y = 100
+integer height = 96
+integer taborder = 70
+boolean bringtotop = true
+end type
+
+event ue_cambio;call super::ue_cambio;If This.Codigo = 81 Then
+	sle_camara.Visible	=	False
+	st_camara.Visible	=	False
+Else
+	sle_camara.Visible	=	True
+	st_camara.Visible	=	True
+End If
+end event
+
+on uo_selcliente.destroy
+call uo_seleccion_clientesprod::destroy
+end on
 

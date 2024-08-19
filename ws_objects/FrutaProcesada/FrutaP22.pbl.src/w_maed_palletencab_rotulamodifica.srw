@@ -14,7 +14,7 @@ end variables
 
 global type w_maed_palletencab_rotulamodifica from w_mant_encab_deta_csd
 integer width = 3826
-integer height = 2028
+integer height = 2072
 string menuname = ""
 event ue_imprimir ( )
 dw_histofruta dw_histofruta
@@ -1536,6 +1536,7 @@ If ii_ancestro = 1 Then
 			dw_histoFruta.Object.pafr_prdrot[ll_fila_P]		=	dw_1.Object.pafr_prdrot[ll_fila]
 			dw_histoFruta.Object.cate_codigo[ll_fila_P]		=	dw_1.Object.cate_codigo[ll_fila]
 			dw_histoFruta.Object.pafr_catrot[ll_fila_P]		=	dw_1.Object.pafr_catrot[ll_fila]
+			dw_histoFruta.Object.pafr_ggncod[ll_fila_P]		=	dw_1.Object.pafr_ggncod[ll_fila]
 		Next
 	End If
 End If

@@ -339,7 +339,6 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 16777215
 long backcolor = 553648127
-boolean enabled = false
 string text = "Zona"
 boolean focusrectangle = false
 end type
@@ -357,7 +356,6 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 16777215
 long backcolor = 553648127
-boolean enabled = false
 string text = "Productor"
 boolean focusrectangle = false
 end type

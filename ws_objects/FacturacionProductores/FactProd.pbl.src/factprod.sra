@@ -44,8 +44,8 @@ end variables
 
 global type factprod from application
 string appname = "factprod"
-string themepath = "C:\Program Files (x86)\Appeon\Shared\PowerBuilder\theme190"
-string themename = "Do Not Use Themes"
+string themepath = "C:\Program Files (x86)\Appeon\PowerBuilder 22.0\IDE\theme"
+string themename = "Flat Design Lime"
 boolean nativepdfvalid = true
 boolean nativepdfincludecustomfont = false
 string nativepdfappname = ""
@@ -57,8 +57,13 @@ string appicon = "\Desarrollo 17\Imagenes\Sistemas\facturacion_productores.ico"
 string appruntimeversion = "22.0.0.1900"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean ultrafast = false
 boolean bignoreservercertificate = false
 uint ignoreservercertificate = 0
+long webview2distribution = 0
+boolean webview2checkx86 = false
+boolean webview2checkx64 = false
+string webview2url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/"
 end type
 global factprod factprod
 
@@ -116,7 +121,7 @@ END IF
 
 IF AccesoSistemaValido() THEN
 	Parempresa()
-//	ParamPlanta()
+	ParamPlanta()
 	Open(w_main)
 ELSE
 	HALT

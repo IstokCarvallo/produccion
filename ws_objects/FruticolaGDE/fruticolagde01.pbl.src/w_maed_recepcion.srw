@@ -69,42 +69,36 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 //	dw_3.Object.rece_fecrec	.Protect	= 0
 	dw_3.Object.rece_numero.Protect	= 0
 	dw_3.Object.bins_pesnet.Protect	= 0
-	dw_3.Object.cont_codigo.Protect	= 0
 	
 	dw_3.Object.prpr_codigo.Color 	=	0
 	dw_3.Object.prcc_codigo.Color 	=	0
 //	dw_3.Object.rece_fecrec.Color 	=	0
 	dw_3.Object.rece_numero.Color	=	0
 	dw_3.Object.bins_pesnet.Color 	=	0
-	dw_3.Object.cont_codigo.Color 	=	0
 
 	dw_3.Object.prpr_codigo.BackGround.Color 	= RGB(255,255,255)
 	dw_3.Object.prcc_codigo.BackGround.Color 	= RGB(255,255,255)
 //	dw_3.Object.rece_fecrec.BackGround.Color 	= RGB(255,255,255)
 	dw_3.Object.rece_numero.BackGround.Color	= RGB(255,255,255)
 	dw_3.Object.bins_pesnet.BackGround.Color 	= RGB(255,255,255)
-	dw_3.Object.cont_codigo.BackGround.Color 	= RGB(255,255,255)
 ELSE
 	dw_3.Object.prpr_codigo.Protect	=	1
 	dw_3.Object.prcc_codigo.Protect	=	1
 //	dw_3.Object.rece_fecrec	.Protect	=	1
 	dw_3.Object.rece_numero.Protect	=	1
 	dw_3.Object.bins_pesnet.Protect	=	1
-	dw_3.Object.cont_codigo.Protect	=	1
 	
 	dw_3.Object.prpr_codigo.Color		=	RGB(255,255,255)
 	dw_3.Object.prcc_codigo.Color		=	RGB(255,255,255)
 //	dw_3.Object.rece_fecrec.Color		=	RGB(255,255,255)
 	dw_3.Object.rece_numero.Color	=	RGB(255,255,255)
 	dw_3.Object.bins_pesnet.Color 	=	RGB(255,255,255)
-	dw_3.Object.cont_codigo.Color 	=	RGB(255,255,255)
 
 	dw_3.Object.prpr_codigo.BackGround.Color 	= 553648127
 	dw_3.Object.prcc_codigo.BackGround.Color 	= 553648127
 //	dw_3.Object.rece_fecrec.BackGround.Color 	= 553648127
 	dw_3.Object.rece_numero.BackGround.Color 	= 553648127
 	dw_3.Object.bins_pesnet.BackGround.Color 	= 553648127
-	dw_3.Object.cont_codigo.BackGround.Color 	= 553648127
 END IF
 end subroutine
 
@@ -535,10 +529,10 @@ end event
 
 type dw_2 from w_mant_encab_deta`dw_2 within w_maed_recepcion
 boolean visible = false
-integer x = 101
+integer x = 183
 integer y = 60
-integer width = 2894
-integer height = 864
+integer width = 2898
+integer height = 764
 string dataobject = "dw_gene_recepcion"
 end type
 
@@ -590,10 +584,10 @@ integer y = 52
 end type
 
 type dw_3 from uo_dw within w_maed_recepcion
-integer x = 187
-integer y = 44
+integer x = 183
+integer y = 60
 integer width = 2898
-integer height = 864
+integer height = 764
 integer taborder = 11
 boolean bringtotop = true
 string dataobject = "dw_mant_recepcion"

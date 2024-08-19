@@ -4001,7 +4001,7 @@ ProductoresLotes(lstr_mant.productores)
 end event
 
 event ue_borrar;Integer	li_Cliente,li_aplicaenvase
-IF dw_2.RowCount() < 1 THEN RETURN
+If dw_2.RowCount() < 1 Then RETURN
 
 If Not wf_ValidaLoteCtlCal() Then Return
 
@@ -4014,7 +4014,7 @@ Message.DoubleParm = 0
 
 This.TriggerEvent ("ue_validaborrar")
 
-IF Message.DoubleParm = -1 THEN RETURN
+If Message.DoubleParm = -1 Then RETURN
 
 li_Cliente	=	dw_2.Object.clie_codigo[1]
 
@@ -4023,69 +4023,69 @@ INTO   	:il_conexiste, :il_coneccion
 FROM dbo.clientesprod
 WHERE clie_codigo = :li_Cliente;
 
-IF il_conexiste = 1 THEN
-	sqlexi	=	CREATE Transaction
-	
-	IF Conexionexistencia() THEN
-		dw_exideta.SetTransObject(sqlexi)
-		dw_exiencab.SetTransObject(sqlexi)	
-		dw_exismovtodetanulos.SetTransObject(sqlexi)
-		dw_exidetaborra.SetTransObject(sqlexi)
-		TriggerEvent("anulamovto")
-		DISCONNECT USING sqlexi;
-		
-		SELECT isnull(plde_renenv,0)
-			INTO :li_aplicaenvase
-			FROM dbo.plantadesp 
-			WHERE plde_codigo = :il_packing;
-		
-		IF li_aplicaenvase = 1 THEN
-			IF Conexionexistencia() THEN
-				dw_exideta.SetTransObject(sqlexi)
-				dw_exiencab.SetTransObject(sqlexi)	
-				dw_exismovtodetanulos.SetTransObject(sqlexi)
-				dw_exidetaborra.SetTransObject(sqlexi)
-				TriggerEvent("anulamovto2")
-				
-				DISCONNECT USING sqlexi;
-				
-			ELSE
-				MessageBox("Atención", "Imposible Conectar con Base de Existencia(Generar Despacho).",Exclamation!, OK!)
-			END IF
-		END IF	
-	ELSE
-		MessageBox("Atención", "Imposible Conectar con Base de Existencia.",Exclamation!, OK!)
-	END IF
-END IF	
+//If il_conexiste = 1 Then
+//	sqlexi	=	CREATE Transaction
+//	
+//	If Conexionexistencia() Then
+//		dw_exideta.SetTransObject(sqlexi)
+//		dw_exiencab.SetTransObject(sqlexi)	
+//		dw_exismovtodetanulos.SetTransObject(sqlexi)
+//		dw_exidetaborra.SetTransObject(sqlexi)
+//		TriggerEvent("anulamovto")
+//		DISCONNECT USING sqlexi;
+//		
+//		SELECT isnull(plde_renenv,0)
+//			INTO :li_aplicaenvase
+//			FROM dbo.plantadesp 
+//			WHERE plde_codigo = :il_packing;
+//		
+//		If li_aplicaenvase = 1 Then
+//			If Conexionexistencia() Then
+//				dw_exideta.SetTransObject(sqlexi)
+//				dw_exiencab.SetTransObject(sqlexi)	
+//				dw_exismovtodetanulos.SetTransObject(sqlexi)
+//				dw_exidetaborra.SetTransObject(sqlexi)
+//				TriggerEvent("anulamovto2")
+//				
+//				DISCONNECT USING sqlexi;
+//				
+//			Else
+//				MessageBox("Atención", "Imposible Conectar con Base de Existencia(Generar Despacho).",Exclamation!, OK!)
+//			End If
+//		End If	
+//	Else
+//		MessageBox("Atención", "Imposible Conectar con Base de Existencia.",Exclamation!, OK!)
+//	End If
+//End If	
 
-IF dw_1.RowCount() > 0 THEN dw_1.RowsMove(1,dw_1.RowCount(),Primary!,dw_1,1,Delete!)
-IF dw_3.RowCount() > 0 THEN dw_3.RowsMove(1,dw_3.RowCount(),Primary!,dw_3,1,Delete!)
-IF dw_4.RowCount() > 0 THEN dw_4.RowsMove(1,dw_4.RowCount(),Primary!,dw_4,1,Delete!)
-IF dw_5.RowCount() > 0 THEN dw_5.RowsMove(1,dw_5.RowCount(),Primary!,dw_5,1,Delete!)
-IF dw_6.RowCount() > 0 THEN dw_6.RowsMove(1,dw_6.RowCount(),Primary!,dw_6,1,Delete!)
-IF dw_7.RowCount() > 0 THEN dw_7.RowsMove(1,dw_7.RowCount(),Primary!,dw_7,1,Delete!)
-IF dw_9.RowCount() > 0 THEN dw_9.RowsMove(1,dw_9.RowCount(),Primary!,dw_9,1,Delete!)
-IF dw_pdf.RowCount() > 0 THEN dw_pdf.RowsMove(1,dw_pdf.RowCount(),Primary!,dw_pdf,1,Delete!)
-IF dw_spro_bins.RowCount() > 0 THEN dw_spro_bins.RowsMove(1,dw_spro_bins.RowCount(),Primary!,dw_spro_bins,1,Delete!)
+If dw_1.RowCount() > 0 Then dw_1.RowsMove(1,dw_1.RowCount(),Primary!,dw_1,1,Delete!)
+If dw_3.RowCount() > 0 Then dw_3.RowsMove(1,dw_3.RowCount(),Primary!,dw_3,1,Delete!)
+If dw_4.RowCount() > 0 Then dw_4.RowsMove(1,dw_4.RowCount(),Primary!,dw_4,1,Delete!)
+If dw_5.RowCount() > 0 Then dw_5.RowsMove(1,dw_5.RowCount(),Primary!,dw_5,1,Delete!)
+If dw_6.RowCount() > 0 Then dw_6.RowsMove(1,dw_6.RowCount(),Primary!,dw_6,1,Delete!)
+If dw_7.RowCount() > 0 Then dw_7.RowsMove(1,dw_7.RowCount(),Primary!,dw_7,1,Delete!)
+If dw_9.RowCount() > 0 Then dw_9.RowsMove(1,dw_9.RowCount(),Primary!,dw_9,1,Delete!)
+If dw_pdf.RowCount() > 0 Then dw_pdf.RowsMove(1,dw_pdf.RowCount(),Primary!,dw_pdf,1,Delete!)
+If dw_spro_bins.RowCount() > 0 Then dw_spro_bins.RowsMove(1,dw_spro_bins.RowCount(),Primary!,dw_spro_bins,1,Delete!)
 
-IF dw_2.DeleteRow(0) = 1 THEN
+If dw_2.DeleteRow(0) = 1 Then
 	ib_borrar = False
 	w_main.SetMicroHelp("Borrando Registro...")
 	
 	ib_AutoCommit		=	SQLCA.AutoCommit
 	SQLCA.AutoCommit	=	False
 	
-	IF wf_actualiza_db(True) THEN
+	If wf_actualiza_db(True) Then
 		w_main.SetMicroHelp("Registro Borrado...")
 		This.TriggerEvent("ue_nuevo")
 		SetPointer(Arrow!)
-	ELSE
+	Else
 		w_main.SetMicroHelp("Registro no Borrado...")
-	END IF			
-ELSE
+	End If			
+Else
 	ib_borrar = False
 	MessageBox(This.Title,"No se puede borrar actual registro.")
-END IF
+End If
 end event
 
 event ue_guardar;Integer li_cliente, li_aplicaenvase
