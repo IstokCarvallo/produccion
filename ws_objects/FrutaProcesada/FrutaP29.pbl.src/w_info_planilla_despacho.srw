@@ -1143,6 +1143,7 @@ boolean visible = false
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_planilla_despacho
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_planilla_despacho
@@ -1268,7 +1269,7 @@ Else
 	vinf.dw_1.Modify("t_numsellos.text = '" + em_numsellos.text + "'")
 	vinf.dw_1.Modify("t_nomdespachador.text = '" + em_nomdespachador.text + "'")
 	vinf.dw_1.Modify("t_nominspector.text = '" + em_nominspector.text + "'")	
-//	vinf.dw_1.Modify("t_tratamiento.text = '" + mle_tratamiento.text + "'")
+	vinf.dw_1.Modify("t_tratamiento.text = '" + mle_tratamiento.text + "'")
 	vinf.dw_1.Modify("t_nombreexportador.text = '" + em_exportador.text + "'")
 	vinf.dw_1.Modify("t_rutexportador.text = '" + em_rut.text + "'")
 	vinf.dw_1.Modify("t_defe_fecdes.text = '" + em_fecha_des.text + "'")

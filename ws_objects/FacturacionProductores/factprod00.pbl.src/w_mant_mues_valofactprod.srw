@@ -32,7 +32,7 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_valofactprod from w_mant_tabla
-integer width = 3785
+integer width = 4005
 integer height = 1936
 string title = "VALORES DE FACTURACION POR PRODUCTOR"
 st_2 st_2
@@ -98,15 +98,15 @@ DO
 	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]))
 	
 	IF ll_fila = -1 THEN
-		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
 	ELSEIF ll_fila > 0 THEN
 		dw_1.SetRow(1)
 		dw_1.SelectRow(1,True)
 		dw_1.SetFocus()
 		pb_imprimir.Enabled	= True
 		pb_eliminar.Enabled	= True
-		pb_grabar.Enabled		= True
+		pb_grabar.Enabled	= True
+		cb_copia.Enabled		= True
 	ELSE
 		pb_insertar.SetFocus()
 	END IF
@@ -256,20 +256,20 @@ end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_valofactprod
 integer y = 584
-integer width = 3141
+integer width = 3323
 integer height = 1216
 integer taborder = 50
 string dataobject = "dw_mues_valofactprod"
 end type
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_valofactprod
-integer width = 3113
+integer width = 3323
 integer height = 464
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 108
+integer x = 3538
+integer y = 56
 integer taborder = 40
 boolean enabled = false
 end type
@@ -279,8 +279,8 @@ em_produc.Enabled		=	False
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 564
+integer x = 3538
+integer y = 512
 integer taborder = 60
 end type
 
@@ -297,32 +297,32 @@ em_produc.SetFocus()
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 740
+integer x = 3538
+integer y = 688
 integer taborder = 70
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 916
+integer x = 3538
+integer y = 864
 integer taborder = 80
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 1092
+integer x = 3538
+integer y = 1040
 integer taborder = 90
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 1268
+integer x = 3538
+integer y = 1216
 integer taborder = 100
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_valofactprod
-integer x = 3392
-integer y = 1572
+integer x = 3538
+integer y = 1520
 integer taborder = 110
 end type
 
@@ -381,40 +381,43 @@ string displaydata = ""
 end type
 
 event modified;Integer	li_zona
-String	ls_productor, ls_zona
+String		ls_productor, ls_zona
 Long		ll_codigo
 
 
-IF This.Text <> '' THEN
-	ll_codigo = Long(This.Text)
-	
-	SELECT	pro.zona_codigo, pro.prod_nombre, zon.zona_nombre
-		INTO 	:li_zona, :ls_productor, :ls_zona
-		FROM	dbo.PRODUCTORES as pro, dbo.ZONAS as zon
-		WHERE	pro.prod_codigo = :ll_codigo
-		AND	zon.zona_codigo = pro.zona_codigo;
-	
-	IF sqlca.SQLCode = -1 THEN
-		MessageBox("Error","Error al intentar conección a Base de Datos",Information!, Ok!)
-		sle_nompro.text	= ""
-		sle_nomzona.text	= ""
-		This.SetFocus()
-		RETURN
-	ELSEIF sqlca.SQLCode = 100 THEN
-		MessageBox("Error","Código de Productor no ha sido ingresado.",Information!, Ok!)
-		sle_nompro.text	= ""
-		sle_nomzona.text	= ""
-		This.SetFocus()
-		RETURN
-	ELSE
-		istr_mant.argumento[2]	= String(ll_codigo)
-		istr_mant.argumento[3]	= ls_productor
-		sle_nompro.text			= ls_productor
-		sle_nomzona.text			= ls_zona
-		pb_lectura.Enabled		= True
-		pb_lectura.SetFocus()
-	END IF
-END IF	
+If This.Text =  '' Then Return 
+
+ll_codigo = Long(This.Text)
+
+SELECT	pro.zona_codigo, pro.prod_nombre, zon.zona_nombre
+	INTO 	:li_zona, :ls_productor, :ls_zona
+	FROM	dbo.PRODUCTORES as pro, dbo.ZONAS as zon
+	WHERE	pro.prod_codigo = :ll_codigo
+	AND	zon.zona_codigo = pro.zona_codigo;
+
+If sqlca.SQLCode = -1 Then
+	MessageBox("Error","Error al intentar conección a Base de Datos",Information!, Ok!)
+	sle_nompro.text	=	""
+	sle_nomzona.text	=	""
+	This.Text				=	""
+	This.SetFocus()
+	Return
+ElseIf sqlca.SQLCode = 100 Then
+	MessageBox("Error","Código de Productor no ha sido ingresado.",Information!, Ok!)
+	sle_nompro.text	=	""
+	sle_nomzona.text	=	""
+	This.Text				=	""
+	This.SetFocus()
+	Return
+Else
+	istr_mant.argumento[2]	= String(ll_codigo)
+	istr_mant.argumento[3]	= ls_productor
+	istr_mant.argumento[4]	= String(li_Zona)
+	sle_nompro.text			= ls_productor
+	sle_nomzona.text			= ls_zona
+	pb_lectura.Enabled		= True
+	pb_lectura.SetFocus()
+END If	
 end event
 
 type cb_2 from uo_buscar within w_mant_mues_valofactprod
@@ -443,7 +446,7 @@ ELSE
 	istr_mant.argumento[2]	= istr_busq.argum[1]
 	istr_mant.argumento[3]	= istr_busq.argum[2]
 
-	pb_lectura.Enabled		= True
+	pb_lectura.Enabled		= True	
 	pb_lectura.SetFocus()
 END IF
 end event
@@ -518,9 +521,9 @@ end on
 
 type cb_copia from commandbutton within w_mant_mues_valofactprod
 integer x = 2597
-integer y = 236
-integer width = 576
-integer height = 112
+integer y = 240
+integer width = 805
+integer height = 108
 integer taborder = 40
 boolean bringtotop = true
 integer textsize = -10
@@ -529,41 +532,58 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
+boolean enabled = false
 string text = "Copiar"
 end type
 
-event clicked;Integer		li_Respuesta
-String			ls_Mensaje
-Str_mant		lstr_mant
+event clicked;Long				ll_New, ll_Busqueda
+String				ls_Mensaje, ls_Busqueda
+Str_Busqueda	lstr_Busq
+uo_Variedades	luo_Variedad
 
-istr_mant.argumento[1]	=	String(uo_SelCliente.Codigo)
+luo_Variedad	=	Create uo_Variedades
 
-If UpperBound(istr_mant.argumento) >= 2 Then 
-	If IsNull(istr_mant.argumento[2]) Or  istr_mant.argumento[2] = '' Then 
-		MessageBox('Atención', 'Debe seleccionar un productor')
-	Else
-		li_Respuesta = MessageBox('Atención', 'Se copiara Matriz de precios del Productor a Seleccionar.' + &
-					'~nSi existen datos del productor actual (' + istr_mant.argumento[2] + ').' + &
-					'~nSeran eliminados. Desea Continuar?' , Question!, YesNo!, 2)
-					
-		If li_Respuesta = 1 Then
-			OpenWithParm(w_copia_valoresproductor, istr_Mant)
+istr_Mant.Argumento[1]	=	String(uo_SelCliente.Codigo)
+istr_Mant.Argumento[2]	=	em_Produc.Text
+istr_Mant.dw = dw_1
 			
-			lstr_Mant = Message.PowerObjectParm
-			
-			If lstr_Mant.Respuesta <> 1 Then
-				ls_Mensaje = 'Proceso Abortado por el Usuario...'
-			Else
-				ls_Mensaje = 'Preceso Terminado...'
-			End If
-			MessageBox('Atencion', ls_Mensaje, Exclamation!, OK!)
-			Parent.TriggerEvent('ue_recuperadatos')
-		Else
-			Parent.TriggerEvent('ue_recuperadatos')
-		End If
+OpenWithParm(w_busc_copiavalorizacion, istr_Mant)
+
+lstr_Busq = Message.PowerObjectParm
+
+If UpperBound(lstr_Busq.Argum) > 1 Then	
+	
+	ls_Busqueda = "espe_codigo = " + lstr_Busq.Argum[3] + " and " + "vari_codigo = " + lstr_Busq.Argum[4] + " and " + &
+							"String(vafa_fecini,'dd/mm/yyyy') = '" + lstr_Busq.Argum[7] + "' and " + &
+							"emba_codigo = '" + lstr_Busq.Argum[10] + "'" +" and  emba_tipvid = " + lstr_Busq.Argum[13] + " and " + &
+							"colo_nombre = '" + lstr_Busq.Argum[15] + "'" +" and " + &
+							"String(vafa_fecter,'dd/mm/yyyy') = '" + lstr_Busq.Argum[8] + "' and " + &
+							"vaca_calibr = '" + lstr_Busq.Argum[5] + "'"
+
+	ll_Busqueda = dw_1.Find(ls_Busqueda, 1, dw_1.RowCount())
+	
+	If ll_Busqueda = 0 Then
+		ll_New = dw_1.InsertRow(0)
+		
+		luo_Variedad.Existe(Integer(lstr_Busq.Argum[3]),Integer(lstr_Busq.Argum[4]), False, SQLCA)
+		
+		dw_1.Object.clie_codigo[ll_New]		=	uo_SelCliente.Codigo
+		dw_1.Object.prod_codigo[ll_New]		=	Long(em_Produc.Text)
+		dw_1.Object.espe_codigo[ll_New]		=	Integer(lstr_Busq.Argum[3])
+		dw_1.Object.vari_codigo[ll_New]		=	Integer(lstr_Busq.Argum[4])
+		dw_1.Object.vari_nombre[ll_New]		=	luo_Variedad.NombreVariedad
+		dw_1.Object.vaca_calibr[ll_New]		=	lstr_Busq.Argum[5]
+		dw_1.Object.vafp_preuni[ll_New]		=	0 // lstr_Busq.Argum[6]
+		dw_1.Object.vafa_fecini[ll_New]		=	Date(lstr_Busq.Argum[7])
+		dw_1.Object.vafa_fecter[ll_New]		=	Date(lstr_Busq.Argum[8])
+		dw_1.Object.emba_codigo[ll_New]	=	lstr_Busq.Argum[10]
+		dw_1.Object.todos[ll_New]				=	Integer(lstr_Busq.Argum[11])
+		dw_1.Object.todoscal[ll_New]			=	Integer(lstr_Busq.Argum[12])
+		dw_1.Object.emba_tipvid[ll_New]		=	Integer(lstr_Busq.Argum[13])
+		dw_1.Object.semana[ll_New]			=	Integer(lstr_Busq.Argum[14])
+		dw_1.Object.colo_nombre[ll_New]	=	lstr_Busq.Argum[15]
 	End If
-Else
-	MessageBox('Atención', 'Debe seleccionar un productor')
-End IF
+End If
+
 end event
 

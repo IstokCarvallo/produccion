@@ -23,6 +23,10 @@ type m_pmgminimo from menu within m_aplicacion
 end type
 type m_pmgexportadora from menu within m_aplicacion
 end type
+type m_1 from menu within m_aplicacion
+end type
+type m_colores from menu within m_aplicacion
+end type
 type m_0 from menu within m_aplicacion
 end type
 type m_calibresporvariedades from menu within m_aplicacion
@@ -35,6 +39,8 @@ m_macro m_macro
 m_productores0 m_productores0
 m_pmgminimo m_pmgminimo
 m_pmgexportadora m_pmgexportadora
+m_1 m_1
+m_colores m_colores
 m_0 m_0
 m_calibresporvariedades m_calibresporvariedades
 m_semanafacturacion m_semanafacturacion
@@ -443,6 +449,8 @@ m_macro m_macro
 m_productores0 m_productores0
 m_pmgminimo m_pmgminimo
 m_pmgexportadora m_pmgexportadora
+m_1 m_1
+m_colores m_colores
 m_0 m_0
 m_calibresporvariedades m_calibresporvariedades
 m_semanafacturacion m_semanafacturacion
@@ -455,6 +463,8 @@ this.m_macro=create m_macro
 this.m_productores0=create m_productores0
 this.m_pmgminimo=create m_pmgminimo
 this.m_pmgexportadora=create m_pmgexportadora
+this.m_1=create m_1
+this.m_colores=create m_colores
 this.m_0=create m_0
 this.m_calibresporvariedades=create m_calibresporvariedades
 this.m_semanafacturacion=create m_semanafacturacion
@@ -463,6 +473,8 @@ this.Item[UpperBound(this.Item)+1]=this.m_macro
 this.Item[UpperBound(this.Item)+1]=this.m_productores0
 this.Item[UpperBound(this.Item)+1]=this.m_pmgminimo
 this.Item[UpperBound(this.Item)+1]=this.m_pmgexportadora
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_colores
 this.Item[UpperBound(this.Item)+1]=this.m_0
 this.Item[UpperBound(this.Item)+1]=this.m_calibresporvariedades
 this.Item[UpperBound(this.Item)+1]=this.m_semanafacturacion
@@ -475,6 +487,8 @@ destroy(this.m_macro)
 destroy(this.m_productores0)
 destroy(this.m_pmgminimo)
 destroy(this.m_pmgexportadora)
+destroy(this.m_1)
+destroy(this.m_colores)
 destroy(this.m_0)
 destroy(this.m_calibresporvariedades)
 destroy(this.m_semanafacturacion)
@@ -1280,6 +1294,66 @@ this.bitmapgradient = true
 end on
 
 on m_pmgexportadora.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_aplicacion
+end type
+
+on m_1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_colores from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_color, w_main, columna, Original!)
+end event
+
+on m_colores.create
+call super::create
+this.text = "Colores"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_colores.destroy
 call super::destroy
 end on
 

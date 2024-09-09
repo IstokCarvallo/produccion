@@ -21,6 +21,6 @@ Save Format v3.0(19990112)
  9 "FrutaProcesada\\produccion.pbt";
  19 "CargaEmbarques\\cargaembarque.pbt";
 @end;
-DefaultTarget "FrutaGranel\\Fruta Granel.pbt";
+DefaultTarget "FacturacionProductores\\Facturacion Productores.pbt";
 DefaultExportEncode "UTF-8";
-DefaultRemoteTarget "FrutaGranel\\Fruta Granel.pbt";
+DefaultRemoteTarget "FacturacionProductores\\Facturacion Productores.pbt";

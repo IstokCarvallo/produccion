@@ -18,7 +18,7 @@ end type
 end forward
 
 global type w_copia_valoresproductor from w_mant_detalle
-integer width = 3049
+integer width = 4631
 integer height = 1824
 st_3 st_3
 em_productor em_productor
@@ -124,13 +124,13 @@ type pb_primero from w_mant_detalle`pb_primero within w_copia_valoresproductor
 end type
 
 type pb_cancela from w_mant_detalle`pb_cancela within w_copia_valoresproductor
-integer x = 2683
-integer y = 772
+integer x = 4069
+integer y = 800
 end type
 
 type pb_acepta from w_mant_detalle`pb_acepta within w_copia_valoresproductor
-integer x = 2679
-integer y = 512
+integer x = 4064
+integer y = 540
 end type
 
 event pb_acepta::clicked;Long 		ll_Cliente, ll_Antiguo, ll_Nuevo
@@ -162,16 +162,16 @@ CloseWithReturn(Parent, istr_mant)
 end event
 
 type pb_salir from w_mant_detalle`pb_salir within w_copia_valoresproductor
-integer x = 2693
-integer y = 1044
+integer x = 4078
+integer y = 1072
 end type
 
 type dw_1 from w_mant_detalle`dw_1 within w_copia_valoresproductor
 integer y = 500
-integer width = 2487
+integer width = 3109
 integer height = 1156
 boolean titlebar = true
-string dataobject = "dw_mues_valofactprod"
+string dataobject = "dw_mues_pmg_exportadora"
 boolean vscrollbar = true
 boolean border = true
 end type
@@ -306,7 +306,7 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 16777215
 long backcolor = 16711680
-borderstyle borderstyle = StyleRaised!
+borderstyle borderstyle = styleraised!
 boolean focusrectangle = false
 end type
 

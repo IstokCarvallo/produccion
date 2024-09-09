@@ -562,10 +562,11 @@ For ll_Fila = 1 To dw_2.RowCount()
 				FechaPaletizaje 					=	dw_4.Object.FechaPaletizaje[ll_Fila_D]
 				codTipoTarja  						=	dw_4.Object.TipoPallet[ll_Fila_D]
 				codTipoPalet						=	dw_4.Object.codTipoPalet[ll_Fila_D]
-				codGGN								=	f_AsignaGGN(Long(dw_4.Object.codProductorReal[ll_Fila_D]), &
-																				Integer(dw_4.Object.codPredio_ORD[ll_Fila_D]), &
-																				Integer(dw_4.Object.codEspecie[ll_Fila_D]),&
-																				Date(dw_4.Object.FechaProduccion[ll_Fila_D]), False)
+				codGGN								=	dw_4.Object.GGN_ORD[ll_Fila_D]
+//															f_AsignaGGN(Long(dw_4.Object.codProductorReal[ll_Fila_D]), &
+//																				Integer(dw_4.Object.codPredio_ORD[ll_Fila_D]), &
+//																				Integer(dw_4.Object.codEspecie[ll_Fila_D]),&
+//																				Date(dw_4.Object.FechaProduccion[ll_Fila_D]), False)
 
 				DECLARE	InsertaCajas PROCEDURE FOR dbo.UNITEC_InsertaCajas
 							@codCaja  								=	:codCaja,

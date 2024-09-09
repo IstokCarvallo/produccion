@@ -234,7 +234,7 @@ global type w_info_embarque_resumido from w_para_informes
 integer x = 14
 integer y = 32
 integer width = 4192
-integer height = 2736
+integer height = 2684
 string title = "Informe de Despachos Resumidos"
 boolean minbox = false
 boolean maxbox = false
@@ -1029,7 +1029,7 @@ end type
 
 type st_computador from w_para_informes`st_computador within w_info_embarque_resumido
 integer x = 1253
-integer y = 164
+integer y = 192
 integer width = 2258
 integer textsize = -10
 fontfamily fontfamily = swiss!
@@ -1038,7 +1038,7 @@ end type
 
 type st_usuario from w_para_informes`st_usuario within w_info_embarque_resumido
 integer x = 1253
-integer y = 92
+integer y = 120
 integer width = 2258
 integer textsize = -10
 fontfamily fontfamily = swiss!
@@ -1047,7 +1047,7 @@ end type
 
 type st_temporada from w_para_informes`st_temporada within w_info_embarque_resumido
 integer x = 1253
-integer y = 20
+integer y = 48
 integer width = 2258
 integer height = 80
 integer textsize = -10
@@ -1061,7 +1061,7 @@ end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_embarque_resumido
 integer y = 228
-integer width = 3259
+integer width = 3387
 integer height = 80
 string text = "Informe de Despachos Resumidos"
 end type
@@ -1295,7 +1295,7 @@ end type
 
 type st_1 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 908
+integer y = 956
 integer width = 238
 integer height = 76
 boolean bringtotop = true
@@ -1314,7 +1314,7 @@ end type
 
 type st_2 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 1452
+integer y = 1500
 integer width = 375
 integer height = 64
 boolean bringtotop = true
@@ -1333,7 +1333,7 @@ end type
 
 type em_desde from editmask within w_info_embarque_resumido
 integer x = 759
-integer y = 1432
+integer y = 1480
 integer width = 343
 integer height = 96
 integer taborder = 60
@@ -1357,7 +1357,7 @@ end event
 
 type dw_cliente from datawindow within w_info_embarque_resumido
 integer x = 663
-integer y = 424
+integer y = 472
 integer width = 1143
 integer height = 104
 integer taborder = 10
@@ -1411,7 +1411,7 @@ end event
 
 type st_6 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 436
+integer y = 484
 integer width = 233
 integer height = 64
 boolean bringtotop = true
@@ -1429,7 +1429,7 @@ end type
 
 type dw_planta from datawindow within w_info_embarque_resumido
 integer x = 677
-integer y = 892
+integer y = 940
 integer width = 969
 integer height = 92
 integer taborder = 40
@@ -1464,7 +1464,7 @@ end event
 
 type st_3 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 752
+integer y = 800
 integer width = 270
 integer height = 64
 boolean bringtotop = true
@@ -1483,7 +1483,7 @@ end type
 
 type st_7 from statictext within w_info_embarque_resumido
 integer x = 1134
-integer y = 1452
+integer y = 1500
 integer width = 137
 integer height = 64
 boolean bringtotop = true
@@ -1501,7 +1501,7 @@ end type
 
 type em_hasta from editmask within w_info_embarque_resumido
 integer x = 1285
-integer y = 1436
+integer y = 1484
 integer width = 347
 integer height = 96
 integer taborder = 70
@@ -1525,7 +1525,7 @@ end event
 
 type st_8 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 1128
+integer y = 1176
 integer width = 329
 integer height = 64
 boolean bringtotop = true
@@ -1543,7 +1543,7 @@ end type
 
 type cbx_peso from checkbox within w_info_embarque_resumido
 integer x = 1947
-integer y = 1236
+integer y = 1284
 integer width = 603
 integer height = 80
 boolean bringtotop = true
@@ -1573,7 +1573,7 @@ end event
 
 type dw_pesoneto from datawindow within w_info_embarque_resumido
 integer x = 2693
-integer y = 1228
+integer y = 1276
 integer width = 439
 integer height = 100
 integer taborder = 140
@@ -1591,7 +1591,7 @@ end event
 
 type tit_peso from statictext within w_info_embarque_resumido
 integer x = 2565
-integer y = 1244
+integer y = 1292
 integer width = 146
 integer height = 64
 boolean bringtotop = true
@@ -1610,7 +1610,7 @@ end type
 
 type st_variedad from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 508
+integer y = 556
 integer width = 261
 integer height = 96
 boolean bringtotop = true
@@ -1628,7 +1628,7 @@ end type
 
 type st_embalaje from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 684
+integer y = 732
 integer width = 325
 integer height = 76
 boolean bringtotop = true
@@ -1647,7 +1647,7 @@ end type
 
 type cbx_embalaje from checkbox within w_info_embarque_resumido
 integer x = 2336
-integer y = 624
+integer y = 672
 integer width = 402
 integer height = 56
 boolean bringtotop = true
@@ -1680,7 +1680,7 @@ end event
 
 type cb_buscaembalaje from commandbutton within w_info_embarque_resumido
 integer x = 2661
-integer y = 688
+integer y = 736
 integer width = 96
 integer height = 84
 integer taborder = 110
@@ -1714,7 +1714,7 @@ end event
 
 type cbx_consembalaje from checkbox within w_info_embarque_resumido
 integer x = 2830
-integer y = 624
+integer y = 672
 integer width = 471
 integer height = 56
 boolean bringtotop = true
@@ -1744,7 +1744,7 @@ end event
 
 type st_11 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 852
+integer y = 900
 integer width = 256
 integer height = 76
 boolean bringtotop = true
@@ -1763,7 +1763,7 @@ end type
 
 type dw_etiqueta from datawindow within w_info_embarque_resumido
 integer x = 2341
-integer y = 840
+integer y = 888
 integer width = 891
 integer height = 96
 integer taborder = 120
@@ -1799,7 +1799,7 @@ end event
 
 type cbx_etiqueta from checkbox within w_info_embarque_resumido
 integer x = 2341
-integer y = 784
+integer y = 832
 integer width = 293
 integer height = 56
 boolean bringtotop = true
@@ -1833,7 +1833,7 @@ end event
 
 type cbx_consetiqueta from checkbox within w_info_embarque_resumido
 integer x = 2834
-integer y = 784
+integer y = 832
 integer width = 471
 integer height = 56
 boolean bringtotop = true
@@ -1863,7 +1863,7 @@ end event
 
 type st_calidad from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 956
+integer y = 1004
 integer width = 215
 integer height = 76
 boolean bringtotop = true
@@ -1882,7 +1882,7 @@ end type
 
 type em_calidad from editmask within w_info_embarque_resumido
 integer x = 2350
-integer y = 944
+integer y = 992
 integer width = 265
 integer height = 96
 integer taborder = 130
@@ -1925,7 +1925,7 @@ end event
 
 type cbx_calidad from checkbox within w_info_embarque_resumido
 integer x = 2642
-integer y = 960
+integer y = 1008
 integer width = 297
 integer height = 56
 boolean bringtotop = true
@@ -1959,7 +1959,7 @@ end event
 
 type cbx_conscalidad from checkbox within w_info_embarque_resumido
 integer x = 2949
-integer y = 960
+integer y = 1008
 integer width = 471
 integer height = 56
 boolean bringtotop = true
@@ -1989,7 +1989,7 @@ end event
 
 type cbx_planta from checkbox within w_info_embarque_resumido
 integer x = 667
-integer y = 836
+integer y = 884
 integer width = 402
 integer height = 56
 boolean bringtotop = true
@@ -2023,7 +2023,7 @@ end event
 
 type cbx_plantascons from checkbox within w_info_embarque_resumido
 integer x = 1143
-integer y = 836
+integer y = 884
 integer width = 471
 integer height = 56
 boolean bringtotop = true
@@ -2052,7 +2052,7 @@ end event
 
 type st_21 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 1664
+integer y = 1712
 integer width = 1673
 integer height = 328
 integer textsize = -10
@@ -2070,7 +2070,7 @@ end type
 
 type st_38 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 1424
+integer y = 1472
 integer width = 329
 integer height = 64
 boolean bringtotop = true
@@ -2088,7 +2088,7 @@ end type
 
 type st_48 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 1588
+integer y = 1636
 integer width = 329
 integer height = 64
 boolean bringtotop = true
@@ -2106,7 +2106,7 @@ end type
 
 type st_51 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 1336
+integer y = 1384
 integer width = 1723
 integer height = 500
 integer textsize = -10
@@ -2124,7 +2124,7 @@ end type
 
 type st_58 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 1740
+integer y = 1788
 integer width = 421
 integer height = 64
 boolean bringtotop = true
@@ -2142,7 +2142,7 @@ end type
 
 type cbx_mercado from checkbox within w_info_embarque_resumido
 integer x = 2350
-integer y = 1352
+integer y = 1400
 integer width = 366
 integer height = 56
 integer taborder = 230
@@ -2177,7 +2177,7 @@ end event
 
 type cbx_merccons from checkbox within w_info_embarque_resumido
 integer x = 2793
-integer y = 1352
+integer y = 1400
 integer width = 471
 integer height = 56
 integer taborder = 220
@@ -2208,7 +2208,7 @@ end event
 
 type dw_mercado from datawindow within w_info_embarque_resumido
 integer x = 2345
-integer y = 1408
+integer y = 1456
 integer width = 887
 integer height = 92
 integer taborder = 240
@@ -2240,7 +2240,7 @@ end event
 
 type cbx_recibidor from checkbox within w_info_embarque_resumido
 integer x = 2354
-integer y = 1668
+integer y = 1716
 integer width = 402
 integer height = 56
 integer taborder = 290
@@ -2275,7 +2275,7 @@ end event
 
 type cbx_recibidorcons from checkbox within w_info_embarque_resumido
 integer x = 2793
-integer y = 1668
+integer y = 1716
 integer width = 471
 integer height = 56
 integer taborder = 280
@@ -2308,7 +2308,7 @@ end event
 
 type dw_recibidor from datawindow within w_info_embarque_resumido
 integer x = 2350
-integer y = 1728
+integer y = 1776
 integer width = 1106
 integer height = 92
 integer taborder = 300
@@ -2333,7 +2333,7 @@ end event
 
 type cbx_destino from checkbox within w_info_embarque_resumido
 integer x = 2350
-integer y = 1516
+integer y = 1564
 integer width = 366
 integer height = 56
 integer taborder = 260
@@ -2368,7 +2368,7 @@ end event
 
 type cbx_destcons from checkbox within w_info_embarque_resumido
 integer x = 2793
-integer y = 1516
+integer y = 1564
 integer width = 471
 integer height = 56
 integer taborder = 250
@@ -2400,7 +2400,7 @@ end event
 
 type dw_destino from datawindow within w_info_embarque_resumido
 integer x = 2345
-integer y = 1576
+integer y = 1624
 integer width = 887
 integer height = 92
 integer taborder = 270
@@ -2425,7 +2425,7 @@ end event
 
 type st_70 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 1748
+integer y = 1796
 integer width = 315
 integer height = 64
 boolean bringtotop = true
@@ -2443,7 +2443,7 @@ end type
 
 type cbx_operacion from checkbox within w_info_embarque_resumido
 integer x = 663
-integer y = 1676
+integer y = 1724
 integer width = 379
 integer height = 56
 integer taborder = 160
@@ -2478,7 +2478,7 @@ end event
 
 type dw_operaciones from datawindow within w_info_embarque_resumido
 integer x = 654
-integer y = 1728
+integer y = 1776
 integer width = 997
 integer height = 92
 integer taborder = 170
@@ -2502,7 +2502,7 @@ end event
 
 type cbx_operacioncons from checkbox within w_info_embarque_resumido
 integer x = 1143
-integer y = 1676
+integer y = 1724
 integer width = 471
 integer height = 56
 integer taborder = 150
@@ -2535,7 +2535,7 @@ end event
 
 type st_9 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 584
+integer y = 632
 integer width = 306
 integer height = 64
 boolean bringtotop = true
@@ -2553,7 +2553,7 @@ end type
 
 type cbx_zonas from checkbox within w_info_embarque_resumido
 integer x = 667
-integer y = 524
+integer y = 572
 integer width = 402
 integer height = 56
 boolean bringtotop = true
@@ -2595,7 +2595,7 @@ end event
 
 type dw_zonas from datawindow within w_info_embarque_resumido
 integer x = 663
-integer y = 576
+integer y = 624
 integer width = 873
 integer height = 92
 integer taborder = 20
@@ -2625,7 +2625,7 @@ end event
 
 type st_12 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 1892
+integer y = 1940
 integer width = 384
 integer height = 64
 boolean bringtotop = true
@@ -2643,7 +2643,7 @@ end type
 
 type cbx_puertos from checkbox within w_info_embarque_resumido
 integer x = 663
-integer y = 1824
+integer y = 1872
 integer width = 366
 integer height = 56
 integer taborder = 190
@@ -2678,7 +2678,7 @@ end event
 
 type cbx_puertoscons from checkbox within w_info_embarque_resumido
 integer x = 1143
-integer y = 1824
+integer y = 1872
 integer width = 471
 integer height = 56
 integer taborder = 180
@@ -2709,7 +2709,7 @@ end event
 
 type st_13 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 1572
+integer y = 1620
 integer width = 494
 integer height = 64
 boolean bringtotop = true
@@ -2727,7 +2727,7 @@ end type
 
 type cbx_fecemb from checkbox within w_info_embarque_resumido
 integer x = 1655
-integer y = 1572
+integer y = 1620
 integer width = 238
 integer height = 68
 integer textsize = -10
@@ -2744,7 +2744,7 @@ end type
 
 type st_10 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 1420
+integer y = 1468
 integer width = 1673
 integer height = 240
 integer textsize = -10
@@ -2762,7 +2762,7 @@ end type
 
 type st_5 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 352
+integer y = 400
 integer width = 1723
 integer height = 864
 integer textsize = -10
@@ -2780,7 +2780,7 @@ end type
 
 type st_15 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 1912
+integer y = 1960
 integer width = 178
 integer height = 64
 boolean bringtotop = true
@@ -2798,7 +2798,7 @@ end type
 
 type dw_transp from datawindow within w_info_embarque_resumido
 integer x = 2121
-integer y = 1908
+integer y = 1956
 integer width = 891
 integer height = 92
 integer taborder = 320
@@ -2828,7 +2828,7 @@ end event
 
 type dw_puertos from datawindow within w_info_embarque_resumido
 integer x = 663
-integer y = 1884
+integer y = 1932
 integer width = 987
 integer height = 92
 integer taborder = 200
@@ -2853,7 +2853,7 @@ end event
 
 type st_16 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 2080
+integer y = 2128
 integer width = 210
 integer height = 64
 boolean bringtotop = true
@@ -2871,7 +2871,7 @@ end type
 
 type dw_tica from datawindow within w_info_embarque_resumido
 integer x = 2121
-integer y = 2064
+integer y = 2112
 integer width = 983
 integer height = 92
 integer taborder = 340
@@ -2901,7 +2901,7 @@ end event
 
 type cbx_tica from checkbox within w_info_embarque_resumido
 integer x = 2121
-integer y = 1996
+integer y = 2044
 integer width = 256
 integer height = 72
 integer taborder = 330
@@ -2930,7 +2930,7 @@ end event
 
 type cbx_trans from checkbox within w_info_embarque_resumido
 integer x = 2121
-integer y = 1844
+integer y = 1892
 integer width = 256
 integer height = 72
 integer taborder = 310
@@ -2959,7 +2959,7 @@ end event
 
 type st_14 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 1988
+integer y = 2036
 integer width = 1673
 integer height = 180
 integer textsize = -10
@@ -2977,7 +2977,7 @@ end type
 
 type cbx_cliente from checkbox within w_info_embarque_resumido
 integer x = 672
-integer y = 360
+integer y = 408
 integer width = 343
 integer height = 68
 boolean bringtotop = true
@@ -3011,7 +3011,7 @@ end event
 
 type cbx_seleccion from checkbox within w_info_embarque_resumido
 integer x = 3145
-integer y = 1248
+integer y = 1296
 integer width = 411
 integer height = 64
 boolean bringtotop = true
@@ -3029,7 +3029,7 @@ end type
 
 type st_18 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 2064
+integer y = 2112
 integer width = 347
 integer height = 64
 boolean bringtotop = true
@@ -3047,7 +3047,7 @@ end type
 
 type dw_status from datawindow within w_info_embarque_resumido
 integer x = 663
-integer y = 2064
+integer y = 2112
 integer width = 997
 integer height = 92
 integer taborder = 210
@@ -3075,7 +3075,7 @@ end event
 
 type cbx_status from checkbox within w_info_embarque_resumido
 integer x = 663
-integer y = 1996
+integer y = 2044
 integer width = 402
 integer height = 60
 boolean bringtotop = true
@@ -3108,7 +3108,7 @@ end event
 
 type cbx_constatus from checkbox within w_info_embarque_resumido
 integer x = 1138
-integer y = 1996
+integer y = 2044
 integer width = 471
 integer height = 60
 boolean bringtotop = true
@@ -3143,7 +3143,7 @@ end event
 type uo_selespecie from uo_seleccion_especie within w_info_embarque_resumido
 event destroy ( )
 integer x = 663
-integer y = 660
+integer y = 708
 integer height = 164
 integer taborder = 30
 boolean bringtotop = true
@@ -3169,7 +3169,7 @@ end event
 type uo_selvariedad from uo_seleccion_variedad within w_info_embarque_resumido
 event destroy ( )
 integer x = 2322
-integer y = 364
+integer y = 412
 integer height = 168
 integer taborder = 80
 boolean bringtotop = true
@@ -3181,7 +3181,7 @@ end on
 
 type cbx_varirotula from checkbox within w_info_embarque_resumido
 integer x = 2331
-integer y = 544
+integer y = 592
 integer width = 626
 integer height = 80
 integer taborder = 90
@@ -3199,7 +3199,7 @@ end type
 
 type st_20 from statictext within w_info_embarque_resumido
 integer x = 297
-integer y = 2196
+integer y = 2244
 integer width = 293
 integer height = 68
 boolean bringtotop = true
@@ -3217,7 +3217,7 @@ end type
 
 type em_norden from editmask within w_info_embarque_resumido
 integer x = 663
-integer y = 2176
+integer y = 2224
 integer width = 407
 integer height = 84
 integer taborder = 180
@@ -3240,7 +3240,7 @@ end event
 
 type cbx_1 from checkbox within w_info_embarque_resumido
 integer x = 1097
-integer y = 2188
+integer y = 2236
 integer width = 270
 integer height = 68
 integer taborder = 80
@@ -3270,7 +3270,7 @@ end event
 
 type cbx_2 from checkbox within w_info_embarque_resumido
 integer x = 1394
-integer y = 2188
+integer y = 2236
 integer width = 443
 integer height = 68
 boolean bringtotop = true
@@ -3302,7 +3302,7 @@ end event
 
 type st_22 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 2272
+integer y = 2320
 integer width = 1673
 integer height = 112
 boolean bringtotop = true
@@ -3321,7 +3321,7 @@ end type
 
 type st_23 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 2296
+integer y = 2344
 integer width = 293
 integer height = 68
 boolean bringtotop = true
@@ -3339,7 +3339,7 @@ end type
 
 type em_guia from editmask within w_info_embarque_resumido
 integer x = 663
-integer y = 2280
+integer y = 2328
 integer width = 407
 integer height = 84
 integer taborder = 190
@@ -3362,7 +3362,7 @@ end event
 
 type cbx_3 from checkbox within w_info_embarque_resumido
 integer x = 1097
-integer y = 2292
+integer y = 2340
 integer width = 270
 integer height = 68
 integer taborder = 80
@@ -3392,7 +3392,7 @@ end event
 
 type cbx_4 from checkbox within w_info_embarque_resumido
 integer x = 1394
-integer y = 2292
+integer y = 2340
 integer width = 443
 integer height = 68
 boolean bringtotop = true
@@ -3424,7 +3424,7 @@ end event
 
 type st_19 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 2164
+integer y = 2212
 integer width = 1673
 integer height = 108
 integer textsize = -10
@@ -3442,7 +3442,7 @@ end type
 
 type st_25 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 1216
+integer y = 1264
 integer width = 1723
 integer height = 120
 integer textsize = -10
@@ -3460,7 +3460,7 @@ end type
 
 type st_24 from statictext within w_info_embarque_resumido
 integer x = 306
-integer y = 1312
+integer y = 1360
 integer width = 329
 integer height = 64
 boolean bringtotop = true
@@ -3478,7 +3478,7 @@ end type
 
 type dw_packing from datawindow within w_info_embarque_resumido
 integer x = 677
-integer y = 1312
+integer y = 1360
 integer width = 969
 integer height = 92
 integer taborder = 60
@@ -3508,7 +3508,7 @@ end event
 
 type cbx_packing from checkbox within w_info_embarque_resumido
 integer x = 667
-integer y = 1248
+integer y = 1296
 integer width = 402
 integer height = 68
 boolean bringtotop = true
@@ -3540,7 +3540,7 @@ end event
 
 type cbx_packingcons from checkbox within w_info_embarque_resumido
 integer x = 1147
-integer y = 1244
+integer y = 1292
 integer width = 471
 integer height = 72
 boolean bringtotop = true
@@ -3565,7 +3565,7 @@ end event
 
 type st_26 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 2172
+integer y = 2220
 integer width = 1723
 integer height = 108
 boolean bringtotop = true
@@ -3584,7 +3584,7 @@ end type
 
 type cbx_excluye from checkbox within w_info_embarque_resumido
 integer x = 2121
-integer y = 2184
+integer y = 2232
 integer width = 1358
 integer height = 80
 boolean bringtotop = true
@@ -3601,7 +3601,7 @@ end type
 
 type uo_seltipoproductor from uo_seleccion_tipoproductor within w_info_embarque_resumido
 integer x = 2341
-integer y = 1036
+integer y = 1084
 integer height = 172
 integer taborder = 290
 boolean bringtotop = true
@@ -3613,7 +3613,7 @@ end on
 
 type st_27 from statictext within w_info_embarque_resumido
 integer x = 1943
-integer y = 1112
+integer y = 1160
 integer width = 411
 integer height = 76
 boolean bringtotop = true
@@ -3631,7 +3631,7 @@ end type
 
 type st_4 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 352
+integer y = 400
 integer width = 1673
 integer height = 1068
 integer textsize = -10
@@ -3649,7 +3649,7 @@ end type
 
 type em_embalaje from singlelineedit within w_info_embarque_resumido
 integer x = 2341
-integer y = 680
+integer y = 728
 integer width = 297
 integer height = 96
 integer taborder = 130
@@ -3684,7 +3684,7 @@ end event
 
 type cbx_consolzona from checkbox within w_info_embarque_resumido
 integer x = 1079
-integer y = 524
+integer y = 572
 integer width = 402
 integer height = 56
 boolean bringtotop = true
@@ -3713,7 +3713,7 @@ end event
 
 type st_28 from statictext within w_info_embarque_resumido
 integer x = 247
-integer y = 2384
+integer y = 2432
 integer width = 1673
 integer height = 136
 boolean bringtotop = true
@@ -3732,7 +3732,7 @@ end type
 
 type st_29 from statictext within w_info_embarque_resumido
 integer x = 302
-integer y = 2416
+integer y = 2464
 integer width = 352
 integer height = 76
 boolean bringtotop = true
@@ -3750,7 +3750,7 @@ end type
 
 type ddlb_calificacion from dropdownlistbox within w_info_embarque_resumido
 integer x = 663
-integer y = 2400
+integer y = 2448
 integer width = 411
 integer height = 400
 integer taborder = 90
@@ -3772,7 +3772,7 @@ end event
 
 type cbx_todcalifi from checkbox within w_info_embarque_resumido
 integer x = 1097
-integer y = 2412
+integer y = 2460
 integer width = 288
 integer height = 76
 integer taborder = 60
@@ -3804,7 +3804,7 @@ end event
 
 type cbx_consolcalifi from checkbox within w_info_embarque_resumido
 integer x = 1394
-integer y = 2412
+integer y = 2460
 integer width = 411
 integer height = 76
 integer taborder = 60
@@ -3837,7 +3837,7 @@ end event
 
 type uo_selproductor from uo_seleccion_varios_productores_clientes within w_info_embarque_resumido
 integer x = 672
-integer y = 976
+integer y = 1024
 integer taborder = 130
 boolean bringtotop = true
 end type
@@ -3851,7 +3851,7 @@ end event
 
 type st_30 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 2284
+integer y = 2332
 integer width = 1723
 integer height = 236
 boolean bringtotop = true
@@ -3870,7 +3870,7 @@ end type
 
 type em_desdeemb from editmask within w_info_embarque_resumido
 integer x = 763
-integer y = 1544
+integer y = 1592
 integer width = 338
 integer height = 96
 integer taborder = 80
@@ -3894,7 +3894,7 @@ end event
 
 type em_hastaemb from editmask within w_info_embarque_resumido
 integer x = 1289
-integer y = 1544
+integer y = 1592
 integer width = 347
 integer height = 96
 integer taborder = 70
@@ -3918,7 +3918,7 @@ end event
 
 type cbx_produrotula from checkbox within w_info_embarque_resumido
 integer x = 3081
-integer y = 1916
+integer y = 1964
 integer width = 375
 integer height = 56
 boolean bringtotop = true
@@ -3935,7 +3935,7 @@ end type
 
 type cbx_5 from checkbox within w_info_embarque_resumido
 integer x = 3081
-integer y = 1972
+integer y = 2020
 integer width = 375
 integer height = 76
 boolean bringtotop = true
@@ -3952,7 +3952,7 @@ end type
 
 type gb_4 from groupbox within w_info_embarque_resumido
 integer x = 3003
-integer y = 1844
+integer y = 1892
 integer width = 535
 integer height = 216
 integer taborder = 330
@@ -3969,7 +3969,7 @@ end type
 
 type st_17 from statictext within w_info_embarque_resumido
 integer x = 1920
-integer y = 1836
+integer y = 1884
 integer width = 1723
 integer height = 332
 integer textsize = -10
@@ -3987,7 +3987,7 @@ end type
 
 type st_34 from statictext within w_info_embarque_resumido
 integer x = 1134
-integer y = 1568
+integer y = 1616
 integer width = 137
 integer height = 64
 boolean bringtotop = true
@@ -4005,7 +4005,7 @@ end type
 
 type st_31 from statictext within w_info_embarque_resumido
 integer x = 1938
-integer y = 2356
+integer y = 2416
 integer width = 347
 integer height = 68
 boolean bringtotop = true
@@ -4024,7 +4024,7 @@ end type
 
 type dw_exportador from datawindow within w_info_embarque_resumido
 integer x = 2277
-integer y = 2348
+integer y = 2400
 integer width = 1125
 integer height = 96
 integer taborder = 250
@@ -4055,7 +4055,7 @@ end event
 
 type cbx_6 from checkbox within w_info_embarque_resumido
 integer x = 3387
-integer y = 2312
+integer y = 2340
 integer width = 192
 integer height = 80
 integer taborder = 320
@@ -4087,7 +4087,7 @@ end event
 
 type cbx_7 from checkbox within w_info_embarque_resumido
 integer x = 3387
-integer y = 2388
+integer y = 2416
 integer width = 270
 integer height = 80
 integer taborder = 320

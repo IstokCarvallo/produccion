@@ -22,9 +22,9 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_pmg_exportadora from w_mant_tabla
-integer width = 3785
+integer width = 4023
 integer height = 1936
-string title = "VALORES DE FACTURACION POR PRODUCTOR"
+string title = "VALORES DE FACTURACION EXPORTADORA"
 st_2 st_2
 st_5 st_5
 uo_selcliente uo_selcliente
@@ -235,20 +235,20 @@ end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_pmg_exportadora
 integer y = 364
-integer width = 3003
+integer width = 3314
 integer height = 1436
 integer taborder = 50
 string dataobject = "dw_mues_pmg_exportadora"
 end type
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_pmg_exportadora
-integer width = 3003
+integer width = 3314
 integer height = 260
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 108
+integer x = 3611
+integer y = 88
 integer taborder = 40
 end type
 
@@ -257,8 +257,8 @@ uo_SelZonas.Bloquear(True)
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 564
+integer x = 3611
+integer y = 544
 integer taborder = 60
 end type
 
@@ -268,32 +268,32 @@ uo_SelZonas.Bloquear(False)
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 740
+integer x = 3611
+integer y = 720
 integer taborder = 70
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 916
+integer x = 3611
+integer y = 896
 integer taborder = 80
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 1092
+integer x = 3611
+integer y = 1072
 integer taborder = 90
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 1268
+integer x = 3611
+integer y = 1248
 integer taborder = 100
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_pmg_exportadora
-integer x = 3392
-integer y = 1572
+integer x = 3611
+integer y = 1552
 integer taborder = 110
 end type
 
