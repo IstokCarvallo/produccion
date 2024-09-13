@@ -45,6 +45,7 @@ DataStore				ids_archivo,ids_archivo2
 Long				Sistema_Operativo
 uo_ApiWindows	iuo_API
 end variables
+
 global type control_calidad from application
 string appname = "control_calidad"
 string themepath = "C:\Program Files (x86)\Appeon\Shared\PowerBuilder\theme190"
@@ -57,7 +58,7 @@ long richtexteditx64type = 5
 long richtexteditversion = 3
 string richtexteditkey = ""
 string appicon = "F:\Desarrollo 17\Imagenes\Sistemas\control_calidad.ico"
-string appruntimeversion = "22.0.0.1900"
+string appruntimeversion = "22.2.0.3391"
 boolean manualsession = false
 boolean unsupportedapierror = false
 boolean bignoreservercertificate = false

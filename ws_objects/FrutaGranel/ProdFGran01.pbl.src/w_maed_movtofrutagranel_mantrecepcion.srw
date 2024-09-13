@@ -5126,12 +5126,12 @@ event closequery; IF Not istr_mant.Solo_Consulta THEN
 END IF
 end event
 
-event ue_validaborrar();Long ll_fila
+event ue_validaborrar;Long ll_fila
 IF MessageBox("Borrar Registro","Desea Borrar la Información ?", Question!, YesNo!) = 1 THEN
 	Message.DoubleParm = 1
 	
 	FOR ll_fila = 1 TO dw_3.RowCount()
-		IF NOT verificalote(dw_3.Object.lote_pltcod[ll_fila],&
+		IF NOT VerificaLote(dw_3.Object.lote_pltcod[ll_fila],&
 									dw_3.Object.lote_espcod[ll_fila],&
 									dw_3.Object.lote_codigo[ll_fila]) THEN
 			Message.DoubleParm = -1
