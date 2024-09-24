@@ -19,7 +19,9 @@ type st_5 from statictext within w_mant_mues_valofactprod
 end type
 type uo_selcliente from uo_seleccion_clientesprod within w_mant_mues_valofactprod
 end type
-type cb_copia from commandbutton within w_mant_mues_valofactprod
+type cb_estandar from commandbutton within w_mant_mues_valofactprod
+end type
+type cb_productor from commandbutton within w_mant_mues_valofactprod
 end type
 type str_anexos from structure within w_mant_mues_valofactprod
 end type
@@ -32,7 +34,7 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_valofactprod from w_mant_tabla
-integer width = 4005
+integer width = 4233
 integer height = 1936
 string title = "VALORES DE FACTURACION POR PRODUCTOR"
 st_2 st_2
@@ -43,7 +45,8 @@ sle_nompro sle_nompro
 sle_nomzona sle_nomzona
 st_5 st_5
 uo_selcliente uo_selcliente
-cb_copia cb_copia
+cb_estandar cb_estandar
+cb_productor cb_productor
 end type
 global w_mant_mues_valofactprod w_mant_mues_valofactprod
 
@@ -106,7 +109,8 @@ DO
 		pb_imprimir.Enabled	= True
 		pb_eliminar.Enabled	= True
 		pb_grabar.Enabled	= True
-		cb_copia.Enabled		= True
+		cb_estandar.Enabled	= True
+		cb_productor.Enabled	= True
 	ELSE
 		pb_insertar.SetFocus()
 	END IF
@@ -130,7 +134,8 @@ this.sle_nompro=create sle_nompro
 this.sle_nomzona=create sle_nomzona
 this.st_5=create st_5
 this.uo_selcliente=create uo_selcliente
-this.cb_copia=create cb_copia
+this.cb_estandar=create cb_estandar
+this.cb_productor=create cb_productor
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_2
 this.Control[iCurrent+2]=this.st_3
@@ -140,7 +145,8 @@ this.Control[iCurrent+5]=this.sle_nompro
 this.Control[iCurrent+6]=this.sle_nomzona
 this.Control[iCurrent+7]=this.st_5
 this.Control[iCurrent+8]=this.uo_selcliente
-this.Control[iCurrent+9]=this.cb_copia
+this.Control[iCurrent+9]=this.cb_estandar
+this.Control[iCurrent+10]=this.cb_productor
 end on
 
 on w_mant_mues_valofactprod.destroy
@@ -153,7 +159,8 @@ destroy(this.sle_nompro)
 destroy(this.sle_nomzona)
 destroy(this.st_5)
 destroy(this.uo_selcliente)
-destroy(this.cb_copia)
+destroy(this.cb_estandar)
+destroy(this.cb_productor)
 end on
 
 event ue_borrar;IF dw_1.rowcount() < 1 THEN RETURN
@@ -256,20 +263,20 @@ end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_valofactprod
 integer y = 584
-integer width = 3323
+integer width = 3529
 integer height = 1216
 integer taborder = 50
 string dataobject = "dw_mues_valofactprod"
 end type
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_valofactprod
-integer width = 3323
+integer width = 3529
 integer height = 464
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 56
+integer x = 3808
+integer y = 64
 integer taborder = 40
 boolean enabled = false
 end type
@@ -279,15 +286,16 @@ em_produc.Enabled		=	False
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 512
+integer x = 3808
+integer y = 520
 integer taborder = 60
 end type
 
 event pb_nuevo::clicked;call super::clicked;uo_SelCliente.Bloquear(False)
-em_produc.Enabled			=	True	
-
-pb_lectura.Enabled		= 	False
+em_produc.Enabled	=	True	
+pb_lectura.Enabled	= 	False
+cb_estandar.Enabled	=	False
+cb_productor.Enabled	= 	False
 
 em_produc.Text			=	''
 sle_nompro.Text			=	''
@@ -297,32 +305,32 @@ em_produc.SetFocus()
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 688
+integer x = 3808
+integer y = 696
 integer taborder = 70
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 864
+integer x = 3808
+integer y = 872
 integer taborder = 80
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 1040
+integer x = 3808
+integer y = 1048
 integer taborder = 90
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 1216
+integer x = 3808
+integer y = 1224
 integer taborder = 100
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_valofactprod
-integer x = 3538
-integer y = 1520
+integer x = 3808
+integer y = 1528
 integer taborder = 110
 end type
 
@@ -519,10 +527,10 @@ on uo_selcliente.destroy
 call uo_seleccion_clientesprod::destroy
 end on
 
-type cb_copia from commandbutton within w_mant_mues_valofactprod
+type cb_estandar from commandbutton within w_mant_mues_valofactprod
 integer x = 2597
 integer y = 240
-integer width = 805
+integer width = 987
 integer height = 108
 integer taborder = 40
 boolean bringtotop = true
@@ -533,7 +541,7 @@ fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 boolean enabled = false
-string text = "Copiar"
+string text = "Copiar Estandar"
 end type
 
 event clicked;Long				ll_New, ll_Busqueda
@@ -552,7 +560,73 @@ OpenWithParm(w_busc_copiavalorizacion, istr_Mant)
 lstr_Busq = Message.PowerObjectParm
 
 If UpperBound(lstr_Busq.Argum) > 1 Then	
+	ls_Busqueda = "espe_codigo = " + lstr_Busq.Argum[3] + " and " + "vari_codigo = " + lstr_Busq.Argum[4] + " and " + &
+							"String(vafa_fecini,'dd/mm/yyyy') = '" + lstr_Busq.Argum[7] + "' and " + &
+							"emba_codigo = '" + lstr_Busq.Argum[10] + "'" +" and  emba_tipvid = " + lstr_Busq.Argum[13] + " and " + &
+							"colo_nombre = '" + lstr_Busq.Argum[15] + "'" +" and " + &
+							"String(vafa_fecter,'dd/mm/yyyy') = '" + lstr_Busq.Argum[8] + "' and " + &
+							"vaca_calibr = '" + lstr_Busq.Argum[5] + "'"
+
+	ll_Busqueda = dw_1.Find(ls_Busqueda, 1, dw_1.RowCount())
 	
+	If ll_Busqueda = 0 Then
+		ll_New = dw_1.InsertRow(0)
+		
+		luo_Variedad.Existe(Integer(lstr_Busq.Argum[3]),Integer(lstr_Busq.Argum[4]), False, SQLCA)
+		
+		dw_1.Object.clie_codigo[ll_New]		=	uo_SelCliente.Codigo
+		dw_1.Object.prod_codigo[ll_New]		=	Long(em_Produc.Text)
+		dw_1.Object.espe_codigo[ll_New]		=	Integer(lstr_Busq.Argum[3])
+		dw_1.Object.vari_codigo[ll_New]		=	Integer(lstr_Busq.Argum[4])
+		dw_1.Object.vari_nombre[ll_New]		=	luo_Variedad.NombreVariedad
+		dw_1.Object.vaca_calibr[ll_New]		=	lstr_Busq.Argum[5]
+		dw_1.Object.vafp_preuni[ll_New]		=	0 // lstr_Busq.Argum[6]
+		dw_1.Object.vafa_fecini[ll_New]		=	Date(lstr_Busq.Argum[7])
+		dw_1.Object.vafa_fecter[ll_New]		=	Date(lstr_Busq.Argum[8])
+		dw_1.Object.emba_codigo[ll_New]	=	lstr_Busq.Argum[10]
+		dw_1.Object.todos[ll_New]				=	Integer(lstr_Busq.Argum[11])
+		dw_1.Object.todoscal[ll_New]			=	Integer(lstr_Busq.Argum[12])
+		dw_1.Object.emba_tipvid[ll_New]		=	Integer(lstr_Busq.Argum[13])
+		dw_1.Object.semana[ll_New]			=	Integer(lstr_Busq.Argum[14])
+		dw_1.Object.colo_nombre[ll_New]	=	lstr_Busq.Argum[15]
+	End If
+End If
+
+end event
+
+type cb_productor from commandbutton within w_mant_mues_valofactprod
+integer x = 2597
+integer y = 356
+integer width = 987
+integer height = 108
+integer taborder = 50
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+boolean enabled = false
+string text = "Copiar Productor"
+end type
+
+event clicked;Long				ll_New, ll_Busqueda
+String				ls_Mensaje, ls_Busqueda
+Str_Busqueda	lstr_Busq
+uo_Variedades	luo_Variedad
+
+luo_Variedad	=	Create uo_Variedades
+
+istr_Mant.Argumento[1]	=	String(uo_SelCliente.Codigo)
+istr_Mant.Argumento[2]	=	em_Produc.Text
+istr_Mant.dw = dw_1
+			
+OpenWithParm(w_busc_copiavalorizacion_prod, istr_Mant)
+
+lstr_Busq = Message.PowerObjectParm
+
+If UpperBound(lstr_Busq.Argum) > 1 Then	
 	ls_Busqueda = "espe_codigo = " + lstr_Busq.Argum[3] + " and " + "vari_codigo = " + lstr_Busq.Argum[4] + " and " + &
 							"String(vafa_fecini,'dd/mm/yyyy') = '" + lstr_Busq.Argum[7] + "' and " + &
 							"emba_codigo = '" + lstr_Busq.Argum[10] + "'" +" and  emba_tipvid = " + lstr_Busq.Argum[13] + " and " + &

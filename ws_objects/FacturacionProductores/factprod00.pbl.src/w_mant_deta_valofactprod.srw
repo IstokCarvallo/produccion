@@ -144,38 +144,45 @@ ias_campo[2]  = String(dw_1.GetItemNumber(il_fila, "vari_codigo"))
 ias_campo[3]  = dw_1.GetItemString(il_fila, "vaca_calibr")
 ias_campo[4]  = String(dw_1.GetItemDecimal(il_fila, "vafp_preuni"))
 ias_campo[5]  = dw_1.GetItemString(il_fila, "emba_codigo")
+ias_campo[6]  = dw_1.GetItemString(il_fila, "colo_nombre")
 
-IF ias_campo[3] = '-1' THEN
+If ias_campo[3] = '-1' Then
 	dw_1.SetItem(il_fila, "todoscal", 1)
-ELSE
+Else
 	dw_1.SetItem(il_fila, "todoscal", 0)
-END IF
+End If
 
-IF ias_campo[5] = '-1' THEN
+If ias_campo[5] = '-1' Then
 	dw_1.SetItem(il_fila, "todos", 1)
-ELSE
+Else
 	dw_1.SetItem(il_fila, "todos", 0)
-END IF
+End If
+
+If ias_campo[6] = '-1' Then
+	dw_1.SetItem(il_fila, "todosCol", 1)
+Else
+	dw_1.SetItem(il_fila, "todosCol", 0)
+End If
 
 dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 dw_1.SetItem(il_fila, "prod_codigo", Long(istr_mant.argumento[2]))
 dw_1.SetItem(il_fila, "prod_nombre", istr_mant.argumento[3])
 
-dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModified!)
-dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModified!)
-dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModified!)
+dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModIfied!)
 
-IF istr_mant.agrega = False THEN
+If Not istr_mant.Agrega Then
 		dw_1.GetChild("vari_codigo", idwc_variedad)
 		idwc_variedad.SetTransObject(sqlca)
 		idwc_variedad.Retrieve(Integer(ias_campo[1]))
 		dw_1.GetChild("vaca_calibr", idwc_calibre)
 		idwc_calibre.SetTransObject(sqlca)
 		idwc_calibre.Retrieve(Integer(ias_campo[1]), Integer(ias_campo[2]))	
-ELSE
+Else
 	dw_1.Object.vafa_fecini[il_fila] = id_fechaini 
 	dw_1.Object.vafa_fecter[il_fila] = id_fechafin		
-END IF
+End If
 end event
 
 event ue_nuevo;call super::ue_nuevo;dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
@@ -207,25 +214,32 @@ END IF
 
 end event
 
-event ue_deshace;call super::ue_deshace;IF UpperBound(ias_campo) > 0 THEN
+event ue_deshace;call super::ue_deshace;If UpperBound(ias_campo) > 0 Then
 	dw_1.SetItem(il_fila, "espe_codigo", Integer(ias_campo[1]))
 	dw_1.SetItem(il_fila, "vari_codigo", Integer(ias_campo[2]))
 	dw_1.SetItem(il_fila, "vaca_calibr", ias_campo[3])
 	dw_1.SetItem(il_fila, "vafp_preuni", Dec(ias_campo[4]))
 	dw_1.SetItem(il_fila, "emba_codigo", ias_campo[5])
+	dw_1.SetItem(il_fila, "colo_nombre", ias_campo[6])
 	
-	IF ias_campo[3] = '-1' THEN
+	If ias_campo[3] = '-1' Then
 		dw_1.SetItem(il_fila, "todoscal", 1)
-	ELSE
+	Else
 		dw_1.SetItem(il_fila, "todoscal", 0)
-	END IF
+	End If
 	
-	IF ias_campo[5] = '-1' THEN
+	If ias_campo[5] = '-1' Then
 		dw_1.SetItem(il_fila, "todos", 1)
-	ELSE
+	Else
 		dw_1.SetItem(il_fila, "todos", 0)
-	END IF
-END IF
+	End If
+	
+	If ias_campo[6] = '-1' Then
+		dw_1.SetItem(il_fila, "todosCol", 1)
+	Else
+		dw_1.SetItem(il_fila, "todosCol", 0)
+	End If
+End If
 end event
 
 event ue_antesguardar;call super::ue_antesguardar;Integer	li_cont
@@ -468,11 +482,11 @@ Choose Case ls_Columna
 	
 	Case "todos"
 		If Data = '1' Then
-			dw_1.Object.emba_codigo[Row]	=	'-1'
+			This.Object.emba_codigo[Row]	=	'-1'
 			This.SetItem(Row, ls_Columna, li_Null)
 			Return
 		Else	
-			dw_1.Object.emba_codigo[Row]	=	''	
+			This.Object.emba_codigo[Row]	=	''	
 		End If
 
 	Case 'emba_tipvid'
@@ -496,7 +510,7 @@ Choose Case ls_Columna
 
 	Case "todoscal"
 		If Data = '1' Then
-			dw_1.Object.vaca_calibr[Row]	=	'-1'
+			This.Object.vaca_calibr[Row]	=	'-1'
 			idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], '*')
 			
 			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], '*', False, SQLCA) Then
@@ -505,7 +519,7 @@ Choose Case ls_Columna
 			
 			Return
 		Else	
-			dw_1.Object.vaca_calibr[Row]	=	''	
+			This.Object.vaca_calibr[Row]	=	''	
 		End If				
 		
 	Case "vafa_fecini"	
@@ -578,6 +592,14 @@ Choose Case ls_Columna
 			This.SetItem(Row, ls_Columna, li_null)
 			Return 1
 		End If	
+		
+	Case "todoscol"
+		If Data = '1' Then
+			This.Object.colo_nombre[Row]	=	'-1'			
+			Return
+		Else	
+			This.Object.colo_nombre[Row]	=	''	
+		End If		
 		
 End Choose
 end event

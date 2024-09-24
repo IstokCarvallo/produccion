@@ -19,7 +19,7 @@ end forward
 global type w_mant_pmgminimo from window
 integer x = 46
 integer y = 48
-integer width = 2889
+integer width = 3136
 integer height = 1404
 boolean titlebar = true
 string title = "Mantención Parametros de Fruta Granel"
@@ -53,8 +53,8 @@ end variables
 
 forward prototypes
 protected function boolean wf_actualiza_db ()
-public subroutine cargaespecies ()
-public function boolean validaespecie (integer ai_especie)
+public subroutine wf_cargaespecies ()
+public function boolean wf_validaespecie (integer ai_especie)
 end prototypes
 
 event ue_guardar;String ls_plantanomb
@@ -87,10 +87,10 @@ DO
 	ELSEIF ll_fila > 0 THEN
 		dw_1.SetRow(1)
 		dw_1.SetFocus()
-		CargaEspecies()
+		wf_CargaEspecies()
 	ELSE
 		dw_1.Reset()
-		CargaEspecies()
+		wf_CargaEspecies()
 		dw_1.InsertRow(0)
 	END IF
 LOOP WHILE respuesta = 1
@@ -122,7 +122,7 @@ sqlca.Autocommit	=	False
 
 If dw_1.update() <> -1 Then 
 	
-	CargaEspecies()
+	wf_CargaEspecies()
 	commit;
 	
 	If sqlca.sqlcode <> 0 Then
@@ -147,7 +147,7 @@ Return lb_retorno
 
 end function
 
-public subroutine cargaespecies ();Long		ll_fila, ll_find
+public subroutine wf_cargaespecies ();Long		ll_fila, ll_find
 Integer	li_especie, li_planta
 String		ls_nombre
 
@@ -172,7 +172,7 @@ dw_1.SetSort("espe_codigo asc")
 dw_1.Sort()
 end subroutine
 
-public function boolean validaespecie (integer ai_especie);Integer	li_existe
+public function boolean wf_validaespecie (integer ai_especie);Integer	li_existe
 
 SELECT DISTINCT espe_codigo
   INTO :li_existe
@@ -275,8 +275,8 @@ end type
 
 type pb_3 from picturebutton within w_mant_pmgminimo
 event ue_mousemove pbm_mousemove
-integer x = 2501
-integer y = 184
+integer x = 2734
+integer y = 132
 integer width = 302
 integer height = 244
 integer taborder = 40
@@ -300,8 +300,8 @@ end event
 
 type pb_2 from picturebutton within w_mant_pmgminimo
 event ue_mousemove pbm_mousemove
-integer x = 2501
-integer y = 584
+integer x = 2734
+integer y = 532
 integer width = 302
 integer height = 244
 integer taborder = 50
@@ -325,7 +325,7 @@ end event
 type dw_1 from uo_dw within w_mant_pmgminimo
 integer x = 55
 integer y = 312
-integer width = 2295
+integer width = 2574
 integer height = 924
 integer taborder = 20
 boolean bringtotop = true
@@ -338,7 +338,7 @@ end type
 type st_2 from statictext within w_mant_pmgminimo
 integer x = 55
 integer y = 28
-integer width = 2295
+integer width = 2574
 integer height = 184
 integer textsize = -14
 integer weight = 700

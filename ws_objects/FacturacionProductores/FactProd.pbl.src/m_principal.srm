@@ -1109,6 +1109,7 @@ end type
 event clicked;SetPointer(HourGlass!)
 IF NOT accesopuntocritico() THEN Return
 gstr_us.OpcionActiva	=	This.ClassName()
+
 OpenSheet(w_mant_mues_valofactprod, w_main, columna, Original!)
 end event
 
@@ -1234,7 +1235,7 @@ end type
 
 on m_pmgminimo.create
 call super::create
-this.text = "PMG Minimo"
+this.text = "PMG Minimo / Libre Consig."
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741

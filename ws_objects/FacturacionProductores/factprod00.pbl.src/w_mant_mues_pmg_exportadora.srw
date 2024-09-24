@@ -11,6 +11,10 @@ type uo_selcliente from uo_seleccion_clientesprod within w_mant_mues_pmg_exporta
 end type
 type uo_selzonas from uo_seleccion_zonas within w_mant_mues_pmg_exportadora
 end type
+type cb_carga from commandbutton within w_mant_mues_pmg_exportadora
+end type
+type dw_carga from datawindow within w_mant_mues_pmg_exportadora
+end type
 type str_anexos from structure within w_mant_mues_pmg_exportadora
 end type
 end forward
@@ -22,21 +26,68 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_pmg_exportadora from w_mant_tabla
-integer width = 4023
+integer width = 4137
 integer height = 1936
 string title = "VALORES DE FACTURACION EXPORTADORA"
 st_2 st_2
 st_5 st_5
 uo_selcliente uo_selcliente
 uo_selzonas uo_selzonas
+cb_carga cb_carga
+dw_carga dw_carga
 end type
 global w_mant_mues_pmg_exportadora w_mant_mues_pmg_exportadora
 
 type variables
 w_mant_deta_pmg_exportadora iw_mantencion
 
-DataWindowChild				idwc_especie
+DataWindowChild	idwc_especie
+uo_semanafactura	iuo_Semana
 end variables
+
+forward prototypes
+public function integer wf_cargaarchivo ()
+end prototypes
+
+public function integer wf_cargaarchivo ();String	ls_File
+Long	ll_File, ll_New, ll_Fila, ll_Retorno = 1
+
+uo_Variedades		iuo_Variedad
+
+iuo_Variedad	=	Create uo_Variedades
+
+ll_File = dw_carga.ImportFile(CSV!, ls_File)
+	
+If ll_File < 0 Then
+	MessageBox('Alerta', 'Error en la carga de archivo.', Exclamation!, OK!)
+	ll_Retorno =  ll_File
+Else
+	For ll_Fila = 1 To dw_Carga.RowCount()
+		ll_New = dw_1.InsertRow(0)
+		
+		iuo_Semana.of_Existe(Integer(dw_carga.Object.semana[ll_Fila]), False, Sqlca)
+		iuo_Variedad.Existe(Integer(dw_carga.Object.Especie[ll_Fila]), Integer(dw_carga.Object.Variedad[ll_Fila]), False, Sqlca)
+		
+		dw_1.Object.clie_codigo[ll_New]		=	Integer(dw_carga.Object.Cliente[ll_Fila])
+		dw_1.Object.zona_codigo[ll_New]		=	Integer(dw_carga.Object.Zona[ll_Fila])
+		dw_1.Object.espe_codigo[ll_New]		=	Integer(dw_carga.Object.Especie[ll_Fila])
+		dw_1.Object.vari_codigo[ll_New]		=	Integer(dw_carga.Object.Variedad[ll_Fila])
+		dw_1.Object.vari_nombre[ll_New]		=	iuo_Variedad.NombreVariedad
+		dw_1.Object.emba_codigo[ll_New]	=	dw_carga.Object.Embalaje[ll_Fila]
+		dw_1.Object.emba_tipvid[ll_New]		=	Integer(dw_carga.Object.tipovida[ll_Fila])
+		dw_1.Object.vaca_calibr[ll_New]		=	dw_carga.Object.Calibre[ll_Fila]
+		dw_1.Object.colo_nombre[ll_New]	=	dw_carga.Object.Color[ll_Fila]
+		dw_1.Object.vafp_preuni[ll_New]		=	Dec(dw_carga.Object.Valor[ll_Fila])
+		dw_1.Object.semana[ll_New]			=	Integer(dw_carga.Object.semana[ll_Fila])
+		dw_1.Object.vafa_fecini[ll_New]		=	iuo_Semana.Desde
+		dw_1.Object.vafa_fecter[ll_New]		=	iuo_Semana.Hasta		
+	Next
+End If
+
+Destroy iuo_Variedad
+
+Return ll_Retorno
+end function
 
 event ue_nuevo;istr_mant.borra	= False
 istr_mant.agrega	= True
@@ -94,7 +145,15 @@ Do
 		dw_1.SetFocus()
 		pb_imprimir.Enabled	= True
 		pb_eliminar.Enabled	= True
-		pb_grabar.Enabled		= True
+		pb_grabar.Enabled	= True
+		cb_carga.Enabled		= True
+		
+		For ll_Fila = 1 To dw_1.RowCount()
+			If iuo_Semana.of_Semana(dw_1.Object.vafa_fecini[ll_Fila], SQLCA) Then
+				dw_1.Object.semana[ll_Fila] = iuo_Semana.Semana
+			End If
+		Next
+
 	Else
 		pb_insertar.SetFocus()
 	End If
@@ -114,11 +173,15 @@ this.st_2=create st_2
 this.st_5=create st_5
 this.uo_selcliente=create uo_selcliente
 this.uo_selzonas=create uo_selzonas
+this.cb_carga=create cb_carga
+this.dw_carga=create dw_carga
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_2
 this.Control[iCurrent+2]=this.st_5
 this.Control[iCurrent+3]=this.uo_selcliente
 this.Control[iCurrent+4]=this.uo_selzonas
+this.Control[iCurrent+5]=this.cb_carga
+this.Control[iCurrent+6]=this.dw_carga
 end on
 
 on w_mant_mues_pmg_exportadora.destroy
@@ -127,6 +190,8 @@ destroy(this.st_2)
 destroy(this.st_5)
 destroy(this.uo_selcliente)
 destroy(this.uo_selzonas)
+destroy(this.cb_carga)
+destroy(this.dw_carga)
 end on
 
 event ue_borrar;If dw_1.rowcount() < 1 Then Return
@@ -179,10 +244,11 @@ event open;call super::open;Boolean lb_Cerrar = False
 If IsNull(uo_SelCliente.Codigo) Then lb_Cerrar = True
 If IsNull(uo_SelZonas.Codigo) Then lb_Cerrar = True
 
-
 If lb_Cerrar Then
 	Close(This)
 Else
+	iuo_Semana	=	Create uo_semanafactura	
+	
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelZonas.Seleccion(False, False)
 	uo_SelCliente.Inicia(gi_CodExport)
@@ -235,20 +301,20 @@ end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_pmg_exportadora
 integer y = 364
-integer width = 3314
+integer width = 3497
 integer height = 1436
 integer taborder = 50
 string dataobject = "dw_mues_pmg_exportadora"
 end type
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_pmg_exportadora
-integer width = 3314
+integer width = 3497
 integer height = 260
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 88
+integer x = 3735
+integer y = 72
 integer taborder = 40
 end type
 
@@ -257,43 +323,44 @@ uo_SelZonas.Bloquear(True)
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 544
+integer x = 3735
+integer y = 528
 integer taborder = 60
 end type
 
 event pb_nuevo::clicked;call super::clicked;uo_SelCliente.Bloquear(False)
 uo_SelZonas.Bloquear(False)
+cb_carga.Enabled	= False
 
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 720
+integer x = 3735
+integer y = 704
 integer taborder = 70
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 896
+integer x = 3735
+integer y = 880
 integer taborder = 80
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 1072
+integer x = 3735
+integer y = 1056
 integer taborder = 90
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 1248
+integer x = 3735
+integer y = 1232
 integer taborder = 100
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_pmg_exportadora
-integer x = 3611
-integer y = 1552
+integer x = 3735
+integer y = 1536
 integer taborder = 110
 end type
 
@@ -357,4 +424,49 @@ end type
 on uo_selzonas.destroy
 call uo_seleccion_zonas::destroy
 end on
+
+type cb_carga from commandbutton within w_mant_mues_pmg_exportadora
+integer x = 2999
+integer y = 140
+integer width = 590
+integer height = 116
+integer taborder = 60
+boolean bringtotop = true
+integer textsize = -8
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+boolean enabled = false
+string text = "Carga Inicial"
+boolean default = true
+end type
+
+event clicked;
+If dw_1.RowCount() > 0 Then
+	If MessageBox('Alerta', 'Existe Informacion cargada. Desea Borrar', Exclamation!, YesNo!, 2) = 2 Then 
+		Return 
+	Else
+		dw_1.RowsMove(1, dw_1.RowCount(), Primary!, dw_1, 1, Delete!)
+		wf_CargaArchivo()
+	End if
+Else
+	wf_CargaArchivo()
+End If
+end event
+
+type dw_carga from datawindow within w_mant_mues_pmg_exportadora
+boolean visible = false
+integer x = 2994
+integer y = 1432
+integer width = 594
+integer height = 336
+integer taborder = 100
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_carga_estandar"
+boolean livescroll = true
+borderstyle borderstyle = stylelowered!
+end type
 

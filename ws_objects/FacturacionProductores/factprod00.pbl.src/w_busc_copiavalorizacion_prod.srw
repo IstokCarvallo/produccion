@@ -1,6 +1,6 @@
-﻿$PBExportHeader$w_busc_copiavalorizacion.srw
+﻿$PBExportHeader$w_busc_copiavalorizacion_prod.srw
 forward
-global type w_busc_copiavalorizacion from w_busqueda
+global type w_busc_copiavalorizacion_prod from w_busqueda
 end type
 type st_1 from statictext within tabpage_1
 end type
@@ -8,31 +8,40 @@ type st_2 from statictext within tabpage_1
 end type
 type uo_selcliente from uo_seleccion_clientesprod within tabpage_1
 end type
-type uo_selzonas from uo_seleccion_zonas within tabpage_1
+type st_3 from statictext within tabpage_1
 end type
-type pb_todos from picturebutton within w_busc_copiavalorizacion
+type em_produc from editmask within tabpage_1
 end type
-type pb_ninguno from picturebutton within w_busc_copiavalorizacion
+type cb_2 from uo_buscar within tabpage_1
 end type
-type dw_4 from uo_dw within w_busc_copiavalorizacion
+type sle_nompro from singlelineedit within tabpage_1
+end type
+type sle_nomzona from singlelineedit within tabpage_1
+end type
+type pb_todos from picturebutton within w_busc_copiavalorizacion_prod
+end type
+type pb_ninguno from picturebutton within w_busc_copiavalorizacion_prod
+end type
+type dw_4 from uo_dw within w_busc_copiavalorizacion_prod
 end type
 end forward
 
-global type w_busc_copiavalorizacion from w_busqueda
+global type w_busc_copiavalorizacion_prod from w_busqueda
 integer width = 4110
-integer height = 2192
-string title = "Copia de Valores Exportadora"
+integer height = 2288
+string title = "Copia de Valores Productor"
 pb_todos pb_todos
 pb_ninguno pb_ninguno
 dw_4 dw_4
 end type
-global w_busc_copiavalorizacion w_busc_copiavalorizacion
+global w_busc_copiavalorizacion_prod w_busc_copiavalorizacion_prod
 
 type variables
 uo_semanafactura	iuo_Semana
+uo_Productores		iuo_Productor
 end variables
 
-on w_busc_copiavalorizacion.create
+on w_busc_copiavalorizacion_prod.create
 int iCurrent
 call super::create
 this.pb_todos=create pb_todos
@@ -44,7 +53,7 @@ this.Control[iCurrent+2]=this.pb_ninguno
 this.Control[iCurrent+3]=this.dw_4
 end on
 
-on w_busc_copiavalorizacion.destroy
+on w_busc_copiavalorizacion_prod.destroy
 call super::destroy
 destroy(this.pb_todos)
 destroy(this.pb_ninguno)
@@ -58,22 +67,21 @@ dw_1.SetRedraw(False)
 istr_Mant		=	Message.PowerObjectParm
 
 Tab_1.TabPage_1.uo_SelCliente.Seleccion(False, False)
-Tab_1.TabPage_1.uo_SelZonas.Seleccion(False, False)
 
-iuo_Semana	=	Create uo_semanafactura
+iuo_Semana		=	Create uo_semanafactura
+iuo_Productor	=	Create uo_Productores	
 
 is_ordena = 'Especie:espe_codigo,Variedad:vari_codigo,Embalaje:emba_codigo,Tipo Vida:emba_tipvid,Calibre:vaca_calibr,Semana:semana'
 
 If UpperBound(istr_Mant.Argumento) > 0 Then
 	If istr_Mant.Argumento[1] <> "" Then
 		Tab_1.TabPage_1.uo_SelCliente.Inicia(Integer(istr_Mant.Argumento[1]))
-		Tab_1.TabPage_1.uo_SelZonas.Inicia(Integer(istr_Mant.Argumento[4]))
 
 		dw_1.SetFocus()
 	End If
 End If
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo)
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text))
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -111,7 +119,7 @@ istr_busq.argum[15]	= dw_1.Object.colo_nombre[dw_1.GetRow()]
 CloseWithReturn(This, istr_busq)
 end event
 
-type pb_insertar from w_busqueda`pb_insertar within w_busc_copiavalorizacion
+type pb_insertar from w_busqueda`pb_insertar within w_busc_copiavalorizacion_prod
 integer x = 3703
 integer y = 744
 integer taborder = 50
@@ -167,11 +175,13 @@ Destroy luo_Variedad
 CloseWithReturn(Parent, lstr_Busq)
 end event
 
-type dw_1 from w_busqueda`dw_1 within w_busc_copiavalorizacion
+type dw_1 from w_busqueda`dw_1 within w_busc_copiavalorizacion_prod
+integer x = 114
+integer y = 792
 integer width = 3515
 integer height = 1308
 integer taborder = 60
-string dataobject = "dw_mues_pmg_exportadora"
+string dataobject = "dw_mues_valofactprod"
 end type
 
 event dw_1::doubleclicked;IF row > 0 THEN
@@ -252,7 +262,7 @@ Else
 End If
 end event
 
-type pb_salir from w_busqueda`pb_salir within w_busc_copiavalorizacion
+type pb_salir from w_busqueda`pb_salir within w_busc_copiavalorizacion_prod
 integer x = 3698
 integer y = 1052
 end type
@@ -261,7 +271,7 @@ event pb_salir::clicked;
 CloseWithReturn(Parent, istr_busq)
 end event
 
-type tab_1 from w_busqueda`tab_1 within w_busc_copiavalorizacion
+type tab_1 from w_busqueda`tab_1 within w_busc_copiavalorizacion_prod
 end type
 
 on tab_1.create
@@ -279,21 +289,33 @@ type tabpage_1 from w_busqueda`tabpage_1 within tab_1
 st_1 st_1
 st_2 st_2
 uo_selcliente uo_selcliente
-uo_selzonas uo_selzonas
+st_3 st_3
+em_produc em_produc
+cb_2 cb_2
+sle_nompro sle_nompro
+sle_nomzona sle_nomzona
 end type
 
 on tabpage_1.create
 this.st_1=create st_1
 this.st_2=create st_2
 this.uo_selcliente=create uo_selcliente
-this.uo_selzonas=create uo_selzonas
+this.st_3=create st_3
+this.em_produc=create em_produc
+this.cb_2=create cb_2
+this.sle_nompro=create sle_nompro
+this.sle_nomzona=create sle_nomzona
 int iCurrent
 call super::create
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.st_2
 this.Control[iCurrent+3]=this.uo_selcliente
-this.Control[iCurrent+4]=this.uo_selzonas
+this.Control[iCurrent+4]=this.st_3
+this.Control[iCurrent+5]=this.em_produc
+this.Control[iCurrent+6]=this.cb_2
+this.Control[iCurrent+7]=this.sle_nompro
+this.Control[iCurrent+8]=this.sle_nomzona
 end on
 
 on tabpage_1.destroy
@@ -301,15 +323,21 @@ call super::destroy
 destroy(this.st_1)
 destroy(this.st_2)
 destroy(this.uo_selcliente)
-destroy(this.uo_selzonas)
+destroy(this.st_3)
+destroy(this.em_produc)
+destroy(this.cb_2)
+destroy(this.sle_nompro)
+destroy(this.sle_nomzona)
 end on
 
 type pb_filtrar from w_busqueda`pb_filtrar within tabpage_1
+integer x = 2034
+integer y = 272
 end type
 
 event pb_filtrar::clicked;call super::clicked;Long ll_Fila
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo)
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text))
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -384,9 +412,9 @@ type pb_buscar from w_busqueda`pb_buscar within tabpage_3
 end type
 
 type st_1 from statictext within tabpage_1
-integer x = 96
+integer x = 78
 integer y = 116
-integer width = 466
+integer width = 297
 integer height = 76
 boolean bringtotop = true
 integer textsize = -10
@@ -400,9 +428,9 @@ boolean focusrectangle = false
 end type
 
 type st_2 from statictext within tabpage_1
-integer x = 96
-integer y = 296
-integer width = 466
+integer x = 78
+integer y = 360
+integer width = 297
 integer height = 76
 boolean bringtotop = true
 integer textsize = -10
@@ -416,7 +444,7 @@ boolean focusrectangle = false
 end type
 
 type uo_selcliente from uo_seleccion_clientesprod within tabpage_1
-integer x = 640
+integer x = 457
 integer y = 100
 integer height = 108
 integer taborder = 20
@@ -427,19 +455,120 @@ on uo_selcliente.destroy
 call uo_seleccion_clientesprod::destroy
 end on
 
-type uo_selzonas from uo_seleccion_zonas within tabpage_1
-integer x = 640
-integer y = 280
-integer height = 108
-integer taborder = 21
+type st_3 from statictext within tabpage_1
+integer x = 78
+integer y = 240
+integer width = 297
+integer height = 84
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long backcolor = 553648127
+string text = "Productor"
+boolean focusrectangle = false
+end type
+
+type em_produc from editmask within tabpage_1
+integer x = 457
+integer y = 236
+integer width = 219
+integer height = 92
+integer taborder = 30
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long backcolor = 16777215
+alignment alignment = center!
+borderstyle borderstyle = stylelowered!
+string mask = "#####"
+string displaydata = ""
+end type
+
+event modified;If This.Text =  '' Then Return 
+
+If Not iuo_Productor.Existe(Long(This.Text), True, Sqlca) Then 
+	sle_nompro.text	=	""
+	sle_nomzona.text	=	""
+	This.Text				=	""
+	This.SetFocus()
+Else
+	sle_nompro.text			= iuo_Productor.Nombre
+	sle_nomzona.text			= iuo_Productor.NombreZona
+End If
+end event
+
+type cb_2 from uo_buscar within tabpage_1
+integer x = 695
+integer y = 240
+integer width = 96
+integer height = 84
+integer taborder = 40
 boolean bringtotop = true
 end type
 
-on uo_selzonas.destroy
-call uo_seleccion_zonas::destroy
-end on
+event clicked;istr_busq.argum[1]  = ''
 
-type pb_todos from picturebutton within w_busc_copiavalorizacion
+OpenWithParm(w_busc_productores, istr_busq)
+
+istr_busq	= Message.PowerObjectParm
+
+If istr_busq.argum[1] = "" Then
+	em_produc.SetFocus()
+Else
+	em_produc.Text			= istr_busq.argum[1]
+	sle_nompro.Text			= istr_busq.argum[2]
+	sle_nomzona.Text			= istr_busq.argum[4]
+
+	istr_mant.argumento[2]	= istr_busq.argum[1]
+	istr_mant.argumento[3]	= istr_busq.argum[2]
+End If
+end event
+
+type sle_nompro from singlelineedit within tabpage_1
+integer x = 809
+integer y = 236
+integer width = 1211
+integer height = 92
+integer taborder = 50
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+boolean autohscroll = false
+boolean displayonly = true
+borderstyle borderstyle = stylelowered!
+end type
+
+type sle_nomzona from singlelineedit within tabpage_1
+integer x = 457
+integer y = 352
+integer width = 1563
+integer height = 92
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+boolean autohscroll = false
+boolean displayonly = true
+borderstyle borderstyle = stylelowered!
+end type
+
+type pb_todos from picturebutton within w_busc_copiavalorizacion_prod
 integer x = 2409
 integer y = 504
 integer width = 494
@@ -462,7 +591,7 @@ dw_1.SelectRow(0,True)
 dw_1.SetRedraw(True)
 end event
 
-type pb_ninguno from picturebutton within w_busc_copiavalorizacion
+type pb_ninguno from picturebutton within w_busc_copiavalorizacion_prod
 integer x = 2967
 integer y = 504
 integer width = 494
@@ -485,7 +614,7 @@ dw_1.SelectRow(0,False)
 dw_1.SetRedraw(True)
 end event
 
-type dw_4 from uo_dw within w_busc_copiavalorizacion
+type dw_4 from uo_dw within w_busc_copiavalorizacion_prod
 boolean visible = false
 integer x = 2432
 integer y = 52

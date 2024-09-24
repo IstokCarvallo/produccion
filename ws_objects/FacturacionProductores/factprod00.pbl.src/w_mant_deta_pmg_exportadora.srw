@@ -147,6 +147,7 @@ ias_campo[2]  = String(dw_1.GetItemNumber(il_fila, "vari_codigo"))
 ias_campo[3]  = dw_1.GetItemString(il_fila, "vaca_calibr")
 ias_campo[4]  = String(dw_1.GetItemDecimal(il_fila, "vafp_preuni"))
 ias_campo[5]  = dw_1.GetItemString(il_fila, "emba_codigo")
+ias_campo[6]  = dw_1.GetItemString(il_fila, "colo_nombre")
 
 If ias_campo[3] = '-1' Then
 	dw_1.SetItem(il_fila, "todoscal", 1)
@@ -159,6 +160,12 @@ If ias_campo[5] = '-1' Then
 	ls_Calibre = '*'
 Else
 	dw_1.SetItem(il_fila, "todos", 0)
+End If
+
+If ias_campo[6] = '-1' Then
+	dw_1.SetItem(il_fila, "todosCol", 1)
+Else
+	dw_1.SetItem(il_fila, "todosCol", 0)
 End If
 
 dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
@@ -205,25 +212,33 @@ End If
 
 end event
 
-event ue_deshace;call super::ue_deshace;IF UpperBound(ias_campo) > 0 THEN
+event ue_deshace;call super::ue_deshace;If UpperBound(ias_campo) > 0 Then
 	dw_1.SetItem(il_fila, "espe_codigo", Integer(ias_campo[1]))
 	dw_1.SetItem(il_fila, "vari_codigo", Integer(ias_campo[2]))
 	dw_1.SetItem(il_fila, "vaca_calibr", ias_campo[3])
 	dw_1.SetItem(il_fila, "vafp_preuni", Dec(ias_campo[4]))
 	dw_1.SetItem(il_fila, "emba_codigo", ias_campo[5])
+	dw_1.SetItem(il_fila, "colo_nombre", ias_campo[6])
 	
-	IF ias_campo[3] = '-1' THEN
+	If ias_campo[3] = '-1' Then
 		dw_1.SetItem(il_fila, "todoscal", 1)
-	ELSE
+	Else
 		dw_1.SetItem(il_fila, "todoscal", 0)
-	END IF
+	End If
 	
-	IF ias_campo[5] = '-1' THEN
+	If ias_campo[5] = '-1' Then
 		dw_1.SetItem(il_fila, "todos", 1)
-	ELSE
+	Else
 		dw_1.SetItem(il_fila, "todos", 0)
-	END IF
-END IF
+	End If
+	
+	If ias_campo[6] = '-1' Then
+		dw_1.SetItem(il_fila, "todosCol", 1)
+	Else
+		dw_1.SetItem(il_fila, "todosCol", 0)
+	End If
+	
+End If
 end event
 
 event ue_antesguardar;call super::ue_antesguardar;Integer	li_cont
@@ -564,7 +579,15 @@ Choose Case ls_Columna
 		If wf_Duplicado(ls_Columna,data) Then
 			This.SetItem(Row, ls_Columna, li_null)
 			Return 1
-		End If		
+		End If
+	
+	Case "todoscol"
+		If data = '1' Then
+			dw_1.Object.colo_nombre[Row]	=	'-1'	
+			Return
+		Else	
+			dw_1.Object.colo_nombre[Row]	=	''
+		End If	
 		
 End Choose
 end event
