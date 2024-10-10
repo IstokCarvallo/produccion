@@ -170,7 +170,7 @@ Else
 	F_Membrete(vinf.dw_1)
   	vinf.dw_1.ModIfy("guia.text = '" + ls_recepcion + "'")
 	vinf.dw_1.ModIfy("fruta.text = '" + ls_descri + "'")  
-	vinf.dw_1.Object.DataWindow.Zoom = 93
+	vinf.dw_1.Object.DataWindow.Zoom = 89
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
 

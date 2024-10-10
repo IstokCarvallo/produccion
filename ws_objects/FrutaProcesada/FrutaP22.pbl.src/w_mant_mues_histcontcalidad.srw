@@ -77,18 +77,18 @@ lstr_mant	=	Message.PowerObjectParm
 IF lstr_mant.Respuesta = 0 THEN Close(This)
 end event
 
-event ue_nuevo;istr_mant.borra	= False
-istr_mant.agrega	= True
+event ue_nuevo;istr_mant.Borra		= False
+istr_mant.Agrega	= True
 
 istr_mant.Argumento[1] = String(uo_SelCliente.Codigo)
 istr_mant.Argumento[2] = String(uo_SelPlanta.Codigo)
 
 OpenWithParm(iw_mantencion, istr_mant)
 
-IF dw_1.RowCount() > 0 and pb_eliminar.Enabled = FALSE THEN
-	pb_eliminar.Enabled	= TRUE
-	pb_grabar.Enabled		= TRUE
-END IF
+If dw_1.RowCount() > 0 And Not pb_eliminar.Enabled Then 
+	pb_eliminar.Enabled	= True
+	pb_grabar.Enabled	= True
+End If
 
 dw_1.SetRow(il_fila)
 dw_1.SelectRow(il_fila,True)
@@ -103,27 +103,26 @@ Str_info	lstr_info
 lstr_info.titulo	=	"INFORME CONTROL DE CALIDAD"
 lstr_info.copias	=	1
 
-IF rb_pallet.Checked THEN
+If rb_pallet.Checked Then
 	ll_lote = -1
-ELSE	
+Else	
 	ll_lote  =  Long(em_lote.Text)
-END IF
+End If
 
 OpenWithParm(vinf,lstr_info)
 vinf.dw_1.DataObject = "dw_info_histocontcalidad"
 vinf.dw_1.SetTransObject(sqlca)
 
-ll_fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, Date(em_Fecha.Text), ll_lote)
+ll_fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, Datetime(em_Fecha.Text), ll_lote)
 
-IF ll_fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_fila = 0 THEN
+If ll_fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf ll_fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.",StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
@@ -134,36 +133,36 @@ w_main.SetMicroHelp("Recuperando Datos...")
 SetPointer(HourGlass!)
 PostEvent("ue_listo")
 
-DO	
-	IF rb_pallet.Checked THEN
-		ll_Fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date(em_Fecha.Text))
+Do
+	If rb_pallet.Checked Then
+		ll_Fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Datetime(em_Fecha.Text))
 		
 		pb_eliminar.Enabled	= True
 		pb_grabar.Enabled	= True
 		pb_insertar.Enabled	= True
 		
-	ELSE
+	Else
 		ll_Fila	= dw_2.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Long(em_lote.Text))
 		
-		IF ll_Fila > 0 THEN
+		If ll_Fila > 0 Then
 			pb_eliminar.Enabled	= False
-			pb_grabar.Enabled		= True
+			pb_grabar.Enabled	= True
 			pb_insertar.Enabled	= False
-		END IF	
-	END IF	
+		End If	
+	End If	
 	
-	IF ll_Fila = -1 THEN
+	If ll_Fila = -1 Then
 		ll_Respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-	ELSEIF ll_Fila > 0 THEN
+	ElseIf ll_Fila > 0 Then
 		dw_1.SetRow(1)
 		dw_1.SelectRow(1,True)
 		dw_1.SetFocus()
-	ELSE
+	Else
 		pb_insertar.SetFocus()
-	END IF
-LOOP WHILE ll_Respuesta = 1
+	End If
+Loop While ll_Respuesta = 1
 
-IF ll_Respuesta = 2 THEN Close(This)
+If ll_Respuesta = 2 Then Close(This)
 end event
 
 on w_mant_mues_histcontcalidad.create
@@ -294,55 +293,54 @@ Else
 End If
 end event
 
-event ue_modifica;call super::ue_modifica;IF dw_1.RowCount() > 0 AND &
-	(dw_1.GetItemStatus(il_fila, 0, Primary!) = New! OR &
-	dw_1.GetItemStatus(il_fila, 0, Primary!) = NewModified!) THEN
+event ue_modifica;call super::ue_modifica;If dw_1.RowCount() > 0 AND &
+	(dw_1.GetItemStatus(il_fila, 0, Primary!) = New! Or dw_1.GetItemStatus(il_fila, 0, Primary!) = NewModified!) Then
 	
-	istr_mant.agrega	= False
-	istr_mant.borra	= False
+	istr_mant.Agrega	= False
+	istr_mant.Borra		= False
 	
 	istr_mant.Argumento[1] = String(uo_SelCliente.Codigo)
 	istr_mant.Argumento[2] = String(uo_SelPlanta.Codigo)
 	
 	OpenWithParm(iw_mantencion, istr_mant)
-END IF
+End If
 end event
 
-event ue_listo;IF rb_pallet.Checked THEN
+event ue_listo;If rb_pallet.Checked Then
 
-	IF dw_1.RowCount() > 0 THEN
+	If dw_1.RowCount() > 0 Then
 		pb_Imprimir.Enabled	=	True
 		
-		IF istr_mant.Solo_Consulta THEN
+		If istr_mant.Solo_Consulta Then
 			pb_Eliminar.Enabled	=	False
-			pb_Grabar.Enabled		=	False
+			pb_Grabar.Enabled	=	False
 			pb_Insertar.Enabled	=	False
-		ELSE
+		Else
 			pb_Eliminar.Enabled	=	True
-			pb_Grabar.Enabled		=	True
+			pb_Grabar.Enabled	=	True
 			pb_Insertar.Enabled	=	True
-		END IF
-	ELSE
-		IF istr_mant.Solo_Consulta THEN
+		End If
+	Else
+		If istr_mant.Solo_Consulta Then
 			pb_Insertar.Enabled	=	False
-		ELSE
+		Else
 			pb_Insertar.Enabled	=	True
-		END IF
-	END IF
-END IF	
+		End If
+	End If
+End If	
 
 w_main.SetMicroHelp("Listo")
 
 SetPointer(Arrow!)
 end event
 
-event ue_antesguardar;call super::ue_antesguardar;Long	ll_fila, ll_filnew, ll_new, ll_pallet
-Integer	li_Cliente, li_planta, li_secuen
-Date	ld_fecha
+event ue_antesguardar;call super::ue_antesguardar;Long			ll_fila, ll_filnew, ll_new, ll_pallet
+Integer		li_Cliente, li_planta, li_secuen
+DateTime	ld_fecha
 
-IF rb_lote.Checked THEN
-	IF dw_2.RowCount() > 0 THEN
-		FOR ll_fila = 1 TO dw_2.RowCount()
+If rb_lote.Checked Then
+	If dw_2.RowCount() > 0 Then
+		For ll_fila = 1 To dw_2.RowCount()
 			ll_filnew = dw_1.InsertRow(0)
 			
 			dw_1.Object.clie_codigo[ll_filnew] 	= dw_2.Object.clie_codigo[ll_fila]
@@ -353,34 +351,33 @@ IF rb_lote.Checked THEN
 			dw_1.Object.coca_secuen[ll_filnew] 	= ll_fila + 1
 			dw_1.Object.coca_estneo[ll_filnew] 	= il_newestado
 			dw_1.Object.coca_observ[ll_filnew] 	= em_observa.Text
-		NEXT
-	END IF
-ELSE
+		Next
+	End If
+Else
 	FOR ll_new = 1 TO dw_1.RowCount()
 		li_Cliente	=	dw_1.Object.clie_codigo[ll_new]
 		ll_pallet	=	dw_1.Object.paen_numero[ll_new]
 		li_planta	=	dw_1.Object.plde_codigo[ll_new]
-		ld_fecha		=	dw_1.Object.coca_fechac[ll_new]
+		ld_fecha	=	dw_1.Object.coca_fechac[ll_new]
 		
-		IF li_secuen = 0 THEN
+		If li_secuen = 0 Then
 			SELECT	Max(coca_secuen)
 				INTO	:li_secuen
 				FROM	dbo.histcontcalidad
 				WHERE	clie_codigo =  :li_cliente
 				AND	paen_numero	=	:ll_pallet
 				AND	plde_codigo	=	:li_planta
-				AND	coca_fechac	=	:ld_fecha;
-		END IF		
+				AND	Datediff(dd, coca_fechac, :ld_fecha) = 0;
+		End If		
 		
-		IF Isnull(li_secuen) THEN li_secuen = 0
+		If IsNull(li_secuen) Then li_secuen = 0
 		
-		IF Isnull(dw_1.Object.coca_secuen[ll_new]) or dw_1.Object.coca_secuen[ll_new] = 0 THEN
+		If IsNull(dw_1.Object.coca_secuen[ll_new]) or dw_1.Object.coca_secuen[ll_new] = 0 Then
 			li_secuen ++
 			dw_1.Object.coca_secuen[ll_new] = li_secuen
-		END IF
-	NEXT
-	
-END IF	
+		End If
+	Next	
+End If	
 end event
 
 event resize;call super::resize;dw_2.Height = dw_1.Height
@@ -414,7 +411,7 @@ end type
 
 event pb_lectura::clicked;em_fecha.Enabled			=	False
 
-istr_mant.Argumento[3]	=	em_fecha.Text
+istr_mant.Argumento[3]	=	em_fecha.Text + ' ' + String(Now(), 'hh:mm')
 em_lote.Enabled 			= False
 em_observa.Enabled 		= False
 
@@ -505,12 +502,12 @@ string displaydata = "~t/"
 boolean dropdowncalendar = true
 end type
 
-event modified;IF Not f_validafechatempo(date(this.Text)) THEN
+event modified;If Not f_ValidaFechaTempo(date(this.Text)) Then
 	This.Text = ''
 	This.SetFocus()
-END IF
+End If
 
-istr_mant.Argumento[3]	=	This.Text
+istr_mant.Argumento[3]	=	This.Text + ' ' + String(Now(), 'hh:mm')
 
 
 end event

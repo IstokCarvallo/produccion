@@ -62,7 +62,7 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_facturprodgenerado from w_mant_tabla
-integer width = 3863
+integer width = 3977
 integer height = 1912
 string title = "MANTENCION DE FACTURACION POR PRODUCTOR"
 st_3 st_3
@@ -540,7 +540,7 @@ end event
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_facturprodgenerado
 integer x = 73
 integer y = 596
-integer width = 3301
+integer width = 3319
 integer height = 1148
 integer taborder = 130
 string dataobject = "dw_mues_facturprodgenerado"
@@ -556,8 +556,8 @@ integer height = 420
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_facturprodgenerado
-integer x = 3479
-integer y = 24
+integer x = 3579
+integer y = 68
 integer taborder = 100
 end type
 
@@ -569,8 +569,8 @@ cb_2.Enabled			= 	False
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_facturprodgenerado
-integer x = 3479
-integer y = 440
+integer x = 3579
+integer y = 484
 integer taborder = 140
 end type
 
@@ -602,7 +602,8 @@ em_produc.SetFocus()
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_facturprodgenerado
-integer x = 3479
+integer x = 3579
+integer y = 700
 integer taborder = 150
 end type
 
@@ -616,27 +617,27 @@ end event
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_facturprodgenerado
 boolean visible = false
-integer x = 3479
-integer y = 832
+integer x = 3579
+integer y = 876
 integer taborder = 160
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_facturprodgenerado
-integer x = 3479
-integer y = 1008
+integer x = 3579
+integer y = 1052
 integer taborder = 170
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_facturprodgenerado
 boolean visible = false
-integer x = 3479
-integer y = 1184
+integer x = 3579
+integer y = 1228
 integer taborder = 180
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_facturprodgenerado
-integer x = 3479
-integer y = 1476
+integer x = 3579
+integer y = 1520
 integer taborder = 190
 end type
 

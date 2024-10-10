@@ -101,7 +101,7 @@ dw_1.SetRedraw(True)
 end event
 
 event ue_asignacion;istr_busq.argum[1]	= String(dw_1.Object.clie_codigo[dw_1.GetRow()])
-istr_busq.argum[2]	= String(dw_1.Object.zona_codigo[dw_1.GetRow()])
+istr_busq.argum[2]	= String(iuo_Productor.Zona)
 istr_busq.argum[3]	= String(dw_1.Object.espe_codigo[dw_1.GetRow()])
 istr_busq.argum[4]	= String(dw_1.Object.vari_codigo[dw_1.GetRow()])
 istr_busq.argum[5]	= dw_1.Object.vaca_calibr[dw_1.GetRow()]
@@ -157,7 +157,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 			dw_4.Object.vari_codigo[ll_New]		=	dw_1.Object.vari_codigo[ll_Fila]
 			dw_4.Object.vari_nombre[ll_New]		=	luo_Variedad.NombreVariedad
 			dw_4.Object.vaca_calibr[ll_New]		=	dw_1.Object.vaca_calibr[ll_Fila]
-			dw_4.Object.vafp_preuni[ll_New]		=	0 
+			dw_4.Object.vafp_preuni[ll_New]		=	dw_1.Object.vafp_preuni[ll_Fila]
 			dw_4.Object.vafa_fecini[ll_New]		=	dw_1.Object.vafa_fecini[ll_Fila]
 			dw_4.Object.vafa_fecter[ll_New]		=	dw_1.Object.vafa_fecter[ll_Fila]
 			dw_4.Object.emba_codigo[ll_New]	=	dw_1.Object.emba_codigo[ll_Fila]

@@ -457,7 +457,7 @@ Choose Case ls_Columna
 		End If
 		
 	Case "vari_codigo"
-		If wf_Duplicado(ls_Columna,Data) Or iuo_Variedad.Existe(This.Object.espe_codigo[Row], Integer(Data), True, Sqlca) Then
+		If wf_Duplicado(ls_Columna,Data) Or Not iuo_Variedad.Existe(This.Object.espe_codigo[Row], Integer(Data), True, Sqlca) Then
 			This.SetItem(Row, ls_Columna, Integer(ias_campo[2]))
 			Return 1
 		Else

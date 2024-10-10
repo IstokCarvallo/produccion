@@ -208,13 +208,13 @@ end type
 event pb_acepta::clicked;SetPointer(HourGlass!)
 
 Long		ll_Fila, ll_NroPallet, ll_lote
-Date		ld_fdesde, ld_fhasta
+Datetime	ld_fdesde, ld_fhasta
 
 istr_info.titulo	=	"BITACORA COTROL DE CALIDAD PALLETS"
 istr_info.copias	=	1
 
-ld_fdesde = Date(em_desde.Text)
-ld_fhasta = Date(em_hasta.Text)
+ld_fdesde = Datetime(em_desde.Text)
+ld_fhasta = Datetime(em_hasta.Text)
 
 If cbx_Pallet.Checked Then 
 	ll_NroPallet = -1

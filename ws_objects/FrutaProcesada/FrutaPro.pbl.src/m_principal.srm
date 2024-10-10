@@ -13321,7 +13321,7 @@ end event
 type m_29 from menu within m_45
 end type
 
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+event clicked;SetPointer(HourGlass!);If NOT accesopuntocritico() Then Return
 gstr_us.OpcionActiva	=	This.ClassName()
 
 uo_responablescierre		iuo_responablescierre
@@ -13329,16 +13329,13 @@ uo_admausuarios			iuo_admausurios
 iuo_responablescierre	=	CREATE uo_responablescierre
 iuo_admausurios			=	CREATE uo_admausuarios
 
-IF NOT iuo_admausurios.Existe(gstr_us.Nombre,False,Sqlca) THEN
-	Return
-END IF	
+If NOT iuo_admausurios.Existe(gstr_us.Nombre,False,Sqlca) Then Return
 
-IF iuo_responablescierre.Existe(gi_codplanta,gstr_us.Nombre,False,Sqlca) AND iuo_admausurios.Administrador = 1 THEN
+If iuo_responablescierre.Existe(gi_codplanta,gstr_us.Nombre,False,Sqlca) AND iuo_admausurios.Administrador = 1 Then
 	OpenSheet(w_mant_degradepallet, w_main, columna, Original!)
-ELSE
-	MessageBox("Atención", "Usuario NO Autorizado para Operar Esta Opción")	
-	
-END IF
+Else
+	MessageBox("Atención", "Usuario NO Autorizado para Operar Esta Opción")		
+End If
 
 
 

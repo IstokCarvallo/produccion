@@ -55,22 +55,21 @@ OpenWithParm(w_busc_palletencab, lstr_busq)
 
 lstr_busq	=	Message.PowerObjectParm
 
-IF lstr_busq.argum[2] <> "" THEN
+If lstr_busq.argum[2] <> "" Then
 	//NoExistePallet(Long(lstr_busq.Argum[2]))
-	IF NoExistePallet(Long(lstr_busq.Argum[2])) OR &
-			Duplicado(Long(lstr_busq.Argum[2])) THEN
+	If NoExistePallet(Long(lstr_busq.Argum[2])) Or &
+			Duplicado(Long(lstr_busq.Argum[2])) Then
 		dw_1.SetItem(il_fila, "paen_numero", Long(ls_Nula))
 		dw_1.SetColumn("paen_numero")
 		dw_1.SetFocus()
-	END IF
+	End If
 	
 	istr_mant.Argumento[4]	=	lstr_busq.Argum[2]
-	pb_acepta.SetFocus()
-	
-ELSE
+	pb_acepta.SetFocus()	
+Else
 	dw_1.SetColumn("paen_numero")
 	dw_1.SetFocus()
-END IF
+End If
 
 RETURN
 	
@@ -100,26 +99,26 @@ SELECT	pae.paen_tipopa, pae.espe_codigo, var.vari_nombre, pae.emba_codigo,
 	AND	paen_numero	= :al_Numero
 	AND	plde_codigo	= :li_Planta;
 	
-IF ll_cont = 0 THEN
+If ll_cont = 0 Then
 	MessageBox("Atención", "Pallet NO Existe en Definitivo.", Exclamation!, OK!)
 	Return True
-END IF
+End If
 
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_errorbasedatos(sqlca,"Lectura tabla Palletencab")
 	Return  True
-ELSEIF sqlca.SQLCode = 100 THEN
+ElseIf sqlca.SQLCode = 100 Then
 	MessageBox("Atención", "Número de Pallet no ha sido creado, Ingrese otro Código.", Exclamation!, OK!)
 	Return  True
-ELSEIF li_Estado = 2 THEN
+ElseIf li_Estado = 2 Then
 	MessageBox("Atención", "Pallet no está en Existencia, fue Despachado.~r~r" + &
 				"Ingrese o seleccione otro Número.", Exclamation!, OK!)
 	Return  True
-ELSEIF li_Estado = 3 THEN
+ElseIf li_Estado = 3 Then
 	MessageBox("Atención", "Pallet no está en Existencia, fue Repalletizado.~r~r" + &
 				"Ingrese o seleccione otro Número.", Exclamation!, OK!)
 	Return  True
-ELSE			
+Else			
 	dw_1.SetItem(il_fila, "paen_numero", al_numero)
 	dw_1.SetItem(il_fila, "espe_codigo", li_Especie)
 	dw_1.SetItem(il_fila, "vari_nombre", ls_nomvar)
@@ -127,20 +126,20 @@ ELSE
 	dw_1.SetItem(il_fila, "emba_codigo", ls_embala)
 	dw_1.SetItem(il_fila, "paen_ccajas", li_cajas)
 	
-	IF IsNull(li_CCalidad) OR li_CCalidad = 0 THEN
+	If IsNull(li_CCalidad) OR li_CCalidad = 0 Then
 		dw_1.Object.coca_estant.Protect	=	0
 		dw_1.SetColumn("coca_estant")
 		dw_1.SetFocus()		
-	ELSE
+	Else
 		dw_1.Object.coca_estant.Protect	=	1
 		
 		dw_1.SetItem(il_fila, "coca_estant", li_CCalidad)
 		dw_1.SetColumn("coca_estneo")
 		dw_1.SetFocus()
-	END IF	
+	End If	
 	
 	Return False
-END IF
+End If
 end function
 
 on w_mant_deta_histcontcalidad.create
@@ -165,7 +164,8 @@ ias_campo[3]	=	String(dw_1.Object.coca_observ[il_fila])
 IF istr_mant.Agrega THEN
 	dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 	dw_1.SetItem(il_fila, "plde_codigo", Integer(istr_mant.argumento[2]))
-	dw_1.SetItem(il_fila, "coca_fechac", Date(istr_mant.argumento[3]))
+	dw_1.SetItem(il_fila, "coca_fechac", Datetime(istr_mant.argumento[3]))
+	
 ElseIf Not istr_mant.Agrega And Not istr_Mant.Borra THEN
 		dw_1.Object.paen_numero.Protect				=	1
 		dw_1.Object.paen_numero.Color					=	RGB(255,255,255)
@@ -186,40 +186,40 @@ dw_1.Object.coca_observ[il_fila]	=	ias_campo[3]
 
 end event
 
-event ue_antesguardar;call super::ue_antesguardar;Integer	li_cont, li_Cliente, li_planta, li_secuen
-String	ls_mensaje, ls_colu[]
-Date	  	ld_fecha
-Long 		ll_Pallet
+event ue_antesguardar;call super::ue_antesguardar;Integer		li_cont, li_Cliente, li_planta, li_secuen
+String			ls_mensaje, ls_colu[]
+Datetime	  	ld_fecha
+Long 			ll_Pallet
 
-IF Isnull(dw_1.Object.paen_numero[il_fila]) OR dw_1.Object.paen_numero[il_fila] = 0 THEN
+If IsNull(dw_1.Object.paen_numero[il_fila]) OR dw_1.Object.paen_numero[il_fila] = 0 Then
    li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nNúmero de Pallet"
+	ls_mensaje 		= ls_mensaje + "~nNúmero de Pallet"
 	ls_colu[li_cont]	= "paen_numero"
-END IF
+End If
 
-IF Isnull(dw_1.Object.coca_estant[il_fila]) OR dw_1.Object.coca_estant[il_fila] = 0 THEN
+If IsNull(dw_1.Object.coca_estant[il_fila]) OR dw_1.Object.coca_estant[il_fila] = 0 Then
    li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nEstado Anterior"
+	ls_mensaje 		= ls_mensaje + "~nEstado Anterior"
 	ls_colu[li_cont]	= "coca_estant"
-END IF
+End If
 
-IF Isnull(dw_1.Object.coca_estneo[il_fila]) OR dw_1.Object.coca_estneo[il_fila] = 0 THEN
+If IsNull(dw_1.Object.coca_estneo[il_fila]) OR dw_1.Object.coca_estneo[il_fila] = 0 Then
    li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nEstado Actual"
+	ls_mensaje 		= ls_mensaje + "~nEstado Actual"
 	ls_colu[li_cont]	= "coca_estneo"
-END IF
+End If
 
-IF li_cont > 0 THEN
+If li_cont > 0 Then
 	MessageBox("Error de Consistencia", "Falta el ingreso de : " + ls_mensaje + ".", StopSign!, Ok!)
 	dw_1.SetColumn(ls_colu[1])
 	dw_1.SetFocus() 
 	Message.DoubleParm = -1
-ELSE	
+Else	
 	
 	li_Cliente	=	dw_1.Object.clie_codigo[il_fila]
 	ll_pallet	=	dw_1.Object.paen_numero[il_fila]
 	li_planta	=	dw_1.Object.plde_codigo[il_fila]
-	ld_fecha		=	dw_1.Object.coca_fechac[il_fila]
+	ld_fecha	=	dw_1.Object.coca_fechac[il_fila]
 	
 	SELECT	Max(coca_secuen)
 		INTO	:li_secuen
@@ -227,21 +227,22 @@ ELSE
 		WHERE	clie_codigo =  :li_cliente
 		AND	paen_numero	=	:ll_pallet
 		AND	plde_codigo	=	:li_planta
-		AND	coca_fechac	=	:ld_fecha;
+		AND	DateDiff(dd, coca_fechac, :ld_fecha) = 0;
 	
-	IF Isnull(li_secuen) THEN li_secuen = 0
+	If IsNull(li_secuen) Then li_secuen = 0
 	
-	IF Isnull(dw_1.Object.coca_secuen[il_fila]) or dw_1.Object.coca_secuen[il_fila] = 0 THEN
+	If IsNull(dw_1.Object.coca_secuen[il_fila]) or dw_1.Object.coca_secuen[il_fila] = 0 Then
 		li_secuen ++
 		dw_1.Object.coca_secuen[il_fila] = li_secuen
-	END IF
+	End If
 
-END IF
+End If
 end event
 
 event ue_nuevo;call super::ue_nuevo;dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 dw_1.SetItem(il_fila, "plde_codigo", Integer(istr_mant.argumento[2]))
-dw_1.SetItem(il_fila, "coca_fechac", Date(istr_mant.argumento[3]))
+
+dw_1.SetItem(il_fila, "coca_fechac", Datetime(Date(Mid(istr_mant.argumento[3], 1, 10)), Now()))
 end event
 
 event open;/*

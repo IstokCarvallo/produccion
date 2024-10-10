@@ -52,7 +52,8 @@ global w_mant_mues_valofactprod w_mant_mues_valofactprod
 
 type variables
 w_mant_deta_valofactprod	iw_mantencion
-DataWindowChild				idwc_especie
+DataWindowChild	idwc_especie
+uo_semanafactura	iuo_Semana
 end variables
 
 event ue_nuevo;istr_mant.borra	= False
@@ -100,9 +101,9 @@ event ue_recuperadatos;call super::ue_recuperadatos;Long	ll_fila, respuesta
 DO
 	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]))
 	
-	IF ll_fila = -1 THEN
+	If ll_fila = -1 Then
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-	ELSEIF ll_fila > 0 THEN
+	ElseIf ll_fila > 0 Then
 		dw_1.SetRow(1)
 		dw_1.SelectRow(1,True)
 		dw_1.SetFocus()
@@ -111,16 +112,26 @@ DO
 		pb_grabar.Enabled	= True
 		cb_estandar.Enabled	= True
 		cb_productor.Enabled	= True
-	ELSE
+		
+		For ll_Fila = 1 To dw_1.RowCount()
+			If iuo_Semana.of_Semana(dw_1.Object.vafa_fecini[ll_Fila], SQLCA) Then
+				dw_1.Object.semana[ll_Fila] = iuo_Semana.Semana
+			End If
+		Next
+
+	Else
 		pb_insertar.SetFocus()
-	END IF
+		pb_grabar.Enabled	= True
+		cb_estandar.Enabled	= True
+		cb_productor.Enabled	= True
+	End If
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN
+If respuesta = 2 Then
 	Close(This)
-ELSE
+Else
 	pb_insertar.Enabled	= True
-END IF
+End If
 end event
 
 on w_mant_mues_valofactprod.create
@@ -213,6 +224,7 @@ If IsNull(uo_SelCliente.Codigo) Then lb_Cerrar = True
 If lb_Cerrar Then
 	Close(This)
 Else
+	iuo_Semana	=	Create uo_semanafactura
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelCliente.Inicia(gi_CodExport)
 	
@@ -580,7 +592,7 @@ If UpperBound(lstr_Busq.Argum) > 1 Then
 		dw_1.Object.vari_codigo[ll_New]		=	Integer(lstr_Busq.Argum[4])
 		dw_1.Object.vari_nombre[ll_New]		=	luo_Variedad.NombreVariedad
 		dw_1.Object.vaca_calibr[ll_New]		=	lstr_Busq.Argum[5]
-		dw_1.Object.vafp_preuni[ll_New]		=	0 // lstr_Busq.Argum[6]
+		dw_1.Object.vafp_preuni[ll_New]		=	Dec(lstr_Busq.Argum[6])
 		dw_1.Object.vafa_fecini[ll_New]		=	Date(lstr_Busq.Argum[7])
 		dw_1.Object.vafa_fecter[ll_New]		=	Date(lstr_Busq.Argum[8])
 		dw_1.Object.emba_codigo[ll_New]	=	lstr_Busq.Argum[10]
@@ -647,7 +659,7 @@ If UpperBound(lstr_Busq.Argum) > 1 Then
 		dw_1.Object.vari_codigo[ll_New]		=	Integer(lstr_Busq.Argum[4])
 		dw_1.Object.vari_nombre[ll_New]		=	luo_Variedad.NombreVariedad
 		dw_1.Object.vaca_calibr[ll_New]		=	lstr_Busq.Argum[5]
-		dw_1.Object.vafp_preuni[ll_New]		=	0 // lstr_Busq.Argum[6]
+		dw_1.Object.vafp_preuni[ll_New]		=	Dec(lstr_Busq.Argum[6])
 		dw_1.Object.vafa_fecini[ll_New]		=	Date(lstr_Busq.Argum[7])
 		dw_1.Object.vafa_fecter[ll_New]		=	Date(lstr_Busq.Argum[8])
 		dw_1.Object.emba_codigo[ll_New]	=	lstr_Busq.Argum[10]

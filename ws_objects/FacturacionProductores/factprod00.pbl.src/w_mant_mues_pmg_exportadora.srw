@@ -49,14 +49,35 @@ forward prototypes
 public function integer wf_cargaarchivo ()
 end prototypes
 
-public function integer wf_cargaarchivo ();String	ls_File
+public function integer wf_cargaarchivo ();String	ls_path, ls_File
 Long	ll_File, ll_New, ll_Fila, ll_Retorno = 1
 
+
+OleObject 			loo_Excel
 uo_Variedades		iuo_Variedad
 
 iuo_Variedad	=	Create uo_Variedades
+loo_Excel			=	Create OleObject 
 
-ll_File = dw_carga.ImportFile(CSV!, ls_File)
+If GetFileOpenName ( "Integración Proforma", ls_path, ls_File, "XLSX","Excel Files(*.xlsx),*.xlsx" ) < 1 Then Return -1
+
+dw_Carga.Reset()
+
+loo_Excel.ConnectToNewObject( "excel.application" ) 
+loo_Excel.Visible = false 
+loo_Excel.WorkBooks.Open( ls_Path)
+loo_Excel.Application.ActiveWorkbook.Worksheets[1].Activate 
+loo_Excel.Application.ActiveWorkbook.Worksheets[1].Range("A1").Activate 
+loo_Excel.ActiveCell.CurrentRegion.Select() 
+loo_Excel.Selection.Copy() 
+dw_Carga.ImportClipBoard (2)
+
+ClipBoard('')
+loo_Excel.WorkBooks.Close()
+loo_Excel.Application.Quit
+loo_Excel.DisconnectObject()
+
+//ll_File = dw_carga.ImportFile(CSV!, ls_File)
 	
 If ll_File < 0 Then
 	MessageBox('Alerta', 'Error en la carga de archivo.', Exclamation!, OK!)
@@ -85,8 +106,10 @@ Else
 End If
 
 Destroy iuo_Variedad
+Destroy loo_Excel
 
 Return ll_Retorno
+ 
 end function
 
 event ue_nuevo;istr_mant.borra	= False
