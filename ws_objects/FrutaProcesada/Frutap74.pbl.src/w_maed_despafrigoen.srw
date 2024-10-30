@@ -3006,7 +3006,7 @@ DO
 					dw_1.SelectRow(1,True)
 					dw_1.SetFocus()
 					HabilitaEncab(False)
-					habilitaingreso("defe_guides")
+					habilitaIngreso("defe_guides")
 				Else
 					If dw_2.Object.defe_estado[1]	=	1 Then pb_ins_det.Enabled	=	True							
 				End If

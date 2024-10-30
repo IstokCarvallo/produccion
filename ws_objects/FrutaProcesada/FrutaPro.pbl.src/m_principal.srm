@@ -1109,6 +1109,8 @@ m_impresiondeadhesivosparaventanas m_impresiondeadhesivosparaventanas
 m_30 m_30
 m_impresiónventanapallet0 m_impresiónventanapallet0
 end type
+type m_123 from menu within m_mantención
+end type
 type m_mantención from menu within m_movimientos
 m_mantenciónpallettransitorios m_mantenciónpallettransitorios
 m_mantenciónpallettransitoriosrotulación m_mantenciónpallettransitoriosrotulación
@@ -1127,6 +1129,7 @@ m_mantenciondetallepallet m_mantenciondetallepallet
 m_mantenciondetallepallet0 m_mantenciondetallepallet0
 m_-79 m_-79
 m_adhesivosycompactos m_adhesivosycompactos
+m_123 m_123
 end type
 type m_-11 from menu within m_movimientos
 end type
@@ -14260,6 +14263,7 @@ m_mantenciondetallepallet m_mantenciondetallepallet
 m_mantenciondetallepallet0 m_mantenciondetallepallet0
 m_-79 m_-79
 m_adhesivosycompactos m_adhesivosycompactos
+m_123 m_123
 end type
 
 on m_mantención.create
@@ -14297,6 +14301,7 @@ this.m_mantenciondetallepallet=create m_mantenciondetallepallet
 this.m_mantenciondetallepallet0=create m_mantenciondetallepallet0
 this.m_-79=create m_-79
 this.m_adhesivosycompactos=create m_adhesivosycompactos
+this.m_123=create m_123
 this.Item[UpperBound(this.Item)+1]=this.m_mantenciónpallettransitorios
 this.Item[UpperBound(this.Item)+1]=this.m_mantenciónpallettransitoriosrotulación
 this.Item[UpperBound(this.Item)+1]=this.m_mantenciónpalletdefintivocajas
@@ -14314,6 +14319,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_mantenciondetallepallet
 this.Item[UpperBound(this.Item)+1]=this.m_mantenciondetallepallet0
 this.Item[UpperBound(this.Item)+1]=this.m_-79
 this.Item[UpperBound(this.Item)+1]=this.m_adhesivosycompactos
+this.Item[UpperBound(this.Item)+1]=this.m_123
 end on
 
 on m_mantención.destroy
@@ -14335,6 +14341,7 @@ destroy(this.m_mantenciondetallepallet)
 destroy(this.m_mantenciondetallepallet0)
 destroy(this.m_-79)
 destroy(this.m_adhesivosycompactos)
+destroy(this.m_123)
 end on
 
 type m_mantenciónpallettransitorios from menu within m_mantención
@@ -15727,6 +15734,40 @@ this.bitmapgradient = true
 end on
 
 on m_reimpresión.destroy
+call super::destroy
+end on
+
+type m_123 from menu within m_mantención
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_cons_codigooperacional, w_main, columna, Original!)
+end event
+
+on m_123.create
+call super::create
+this.text = "Codigo Operacional"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_123.destroy
 call super::destroy
 end on
 
