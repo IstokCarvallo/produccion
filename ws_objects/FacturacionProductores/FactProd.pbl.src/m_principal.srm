@@ -57,6 +57,8 @@ type m_validaproforma from menu within m_movimientos
 end type
 type m_informefacturaciónproductores from menu within m_movimientos
 end type
+type m_emisionproformas from menu within m_movimientos
+end type
 type m_-4 from menu within m_movimientos
 end type
 type m_cargapreciosfichaproductores from menu within m_movimientos
@@ -68,6 +70,7 @@ m_mantenciónfacturaciónporproductor m_mantenciónfacturaciónporproductor
 m_-14 m_-14
 m_validaproforma m_validaproforma
 m_informefacturaciónproductores m_informefacturaciónproductores
+m_emisionproformas m_emisionproformas
 m_-4 m_-4
 m_cargapreciosfichaproductores m_cargapreciosfichaproductores
 end type
@@ -501,6 +504,7 @@ m_mantenciónfacturaciónporproductor m_mantenciónfacturaciónporproductor
 m_-14 m_-14
 m_validaproforma m_validaproforma
 m_informefacturaciónproductores m_informefacturaciónproductores
+m_emisionproformas m_emisionproformas
 m_-4 m_-4
 m_cargapreciosfichaproductores m_cargapreciosfichaproductores
 end type
@@ -514,6 +518,7 @@ this.m_mantenciónfacturaciónporproductor=create m_mantenciónfacturaciónporpr
 this.m_-14=create m_-14
 this.m_validaproforma=create m_validaproforma
 this.m_informefacturaciónproductores=create m_informefacturaciónproductores
+this.m_emisionproformas=create m_emisionproformas
 this.m_-4=create m_-4
 this.m_cargapreciosfichaproductores=create m_cargapreciosfichaproductores
 this.Item[UpperBound(this.Item)+1]=this.m_generafacturacióndeproductores
@@ -522,6 +527,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_mantenciónfacturaciónporproductor
 this.Item[UpperBound(this.Item)+1]=this.m_-14
 this.Item[UpperBound(this.Item)+1]=this.m_validaproforma
 this.Item[UpperBound(this.Item)+1]=this.m_informefacturaciónproductores
+this.Item[UpperBound(this.Item)+1]=this.m_emisionproformas
 this.Item[UpperBound(this.Item)+1]=this.m_-4
 this.Item[UpperBound(this.Item)+1]=this.m_cargapreciosfichaproductores
 end on
@@ -534,6 +540,7 @@ destroy(this.m_mantenciónfacturaciónporproductor)
 destroy(this.m_-14)
 destroy(this.m_validaproforma)
 destroy(this.m_informefacturaciónproductores)
+destroy(this.m_emisionproformas)
 destroy(this.m_-4)
 destroy(this.m_cargapreciosfichaproductores)
 end on
@@ -1524,7 +1531,9 @@ end event
 
 on m_mantenciónfacturaciónporproductor.create
 call super::create
+this.visible = false
 this.text = "Mantención Facturación por Productor"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1551,7 +1560,9 @@ end type
 
 on m_-14.create
 call super::create
+this.visible = false
 this.text = "-"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1638,6 +1649,40 @@ this.bitmapgradient = true
 end on
 
 on m_informefacturaciónproductores.destroy
+call super::destroy
+end on
+
+type m_emisionproformas from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_emision_facturacion, w_main, columna, Original!)
+end event
+
+on m_emisionproformas.create
+call super::create
+this.text = "Emision Proformas "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_emisionproformas.destroy
 call super::destroy
 end on
 

@@ -101,12 +101,19 @@ Else
 		dw_1.Object.vafp_preuni[ll_New]		=	Dec(dw_carga.Object.Valor[ll_Fila])
 		dw_1.Object.semana[ll_New]			=	Integer(dw_carga.Object.semana[ll_Fila])
 		dw_1.Object.vafa_fecini[ll_New]		=	iuo_Semana.Desde
-		dw_1.Object.vafa_fecter[ll_New]		=	iuo_Semana.Hasta		
+		dw_1.Object.vafa_fecter[ll_New]		=	iuo_Semana.Hasta	
+		
+		dw_1.SetRow(ll_New)
+  		dw_1.ScrollToRow(ll_New)
 	Next
 End If
 
 Destroy iuo_Variedad
 Destroy loo_Excel
+
+pb_imprimir.Enabled	= True
+pb_eliminar.Enabled	= True
+pb_grabar.Enabled	= True
 
 Return ll_Retorno
  
@@ -179,6 +186,7 @@ Do
 
 	Else
 		pb_insertar.SetFocus()
+		cb_carga.Enabled		= True
 	End If
 Loop While respuesta = 1
 
@@ -298,8 +306,6 @@ end event
 
 event ue_antesguardar;call super::ue_antesguardar;Long		ll_fila, ll_productor
 Integer	li_secuencia
-
-
 
 SELECT	Max(vafa_secuen)
 	INTO	:li_secuencia
@@ -472,6 +478,7 @@ If dw_1.RowCount() > 0 Then
 		Return 
 	Else
 		dw_1.RowsMove(1, dw_1.RowCount(), Primary!, dw_1, 1, Delete!)
+		Parent.TriggerEvent("ue_guardar")
 		wf_CargaArchivo()
 	End if
 Else

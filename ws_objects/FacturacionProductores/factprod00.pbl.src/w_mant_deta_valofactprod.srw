@@ -452,7 +452,7 @@ Choose Case ls_Columna
 		idwc_calibre.Retrieve(Integer(Data), 1)
 		idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), Integer(Data), -1, '*')
 		
-		If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), Integer(Data), -1, '*', False, SQLCA) Then
+		If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), Integer(Data), -1, '*', False, SQLCA) And This.Object.todoscol[Row] = 0 Then
 			This.SetItem(Row, "colo_nombre", iuo_Color.Color)
 		End If
 		
@@ -466,7 +466,7 @@ Choose Case ls_Columna
 			idwc_calibre.Retrieve(This.Object.espe_codigo[Row], Integer(Data))
 			idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], Integer(Data), '*')
 			
-			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], Integer(Data), '*', False, SQLCA) Then
+			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], Integer(Data), '*', False, SQLCA) And This.Object.todoscol[Row] = 0 Then
 				This.SetItem(Row, "colo_nombre", iuo_Color.Color)
 			End If
 		End If
@@ -503,7 +503,7 @@ Choose Case ls_Columna
 		Else
 			idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], Data)
 			
-			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], Data, False, SQLCA) Then
+			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], Data, False, SQLCA)  And This.Object.todoscol[Row] = 0 Then
 				This.SetItem(Row, "colo_nombre", iuo_Color.Color)
 			End If
 		End If	
@@ -513,7 +513,7 @@ Choose Case ls_Columna
 			This.Object.vaca_calibr[Row]	=	'-1'
 			idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], '*')
 			
-			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], '*', False, SQLCA) Then
+			If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), This.Object.espe_codigo[Row], This.Object.vari_codigo[Row], '*', False, SQLCA)  And This.Object.todoscol[Row] = 0 Then
 				This.SetItem(Row, "colo_nombre", iuo_Color.Color)
 			End If
 			

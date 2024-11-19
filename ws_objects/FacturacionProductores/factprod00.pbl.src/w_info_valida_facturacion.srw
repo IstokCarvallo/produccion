@@ -161,6 +161,7 @@ End If
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_info_valida_facturacion
+integer taborder = 0
 end type
 
 type st_computador from w_para_informes`st_computador within w_info_valida_facturacion
@@ -184,7 +185,7 @@ end type
 type pb_acepta from w_para_informes`pb_acepta within w_info_valida_facturacion
 integer x = 2258
 integer y = 876
-integer taborder = 100
+integer taborder = 80
 end type
 
 event pb_acepta::clicked;SetPointer(Arrow!)
@@ -222,7 +223,7 @@ end event
 type pb_salir from w_para_informes`pb_salir within w_info_valida_facturacion
 integer x = 2254
 integer y = 1216
-integer taborder = 110
+integer taborder = 90
 end type
 
 type st_4 from statictext within w_info_valida_facturacion
@@ -383,7 +384,7 @@ type uo_selcliente from uo_seleccion_clientesprod within w_info_valida_facturaci
 integer x = 855
 integer y = 496
 integer height = 96
-integer taborder = 40
+integer taborder = 10
 boolean bringtotop = true
 end type
 
@@ -406,7 +407,7 @@ end on
 type uo_selproductor from uo_seleccion_productor within w_info_valida_facturacion
 integer x = 855
 integer y = 1228
-integer taborder = 120
+integer taborder = 70
 boolean bringtotop = true
 end type
 
@@ -457,7 +458,7 @@ integer x = 855
 integer y = 900
 integer width = 379
 integer height = 96
-integer taborder = 60
+integer taborder = 50
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -497,7 +498,7 @@ integer x = 1701
 integer y = 900
 integer width = 379
 integer height = 96
-integer taborder = 70
+integer taborder = 60
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700

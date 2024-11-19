@@ -182,6 +182,8 @@ dw_1.Setitem(1,"cliente",gi_codexport)
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_info_recepcion_movimiento_diario
+integer y = 628
+integer height = 240
 end type
 
 type st_computador from w_para_informes`st_computador within w_info_recepcion_movimiento_diario
@@ -381,7 +383,9 @@ Else
 	If dw_1.Object.totalespe[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.3.Height=0")
 	If dw_1.Object.totalprod[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.4.Height=0")
 	If dw_1.Object.totalvari[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.5.Height=0")
-	If dw_1.Object.totaltrat[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.6.Height=0")	
+	If dw_1.Object.totaltrat[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.6.Height=0")
+	vinf.dw_1.Object.DataWindow.Zoom = 95
+	
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
 

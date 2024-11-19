@@ -616,6 +616,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_sitiosrevision,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_mantpaltrans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_mant_modificafruta_prediocuartel,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,dw_mues_modificapalletfruta_prediocuartel,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_cons_codigooperacional,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,dw_mant_spro_palletencab_cajas,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,dw_mant_spro_cajasprod_caja,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_mues_repalletdeta_gen_nuevo_sag,d
@@ -1211,6 +1212,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_movtoservici
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_mant_deta_palletagrupado,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,w_mant_deta_palletfruta_rotulamodifica,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,w_imprecion_de_compactos_pallet_bultos,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,dw_cons_codigooperacional,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipotransporte,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_ordencargapallet,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_camaras_tipo,d

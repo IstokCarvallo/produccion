@@ -52,7 +52,7 @@ table(column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_pltcod 
  column=(type=decimal(0) updatewhereclause=yes name=lote_trtesp dbname="spro_lotesfrutagranel.lote_trtesp" initial="0" values="Sin Tratamiento	0/Drenchado	1/" )
  column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_prdpak dbname="spro_lotesfrutagranel.lote_prdpak" )
  column=(type=decimal(3) update=yes updatewhereclause=yes name=lote_kireor dbname="spro_lotesfrutagranel.lote_kireor" )
- column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_conhid dbname="spro_lotesfrutagranel.lote_conhid" values="Sin HidroCooler	0/HidroCooler en Huerto	1/HidroCooler en Planta	2/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=lote_conhid dbname="spro_lotesfrutagranel.lote_conhid" values="Sin HidroCooler	0/HidroCooler en Huerto	1/	/" )
  column=(type=decimal(0) updatewhereclause=yes name=lote_consya dbname="spro_lotesfrutagranel.lote_consya" values="Con System Aproach	1/Con System Aproach	0" )
  column=(type=char(60) updatewhereclause=yes name=variedades_vari_nombre dbname="variedades.vari_nombre" )
  column=(type=decimal(0) updatewhereclause=yes name=clie_codigo dbname="spro_lotesfrutagranel.clie_codigo" )
