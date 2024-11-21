@@ -161,7 +161,10 @@ end type
 
 event pb_acepta::clicked;call super::clicked;Long 					ll_Fila, ll_Cliente, ll_Planta, ll_Productor, ll_Zona
 Integer				li_Secuencia, li_Resultado
-String					ls_Path, ls_Periodo, ls_Archivo, ls_Pass, ls_Asunto,ls_Texto, ls_Texto1, ls_Envio, ls_Mes[], ls_Error=""
+String					ls_Path, ls_Periodo, ls_Archivo, ls_Pass, ls_Asunto,ls_Texto, ls_Texto1, ls_Envio, ls_Error="", &
+						ls_CC[] = {'jose.perez@rioblanco.net', 'daniela.oliva@rioblanco.net', 'francisca.gutierrez@rioblanco.net', &
+						 				'Omar.Bravo@rioblanco.net', 'Roberto.Valderrama@rioblanco.net', 'Susana.Sagardia@rioblanco.net'}, & 
+						ls_Mes[] = {'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'}
 Date					ld_Desde, ld_Hasta, ld_Fecha
 Dec{2}				ld_Cambio
 
@@ -176,19 +179,6 @@ luo_Productor	=	Create uo_Productores
 luo_Especie		=	Create uo_Especies
 luo_Factura		=	Create uo_facturaproductor
 luo_Mail			=	Create uo_Mail
-
-ls_Mes[1] = 'Enero' 
-ls_Mes[2] = 'Febrero'
-ls_Mes[3] = 'Marxo'
-ls_Mes[4] = 'Abril'
-ls_Mes[5] = 'Mayo'
-ls_Mes[6] = 'Junio'
-ls_Mes[7] = 'Julio'
-ls_Mes[8] = 'Agosto'
-ls_Mes[9] = 'Septiembre'
-ls_Mes[10] = 'Octubre'
-ls_Mes[11] = 'Noviembre'
-ls_Mes[12] = 'Diciembre'
 
 ls_Path = 'C:\PdfBck'
 
@@ -275,7 +265,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		+=	 '~nNota:Por seguridad, para abrir el archivo deberás ingresar una clave que corresponde a los dígitos de tu Rut (sin dígito verificador).'
 						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text)
 						
-						luo_Mail.Of_Send(luo_Productor.Mail,ls_Asunto,ls_Texto,{ls_Envio}, 0) 
+						luo_Mail.Of_Send(luo_Productor.Mail, ls_CC, ls_Asunto, ls_Texto, {ls_Envio}, 0) 
 						
 						If Not DirectoryExists (ls_path + '\' + ls_Periodo + '\Enviado') Then CreateDirectory (ls_path + '\' + ls_Periodo + '\Enviado')
 						

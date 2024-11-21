@@ -384,7 +384,7 @@ Else
 	If dw_1.Object.totalprod[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.4.Height=0")
 	If dw_1.Object.totalvari[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.5.Height=0")
 	If dw_1.Object.totaltrat[1] = 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.6.Height=0")
-	vinf.dw_1.Object.DataWindow.Zoom = 95
+	vinf.dw_1.Object.DataWindow.Zoom = 90
 	
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
