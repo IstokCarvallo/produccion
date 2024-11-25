@@ -388,10 +388,13 @@ type m_mantención from menu within m_ventadirectaporproductor
 end type
 type m_proforma from menu within m_ventadirectaporproductor
 end type
+type m_emisionproforma from menu within m_ventadirectaporproductor
+end type
 type m_ventadirectaporproductor from menu within m_procesos
 m_gegenerasecuencia m_gegenerasecuencia
 m_mantención m_mantención
 m_proforma m_proforma
+m_emisionproforma m_emisionproforma
 end type
 type m_cambiodetarjas from menu within m_procesos
 end type
@@ -5704,6 +5707,7 @@ type m_ventadirectaporproductor from menu within m_procesos
 m_gegenerasecuencia m_gegenerasecuencia
 m_mantención m_mantención
 m_proforma m_proforma
+m_emisionproforma m_emisionproforma
 end type
 
 on m_ventadirectaporproductor.create
@@ -5727,9 +5731,11 @@ this.bitmapgradient = true
 this.m_gegenerasecuencia=create m_gegenerasecuencia
 this.m_mantención=create m_mantención
 this.m_proforma=create m_proforma
+this.m_emisionproforma=create m_emisionproforma
 this.Item[UpperBound(this.Item)+1]=this.m_gegenerasecuencia
 this.Item[UpperBound(this.Item)+1]=this.m_mantención
 this.Item[UpperBound(this.Item)+1]=this.m_proforma
+this.Item[UpperBound(this.Item)+1]=this.m_emisionproforma
 end on
 
 on m_ventadirectaporproductor.destroy
@@ -5737,6 +5743,7 @@ call super::destroy
 destroy(this.m_gegenerasecuencia)
 destroy(this.m_mantención)
 destroy(this.m_proforma)
+destroy(this.m_emisionproforma)
 end on
 
 type m_gegenerasecuencia from menu within m_ventadirectaporproductor
@@ -5840,6 +5847,40 @@ gstr_us.OpcionActiva	=	This.ClassName()
 
 OpenSheet(w_info_frucomercial_proforma, w_main, ii_Columna, Original!)
 end event
+
+type m_emisionproforma from menu within m_ventadirectaporproductor
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_emision_facturacion, w_main, ii_Columna, Original!)
+end event
+
+on m_emisionproforma.create
+call super::create
+this.text = "Emision Proforma "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_emisionproforma.destroy
+call super::destroy
+end on
 
 type m_cambiodetarjas from menu within m_procesos
 end type

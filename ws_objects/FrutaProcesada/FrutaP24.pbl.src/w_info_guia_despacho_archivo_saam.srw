@@ -3423,7 +3423,6 @@ End If
 end event
 
 type cb_rossi from commandbutton within w_info_guia_despacho_archivo_saam
-boolean visible = false
 integer x = 2341
 integer y = 816
 integer width = 594

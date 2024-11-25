@@ -30,14 +30,13 @@ end forward
 global type w_proc_emision_facturacion from w_para_informes
 integer x = 14
 integer y = 32
-integer width = 4443
+integer width = 3886
 integer height = 2232
 string title = "Facturación Mensual de Productores"
 boolean minbox = false
 boolean maxbox = false
 boolean resizable = false
 windowtype windowtype = response!
-windowstate windowstate = maximized!
 string icon = "F:\Desarrollo\Producción\FrutaProcesada\Producc.ico"
 st_4 st_4
 st_1 st_1
@@ -119,12 +118,9 @@ Else
 End If
 end event
 
-event resize;call super::resize;dw_1.Resize(This.WorkSpaceWidth() - 490,This.WorkSpaceHeight() - dw_1.y - 75)
-end event
-
 type pb_excel from w_para_informes`pb_excel within w_proc_emision_facturacion
-integer x = 4059
-integer y = 456
+integer x = 3511
+integer y = 596
 integer taborder = 20
 end type
 
@@ -148,24 +144,22 @@ string text = "Emision Factura Mensual Productores"
 end type
 
 type pb_acepta from w_para_informes`pb_acepta within w_proc_emision_facturacion
-integer x = 4082
-integer y = 812
+integer x = 3534
+integer y = 952
 integer taborder = 90
 integer weight = 400
 fontcharset fontcharset = ansi!
 boolean enabled = false
-boolean cancel = true
 boolean default = false
 string picturename = "\Desarrollo 22\Imagenes\Botones\Email.png"
 string disabledname = "\Desarrollo 22\Imagenes\Botones\Email-bn.png"
 end type
 
-event pb_acepta::clicked;call super::clicked;Long 					ll_Fila, ll_Cliente, ll_Planta, ll_Productor, ll_Zona
-Integer				li_Secuencia, li_Resultado
+event pb_acepta::clicked;call super::clicked;Long 					ll_Fila, ll_Cliente, ll_Planta, ll_Productor
+Integer				li_Secuencia, li_Resultado, li_Especie
 String					ls_Path, ls_Periodo, ls_Archivo, ls_Pass, ls_Asunto,ls_Texto, ls_Texto1, ls_Envio, ls_Error="", &
 						ls_Mes[] = {'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'}
-Date					ld_Desde, ld_Hasta, ld_Fecha
-Dec{2}				ld_Cambio
+Date					ld_Fecha
 
 uo_Especies				luo_Especie 
 uo_Productores			luo_Productor
@@ -193,16 +187,12 @@ For ll_Fila = 1 To dw_1.RowCount()
 		ll_Cliente		=	dw_1.Object.clie_codigo[ll_Fila]
 		ll_Planta		=	dw_1.Object.plde_codigo[ll_Fila]
 		ll_Productor	=	dw_1.Object.prod_codigo[ll_Fila]
-		ll_Zona		=	dw_1.Object.zona_codigo[ll_Fila]
-		li_Secuencia=	dw_1.Object.faen_secuen[ll_Fila]
-		ld_Desde		=	Date(dw_1.Object.faen_fecini[ll_Fila])
-		ld_Hasta 		=	Date(dw_1.Object.faen_fecter[ll_Fila])
-		ld_Cambio	=	dw_1.Object.faen_cambio[ll_Fila]
+		li_Especie	=	dw_1.Object.espe_codigo[ll_Fila]
 		
 		dw_Proforma.Reset()
 		ld_Fecha = Date('01/' + em_Fecha.Text)
-		If dw_Proforma.Retrieve(ll_Cliente, ll_Planta, Date('01/' + em_Fecha.Text), ll_Productor, ll_Zona, &
-											ld_Cambio, 19, 0, 0, 0, 0, ld_Desde, ld_Hasta, -1, li_Secuencia) < 1 Then 
+		
+		If dw_Proforma.Retrieve(ll_Productor, Date('01/' + em_Fecha.Text), li_Especie, ll_Cliente) < 1 Then 
 				ls_Error = ls_Error + '[' + String(ll_Productor, '00000') + '] No esta disponible Proforma.~n'
 		Else
 			
@@ -216,14 +206,14 @@ For ll_Fila = 1 To dw_1.RowCount()
 			dw_Proforma.Object.DataWindow.Export.PDF.NativePDF.Restrictions			= 'noannots!'
 			dw_Proforma.Object.DataWindow.Export.PDF.NativePDF.MasterPassword	= '6460'
 								
-			ls_Archivo = ls_Periodo + '_' + String(luo_Productor.Codigo, '00000') + '.PDF'
+			ls_Archivo = ls_Periodo + '_' + String(luo_Productor.Codigo, '00000') + '_Comer.PDF'
 			ls_Pass = String(Long(Mid(luo_Productor.Rut,1,9)))
 		
 			dw_Proforma.Object.DataWindow.Export.PDF.NativePDF.UserPassword	=	ls_Pass
 			li_Resultado = dw_Proforma.SaveAs(ls_path + '\' + ls_Periodo + '\' + ls_Archivo, PDF!, True)
 			
 			If li_Resultado = 1 Then
-				If dw_1.Object.faen_enviado[ll_Fila] = 0 Then
+				If dw_1.Object.fpfc_enviado[ll_Fila] = 0 Then
 					If UpperBound(luo_Productor.Mail) > 0 And luo_Productor.Mail[1] <> '' Then 
 						
 						luo_Especie.Existe(dw_1.Object.espe_codigo[ll_Fila], False, SQLCA)
@@ -234,16 +224,15 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		=	'Estimado productor buenos dias,~n~n'
 						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir factutación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
 														'-' + Mid(em_fecha.Text, 4) + ' con el siguiente detalle:.~n~n'
-						ls_Texto		+=	'Factura por fruta de exportación.~n'
-						ls_Texto		+=	'Nombre: ' + uo_SelCliente.Nombre + '~n'
-						ls_Texto		+=	'Rut: ' + String(Long(Mid(uo_SelCliente.Rut, 1, 9)), '#,##0') + '-' + Right(uo_SelCliente.Rut, 1)+ ' ~n'
-						ls_Texto		+=	'Dirección: ' + uo_SelCliente.DireccionCompleta +' ~n'
-						ls_Texto		+=	'Giro: ' + uo_SelCliente.Giro +' ~n'
+						ls_Texto		+=	'Factura por fruta comercial.~n'
+						ls_Texto		+=	'Nombre: Comercial Rio Blanco SPA.~n' //+ uo_SelCliente.Nombre + '~n'
+						ls_Texto		+=	'Rut: 76.412.835-4~n' //+ String(Long(Mid(uo_SelCliente.Rut, 1, 9)), '#,##0') + '-' + Right(uo_SelCliente.Rut, 1)+ ' ~n'
+						ls_Texto		+=	'Dirección: Alonso de Monroy 2677, Piso 4, Vitacura, Santiago.~n' //+ uo_SelCliente.DireccionCompleta +' ~n'
+						ls_Texto		+=	'Giro: Otros servicios agricolas.~n' //+ uo_SelCliente.Giro +' ~n'
 						
-						luo_Factura.Of_Totales(ll_Cliente, ll_Planta, ll_Zona, ll_Productor, Date('01/' + em_Fecha.Text), li_Secuencia, 0, SQLCA)
+						luo_Factura.Of_Totales_Comercial(ll_Cliente, ll_Planta, ll_Productor, Date('01/' + em_Fecha.Text), SQLCA)
 						
-						ls_Texto		+= '~n~n Con PMG~n~n'
-						ls_Texto		+=	'Glosa: ' + String(luo_Factura.Kilos, '#,##0.00') + ' Kilos de ' + luo_Especie.Nombre + ' de exportacion, '
+						ls_Texto		+=	'Glosa: ' + String(luo_Factura.Kilos, '#,##0.00') + ' Kilos de ' + luo_Especie.Nombre + ' comercial, '
 						ls_Texto		+=	' variedad ' + luo_Factura.Variedad + ' de acuerdo con detalle adjunto.~n'
 						
 						If Not IsNull(luo_Factura.GGN) And luo_Factura.GGN <> '' Then  ls_Texto += String(luo_Factura.GGN, '#,##0.00')  + ' Kilos fruta Certificada Global GAP ' + luo_Factura.GGN
@@ -251,20 +240,6 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		+=	'Neto: ' + String(luo_Factura.Neto, '#,##0') + ' ~n'
 						ls_Texto		+=	'IVA: ' + String(luo_Factura.IVA, '#,##0') + ' ~n'
 						ls_Texto		+=	'Total: ' + String(luo_Factura.Total, '#,##0') + ' ~n'
-					
-						luo_Factura.Of_Totales(ll_Cliente, ll_Planta, ll_Zona, ll_Productor, Date('01/' + em_Fecha.Text), li_Secuencia, 1, SQLCA)
-						
-						If Not IsNull(luo_Factura.Kilos) Then
-							ls_Texto		+= ' ~n SIN PMG~n~n'
-							ls_Texto	+=	'Glosa: ' + String(luo_Factura.Kilos, '#,##0.00') + ' Kilos de ' + luo_Especie.Nombre + ' de exportacion, '							
-							ls_Texto	+=	' variedad ' + luo_Factura.Variedad + ' de acuerdo con detalle adjunto.~n'
-							
-							If Not IsNull(luo_Factura.GGN) And luo_Factura.GGN <> '' Then  ls_Texto += String(luo_Factura.GGN, '#,##0.00')  + ' Kilos fruta Certificada Global GAP ' + luo_Factura.GGN
-							
-							ls_Texto	+=	'Neto: ' + String(luo_Factura.Neto, '#,##0') + ' ~n'
-							ls_Texto	+=	'IVA: ' + String(luo_Factura.IVA, '#,##0') + ' ~n'
-							ls_Texto	+=	'Total: ' + String(luo_Factura.Total, '#,##0') + ' ~n'
-						End If
 						
 						ls_Texto		+=	 '~nNota:Por seguridad, para abrir el archivo deberás ingresar una clave que corresponde a los dígitos de tu Rut (sin dígito verificador).'
 						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text)
@@ -278,13 +253,12 @@ For ll_Fila = 1 To dw_1.RowCount()
 							ls_Error = ls_Error + '[' + String(ll_Productor, '00000') + '] No se puedo mover el archivo.~n'
 						Else
 							
-							Update dbo.facturprodenca
-								Set  faen_enviado = 1
+							Update dbo.spro_facturprocomercial
+								Set  fpfc_enviado = 1
 								Where clie_codigo = :ll_Cliente
 									And plde_codigo = :ll_Planta
 									And prod_codigo = :luo_Productor.Codigo
-									And zona_codigo = :ll_zona
-									And Datediff(mm, faen_fechaf, :ld_Fecha) = 0
+									And Datediff(mm, fpfc_mespro, :ld_Fecha) = 0
 								Using SQLCA;
 							
 								If SQLCA.SQLCode = -1 Then
@@ -304,7 +278,7 @@ Next
 
 If Not IsNull(ls_Error) And ls_Error <> "" Then MessageBox('Informacion', ls_Error, Information!, OK!)
 
-dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, 1, Date('01/' + em_fecha.Text))
+dw_1.Retrieve(uo_SelCliente.Codigo, Date('01/' + em_Fecha.Text), uo_SelPlanta.Codigo)
 
 Destroy luo_Productor
 Destroy luo_Planta
@@ -315,8 +289,8 @@ Destroy luo_Mail
 end event
 
 type pb_salir from w_para_informes`pb_salir within w_proc_emision_facturacion
-integer x = 4087
-integer y = 1132
+integer x = 3538
+integer y = 1272
 integer taborder = 100
 end type
 
@@ -400,7 +374,7 @@ end type
 event modified;
 If IsNull(This.Text) Then Return
 
-If dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, 1, Date('01/' + This.Text)) > 0 Then Parent.pb_acepta.Enabled = True
+If dw_1.Retrieve(uo_SelCliente.Codigo, Date('01/' + This.Text), uo_SelPlanta.Codigo) > 0 Then Parent.pb_acepta.Enabled = True
 end event
 
 type st_6 from statictext within w_proc_emision_facturacion
@@ -448,13 +422,13 @@ call uo_seleccion_plantas::destroy
 end on
 
 type dw_1 from uo_dw within w_proc_emision_facturacion
-integer x = 64
+integer x = 247
 integer y = 772
-integer width = 3831
+integer width = 3168
 integer height = 1348
 integer taborder = 11
 boolean bringtotop = true
-string dataobject = "dw_gene_estadoproforma_envio"
+string dataobject = "dw_gene_estadoproformacomer_envio"
 boolean hscrollbar = true
 boolean border = false
 end type
@@ -586,7 +560,7 @@ integer width = 411
 integer height = 272
 integer taborder = 11
 boolean bringtotop = true
-string dataobject = "dw_info_facturacion_productorgeneradodet"
+string dataobject = "dw_info_fproforma_fcomer"
 boolean vscrollbar = false
 boolean border = false
 end type
