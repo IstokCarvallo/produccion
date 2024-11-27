@@ -10,7 +10,7 @@ global uo_ws_cargoproduce uo_ws_cargoproduce
 
 type variables
 Private uo_Mail		iuo_Correo
-Private DataStore	ids_JSON, ids_SKU, ids_Contenedor
+Private DataStore	ids_JSON, ids_SKU, ids_Contenedor, ids_Termografo
 
 Private 	String		_URL
 Private 	String		_HEADERS
@@ -197,11 +197,12 @@ Return ls_Retorno
 end function
 
 private function string of_cargamulti (string embarque);String	ls_Retorno
-Long	ll_Fila, Row, RowD
+Long	ll_Fila, Row, RowD, RowE
 
-ll_Fila = ids_JSON.Retrieve(Embarque, 0, 0) 
-ll_Fila = ids_SKU.Retrieve(Embarque, 1, 0) 
-ll_Fila = ids_Contenedor.Retrieve(Embarque, 0, 1) 
+ll_Fila = ids_JSON.Retrieve(Embarque, 0, 0, 0) 
+ll_Fila = ids_SKU.Retrieve(Embarque, 1, 0, 0) 
+ll_Fila = ids_Contenedor.Retrieve(Embarque, 0, 1, 0) 
+ll_Fila = ids_Termografo.Retrieve(Embarque, 0, 0, 1) 
 
 If ll_Fila = -1 Then
 	MessageBox('Atencion', 'Error de carga de store....', StopSign!, Ok!)
@@ -229,7 +230,21 @@ Else
 		ls_Retorno += of_InsertaLinea('eta', String(ids_Contenedor.Object.eta[RowD]), 0, 0)
 		ls_Retorno += of_InsertaLinea('isReefer', String(ids_Contenedor.Object.isreefer[RowD]), 0, 1)
 		ls_Retorno += of_InsertaLinea('vesselName', String(ids_Contenedor.Object.referenceNumber[RowD]), 0, 0)
-		ls_Retorno += of_InsertaLinea('bookingNumber', String(ids_Contenedor.Object.bookingNumber[RowD]), 1, 0)
+		ls_Retorno += of_InsertaLinea('bookingNumber', String(ids_Contenedor.Object.bookingNumber[RowD]), 0, 0)
+		
+		ls_Retorno += _MARCA + 'sensors' + _MARCA  + _Separador + _INICIOBLOQUE 
+		For RowE = 1 To ids_Termografo.RowCount()
+			ls_Retorno += _INICIO + Char(13)
+			ls_Retorno += of_InsertaLinea('identifier', String(ids_Termografo.Object.Termografo[RowE]), 0, 0)
+			ls_Retorno += of_InsertaLinea('brand', 'DeltaTrak', 1, 0)
+			If RowE = ids_Termografo.RowCount() Then
+				ls_Retorno += _FINAL + Char(13)
+			Else
+				ls_Retorno += _FINAL + Char(13) + _FINLINEA + Char(13)
+			End If
+		Next
+		ls_Retorno += _FINALBLOQUE + _FINLINEA + Char(13)
+		
 		If RowD = ids_Contenedor.RowCount() Then
 			ls_Retorno += _FINAL + Char(13)
 		Else
@@ -345,6 +360,7 @@ end function
 event constructor;ids_JSON			=	Create DataStore
 ids_SKU			=	Create DataStore
 ids_Contenedor	=	Create DataStore
+ids_Termografo	=	Create DataStore
 
 iuo_Correo		=	Create uo_Mail
 
@@ -356,6 +372,9 @@ ids_SKU.SetTransObject(Sqlca)
 
 ids_Contenedor.DataObject = 'dw_gene_json_embq'
 ids_Contenedor.SetTransObject(Sqlca)
+
+ids_Termografo.DataObject = 'dw_gene_json_embq'
+ids_Termografo.SetTransObject(Sqlca)
 
 end event
 
