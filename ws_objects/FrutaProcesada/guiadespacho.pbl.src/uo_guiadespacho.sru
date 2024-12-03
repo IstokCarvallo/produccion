@@ -675,7 +675,7 @@ Else
 	of_InsertaRegistro('xMontoEscrito', '')
 	of_InsertaRegistro('xObservaciones', Mid(ids_Source_Frut.Object.defe_glosa[1], 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source_Frut.Object.ggn[1], 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
 	
@@ -899,7 +899,7 @@ IF of_DatosEmpresa(Tipo) Then
 		Else
 			ls_Referencia = Trim(ids_Source.Object.defe_glosas[1])
 			If Tipo = 1 Then
-				ls_Referencia =  ls_Referencia + ' - Fruta Certificada Global GAP, ' + f_Kilos_GGN(Cliente, Planta, Movimiento)
+				ls_Referencia =  ls_Referencia + ' - Fruta Certificada GLOBALG.A.P. ' + f_Kilos_GGN(Cliente, Planta, Movimiento)
 			End If
 		End If
 		
@@ -913,9 +913,9 @@ IF of_DatosEmpresa(Tipo) Then
 			End If
 			
 			of_InsertaRegistro('xObservaciones1', Mid(ls_Referencia, 1, 120))
-			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source.Object.ggn[1], 1, 120))
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 4  Then
-			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada Global GAP GGN : ' + ids_Source.Object.ggn[1], 1, 120))
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 1 Then //Guia Exportacion / Embarques
 			//Glosa 1
 			ls_Referencia = Mid('Total VGM: ' + String(ids_Source.Object.defe_totvgm[1], '#,##0.00') + &
@@ -982,8 +982,8 @@ IF of_DatosEmpresa(Tipo) Then
 			ls_Referencia += '' + _SeparadorDTE
 			
 			If Tipo = 1 Then 
-				ls_Referencia += Mid('Cajas de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exportación ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb. ' ,1,80)+ _SeparadorDTE
-				ls_Referencia += 'Cajas de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exportación ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb. ' + _SeparadorDTE
+				ls_Referencia += Mid('Cajas de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exportacion ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb.' ,1,80)+ _SeparadorDTE
+				ls_Referencia += 'Cajas de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exportacion ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb.' + _SeparadorDTE
 			ElseIf Tipo = 0 Then
 				ls_Referencia += Mid('Cajas muestra de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Lote ' + Trim(String(ids_Source.Object.defi_nrlote[ll_Fila], '000000')) + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ',1,80)+ _SeparadorDTE
 				ls_Referencia +=  'Cajas muestra de ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Lote ' + Trim(String(ids_Source.Object.defi_nrlote[ll_Fila], '000000')) + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. '+ _SeparadorDTE
@@ -1240,7 +1240,7 @@ Else
 	of_InsertaRegistro('xMontoEscrito', '')
 	of_InsertaRegistro('xObservaciones', Mid(ids_Source_GDE.Object.defe_glosa[1], 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid(ids_Source_GDE.Object.defe_glosas[1] + ' \ FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA', 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ' \ FRUTA CERTIFICADA GLOBAL GAP GGN : ' + ids_Source_GDE.Object.ggn[1], 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ' \ FRUTA CERTIFICADA GLOBALG.A.P. GGN : ' + ids_Source_GDE.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid(' CSG:' + ids_Source_GDE.Object.CSG[1] + ' CSP:' + ids_Source_GDE.Object.CSP[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)

@@ -577,27 +577,27 @@ DO WHILE  FileRead(ll_Filas, ls_Registro)>=1
 	IF li_tabla	=	3 THEN
 		
 		ll_numpal		=	Long(Mid(ls_Registro, 5, 8))
-		li_tipopa	 	=	Integer(Mid(ls_Registro, 17, 1))
+		li_tipopa	 		=	Integer(Mid(ls_Registro, 17, 1))
 		ls_tpemcod 	 	=	Mid(ls_Registro, 18, 5)
 		li_especie	 	=	Integer(Mid(ls_Registro, 23, 2))
 		li_variedad	 	=	Integer(Mid(ls_Registro, 25, 4))
 		li_tiemcod	 	=	Integer(Mid(ls_Registro, 29, 2))
-		li_categoria 	= 	Integer(Mid(ls_Registro, 31, 3))
+		li_categoria 		= 	Integer(Mid(ls_Registro, 31, 3))
 		li_etiqueta		=  Integer(Mid(ls_Registro, 34, 4))
-		li_status		=	Integer(Mid(ls_Registro, 38, 2))
-		li_tratamiento =  Integer(Mid(ls_Registro, 40, 3))
-		ls_frio			=  Mid(ls_Registro, 43, 1)
-		li_condicion	=  Integer(Mid(ls_Registro, 44, 1))
+		li_status			=	Integer(Mid(ls_Registro, 38, 2))
+		li_tratamiento 	=  Integer(Mid(ls_Registro, 40, 3))
+		ls_frio				=  Mid(ls_Registro, 43, 1)
+		li_condicion		=  Integer(Mid(ls_Registro, 44, 1))
 		
 		IF Integer(Mid(ls_Registro, 45, 3)) <> 0 THEN
 			li_destino		=	Integer(Mid(ls_Registro, 45, 3))
 		END IF
 		
-		ls_embalaje		=	Mid(ls_Registro, 48, 10)
-		ld_fecemb      =  Date(String(Mid(ls_Registro, 58, 2)+'-'+Mid(ls_Registro, 60, 2)+'-'+Mid(ls_Registro, 62, 4) ))
+		ls_embalaje	=	Mid(ls_Registro, 48, 10)
+		ld_fecemb   	=  Date(String(Mid(ls_Registro, 58, 2)+'-'+Mid(ls_Registro, 60, 2)+'-'+Mid(ls_Registro, 62, 4) ))
 		ld_feccos		=	Date(String(Mid(ls_Registro, 66, 2)+'-'+Mid(ls_Registro, 68, 2)+'-'+Mid(ls_Registro, 70, 4) ))
 		li_altura		=	Integer(Mid(ls_Registro, 74, 4))
-		ll_cajas			=	Long(Mid(ls_Registro, 78, 7))
+		ll_cajas		=	Long(Mid(ls_Registro, 78, 7))
 		li_tmpv        =  Integer(Mid(ls_Registro, 85, 2))
 		ld_fecini		=	Date(String(Mid(ls_Registro, 87, 2)+'-'+Mid(ls_Registro, 89, 2)+'-'+Mid(ls_Registro, 91, 4) ))
 		ld_horini		=	Time(String(Mid(ls_Registro, 95, 2)+':'+Mid(ls_Registro, 97, 2)+':'+Mid(ls_Registro, 99, 2) ))
@@ -607,8 +607,8 @@ DO WHILE  FileRead(ll_Filas, ls_Registro)>=1
 		li_pexpor		=	Integer(Mid(ls_Registro, 113, 1))
 		li_pmixto		=	Integer(Mid(ls_Registro, 114, 1))
 		li_varrot		=	Integer(Mid(ls_Registro, 115, 4))
-		ls_nrasda		=	Mid(ls_Registro, 119, 16)
-		ls_copa			=	Mid(ls_Registro, 135, 3)
+		ls_nrasda	=	Mid(ls_Registro, 119, 16)
+		ls_copa		=	Mid(ls_Registro, 135, 3)
 		IF NOT IsNull(ls_copa) AND ls_copa <>"" THEN
 			li_copa		=	Integer(ls_copa)
 		ELSE

@@ -235,7 +235,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		+=	'Glosa: ' + String(luo_Factura.Kilos, '#,##0.00') + ' Kilos de ' + luo_Especie.Nombre + ' comercial, '
 						ls_Texto		+=	' variedad ' + luo_Factura.Variedad + ' de acuerdo con detalle adjunto.~n'
 						
-						If Not IsNull(luo_Factura.GGN) And luo_Factura.GGN <> '' Then  ls_Texto += String(luo_Factura.GGN, '#,##0.00')  + ' Kilos fruta Certificada Global GAP ' + luo_Factura.GGN
+						If Not IsNull(luo_Factura.GGN) And luo_Factura.GGN <> '' Then  ls_Texto += String(luo_Factura.GGN, '#,##0.00')  + ' Kilos fruta Certificada GLOBALG.A.P. GGN:' + luo_Factura.GGN
 						
 						ls_Texto		+=	'Neto: ' + String(luo_Factura.Neto, '#,##0') + ' ~n'
 						ls_Texto		+=	'IVA: ' + String(luo_Factura.IVA, '#,##0') + ' ~n'
