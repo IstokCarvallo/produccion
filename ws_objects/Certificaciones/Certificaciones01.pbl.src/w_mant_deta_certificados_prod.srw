@@ -386,6 +386,13 @@ Choose Case ls_Columna
 			dw_1.SetItem(row, ls_Columna, String(li_Null))
 			Return 1
 		End If
+		
+	Case 'cece_ggngap'
+		If Match(Data,"[^0-9 A-Za-z()-_,.&$%#/\]") Then
+			MessageBox("Atención","El nombre sólo permite letras, números y [()-_,.&$%#/\]")
+			This.SetItem(row, 'fade_nompro', String(li_Null))
+			Return 1
+		End If		
 
 	Case "cace_codigo"
 		If Data <> '1' Then dw_1.SetItem(row, 'cece_montos', Dec(li_Null))
