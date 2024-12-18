@@ -2962,6 +2962,21 @@ DO
 							NoExisteEmbarque(dw_2.Object.embq_codigo[1])
 						End If
 						
+						iuo_Cliente.Existe(dw_2.Object.clie_codigo[1], False, Sqlca)
+		
+						If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
+								(dw_2.Object.defe_tiposa[1] = 7 Or dw_2.Object.defe_tiposa[1] = 8 Or dw_2.Object.defe_tiposa[1] = 9 Or &
+								dw_2.Object.defe_tiposa[1] = 10 Or dw_2.Object.defe_tiposa[1] = 11 Or dw_2.Object.defe_tiposa[1] = 30)Then 
+								
+							dw_2.Object.defe_guides.Protect	= 1
+							dw_2.Object.defe_guides.Color		= Rgb(255,255,255)
+							dw_2.Object.defe_guides.BackGround.Color	= 553648127
+						Else
+							dw_2.Object.defe_guides.Protect 	= 0
+							dw_2.Object.defe_guides.Color		= 0
+							dw_2.Object.defe_guides.BackGround.Color	= Rgb(255,255,255)
+						End If
+						
 						SELECT count(*) 
 						INTO :li_cont
 						FROM dbo.despafrigoguias

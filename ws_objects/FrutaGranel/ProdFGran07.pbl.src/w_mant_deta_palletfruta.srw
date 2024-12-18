@@ -585,6 +585,7 @@ Else
 	dw_1.Object.plde_codigo[il_Fila]	=	Integer(istr_mant.argumento[6])
 	dw_1.Object.pafr_estemb[il_Fila]	=	1
 	dw_1.Object.cate_codigo[il_Fila]	=	Integer(istr_mant.argumento[13])
+	dw_1.Object.pafr_fecemb[il_Fila] 	= Date(istr_mant.argumento[91])
 	dw_1.Object.emba_codigo[il_Fila]	=	istr_mant.argumento[14]
 	dw_1.Object.pefr_codigo[il_Fila]	=	1
 	

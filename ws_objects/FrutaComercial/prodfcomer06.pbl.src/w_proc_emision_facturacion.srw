@@ -219,10 +219,10 @@ For ll_Fila = 1 To dw_1.RowCount()
 						luo_Especie.Existe(dw_1.Object.espe_codigo[ll_Fila], False, SQLCA)
 						
 						ls_Envio		=	ls_path + '\' + ls_Periodo + '\' + ls_Archivo
-						ls_Asunto	=	'Facturación '+ luo_Especie.Nombre + ' Exportación ' + em_Fecha.Text + ' Prod. ' + String(luo_Productor.Codigo, '00000') + ' ' + luo_Productor.Nombre
+						ls_Asunto	=	'Facturación '+ luo_Especie.Nombre + ' Comercial ' + em_Fecha.Text + ' Prod. ' + String(luo_Productor.Codigo, '00000') + ' ' + luo_Productor.Nombre
 						
 						ls_Texto		=	'Estimado productor buenos dias,~n~n'
-						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir factutación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
+						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir facturación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
 														'-' + Mid(em_fecha.Text, 4) + ' con el siguiente detalle:.~n~n'
 						ls_Texto		+=	'Factura por fruta comercial.~n'
 						ls_Texto		+=	'Nombre: Comercial Rio Blanco SPA.~n' //+ uo_SelCliente.Nombre + '~n'

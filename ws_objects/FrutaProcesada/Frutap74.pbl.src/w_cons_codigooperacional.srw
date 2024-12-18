@@ -427,8 +427,8 @@ fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 boolean enabled = false
-string picturename = "\Desarrollo 22\Imagenes\Botones\Guardar Como.png"
-string disabledname = "\Desarrollo 22\Imagenes\Botones\Guardar Como-bn.png"
+string picturename = "\Desarrollo 17\Imagenes\Botones\Guardar Como.png"
+string disabledname = "\Desarrollo 17\Imagenes\Botones\Guardar Como-bn.png"
 alignment htextalign = left!
 end type
 
@@ -1214,40 +1214,22 @@ textcase textcase = upper!
 borderstyle borderstyle = stylelowered!
 end type
 
-event modified;Integer  li_cliente
-String	ls_embalaje, ls_Nombre
+event modified;String	ls_embalaje, ls_Nombre
 
-li_cliente	=	Integer(istr_mant.argumento[2]) // Cliente
 ls_embalaje	=	This.Text
 
 SELECT	emba_nombre
 	INTO	:ls_Nombre
 	FROM	dbo.embalajesprod
-	WHERE	clie_codigo	=	:li_cliente
+	WHERE	clie_codigo	=	:uo_SelCliente.Codigo
 	AND	emba_codigo	=	:ls_embalaje;
-	
-	
-//	
-//IF sqlca.SQLCode = -1 THEN
-////	F_ErrorBaseDatos(sqlca, "Lectura de tabla Embalajes")
-////	This.SetFocus()
-//ELSEIF sqlca.SQLCode = 100 THEN
-////	MessageBox("Atención", "Código de Embalaje no ha sido Definido.~r~r" + &
-////		"Ingrese o seleccione otro Código.")
-////	This.SetFocus()
-//ELSE
-IF ls_Nombre <> '' THEN
+
+If ls_Nombre <> '' Then
 	istr_mant.argumento[8]	=	ls_embalaje
-//	dw_tipopallemba.GetChild("tpem_codigo", idwc_tipopallemba)
-//	idwc_tipopallemba.SetTransObject(sqlca)
-//	idwc_tipopallemba.Retrieve(Integer(istr_mant.argumento[2]),ls_embalaje)
-//	cbx_tipoembalaje.Enabled = TRUE
-ELSE
+Else
 	istr_mant.argumento[8]	=	ls_embalaje
-//	cbx_tipoembalaje.Checked = True
-//	cbx_tipoembalaje.Enabled = False
-END IF	
-//END IF
+End If	
+
 end event
 
 type em_calibre from editmask within w_cons_codigooperacional

@@ -119,49 +119,14 @@ w_informes_guia_archivo 		vinf2
 end variables
 
 forward prototypes
-public function boolean existeguia (long al_guia)
-public subroutine generaarchivo ()
-public function boolean existearchivo (integer li_cliente, integer li_planta, long ll_guia, long al_planillas, string as_tipoplanilla, string as_instructivo)
-public function boolean valida_datos ()
-public function boolean obtiene_condicion (integer ai_cliente, integer ai_planta, long al_pallet)
+public subroutine wf_generaarchivo ()
+public function boolean wf_obtienecondicion (integer ai_cliente, integer ai_planta, long al_pallet)
+public function boolean wf_ValidaDatos ()
+public function boolean wf_existeguia (long al_guia)
+public function boolean wf_existearchivo (integer li_cliente, integer li_planta, long ll_guia, long al_planillas, string as_tipoplanilla, string as_instructivo)
 end prototypes
 
-public function boolean existeguia (long al_guia);Integer	li_tipoembq, li_consol, li_plades
-Long		ll_fila, ll_fila1, ll_contpal, ll_cont
-
-If al_guia <> 0 Then
-	
-	SELECT defe_tiposa,defe_numero,defe_especi,defe_consol,defe_plades, embq_codigo, defe_plasag
-		INTO	:li_tipoembq,:il_despacho,:ii_especie,:li_consol,:li_plades, :is_Embarque, :al_planilla
-		FROM	dbo.DESPAFRIGOEN 
-		WHERE	plde_codigo =	:uo_SelPlanta.Codigo
-		AND	clie_codigo	=	:uo_SelCliente.Codigo
-		AND	defe_guides	=	:al_guia
-		Using SQLCA;
-				
-	If sqlca.SQLCode = -1 Then
-		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
-		em_nroguia.SetFocus()
-		Return False
-	ElseIf sqlca.SQLCode = 100 Then
-		MessageBox("Atención", "No existe Número Guia Despacho Indicado.~r~rIngrese otro Número.", Exclamation!, Ok!)
-		pb_Grabar.Enabled	= False
-		em_nroguia.Text 		= ''
-		em_nroguia.SetFocus()
-		Return False
-	Else
-		iuo_Embarque.Existe(is_Embarque, True, Sqlca)
-		sle_nave.Text		= iuo_Embarque.NombreNave
-		em_fzarpe.Text	= String(iuo_Embarque.FechaZarpe, 'dd/mm/yyyy')
-		pb_Grabar.Enabled= True
-	End If
-Else
-	MessageBox("Atención", "Faltan parámetros de búsqueda.~r~rIngreselos todos.", Exclamation!, Ok!)
-	Return False
-End If
-end function
-
-public subroutine generaarchivo ();Long			ll_fila, ll_filas, ll_filadet, ll_guia, ll_numero, ll_cont, ll_planilla, ll_filcont
+public subroutine wf_generaarchivo ();Long			ll_fila, ll_filas, ll_filadet, ll_guia, ll_numero, ll_cont, ll_planilla, ll_filcont
 String			ls_Cliente, ls_Planta, ls_Patente, ls_Archivo, ls_Registro, ls_embarque,&
 				ls_termog, ls_guia, ls_Instructivo
 double		ll_termog
@@ -183,6 +148,9 @@ dw_4.SetTransObject(SQLCA)
 dw_5.SetTransObject(SQLCA)
 dw_guia.SetTransObject(SQLCA)
 
+
+If IsNull(al_planilla) Then al_planilla = 0
+
 ls_Cliente		=	String(uo_SelCliente.Codigo, '000')
 ls_Planta			=	String(uo_SelPlanta.Codigo, '0000')
 ls_guia 			=  em_nroguia.Text
@@ -197,12 +165,12 @@ is_archivo	=	ls_Archivo
 ll_filcont		=  dw_5.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
 
 If ll_filcont > 0 Then
-	If valida_datos() Then
+	If wf_ValidaDatos() Then
 		Return
 	End If	
 End If	
 
-ll_filas			=  dw_6.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
+ll_filas	=  dw_6.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ll_planilla,ii_var,ii_cal,ii_prod,ll_guia, 0, '-1',ls_Instructivo)
 									  
 li_cliente = uo_SelCliente.Codigo
 
@@ -226,7 +194,7 @@ Else
 		ls_Registro	+=	ls_Patente + Fill(' ',6 - Len(ls_Patente))
 		ls_Registro	+=	String(dw_6.Object.espe_codigo[ll_fila], '00')
 				
-		Obtiene_condicion(dw_6.Object.clie_codigo[ll_fila],dw_6.Object.plde_codigo[ll_fila],dw_6.Object.paen_numero[ll_fila])
+		wf_ObtieneCondicion(dw_6.Object.clie_codigo[ll_fila],dw_6.Object.plde_codigo[ll_fila],dw_6.Object.paen_numero[ll_fila])
 			
 		If ii_condicion = 1 Then
 			ls_Registro	+=	'F'
@@ -285,7 +253,7 @@ Else
 		ll_filadet	=	dw_7.InsertRow(0)
 		dw_7.Object.registro[ll_filadet]	=	ls_Registro
 
-		If ExisteArchivo(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,dw_6.Object.defe_guides[ll_fila],&
+		If wf_ExisteArchivo(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,dw_6.Object.defe_guides[ll_fila],&
 			al_planilla,String(-1),ls_Instructivo) Then
 			Return
 		End If
@@ -307,63 +275,48 @@ Else
 End If
 end subroutine
 
-public function boolean existearchivo (integer li_cliente, integer li_planta, long ll_guia, long al_planillas, string as_tipoplanilla, string as_instructivo);Date ld_fecha
-Time lt_hora
-Integer li_contador, li_code_gengde
-Long ll_numero
-String	ls_embarque
+public function boolean wf_obtienecondicion (integer ai_cliente, integer ai_planta, long al_pallet);Long li_Existe
+Date ld_fecha
 
-//ls_embarque = String(em_operacion.Text)
-
-SELECT defe_numero
-INTO	:ll_numero
-FROM	dbo.DESPAFRIGOEN 
-WHERE	plde_codigo =	:li_planta
-AND	clie_codigo	=	:li_cliente
-AND	defe_guides	=	:ll_guia
-AND   defe_plasag =  :al_planilla
-AND   embq_codigo =  :as_instructivo;
-
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
-	RETURN True
-ELSEIF sqlca.SQLCode = 100 THEN
-	MessageBox("Atención", "No existe Número Guia Indicado.~r~rIngrese otro Número.", &
-					Exclamation!, Ok!)
-	RETURN True
-END IF
-
-SELECT count(*),max(CODE_FECHAA),max(CODE_HORAAP)
-INTO :li_contador,:ld_fecha,:lt_hora
-FROM dbo.CONTROLDESPACHOS
-where plde_codigo =	:li_planta
-AND	clie_codigo	=	:li_cliente
-AND	defe_numero	=	:ll_numero;
-
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla CONTROLDESPACHOS")
-	RETURN True
-END IF
-
-IF li_contador > 0 THEN
-	Select CODE_GEMSAA 
-	INTO :li_code_gengde
-	from dbo.CONTROLDESPACHOS
-	where  plde_codigo =	:li_planta
-		AND	clie_codigo =	:li_cliente
-		AND	defe_numero =	:ll_numero
-		AND	CODE_FECHAA =  :ld_fecha
-		AND	CODE_HORAAP = 	:lt_hora;
-		
-	IF li_code_gengde = 1 THEN
-		MessageBox("Atención", "El Archivo S.A.A.M ya Fue Generado.", Exclamation!, Ok!)
-		Return True
-	END IF		
-END IF
-Return FALSE
+ii_condicion = 0
+	
+  SELECT max(fumi_fecfum)  
+    INTO :ld_fecha
+    FROM dbo.fumigadet as det,dbo.fumigaenc as enc 
+   WHERE det.clie_codigo = :ai_cliente AND  
+         det.plde_codigo = :ai_planta  AND  
+         det.paen_numero = :al_pallet AND
+			det.clie_codigo = enc.clie_codigo AND
+			det.plde_codigo = enc.plde_codigo AND
+			det.cond_codigo = enc.cond_codigo AND
+			det.fumi_numero = enc.fumi_numero
+	GROUP BY det.cond_codigo;
+	
+	SELECT det.cond_codigo  
+    INTO :ii_condicion 
+    FROM dbo.fumigadet as det,dbo.fumigaenc as enc 
+   WHERE det.clie_codigo = :ai_cliente AND  
+         det.plde_codigo = :ai_planta  AND  
+         det.paen_numero = :al_pallet AND
+			det.clie_codigo = enc.clie_codigo AND
+			det.plde_codigo = enc.plde_codigo AND
+			det.cond_codigo = enc.cond_codigo AND
+			det.fumi_numero = enc.fumi_numero AND
+			enc.fumi_fecfum = :ld_fecha;
+	
+	IF sqlca.SQLCode = -1 THEN
+		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla fumigadet")
+		RETURN True
+	ELSEIF sqlca.SQLCode = 100 THEN
+		RETURN True
+	ELSE
+		RETURN False
+	END IF
+	
+Return False
 end function
 
-public function boolean valida_datos ();Long ll_fila, ll_cont, ll_pallet
+public function boolean wf_ValidaDatos ();Long ll_fila, ll_cont, ll_pallet
 String	ls_mensaje
 Integer	li_cliente, li_planta
 
@@ -402,44 +355,93 @@ Return False
 	
 end function
 
-public function boolean obtiene_condicion (integer ai_cliente, integer ai_planta, long al_pallet);Long li_Existe
-Date ld_fecha
+public function boolean wf_existeguia (long al_guia);Integer	li_tipoembq, li_consol, li_plades
+Long		ll_fila, ll_fila1, ll_contpal, ll_cont
 
-ii_condicion = 0
+If al_guia <> 0 Then
 	
-  SELECT max(fumi_fecfum)  
-    INTO :ld_fecha
-    FROM dbo.fumigadet as det,dbo.fumigaenc as enc 
-   WHERE det.clie_codigo = :ai_cliente AND  
-         det.plde_codigo = :ai_planta  AND  
-         det.paen_numero = :al_pallet AND
-			det.clie_codigo = enc.clie_codigo AND
-			det.plde_codigo = enc.plde_codigo AND
-			det.cond_codigo = enc.cond_codigo AND
-			det.fumi_numero = enc.fumi_numero
-	GROUP BY det.cond_codigo;
-	
-	SELECT det.cond_codigo  
-    INTO :ii_condicion 
-    FROM dbo.fumigadet as det,dbo.fumigaenc as enc 
-   WHERE det.clie_codigo = :ai_cliente AND  
-         det.plde_codigo = :ai_planta  AND  
-         det.paen_numero = :al_pallet AND
-			det.clie_codigo = enc.clie_codigo AND
-			det.plde_codigo = enc.plde_codigo AND
-			det.cond_codigo = enc.cond_codigo AND
-			det.fumi_numero = enc.fumi_numero AND
-			enc.fumi_fecfum = :ld_fecha;
-	
-	IF sqlca.SQLCode = -1 THEN
-		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla fumigadet")
-		RETURN True
-	ELSEIF sqlca.SQLCode = 100 THEN
-		RETURN True
-	ELSE
-		RETURN False
-	END IF
-	
+	SELECT defe_tiposa,defe_numero,defe_especi,defe_consol,defe_plades, embq_codigo, defe_plasag
+		INTO	:li_tipoembq,:il_despacho,:ii_especie,:li_consol,:li_plades, :is_Embarque, :al_planilla
+		FROM	dbo.DESPAFRIGOEN 
+		WHERE	plde_codigo =	:uo_SelPlanta.Codigo
+		AND	clie_codigo	=	:uo_SelCliente.Codigo
+		AND	defe_guides	=	:al_guia
+		Using SQLCA;
+				
+	If sqlca.SQLCode = -1 Then
+		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
+		em_nroguia.SetFocus()
+		Return False
+	ElseIf sqlca.SQLCode = 100 Then
+		MessageBox("Atención", "No existe Número Guia Despacho Indicado.~r~rIngrese otro Número.", Exclamation!, Ok!)
+		pb_Grabar.Enabled	= False
+		em_nroguia.Text 		= ''
+		em_nroguia.SetFocus()
+		Return False
+	Else
+		iuo_Embarque.Existe(is_Embarque, True, Sqlca)
+		sle_nave.Text		= iuo_Embarque.NombreNave
+		em_fzarpe.Text	= String(iuo_Embarque.FechaZarpe, 'dd/mm/yyyy')
+		pb_Grabar.Enabled= True
+	End If
+Else
+	MessageBox("Atención", "Faltan parámetros de búsqueda.~r~rIngreselos todos.", Exclamation!, Ok!)
+	Return False
+End If
+end function
+
+public function boolean wf_existearchivo (integer li_cliente, integer li_planta, long ll_guia, long al_planillas, string as_tipoplanilla, string as_instructivo);Date 		ld_fecha
+Time 		lt_hora
+Integer	li_contador, li_code_gengde
+Long 		ll_numero
+
+//ls_embarque = String(em_operacion.Text)
+
+SELECT defe_numero
+INTO	:ll_numero
+FROM	dbo.DESPAFRIGOEN 
+WHERE	plde_codigo =	:li_planta
+AND	clie_codigo	=	:li_cliente
+AND	defe_guides	=	:ll_guia
+AND   IsNull(defe_plasag, -1) =  Case defe_tiposa when 33 Then -1 Else :al_planilla End
+AND   embq_codigo =  :as_instructivo;
+
+If sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
+	Return True
+ElseIf sqlca.SQLCode = 100 Then
+	MessageBox("Atención", "No existe Número Guia Indicado.~r~rIngrese otro Número.", Exclamation!, Ok!)
+	Return True
+End If
+
+SELECT count(*),max(CODE_FECHAA),max(CODE_HORAAP)
+INTO :li_contador,:ld_fecha,:lt_hora
+FROM dbo.CONTROLDESPACHOS
+where plde_codigo =	:li_planta
+AND	clie_codigo	=	:li_cliente
+AND	defe_numero	=	:ll_numero;
+
+If sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla CONTROLDESPACHOS")
+	Return True
+End If
+
+If li_contador > 0 Then
+	Select CODE_GEMSAA 
+	INTO :li_code_gengde
+	from dbo.CONTROLDESPACHOS
+	where  plde_codigo =	:li_planta
+		AND	clie_codigo =	:li_cliente
+		AND	defe_numero =	:ll_numero
+		AND	CODE_FECHAA =  :ld_fecha
+		AND	CODE_HORAAP = 	:lt_hora;
+		
+	If li_code_gengde = 1 Then
+		MessageBox("Atención", "El Archivo S.A.A.M ya Fue Generado.", Exclamation!, Ok!)
+		Return True
+	End If		
+End If
+
 Return False
 end function
 
@@ -749,7 +751,7 @@ maskdatatype maskdatatype = stringmask!
 string displaydata = "$"
 end type
 
-event modified;If Not ExisteGuia(Long(This.Text)) Then
+event modified;If Not wf_ExisteGuia(Long(This.Text)) Then
 	This.SetFocus()
 End If
 end event
@@ -1028,7 +1030,7 @@ ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 Else
 	F_Membrete(vinf2.dw_1)		
-	If (li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9)  Then GeneraArchivo()
+	If (li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9 OR li_tipoembq = 33)  Then wf_GeneraArchivo()
 	iuo_Guia.of_RecuperaPDF(ll_NroGuia, dw_guia.Object.defe_fecdes[1], 1)	
 	dw_guia.SaveAs(gs_disco+":\GeneradosSAAM\"+'GD' +String(uo_SelCliente.Codigo,'000')+String(uo_SelPlanta.Codigo,'00000')+String(ll_nroguia, '00000000')+'.PDF', PDF!, TRUE)	
 	pb_Grabar.Enabled = False

@@ -232,7 +232,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Asunto	=	'Facturación '+ luo_Especie.Nombre + ' Exportación ' + em_Fecha.Text + ' Prod. ' + String(luo_Productor.Codigo, '00000') + ' ' + luo_Productor.Nombre
 						
 						ls_Texto		=	'Estimado productor buenos dias,~n~n'
-						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir factutación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
+						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir facturación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
 														'-' + Mid(em_fecha.Text, 4) + ' con el siguiente detalle:.~n~n'
 						ls_Texto		+=	'Factura por fruta de exportación.~n'
 						ls_Texto		+=	'Nombre: ' + uo_SelCliente.Nombre + '~n'

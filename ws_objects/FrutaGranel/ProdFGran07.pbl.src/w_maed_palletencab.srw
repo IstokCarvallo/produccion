@@ -58,6 +58,7 @@ uo_AnalizaPallet			iuo_pallet
 uo_valida_codigopallet	iuo_copa
 uo_ControlVentanas		iuo_Ventana
 uo_EmbalajesProd			iuo_Embalajes 
+uo_system_approach		iuo_System
 end variables
 
 forward prototypes
@@ -910,6 +911,7 @@ iuo_pallet			=	Create uo_AnalizaPallet
 iuo_copa				=	Create uo_valida_codigopallet
 iuo_Ventana			=	Create uo_ControlVentanas
 iuo_Embalajes		=	Create uo_EmbalajesProd
+iuo_System			=	Create uo_system_approach
 
 dw_1.SetTransObject(sqlca)
 dw_2.SetTransObject(sqlca)
@@ -970,7 +972,7 @@ istr_mant.argumento[28] 				= 	''
 
 buscar	= "Código:Nvari_codigo,Descripción:Svari_nombre"
 ordenar	= "Código:vari_codigo,Descripción:vari_nombre"
-End event
+end event
 
 event ue_borra_detalle;If dw_1.rowcount() < 1 Then
 	dw_1.SetFocus()
@@ -1061,9 +1063,10 @@ DO
 		If  iuo_destinos.Existe(dw_2.Object.dest_codigo[1],True,SqlCa) Then
 			 Istr_mant.argumento[16]	=	String(iuo_destinos.CodigoMercado)
 		End If
+		
 		If ll_fila_e > 0 Then
 			
-			If isnull(dw_2.Object.paen_inspec[1]) Then
+			If IsNull(dw_2.Object.paen_inspec[1]) Then
 				dw_2.Object.paen_inspec[1] = 0
 			ElseIf dw_2.Object.paen_inspec[1] > 0 Then
 				dw_2.Object.dest_codigo.Protect 				= 	1
@@ -1121,6 +1124,7 @@ DO
 					
 					HabilitaEncab(False)
 					wf_CuentaCajas()
+					dw_2.Object.System[1] = iuo_System.of_Get(dw_1)
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
 							Commit;
@@ -1315,7 +1319,7 @@ dw_2.Object.esta_codigo[1]		=	1 // Estacion Packing
 dw_2.Object.paen_fecpro[1]	=	Datetime(Today(), Now())
 
 For ll_Fila = 1 To dw_1.RowCount()
-	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModIfied! Then
+	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModified! Then
 		
 		dw_1.Object.clie_codigo[ll_Fila]		=	dw_2.Object.clie_codigo[1]
 		dw_1.Object.plde_codigo[ll_Fila]		=	dw_2.Object.plde_codigo[1]
@@ -1324,10 +1328,16 @@ For ll_Fila = 1 To dw_1.RowCount()
 		dw_1.Object.etiq_codigo[ll_Fila]		=	dw_2.Object.etiq_codigo[1]
 		dw_1.Object.paen_numero[ll_Fila]	=	dw_2.Object.paen_numero[1]
 		dw_1.Object.pafr_copack[ll_Fila]		=	li_Planta
-		dw_1.Object.pafr_secuen[ll_Fila]		=	ll_Fila//li_Secuencia
-	
+		dw_1.Object.pafr_secuen[ll_Fila]		=	ll_Fila//li_Secuencia	
 		li_Secuencia ++
 	End If
+	
+	IF dw_2.Object.System[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila])
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila])
+	End If
+		
 Next
 
 end event
@@ -1738,11 +1748,11 @@ Choose Case ls_columna
 		End If
 		
 	Case "copa_codigo"
-		If NOT iuo_copa.Existe(Integer(data), True, SQLCa) Then
+		If Not iuo_copa.Existe(Integer(data), True, SQLCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
 			Return 1
 		End If
-			
+		
 End Choose
 	
 HabilitaIngreso()

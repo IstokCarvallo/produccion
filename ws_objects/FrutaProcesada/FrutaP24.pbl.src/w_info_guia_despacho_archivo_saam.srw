@@ -1743,7 +1743,7 @@ Else
 	
 	If Upper(gstr_us.Nombre) = 'ISTOK.CARVALLO' Or Upper(gstr_us.Nombre) = 'GABRIEL.PONCE'  Or &
 		Upper(gstr_us.Nombre) = 'CAMILO.HERNANDEZ' Or Upper(gstr_us.Nombre) = 'JEFFREY.ROBLES' Or &
-		Upper(gstr_us.Nombre) = 'NICOLAS.ZUNIGA' Or Upper(gstr_us.Nombre) = 'fABIAN.MIRANDA'  Or &
+		Upper(gstr_us.Nombre) = 'NICOLAS.ZUNIGA' Or Upper(gstr_us.Nombre) = 'FABIAN.MIRANDA'  Or &
 		Upper(gstr_us.Nombre) = 'DANIELLA.CONTRERAS' Then
 		cb_rossi.Visible = True
 	End If
@@ -1910,7 +1910,7 @@ Else
 		ls_parteemb = Right(is_embarque, 1)
 		is_parteemb = Right(is_embarque, 1)
 		
-		If (ii_tipoemb = 7 OR ii_tipoemb = 8 OR ii_tipoemb = 9)  Then	
+		If (ii_tipoemb = 7 Or ii_tipoemb = 8 Or ii_tipoemb = 9 Or ii_tipoemb = 33)  Then	
 			If ii_controlsaam = 0 Then
 				If iuo_Embarcador.ArchivoPlano = 1 Then wf_GeneraGuia_ws()
 				wf_GeneraArchivo()
@@ -3423,6 +3423,7 @@ End If
 end event
 
 type cb_rossi from commandbutton within w_info_guia_despacho_archivo_saam
+boolean visible = false
 integer x = 2341
 integer y = 816
 integer width = 594
@@ -3435,6 +3436,7 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
+boolean enabled = false
 string text = "WS Embarcador"
 end type
 
