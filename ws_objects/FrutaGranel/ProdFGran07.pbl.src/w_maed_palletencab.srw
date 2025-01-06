@@ -71,7 +71,6 @@ public function boolean existevariecalibre (integer as_valor)
 public subroutine buscavariedad ()
 public function boolean existepallet (string as_codigo)
 public subroutine habilitaencab (boolean habilita)
-public subroutine buscaenvase ()
 public function boolean existevariedad (integer li_columna, integer cliente)
 public function boolean noexistecliente (integer cliente)
 public function boolean buscanombreembalaje (string as_embalaje)
@@ -82,6 +81,7 @@ protected function boolean wf_actualiza_db (boolean borrando)
 public function boolean wf_creacion_cajas ()
 public subroutine wf_cuentacajas ()
 public function boolean wf_existetipoembalaje (string as_codigo, boolean ab_captura)
+public subroutine wf_buscaenvase ()
 end prototypes
 
 event ue_imprimir;SetPointer(HourGlass!)
@@ -527,35 +527,6 @@ Else
 End If
 end subroutine
 
-public subroutine buscaenvase ();Str_busqueda	lstr_busq
-Integer li_especie, li_tipo, li_envase
-
-lstr_busq.argum[1]	=	String(dw_2.GetItemNumber(1, "enva_tipoen"))
-
-OpenWithParm(w_busc_envases, lstr_busq)
-
-lstr_busq	= Message.PowerObjectParm
-
-If lstr_busq.argum[2] <> '' Then
-	
-  
-   istr_mant.argumento[7]	=	lstr_busq.argum[1]
-	istr_mant.argumento[8]	=	lstr_busq.argum[2]
-	
-	dw_2.SetItem(1, "enva_codigo", Integer(lstr_busq.argum[2]))
-	dw_2.SetItem(1, "enva_nombre", lstr_busq.argum[3])
-
-	dw_2.GetChild("tpen_codigo", idwc_tippen)
-	idwc_tippen.SetTransObject(SqlCa)
-	If idwc_tippen.Retrieve(Integer(lstr_busq.argum[1]),Integer(lstr_busq.argum[2])) = 0 Then
-		idwc_tippen.InsertRow(0)
-	End If	
-
-	dw_2.SetColumn("enva_codigo")
-	dw_2.SetFocus()
-End If
-End subroutine
-
 public function boolean existevariedad (integer li_columna, integer cliente);Integer	li_cliente, li_especie, li_variedad
 String	ls_nombre
 
@@ -870,6 +841,35 @@ End If
 Return False
 end function
 
+public subroutine wf_buscaenvase ();Str_busqueda	lstr_busq
+Integer li_especie, li_tipo, li_envase
+
+lstr_busq.argum[1]	=	String(dw_2.GetItemNumber(1, "enva_tipoen"))
+
+OpenWithParm(w_busc_envases, lstr_busq)
+
+lstr_busq	= Message.PowerObjectParm
+
+If lstr_busq.argum[2] <> '' Then
+	
+  
+   istr_mant.argumento[7]	=	lstr_busq.argum[1]
+	istr_mant.argumento[8]	=	lstr_busq.argum[2]
+	
+	dw_2.SetItem(1, "enva_codigo", Integer(lstr_busq.argum[2]))
+	dw_2.SetItem(1, "enva_nombre", lstr_busq.argum[3])
+
+	dw_2.GetChild("tpen_codigo", idwc_tippen)
+	idwc_tippen.SetTransObject(SqlCa)
+	If idwc_tippen.Retrieve(Integer(lstr_busq.argum[1]),Integer(lstr_busq.argum[2])) = 0 Then
+		idwc_tippen.InsertRow(0)
+	End If	
+
+	dw_2.SetColumn("enva_codigo")
+	dw_2.SetFocus()
+End If
+end subroutine
+
 event open;/*
 		Argumentos					:		[1]	=	Código de Exportador
 												[2]	=	Numero de Pallet
@@ -1099,32 +1099,37 @@ DO
 		
 		DO
 			//////////////////////////////////////////////////////////////////
-			ll_fila_d	=	dw_1.Retrieve(	Long(istr_mant.argumento[1]), &
-													Long(istr_mant.argumento[2]),&
-													Long(istr_mant.argumento[6]))
+			ll_fila_d	=	dw_1.Retrieve(	Long(istr_mant.argumento[1]), Long(istr_mant.argumento[2]), Long(istr_mant.argumento[6]))
 
 			If ll_fila_d = -1 Then
-				li_Respuesta	=	MessageBox("Error en Base de Datos", &
-												"No es posible conectar la Base de Datos 2.", &
-												Information!, RetryCancel!)
+				li_Respuesta	=	MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos 2.", Information!, RetryCancel!)
 			Else
-				pb_eliminar.Enabled			=	NOT istr_Mant.Solo_Consulta
-				pb_grabar.Enabled			=	NOT istr_Mant.Solo_Consulta
-				pb_ins_det.Enabled			=	NOT istr_Mant.Solo_Consulta
+				pb_eliminar.Enabled			=	Not istr_Mant.Solo_Consulta
+				pb_grabar.Enabled			=	Not istr_Mant.Solo_Consulta
+				pb_ins_det.Enabled			=	Not istr_Mant.Solo_Consulta
 				pb_ventana.Enabled			=	True
 				pb_imprimir.Enabled			=	True
 				pb_compactos.Enabled		=	True
 				pb_cambio_folio.Enabled		=	True
 
 				If ll_fila_d > 0 Then
-					pb_eli_det.Enabled	=	NOT istr_Mant.Solo_Consulta
+					pb_eli_det.Enabled	=	Not istr_Mant.Solo_Consulta
 					dw_1.SetRow(1)
 					dw_1.SelectRow(1, True)
 					dw_1.SetFocus()
 					
 					HabilitaEncab(False)
 					wf_CuentaCajas()
-					dw_2.Object.System[1] = iuo_System.of_Get(dw_1)
+					
+					//Marca Condiciones a folio
+					dw_2.Object.System[1] = iuo_System.of_Get(dw_1, 'S')
+					dw_2.Object.Mosca[1] = iuo_System.of_Get(dw_1, 'M')
+					dw_2.Object.Lobesia[1] = iuo_System.of_Get(dw_1, 'L')
+					dw_2.Object.Fumigar[1] = iuo_System.of_Get(dw_1, 'F')
+					dw_2.Object.Fosfinar[1] = iuo_System.of_Get(dw_1, 'P')
+					dw_2.Object.Ensayo[1] = iuo_System.of_Get(dw_1, 'E')
+					
+					
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
 							Commit;
@@ -1333,10 +1338,41 @@ For ll_Fila = 1 To dw_1.RowCount()
 	End If
 	
 	IF dw_2.Object.System[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila])
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'S')
 	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila])
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'S')
 	End If
+	
+	IF dw_2.Object.Mosca[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'M')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'M')
+	End If
+	
+	IF dw_2.Object.Lobesia[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'L')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'L')
+	End If
+	
+	IF dw_2.Object.fumigar[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'F')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'F')
+	End If
+	
+	IF dw_2.Object.fosfinar[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'P')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'P')
+	End If
+	
+	IF dw_2.Object.ensayo[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'E')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'E')
+	End If
+	
 		
 Next
 
@@ -1504,9 +1540,9 @@ end event
 
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_maed_palletencab
 integer x = 101
-integer y = 904
+integer y = 1048
 integer width = 3291
-integer height = 1196
+integer height = 1052
 integer taborder = 100
 string title = "Detalle de Pallets"
 string dataobject = "dw_mues_palletfruta"
@@ -1542,7 +1578,7 @@ type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_palletencab
 integer x = 261
 integer y = 40
 integer width = 2917
-integer height = 768
+integer height = 996
 string dataobject = "dw_mant_palletencab"
 boolean hsplitscroll = true
 end type
@@ -1770,10 +1806,10 @@ Choose Case dwo.name
 		buscavariedad()
 
 	Case "b_buscaenvase"
-		buscaenvase()
+		wf_buscaenvase()
 		
 End Choose
-End event
+end event
 
 type pb_nuevo from w_mant_encab_deta_csd`pb_nuevo within w_maed_palletencab
 integer x = 3712

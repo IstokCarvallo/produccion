@@ -645,8 +645,7 @@ DO
 			
 			If dw_1.Retrieve(Integer(istr_mant.argumento[1]),Integer(istr_mant.argumento[2]),&
 							     	  Long(istr_mant.argumento[3]),li_Sentido, Integer(istr_Mant.Argumento[16])) = -1 Then
-				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-												Information!, RetryCancel!)
+				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
 			Else
 				If dw_2.Object.meen_guiemi[1] = 1 Then
 					pb_eliminar.PictureName 	= "\Desarrollo 17\Imagenes\Botones\Nulo.png"
@@ -881,24 +880,24 @@ OpenWithParm(vinf,istr_info)
 vinf.dw_1.DataObject = "dw_info_movtoenvases"
 vinf.dw_1.SetTransObject(sqlca)
 
-IF dw_2.Object.tpmv_codrec[1]	= 1 THEN
+If dw_2.Object.tpmv_codrec[1]	= 1 Then
 	li_Sentido	=	0
-ELSE
+Else
 	li_Sentido	=	Integer(istr_mant.argumento[4])
-END IF
+End If
 
 fila = vinf.dw_1.Retrieve(Integer(istr_mant.Argumento[1]),Integer(istr_mant.Argumento[2]),&
 								  Integer(istr_mant.Argumento[3]),li_Sentido)
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
