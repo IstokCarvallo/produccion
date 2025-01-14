@@ -1733,16 +1733,17 @@ SELECT expo_nombre,expo_rutexp
 	FROM	dbo.exportadores
 	WHERE	expo_codigo	=	:ai_cliente;
 				
-	IF sqlca.SQLCode = -1 THEN
-		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla exportadores")
-	Return False
-	
-	ELSEIF sqlca.SQLCode = 100 THEN
-		MessageBox("Atención", "No Existe Exportador.~r~rIngrese otro Número.", &
-						Exclamation!, Ok!)
+If sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla exportadores")
+Return False
+
+ElseIf sqlca.SQLCode = 100 Then
+	MessageBox("Atención", "No Existe Exportador.~r~rIngrese otro Número.", &
+					Exclamation!, Ok!)
 	Return False						
-	END IF
-	Return True
+End If
+
+Return True
 end function
 
 on w_info_guia_despacho.create

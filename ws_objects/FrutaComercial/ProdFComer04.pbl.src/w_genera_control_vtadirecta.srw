@@ -181,35 +181,33 @@ event ue_recuperadatos;call super::ue_recuperadatos;Long	ll_fila, respuesta, ll_
 Date	ld_Fecha
 Dec{2} ld_Porcentaje
 
-Do
-	ld_Fecha	=	date('01/' + em_fecha.Text)
-	ld_Porcentaje = Dec(em_porcentaje.Text)
-	
-	Declare GeneraFactura Procedure For dbo.FComer_Genera_FacturaComercial
-			@Fecha			=	:ld_Fecha, 
-			@cliente			=	:uo_SelCliente.Codigo, 
-			@Productor		=	:uo_SelProductor.Codigo,
-			@Porcentaje	=	:ld_Porcentaje			
-	Using	Sqlca;
-					
-	Execute GeneraFactura ;
-					
-	If sqlca.SQLCode = -1 Then
-		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-		pb_grabar.Enabled = True
-	Else
-		If cbx_informe.Checked Then This.TriggerEvent("ue_imprimir")
-	End If
-	
-	Close GeneraFactura ;
-	Commit;
-Loop While respuesta = 1
-
 SetPointer(Arrow!)
 
-If respuesta = 2 Then
-	Close(This)
+ld_Fecha	=	date('01/' + em_fecha.Text)
+ld_Porcentaje = Dec(em_porcentaje.Text)
+
+Declare GeneraFactura Procedure For dbo.FComer_Genera_FacturaComercial
+		@Fecha			=	:ld_Fecha, 
+		@cliente			=	:uo_SelCliente.Codigo, 
+		@Productor		=	:uo_SelProductor.Codigo,
+		@Porcentaje	=	:ld_Porcentaje			
+Using	Sqlca;
+				
+Execute GeneraFactura ;
+				
+If sqlca.SQLCode = -1 Then
+	respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
+Else
+	If cbx_informe.Checked Then This.TriggerEvent("ue_imprimir")
+	MessageBox("Atencion", "Datos Cargado Correctamente.", Information!, OK!)
 End If
+
+Close GeneraFactura ;
+Commit;
+
+pb_grabar.Enabled = True
+
+SetPointer(HourGlass!)
 end event
 
 on w_genera_control_vtadirecta.create

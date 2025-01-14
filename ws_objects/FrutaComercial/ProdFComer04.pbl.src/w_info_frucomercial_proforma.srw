@@ -133,6 +133,7 @@ integer width = 1234
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_frucomercial_proforma
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_frucomercial_proforma

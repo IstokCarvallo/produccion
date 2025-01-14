@@ -124,29 +124,10 @@ Integer				ii_tipo
 end variables
 
 forward prototypes
-public function boolean noexistecliente (integer cliente)
-public function boolean existe_guia (integer ai_codigo, long al_guia)
+public function boolean wf_existe_guia (integer ai_codigo, long al_guia)
 end prototypes
 
-public function boolean noexistecliente (integer cliente);String ls_nombre
-
-SELECT 		clie_nombre
-INTO			:ls_nombre
-FROM 		dbo.clientesprod
-WHERE		clie_codigo =:cliente;
-
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla ClientesProd")
-	Return True
-ELSEIF sqlca.SQLCode = 100 THEN
-	MessageBox("Atención","Código No ha sido Generado. Ingrese Otro.")
-	Return True
-END IF
-
-Return False
-end function
-
-public function boolean existe_guia (integer ai_codigo, long al_guia);Long ll_guia
+public function boolean wf_existe_guia (integer ai_codigo, long al_guia);Long ll_guia
 
 SELECT Distinct mfco_guisii
 INTO   :ll_guia
@@ -278,14 +259,14 @@ end on
 
 event open;call super::open;Boolean	lb_Cerrar
 
-IF IsNull(uo_SeleCli.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SeleEnt.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SelEspe.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SelVari.Codigo) THEN lb_Cerrar	=	True
+If IsNull(uo_SeleCli.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SeleEnt.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SelEspe.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SelVari.Codigo) Then lb_Cerrar	=	True
 
-IF lb_Cerrar THEN
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_SelVari.Todos(True)
 	uo_SelVari.cbx_Todos.Enabled	=	False
 	
@@ -294,7 +275,7 @@ ELSE
 	ii_tipo				=	-1
 	istr_mant.Argumento[1]	=	''
 	ddlb_tipodocto.SelectItem(3)
-END IF
+End If
 
 end event
 
@@ -705,16 +686,16 @@ borderstyle borderstyle = stylelowered!
 string mask = "############"
 end type
 
-event modified;IF Not IsNull(em_guia.text) AND Not em_guia.text = "" THEN
-	IF Not Existe_guia(uo_SeleCli.Codigo,Long(This.text)) THEN
+event modified;If Not IsNull(em_guia.text) AND Not em_guia.text = "" Then
+	If Not wf_Existe_guia(uo_SeleCli.Codigo,Long(This.text)) Then
 		This.Text = ""
 		istr_mant.argumento[1] = ""
 		This.SetFocus()
-		RETURN 1
-	ELSE
+		Return 1
+	Else
 		istr_mant.argumento[1] = This.text
-	END IF
-END IF
+	End If
+End If
 
 end event
 

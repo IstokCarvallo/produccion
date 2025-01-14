@@ -195,13 +195,13 @@ SELECT	Max(inpd_frecha)
 	AND	plde_codigo = :li_planta
 	AND	paen_numero	= :ll_numero ;
 	
-IF ld_fecrechazo <> Date('1900-01-01') OR NOT Isnull(ld_fecrechazo) THEN /*Rechazado SAG*/
-	IF MessageBox("Advertencia", "Inspeccionará un Pallet Rechazado en Fecha " +String(ld_fecrechazo)+".~r~r" + &
-					"Desea continuar ?", Question!, YesNo!, 2) = 1 THEN 
-	ELSE
+If ld_fecrechazo <> Date('1900-01-01') OR NOT Isnull(ld_fecrechazo) Then /*Rechazado SAG*/
+	If MessageBox("Advertencia", "Inspeccionará un Pallet Rechazado en Fecha " +String(ld_fecrechazo)+".~r~r" + &
+					"Desea continuar ?", Question!, YesNo!, 2) = 1 Then 
+	Else
 		Return True
-	END IF
-END IF	
+	End If
+End If	
 
 SELECT	pae.paen_tipopa, esp.espe_nombre, var.vari_nombre, emb.emba_nombre,
 			pae.paen_ccajas, pae.paen_inspec, pae.paen_estado, pae.cond_codigo, pae.espe_codigo
@@ -225,26 +225,26 @@ SELECT	pae.paen_tipopa, esp.espe_nombre, var.vari_nombre, emb.emba_nombre,
 	AND	paen_numero	= :ll_numero
 	AND	plde_codigo	= :li_planta;
 	
-IF ll_cont = 0 THEN
+If ll_cont = 0 Then
 	MessageBox("Atención", "Pallet NO Existe en Definitivo.", + &
 	Exclamation!, OK!)
-	RETURN True
-END IF
+	Return True
+End If
 
-IF li_especie <> dw_especie.Object.espe_codigo[1] THEN
+If li_especie <> dw_especie.Object.espe_codigo[1] Then
 	MessageBox("Atención", "Especie de Encabezado No Coincide con Detalle.", + &
 	Exclamation!, OK!)
-	RETURN True
-END IF
+	Return True
+End If
 
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_errorbasedatos(sqlca, "Lectura Información de Pallet")
-	RETURN True
-ELSEIF sqlca.SQLCode = 100 THEN
+	Return True
+ElseIf sqlca.SQLCode = 100 Then
 	MessageBox("Atención", "Número de Pallet no ha sido creado.~rIngrese otro Número.", + &
 	Exclamation!, OK!)
-	RETURN True
-ELSEIF li_tipoin > 0 AND (li_inspec = 1 OR li_inspec = 2) THEN	// Pallet en Existencia Inspeccionado o Reinspeccionado
+	Return True
+ElseIf li_tipoin > 0 AND (li_inspec = 1 OR li_inspec = 2) Then	// Pallet en Existencia Inspeccionado o Reinspeccionado
 	SELECT	inpe_secuen
 		INTO	:li_secuen
 		FROM	dbo.inspecpaldet
@@ -254,51 +254,49 @@ ELSEIF li_tipoin > 0 AND (li_inspec = 1 OR li_inspec = 2) THEN	// Pallet en Exis
 		AND	plde_codigo = :li_planta
 		AND	paen_numero	= :ll_numero ;
 		
-	IF sqlca.SQLCode = -1 THEN
+	If sqlca.SQLCode = -1 Then
 		F_errorbasedatos(sqlca,"Lectura Información de Inspección de Pallet")
-		RETURN True
-	ELSEIF sqlca.SQLCode = 100 THEN
+		Return True
+	ElseIf sqlca.SQLCode = 100 Then
 		MessageBox("Atención","Pallet ya fue considerado en otra Inspección.~r~r" + &
 					"Ingrese o seleccione otro Pallet.")
-		RETURN True
-	END IF
-ELSEIF li_estado = 2 THEN
+		Return True
+	End If
+ElseIf li_estado = 2 Then
 	MessageBox("Atención","Pallet fue Despachado.~r~r" + &
 				"Ingrese o seleccione otro Pallet.")
-	RETURN True
-ELSEIF li_estado = 3 THEN
+	Return True
+ElseIf li_estado = 3 Then
 	MessageBox("Atención","Pallet fue Repalletizado.~r~r" + &
 				"Ingrese o seleccione otro Pallet.")
-	RETURN True
-ELSEIF li_tipoin = 2 AND li_inspec = 0 THEN
+	Return True
+ElseIf li_tipoin = 2 AND li_inspec = 0 Then
 	MessageBox("Atención","Nro. de Pallet no ha sido previamente Inspeccionado.~r~r" + &
 					"Ingrese o seleccione otro Pallet.")
-	RETURN True
-ELSEIF li_inspec = 5	THEN
-	MessageBox("Atención","Nro. de Pallet se Encuentra en Estado Pendiente.~r~r" + &
+	Return True
+ElseIf li_inspec = 5	Then
+	MessageBox("Atención","Nro. de Pallet se Encuentra en Estado PEndiente.~r~r" + &
 					"Ingrese o seleccione otro Pallet.")
-	RETURN True
-ELSEIF li_fumiga <> 0 THEN
-	   IF MessageBox("Atención","Pallet está FUMIGADO.~r~r" + &
-			            "Desea continuar ?", Question!, YesNo!, 2) = 1 THEN 
+	Return True
+ElseIf li_fumiga <> 0 Then
+	   If MessageBox("Atención","Pallet está FUMIGADO.~r~rDesea continuar ?", Question!, YesNo!, 2) = 1 Then 
           	dw_1.SetItem(il_fila, "paen_numero", ll_numero)
-				dw_1.SetItem(il_fila, "variedades_vari_nombre", ls_variedad)
-				dw_1.SetItem(il_fila, "palletencab_paen_tipopa", li_tipopa)
-				dw_1.SetItem(il_fila, "embalajesprod_emba_nombre", ls_embalaje)
-				dw_1.SetItem(il_fila, "especies_espe_nombre", ls_especie)
-				dw_1.SetItem(il_fila, "palletencab_paen_ccajas", ll_cajas)
-				dw_1.SetItem(il_fila, "inpd_ccajas", ll_cajas)
-				dw_1.SetItem(il_fila, "fecha_recha", ld_fecrechazo)
-				
-				pb_grabar.Enabled = True
-				RETURN False
-		ELSE
-				RETURN True
-		END IF						  
-	
-//ELSEIF li_inspec=3 THEN /*Rechazado SAG*/
-//	      IF MessageBox("Advertencia", "Inspeccionará un Pallet Rechazado por SAG.~r~r" + &
-//			            "Desea continuar ?", Question!, YesNo!, 2) = 1 THEN 
+			dw_1.SetItem(il_fila, "variedades_vari_nombre", ls_variedad)
+			dw_1.SetItem(il_fila, "palletencab_paen_tipopa", li_tipopa)
+			dw_1.SetItem(il_fila, "embalajesprod_emba_nombre", ls_embalaje)
+			dw_1.SetItem(il_fila, "especies_espe_nombre", ls_especie)
+			dw_1.SetItem(il_fila, "palletencab_paen_ccajas", ll_cajas)
+			dw_1.SetItem(il_fila, "inpd_ccajas", ll_cajas)
+			dw_1.SetItem(il_fila, "fecha_recha", ld_fecrechazo)
+			
+			pb_grabar.Enabled = True
+			Return False
+		Else
+			Return True
+		End If	
+//ElseIf li_inspec=3 Then /*Rechazado SAG*/
+//	      If MessageBox("Advertencia", "Inspeccionará un Pallet Rechazado por SAG.~r~r" + &
+//			            "Desea continuar ?", Question!, YesNo!, 2) = 1 Then 
 //          	dw_1.SetItem(il_fila, "paen_numero", ll_numero)
 //				dw_1.SetItem(il_fila, "variedades_vari_nombre", ls_variedad)
 //				dw_1.SetItem(il_fila, "palletencab_paen_tipopa", li_tipopa)
@@ -307,13 +305,13 @@ ELSEIF li_fumiga <> 0 THEN
 //				dw_1.SetItem(il_fila, "palletencab_paen_ccajas", ll_cajas)
 //				dw_1.SetItem(il_fila, "inpd_ccajas", ll_cajas)
 //				pb_grabar.Enabled = True
-//				RETURN False
-//			ELSE
-//				RETURN True
-//			END IF
-ELSEIF li_inspec=-2 THEN /*Objetado SAG*/
-	      IF MessageBox("Advertencia", "Inspeccionará un Pallet Objetado por SAG.~r~r" + &
-			            "Desea continuar ?", Question!, YesNo!, 2) = 1 THEN 
+//				Return False
+//			Else
+//				Return True
+//			End If
+ElseIf li_inspec=-2 Then /*Objetado SAG*/
+	      If MessageBox("Advertencia", "Inspeccionará un Pallet Objetado por SAG.~r~r" + &
+			            "Desea continuar ?", Question!, YesNo!, 2) = 1 Then 
           	dw_1.SetItem(il_fila, "paen_numero", ll_numero)
 				dw_1.SetItem(il_fila, "variedades_vari_nombre", ls_variedad)
 				dw_1.SetItem(il_fila, "palletencab_paen_tipopa", li_tipopa)
@@ -323,12 +321,11 @@ ELSEIF li_inspec=-2 THEN /*Objetado SAG*/
 				dw_1.SetItem(il_fila, "inpd_ccajas", ll_cajas)
 				dw_1.SetItem(il_fila, "fecha_recha", ld_fecrechazo)
 				pb_grabar.Enabled = True
-				RETURN False
-			ELSE
-				RETURN True
-			END IF			
-ELSE
-	
+				Return False
+			Else
+				Return True
+			End If			
+Else
 	dw_1.SetItem(il_fila, "paen_numero", ll_numero)
 	dw_1.SetItem(il_fila, "variedades_vari_nombre", ls_variedad)
 	dw_1.SetItem(il_fila, "palletencab_paen_tipopa", li_tipopa)
@@ -339,8 +336,8 @@ ELSE
 	dw_1.SetItem(il_fila, "fecha_recha", ld_fecrechazo)
 	
 	pb_grabar.Enabled = True
-	RETURN False
-END IF
+	Return False
+End If
 
 end function
 

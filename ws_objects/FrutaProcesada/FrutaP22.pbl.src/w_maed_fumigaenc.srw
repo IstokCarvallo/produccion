@@ -24,6 +24,8 @@ w_mant_deta_fumigadet iw_mantencion
 
 DataWindowChild	dw_condicion,dw_planta, dw_plades, dw_puerto,dw_etiquetas,dw_plantas,dw_clientes, &
 						dw_ptodes, dw_camaras, dw_mercado, dw_destinos
+						
+uo_Destinos	iuo_Destino
 end variables
 
 forward prototypes
@@ -414,6 +416,8 @@ istr_mant.argumento[1]	=	String(gi_CodPlanta)
 istr_mant.argumento[3]	=	String(gi_CodExport)
 istr_mant.argumento[9]	=	'1'
 
+iuo_Destino	=	Create uo_Destinos
+
 //istr_mant.argumento[5]	=	'dw_mues_repalletdeta_salida_cambiofolio'
 
 end event
@@ -730,95 +734,95 @@ integer height = 756
 string dataobject = "dw_mant_fumigaenc"
 end type
 
-event dw_2::itemchanged;call super::itemchanged;Integer	li_Planta
-Long		ll_null
-String	ls_columna
-Date		ld_nula
+event dw_2::itemchanged;call super::itemchanged;Long		ll_Null
+String		ls_columna
 
-SetNull(ld_nula)
 SetNull(ll_null)
 ls_columna = dwo.Name
  
-CHOOSE CASE ls_columna
-	CASE "clie_codigo"
+Choose Case ls_columna
+	Case "clie_codigo"
 		istr_mant.argumento[3]=data
 		
 		dw_2.Object.fumi_numero[1] = buscafumigacion(dw_2.Object.plde_codigo[1],Integer(data),dw_2.Object.cond_codigo[1])
 		
-		IF NoExisteCliente(Integer(data)) THEN
+		If NoExisteCliente(Integer(data)) Then
 			This.SetItem(Row, ls_Columna, gi_codexport)
-			RETURN 1
-		ELSEIF ExisteFolio(ls_columna, data) THEN
+			Return 1
+		ElseIf ExisteFolio(ls_columna, data) Then
 				This.SetItem(Row, ls_Columna, ll_null)
-				RETURN 1
-			ELSE
-				
-            dw_2.GetChild("plde_codigo", dw_planta)
-			   dw_planta.SetTransObject(sqlca)
-			   dw_planta.Retrieve(1)
-						
-		END IF			
+				Return 1
+			Else
+				dw_2.GetChild("plde_codigo", dw_planta)
+			   	dw_planta.SetTransObject(sqlca)
+			   	dw_planta.Retrieve(1)						
+		End If			
 
-	CASE "plde_codigo"
-		IF ExisteFolio(ls_columna, data) THEN
+	Case "plde_codigo"
+		If ExisteFolio(ls_columna, data) Then
 			This.SetItem(Row, ls_Columna, ll_null)
-			RETURN 1
-		END IF			
-		li_Planta	=	Integer(data)
-		//dw_camaras.Retrieve(li_Planta,2)
+			Return 1
+		End If	
+		
 		dw_2.GetChild("cama_codigo", dw_camaras)
 		dw_camaras.SetTransObject(sqlca)
-		dw_camaras.Retrieve(li_planta,2)
+		dw_camaras.Retrieve(Integer(data), 2)
 		dw_camaras.insertRow(0)
-		dw_2.Object.fumi_numero[1] = buscafumigacion(li_planta,dw_2.object.clie_codigo[1],Integer(istr_mant.argumento[9]))
+		dw_2.Object.fumi_numero[1] = buscafumigacion(Integer(data),dw_2.object.clie_codigo[1],Integer(istr_mant.argumento[9]))
 		
-	CASE "cond_codigo"
+	Case "cond_codigo"
 		If data = '2' Then 
 			This.Object.esta_codigo[Row] = 9
 		Else
 			This.Object.esta_codigo[Row] = 8
 		End If
 
-		IF data ='7' THEN
+		If data ='7' Then
 			MessageBox("Atención","Número de Código Reservado, Ingrese Otro",Information!, Ok!)
 			This.SetItem(row, ls_columna, Integer(ll_null))
-			RETURN 1
-		END IF	
+			Return 1
+		End If	
 			
 		istr_mant.argumento[9] = data
 		
 		dw_2.Object.fumi_numero[1] = buscafumigacion(dw_2.Object.plde_codigo[1],dw_2.object.clie_codigo[1],Integer(data))
 
 		
-	CASE "fumi_numero"
-		IF ExisteFolio(ls_columna, data) THEN
+	Case "fumi_numero"
+		If ExisteFolio(ls_columna, data) Then
 			This.SetItem(Row, ls_Columna, ll_null)
-			RETURN 1
-		END IF			
+			Return 1
+		End If			
 
-	CASE "fumi_cantar"
+	Case "fumi_cantar"
 			istr_mant.argumento[4] = data
 
-	CASE "fumi_cantcaj"
+	Case "fumi_cantcaj"
 			istr_mant.argumento[8] = String(Long(data))
 	
-	CASE "fumi_fecfum"
-		IF Not f_validafechatempo(date(data)) THEN
-			This.SetItem(Row, ls_Columna, ld_nula)
-			RETURN 1
-		END IF	
+	Case "fumi_fecfum"
+		If Not f_validafechatempo(date(data)) Then
+			This.SetItem(Row, ls_Columna, Date(ll_Null))
+			Return 1
+		End If	
 		
-	CASE "merc_codigo"
-		IF NoExisteMercado(Integer(data)) THEN
+	Case "dest_codigo"
+		If Not iuo_Destino.Existe(Integer(Data), True, SQLCA) Then
+			This.SetItem(Row, ls_Columna, ll_Null)
+			Return 1
+		End If
+		
+	Case "merc_codigo"
+		If NoExisteMercado(Integer(data)) Then
 			This.SetItem(Row, ls_Columna, Integer(ll_null))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			dw_2.GetChild("dest_codigo", dw_destinos)
 			dw_destinos.SetTransObject(sqlca)
 			dw_destinos.Retrieve(Integer(data))
-		END IF		
+		End If		
 
-END CHOOSE
+End Choose 
 
 HabilitaIngreso(ls_columna)
 

@@ -124,29 +124,10 @@ INteger				ii_Tipo
 end variables
 
 forward prototypes
-public function boolean noexistecliente (integer cliente)
-public function boolean existe_guia (integer ai_codigo, long al_guia)
+public function boolean wf_existe_guia (integer ai_codigo, long al_guia)
 end prototypes
 
-public function boolean noexistecliente (integer cliente);String ls_nombre
-
-SELECT 		clie_nombre
-INTO			:ls_nombre
-FROM 		dba.clientesprod
-WHERE		clie_codigo =:cliente;
-
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla ClientesProd")
-	Return True
-ELSEIF sqlca.SQLCode = 100 THEN
-	MessageBox("Atención","Código No ha sido Generado. Ingrese Otro.")
-	Return True
-END IF
-
-Return False
-end function
-
-public function boolean existe_guia (integer ai_codigo, long al_guia);Long ll_guia
+public function boolean wf_existe_guia (integer ai_codigo, long al_guia);Long ll_guia
 
 SELECT Distinct mfco_guisii
 INTO   :ll_guia
@@ -154,14 +135,15 @@ FROM   dba.spro_movtofrutacomenca
 WHERE  :ai_codigo in (-1,-9,clie_codigo)
 AND    :al_guia in (-1,-9,mfco_guisii);
 
-IF IsNull(ll_guia) OR ll_guia = 0 THEN
+If IsNull(ll_guia) Or ll_guia = 0 Then
 	MessageBox("Atención","Guía No Existe, Ingrese Otra")
-	RETURN FALSE
-ELSEIF sqlca.sqlcode = -1 THEN
+	Return False
+ElseIf sqlca.sqlcode = -1 Then
 	F_ErrorBaseDatos(sqlca,"No se pudo leer la tabla Spro_movtofrutacomenca")
-	RETURN FALSE
-END IF
-RETURN TRUE
+	Return False
+End If
+
+Return True
 end function
 
 on w_info_ventas_por_productor.create
@@ -279,14 +261,14 @@ end on
 event open;call super::open;Boolean	lb_Cerrar
 
 
-IF IsNull(uo_SeleCli.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SeleEnt.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SelEspe.Codigo) THEN lb_Cerrar	=	True
-IF IsNull(uo_SelVari.Codigo) THEN lb_Cerrar	=	True
+If IsNull(uo_SeleCli.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SeleEnt.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SelEspe.Codigo) Then lb_Cerrar	=	True
+If IsNull(uo_SelVari.Codigo) Then lb_Cerrar	=	True
 
-IF lb_Cerrar THEN
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_SelVari.Todos(True)
 	uo_SelVari.cbx_Todos.Enabled	=	False
 	em_1.text = '01/01/' + String(Year(Today()))
@@ -294,7 +276,7 @@ ELSE
 	istr_mant.argumento[1] = ""	
 	ii_Tipo = -1
 	ddlb_tipodocto.SelectItem(3)
-END IF
+End If
 
 
 
@@ -351,57 +333,57 @@ OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_ventas_solo_por_productor"
 vinf.dw_1.SetTransObject(sqlca)
 
-IF rb_cliente.Checked AND rb_infcli.checked THEN
+If rb_cliente.Checked AND rb_infcli.checked Then
 	vinf.dw_1.SetSort('clpr_rut A, mfco_guisii A, lofc_espcod A, lofc_lotefc A, fgmb_nrotar A')
 	vinf.dw_1.Sort()
-ELSEIF rb_guia.Checked AND rb_infcli.checked THEN
+ElseIf rb_guia.Checked AND rb_infcli.checked Then
 	vinf.dw_1.SetSort('mfco_guisii A, clpr_rut A, lofc_espcod A, lofc_lotefc A, fgmb_nrotar A')
 	vinf.dw_1.Sort()
-END IF
+End If
 
 //Guía Despacho
-IF istr_mant.argumento[1] = "" THEN
+If istr_mant.argumento[1] = "" Then
 	MessageBox("Atención","Debe ingresar una Guía de despacho")
 	em_guia.SetFocus()
-	RETURN
-ELSE
+	Return
+Else
 	ll_guia   = Long(istr_mant.argumento[1])
-END IF
+End If
 
 //Fecha Movimiento
-IF em_1.text = '00/00/0000' OR em_2.text = '00/00/0000' THEN
+If em_1.text = '00/00/0000' OR em_2.text = '00/00/0000' Then
 	MessageBox("Atención","Debe ingresar fechas de movimiento")
-	RETURN
-ELSEIF Date(em_2.text) <= Date(em_1.text) THEN
+	Return
+ElseIf Date(em_2.text) <= Date(em_1.text) Then
 	MessageBox("Error de consistencia","Fecha termino no puede ser menor a fecha inicio",StopSign!)
 	em_2.text = ""
 	em_2.SetFocus()
-	RETURN
-ELSE	
+	Return
+Else	
 	ld_fecini = Date(em_1.text)
 	ld_fecter = Date(em_2.text)
-END IF
+End If
 
-IF rb_grupo.Checked THEN
+If rb_grupo.Checked Then
 	li_agrupa = 1
-ELSEIF rb_detalle.Checked THEN
+ElseIf rb_detalle.Checked Then
 	li_agrupa = 2
-END IF
+End If
 
 ll_Fila	=	vinf.dw_1.Retrieve(uo_SeleCli.Codigo,uo_SelEspe.Codigo,uo_SelVari.Codigo,ll_guia,&
                                ld_fecini,ld_fecter,li_agrupa, uo_SeleEnt.Codigo, ii_Tipo)
 
-IF ll_Fila = -1 THEN
+If ll_Fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Fila = 0 THEN
+ElseIf ll_Fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify("fechadesde.text = '" + String(ld_fecini,'dd/mm/yyyy') + "'")
-	vinf.dw_1.Modify("fechahasta.text = '" + String(ld_fecter,'dd/mm/yyyy') + "'")	
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	vinf.dw_1.ModIfy("fechadesde.text = '" + String(ld_fecini,'dd/mm/yyyy') + "'")
+	vinf.dw_1.ModIfy("fechahasta.text = '" + String(ld_fecter,'dd/mm/yyyy') + "'")	
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
@@ -727,16 +709,16 @@ borderstyle borderstyle = stylelowered!
 string mask = "############"
 end type
 
-event modified;IF Not IsNull(em_guia.text) AND Not em_guia.text = "" THEN
-	IF Not Existe_guia(uo_SeleCli.Codigo,Long(This.text)) THEN
+event modified;If Not IsNull(em_guia.text) AND Not em_guia.text = "" Then
+	If Not wf_Existe_guia(uo_SeleCli.Codigo,Long(This.text)) Then
 		This.Text = ""
 		istr_mant.argumento[1] = ""
 		This.SetFocus()
-		RETURN 1
-	ELSE
+		Return 1
+	Else
 		istr_mant.argumento[1] = This.text
-	END IF
-END IF
+	End If
+End If
 
 end event
 

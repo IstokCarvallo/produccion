@@ -89,29 +89,26 @@ SELECT	pae.paen_tipopa, var.vari_nombre, pae.emba_codigo, pae.cate_codigo,
 	AND	pae.plde_codigo	=	:li_planta
 	AND	var.espe_codigo	= 	pae.espe_codigo
 	AND	var.vari_codigo	= 	pae.vari_codigo
-	AND   exists(select *
-	from dbo.palletfruta as paf
-	where paf.clie_codigo=pae.clie_codigo
-	and   paf.plde_codigo=pae.plde_codigo
-	and   paf.paen_numero=pae.paen_numero);
+	AND   exists(Select *
+						from dbo.palletfruta as paf
+						where paf.clie_codigo=pae.clie_codigo
+						and   paf.plde_codigo=pae.plde_codigo
+						and   paf.paen_numero=pae.paen_numero);
 
 If sqlca.SQLCode = -1 Then
 	F_errorbasedatos(sqlca,"Lectura tabla Palletencab")
-	RETURN True
+	Return True
 ElseIf sqlca.SQLCode = 100 Then
-	MessageBox("Atención", "Número de Pallet no ha sido creado, Ingrese otro Código.", &
-			Exclamation!, OK!)
-	RETURN True
+	MessageBox("Atención", "Número de Pallet no ha sido creado, Ingrese otro Código.", Exclamation!, OK!)
+	Return True
 End If
 
 If ii_estado = 2 Then
-	MessageBox("Atención", "Pallet ya fue Despachado desde Planta Despachadora.", &
-			Exclamation!, OK!)
-	RETURN True
+	MessageBox("Atención", "Pallet ya fue Despachado desde Planta Despachadora.", Exclamation!, OK!)
+	Return True
 ElseIf ii_estado = 3 Then
-	MessageBox("Atención", "Pallet fue Repalletizado en Planta Despachadora.", &
-			Exclamation!, OK!)
-	RETURN True
+	MessageBox("Atención", "Pallet fue Repalletizado en Planta Despachadora.", Exclamation!, OK!)
+	Return True
 End If
 
 SELECT fumi_estado
@@ -125,24 +122,23 @@ WHERE  clie_codigo	= 	:li_cliente
 If li_estadofumi = 2 Then
 	li_respuesta = MessageBox("Atención", "Pallet con Proceso Rechazado. Desea Continuar", Exclamation!, YesNo!, 2)	
 	If li_respuesta = 2 Then
-		RETURN True
+		Return True
 	End If	
 End If	
 
 If li_condicion <> 0 AND li_condicion <> 7 And li_condicion <> 4 Then
 	MessageBox("Atención", "Pallet Fue Fumigado Seleccione otro Pallet.", Exclamation!, OK!)
-	RETURN True
+	Return True
 End If	
 
 If li_estadofumi = 7 Then
 	MessageBox("Atención", "Pallet con Proceso de Condición PEndiente. Seleccione Otro Pallet", Exclamation!, OK!)
-	RETURN True
+	Return True
 End If	
 
 /*	VerIfica Condición de Inspección	*/
 If li_inspec <> 0  Then
-	If MessageBox("Advertencia", "Se Quiere Procesar Un Pallet Inspeccionado.~r~r" + &
-					"Desea continuar ?", Question!, YesNo!, 2) = 2 Then RETURN True
+	If MessageBox("Advertencia", "Se Quiere Procesar Un Pallet Inspeccionado.~r~rDesea continuar ?", Question!, YesNo!, 2) = 2 Then Return True
 End If
 
 dw_1.SetItem(il_fila, "paen_numero", al_numero)
@@ -156,7 +152,7 @@ dw_1.SetItem(il_fila, "palletencab_paen_ccajas", li_cajas)
 dw_1.SetColumn("fude_certIf")
 dw_1.SetFocus()
 
-RETURN False
+Return False
 end function
 
 on w_mant_deta_fumigadet.create
