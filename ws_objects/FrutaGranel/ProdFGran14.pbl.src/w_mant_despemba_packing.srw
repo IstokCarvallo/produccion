@@ -654,6 +654,42 @@ If (dw_1.Object.compute_1[1])<> dw_2.Object.defe_cantar[1]  Then
 	Message.DoubleParm = -1
 End If
 
+If IsNull(dw_2.Object.tran_codigo[1]) Or dw_2.Object.tran_codigo[1] = 0 Then
+	MessageBox("Error de Ingreso", "Falta ingresar tranportista.", StopSign!, Ok!)
+	dw_2.SetColumn("tran_codigo")
+	Message.DoubleParm = -1
+End If
+
+If IsNull(dw_2.Object.tica_codigo[1]) Or dw_2.Object.tica_codigo[1] = 0 Then
+	MessageBox("Error de Ingreso", "Falta ingresar tipo camion.", StopSign!, Ok!)
+	dw_2.SetColumn("tica_codigo")
+	Message.DoubleParm = -1
+End If
+
+If IsNull(dw_2.Object.defe_chfrut[1]) Or dw_2.Object.defe_chfrut[1] = "" Then
+	MessageBox("Error de Ingreso", "Falta ingresar Rut chofer.", StopSign!, Ok!)
+	dw_2.SetColumn("defe_chfrut")
+	Message.DoubleParm = -1
+End If
+
+If IsNull(dw_2.Object.defe_chofer[1]) Or dw_2.Object.defe_chofer[1] = "" Then
+	MessageBox("Error de Ingreso", "Falta ingresar Nombre chofer.", StopSign!, Ok!)
+	dw_2.SetColumn("defe_chofer")
+	Message.DoubleParm = -1
+End If
+
+If IsNull(dw_2.Object.defe_celcho[1]) Or dw_2.Object.defe_celcho[1] = "" Then
+	MessageBox("Error de Ingreso", "Falta ingresar Celular chofer.", StopSign!, Ok!)
+	dw_2.SetColumn("defe_celcho")
+	Message.DoubleParm = -1
+End If
+
+If IsNull(dw_2.Object.defe_patent[1]) Or dw_2.Object.defe_patent[1] = "" Then
+	MessageBox("Error de Ingreso", "Falta ingresar Patente camion.", StopSign!, Ok!)
+	dw_2.SetColumn("defe_patent")
+	Message.DoubleParm = -1
+End If
+
 If il_NroDespa < 1 Then
 	il_NroDespa	=	wf_BusNuevoFolioDespa(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1])
 End If

@@ -1199,12 +1199,16 @@ luo_Rossi.of_SetHeaders(iuo_Embarcador.Header)
 
 luo_Rossi.of_SetAsunto(iuo_Embarques.NombreNave + SEPARADOR + iuo_Embarques.NombrePuerto + SEPARADOR + &
 		String(iuo_Embarques.Operacion, '00') + '-' + iuo_Embarques.Codigo + SEPARADOR + String(uo_SelPlanta.Codigo, '0000') + SEPARADOR + &
-		em_nroguia.Text + ' - Carga JSON Automático.')
+		em_nroguia.Text + ' - Carga JSON Embarcador Automático.')
 		
 luo_Rossi.of_SetCuerpo('')
 luo_Rossi.of_SetCorreo(uo_SelPlanta.Mail)
-	
-luo_Rossi.of_CargaGuia(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, al_planilla, is_embarque, dw_error)
+
+If IsNull(iuo_Embarcador.Header) Or iuo_Embarcador.Header = '' Then
+	luo_Rossi.of_Carga(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, al_planilla, is_embarque, dw_error)
+Else
+	luo_Rossi.of_CargaGuia(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, al_planilla, is_embarque, dw_error)
+End If
 
 If dw_error.RowCount() > 0 Then dw_error.Visible = True
 
@@ -3423,7 +3427,6 @@ End If
 end event
 
 type cb_rossi from commandbutton within w_info_guia_despacho_archivo_saam
-boolean visible = false
 integer x = 2341
 integer y = 816
 integer width = 594
@@ -3436,23 +3439,10 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
-boolean enabled = false
 string text = "WS Embarcador"
 end type
 
-event clicked;//uo_ws_embarcador	luo_Rossi
-//luo_Rossi	=	Create uo_ws_embarcador
-//
-//luo_Rossi.of_SetURL(iuo_Embarcador.URL)
-//luo_Rossi.of_setheaders(iuo_Embarcador.Header)
-//
-//luo_Rossi.of_CargaGuia(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, al_planilla, is_embarque, dw_error)
-//
-//If dw_error.RowCount() > 0 Then dw_error.Visible = True
-//
-//Destroy luo_Rossi
-
-SetPointer(HourGlass!)
+event clicked;SetPointer(HourGlass!)
 
 If em_nroguia.Text = '' Or IsNull(em_nroguia.Text) Then 
 	MessageBox('Atencion', 'Debe seleccionar una guia de despacho.', StopSign!, OK!)
