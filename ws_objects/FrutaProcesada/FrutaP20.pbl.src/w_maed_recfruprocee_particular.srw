@@ -2563,14 +2563,14 @@ istr_mant.argumento[50] =  '1'			//tipo recepcion
 
 iuo_especie				=	CREATE	uo_especie				
 iuo_variedades			=	CREATE	uo_variedades			
-iuo_embalajesprod		=  CREATE	uo_embalajesprod		
+iuo_embalajesprod	=  CREATE	uo_embalajesprod		
 iuo_etiquetas			=	CREATE	uo_etiquetas			
-iuo_tipofrio			=	CREATE	uo_tipofrio					
+iuo_tipofrio				=	CREATE	uo_tipofrio					
 iuo_status				=	CREATE	uo_status				
 iuo_tipopallet			=	CREATE	uo_tipopallet			
 iuo_condicion			=	CREATE	uo_condicion				
 iuo_codigopallet		=	CREATE	uo_codigopallet			
-iuo_destinos			=	CREATE	uo_destinos				
+iuo_destinos				=	CREATE	uo_destinos				
 iuo_productores		=	CREATE	uo_productores				
 iuo_calibre				=	CREATE	uo_calibre	
 iuo_categoria			=	CREATE	uo_categoria

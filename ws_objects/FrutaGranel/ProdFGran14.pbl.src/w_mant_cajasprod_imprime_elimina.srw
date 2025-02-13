@@ -245,6 +245,7 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 				
 				//Codigo UPC
 				dw_1.Object.Ole_UPC.Object.Text 		= 	dw_1.Object.gtin_codupc[1]
+				dw_1.Object.Ole_Ean13.Object.Text 		= 	dw_1.Object.gtin_codupc[1]
 				
 				iuo_voicecode	=	Create uo_voicecode
 				iuo_voicecode.voicecode(dw_1	, dw_1.Object.emba_nroint[1],  ls_fecha, dw_1.Object.capr_fecemb[1], iuo_correl.foad_vopico)
@@ -328,6 +329,7 @@ For ll_fila = 1 TO dw_lotes.RowCount()
 					//Codigo UPC
 //					dw_1.Object.Ole_UPC.Object.BarCode		=	iuo_clie.Barras
 					dw_1.Object.Ole_UPC.Object.Text 			= 	dw_1.Object.gtin_codupc[1]
+					dw_1.Object.Ole_Ean13.Object.Text 			= 	dw_1.Object.gtin_codupc[1]
 				End If
 							
 				If IsNull(iuo_Equipo.Impresora) Or Len(iuo_Equipo.Impresora) < 1 Then

@@ -267,6 +267,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_spro_cargospack
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_mues_spro_pararetiroprod,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_gene_archivo_plano,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_info_ventas_real_orden,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer06.pbl,dw_gene_estadoproformacomer_envio,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer06.pbl,w_info_lotes_entradasalida_comercial,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_detalle,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_envases_encab,d
@@ -305,6 +306,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mant_movtoenvaenc
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer03.pbl,w_maed_spro_ordenretiroventaenca,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer03.pbl,dw_mues_spro_ordenretiroenca,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_mant_mues_spro_concalcomdetmad,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer04.pbl,dw_info_fproforma_fcomer,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer.pbl,w_main,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_busqueda,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_transportista,w
@@ -322,6 +324,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd06.pbl,uo_tipomovtofruta,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer01.pbl,uo_existencia,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd06.pbl,dw_mues_clienprove,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_grabatablabitacora,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_facturaproductor,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer04.pbl,dw_info_almacenaje_camara_seleccion,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd06.pbl,dddw_tratamientofrio,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admausuarios,w
@@ -555,6 +558,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_variedades,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer02.pbl,dw_mant_movtofrutacomer_emision,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer03.pbl,w_maed_spro_procvaciadocomercial,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer03.pbl,w_maed_anula_termino_proceso_comer,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer06.pbl,w_proc_emision_facturacion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer07.pbl,w_info_existencia_fruta_comercial,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer04.pbl,dw_info_existencia_camarabanda_seleccion,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_fondo,w

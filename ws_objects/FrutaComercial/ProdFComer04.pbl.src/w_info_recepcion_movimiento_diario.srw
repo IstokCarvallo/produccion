@@ -202,6 +202,7 @@ integer width = 1929
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_recepcion_movimiento_diario
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_recepcion_movimiento_diario
@@ -238,6 +239,7 @@ If dw_1.Object.envase[1] = 1 Then
 Else	
 	vinf.dw_1.DataObject = "dw_info_recepcion_frutacomercial_diaria"
 End If		
+
 dw_1.accepttext()
 
 //Acepta Exportador

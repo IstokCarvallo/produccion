@@ -1431,14 +1431,14 @@ SELECT	mfco_numero, mfco_fecmov
 	AND   mfco_docrel =  :al_docrel
 	AND 	clie_codigo = 	:li_cliente;
 
-IF SqlCa.SQLCode = -1 THEN
+If SqlCa.SQLCode = -1 Then
 	F_ErrorBaseDatos(SqlCa, "Lectura de Tabla spro_movtofrutacomenca")
 
-	RETURN False
-ELSEIF SqlCa.SQLCode = 100 THEN
+	Return False
+ElseIf SqlCa.SQLCode = 100 Then
 
-	RETURN False
-END IF
+	Return False
+End If
 
 SELECT IsNull(Min(lofc_lotefc), 0)
   INTO :ll_lote
@@ -1448,26 +1448,26 @@ SELECT IsNull(Min(lofc_lotefc), 0)
 	AND	mfco_numero	=	:ll_nrodocto
 	AND 	clie_codigo = 	:li_cliente;
 
-IF SqlCa.SQLCode = -1 THEN
+If SqlCa.SQLCode = -1 Then
 	F_ErrorBaseDatos(SqlCa, "Lectura de Tabla spro_movtofrutacomenca")
 
-	RETURN False
-ELSEIF SqlCa.SQLCode <> 100 AND ll_lote <> 0 THEN
+	Return False
+ElseIf SqlCa.SQLCode <> 100 AND ll_lote <> 0 Then
 	istr_mant.argumento[6]	=	String(ll_lote)
-ELSE
+Else
 	istr_mant.argumento[6]	=	String(nuevofoliolote())
 	
-	IF Long(istr_mant.argumento[6]) < 1 THEN
-		RETURN False
-	END IF
-END IF
+	If Long(istr_mant.argumento[6]) < 1 Then
+		Return False
+	End If
+End If
   
 istr_Mant.Argumento[3] 		= string(ll_nrodocto)
 istr_mant.argumento[4] 		= string(ai_tipdoc)
 istr_mant.argumento[5] 		= String(al_docrel)
 dw_2.Object.mfco_fecmov[1] = ld_fecha
 
-RETURN True
+Return True
 end function
 
 public subroutine habilitaingreso (string as_columna);Date		ld_fecha
@@ -1991,7 +1991,7 @@ IF lstr_Busq.Argum[1] <> "" THEN
 		dw_3.SetItem(1, "prod_codigo", gstr_paramplanta.productorempresa)
 		dw_3.SetItem(1, "prod_nombre", iuo_prodempresa.nombre )
 		
-		IF buscamovto(Integer(lstr_Busq.Argum[10]),Long(lstr_Busq.Argum[6])) THEN
+		IF BuscaMovto(Integer(lstr_Busq.Argum[10]),Long(lstr_Busq.Argum[6])) THEN
 			TriggerEvent("ue_recuperadatos")
 			Return
 		END IF
@@ -2118,7 +2118,7 @@ ll_fila = dw_4.Find("fgmb_nrotar = " + String(tarja) , 1, dw_1.RowCount())
 
 If ll_fila > 0 and ll_fila <> il_fila Then
 	MessageBox("Error", "La tarja digitada ya pertenece a este Proceso.", Exclamation!)
-	lb_Retorno	=	TRUE
+	lb_Retorno	=	True
 End If
 
 If NOT lb_Retorno Then
@@ -2131,12 +2131,12 @@ If NOT lb_Retorno Then
 	
 	If sqlca.SQLCode = -1 Then
 		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Spro_Bins")
-		lb_Retorno	=	TRUE
+		lb_Retorno	=	True
 	ElseIf sqlca.SQLCode = 100 Then
-		lb_Retorno	=	FALSE
+		lb_Retorno	=	False
 	Else
 		MessageBox("Error", "La tarja digitada a pertenece a otro Proceso.", Exclamation!)
-		lb_Retorno	= TRUE
+		lb_Retorno	= True
 	End If
 End If
 
@@ -2942,7 +2942,7 @@ CHOOSE CASE ls_Columna
 END CHOOSE
 end function
 
-public function boolean wf_existetarja (long tarja);Long	 	ll_Cliente
+public function boolean wf_existetarja (long tarja);Long	 	ll_Cliente, ll_Cantidad
 Boolean	lb_Retorno
 
 If NOT lb_Retorno Then
@@ -2953,14 +2953,39 @@ If NOT lb_Retorno Then
 	
 	If sqlca.SQLCode = -1 Then
 		F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_lotesfrutacomdeta")
-		lb_Retorno	=	TRUE
+		lb_Retorno	=	True
 	ElseIf sqlca.SQLCode = 100 Then
-		lb_Retorno	=	FALSE
+		lb_Retorno	=	False
 	Else
 		MessageBox("Error", "La tarja digitada a pertenece a otro Cliente ("+ String(ll_Cliente) + ").", Exclamation!)
-		lb_Retorno	= TRUE
+		lb_Retorno	= True
 	End If
 End If
+
+Select IsNull(Max(md.mfco_numero), 0)
+	Into :ll_Cantidad
+	From dbo.spro_lotesfrutacomdeta ld Inner Join dbo.spro_movtofrutacomdeta md
+					On ld.clie_codigo = md.clie_codigo
+					And ld.lofc_pltcod = md.lofc_pltcod
+					And ld.lofc_espcod = md.lofc_espcod
+					And ld.lofc_lotefc = md.lofc_lotefc
+					And (ld.lfcd_secuen = md.lfcd_secuen
+					 Or ld.lfcd_secuen = md.lfcd_secue2
+					 Or ld.lfcd_secuen = md.lfcd_secue3)
+					And md.tpmv_codigo in(19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,30, 31, 32, 33, 36)
+	Where ld.fgmb_nrotar = :tarja;
+	
+	If sqlca.SQLCode = -1 Then
+		F_ErrorBaseDatos(sqlca, "Lectura de Tabla spro_lotesfrutacomdeta")
+		lb_Retorno	=	True
+	ElseIf sqlca.SQLCode = 100 Then
+		lb_Retorno	=	False
+	Else
+		If ll_Cantidad > 0 Then 
+			MessageBox("Error", "La tarja digitada esta despachada en el Movimiento ("+ String(ll_Cantidad) + ").", Exclamation!)
+			lb_Retorno	= True
+		End If
+	End If
 
 Return lb_Retorno
 end function

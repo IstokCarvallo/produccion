@@ -33,7 +33,7 @@ long richtexteditx64type = 3
 long richtexteditversion = 0
 string richtexteditkey = ""
 string appicon = "\Desarrollo 17\Imagenes\Sistemas\Control.ico"
-string appruntimeversion = "22.2.0.3391"
+string appruntimeversion = "22.2.0.3397"
 boolean manualsession = false
 boolean unsupportedapierror = false
 end type

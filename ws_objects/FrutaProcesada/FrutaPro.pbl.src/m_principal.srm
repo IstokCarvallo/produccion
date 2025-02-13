@@ -12380,7 +12380,7 @@ end on
 type m_impresióndesolicitudfitosanitarioincluyetercerosdestino from menu within m_fumigacióninspección
 end type
 
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+event clicked;SetPointer(HourGlass!);If Not AccesoPuntoCritico() Then Return
 gstr_us.OpcionActiva	=	This.ClassName()
 
 OpenSheet(w_info_solicitud_inspeccion_nuevo, w_main, columna, Original!)

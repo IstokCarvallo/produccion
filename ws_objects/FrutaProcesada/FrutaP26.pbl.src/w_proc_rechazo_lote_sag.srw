@@ -535,22 +535,21 @@ integer taborder = 0
 boolean enabled = false
 end type
 
-event pb_lectura::clicked;IF cbx_1.Checked THEN
+event pb_lectura::clicked;If cbx_1.Checked Then
 	istr_mant.argumento[1] 	= 	'-1'
-ELSE
+Else
 	istr_mant.argumento[1] 	= 	String(dw_cliente.Object.clie_codigo[1])
-END IF	
+End If	
 
 istr_mant.argumento[2]	=	String(dw_planta.Object.plde_codigo[1])
 istr_mant.argumento[3]	=	em_nrosag.Text
 
-IF NOT existeinspeccion(Integer(istr_mant.argumento[1]),Integer(istr_mant.argumento[2]), &
-	                         Long(istr_mant.argumento[3])) THEN
+If Not Existeinspeccion(Integer(istr_mant.argumento[1]),Integer(istr_mant.argumento[2]),  Long(istr_mant.argumento[3])) Then
 	Parent.TriggerEvent("ue_recuperadatos")
-ELSE									 
+Else									 
 	em_nrosag.Text = ''
 	em_nrosag.SetFocus()
-END IF
+End If
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_proc_rechazo_lote_sag

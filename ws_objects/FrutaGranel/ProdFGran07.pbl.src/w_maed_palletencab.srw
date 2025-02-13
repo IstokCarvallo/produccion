@@ -1128,6 +1128,7 @@ DO
 					dw_2.Object.Fumigar[1] = iuo_System.of_Get(dw_1, 'F')
 					dw_2.Object.Fosfinar[1] = iuo_System.of_Get(dw_1, 'P')
 					dw_2.Object.Ensayo[1] = iuo_System.of_Get(dw_1, 'E')
+					dw_2.Object.Lobesia_C[1] = iuo_System.of_Get(dw_1, 'C')
 					
 					
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
@@ -1324,7 +1325,7 @@ dw_2.Object.esta_codigo[1]		=	1 // Estacion Packing
 dw_2.Object.paen_fecpro[1]	=	Datetime(Today(), Now())
 
 For ll_Fila = 1 To dw_1.RowCount()
-	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModified! Then
+	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModIfied! Then
 		
 		dw_1.Object.clie_codigo[ll_Fila]		=	dw_2.Object.clie_codigo[1]
 		dw_1.Object.plde_codigo[ll_Fila]		=	dw_2.Object.plde_codigo[1]
@@ -1337,40 +1338,46 @@ For ll_Fila = 1 To dw_1.RowCount()
 		li_Secuencia ++
 	End If
 	
-	IF dw_2.Object.System[1] = 1 Then 
+	If dw_2.Object.System[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'S')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'S')
 	End If
 	
-	IF dw_2.Object.Mosca[1] = 1 Then 
+	If dw_2.Object.Mosca[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'M')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'M')
 	End If
 	
-	IF dw_2.Object.Lobesia[1] = 1 Then 
+	If dw_2.Object.Lobesia[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'L')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'L')
 	End If
 	
-	IF dw_2.Object.fumigar[1] = 1 Then 
+	If dw_2.Object.fumigar[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'F')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'F')
 	End If
 	
-	IF dw_2.Object.fosfinar[1] = 1 Then 
+	If dw_2.Object.fosfinar[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'P')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'P')
 	End If
 	
-	IF dw_2.Object.ensayo[1] = 1 Then 
+	If dw_2.Object.ensayo[1] = 1 Then 
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'E')
 	Else
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'E')
+	End If
+	
+	If dw_2.Object.Lobesia_C[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'C')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'C')
 	End If
 	
 		
@@ -1378,10 +1385,10 @@ Next
 
 end event
 
-event activate;If dw_1.rowcount() > 0 Then
+event activate;If dw_1.RowCount() > 0 Then
 	pb_eli_det.enabled = true
 End If
-End event
+end event
 
 event ue_modifica_detalle;
 If dw_1.RowCount() > 0 Then

@@ -3610,7 +3610,7 @@ If iuo_Especies.Codigo = 21 Then	//Cerezas
 	vinf.dw_1.Modify('DataWindow.Zoom = 100')
 ElseIf iuo_Especies.Codigo = 23 Then //Ciruelas
 	vinf.dw_1.DataObject	=	"dw_info_recepcion_ciruelas"
-	vinf.dw_1.Modify('DataWindow.Zoom = 82')
+//	vinf.dw_1.Modify('DataWindow.Zoom = 92')
 ElseIf iuo_Especies.Codigo = 41 Then //Kiwis
 	//	vinf.dw_1.DataObject	=	"dw_info_recepcion_kiwis" 
 	//  Problema en dw_info_ctlcalinpecevaluadetkiwi

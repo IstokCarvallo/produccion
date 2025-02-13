@@ -75,6 +75,8 @@ type ids_archivodw from datawindow within w_info_solicitud_inspeccion_nuevo
 end type
 type ids_archivo2dw from datawindow within w_info_solicitud_inspeccion_nuevo
 end type
+type cbx_inspeccion from checkbox within w_info_solicitud_inspeccion_nuevo
+end type
 end forward
 
 global type w_info_solicitud_inspeccion_nuevo from w_para_informes
@@ -117,6 +119,7 @@ rb_detalle rb_detalle
 rb_solicitud rb_solicitud
 ids_archivodw ids_archivodw
 ids_archivo2dw ids_archivo2dw
+cbx_inspeccion cbx_inspeccion
 end type
 global w_info_solicitud_inspeccion_nuevo w_info_solicitud_inspeccion_nuevo
 
@@ -158,15 +161,15 @@ FOR ll_fila =  1 TO dw_2.RowCount()
 	ls_ip			=	dw_2.Object.cone_ipserv[ll_fila]
 	ls_puerto	=	dw_2.Object.cone_puerto[ll_fila]	
 			
-	IF lb_Conectado THEN 
+	If lb_Conectado Then 
 		DISCONNECT USING Sqlprod;
 		
 		lb_Conectado	=	False
-	END IF
+	End If
 	
-	datastore dw_motor
+	DataStore dw_motor
 
-	dw_motor			=	create datastore
+	dw_motor		=	Create DataStore
 	iuo_odbc			=	Create uo_odbc
 	
 	dw_motor.dataObject='dw_mues_admamotorbd'
@@ -175,11 +178,11 @@ FOR ll_fila =  1 TO dw_2.RowCount()
 	
 	ls_Motor = iuo_Odbc.MotorBD()
 	
-	IF ls_Motor = '' OR ls_ubicacion = '' OR ls_ip = '' OR ls_puerto = '' THEN
+	If ls_Motor = '' OR ls_ubicacion = '' OR ls_ip = '' OR ls_puerto = '' Then
 		MessageBox("Atención", "Falta mantención a tabla conexiones.")
 		lb_Conectado = False
 		Return False
-	END IF	
+	End If	
 	
 	iuo_Odbc.Crea(ls_nomodb, ls_Usuario, ls_Password,&
 		 ls_nombas,ls_ubicacion,ls_nomser,ls_ip, &
@@ -236,6 +239,7 @@ this.rb_detalle=create rb_detalle
 this.rb_solicitud=create rb_solicitud
 this.ids_archivodw=create ids_archivodw
 this.ids_archivo2dw=create ids_archivo2dw
+this.cbx_inspeccion=create cbx_inspeccion
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.dw_cliente
@@ -273,6 +277,7 @@ this.Control[iCurrent+33]=this.rb_detalle
 this.Control[iCurrent+34]=this.rb_solicitud
 this.Control[iCurrent+35]=this.ids_archivodw
 this.Control[iCurrent+36]=this.ids_archivo2dw
+this.Control[iCurrent+37]=this.cbx_inspeccion
 end on
 
 on w_info_solicitud_inspeccion_nuevo.destroy
@@ -313,39 +318,40 @@ destroy(this.rb_detalle)
 destroy(this.rb_solicitud)
 destroy(this.ids_archivodw)
 destroy(this.ids_archivo2dw)
+destroy(this.cbx_inspeccion)
 end on
 
-event open;call super::open;IF gi_vari_rotulada = 1 THEN
+event open;call super::open;If gi_vari_rotulada = 1 Then
 	cbx_varrot.Checked	= True
 	cbx_varrot.Enabled	= False
-ELSE
+Else
 	cbx_varrot.Checked	= False
 	cbx_varrot.Enabled	= True
-END IF	
+End If	
 
-IF gi_prod_rotulado = 1 THEN
+If gi_prod_rotulado = 1 Then
 	cbx_prdrot.Checked	=	True
 	cbx_prdrot.Enabled	=	False
-ELSE
+Else
 	cbx_prdrot.Checked	= 	False
 	cbx_prdrot.Enabled	=	True
-END IF
+End If
 
-IF gi_cali_rotulado = 1 THEN
+If gi_cali_rotulado = 1 Then
 	cbx_calrot.Checked	=	True
 	cbx_calrot.Enabled	=	False
-ELSE
+Else
 	cbx_calrot.Checked	= 	False
 	cbx_calrot.Enabled	=	True
-END IF
+End If
 
-IF gi_pack_rotulado = 1 THEN
+If gi_pack_rotulado = 1 Then
 	cbx_packrot.Checked	=	True
 	cbx_packrot.Enabled	=	False
-ELSE
+Else
 	cbx_packrot.Checked	= 	False
 	cbx_packrot.Enabled	=	True
-END IF
+End If
 
 ii_var		= gi_vari_rotulada
 
@@ -367,8 +373,8 @@ istr_mant.Argumento[1]	=	String(gi_CodExport)
 istr_mant.Argumento[2]	=	String(gi_CodPlanta)
 istr_mant.Argumento[3]	=	"1"
 
-ids_archivo2				=	CREATE	DataStore
-ids_archivo					=	CREATE	DataStore
+ids_archivo2			=	Create DataStore
+ids_archivo			=	Create DataStore
 
 dw_1.SetTransObject(sqlca)
 dw_2.SetTransObject(sqlca)
@@ -420,7 +426,7 @@ dw_1.Reset()
 ids_archivodw.SetTransObject(sqlca)
 ids_archivo2dw.SetTransObject(sqlca)
 
-If em_numero.Text = "" Then RETURN
+If em_numero.Text = "" Then Return
 
 lstr_info.titulo	= "SOLICITUD INSPECCION FITOSANITARIA S.A.G."
 lstr_info.copias	= 1
@@ -467,12 +473,12 @@ Else
 	li_marca = 1
 End If	
 
-li_tipo		= Integer(istr_mant.argumento[3])
+li_tipo			= Integer(istr_mant.argumento[3])
 ll_numero	= Long(istr_mant.argumento[4])
-li_planta 	= Integer(istr_mant.argumento[2])
+li_planta 		= Integer(istr_mant.argumento[2])
 
-If cbx_conex.Checked = False Then
-	If cbx_formato.Checked = False Then
+If Not cbx_conex.Checked Then
+	If Not cbx_formato.Checked and Not cbx_inspeccion.Checked Then
 		If rb_aconcagua.Checked Then
 			vinf2.dw_1.DataObject = "dw_info_solicitud_inspeccion_aconcagua_nuevo"
 			li_info	=	1
@@ -502,7 +508,11 @@ If cbx_conex.Checked = False Then
 			ids_archivo2dw.DataObject	=	'dw_info_solicitud_fitosan_unisag_sag'
 		End If
 	Else
-		vinf2.dw_1.DataObject = "dw_info_sol_insp_sag_mexi_format_nuevo"
+		If cbx_formato.Checked Then
+			vinf2.dw_1.DataObject = "dw_info_sol_insp_sag_mexi_format_nuevo"
+		ElseIf cbx_Inspeccion.Checked Then
+			vinf2.dw_1.DataObject = "dw_info_solicitud_inspeccion_sag"
+		End If
 	End If	
 	
 	ls_Archivo	=	"\Inspeccion-"+String(Long(istr_mant.argumento[4]))+"Listado.xls"
@@ -608,13 +618,13 @@ If cbx_conex.Checked Then
 			FOR ll_cont = 1 TO dw_1.RowCount() 
 				If Isnull(dw_1.Object.prpr_prepro[ll_cont]) OR dw_1.Object.prpr_prepro[ll_cont] = '' Then
 					li_cont ++
-					ls_mensaje 			= ls_mensaje + "~nFalta CSG para Predio del Productor "+ String(dw_1.Object.Prod_codigo[ll_cont])
+					ls_mensaje 		= ls_mensaje + "~nFalta CSG para Predio del Productor "+ String(dw_1.Object.Prod_codigo[ll_cont])
 					ls_colu[li_cont]	= "prpr_prepro"
 				End If
 				
 				If Isnull(dw_1.Object.plde_codsag[ll_cont]) OR dw_1.Object.plde_codsag[ll_cont] = 0 Then
 					li_cont ++
-					ls_mensaje 			= ls_mensaje + "~nFalta Código Sag (CSP)para el Packing "+ String(dw_1.Object.pafr_copack[ll_cont])+' y Productor '+ String(dw_1.Object.Prod_codigo[ll_cont])
+					ls_mensaje 		= ls_mensaje + "~nFalta Código Sag (CSP)para el Packing "+ String(dw_1.Object.pafr_copack[ll_cont])+' y Productor '+ String(dw_1.Object.Prod_codigo[ll_cont])
 					ls_colu[li_cont]	= "plde_codsag"
 				End If
 			NEXT
@@ -779,11 +789,7 @@ If gs_Ambiente = 'Windows' Then
 		DISCONNECT USING Sqlprod;
 		lb_Conectado	=	False
 	End If
-//	If vinf2.dw_1.Object.DataWindow.Print.Orientation = '1' Then
-//		vinf2.dw_1.width = 5100//LandScape
-//	ElseH
-//		vinf2.dw_1.width = 3900//Portrait
-//	End If
+
 	If vinf2.dw_1.RowCount() > 0 Then
 		vinf2.Visible	= 	True
 		vinf2.Enabled	= 	True
@@ -1209,7 +1215,7 @@ boolean focusrectangle = false
 end type
 
 type cbx_archivo from checkbox within w_info_solicitud_inspeccion_nuevo
-integer x = 622
+integer x = 334
 integer y = 1916
 integer width = 320
 integer height = 76
@@ -1314,9 +1320,9 @@ string text = "ID"
 end type
 
 type cbx_formato from checkbox within w_info_solicitud_inspeccion_nuevo
-integer x = 1298
+integer x = 823
 integer y = 1916
-integer width = 599
+integer width = 672
 integer height = 76
 boolean bringtotop = true
 integer textsize = -10
@@ -1327,7 +1333,7 @@ fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 long textcolor = 16777215
 long backcolor = 553648127
-string text = "Formato Nuevo"
+string text = "Inspeccion En Linea"
 end type
 
 event clicked;IF cbx_formato.Checked THEN
@@ -1523,5 +1529,38 @@ borderstyle borderstyle = stylelowered!
 end type
 
 event itemchanged;Return 2
+end event
+
+type cbx_inspeccion from checkbox within w_info_solicitud_inspeccion_nuevo
+integer x = 1554
+integer y = 1916
+integer width = 599
+integer height = 76
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Formato Nuevo"
+end type
+
+event clicked;If This.Checked Then
+	rb_aconcagua.Enabled = False
+	rb_2.Enabled = False
+	rb_1.Enabled = False
+	rb_3.Enabled = False
+	cbx_mexicopredios.Enabled = False
+Else
+	rb_aconcagua.Enabled = True
+	rb_2.Enabled = True
+	rb_1.Enabled = True
+	rb_3.Enabled = True
+	cbx_mexicopredios.Enabled = True
+End If
+
 end event
 

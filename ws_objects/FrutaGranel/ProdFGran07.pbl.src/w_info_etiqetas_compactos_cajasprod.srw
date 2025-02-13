@@ -557,6 +557,7 @@ FOR ll_recorre = ll_numero TO dw_8.RowCount()
 				
 				//Codigo UPC
 				dw_7.Object.Ole_UPC.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
+				dw_7.Object.ole_Ean13.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
 					
 				/*
 				Code Pick Voice
@@ -605,6 +606,7 @@ FOR ll_recorre = ll_numero TO dw_8.RowCount()
 					
 					//Codigo UPC
 					dw_7.Object.Ole_UPC.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
+					dw_7.Object.ole_Ean13.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
 					
 					/* Code Pick Voice */
 					iuo_voicecode	=	Create uo_voicecode
@@ -653,6 +655,7 @@ FOR ll_recorre = ll_numero TO dw_8.RowCount()
 					
 					//Codigo UPC
 					dw_7.Object.Ole_UPC.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
+					dw_7.Object.ole_Ean13.Object.Text 	= 	dw_7.Object.gtin_codupc[1]
 					
 					/* Code Pick Voice */
 					iuo_voicecode	=	Create uo_voicecode
