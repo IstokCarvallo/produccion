@@ -3568,14 +3568,14 @@ end event
 event closequery;Long	ll_numero, ll_cont
 Integer	li_cliente,li_planta
 
-IF Not istr_mant.Solo_Consulta THEN
-	CHOOSE CASE wf_modifica()
-		CASE -1
+If Not istr_mant.Solo_Consulta Then
+	Choose Case wf_modIfica()
+		Case -1
 			Message.ReturnValue = 1 
-		CASE 0
-			IF dw_1.RowCount() > 0 THEN
-				CHOOSE CASE MessageBox("Grabar registro(s)","Desea Grabar la información ?", Question!, YesNoCancel!)
-				 	CASE 1
+		Case 0
+			If dw_1.RowCount() > 0 Then
+				Choose Case MessageBox("Grabar registro(s)","Desea Grabar la información ?", Question!, YesNoCancel!)
+				 	Case 1
 						ll_numero = dw_2.Object.rfpe_numtra[1]
 						li_cliente = dw_2.Object.clie_codigo[1]
 						li_planta = dw_2.Object.plde_codigo[1]
@@ -3588,23 +3588,23 @@ IF Not istr_mant.Solo_Consulta THEN
 						AND plde_codigo = :li_planta
 						AND rfpe_estado = 2;
 						
-						IF ll_cont > 0 THEN
+						If ll_cont > 0 Then
 							MessageBox("Atención","Recepción ya se encuentra en estado definitivo.", Exclamation!, Ok!)
 							Return
-						END IF	
+						End If	
 						
 						Message.DoubleParm = 0
 						This.triggerevent("ue_guardar")
-						IF message.doubleparm = -1 THEN Message.ReturnValue = 1
-						RETURN
-					CASE 3
+						If message.doubleparm = -1 Then Message.ReturnValue = 1
+						Return
+					Case 3
 						Message.ReturnValue = 1
-						RETURN
-				END CHOOSE
+						Return
+				End Choose
 				
-			END IF
-	END CHOOSE
-END IF
+			End If
+	End Choose
+End If
 end event
 
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_maed_recfruprocee_particular
