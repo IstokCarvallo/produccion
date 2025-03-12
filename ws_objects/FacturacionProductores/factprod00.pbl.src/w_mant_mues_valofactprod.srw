@@ -23,6 +23,8 @@ type cb_estandar from commandbutton within w_mant_mues_valofactprod
 end type
 type cb_productor from commandbutton within w_mant_mues_valofactprod
 end type
+type cb_elimina from commandbutton within w_mant_mues_valofactprod
+end type
 type str_anexos from structure within w_mant_mues_valofactprod
 end type
 end forward
@@ -47,6 +49,7 @@ st_5 st_5
 uo_selcliente uo_selcliente
 cb_estandar cb_estandar
 cb_productor cb_productor
+cb_elimina cb_elimina
 end type
 global w_mant_mues_valofactprod w_mant_mues_valofactprod
 
@@ -147,6 +150,7 @@ this.st_5=create st_5
 this.uo_selcliente=create uo_selcliente
 this.cb_estandar=create cb_estandar
 this.cb_productor=create cb_productor
+this.cb_elimina=create cb_elimina
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_2
 this.Control[iCurrent+2]=this.st_3
@@ -158,6 +162,7 @@ this.Control[iCurrent+7]=this.st_5
 this.Control[iCurrent+8]=this.uo_selcliente
 this.Control[iCurrent+9]=this.cb_estandar
 this.Control[iCurrent+10]=this.cb_productor
+this.Control[iCurrent+11]=this.cb_elimina
 end on
 
 on w_mant_mues_valofactprod.destroy
@@ -172,6 +177,7 @@ destroy(this.st_5)
 destroy(this.uo_selcliente)
 destroy(this.cb_estandar)
 destroy(this.cb_productor)
+destroy(this.cb_elimina)
 end on
 
 event ue_borrar;IF dw_1.rowcount() < 1 THEN RETURN
@@ -280,6 +286,85 @@ integer height = 1216
 integer taborder = 50
 string dataobject = "dw_mues_valofactprod"
 end type
+
+event dw_1::clicked;Long	ll_Fila, ll_SelectedRow
+
+If Row = 0 Then
+	/*
+	Para que funcione este ordenamiento los títulos deben tener el nombre
+	de la columna y terminacion "_t", de lo contrario no funcionará
+	*/
+	String		ls_old_sort, ls_column, ls_color_old
+	Char		lc_sort
+	
+	IF IsNull(dwo) THEN RETURN
+	
+	If Right(dwo.Name,2) = '_t' Then
+		ls_column	= Left (dwo.Name, Len(String(dwo.Name)) - 2)
+		ls_old_sort	= This.Describe("Datawindow.Table.sort")
+		ls_color_old	=This.Describe(ls_Column + "_t.Color")
+	
+		If ls_column = Left(ls_old_sort, Len(ls_old_sort) - 2) Then
+			lc_sort = Right(ls_old_sort, 1)
+			If lc_sort = 'A' Then
+				lc_sort = 'D'
+			Else
+				lc_sort = 'A'
+			End If
+			This.SetSort(ls_column+" "+lc_sort)
+		Else
+			This.SetSort(ls_column+" A")
+			This.Modify(Left(ls_old_sort, Len(ls_old_sort) - 2) + "_t.Color = " + ls_color_old)
+		End If
+		
+		This.Modify(dwo.Name + ".Color = " + String(Rgb(0, 0, 255)))
+		
+		This.Sort()
+	End If
+
+Else
+	ll_SelectedRow = dw_1.GetSelectedRow(0)
+	
+	If KeyDown(KeyShift!) Then
+		If ll_SelectedRow = 0 Then
+			This.SelectRow(Row, True)
+		Else
+			This.SelectRow(1, False)
+			If Row > ll_SelectedRow Then
+				For ll_Fila = ll_SelectedRow To Row
+					This.SelectRow(ll_Fila, True)
+				Next
+			Else
+				For ll_Fila = Row To ll_SelectedRow
+					This.SelectRow(ll_Fila, True)
+				Next
+			End If
+		End If
+	
+	ElseIf KeyDown(KeyControl!) Then
+		If This.IsSelected(Row) Then
+			This.SelectRow(Row, False)
+		Else
+			This.SelectRow(Row, True)
+		End If
+	
+	Else
+		If This.IsSelected(Row) Then
+			This.SelectRow(0, False)
+			This.SelectRow(Row, True)
+		Else
+			This.SelectRow(0, False)
+			This.SelectRow(Row, True)
+		End If
+	End If
+End If
+end event
+
+event dw_1::rowfocuschanged;//
+end event
+
+event dw_1::losefocus;//
+end event
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_valofactprod
 integer width = 3529
@@ -671,5 +756,34 @@ If UpperBound(lstr_Busq.Argum) > 1 Then
 	End If
 End If
 
+end event
+
+type cb_elimina from commandbutton within w_mant_mues_valofactprod
+integer x = 2597
+integer y = 124
+integer width = 987
+integer height = 108
+integer taborder = 40
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+string text = "Elimina MUltiple"
+end type
+
+event clicked;Long	ll_Fila
+
+ll_Fila = 1 
+
+Do While ll_Fila <= dw_1.RowCount()
+	If dw_1.IsSelected(ll_Fila) Then
+		dw_1.DeleteRow(ll_Fila)
+	ELse
+		ll_Fila++
+	End If
+Loop
 end event
 

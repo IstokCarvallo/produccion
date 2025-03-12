@@ -1129,33 +1129,28 @@ DO
 					dw_2.Object.Fosfinar[1] = iuo_System.of_Get(dw_1, 'P')
 					dw_2.Object.Ensayo[1] = iuo_System.of_Get(dw_1, 'E')
 					dw_2.Object.Lobesia_C[1] = iuo_System.of_Get(dw_1, 'C')
-					
-					
+					dw_2.Object.Guarda[1] = iuo_System.of_Get(dw_1, 'G')
+				
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
 							Commit;
 							
 							If sqlca.SQLCode <> 0 Then
 								F_ErrorBaseDatos(sqlca, This.Title)
-								
 								RollBack;
 							Else
 								dw_2.ResetUpdate()
 							End If
 						Else
 							F_ErrorBaseDatos(sqlca, This.Title)
-							
 							RollBack;
 						End If
 					End If
-					
-					
 					/*
 					control de boton de emision de tarjas	
 					*/
 					pb_ventana.Enabled 			=	dw_2.Object.paen_tipopa[1]	=	1
-					
-					pb_ventana.ii_cliente		=	dw_2.Object.clie_codigo[1]
+					pb_ventana.ii_cliente			=	dw_2.Object.clie_codigo[1]
 					pb_ventana.ii_especie		=	dw_2.Object.espe_codigo[1]
 					pb_ventana.ii_cajas			=	dw_2.Object.paen_ccajas[1]
 					pb_ventana.il_planta			=	dw_2.Object.plde_codigo[1]
@@ -1163,10 +1158,7 @@ DO
 					pb_ventana.ii_procedencia	=	1//Granel
 					pb_ventana.ii_operacion		=	1//Impresion
 					pb_ventana.ii_sistema		=	1//Granel	
-					/*
-					fin control
-					*/
-					
+					/*fin control*/
 				Else
 					pb_grabar.Enabled	= FALSE
 					//pb_ins_det.SetFocus()
@@ -1380,7 +1372,12 @@ For ll_Fila = 1 To dw_1.RowCount()
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'C')
 	End If
 	
-		
+	If dw_2.Object.Guarda[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'G')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'G')
+	End If
+	
 Next
 
 end event

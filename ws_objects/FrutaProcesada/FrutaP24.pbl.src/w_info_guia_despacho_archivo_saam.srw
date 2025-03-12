@@ -585,7 +585,7 @@ If al_guia <> 0 OR uo_SelPlanta.Codigo = 0 Then
 		AND	enc.defe_guides =	:al_guia
 		AND	enc.clie_codigo = det.clie_codigo
 		AND	enc.plde_codigo = det.plde_codigo
-		AND	enc.defe_numero = det.defe_numero;	
+		AND	enc.defe_numero = det.defe_numero;
 						
 		If sqlca.SQLCode = -1 Then
 			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")

@@ -48,23 +48,23 @@ ls_embalaje =	dw_1.Object.emba_codigo[il_fila]
 ls_TipoVida	=	String(dw_1.Object.emba_tipvid[il_fila])
 ls_Color		=	dw_1.Object.colo_nombre[il_fila]
 
-CHOOSE CASE as_columna
-	CASE "espe_codigo"
+Choose Case as_columna
+	Case "espe_codigo"
 		ls_especie	= as_valor
 		
-	CASE "vari_codigo"
+	Case "vari_codigo"
 		ls_variedad	= as_valor
 				
-	CASE "vaca_calibr"
+	Case "vaca_calibr"
 		ls_calibre	= as_valor
 	
-	CASE "vafa_fecini"
+	Case "vafa_fecini"
 		ld_fecini	= Date(as_valor)
 				
-	CASE "vafa_fecter"
+	Case "vafa_fecter"
 		ld_fecter	= Date(as_valor)
 		
-	CASE "emba_codigo"
+	Case "emba_codigo"
 		ls_embalaje	= as_valor
 	
 	Case 'emba_tipvid'
@@ -73,7 +73,7 @@ CHOOSE CASE as_columna
 	Case 'colo_nombre'
 		ls_Color = as_Valor
 		
-END CHOOSE
+End Choose
 
 ll_fila	= istr_mant.dw.Find("espe_codigo = " + ls_especie + " and " + "vari_codigo = " + ls_variedad + " and " + &
 							"String(vafa_fecini,'yyyy-mm-dd') = '" + String(ld_fecini,'yyyy-mm-dd') + "' and " + &
@@ -82,12 +82,12 @@ ll_fila	= istr_mant.dw.Find("espe_codigo = " + ls_especie + " and " + "vari_codi
 							"String(vafa_fecter,'yyyy-mm-dd') = '" + String(ld_fecter,'yyyy-mm-dd') + "' and " + &
 							"vaca_calibr = '" + ls_calibre + "'", 1, istr_mant.dw.RowCount())
 
-IF ll_fila > 0 and ll_fila <> il_filaAnc THEN
+If ll_fila > 0 and ll_fila <> il_filaAnc Then
 	MessageBox("Error","Registro ya fue ingresado anteriormente",Information!, Ok!)
-	RETURN True
-ELSE
-	RETURN False
-END IF
+	Return True
+Else
+	Return False
+End If
 end function
 
 public function boolean wf_rangotemporada ();
@@ -189,28 +189,28 @@ event ue_nuevo;call super::ue_nuevo;dw_1.SetItem(il_fila, "clie_codigo", Integer
 dw_1.SetItem(il_fila, "prod_codigo", Long(istr_mant.argumento[2]))
 dw_1.SetItem(il_fila, "prod_nombre", istr_mant.argumento[3])
 
-dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModified!)
-dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModified!)
-dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModified!)
+dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModIfied!)
 
-IF dw_1.RowCount() > 1 THEN
+If dw_1.RowCount() > 1 Then
 	dw_1.SetItem(il_fila, "espe_codigo", dw_1.Object.espe_codigo[il_fila - 1])
 	dw_1.SetItem(il_fila, "vari_codigo", dw_1.Object.vari_codigo[il_fila - 1])
-	dw_1.SetItem(il_fila, "vafa_fecini", dw_1.Object.vafa_fecini[il_fila - 1])
-	dw_1.SetItem(il_fila, "vafa_fecter", dw_1.Object.vafa_fecter[il_fila - 1])
+//	dw_1.SetItem(il_fila, "vafa_fecini", dw_1.Object.vafa_fecini[il_fila - 1])
+//	dw_1.SetItem(il_fila, "vafa_fecter", dw_1.Object.vafa_fecter[il_fila - 1])
 //	dw_1.SetItem(il_fila, "emba_codigo", dw_1.Object.emba_codigo[il_fila - 1])
 //	dw_1.SetItem(il_fila, "vaca_calibr", dw_1.Object.vaca_calibr[il_fila - 1])
 //	
-//	IF dw_1.Object.emba_codigo[il_fila - 1] <> '-1' THEN
+//	If dw_1.Object.emba_codigo[il_fila - 1] <> '-1' Then
 //		dw_1.Object.todos[il_fila] = 0
-//	END IF
+//	End If
 //	
-//	IF dw_1.Object.vaca_calibr[il_fila - 1] <> '-1' THEN
+//	If dw_1.Object.vaca_calibr[il_fila - 1] <> '-1' Then
 //		dw_1.Object.todoscal[il_fila] = 0
-//	END IF
+//	End If
 	
 	dw_1.SetColumn('espe_codigo')
-END IF	
+End If	
 
 end event
 

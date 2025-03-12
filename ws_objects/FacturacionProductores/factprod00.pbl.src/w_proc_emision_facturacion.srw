@@ -156,8 +156,8 @@ fontcharset fontcharset = ansi!
 boolean enabled = false
 boolean cancel = true
 boolean default = false
-string picturename = "\Desarrollo 22\Imagenes\Botones\Email.png"
-string disabledname = "\Desarrollo 22\Imagenes\Botones\Email-bn.png"
+string picturename = "\Desarrollo 17\Imagenes\Botones\Email.png"
+string disabledname = "\Desarrollo 17\Imagenes\Botones\Email-bn.png"
 end type
 
 event pb_acepta::clicked;call super::clicked;Long 					ll_Fila, ll_Cliente, ll_Planta, ll_Productor, ll_Zona
@@ -267,7 +267,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 						End If
 						
 						ls_Texto		+=	 '~nNota:Por seguridad, para abrir el archivo deberás ingresar una clave que corresponde a los dígitos de tu Rut (sin dígito verificador).'
-						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text)
+						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text, ll_Productor) + ", forma de pago: crédito."
 						ls_Texto		+=	 '~n~tFavor una vez emitida la factura, enviar a las personas que están en copia en este correo.'						
 						
 						luo_Mail.Of_Send(luo_Productor.Mail, luo_Planta.CC, ls_Asunto, ls_Texto, {ls_Envio}, 0) 

@@ -17,7 +17,15 @@ m_valoresespecialesdefacturación m_valoresespecialesdefacturación
 end type
 type m_macro from menu within m_aplicacion
 end type
-type m_productores0 from menu within m_aplicacion
+type m_2 from menu within m_aplicacion
+end type
+type m_plantas from menu within m_2
+end type
+type m_productores0 from menu within m_2
+end type
+type m_2 from menu within m_aplicacion
+m_plantas m_plantas
+m_productores0 m_productores0
 end type
 type m_pmgminimo from menu within m_aplicacion
 end type
@@ -36,7 +44,7 @@ end type
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
 m_productores m_productores
 m_macro m_macro
-m_productores0 m_productores0
+m_2 m_2
 m_pmgminimo m_pmgminimo
 m_pmgexportadora m_pmgexportadora
 m_1 m_1
@@ -449,7 +457,7 @@ end on
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
 m_productores m_productores
 m_macro m_macro
-m_productores0 m_productores0
+m_2 m_2
 m_pmgminimo m_pmgminimo
 m_pmgexportadora m_pmgexportadora
 m_1 m_1
@@ -463,7 +471,7 @@ on m_aplicacion.create
 call super::create
 this.m_productores=create m_productores
 this.m_macro=create m_macro
-this.m_productores0=create m_productores0
+this.m_2=create m_2
 this.m_pmgminimo=create m_pmgminimo
 this.m_pmgexportadora=create m_pmgexportadora
 this.m_1=create m_1
@@ -473,7 +481,7 @@ this.m_calibresporvariedades=create m_calibresporvariedades
 this.m_semanafacturacion=create m_semanafacturacion
 this.Item[UpperBound(this.Item)+1]=this.m_productores
 this.Item[UpperBound(this.Item)+1]=this.m_macro
-this.Item[UpperBound(this.Item)+1]=this.m_productores0
+this.Item[UpperBound(this.Item)+1]=this.m_2
 this.Item[UpperBound(this.Item)+1]=this.m_pmgminimo
 this.Item[UpperBound(this.Item)+1]=this.m_pmgexportadora
 this.Item[UpperBound(this.Item)+1]=this.m_1
@@ -487,7 +495,7 @@ on m_aplicacion.destroy
 call super::destroy
 destroy(this.m_productores)
 destroy(this.m_macro)
-destroy(this.m_productores0)
+destroy(this.m_2)
 destroy(this.m_pmgminimo)
 destroy(this.m_pmgexportadora)
 destroy(this.m_1)
@@ -1204,13 +1212,81 @@ on m_macro.destroy
 call super::destroy
 end on
 
-type m_productores0 from menu within m_aplicacion
+type m_2 from menu within m_aplicacion
+m_plantas m_plantas
+m_productores0 m_productores0
+end type
+
+on m_2.create
+call super::create
+this.text = "Correos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_plantas=create m_plantas
+this.m_productores0=create m_productores0
+this.Item[UpperBound(this.Item)+1]=this.m_plantas
+this.Item[UpperBound(this.Item)+1]=this.m_productores0
+end on
+
+on m_2.destroy
+call super::destroy
+destroy(this.m_plantas)
+destroy(this.m_productores0)
+end on
+
+type m_plantas from menu within m_2
+end type
+
+on m_plantas.create
+call super::create
+this.text = "Plantas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_plantas.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheetWithParm(w_mant_mues_plantadesp_plantas_mantencion,"-1", w_main, columna, Original!)
+end event
+
+type m_productores0 from menu within m_2
 end type
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
 gstr_us.OpcionActiva	=	This.ClassName()
 
-OpenSheet(w_mant_mues_productores, w_main, columna, Original!)
+OpenSheet(w_mant_mues_productores_mail, w_main, columna, Original!)
 end event
 
 on m_productores0.create

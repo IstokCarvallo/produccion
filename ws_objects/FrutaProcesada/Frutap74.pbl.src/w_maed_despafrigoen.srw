@@ -3533,7 +3533,6 @@ Else
 End If 
 	
 If dw_2.Object.defe_tiposa[1] = 11 Then
-	
 	SELECT empr_codtra  
     INTO :li_codigo  
     FROM dbo.parempresa;
