@@ -1130,6 +1130,7 @@ DO
 					dw_2.Object.Ensayo[1] = iuo_System.of_Get(dw_1, 'E')
 					dw_2.Object.Lobesia_C[1] = iuo_System.of_Get(dw_1, 'C')
 					dw_2.Object.Guarda[1] = iuo_System.of_Get(dw_1, 'G')
+					dw_2.Object.FueraN[1] = iuo_System.of_Get(dw_1, 'H')
 				
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
@@ -1378,6 +1379,11 @@ For ll_Fila = 1 To dw_1.RowCount()
 		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'G')
 	End If
 	
+	If dw_2.Object.FueraN[1] = 1 Then 
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'H')
+	Else
+		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'H')
+	End If	
 Next
 
 end event
