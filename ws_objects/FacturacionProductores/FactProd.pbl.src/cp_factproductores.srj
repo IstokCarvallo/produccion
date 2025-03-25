@@ -10,7 +10,7 @@ PVN:5,22,2802,2023
 FVS:5.22.28022023
 FVN:5,22,2802,2023
 MAN:0,asInvoker,0
-POWERCLIENT:﻿{"cp_factproductores":{"Format":"1.0","AppType":1,"AppName":"FactProductores","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\FactProductores","ResourceName":"C:\\Desarrollo 22\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.22.28022023","MinimumValidVersion":"5.22.28022023","OnlineTime":"2021-7-15 15:22:13","OfflineTime":"2031-7-15 15:22:13","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuildEx":0,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":false,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":3,"LauncherName":"Default","PackageOutputPath":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\export","UploadOrPackageLauncherFiles":true,"UploadStrategyWhenExist":0,"FullDownload":false,"SaveDynamicCommandLineArgs":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"FactProductores","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.2.0.3397","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Facturacion Productores","CompanyName":"RIOblanco Spa","Description":"","Copyright":"2010","ProductVersion":"5.22.28022023","FileVersion":"5.22.28022023","ProductVersionMajor":5,"ProductVersionMinor":22,"ProductVersionBuild":2802,"ProductVersionRevision":2023,"FileVersionMajor":5,"FileVersionMinor":22,"FileVersionBuild":2802,"FileVersionRevision":2023,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","WebViewType":0,"Libraries":[{"PbdName":"FactProd.pbd","PbdLocalPath":"FactProd.pbd"},{"PbdName":"FactProd00.pbd","PbdLocalPath":"FactProd00.pbd"},{"PbdName":"FrutaP81.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\FrutaProcesada\\FrutaP81.pbd"},{"PbdName":"Productiva.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\FrutaProcesada\\Productiva.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"TabProd04.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 22\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 22\\ObjePubl.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["FactProd.ini"],"InstantDownloadFiles":[],"RuntimeModules":["coreruntimefiles","sncsqlnativeclient","msexcel12support","smtpclientsupport"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","CertificateType":0,"PfxFile":"","Token":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapipath":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","TargetFramework":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"FactProd.ini","UpdateType":3}],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1}}}
+POWERCLIENT:﻿{"cp_factproductores":{"Format":"1.0","AppType":1,"AppName":"FactProductores","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\FactProductores","ResourceName":"C:\\Desarrollo 22\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.22.28022023","MinimumValidVersion":"5.22.28022023","OnlineTime":"2021-7-15 15:22:13","OfflineTime":"2031-7-15 15:22:13","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuildEx":0,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":false,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":3,"LauncherName":"Default","PackageOutputPath":"C:\\Instaladores PC\\DistribucionAPP","UploadOrPackageLauncherFiles":true,"UploadStrategyWhenExist":0,"FullDownload":false,"SaveDynamicCommandLineArgs":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"FactProductores","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.2.0.3397","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Facturacion Productores","CompanyName":"RIOblanco Spa","Description":"","Copyright":"2010","ProductVersion":"5.22.28022023","FileVersion":"5.22.28022023","ProductVersionMajor":5,"ProductVersionMinor":22,"ProductVersionBuild":2802,"ProductVersionRevision":2023,"FileVersionMajor":5,"FileVersionMinor":22,"FileVersionBuild":2802,"FileVersionRevision":2023,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","WebViewType":0,"Libraries":[{"PbdName":"FactProd.pbd","PbdLocalPath":"FactProd.pbd"},{"PbdName":"FactProd00.pbd","PbdLocalPath":"FactProd00.pbd"},{"PbdName":"FrutaP81.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\FrutaProcesada\\FrutaP81.pbd"},{"PbdName":"Productiva.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\FrutaProcesada\\Productiva.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"TabProd04.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 22\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 22\\ObjePubl.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["FactProd.ini"],"InstantDownloadFiles":[],"RuntimeModules":["coreruntimefiles","sncsqlnativeclient","msexcel12support","smtpclientsupport"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","CertificateType":0,"PfxFile":"","Token":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapipath":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","TargetFramework":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"FactProd.ini","UpdateType":3}],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1}}}
 PBD:FactProd.pbl,,1
 PBD:FactProd00.pbl,,1
 PBD:..\FrutaProcesada\FrutaP81.pbl,,1
@@ -47,7 +47,6 @@ OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_con
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admagruposistema,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_busc_copiavalorizacion,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_productores,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_embalajesprod,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
@@ -63,6 +62,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantaclie,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admasucursal,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_respaldo,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admdoctos,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_productores_mail,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,paramplanta,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especie,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipoproductor,u
@@ -72,6 +72,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_tipoenvase,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_facturacion_productor,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fecha_carta,f
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios_unidadsucursal,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_plantadesp_mantencion,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_buscar,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_imprimeinformepdf,f
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_grupousuarios,d
@@ -81,7 +82,7 @@ OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_pro
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_apiwindows,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,m_sys_frame,m
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,grabaaccesoaplicacion,f
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_comunasexp,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp_mantencion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_deta_facturprodgenerado,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_busc_proforma,w
@@ -110,7 +111,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_plantas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_envases,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd.pbl,factprod,a
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_busqueda,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_regiones,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_mant_facturprodgenerado,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_admasucursales,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_prodeuccionversusfacturacion,w
@@ -134,6 +134,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fecha_texto,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipocamion,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_calibre,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_mues_valofactprod,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_productores_mail,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_proc_emision_facturacion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existecliente,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_actualizaciones,w
@@ -154,7 +155,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_clientesprod,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admausuarios,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_plantadesp,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_seleccion_admasistemas,u
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_productores,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_proc_estado_facturacion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_embalajesprod,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoproductor,u
@@ -174,7 +174,6 @@ OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_fac
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_creamenubd,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_dw,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admagruposistema,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_productores,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_proc_genera_facturacion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_color,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_mant_mues_color,d
@@ -206,6 +205,7 @@ OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_pmg
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especies,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesoaplicaciones,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_actualiza_log,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_plantadesp_packing_planta,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantadesp_tipo_zona,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_mues_valorespecial,w
@@ -221,12 +221,13 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_global_replace,f
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,opcionsoloconsulta,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_clientesprod,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_zonas,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_plantadesp_plantas_mantencion,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_gene_estadoproforma,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_productores_mail,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_mues_facturprodenca_resumen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,uo_seleccion_varios_productores_clientes,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_frutarecepcion,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admagrupos,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_provincias,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_errorbasedatos,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagruposistema,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_mant_color,w
@@ -245,7 +246,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,str_paramplanta,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_zonas,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_deta_valofactprod,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_variedades,u
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_grupoeconomico,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_variedades,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existeespecie,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_fondo,w

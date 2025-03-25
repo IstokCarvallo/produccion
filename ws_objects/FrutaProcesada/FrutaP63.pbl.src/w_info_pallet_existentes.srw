@@ -375,44 +375,44 @@ y	=	0
 Boolean lb_Cerrar
 
 // uo_seleccion_especie
-IF IsNull(uo_selespecie.Codigo) THEN lb_Cerrar = True
-IF lb_Cerrar THEN
+If IsNull(uo_selespecie.Codigo) Then lb_Cerrar = True
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_selespecie.Seleccion(True,True)
-END IF
+End If
 
 iuo_calibre   						=	Create uo_calibre
 
 // uo_seleccion_destino
-IF IsNull(uo_selecdestino.Codigo) THEN lb_Cerrar = True
-IF lb_Cerrar THEN
+If IsNull(uo_selecdestino.Codigo) Then lb_Cerrar = True
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_selecdestino.Seleccion(True,True)
-END IF
+End If
 
-IF IsNull(uo_SelCate.Codigo) THEN lb_Cerrar	=	True
-IF lb_Cerrar THEN
+If IsNull(uo_SelCate.Codigo) Then lb_Cerrar	=	True
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_SelCate.Seleccion(True, True)
-END IF
+End If
 
 // uo_seleccion_variedad
-IF IsNull(uo_selvariedad.Codigo) THEN lb_Cerrar = True
-IF lb_Cerrar THEN
+If IsNull(uo_selvariedad.Codigo) Then lb_Cerrar = True
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_selvariedad.Seleccion(True,True)
 	uo_selvariedad.Enabled		=	False
-END IF
+End If
 
-IF IsNull(uo_selcondicion.Codigo) THEN lb_Cerrar	=	True
+If IsNull(uo_selcondicion.Codigo) Then lb_Cerrar	=	True
 
-IF lb_Cerrar THEN
+If lb_Cerrar Then
 	Close(This)
-ELSE
+Else
 	uo_selcondicion.Seleccion(True, True)
 	uo_selcondicion.cbx_consolida.Visible = FALSE
 	uo_selcondicion.cbx_consolida.Enabled = FALSE
@@ -447,21 +447,21 @@ ELSE
 	istr_mant.argumento[26]	= "Consolidado"	
 	dw_stat.Object.stat_codigo.background.color = RGB(166,180,210)
 	
-	em_desde.Text				=	String(RelativeDate(Today(), -365))
-	em_hasta.Text				=	String(Today())
+	em_desde.Text					=	String(RelativeDate(Today(), -365))
+	em_hasta.Text					=	String(Today())
 	
-	istr_mant.argumento[1]	= 	String(gi_CodExport)
-	istr_mant.argumento[2]	= 	String(gi_CodPlanta)
-	istr_mant.argumento[5]	=	'0'
-	istr_mant.argumento[6]	=	'Consolidados'
-	istr_mant.argumento[7]	=	'-9'
+	istr_mant.argumento[1]		= 	String(gi_CodExport)
+	istr_mant.argumento[2]		= 	String(gi_CodPlanta)
+	istr_mant.argumento[5]		=	'0'
+	istr_mant.argumento[6]		=	'Consolidados'
+	istr_mant.argumento[7]		=	'-9'
 	istr_mant.argumento[23]	= 	em_desde.Text
 	istr_mant.argumento[24]	=	em_hasta.Text
 	istr_mant.argumento[27]	= "0"					// Cantidad de cajas por pallets
-	istr_mant.argumento[8]  = "-1"							//	etiqueta
+	istr_mant.argumento[8]  	= "-1"					//	etiqueta
 	
 	em_ncajas.Enabled				=	False
-END IF
+End If
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_info_pallet_existentes
@@ -1403,7 +1403,7 @@ alignment alignment = center!
 textcase textcase = upper!
 borderstyle borderstyle = stylelowered!
 maskdatatype maskdatatype = stringmask!
-string mask = "xxx"
+string mask = "xxxx"
 end type
 
 event modified;Integer	li_especie, li_variedad, li_cantid
