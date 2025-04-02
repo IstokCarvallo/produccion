@@ -95,7 +95,7 @@ end type
 global w_proc_genera_facturacion w_proc_genera_facturacion
 
 type variables
-
+uo_TipoCambio		iuo_TC
 end variables
 
 forward prototypes
@@ -291,6 +291,8 @@ If lb_Cerrar Then
 Else
 	dw_1.SetTransObject(Sqlca)
 	
+	iuo_TC	=	Create uo_TipoCambio	
+	
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelPlanta.Seleccion(False, False)
 	uo_SelEspecie.Seleccion(True, False)
@@ -301,6 +303,8 @@ Else
 	em_desde.Text				=	'01/' + em_Fecha.Text
 	em_hasta.Text				=	String(Today())
 	em_iva.Text					=	"19"
+	
+	em_ValorCambio.Text = String(iuo_TC.of_Get(Today(), gstr_ParEmpresa.Conecion_GuiaElectronica))
 	
 	dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1)
 End If
@@ -577,6 +581,8 @@ em_desde.Text		=	'01/' + This.Text
 em_hasta.Text		=	String(RelativeDate(Date('01/' + Mid(String(RelativeDate(Date(em_desde.Text), 31)), 4, 7)), -1))
 dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), -1)
 
+em_ValorCambio.Text = String(iuo_TC.of_Get(Date('01/' + This.Text), gstr_ParEmpresa.Conecion_GuiaElectronica))
+
 If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), Date('01/' + This.Text)) Then
 	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
 	em_desde.Text = ''
@@ -657,7 +663,8 @@ long textcolor = 33554432
 long backcolor = 16777215
 alignment alignment = right!
 borderstyle borderstyle = stylelowered!
-string mask = "##,###.##"
+maskdatatype maskdatatype = decimalmask!
+string mask = "###,###.00"
 end type
 
 type em_iva from editmask within w_proc_genera_facturacion
@@ -677,6 +684,7 @@ long textcolor = 33554432
 long backcolor = 16777215
 alignment alignment = right!
 borderstyle borderstyle = stylelowered!
+maskdatatype maskdatatype = decimalmask!
 string mask = "#0.00"
 end type
 

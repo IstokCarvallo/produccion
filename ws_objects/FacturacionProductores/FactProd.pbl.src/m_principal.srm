@@ -6,14 +6,13 @@ type m_productores from menu within m_aplicacion
 end type
 type m_valoresdefacturaciónporespecie from menu within m_productores
 end type
-type m_valoresdefacturación from menu within m_productores
-end type
 type m_valoresespecialesdefacturación from menu within m_productores
 end type
 type m_productores from menu within m_aplicacion
 m_valoresdefacturaciónporespecie m_valoresdefacturaciónporespecie
-m_valoresdefacturación m_valoresdefacturación
 m_valoresespecialesdefacturación m_valoresespecialesdefacturación
+end type
+type m_valoresdefacturación from menu within m_aplicacion
 end type
 type m_macro from menu within m_aplicacion
 end type
@@ -43,6 +42,7 @@ type m_semanafacturacion from menu within m_aplicacion
 end type
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
 m_productores m_productores
+m_valoresdefacturación m_valoresdefacturación
 m_macro m_macro
 m_2 m_2
 m_pmgminimo m_pmgminimo
@@ -456,6 +456,7 @@ end on
 
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
 m_productores m_productores
+m_valoresdefacturación m_valoresdefacturación
 m_macro m_macro
 m_2 m_2
 m_pmgminimo m_pmgminimo
@@ -470,6 +471,7 @@ end type
 on m_aplicacion.create
 call super::create
 this.m_productores=create m_productores
+this.m_valoresdefacturación=create m_valoresdefacturación
 this.m_macro=create m_macro
 this.m_2=create m_2
 this.m_pmgminimo=create m_pmgminimo
@@ -480,6 +482,7 @@ this.m_0=create m_0
 this.m_calibresporvariedades=create m_calibresporvariedades
 this.m_semanafacturacion=create m_semanafacturacion
 this.Item[UpperBound(this.Item)+1]=this.m_productores
+this.Item[UpperBound(this.Item)+1]=this.m_valoresdefacturación
 this.Item[UpperBound(this.Item)+1]=this.m_macro
 this.Item[UpperBound(this.Item)+1]=this.m_2
 this.Item[UpperBound(this.Item)+1]=this.m_pmgminimo
@@ -494,6 +497,7 @@ end on
 on m_aplicacion.destroy
 call super::destroy
 destroy(this.m_productores)
+destroy(this.m_valoresdefacturación)
 destroy(this.m_macro)
 destroy(this.m_2)
 destroy(this.m_pmgminimo)
@@ -1048,13 +1052,14 @@ end on
 
 type m_productores from menu within m_aplicacion
 m_valoresdefacturaciónporespecie m_valoresdefacturaciónporespecie
-m_valoresdefacturación m_valoresdefacturación
 m_valoresespecialesdefacturación m_valoresespecialesdefacturación
 end type
 
 on m_productores.create
 call super::create
+this.visible = false
 this.text = "&Valores"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1071,17 +1076,14 @@ this.toolbarhighlightcolor = 134217741
 this.toolbargradient = true
 this.bitmapgradient = true
 this.m_valoresdefacturaciónporespecie=create m_valoresdefacturaciónporespecie
-this.m_valoresdefacturación=create m_valoresdefacturación
 this.m_valoresespecialesdefacturación=create m_valoresespecialesdefacturación
 this.Item[UpperBound(this.Item)+1]=this.m_valoresdefacturaciónporespecie
-this.Item[UpperBound(this.Item)+1]=this.m_valoresdefacturación
 this.Item[UpperBound(this.Item)+1]=this.m_valoresespecialesdefacturación
 end on
 
 on m_productores.destroy
 call super::destroy
 destroy(this.m_valoresdefacturaciónporespecie)
-destroy(this.m_valoresdefacturación)
 destroy(this.m_valoresespecialesdefacturación)
 end on
 
@@ -1118,40 +1120,6 @@ on m_valoresdefacturaciónporespecie.destroy
 call super::destroy
 end on
 
-type m_valoresdefacturación from menu within m_productores
-end type
-
-event clicked;SetPointer(HourGlass!)
-IF NOT accesopuntocritico() THEN Return
-gstr_us.OpcionActiva	=	This.ClassName()
-
-OpenSheet(w_mant_mues_valofactprod, w_main, columna, Original!)
-end event
-
-on m_valoresdefacturación.create
-call super::create
-this.text = "&Valores de Facturación por Productor"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_valoresdefacturación.destroy
-call super::destroy
-end on
-
 type m_valoresespecialesdefacturación from menu within m_productores
 end type
 
@@ -1182,6 +1150,40 @@ this.bitmapgradient = true
 end on
 
 on m_valoresespecialesdefacturación.destroy
+call super::destroy
+end on
+
+type m_valoresdefacturación from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_valofactprod, w_main, columna, Original!)
+end event
+
+on m_valoresdefacturación.create
+call super::create
+this.text = "&Valores de Facturación por Productor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valoresdefacturación.destroy
 call super::destroy
 end on
 
