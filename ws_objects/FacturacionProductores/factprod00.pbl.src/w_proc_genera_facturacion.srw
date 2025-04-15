@@ -530,7 +530,6 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 16777215
 long backcolor = 553648127
-boolean enabled = false
 string text = "Planta"
 boolean focusrectangle = false
 end type

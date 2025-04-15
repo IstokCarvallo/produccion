@@ -232,9 +232,11 @@ IF lb_Cerrar THEN
 	Close(This)
 ELSE	
 	iuo_Especie	=	Create uo_Especie
+	
 	iuo_Especie.Existe(Integer(Message.StringParm), False, Sqlca)
 
-	This.Title	= "RESUMEN RECEPCION " + Upper(iuo_Especie.Nombre)
+	This.Title			= "RESUMEN RECEPCION " + Upper(iuo_Especie.Nombre)
+	st_Titulo.Text	+= " - " + Upper(iuo_Especie.Nombre)
 	
 	wf_Visible(iuo_Especie.Codigo)
 	uo_SelVariedad.Seleccion(True, False)

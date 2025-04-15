@@ -68,17 +68,14 @@ If lb_Cerrar Then
 	Close(This)
 Else	
 	li_Especie = Message.DoubleParm
-	
 	uo_SelEspecie.Seleccion(False, False)
-	If li_Especie <> 0 Then
-		uo_SelEspecie.Bloquear(True)
-		uo_SelEspecie.Codigo	=	li_Especie
-		uo_SelEspecie.dw_Seleccion.Object.Codigo[1]=	li_Especie
-		uo_SelVariedad.Filtra(li_Especie)
-	End If
 	uo_SelVariedad.Seleccion(True, False)
 	
-	istr_mant.dw	= dw_1
+	If li_Especie <> 0 Then
+		uo_SelEspecie.Bloquear(True)
+		uo_SelEspecie.Inicia(li_Especie)
+		uo_SelVariedad.Filtra(li_Especie)
+	End If
 	
 	istr_mant.argumento[1]	=	String(gi_CodExport)
 	istr_mant.argumento[2]	=	"0"
@@ -222,24 +219,30 @@ event ue_antesguardar;call super::ue_antesguardar;Integer	ll_Fila, ll_Secuen
 
 SELECT	IsNull(MAX(ccdc_secuen),0) + 1
 	INTO	:ll_Secuen
-	FROM	dba.ctlcaldistcalibre
+	FROM	dbo.ctlcaldistcalibre
 	WHERE	espe_codigo	=	:uo_SelEspecie.Codigo
 	AND		vari_codigo	=	:uo_SelVariedad.Codigo
 	USING SQLCA;
+	
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Distribucion de Calibres")
+	Message.DoubleParm = -1
+	Return
+End If
 
-FOR ll_Fila = 1 TO dw_1.RowCount()
-	IF dw_1.GetItemStatus(ll_fila, 0, Primary!) = NewModified! THEN
+For ll_Fila = 1 TO dw_1.RowCount()
+	If dw_1.GetItemStatus(ll_fila, 0, Primary!) = NewModIfied! Then
 		dw_1.Object.ccdc_secuen[ll_Fila] = ll_Secuen
 		ll_Secuen++
-	END IF 
-NEXT
+	End If 
+Next
 
 dw_1.SetSort("ccdc_ordena asc")
 dw_1.Sort()
 
-FOR ll_Fila = 1 TO dw_1.RowCount()
+For ll_Fila = 1 TO dw_1.RowCount()
 	dw_1.Object.ccdc_ordena[ll_Fila] = ll_Fila*10
-NEXT
+Next
 end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_distribu_calibre

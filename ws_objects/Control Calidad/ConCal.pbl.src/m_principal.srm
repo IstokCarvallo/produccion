@@ -10614,6 +10614,7 @@ end on
 
 event clicked;SetPointer(HourGlass!)
 gstr_us.OpcionActiva = This.ClassName();If Not AccesoPuntoCritico() Then Return
+
 OpenSheetWithParm(w_inf_recepcion_tipo_embarque, "41", w_main, columna, Original!)
 end event
 

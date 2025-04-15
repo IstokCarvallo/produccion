@@ -247,21 +247,29 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 	dw_2.Object.clie_codigo.BackGround.Color = RGB(255,255,255)
 	dw_2.Object.paen_numero.BackGround.Color = RGB(255,255,255)
 	dw_2.Object.plde_codigo.BackGround.Color = RGB(255,255,255)
+	dw_2.Object.clie_codigo.Color = 0
+	dw_2.Object.paen_numero.Color = 0
+	dw_2.Object.plde_codigo.Color = 0
 	dw_2.SetColumn("clie_codigo")
 	dw_2.SetFocus()
 ELSE
 	dw_2.Object.clie_codigo.Protect	=	1
 	dw_2.Object.paen_numero.Protect	=	1
 	dw_2.Object.plde_codigo.Protect	=	1
-	dw_2.Object.clie_codigo.BackGround.Color = RGB(166,180,210)
-	dw_2.Object.paen_numero.BackGround.Color = RGB(166,180,210)
-	dw_2.Object.plde_codigo.BackGround.Color = RGB(166,180,210)
+	dw_2.Object.clie_codigo.BackGround.Color = 553648127
+	dw_2.Object.paen_numero.BackGround.Color = 553648127
+	dw_2.Object.plde_codigo.BackGround.Color = 553648127
+	dw_2.Object.clie_codigo.Color =  RGB(255,255,255)
+	dw_2.Object.paen_numero.Color =  RGB(255,255,255)
+	dw_2.Object.plde_codigo.Color = RGB(255,255,255)
 	
 	IF dw_2.Object.paen_pmixto[1]	=	1 AND Integer(dw_2.Object.paen_pmixto.Protect)	=	1 THEN
 		dw_2.Object.vari_codigo.Protect	=	1
 		dw_2.Object.emba_codigo.Protect	=	1
-		dw_2.Object.vari_codigo.BackGround.Color = RGB(166,180,210)
-		dw_2.Object.emba_codigo.BackGround.Color = RGB(166,180,210)
+		dw_2.Object.vari_codigo.BackGround.Color = 553648127
+		dw_2.Object.emba_codigo.BackGround.Color = 553648127
+		dw_2.Object.vari_codigo.Color = RGB(255,255,255)
+		dw_2.Object.emba_codigo.Color = RGB(255,255,255)
 	END IF
 	
 END IF

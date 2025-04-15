@@ -236,21 +236,29 @@ pb_ins_det.Enabled = lb_estado
 end subroutine
 
 public subroutine habilitaencab (boolean habilita);IF Habilita THEN
-	dw_2.SetTabOrder("clie_codigo",10)
-	dw_2.SetTabOrder("altu_numero",30)
-	dw_2.SetTabOrder("plde_codigo",20)
-	dw_2.Modify("clie_codigo.BackGround.Color = " + String(rgb(255,255,255)))
-	dw_2.Modify("altu_numero.BackGround.Color = " + String(rgb(255,255,255)))
-	dw_2.Modify("plde_codigo.BackGround.Color = " + String(rgb(255,255,255)))
+	dw_2.Object.clie_codigo.Protect	=	0
+	dw_2.Object.altu_numero.Protect	=	0
+	dw_2.Object.plde_codigo.Protect	=	0
+	dw_2.Object.clie_codigo.BackGround.Color 		= RGB(255,255,255)
+	dw_2.Object.altu_numero.BackGround.Color	= RGB(255,255,255)
+	dw_2.Object.plde_codigo.BackGround.Color		= RGB(255,255,255)
+	dw_2.Object.clie_codigo.Color 		= 0
+	dw_2.Object.altu_numero.Color	= 0
+	dw_2.Object.plde_codigo.Color 	= 0
+	
 	dw_2.SetColumn("altu_numero")
 	dw_2.SetFocus()
 ELSE
-	dw_2.SetTabOrder("clie_codigo",0)
-	dw_2.SetTabOrder("altu_numero",0)
-	dw_2.SetTabOrder("plde_codigo",0)
-	dw_2.Modify("clie_codigo.BackGround.Color = " + String(RGB(166,180,210)))
-	dw_2.Modify("altu_numero.BackGround.Color = " + String(RGB(166,180,210)))
-	dw_2.Modify("plde_codigo.BackGround.Color = " + String(RGB(166,180,210)))
+	dw_2.Object.clie_codigo.Protect	=	1
+	dw_2.Object.altu_numero.Protect	=	1
+	dw_2.Object.plde_codigo.Protect	=	1
+	
+	dw_2.Object.clie_codigo.BackGround.Color		= 553648127
+	dw_2.Object.altu_numero.BackGround.Color	= 553648127
+	dw_2.Object.plde_codigo.BackGround.Color		= 553648127
+	dw_2.Object.clie_codigo.Color		=  RGB(255,255,255)
+	dw_2.Object.altu_numero.Color	=  RGB(255,255,255)
+	dw_2.Object.plde_codigo.Color		=  RGB(255,255,255)
 
 END IF
 end subroutine

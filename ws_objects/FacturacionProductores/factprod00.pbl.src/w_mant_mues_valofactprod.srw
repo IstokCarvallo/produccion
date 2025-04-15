@@ -55,9 +55,36 @@ global w_mant_mues_valofactprod w_mant_mues_valofactprod
 
 type variables
 w_mant_deta_valofactprod	iw_mantencion
+
 DataWindowChild	idwc_especie
 uo_semanafactura	iuo_Semana
 end variables
+
+forward prototypes
+public function boolean wf_validaestandar (integer cliente, integer zona, transaction transaccion)
+end prototypes
+
+public function boolean wf_validaestandar (integer cliente, integer zona, transaction transaccion);Boolean	lb_Retorno = True
+Long		ll_Cantidad
+
+Select		IsNull(Count(*), 0)
+	Into :ll_Cantidad
+	From dbo.PMGExportadora
+	Where clie_codigo = :Cliente
+	And zona_codigo = :Zona
+	Using Transaccion;
+
+If Transaccion.SQLCode = -1 Then
+	F_ErrorBaseDatos(Transaccion, "Lectura de TIpo CEstandar Exportadora")
+	lb_Retorno	=	False
+ElseIf Transaccion.SQLCode = 100 Then
+	lb_Retorno	=	False
+Else
+	If ll_Cantidad < 1 Then lb_Retorno	=	False
+End If
+	
+Return lb_Retorno
+end function
 
 event ue_nuevo;istr_mant.borra	= False
 istr_mant.agrega	= True
@@ -468,9 +495,9 @@ end type
 type em_produc from editmask within w_mant_mues_valofactprod
 event modified pbm_enmodified
 integer x = 567
-integer y = 248
+integer y = 252
 integer width = 219
-integer height = 92
+integer height = 88
 integer taborder = 20
 boolean bringtotop = true
 integer textsize = -10
@@ -489,7 +516,6 @@ event modified;Integer	li_zona
 String		ls_productor, ls_zona
 Long		ll_codigo
 
-
 If This.Text =  '' Then Return 
 
 ll_codigo = Long(This.Text)
@@ -500,14 +526,14 @@ SELECT	pro.zona_codigo, pro.prod_nombre, zon.zona_nombre
 	WHERE	pro.prod_codigo = :ll_codigo
 	AND	zon.zona_codigo = pro.zona_codigo;
 
-If sqlca.SQLCode = -1 Then
+If SQLCA.SQLCode = -1 Then
 	MessageBox("Error","Error al intentar conección a Base de Datos",Information!, Ok!)
 	sle_nompro.text	=	""
 	sle_nomzona.text	=	""
 	This.Text				=	""
 	This.SetFocus()
 	Return
-ElseIf sqlca.SQLCode = 100 Then
+ElseIf SQLCA.SQLCode = 100 Then
 	MessageBox("Error","Código de Productor no ha sido ingresado.",Information!, Ok!)
 	sle_nompro.text	=	""
 	sle_nomzona.text	=	""
