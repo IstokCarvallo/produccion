@@ -75,6 +75,8 @@ str_busqueda istr_busq
 str_mant istr_mant
 
 DataWindowChild	idwc_zona, idwc_planta, idwc_cliente, idwc_productor
+
+uo_TipoCambio		iuo_TC
 end variables
 
 on w_info_valida_facturacion.create
@@ -150,6 +152,9 @@ Else
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelPlanta.Seleccion(False, False)
 	uo_SelProductor.Seleccion(True, True)
+	
+	iuo_TC	=	Create uo_TipoCambio	
+	
 	uo_SelProductor.Filtra(-1)
 	uo_SelCliente.Inicia(gi_CodExport)
 	uo_SelPlanta.Inicia(gi_Codplanta)
@@ -157,6 +162,8 @@ Else
 	em_Fecha.Text				=	String(Today())
 	em_desde.Text				=	'01/' + em_Fecha.Text
 	em_hasta.Text				=	String(Today())
+	
+	em_Cambio.Text = String(iuo_TC.of_Get(Today(), gstr_ParEmpresa.Conecion_GuiaElectronica))
 End If
 end event
 
@@ -322,6 +329,8 @@ string mask = "mm/yyyy"
 end type
 
 event modified;istr_mant.argumento[3]	=	This.Text
+
+em_Cambio.Text = String(iuo_TC.of_Get(Date('01/' + This.Text), gstr_ParEmpresa.Conecion_GuiaElectronica))
 end event
 
 type st_6 from statictext within w_info_valida_facturacion
@@ -377,6 +386,7 @@ long textcolor = 33554432
 long backcolor = 16777215
 alignment alignment = right!
 borderstyle borderstyle = stylelowered!
+maskdatatype maskdatatype = decimalmask!
 string mask = "##,###.##"
 end type
 

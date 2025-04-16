@@ -139,8 +139,7 @@ destroy(this.pb_calendario)
 destroy(this.mc_calendario)
 end on
 
-event ue_recuperadatos;call super::ue_recuperadatos;ias_campo[1]  = String(dw_1.GetItemNumber(il_fila, "espe_codigo"))
-ias_campo[2]  = String(dw_1.GetItemNumber(il_fila, "vari_codigo"))
+event ue_recuperadatos;call super::ue_recuperadatos;ias_campo[2]  = String(dw_1.GetItemNumber(il_fila, "vari_codigo"))
 ias_campo[3]  = dw_1.GetItemString(il_fila, "vaca_calibr")
 ias_campo[4]  = String(dw_1.GetItemDecimal(il_fila, "vafp_preuni"))
 ias_campo[5]  = dw_1.GetItemString(il_fila, "emba_codigo")
@@ -167,18 +166,21 @@ End If
 dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 dw_1.SetItem(il_fila, "prod_codigo", Long(istr_mant.argumento[2]))
 dw_1.SetItem(il_fila, "prod_nombre", istr_mant.argumento[3])
+dw_1.SetItem(il_fila, "espe_codigo", Integer(istr_mant.argumento[5]))
 
 dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModIfied!)
 dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModIfied!)
 dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "espe_codigo", Primary!, NotModIfied!)
 
 If Not istr_mant.Agrega Then
 		dw_1.GetChild("vari_codigo", idwc_variedad)
 		idwc_variedad.SetTransObject(sqlca)
-		idwc_variedad.Retrieve(Integer(ias_campo[1]))
+		idwc_variedad.Retrieve(Integer(istr_mant.argumento[5]))
+		
 		dw_1.GetChild("vaca_calibr", idwc_calibre)
 		idwc_calibre.SetTransObject(sqlca)
-		idwc_calibre.Retrieve(Integer(ias_campo[1]), Integer(ias_campo[2]))	
+		idwc_calibre.Retrieve(Integer(istr_mant.argumento[5]), Integer(ias_campo[2]))	
 Else
 	dw_1.Object.vafa_fecini[il_fila] = id_fechaini 
 	dw_1.Object.vafa_fecter[il_fila] = id_fechafin		
@@ -188,13 +190,14 @@ end event
 event ue_nuevo;call super::ue_nuevo;dw_1.SetItem(il_fila, "clie_codigo", Integer(istr_mant.argumento[1]))
 dw_1.SetItem(il_fila, "prod_codigo", Long(istr_mant.argumento[2]))
 dw_1.SetItem(il_fila, "prod_nombre", istr_mant.argumento[3])
+dw_1.SetItem(il_fila, "espe_codigo", Integer(istr_mant.argumento[5]))
 
 dw_1.SetItemStatus(il_fila, "clie_codigo", Primary!, NotModIfied!)
 dw_1.SetItemStatus(il_fila, "prod_codigo", Primary!, NotModIfied!)
 dw_1.SetItemStatus(il_fila, "prod_nombre", Primary!, NotModIfied!)
+dw_1.SetItemStatus(il_fila, "espe_codigo", Primary!, NotModIfied!)
 
 If dw_1.RowCount() > 1 Then
-	dw_1.SetItem(il_fila, "espe_codigo", dw_1.Object.espe_codigo[il_fila - 1])
 	dw_1.SetItem(il_fila, "vari_codigo", dw_1.Object.vari_codigo[il_fila - 1])
 //	dw_1.SetItem(il_fila, "vafa_fecini", dw_1.Object.vafa_fecini[il_fila - 1])
 //	dw_1.SetItem(il_fila, "vafa_fecter", dw_1.Object.vafa_fecter[il_fila - 1])
@@ -209,13 +212,12 @@ If dw_1.RowCount() > 1 Then
 //		dw_1.Object.todoscal[il_fila] = 0
 //	End If
 	
-	dw_1.SetColumn('espe_codigo')
+	dw_1.SetColumn('vari_codigo')
 End If	
 
 end event
 
 event ue_deshace;call super::ue_deshace;If UpperBound(ias_campo) > 0 Then
-	dw_1.SetItem(il_fila, "espe_codigo", Integer(ias_campo[1]))
 	dw_1.SetItem(il_fila, "vari_codigo", Integer(ias_campo[2]))
 	dw_1.SetItem(il_fila, "vaca_calibr", ias_campo[3])
 	dw_1.SetItem(il_fila, "vafp_preuni", Dec(ias_campo[4]))
@@ -245,55 +247,48 @@ end event
 event ue_antesguardar;call super::ue_antesguardar;Integer	li_cont
 String	ls_mensaje, ls_colu[]
 
-
-IF Isnull(dw_1.GetItemNumber(il_fila, "espe_codigo")) OR dw_1.GetItemNumber(il_fila, "espe_codigo") = 0 THEN
-	li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nEspecie "
-	ls_colu[li_cont]	= "espe_codigo"
-END IF
-
-IF Isnull(dw_1.GetItemNumber(il_fila, "vari_codigo")) OR dw_1.GetItemNumber(il_fila, "vari_codigo") = 0 THEN
+If IsNull(dw_1.GetItemNumber(il_fila, "vari_codigo")) OR dw_1.GetItemNumber(il_fila, "vari_codigo") = 0 Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nVariedad "
 	ls_colu[li_cont]	= "vari_codigo"
-END IF
+End If
 
-IF Isnull(dw_1.GetItemString(il_fila, "vaca_calibr")) OR dw_1.GetItemString(il_fila, "vaca_calibr") = "" THEN
+If IsNull(dw_1.GetItemString(il_fila, "vaca_calibr")) OR dw_1.GetItemString(il_fila, "vaca_calibr") = "" Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nCalibre "
 	ls_colu[li_cont]	= "vaca_calibr"
-END IF
+End If
 
-IF Isnull(dw_1.GetItemDecimal(il_fila, "vafp_preuni")) OR dw_1.GetItemDecimal(il_fila, "vafp_preuni") = 0 THEN
+If IsNull(dw_1.GetItemDecimal(il_fila, "vafp_preuni")) OR dw_1.GetItemDecimal(il_fila, "vafp_preuni") = 0 Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nPrecio Unitario "
 	ls_colu[li_cont]	= "vafp_preuni"
-END IF
+End If
 
-IF Isnull(dw_1.Object.vafa_fecini[il_fila]) OR dw_1.Object.vafa_fecini[il_fila] = date("0000/00/00") THEN
+If IsNull(dw_1.Object.vafa_fecini[il_fila]) OR dw_1.Object.vafa_fecini[il_fila] = date("0000/00/00") Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nFecha Inicial"
 	ls_colu[li_cont]	= "vafa_fecini"
-END IF
+End If
 
-IF Isnull(dw_1.Object.vafa_fecter[il_fila]) OR dw_1.Object.vafa_fecter[il_fila] = date("0000/00/00") THEN
+If IsNull(dw_1.Object.vafa_fecter[il_fila]) OR dw_1.Object.vafa_fecter[il_fila] = date("0000/00/00") Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nFecha Término"
 	ls_colu[li_cont]	= "vafa_fecter"
-END IF
+End If
 
-IF Isnull(dw_1.Object.emba_codigo[il_fila]) OR dw_1.Object.emba_codigo[il_fila] = "" THEN
+If IsNull(dw_1.Object.emba_codigo[il_fila]) OR dw_1.Object.emba_codigo[il_fila] = "" Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nCódigo Embalaje"
 	ls_colu[li_cont]	= "emba_codigo"
-END IF
+End If
 
-IF li_cont > 0 THEN
+If li_cont > 0 Then
 	MessageBox("Error de Consistencia", "Falta el ingreso de :" + ls_mensaje + ".", StopSign!, Ok!)
 	dw_1.SetColumn(ls_colu[1])
 	dw_1.SetFocus()
 	Message.DoubleParm = -1
-END IF
+End If
 end event
 
 event open;/*
@@ -339,11 +334,10 @@ idwc_cliente.Retrieve()
 idwc_especie.Retrieve()
 idwc_variedad.Retrieve(0)
 idwc_TipoVida.Retrieve()
-idwc_calibre.Retrieve(gi_CodEspecie, gi_CodVariedad)
-idwc_Color.Retrieve(gi_CodExport, gi_CodEspecie, -1, '*')
+idwc_variedad.Retrieve(Integer(istr_Mant.Argumento[5]))
+idwc_calibre.Retrieve(Integer(istr_Mant.Argumento[5]), gi_CodVariedad)
+idwc_Color.Retrieve(gi_CodExport, Integer(istr_Mant.Argumento[5]), -1, '*')
 
-//dw_1.SetTransObject(sqlca)
-//istr_mant.dw.ShareData(dw_1)
 end event
 
 event resize;Integer		li_posic_x, li_posic_y, li_Ancho = 300, li_Alto = 245, li_Siguiente = 255
@@ -438,22 +432,6 @@ Choose Case ls_Columna
 		Else
 			This.SetItem(Row, "vafa_fecini", iuo_Semana.Desde)
 			This.SetItem(Row, "vafa_fecter", iuo_Semana.Hasta)
-		End If
-		
-	Case "espe_codigo"
-		If wf_Duplicado(ls_Columna,Data) Then
-			This.SetItem(Row, ls_Columna, Integer(ias_campo[1]))
-			Return 1
-		End If
-		
-		wf_BuscaRango_Especie(Data)
-		
-		idwc_variedad.Retrieve(Integer(Data))
-		idwc_calibre.Retrieve(Integer(Data), 1)
-		idwc_Color.Retrieve(Integer(istr_Mant.Argumento[1]), Integer(Data), -1, '*')
-		
-		If iuo_Color.of_Default(Integer(istr_Mant.Argumento[1]), Integer(Data), -1, '*', False, SQLCA) And This.Object.todoscol[Row] = 0 Then
-			This.SetItem(Row, "colo_nombre", iuo_Color.Color)
 		End If
 		
 	Case "vari_codigo"

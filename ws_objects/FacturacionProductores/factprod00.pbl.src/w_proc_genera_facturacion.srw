@@ -453,7 +453,6 @@ If lb_Existe Then
    End If
 	
 Else
-	
 		li_Numero =	wf_ObtieneSecuencia(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,ld_MesProceso)
 		If li_Numero = -1 Then
 			MessageBox('Error', 'No se pudo obtener sucuencia. informe a TI.', StopSign!, Ok!)

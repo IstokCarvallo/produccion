@@ -10,6 +10,10 @@ type uo_selcliente from uo_seleccion_clientesprod within tabpage_1
 end type
 type uo_selzonas from uo_seleccion_zonas within tabpage_1
 end type
+type uo_selespecie from uo_seleccion_especie within tabpage_1
+end type
+type st_3 from statictext within tabpage_1
+end type
 type pb_todos from picturebutton within w_busc_copiavalorizacion
 end type
 type pb_ninguno from picturebutton within w_busc_copiavalorizacion
@@ -19,7 +23,7 @@ end type
 end forward
 
 global type w_busc_copiavalorizacion from w_busqueda
-integer width = 4110
+integer width = 3739
 integer height = 2192
 string title = "Copia de Valores Exportadora"
 pb_todos pb_todos
@@ -59,6 +63,7 @@ istr_Mant		=	Message.PowerObjectParm
 
 Tab_1.TabPage_1.uo_SelCliente.Seleccion(False, False)
 Tab_1.TabPage_1.uo_SelZonas.Seleccion(False, False)
+Tab_1.TabPage_1.uo_SelEspecie.Seleccion(False, False)
 
 iuo_Semana	=	Create uo_semanafactura
 
@@ -68,12 +73,13 @@ If UpperBound(istr_Mant.Argumento) > 0 Then
 	If istr_Mant.Argumento[1] <> "" Then
 		Tab_1.TabPage_1.uo_SelCliente.Inicia(Integer(istr_Mant.Argumento[1]))
 		Tab_1.TabPage_1.uo_SelZonas.Inicia(Integer(istr_Mant.Argumento[4]))
-
+		Tab_1.TabPage_1.uo_SelEspecie.Inicia(Integer(istr_Mant.Argumento[5]))
+		
 		dw_1.SetFocus()
 	End If
 End If
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo)
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo, Tab_1.TabPage_1.uo_SelEspecie.Codigo)
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -112,8 +118,8 @@ CloseWithReturn(This, istr_busq)
 end event
 
 type pb_insertar from w_busqueda`pb_insertar within w_busc_copiavalorizacion
-integer x = 3703
-integer y = 744
+integer x = 3351
+integer y = 732
 integer taborder = 50
 boolean cancel = false
 boolean default = true
@@ -168,7 +174,7 @@ CloseWithReturn(Parent, lstr_Busq)
 end event
 
 type dw_1 from w_busqueda`dw_1 within w_busc_copiavalorizacion
-integer width = 3515
+integer width = 3141
 integer height = 1308
 integer taborder = 60
 string dataobject = "dw_mues_pmg_exportadora"
@@ -253,8 +259,8 @@ End If
 end event
 
 type pb_salir from w_busqueda`pb_salir within w_busc_copiavalorizacion
-integer x = 3698
-integer y = 1052
+integer x = 3346
+integer y = 1040
 end type
 
 event pb_salir::clicked;
@@ -280,6 +286,8 @@ st_1 st_1
 st_2 st_2
 uo_selcliente uo_selcliente
 uo_selzonas uo_selzonas
+uo_selespecie uo_selespecie
+st_3 st_3
 end type
 
 on tabpage_1.create
@@ -287,6 +295,8 @@ this.st_1=create st_1
 this.st_2=create st_2
 this.uo_selcliente=create uo_selcliente
 this.uo_selzonas=create uo_selzonas
+this.uo_selespecie=create uo_selespecie
+this.st_3=create st_3
 int iCurrent
 call super::create
 iCurrent=UpperBound(this.Control)
@@ -294,6 +304,8 @@ this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.st_2
 this.Control[iCurrent+3]=this.uo_selcliente
 this.Control[iCurrent+4]=this.uo_selzonas
+this.Control[iCurrent+5]=this.uo_selespecie
+this.Control[iCurrent+6]=this.st_3
 end on
 
 on tabpage_1.destroy
@@ -302,6 +314,8 @@ destroy(this.st_1)
 destroy(this.st_2)
 destroy(this.uo_selcliente)
 destroy(this.uo_selzonas)
+destroy(this.uo_selespecie)
+destroy(this.st_3)
 end on
 
 type pb_filtrar from w_busqueda`pb_filtrar within tabpage_1
@@ -309,7 +323,7 @@ end type
 
 event pb_filtrar::clicked;call super::clicked;Long ll_Fila
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo)
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Tab_1.TabPage_1.uo_SelZonas.Codigo, Tab_1.TabPage_1.uo_SelEspecie.Codigo)
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -385,7 +399,7 @@ end type
 
 type st_1 from statictext within tabpage_1
 integer x = 96
-integer y = 116
+integer y = 80
 integer width = 466
 integer height = 76
 boolean bringtotop = true
@@ -401,7 +415,7 @@ end type
 
 type st_2 from statictext within tabpage_1
 integer x = 96
-integer y = 296
+integer y = 220
 integer width = 466
 integer height = 76
 boolean bringtotop = true
@@ -417,7 +431,7 @@ end type
 
 type uo_selcliente from uo_seleccion_clientesprod within tabpage_1
 integer x = 640
-integer y = 100
+integer y = 64
 integer height = 108
 integer taborder = 20
 boolean bringtotop = true
@@ -429,7 +443,7 @@ end on
 
 type uo_selzonas from uo_seleccion_zonas within tabpage_1
 integer x = 640
-integer y = 280
+integer y = 204
 integer height = 108
 integer taborder = 21
 boolean bringtotop = true
@@ -439,9 +453,38 @@ on uo_selzonas.destroy
 call uo_seleccion_zonas::destroy
 end on
 
+type uo_selespecie from uo_seleccion_especie within tabpage_1
+integer x = 640
+integer y = 344
+integer height = 108
+integer taborder = 30
+boolean bringtotop = true
+end type
+
+on uo_selespecie.destroy
+call uo_seleccion_especie::destroy
+end on
+
+type st_3 from statictext within tabpage_1
+integer x = 96
+integer y = 364
+integer width = 457
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+long backcolor = 553648127
+string text = "Especie"
+boolean focusrectangle = false
+end type
+
 type pb_todos from picturebutton within w_busc_copiavalorizacion
 integer x = 2409
-integer y = 504
+integer y = 356
 integer width = 494
 integer height = 180
 integer taborder = 20
@@ -463,7 +506,7 @@ dw_1.SetRedraw(True)
 end event
 
 type pb_ninguno from picturebutton within w_busc_copiavalorizacion
-integer x = 2967
+integer x = 2409
 integer y = 504
 integer width = 494
 integer height = 180

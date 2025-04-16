@@ -18,6 +18,10 @@ type sle_nompro from singlelineedit within tabpage_1
 end type
 type sle_nomzona from singlelineedit within tabpage_1
 end type
+type uo_selespecie from uo_seleccion_especie within tabpage_1
+end type
+type st_4 from statictext within tabpage_1
+end type
 type pb_todos from picturebutton within w_busc_copiavalorizacion_prod
 end type
 type pb_ninguno from picturebutton within w_busc_copiavalorizacion_prod
@@ -67,6 +71,7 @@ dw_1.SetRedraw(False)
 istr_Mant		=	Message.PowerObjectParm
 
 Tab_1.TabPage_1.uo_SelCliente.Seleccion(False, False)
+Tab_1.TabPage_1.uo_SelEspecie.Seleccion(False, False)
 
 iuo_Semana		=	Create uo_semanafactura
 iuo_Productor	=	Create uo_Productores	
@@ -76,12 +81,13 @@ is_ordena = 'Especie:espe_codigo,Variedad:vari_codigo,Embalaje:emba_codigo,Tipo 
 If UpperBound(istr_Mant.Argumento) > 0 Then
 	If istr_Mant.Argumento[1] <> "" Then
 		Tab_1.TabPage_1.uo_SelCliente.Inicia(Integer(istr_Mant.Argumento[1]))
+		Tab_1.TabPage_1.uo_SelEspecie.Inicia(Integer(istr_Mant.Argumento[5]))
 
 		dw_1.SetFocus()
 	End If
 End If
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text))
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text), Tab_1.TabPage_1.uo_SelEspecie.Codigo)
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -272,6 +278,7 @@ CloseWithReturn(Parent, istr_busq)
 end event
 
 type tab_1 from w_busqueda`tab_1 within w_busc_copiavalorizacion_prod
+integer width = 2761
 end type
 
 on tab_1.create
@@ -286,6 +293,7 @@ call super::destroy
 end on
 
 type tabpage_1 from w_busqueda`tabpage_1 within tab_1
+integer width = 2725
 st_1 st_1
 st_2 st_2
 uo_selcliente uo_selcliente
@@ -294,6 +302,8 @@ em_produc em_produc
 cb_2 cb_2
 sle_nompro sle_nompro
 sle_nomzona sle_nomzona
+uo_selespecie uo_selespecie
+st_4 st_4
 end type
 
 on tabpage_1.create
@@ -305,6 +315,8 @@ this.em_produc=create em_produc
 this.cb_2=create cb_2
 this.sle_nompro=create sle_nompro
 this.sle_nomzona=create sle_nomzona
+this.uo_selespecie=create uo_selespecie
+this.st_4=create st_4
 int iCurrent
 call super::create
 iCurrent=UpperBound(this.Control)
@@ -316,6 +328,8 @@ this.Control[iCurrent+5]=this.em_produc
 this.Control[iCurrent+6]=this.cb_2
 this.Control[iCurrent+7]=this.sle_nompro
 this.Control[iCurrent+8]=this.sle_nomzona
+this.Control[iCurrent+9]=this.uo_selespecie
+this.Control[iCurrent+10]=this.st_4
 end on
 
 on tabpage_1.destroy
@@ -328,16 +342,18 @@ destroy(this.em_produc)
 destroy(this.cb_2)
 destroy(this.sle_nompro)
 destroy(this.sle_nomzona)
+destroy(this.uo_selespecie)
+destroy(this.st_4)
 end on
 
 type pb_filtrar from w_busqueda`pb_filtrar within tabpage_1
-integer x = 2034
+integer x = 2066
 integer y = 272
 end type
 
 event pb_filtrar::clicked;call super::clicked;Long ll_Fila
 
-ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text))
+ll_Fila = dw_1.Retrieve(Tab_1.TabPage_1.uo_SelCliente.Codigo, Long(Tab_1.TabPage_1.em_Produc.Text), Tab_1.TabPage_1.uo_SelEspecie.Codigo)
 
 If ll_Fila > 0 Then
 	For ll_Fila = 1 To dw_1.RowCount()
@@ -349,6 +365,7 @@ End If
 end event
 
 type tabpage_2 from w_busqueda`tabpage_2 within tab_1
+integer width = 2725
 end type
 
 type pb_acepta from w_busqueda`pb_acepta within tabpage_2
@@ -362,6 +379,7 @@ end type
 
 type tabpage_3 from w_busqueda`tabpage_3 within tab_1
 boolean visible = false
+integer width = 2725
 boolean enabled = false
 end type
 
@@ -568,9 +586,38 @@ boolean displayonly = true
 borderstyle borderstyle = stylelowered!
 end type
 
+type uo_selespecie from uo_seleccion_especie within tabpage_1
+integer x = 1778
+integer y = 100
+integer height = 108
+integer taborder = 30
+boolean bringtotop = true
+end type
+
+on uo_selespecie.destroy
+call uo_seleccion_especie::destroy
+end on
+
+type st_4 from statictext within tabpage_1
+integer x = 1435
+integer y = 124
+integer width = 261
+integer height = 60
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long backcolor = 553648127
+string text = "Especie"
+boolean focusrectangle = false
+end type
+
 type pb_todos from picturebutton within w_busc_copiavalorizacion_prod
-integer x = 2409
-integer y = 504
+integer x = 2930
+integer y = 284
 integer width = 494
 integer height = 180
 integer taborder = 20
@@ -592,7 +639,7 @@ dw_1.SetRedraw(True)
 end event
 
 type pb_ninguno from picturebutton within w_busc_copiavalorizacion_prod
-integer x = 2967
+integer x = 2930
 integer y = 504
 integer width = 494
 integer height = 180
@@ -616,8 +663,8 @@ end event
 
 type dw_4 from uo_dw within w_busc_copiavalorizacion_prod
 boolean visible = false
-integer x = 2432
-integer y = 52
+integer x = 3621
+integer y = 20
 integer width = 352
 integer height = 240
 integer taborder = 11

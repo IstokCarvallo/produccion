@@ -30,13 +30,9 @@ end forward
 global type w_proc_emision_facturacion from w_para_informes
 integer x = 14
 integer y = 32
-integer width = 4443
-integer height = 2232
+integer width = 4471
+integer height = 2256
 string title = "Facturación Mensual de Productores"
-boolean minbox = false
-boolean maxbox = false
-boolean resizable = false
-windowtype windowtype = response!
 windowstate windowstate = maximized!
 string icon = "F:\Desarrollo\Producción\FrutaProcesada\Producc.ico"
 st_4 st_4
@@ -116,6 +112,7 @@ Else
 	uo_SelCliente.Inicia(gi_CodExport)
 	
 	em_Fecha.Text = String(Today(), 'mm/yyyy')
+	If dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, 1, Date('01/' + em_Fecha.Text)) > 0 Then pb_acepta.Enabled = True
 End If
 end event
 

@@ -15,6 +15,10 @@ type cb_carga from commandbutton within w_mant_mues_pmg_exportadora
 end type
 type dw_carga from datawindow within w_mant_mues_pmg_exportadora
 end type
+type st_1 from statictext within w_mant_mues_pmg_exportadora
+end type
+type uo_selespecie from uo_seleccion_especie within w_mant_mues_pmg_exportadora
+end type
 type str_anexos from structure within w_mant_mues_pmg_exportadora
 end type
 end forward
@@ -26,7 +30,7 @@ type str_anexos from structure
 end type
 
 global type w_mant_mues_pmg_exportadora from w_mant_tabla
-integer width = 4137
+integer width = 3744
 integer height = 1936
 string title = "VALORES DE FACTURACION EXPORTADORA"
 st_2 st_2
@@ -35,13 +39,14 @@ uo_selcliente uo_selcliente
 uo_selzonas uo_selzonas
 cb_carga cb_carga
 dw_carga dw_carga
+st_1 st_1
+uo_selespecie uo_selespecie
 end type
 global w_mant_mues_pmg_exportadora w_mant_mues_pmg_exportadora
 
 type variables
 w_mant_deta_pmg_exportadora iw_mantencion
 
-DataWindowChild	idwc_especie
 uo_semanafactura	iuo_Semana
 end variables
 
@@ -125,6 +130,7 @@ istr_mant.agrega	= True
 istr_Mant.Argumento[1] = String(uo_SelCliente.Codigo)
 istr_Mant.Argumento[2] = String(uo_SelZonas.Codigo)
 istr_Mant.Argumento[3] = uo_SelZonas.Nombre
+istr_Mant.Argumento[4] = String(uo_SelEspecie.Codigo)
 
 OpenWithParm(iw_mantencion, istr_mant)
 
@@ -147,7 +153,7 @@ istr_info.copias	= 1
 OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_pmg_exportadora"
 vinf.dw_1.SetTransObject(sqlca)
-fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelZonas.Codigo)
+fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelZonas.Codigo, uo_SelEspecie.Codigo)
 
 If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
@@ -165,7 +171,7 @@ end event
 event ue_recuperadatos;call super::ue_recuperadatos;Long	ll_fila, respuesta
 
 Do
-	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelZonas.Codigo)
+	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelZonas.Codigo, uo_SelEspecie.Codigo)
 	
 	If ll_fila = -1 Then
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
@@ -206,6 +212,8 @@ this.uo_selcliente=create uo_selcliente
 this.uo_selzonas=create uo_selzonas
 this.cb_carga=create cb_carga
 this.dw_carga=create dw_carga
+this.st_1=create st_1
+this.uo_selespecie=create uo_selespecie
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_2
 this.Control[iCurrent+2]=this.st_5
@@ -213,6 +221,8 @@ this.Control[iCurrent+3]=this.uo_selcliente
 this.Control[iCurrent+4]=this.uo_selzonas
 this.Control[iCurrent+5]=this.cb_carga
 this.Control[iCurrent+6]=this.dw_carga
+this.Control[iCurrent+7]=this.st_1
+this.Control[iCurrent+8]=this.uo_selespecie
 end on
 
 on w_mant_mues_pmg_exportadora.destroy
@@ -223,6 +233,8 @@ destroy(this.uo_selcliente)
 destroy(this.uo_selzonas)
 destroy(this.cb_carga)
 destroy(this.dw_carga)
+destroy(this.st_1)
+destroy(this.uo_selespecie)
 end on
 
 event ue_borrar;If dw_1.rowcount() < 1 Then Return
@@ -244,6 +256,7 @@ istr_mant.agrega	= False
 istr_Mant.Argumento[1] = String(uo_SelCliente.Codigo)
 istr_Mant.Argumento[2] = String(uo_SelZonas.Codigo)
 istr_Mant.Argumento[3] = uo_SelZonas.Nombre
+istr_Mant.Argumento[4] = String(uo_SelEspecie.Codigo)
 
 OpenWithParm(iw_mantencion, istr_mant)
 
@@ -274,6 +287,7 @@ event open;call super::open;Boolean lb_Cerrar = False
 
 If IsNull(uo_SelCliente.Codigo) Then lb_Cerrar = True
 If IsNull(uo_SelZonas.Codigo) Then lb_Cerrar = True
+If IsNull(uo_SelEspecie.Codigo) Then lb_Cerrar = True
 
 If lb_Cerrar Then
 	Close(This)
@@ -282,11 +296,9 @@ Else
 	
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelZonas.Seleccion(False, False)
-	uo_SelCliente.Inicia(gi_CodExport)
+	uo_SelEspecie.Seleccion(False, False)
 	
-	dw_1.GetChild("espe_codigo", idwc_especie)
-	idwc_especie.SetTransObject(sqlca)
-	idwc_especie.Retrieve()
+	uo_SelCliente.Inicia(gi_CodExport)
 	
 	buscar	=	"Código Especie:Nespe_codigo,Código Variedad:Nvari_codigo,Nombre Variedad:Svari_nombre,Calibre:Svaca_calibr"
 	ordenar	=	"Código Especie:espe_codigo,Código Variedad:vari_codigo,Nombre Variedad:vari_nombre,Calibre:vaca_calibr"
@@ -299,6 +311,7 @@ event ue_modifica;If dw_1.RowCount() > 0 Then
 	istr_Mant.Argumento[1] = String(uo_SelCliente.Codigo)
 	istr_Mant.Argumento[2] = String(uo_SelZonas.Codigo)
 	istr_Mant.Argumento[3] = uo_SelZonas.Nombre
+	istr_Mant.Argumento[4] = String(uo_SelEspecie.Codigo)
 	
 	OpenWithParm(iw_mantencion, istr_mant)
 End If
@@ -329,21 +342,21 @@ Next
 end event
 
 type dw_1 from w_mant_tabla`dw_1 within w_mant_mues_pmg_exportadora
-integer y = 364
-integer width = 3497
-integer height = 1436
+integer y = 468
+integer width = 3127
+integer height = 1332
 integer taborder = 50
 string dataobject = "dw_mues_pmg_exportadora"
 end type
 
 type st_encabe from w_mant_tabla`st_encabe within w_mant_mues_pmg_exportadora
-integer width = 3497
-integer height = 260
+integer width = 3127
+integer height = 380
 end type
 
 type pb_lectura from w_mant_tabla`pb_lectura within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 72
+integer x = 3342
+integer y = 52
 integer taborder = 40
 end type
 
@@ -352,8 +365,8 @@ uo_SelZonas.Bloquear(True)
 end event
 
 type pb_nuevo from w_mant_tabla`pb_nuevo within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 528
+integer x = 3342
+integer y = 508
 integer taborder = 60
 end type
 
@@ -364,37 +377,37 @@ cb_carga.Enabled	= False
 end event
 
 type pb_insertar from w_mant_tabla`pb_insertar within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 704
+integer x = 3342
+integer y = 684
 integer taborder = 70
 end type
 
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 880
+integer x = 3342
+integer y = 860
 integer taborder = 80
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 1056
+integer x = 3342
+integer y = 1036
 integer taborder = 90
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 1232
+integer x = 3342
+integer y = 1212
 integer taborder = 100
 end type
 
 type pb_salir from w_mant_tabla`pb_salir within w_mant_mues_pmg_exportadora
-integer x = 3735
-integer y = 1536
+integer x = 3342
+integer y = 1516
 integer taborder = 110
 end type
 
 type st_2 from statictext within w_mant_mues_pmg_exportadora
-integer x = 1719
+integer x = 1563
 integer y = 152
 integer width = 293
 integer height = 80
@@ -443,7 +456,7 @@ end on
 
 type uo_selzonas from uo_seleccion_zonas within w_mant_mues_pmg_exportadora
 event destroy ( )
-integer x = 2053
+integer x = 1897
 integer y = 148
 integer height = 92
 integer taborder = 50
@@ -455,8 +468,8 @@ call uo_seleccion_zonas::destroy
 end on
 
 type cb_carga from commandbutton within w_mant_mues_pmg_exportadora
-integer x = 2999
-integer y = 140
+integer x = 2203
+integer y = 300
 integer width = 590
 integer height = 116
 integer taborder = 60
@@ -488,8 +501,8 @@ end event
 
 type dw_carga from datawindow within w_mant_mues_pmg_exportadora
 boolean visible = false
-integer x = 2994
-integer y = 1432
+integer x = 2601
+integer y = 1412
 integer width = 594
 integer height = 336
 integer taborder = 100
@@ -499,4 +512,34 @@ string dataobject = "dw_carga_estandar"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type
+
+type st_1 from statictext within w_mant_mues_pmg_exportadora
+integer x = 187
+integer y = 300
+integer width = 274
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Especie"
+boolean focusrectangle = false
+end type
+
+type uo_selespecie from uo_seleccion_especie within w_mant_mues_pmg_exportadora
+integer x = 567
+integer y = 288
+integer height = 92
+integer taborder = 40
+boolean bringtotop = true
+end type
+
+on uo_selespecie.destroy
+call uo_seleccion_especie::destroy
+end on
 
