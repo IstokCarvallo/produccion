@@ -62,9 +62,9 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantaclie,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admasucursal,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_respaldo,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admdoctos,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especie,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_productores_mail,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,paramplanta,f
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_especie,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipoproductor,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_categorias,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,str_agronomousuario,s
@@ -82,8 +82,8 @@ OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_info_pro
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_apiwindows,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,m_sys_frame,m
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,grabaaccesoaplicacion,f
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp_mantencion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp_mantencion,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_deta_facturprodgenerado,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_busc_proforma,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_parms,s
@@ -95,11 +95,12 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,str_temporada,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,d_columna_ordena,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_variecalibre,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesousuarios,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_gene_estadoproforma_envio,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_errorbasedatos,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_clientesprod,u
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_exportadores,u
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,dw_mues_valorespecial,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_exportadores,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_especies,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_embalajes,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_startupinfo,s
@@ -179,6 +180,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_color,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_mant_mues_color,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admaaplicacces,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admaunidadadmini,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tipocambio,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_zonas,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_zoom,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_principal,w

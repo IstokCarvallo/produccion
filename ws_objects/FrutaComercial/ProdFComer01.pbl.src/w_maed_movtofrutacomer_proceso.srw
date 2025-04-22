@@ -5126,7 +5126,7 @@ type ole_puerta from olecustomcontrol within w_maed_movtofrutacomer_proceso
 event oncomm ( )
 boolean visible = false
 integer x = 3726
-integer y = 132
+integer y = 136
 integer width = 174
 integer height = 152
 integer taborder = 50

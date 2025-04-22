@@ -2079,7 +2079,7 @@ alignment alignment = center!
 textcase textcase = upper!
 borderstyle borderstyle = stylelowered!
 maskdatatype maskdatatype = stringmask!
-string mask = "xxx"
+string mask = "xxxxx"
 end type
 
 event modified;Integer	li_cliente,	li_especie, li_variedad, li_cantid
