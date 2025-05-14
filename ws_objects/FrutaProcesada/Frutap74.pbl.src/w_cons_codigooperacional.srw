@@ -2,6 +2,8 @@
 forward
 global type w_cons_codigooperacional from window
 end type
+type cb_codigo from commandbutton within w_cons_codigooperacional
+end type
 type em_operacional from editmask within w_cons_codigooperacional
 end type
 type st_10 from statictext within w_cons_codigooperacional
@@ -88,6 +90,7 @@ boolean resizable = true
 windowstate windowstate = maximized!
 long backcolor = 16777215
 event ue_asignacion ( )
+cb_codigo cb_codigo
 em_operacional em_operacional
 st_10 st_10
 pb_grabar pb_grabar
@@ -145,6 +148,7 @@ uo_calibre		iuo_calibre
 end variables
 
 on w_cons_codigooperacional.create
+this.cb_codigo=create cb_codigo
 this.em_operacional=create em_operacional
 this.st_10=create st_10
 this.pb_grabar=create pb_grabar
@@ -180,7 +184,8 @@ this.pb_salir=create pb_salir
 this.em_embalaje=create em_embalaje
 this.em_calibre=create em_calibre
 this.st_encabe=create st_encabe
-this.Control[]={this.em_operacional,&
+this.Control[]={this.cb_codigo,&
+this.em_operacional,&
 this.st_10,&
 this.pb_grabar,&
 this.cbx_calibre,&
@@ -218,6 +223,7 @@ this.st_encabe}
 end on
 
 on w_cons_codigooperacional.destroy
+destroy(this.cb_codigo)
 destroy(this.em_operacional)
 destroy(this.st_10)
 destroy(this.pb_grabar)
@@ -362,12 +368,29 @@ pb_salir.width			=	li_Ancho
 pb_salir.height			=	li_Alto
 end event
 
+type cb_codigo from commandbutton within w_cons_codigooperacional
+integer x = 1810
+integer y = 492
+integer width = 937
+integer height = 112
+integer taborder = 70
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "Codigo Operacional"
+end type
+
+event clicked;em_operacional.Text =  f_CodigoOPeracional(uo_SelEspecie.Codigo, em_operacional.Text)
+end event
+
 type em_operacional from editmask within w_cons_codigooperacional
 integer x = 635
 integer y = 496
 integer width = 1138
 integer height = 84
-integer taborder = 40
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -375,10 +398,10 @@ fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Arial"
-long textcolor = 33554432
-boolean enabled = false
+long textcolor = 16777215
+long backcolor = 553648127
 textcase textcase = upper!
-borderstyle borderstyle = stylelowered!
+boolean displayonly = true
 maskdatatype maskdatatype = stringmask!
 string mask = "!!!!!!!!!!!!!!"
 end type
@@ -419,7 +442,7 @@ integer x = 4645
 integer y = 964
 integer width = 302
 integer height = 244
-integer taborder = 70
+integer taborder = 80
 integer textsize = -10
 integer weight = 700
 fontcharset fontcharset = ansi!
@@ -494,7 +517,7 @@ integer x = 3136
 integer y = 196
 integer width = 297
 integer height = 80
-integer taborder = 290
+integer taborder = 170
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -561,7 +584,7 @@ integer x = 3045
 integer y = 104
 integer width = 96
 integer height = 76
-integer taborder = 320
+integer taborder = 190
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -597,7 +620,7 @@ integer x = 3150
 integer y = 100
 integer width = 265
 integer height = 80
-integer taborder = 310
+integer taborder = 180
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -626,7 +649,7 @@ event destroy ( )
 integer x = 320
 integer y = 288
 integer height = 188
-integer taborder = 40
+integer taborder = 20
 boolean bringtotop = true
 end type
 
@@ -673,7 +696,7 @@ end type
 type uo_selproductor from uo_seleccion_productor within w_cons_codigooperacional
 integer x = 2743
 integer y = 292
-integer taborder = 50
+integer taborder = 40
 end type
 
 on uo_selproductor.destroy
@@ -685,7 +708,7 @@ integer x = 3840
 integer y = 192
 integer width = 434
 integer height = 92
-integer taborder = 110
+integer taborder = 140
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -897,7 +920,7 @@ event destroy ( )
 integer x = 1513
 integer y = 96
 integer height = 84
-integer taborder = 130
+integer taborder = 160
 boolean bringtotop = true
 end type
 
@@ -922,7 +945,7 @@ type uo_selvariedad from uo_seleccion_variedad within w_cons_codigooperacional
 event destroy ( )
 integer x = 1513
 integer y = 292
-integer taborder = 40
+integer taborder = 30
 boolean bringtotop = true
 end type
 
@@ -989,7 +1012,7 @@ event destroy ( )
 integer x = 320
 integer y = 196
 integer height = 84
-integer taborder = 30
+integer taborder = 10
 boolean bringtotop = true
 end type
 
@@ -1020,7 +1043,7 @@ event destroy ( )
 integer x = 320
 integer y = 96
 integer height = 84
-integer taborder = 120
+integer taborder = 150
 boolean bringtotop = true
 end type
 
@@ -1034,7 +1057,7 @@ integer x = 4640
 integer y = 696
 integer width = 302
 integer height = 244
-integer taborder = 60
+integer taborder = 70
 integer textsize = -10
 integer weight = 400
 fontcharset fontcharset = ansi!
@@ -1095,7 +1118,7 @@ integer x = 37
 integer y = 652
 integer width = 4549
 integer height = 1488
-integer taborder = 100
+integer taborder = 110
 string title = " Detalle de Movimiento Estaciones"
 string dataobject = "dw_cons_codigooperacional"
 boolean hscrollbar = true
@@ -1201,7 +1224,7 @@ integer x = 2743
 integer y = 100
 integer width = 297
 integer height = 84
-integer taborder = 100
+integer taborder = 120
 integer textsize = -10
 integer weight = 700
 fontcharset fontcharset = ansi!
@@ -1237,7 +1260,7 @@ integer x = 2743
 integer y = 196
 integer width = 297
 integer height = 84
-integer taborder = 100
+integer taborder = 130
 integer textsize = -10
 integer weight = 700
 fontcharset fontcharset = ansi!

@@ -75,16 +75,6 @@ m_4 m_4
 m_lineapacking m_lineapacking
 m_3 m_3
 end type
-type m_parametrosplanta from menu within m_aplicacion
-end type
-type m_planta from menu within m_parametrosplanta
-end type
-type m_0 from menu within m_parametrosplanta
-end type
-type m_parametrosplanta from menu within m_aplicacion
-m_planta m_planta
-m_0 m_0
-end type
 type m_-6 from menu within m_aplicacion
 end type
 type m_6 from menu within m_aplicacion
@@ -96,6 +86,32 @@ end type
 type m_cambiodeplanta from menu within m_aplicacion
 end type
 type m_cargatablas from menu within m_aplicacion
+end type
+type m_8 from menu within m_aplicacion
+end type
+type m_9 from menu within m_aplicacion
+end type
+type m_11 from menu within m_aplicacion
+end type
+type m_12 from menu within m_11
+end type
+type m_14 from menu within m_11
+end type
+type m_11 from menu within m_aplicacion
+m_12 m_12
+m_14 m_14
+end type
+type m_10 from menu within m_aplicacion
+end type
+type m_parametrosplanta from menu within m_aplicacion
+end type
+type m_planta from menu within m_parametrosplanta
+end type
+type m_0 from menu within m_parametrosplanta
+end type
+type m_parametrosplanta from menu within m_aplicacion
+m_planta m_planta
+m_0 m_0
 end type
 type m_37 from menu within m_aplicacion
 end type
@@ -118,13 +134,17 @@ m_correlativos m_correlativos
 m_-25 m_-25
 m_envases m_envases
 m_plantas m_plantas
-m_parametrosplanta m_parametrosplanta
 m_-6 m_-6
 m_6 m_6
 m_7 m_7
 m_usuariosporplanta m_usuariosporplanta
 m_cambiodeplanta m_cambiodeplanta
 m_cargatablas m_cargatablas
+m_8 m_8
+m_9 m_9
+m_11 m_11
+m_10 m_10
+m_parametrosplanta m_parametrosplanta
 m_37 m_37
 end type
 type m_recepcin from menu within m_movimientos
@@ -624,13 +644,17 @@ m_correlativos m_correlativos
 m_-25 m_-25
 m_envases m_envases
 m_plantas m_plantas
-m_parametrosplanta m_parametrosplanta
 m_-6 m_-6
 m_6 m_6
 m_7 m_7
 m_usuariosporplanta m_usuariosporplanta
 m_cambiodeplanta m_cambiodeplanta
 m_cargatablas m_cargatablas
+m_8 m_8
+m_9 m_9
+m_11 m_11
+m_10 m_10
+m_parametrosplanta m_parametrosplanta
 m_37 m_37
 end type
 
@@ -643,13 +667,17 @@ this.m_correlativos=create m_correlativos
 this.m_-25=create m_-25
 this.m_envases=create m_envases
 this.m_plantas=create m_plantas
-this.m_parametrosplanta=create m_parametrosplanta
 this.m_-6=create m_-6
 this.m_6=create m_6
 this.m_7=create m_7
 this.m_usuariosporplanta=create m_usuariosporplanta
 this.m_cambiodeplanta=create m_cambiodeplanta
 this.m_cargatablas=create m_cargatablas
+this.m_8=create m_8
+this.m_9=create m_9
+this.m_11=create m_11
+this.m_10=create m_10
+this.m_parametrosplanta=create m_parametrosplanta
 this.m_37=create m_37
 this.Item[UpperBound(this.Item)+1]=this.m_especievariedad
 this.Item[UpperBound(this.Item)+1]=this.m_19
@@ -658,13 +686,17 @@ this.Item[UpperBound(this.Item)+1]=this.m_correlativos
 this.Item[UpperBound(this.Item)+1]=this.m_-25
 this.Item[UpperBound(this.Item)+1]=this.m_envases
 this.Item[UpperBound(this.Item)+1]=this.m_plantas
-this.Item[UpperBound(this.Item)+1]=this.m_parametrosplanta
 this.Item[UpperBound(this.Item)+1]=this.m_-6
 this.Item[UpperBound(this.Item)+1]=this.m_6
 this.Item[UpperBound(this.Item)+1]=this.m_7
 this.Item[UpperBound(this.Item)+1]=this.m_usuariosporplanta
 this.Item[UpperBound(this.Item)+1]=this.m_cambiodeplanta
 this.Item[UpperBound(this.Item)+1]=this.m_cargatablas
+this.Item[UpperBound(this.Item)+1]=this.m_8
+this.Item[UpperBound(this.Item)+1]=this.m_9
+this.Item[UpperBound(this.Item)+1]=this.m_11
+this.Item[UpperBound(this.Item)+1]=this.m_10
+this.Item[UpperBound(this.Item)+1]=this.m_parametrosplanta
 this.Item[UpperBound(this.Item)+1]=this.m_37
 end on
 
@@ -677,13 +709,17 @@ destroy(this.m_correlativos)
 destroy(this.m_-25)
 destroy(this.m_envases)
 destroy(this.m_plantas)
-destroy(this.m_parametrosplanta)
 destroy(this.m_-6)
 destroy(this.m_6)
 destroy(this.m_7)
 destroy(this.m_usuariosporplanta)
 destroy(this.m_cambiodeplanta)
 destroy(this.m_cargatablas)
+destroy(this.m_8)
+destroy(this.m_9)
+destroy(this.m_11)
+destroy(this.m_10)
+destroy(this.m_parametrosplanta)
 destroy(this.m_37)
 end on
 
@@ -1671,7 +1707,9 @@ end on
 type m_1 from menu within m_correlativos
 end type
 
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+event clicked;SetPointer(HourGlass!)
+If Not AccesoPuntoCritico() Then Return
+
 OpenSheet(w_mant_mues_correlfolio, w_main, ii_columna, Original!)
 end event
 
@@ -1971,110 +2009,6 @@ on m_3.destroy
 call super::destroy
 end on
 
-type m_parametrosplanta from menu within m_aplicacion
-m_planta m_planta
-m_0 m_0
-end type
-
-on m_parametrosplanta.create
-call super::create
-this.text = "Parametros"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-this.m_planta=create m_planta
-this.m_0=create m_0
-this.Item[UpperBound(this.Item)+1]=this.m_planta
-this.Item[UpperBound(this.Item)+1]=this.m_0
-end on
-
-on m_parametrosplanta.destroy
-call super::destroy
-destroy(this.m_planta)
-destroy(this.m_0)
-end on
-
-type m_planta from menu within m_parametrosplanta
-end type
-
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
-
-gstr_us.OpcionActiva	=	This.ClassName()
-
-OpenSheet(w_mant_paramprodfgranel, w_main, ii_Columna, Original!)
-
-end event
-
-on m_planta.create
-call super::create
-this.text = "Planta"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_planta.destroy
-call super::destroy
-end on
-
-type m_0 from menu within m_parametrosplanta
-end type
-
-on m_0.create
-call super::create
-this.text = "Empresa"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_0.destroy
-call super::destroy
-end on
-
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
-
-gstr_us.OpcionActiva	=	This.ClassName()
-
-OpenSheet(w_mant_prod_parempresa, w_main, ii_Columna, Original!)
-end event
-
 type m_-6 from menu within m_aplicacion
 end type
 
@@ -2260,6 +2194,300 @@ this.bitmapgradient = true
 end on
 
 on m_cargatablas.destroy
+call super::destroy
+end on
+
+type m_8 from menu within m_aplicacion
+end type
+
+on m_8.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_8.destroy
+call super::destroy
+end on
+
+type m_9 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_codigooperacional, w_main, ii_columna, Original!)
+end event
+
+on m_9.create
+call super::create
+this.text = "Codigo Operacional"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_9.destroy
+call super::destroy
+end on
+
+type m_11 from menu within m_aplicacion
+m_12 m_12
+m_14 m_14
+end type
+
+on m_11.create
+call super::create
+this.text = "Timbres"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_12=create m_12
+this.m_14=create m_14
+this.Item[UpperBound(this.Item)+1]=this.m_12
+this.Item[UpperBound(this.Item)+1]=this.m_14
+end on
+
+on m_11.destroy
+call super::destroy
+destroy(this.m_12)
+destroy(this.m_14)
+end on
+
+type m_12 from menu within m_11
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_timbre_despacho, w_main, ii_columna, Original!)
+end event
+
+on m_12.create
+call super::create
+this.text = "Timbres Despacho"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_12.destroy
+call super::destroy
+end on
+
+type m_14 from menu within m_11
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_timbresag, w_main, ii_columna, Original!)
+end event
+
+on m_14.create
+call super::create
+this.text = "Timbres SAG"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_14.destroy
+call super::destroy
+end on
+
+type m_10 from menu within m_aplicacion
+end type
+
+on m_10.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_10.destroy
+call super::destroy
+end on
+
+type m_parametrosplanta from menu within m_aplicacion
+m_planta m_planta
+m_0 m_0
+end type
+
+on m_parametrosplanta.create
+call super::create
+this.text = "Parametros"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_planta=create m_planta
+this.m_0=create m_0
+this.Item[UpperBound(this.Item)+1]=this.m_planta
+this.Item[UpperBound(this.Item)+1]=this.m_0
+end on
+
+on m_parametrosplanta.destroy
+call super::destroy
+destroy(this.m_planta)
+destroy(this.m_0)
+end on
+
+type m_planta from menu within m_parametrosplanta
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_paramprodfgranel, w_main, ii_Columna, Original!)
+
+end event
+
+on m_planta.create
+call super::create
+this.text = "Planta"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_planta.destroy
+call super::destroy
+end on
+
+type m_0 from menu within m_parametrosplanta
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_prod_parempresa, w_main, ii_Columna, Original!)
+end event
+
+on m_0.create
+call super::create
+this.text = "Empresa"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_0.destroy
 call super::destroy
 end on
 

@@ -68,7 +68,6 @@ public function boolean existecalibres ()
 public function boolean existecondicion (integer as_valor)
 public function boolean existeplanta (integer as_valor)
 public function boolean existevariecalibre (integer as_valor)
-public subroutine buscavariedad ()
 public function boolean existepallet (string as_codigo)
 public subroutine habilitaencab (boolean habilita)
 public function boolean existevariedad (integer li_columna, integer cliente)
@@ -82,6 +81,7 @@ public function boolean wf_creacion_cajas ()
 public subroutine wf_cuentacajas ()
 public function boolean wf_existetipoembalaje (string as_codigo, boolean ab_captura)
 public subroutine wf_buscaenvase ()
+public subroutine wf_buscavariedad ()
 end prototypes
 
 event ue_imprimir;SetPointer(HourGlass!)
@@ -390,26 +390,6 @@ End If
 
 Return True
 End function
-
-public subroutine buscavariedad ();Str_busqueda	lstr_busq
-
-lstr_busq.argum[1]	=	String(dw_2.GetItemNumber(1, "espe_codigo"))
-lstr_busq.argum[2]	=	String(istr_mant.argumento[1])
-
-OpenWithParm(w_busc_variedades, lstr_busq)
-
-lstr_busq	= Message.PowerObjectParm
-
-If lstr_busq.argum[4] <> '' Then
-	istr_mant.argumento[4]	=	lstr_busq.argum[3]
-	istr_mant.argumento[5]	=	lstr_busq.argum[4]
-	
-	dw_2.setItem(1, "vari_codigo", Integer(lstr_busq.argum[3]))
-	dw_2.setItem(1, "vari_nombre", lstr_busq.argum[4])
-	dw_2.SetColumn("vari_codigo")
-	dw_2.SetFocus()
-End If
-End subroutine
 
 public function boolean existepallet (string as_codigo);Integer	li_cliente, li_cantid, li_planta, li_respuesta
 Long		ll_nropal
@@ -870,6 +850,26 @@ If lstr_busq.argum[2] <> '' Then
 End If
 end subroutine
 
+public subroutine wf_buscavariedad ();Str_busqueda	lstr_busq
+
+lstr_busq.argum[1]	=	String(dw_2.GetItemNumber(1, "espe_codigo"))
+lstr_busq.argum[2]	=	String(istr_mant.argumento[1])
+
+OpenWithParm(w_busc_variedades, lstr_busq)
+
+lstr_busq	= Message.PowerObjectParm
+
+If lstr_busq.argum[4] <> '' Then
+	istr_mant.argumento[4]	=	lstr_busq.argum[3]
+	istr_mant.argumento[5]	=	lstr_busq.argum[4]
+	
+	dw_2.setItem(1, "vari_codigo", Integer(lstr_busq.argum[3]))
+	dw_2.setItem(1, "vari_nombre", lstr_busq.argum[4])
+	dw_2.SetColumn("vari_codigo")
+	dw_2.SetFocus()
+End If
+end subroutine
+
 event open;/*
 		Argumentos					:		[1]	=	Código de Exportador
 												[2]	=	Numero de Pallet
@@ -1121,16 +1121,8 @@ DO
 					HabilitaEncab(False)
 					wf_CuentaCajas()
 					
-					//Marca Condiciones a folio
-					dw_2.Object.System[1] = iuo_System.of_Get(dw_1, 'S')
-					dw_2.Object.Mosca[1] = iuo_System.of_Get(dw_1, 'M')
-					dw_2.Object.Lobesia[1] = iuo_System.of_Get(dw_1, 'L')
-					dw_2.Object.Fumigar[1] = iuo_System.of_Get(dw_1, 'F')
-					dw_2.Object.Fosfinar[1] = iuo_System.of_Get(dw_1, 'P')
-					dw_2.Object.Ensayo[1] = iuo_System.of_Get(dw_1, 'E')
-					dw_2.Object.Lobesia_C[1] = iuo_System.of_Get(dw_1, 'C')
-					dw_2.Object.Guarda[1] = iuo_System.of_Get(dw_1, 'G')
-					dw_2.Object.FueraN[1] = iuo_System.of_Get(dw_1, 'H')
+					//Carga Codigo Operacional 
+					dw_2.Object.pafr_codope[1] = dw_1.Object.pafr_codope[1]
 				
 					If dw_2.GetItemStatus(1, 0, Primary!) = DataModIfied! Then
 						If dw_2.Update(True, False) = 1 Then
@@ -1319,7 +1311,6 @@ dw_2.Object.paen_fecpro[1]	=	Datetime(Today(), Now())
 
 For ll_Fila = 1 To dw_1.RowCount()
 	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModIfied! Then
-		
 		dw_1.Object.clie_codigo[ll_Fila]		=	dw_2.Object.clie_codigo[1]
 		dw_1.Object.plde_codigo[ll_Fila]		=	dw_2.Object.plde_codigo[1]
 		dw_1.Object.paen_numero[ll_Fila]	=	dw_2.Object.paen_numero[1]
@@ -1329,61 +1320,8 @@ For ll_Fila = 1 To dw_1.RowCount()
 		dw_1.Object.pafr_copack[ll_Fila]		=	li_Planta
 		dw_1.Object.pafr_secuen[ll_Fila]		=	ll_Fila//li_Secuencia	
 		li_Secuencia ++
-	End If
-	
-	If dw_2.Object.System[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'S')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'S')
-	End If
-	
-	If dw_2.Object.Mosca[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'M')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'M')
-	End If
-	
-	If dw_2.Object.Lobesia[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'L')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'L')
-	End If
-	
-	If dw_2.Object.fumigar[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'F')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'F')
-	End If
-	
-	If dw_2.Object.fosfinar[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'P')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'P')
-	End If
-	
-	If dw_2.Object.ensayo[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'E')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'E')
-	End If
-	
-	If dw_2.Object.Lobesia_C[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'C')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'C')
-	End If
-	
-	If dw_2.Object.Guarda[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'G')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'G')
-	End If
-	
-	If dw_2.Object.FueraN[1] = 1 Then 
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Add(dw_1.Object.pafr_codope[ll_Fila], 'H')
-	Else
-		dw_1.Object.pafr_codope[ll_Fila] = iuo_System.of_Delete(dw_1.Object.pafr_codope[ll_Fila], 'H')
 	End If	
+	dw_1.Object.pafr_codope[ll_Fila] = dw_2.Object.pafr_codope[1]
 Next
 
 end event
@@ -1807,16 +1745,17 @@ end event
 event dw_2::doubleclicked;//
 End event
 
-event dw_2::buttonclicked;call super::buttonclicked;str_mant lstr_mant
-
-Choose Case dwo.name
+event dw_2::buttonclicked;call super::buttonclicked;Choose Case dwo.name
 		
 	Case "b_buscavariedad"
-		If dw_2.Object.paen_pmixto[1]	=	1 AND Integer(dw_2.Object.paen_pmixto.Protect)	=	1 Then Return
-		buscavariedad()
+		If This.Object.paen_pmixto[1]	=	1 AND Integer(This.Object.paen_pmixto.Protect)	=	1 Then Return
+		wf_BuscaVariedad()
 
 	Case "b_buscaenvase"
-		wf_buscaenvase()
+		wf_BuscaEnvase()
+		
+	Case 'b_codigo'
+		This.Object.pafr_codope[1] =  f_CodigoOPeracional(This.Object.espe_codigo[1], This.Object.pafr_codope[1])
 		
 End Choose
 end event

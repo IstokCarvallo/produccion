@@ -37,13 +37,17 @@ type em_hasta from editmask within w_info_valida_facturacion
 end type
 type cbx_consolida from checkbox within w_info_valida_facturacion
 end type
+type uo_selespecie from uo_seleccion_especie within w_info_valida_facturacion
+end type
+type st_7 from statictext within w_info_valida_facturacion
+end type
 end forward
 
 global type w_info_valida_facturacion from w_para_informes
 integer x = 14
 integer y = 32
 integer width = 2789
-integer height = 1608
+integer height = 1848
 string title = "Facturación Mensual de Productores"
 boolean minbox = false
 boolean maxbox = false
@@ -67,6 +71,8 @@ em_desde em_desde
 st_11 st_11
 em_hasta em_hasta
 cbx_consolida cbx_consolida
+uo_selespecie uo_selespecie
+st_7 st_7
 end type
 global w_info_valida_facturacion w_info_valida_facturacion
 
@@ -99,6 +105,8 @@ this.em_desde=create em_desde
 this.st_11=create st_11
 this.em_hasta=create em_hasta
 this.cbx_consolida=create cbx_consolida
+this.uo_selespecie=create uo_selespecie
+this.st_7=create st_7
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_4
 this.Control[iCurrent+2]=this.st_1
@@ -117,6 +125,8 @@ this.Control[iCurrent+14]=this.em_desde
 this.Control[iCurrent+15]=this.st_11
 this.Control[iCurrent+16]=this.em_hasta
 this.Control[iCurrent+17]=this.cbx_consolida
+this.Control[iCurrent+18]=this.uo_selespecie
+this.Control[iCurrent+19]=this.st_7
 end on
 
 on w_info_valida_facturacion.destroy
@@ -138,6 +148,8 @@ destroy(this.em_desde)
 destroy(this.st_11)
 destroy(this.em_hasta)
 destroy(this.cbx_consolida)
+destroy(this.uo_selespecie)
+destroy(this.st_7)
 end on
 
 event open;call super::open;Boolean lb_Cerrar = False
@@ -145,6 +157,7 @@ event open;call super::open;Boolean lb_Cerrar = False
 If isNull(uo_SelCliente.Codigo) Then lb_Cerrar = True
 If isNull(uo_SelPlanta.Codigo) Then lb_Cerrar = True
 If isNull(uo_SelProductor.Codigo) Then lb_Cerrar = True
+If isNull(uo_SelEspecie.Codigo) Then lb_Cerrar = True
 
 If lb_Cerrar Then
 	Close(This)
@@ -152,6 +165,7 @@ Else
 	uo_SelCliente.Seleccion(False, False)
 	uo_SelPlanta.Seleccion(False, False)
 	uo_SelProductor.Seleccion(True, True)
+	uo_SelEspecie.Seleccion(True, True)
 	
 	iuo_TC	=	Create uo_TipoCambio	
 	
@@ -200,29 +214,27 @@ event pb_acepta::clicked;SetPointer(Arrow!)
 Integer	ll_Filas, li_Consolida = 0
 
 DataWindowChild	ldwc_planta
-
 istr_info.titulo	= 'VALIDACION FACTURACION MENSUAL DE PRODUCTORES'
-
 If cbx_consolida.Checked Then li_Consolida = 1
 
 OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_validaproforma"
 vinf.dw_1.SetTransObject(sqlca)
 
-ll_Filas	=	vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_fecha.Text), -1, Datetime(em_desde.Text), Datetime(em_hasta.text), &
-					Dec(em_cambio.Text), uo_SelProductor.Codigo, li_Consolida)
+ll_Filas	=	vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_fecha.Text), uo_SelEspecie.Codigo, &
+					Datetime(em_desde.Text), Datetime(em_hasta.text),  Dec(em_cambio.Text), uo_SelProductor.Codigo, li_Consolida)
 
-IF ll_Filas = -1 THEN
+If ll_Filas = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
 
-ELSEIF ll_Filas = 0 THEN
+ElseIf ll_Filas = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)				
 end event
@@ -265,7 +277,6 @@ fontfamily fontfamily = swiss!
 string facename = "Arial"
 long textcolor = 16777215
 long backcolor = 553648127
-boolean enabled = false
 string text = "Planta"
 boolean focusrectangle = false
 end type
@@ -274,7 +285,7 @@ type st_5 from statictext within w_info_valida_facturacion
 integer x = 251
 integer y = 1152
 integer width = 1897
-integer height = 308
+integer height = 572
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -541,5 +552,35 @@ long backcolor = 553648127
 string text = "Consolida Fecha"
 boolean checked = true
 boolean lefttext = true
+end type
+
+type uo_selespecie from uo_seleccion_especie within w_info_valida_facturacion
+integer x = 855
+integer y = 1500
+integer taborder = 80
+boolean bringtotop = true
+end type
+
+on uo_selespecie.destroy
+call uo_seleccion_especie::destroy
+end on
+
+type st_7 from statictext within w_info_valida_facturacion
+integer x = 334
+integer y = 1588
+integer width = 485
+integer height = 64
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Especie"
+borderstyle borderstyle = styleraised!
+boolean focusrectangle = false
 end type
 

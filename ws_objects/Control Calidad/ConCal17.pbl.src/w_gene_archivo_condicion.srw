@@ -108,6 +108,7 @@ integer x = 1481
 end type
 
 type p_logo from w_para_informes`p_logo within w_gene_archivo_condicion
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_gene_archivo_condicion

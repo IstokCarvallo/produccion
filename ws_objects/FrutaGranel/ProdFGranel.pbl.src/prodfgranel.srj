@@ -285,6 +285,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_camion,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_spro_sutuaciones,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mant_spro_tipomovtofruta,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_paramprodfgranel,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_gene_archivotarjas,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,paramtemporada,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_lotes,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_palletencab,d
@@ -390,6 +391,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_seleccion_tarjas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_pallets_trasvasije,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_cajasprod_imprime_elimina,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dw_busq_mues_doctoprocesopack,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,w_info_adhesivos_embalaje,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_selecciona_lado,d
@@ -468,6 +470,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_exismovtodet
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_exportadores,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,w_mant_deta_spro_pesajepallets,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran05.pbl,w_busc_detalle_lotesvaciados,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_sele_codigooperacional,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,w_mant_deta_movtoenvadeta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mues_movtoenvadeta_desp,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,w_info_estiba_camarasbins,w
@@ -531,6 +534,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mant_movtofrutagr
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran09.pbl,dw_mant_movtoenvaenca_origen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran09.pbl,dw_pesaje_romana_rec_interplanta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_tipopallet,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_busc_palletencab,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,dw_gene_spro_lotesduchados,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_spro_danoydefectosre,d
@@ -624,6 +628,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mant_codigoerror,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_conectividadgranel,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_spro_paramplantadeta,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_pallet_gr,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_sele_codigooperacional,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran04.pbl,dw_mant_spro_lotes_clasificados_comercia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_info_adhesivos_genericos,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_cajas_aprobadas,d
@@ -1164,6 +1169,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_tipoerror,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_prodconectividad,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mant_movtoenvaenca_emision,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_asignaggn,f
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_gene_archivopesotarjas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_calibres_etiq,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_busc_cuartel,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mant_bitaproducduchadet,d

@@ -358,7 +358,7 @@ ElseIf uo_SelEspecies.Codigo = 82  Then
 	vinf.dw_1.Object.DataWindow.Zoom = 84
 ElseIf uo_SelEspecies.Codigo = 23  Then
 	vinf.dw_1.DataObject = "dw_info_planillarecep_ciruelas"
-	vinf.dw_1.Object.DataWindow.Zoom = 96
+	vinf.dw_1.Object.DataWindow.Zoom = 86
 Else
 	MessageBox( "No Existe información", "No existe información para Especie selecionada.", StopSign!, Ok!)
 End If

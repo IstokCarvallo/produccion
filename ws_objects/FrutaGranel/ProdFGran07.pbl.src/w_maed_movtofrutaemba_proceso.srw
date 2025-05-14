@@ -31,33 +31,33 @@ global w_maed_movtofrutaemba_proceso w_maed_movtofrutaemba_proceso
 
 type variables
 DataWindowChild	idwc_exportador, idwc_planta, idwc_tipofrio, idwc_periodofrio, &
-                  idwc_especie, idwc_variedad, idwc_tipoenvase, idwc_envase, &
+                  		idwc_especie, idwc_variedad, idwc_tipoenvase, idwc_envase, &
 						idwc_categoria, idwc_etiqueta, idwc_destino, idwc_recibidor, &
 						idwc_tipopallet, idwc_calibre, idwc_camara, idwc_cliente, idwc_predio, idwc_varirot
 
 str_envase						istr_envase
 str_calibreenvase				istr_calibre
 
-uo_plantadesp					iuo_Planta
-uo_exportadores				iuo_exportadores
-uo_variedades					iuo_variedades
-uo_categorias					iuo_categorias
-uo_etiquetas					iuo_etiquetas
-uo_destinos						iuo_destinos
-uo_recibidores					iuo_recibidores
-uo_tipopallet					iuo_tipopallet
-uo_productores					iuo_productores
-uo_lotesfrutagranel			iuo_Lote
-uo_spro_ordenproceso		iuo_spro_ordenproceso
-uo_spro_palletencab			iuo_spro_palletencab
+uo_plantadesp						iuo_Planta
+uo_exportadores					iuo_exportadores
+uo_variedades						iuo_variedades
+uo_categorias						iuo_categorias
+uo_etiquetas						iuo_etiquetas
+uo_destinos							iuo_destinos
+uo_recibidores						iuo_recibidores
+uo_tipopallet						iuo_tipopallet
+uo_productores						iuo_productores
+uo_lotesfrutagranel				iuo_Lote
+uo_spro_ordenproceso			iuo_spro_ordenproceso
+uo_spro_palletencab				iuo_spro_palletencab
 uo_spro_movtofrutaembaenca	iuo_spro_movtofrutaembaenca
-uo_camarasfrigo				iuo_camara
-uo_fechaMovto					iuo_FechaMovto
-uo_AnalizaPallet				iuo_pallet
-uo_valida_codigopallet		iuo_copa
+uo_camarasfrigo					iuo_camara
+uo_fechaMovto						iuo_FechaMovto
+uo_AnalizaPallet					iuo_pallet
+uo_valida_codigopallet			iuo_copa
 
 Integer							ii_envacodigo, ii_envatipoen, ii_categoria
-String							is_ultimacol, is_embalaje, is_embacodigo, is_nomcuartel
+String								is_ultimacol, is_embalaje, is_embacodigo, is_nomcuartel
 Boolean							ib_Modifica, ib_AutoCommit, lb_existe = FALSE
 
 end variables
@@ -99,22 +99,20 @@ DO
 	dw_3.SetRedraw(False)
 	dw_3.Reset()
 
-	IF dw_3.Retrieve(Integer(istr_Mant.Argumento[2]), &
-						  Long(istr_Mant.Argumento[7]),&
-						  Integer(istr_Mant.Argumento[1])) =  -1 THEN
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
-	ELSE
-		
+	If dw_3.Retrieve(Integer(istr_Mant.Argumento[2]),  Long(istr_Mant.Argumento[7]),&
+						  Integer(istr_Mant.Argumento[1])) =  -1 Then
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.",  Information!, RetryCancel!)
+	Else
 		dw_3.GetChild("enva_codigo", idwc_envase)
 		idwc_envase.SetTransObject(SqlCa)
-		IF idwc_envase.Retrieve(dw_3.Object.enva_tipoen[1]) = 0 THEN
+		
+		If idwc_envase.Retrieve(dw_3.Object.enva_tipoen[1]) = 0 Then
 			MessageBox("Atención", "Falta Registrar Envase")
 			idwc_envase.InsertRow(0)
-		ELSE
+		Else
 			idwc_envase.SetSort("enva_nombre A")
 			idwc_envase.Sort()
-		END IF
+		End If
 		
 		dw_4.GetChild("pafr_huert1", idwc_predio)
 		idwc_predio.SetTransObject(SqlCa)
@@ -124,24 +122,18 @@ DO
 		istr_Mant.Argumento[10]	=	String(dw_3.Object.enva_codigo[1])
 
 		DO
-			ll_Fila_d	=	dw_4.Retrieve( Integer(istr_Mant.Argumento[2]), &
-													Long(istr_Mant.Argumento[7]),&
-													Integer(istr_Mant.Argumento[1]))
+			ll_Fila_d	=	dw_4.Retrieve( Integer(istr_Mant.Argumento[2]),  Long(istr_Mant.Argumento[7]), Integer(istr_Mant.Argumento[1]))
 								  
-			IF ll_Fila_d = -1 THEN
-				respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-												Information!, RetryCancel!)
-			ELSE
-				IF ll_Fila_d > 0 THEN
-				
+			If ll_Fila_d = -1 Then
+				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
+			Else
+				If ll_Fila_d > 0 Then
 					HabilitaPallet(False)
-					
-					IF dw_3.Object.paen_estado[1] = 2 THEN
-						lb_Habilita	=	False
-					END IF
-				ELSE
+					dw_3.Object.pafr_codope[1] = dw_4.Object.pafr_codope[1]
+					If dw_3.Object.paen_estado[1] = 2 Then lb_Habilita	=	False
+				Else
 					lb_Habilita = True
-				END IF
+				End If
 				
 				ls_embalaje	=	dw_4.Object.emba_codigo[1]
 				idwc_tipopallet.Retrieve(Integer(istr_Mant.Argumento[1]),ls_embalaje)
@@ -150,7 +142,7 @@ DO
 									
 				dw_4.Enabled			=	lb_Habilita
 				pb_eliminar.Enabled	=	lb_Habilita	
-				pb_grabar.Enabled		=	lb_Habilita
+				pb_grabar.Enabled	=	lb_Habilita
 				pb_imprimir.Enabled	=	True	
 				pb_ins_det.Enabled	=	lb_Habilita	
 				pb_eli_det.Enabled	=	lb_Habilita	
@@ -173,16 +165,16 @@ DO
 				dw_1.SetRow(1)
 				dw_1.SelectRow(1,True)
 				dw_1.SetFocus()
-			END IF
+			End If
 		LOOP WHILE respuesta = 1
 
-		IF respuesta = 2 THEN Close(This)
-	END IF
+		If respuesta = 2 Then Close(This)
+	End If
 	dw_2.SetRedraw(True)
 	dw_3.SetRedraw(True)
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN Close(This)
+If respuesta = 2 Then Close(This)
 end event
 
 public subroutine buscaproductor ();Str_Busqueda	lstr_Busq
@@ -336,26 +328,27 @@ Boolean		lb_estado = True
 dw_2.AcceptText()
 dw_3.AcceptText()
 
-IF IsNull(dw_2.Object.mfee_fecmov[1]) OR dw_2.Object.mfee_fecmov[1] = ld_fecha OR &
-	IsNull(dw_2.Object.mfee_tipdoc[1]) OR dw_2.Object.mfee_tipdoc[1] = 0 OR &
-	IsNull(dw_2.Object.mfee_docrel[1]) OR dw_2.Object.mfee_docrel[1] = 0 OR &
-	IsNull(dw_3.Object.vari_codigo[1]) OR dw_3.Object.vari_codigo[1] = 0 OR &
-	IsNull(dw_3.Object.cate_codigo[1]) OR dw_3.Object.cate_codigo[1] = 0 OR &
-	IsNull(dw_3.Object.enva_tipoen[1]) OR dw_3.Object.enva_tipoen[1] = 0 OR &
-	IsNull(dw_3.Object.enva_codigo[1]) OR dw_3.Object.enva_codigo[1] = 0 OR &
-	IsNull(dw_3.Object.copa_codigo[1]) OR dw_3.Object.copa_codigo[1] = 0 OR &
-	IsNull(dw_3.Object.tpen_codigo[1]) OR dw_3.Object.tpen_codigo[1] = "" OR &
-	IsNull(dw_3.Object.etiq_codigo[1]) OR dw_3.Object.etiq_codigo[1] = 0 OR &
-	IsNull(dw_3.Object.paen_feccon[1]) OR dw_3.Object.paen_feccon[1] = ld_fecha OR &
-	IsNull(dw_3.Object.paen_altura[1]) OR dw_3.Object.paen_altura[1] = 0 OR &
-	IsNull(dw_3.Object.cama_codigo[1]) OR dw_3.Object.paen_estado[1] = 2 THEN
+If IsNull(dw_2.Object.mfee_fecmov[1]) Or dw_2.Object.mfee_fecmov[1] = ld_fecha Or &
+	IsNull(dw_2.Object.mfee_tipdoc[1]) Or dw_2.Object.mfee_tipdoc[1] = 0 Or &
+	IsNull(dw_2.Object.mfee_docrel[1]) Or dw_2.Object.mfee_docrel[1] = 0 Or &
+	IsNull(dw_3.Object.vari_codigo[1]) Or dw_3.Object.vari_codigo[1] = 0 Or &
+	IsNull(dw_3.Object.cate_codigo[1]) Or dw_3.Object.cate_codigo[1] = 0 Or &
+	IsNull(dw_3.Object.enva_tipoen[1]) Or dw_3.Object.enva_tipoen[1] = 0 Or &
+	IsNull(dw_3.Object.enva_codigo[1]) Or dw_3.Object.enva_codigo[1] = 0 Or &
+	IsNull(dw_3.Object.copa_codigo[1]) Or dw_3.Object.copa_codigo[1] = 0 Or &
+	IsNull(dw_3.Object.tpen_codigo[1]) Or dw_3.Object.tpen_codigo[1] = "" Or &
+	IsNull(dw_3.Object.etiq_codigo[1]) Or dw_3.Object.etiq_codigo[1] = 0 Or &
+	IsNull(dw_3.Object.paen_feccon[1]) Or dw_3.Object.paen_feccon[1] = ld_fecha Or &
+	IsNull(dw_3.Object.paen_fecemb[1]) Or dw_3.Object.paen_fecemb[1] = ld_fecha Or &
+	IsNull(dw_3.Object.paen_altura[1]) Or dw_3.Object.paen_altura[1] = 0 Or &
+	IsNull(dw_3.Object.cama_codigo[1]) Or dw_3.Object.paen_estado[1] = 2 Then
 	lb_estado = False
 
-ELSEIF dw_3.Object.paen_tipopa[1] = 1 AND &
-	IsNull(dw_3.Object.tpen_codigo[1]) OR dw_3.Object.tpen_codigo[1] = '' THEN
+ElseIf dw_3.Object.paen_tipopa[1] = 1 And &
+	IsNull(dw_3.Object.tpen_codigo[1]) Or dw_3.Object.tpen_codigo[1] = '' Then
 	lb_estado = False
 
-END IF
+End If
 
 pb_ins_det.Enabled = lb_estado
 end subroutine
@@ -1001,20 +994,21 @@ SELECT	emba_nombre, enva_tipoen, enva_codigo, enva_codigo, enva_tipoen
 	WHERE emba_codigo	= :as_embacodigo
 	AND 	clie_codigo = :li_clie_codigo;
 
-IF SqlCa.SQLCode = -1 THEN
+If SqlCa.SQLCode = -1 Then
 	F_errorbasedatos(sqlca,"Lectura tabla Embalajes")
-	RETURN False
-ELSEIF sqlca.SQLCode = 100 THEN
+	Return False
+ElseIf sqlca.SQLCode = 100 Then
 	MessageBox("Atención", "Código de Embalaje (" + ls_codigo + &
 					"), no ha sido creado en tabla respectiva.~r~r" + &
 					"Ingrese o seleccione otro Código.")
-	RETURN False
-END IF
+	Return False
+End If
 
 is_embalaje	=	ls_nombre
 ii_envacodigo = li_envacodigo
 ii_envatipoen = li_envatipoen
-RETURN True
+
+Return True
 end function
 
 public subroutine buscacuartel ();Str_Busqueda	lstr_Busq
@@ -1334,26 +1328,18 @@ event ue_recuperadatos;Long	ll_fila_d, ll_fila_e, respuesta
 DO
 	dw_2.SetRedraw(False)
 	//dw_2.Reset()
-   dw_5.Reset()
+	dw_5.Reset()
 	dw_6.Reset()
 	
-	IF dw_2.Retrieve(Integer(istr_Mant.Argumento[2]), &
-						  Integer(istr_Mant.Argumento[3]), &
-						  Long(istr_Mant.Argumento[4]),&
-						  Integer(istr_Mant.Argumento[1])) = -1 OR &
-		dw_5.Retrieve(Integer(istr_Mant.Argumento[2]), &
-						  Integer(istr_Mant.Argumento[3]), &
-						  Long(istr_Mant.Argumento[4]),&
-						  Integer(istr_Mant.Argumento[1])) = -1 OR &
-		dw_6.Retrieve(Integer(istr_Mant.Argumento[2]), &
-						  Integer(istr_Mant.Argumento[3]), &
-						  Long(istr_Mant.Argumento[4]),&
-						  Integer(istr_Mant.Argumento[1])) = -1 THEN 
+	If dw_2.Retrieve(Integer(istr_Mant.Argumento[2]), Integer(istr_Mant.Argumento[3]), &
+						  Long(istr_Mant.Argumento[4]), Integer(istr_Mant.Argumento[1])) = -1 OR &
+		dw_5.Retrieve(Integer(istr_Mant.Argumento[2]),  Integer(istr_Mant.Argumento[3]), &
+						  Long(istr_Mant.Argumento[4]), Integer(istr_Mant.Argumento[1])) = -1 OR &
+		dw_6.Retrieve(Integer(istr_Mant.Argumento[2]), Integer(istr_Mant.Argumento[3]), &
+						  Long(istr_Mant.Argumento[4]), Integer(istr_Mant.Argumento[1])) = -1 Then 
 						  
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
-	ELSE
-
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.",  Information!, RetryCancel!)
+	Else
 		istr_Mant.Argumento[8]	=	String(dw_2.Object.espe_codigo[1])
 		
 		dw_3.GetChild("vari_codigo", idwc_variedad)
@@ -1362,27 +1348,23 @@ DO
 		idwc_variedad.SetSort("vari_nombre A")
 		idwc_variedad.Sort()
 		DO
-			IF dw_1.Retrieve(Integer(istr_Mant.Argumento[2]), &
-								  Integer(istr_Mant.Argumento[3]), &
-								  Long(istr_Mant.Argumento[4]),&
-						        Integer(istr_Mant.Argumento[1])) = -1 THEN
-				respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-												Information!, RetryCancel!)
-			ELSE
-
+			If dw_1.Retrieve(Integer(istr_Mant.Argumento[2]), Integer(istr_Mant.Argumento[3]), &
+								  Long(istr_Mant.Argumento[4]), Integer(istr_Mant.Argumento[1])) = -1 Then
+				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
+			Else
 				pb_imprimir.Enabled	=	True
-				IF dw_4.RowCount() > 0 THEN
+				If dw_4.RowCount() > 0 Then
 				  	pb_eliminar.Enabled	=	True
-				  	pb_grabar.Enabled		=	True
+				  	pb_grabar.Enabled	=	True				
 				  
-				 	IF iuo_spro_ordenproceso.Estado < 4 THEN
+				 	If iuo_spro_ordenproceso.Estado < 4 Then
 						pb_ins_det.Enabled		=	True
 					  	pb_eli_det.Enabled		=	True
-					ELSE
+					Else
 						pb_ins_det.Enabled		=	False
 					  	pb_eli_det.Enabled		=	False
-					END IF
-			   END IF  
+					End If
+			   End If  
 				
 				HabilitaEncab(False)
 								
@@ -1390,17 +1372,17 @@ DO
 				dw_1.SelectRow(1,True)
 				
 				dw_3.SetColumn("paen_numero")
-				dw_3.SetFocus()
+				dw_3.SetFocus()				
 //				this.TriggerEvent("ue_recuperapallet")
-			END IF
+			End If
 		LOOP WHILE respuesta = 1
 
-		IF respuesta = 2 THEN Close(This)
-	END IF
+		If respuesta = 2 Then Close(This)
+	End If
 	dw_2.SetRedraw(True)
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN Close(This)
+If respuesta = 2 Then Close(This)
 end event
 
 event ue_nuevo;Long		ll_modif1, ll_modif2
@@ -1683,15 +1665,11 @@ If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! AND NOT gstr_paramplanta.pa
 
 	dw_2.Object.mfee_numero[1]	=	ll_NumeroMovto
 ElseIf gstr_paramplanta.packing Then
-	
 	dw_2.Object.mfee_numero[1]	=	dw_2.Object.mfee_docrel[1]
-	
 End If
 
 istr_Mant.Argumento[4]	=	String(dw_2.Object.mfee_numero[1])
-
 istr_Mant.Argumento[7]	=	String(dw_3.Object.paen_numero[1])
-
 ll_NumeroPallet			=	Long(istr_Mant.Argumento[7])
 
 dw_3.Object.frio_tipofr[1]	=	dw_2.Object.frio_tipofr[1]
@@ -1708,7 +1686,6 @@ luo_variedad	=	Create uo_variedades
 
 FOR ll_Fila = 1 TO dw_4.RowCount()
 	dw_4.Object.pafr_calibr[ll_Fila]	=	dw_4.Object.pafr_calibr[ll_Fila]//Mid(dw_4.Object.pafr_calibr[ll_Fila] + "   ", 1, 3)
-
 	If dw_4.GetItemStatus(ll_Fila, 0, Primary!) = NewModIfied! Then
 		
 //		luo_variedad.Existe(dw_2.Object.espe_codigo[1], dw_3.Object.vari_codigo[1], False, sqlca)
@@ -1760,9 +1737,10 @@ End If
 Integer li_cliecod
 li_cliecod 		= dw_2.GetItemNumber(dw_2.GetRow(), "Clie_codigo")
 
-FOR li_i = 1 to dw_4.RowCount()
+For li_i = 1 To dw_4.RowCount()
 	dw_4.Object.Clie_codigo[li_i] = li_cliecod
-NEXT
+	dw_4.Object.pafr_codope[li_i] = dw_3.Object.pafr_codope[dw_3.GetRow()]
+Next
 
 If li_cliecod = GI_codExport Then
 	li_expocodigo = buscaexportador()
@@ -2536,23 +2514,22 @@ SetNull(ls_Null)
 
 ls_Columna = dwo.name
 
-CHOOSE CASE ls_Columna
-	CASE "emba_codigo"
-		IF Not cargaembalaje(data) THEN
-			
-			THIS.object.Emba_codigo[row] = ls_null
-			THIS.SetColumn("emba_codigo")
-			THIS.SetFocus()			
-		ELSE			
-			THIS.Object.enva_tipoen[row] = ii_envatipoen
+Choose Case ls_Columna
+	Case "emba_codigo"
+		If Not CargaEmbalaje(data) Then
+			This.object.Emba_codigo[row] = ls_null
+			This.SetColumn("emba_codigo")
+			This.SetFocus()			
+		Else			
+			This.Object.enva_tipoen[row] = ii_envatipoen
 			This.GetChild("enva_codigo", idwc_envase)
 			idwc_envase.SetTransObject(SqlCa)
 			idwc_envase.Retrieve(ii_envatipoen)
 			istr_Mant.Argumento[9] = STRING(ii_envatipoen)
 			
-			THIS.Object.enva_codigo[row] = ii_envacodigo
-			THIS.SetColumn("paen_tipopa")
-			THIS.SetFocus()
+			This.Object.enva_codigo[row] = ii_envacodigo
+			This.SetColumn("paen_tipopa")
+			This.SetFocus()
 			istr_Mant.Argumento[10] = STRING(ii_envacodigo)
 
 			This.SetItem(1, "tpen_codigo", ls_Null)
@@ -2561,50 +2538,50 @@ CHOOSE CASE ls_Columna
 			idwc_tipopallet.SetTransObject(SqlCa)
 		 	idwc_tipopallet.Retrieve(Integer(istr_Mant.Argumento[1]),Data)
 			is_embacodigo	=	data
-		END IF
+		End If
 		
-	CASE "paen_numero"
+	Case "paen_numero"
 		pb_eli_det.enabled = FALSE
 		pb_ins_det.enabled = FALSE
-		IF isnull(dw_2.Object.mfee_docrel[1]) THEN
+		If isnull(dw_2.Object.mfee_docrel[1]) Then
 			MessageBox("Atención","Necesita Ingresar un movimiento o una Orden de Proceso.")
         	This.SetItem(1, ls_Columna, long(ls_Null))
-			RETURN 1	
-		ELSE	
-			IF iuo_spro_palletencab.Existe(Integer(istr_Mant.Argumento[1]), &
+			Return 1	
+		Else	
+			If iuo_spro_palletencab.Existe(Integer(istr_Mant.Argumento[1]), &
 													 Integer(istr_Mant.Argumento[2]), &
-													 Long(Data),False,SqlCa) THEN
+													 Long(Data),False,SqlCa) Then
 				
-					IF iuo_spro_palletencab.especie	= dw_2.Object.espe_codigo[1] THEN
+					If iuo_spro_palletencab.especie	= dw_2.Object.espe_codigo[1] Then
 						istr_Mant.Argumento[7]	=	Data
 						Parent.TriggerEvent("ue_recuperapallet")
-						IF dw_4.RowCount() > 0 THEN
+						If dw_4.RowCount() > 0 Then
 							dw_3.Object.prod_codrot[1] = dw_4.Object.prod_codrot[1]
-							IF iuo_productores.Existe(dw_4.Object.prod_codrot[1],False,SqlCa) THEN
+							If iuo_productores.Existe(dw_4.Object.prod_codrot[1],False,SqlCa) Then
 								This.SetItem(1, "prod_nomrot", iuo_productores.Nombre)
-							END IF
-						ELSE
+							End If
+						Else
 						dw_3.Object.prod_codrot[1] = iuo_spro_ordenproceso.Productor
-						IF iuo_productores.Existe(iuo_spro_ordenproceso.Productor,False,SqlCa) THEN
+						If iuo_productores.Existe(iuo_spro_ordenproceso.Productor,False,SqlCa) Then
 							This.SetItem(1, "prod_nomrot", iuo_productores.Nombre)
-						END IF
-						END IF	
+						End If
+						End If	
 						lb_existe = TRUE
 						
-						IF iuo_spro_ordenproceso.Estado < 4 THEN
+						If iuo_spro_ordenproceso.Estado < 4 Then
 							pb_ins_det.Enabled		=	True
 							pb_eli_det.Enabled		=	True
-						ELSE
+						Else
 							pb_ins_det.Enabled		=	False
 							pb_eli_det.Enabled		=	False
-						END IF
-					ELSE
+						End If
+					Else
 						lb_existe = FALSE
 						MessageBox("Error de Datos","El pallet ingresado pertenece a otra especie.")
-						this.SetItem(1,"paen_numero",long(ls_Null))
+						This.SetItem(1,"paen_numero",long(ls_Null))
 						Return 1
-					END IF
-			ELSE
+					End If
+			Else
 				lb_existe = FALSE
 				istr_Mant.Argumento[7]	=	Data
 				dw_4.Reset()
@@ -2617,65 +2594,65 @@ CHOOSE CASE ls_Columna
 				
 				dw_3.GetChild("vari_codigo", idwc_variedad)
 				idwc_variedad.SetTransObject(sqlca)
-				IF idwc_variedad.Retrieve(dw_2.Object.espe_codigo[1]) = 0 THEN
+				If idwc_variedad.Retrieve(dw_2.Object.espe_codigo[1]) = 0 Then
 					MessageBox("Atención","Falta Registrar Variedades")
 				idwc_variedad.InsertRow(0)
-				ELSE
+				Else
 					idwc_variedad.SetSort("vari_nombre A")
 					idwc_variedad.Sort()
-				END IF
+				End If
 				
 				dw_3.Object.espe_codigo[1] 	=	dw_2.Object.espe_codigo[1]
 				
-				IF iuo_productores.Existe(iuo_spro_ordenproceso.Productor,False,SqlCa) THEN
+				If iuo_productores.Existe(iuo_spro_ordenproceso.Productor,False,SqlCa) Then
 					This.SetItem(1, "prod_nomrot", iuo_productores.Nombre)
-				END IF
-			END IF
-		END IF
+				End If
+			End If
+		End If
 		
-	CASE "paen_feccon"
+	Case "paen_feccon"
 		ld_fechapru = datetime(dw_3.Object.paen_feccon[row])
-		IF isnull(data) THEN
+		If isnull(data) Then
 			MessageBox("Atención","Ingrese una fecha valida.")
 			This.SetItem(row, ls_Columna, ld_Fechapru)
 			Return 1
-		END IF	
+		End If	
 		
-		IF Date(Mid(data,1,10)) = ld_fecha THEN
+		If Date(Mid(data,1,10)) = ld_fecha Then
 			MessageBox("Atención","Ingrese una fecha valida.")
 			This.SetItem(row, ls_Columna, ld_Fechapru)
 			Return 1
-		ELSE
+		Else
 			ldt_Fecha	=	DateTime(Date(Mid(data,1,10)))
-			IF NOT iuo_FechaMovto.Valida_FechaMovto(Date(ldt_Fecha)) THEN
+			If Not iuo_FechaMovto.Valida_FechaMovto(Date(ldt_Fecha)) Then
 				This.SetItem(row, ls_Columna, ld_Fechapru)
 				This.SetFocus()
-				RETURN 1
-			END IF
+				Return 1
+			End If
 					
 			ls_Fecha	=	Data
 			This.SetItem(row, ls_Columna, DateTime(Date(Mid(ls_Fecha,1,10))))
 			
-		END IF	
+		End If	
 
-	CASE "vari_codigo"
-		IF NOT IsNull(dw_2.Object.espe_codigo[1]) THEN
-			IF NOT iuo_variedades.Existe(dw_2.Object.espe_codigo[1],Integer(Data),True,SqlCa) THEN
+	Case "vari_codigo"
+		If Not IsNull(dw_2.Object.espe_codigo[1]) Then
+			If Not iuo_variedades.Existe(dw_2.Object.espe_codigo[1],Integer(Data),True,SqlCa) Then
 				This.SetItem(1,ls_Columna,Integer(ls_Null))
-				RETURN 1
-			END IF
-		END IF
+				Return 1
+			End If
+		End If
 
-	CASE "enva_tipoen"
-		IF dw_4.RowCount() > 0 THEN
+	Case "enva_tipoen"
+		If dw_4.RowCount() > 0 Then
 			MessageBox("","Ya posee detalle ingresado para el envase elegido. ~rElimine el detalle o seleccione otro pallet.")
-			This.SetItem(1, ls_Columna, this.Object.enva_tipoen[1])
-			RETURN 1		
-		END IF	
-		IF ExisteEnvase(Integer(Data),0,istr_envase) = False THEN
+			This.SetItem(1, ls_Columna, This.Object.enva_tipoen[1])
+			Return 1		
+		End If	
+		If ExisteEnvase(Integer(Data),0,istr_envase) = False Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			istr_Mant.Argumento[9]	=	String(istr_envase.TipoEnvase)
 			This.SetItem(1, "enva_codigo", Integer(ls_Null))
 			This.SetItem(1, "tpen_codigo", ls_Null)
@@ -2685,120 +2662,122 @@ CHOOSE CASE ls_Columna
 			idwc_envase.Retrieve(Integer(Data))
 			idwc_envase.SetSort("enva_codigo A")
 			idwc_envase.Sort()
-		END IF
+		End If
 
-	CASE "enva_codigo"
-		IF dw_4.RowCount() > 0 THEN
+	Case "enva_codigo"
+		If dw_4.RowCount() > 0 Then
 			MessageBox("","Ya posee detalle ingresado para el envase elegido. ~rElimine el detalle o seleccione otro pallet.")
-      	This.SetItem(1, ls_Columna, this.Object.enva_codigo[1])
-			RETURN 1		
-		END IF	
+      	This.SetItem(1, ls_Columna, This.Object.enva_codigo[1])
+			Return 1		
+		End If	
 
-		IF Isnull(this.Object.enva_tipoen[1]) THEN
+		If Isnull(This.Object.enva_tipoen[1]) Then
 			MessageBox("Error de Datos","Necesita elegir primero un tipo de envase.")
       	This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1		
-		END IF	
+			Return 1		
+		End If	
 
-		IF ExisteEnvase(This.Object.enva_tipoen[1],Integer(Data),istr_envase) = False THEN
+		If ExisteEnvase(This.Object.enva_tipoen[1],Integer(Data),istr_envase) = False Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			istr_Mant.Argumento[10]	=	String(istr_envase.Codigo)
 			This.SetItem(1, "tpen_codigo", ls_Null)
-		END IF
+		End If
 
-	CASE "tpen_codigo"
-		IF iuo_tipopallet.existe_porembalaje(Integer(istr_Mant.Argumento[1]), is_embacodigo, Data, True, SqlCa) THEN
+	Case "tpen_codigo"
+		If iuo_tipopallet.existe_porembalaje(Integer(istr_Mant.Argumento[1]), is_embacodigo, Data, True, SqlCa) Then
 			This.SetItem(1, "paen_altura", iuo_tipopallet.Altura)
-		ELSE
+		Else
 			This.SetItem(1, ls_Columna, ls_Null)
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "cate_codigo"
-		IF NOT iuo_categorias.Existe(Integer(Data),True,SqlCa) THEN
+	Case "cate_codigo"
+		If Not iuo_categorias.Existe(Integer(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			ii_categoria	=	Integer(data)
-		END IF
+		End If
 
-	CASE "etiq_codigo"
-		IF dw_4.RowCount() > 0 THEN
+	Case "etiq_codigo"
+		If dw_4.RowCount() > 0 Then
 			MessageBox("","Ya posee detalle ingresado para la etiqueta elegida. ~rElimine el detalle o seleccione otro pallet.")
-			This.SetItem(1, ls_Columna, this.Object.etiq_codigo[1])
-			RETURN 1		
-		END IF
-		IF NOT iuo_etiquetas.Existe(Integer(Data),True,SqlCa) THEN
+			This.SetItem(1, ls_Columna, This.Object.etiq_codigo[1])
+			Return 1		
+		End If
+		
+		If Not iuo_etiquetas.Existe(Integer(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "prod_codrot"
-		IF NOT iuo_productores.Existe(Integer(Data),True,SqlCa) THEN
+	Case "prod_codrot"
+		If Not iuo_productores.Existe(Integer(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
 			This.SetItem(1, "prod_nomrot", ls_Null)
-			RETURN 1
-		ELSE
+			Return 1
+		Else
 			This.SetItem(1, "prod_nomrot", iuo_productores.Nombre)
-		END IF
+		End If
 
-	CASE "dest_codigo"
-		IF NOT iuo_destinos.Existe(Integer(Data),True,SqlCa) THEN
+	Case "dest_codigo"
+		If Not iuo_destinos.Existe(Integer(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "reci_codigo"
-		IF NOT iuo_recibidores.Existe(Long(Data),True,SqlCa) THEN
+	Case "reci_codigo"
+		If Not iuo_recibidores.Existe(Long(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 
-	CASE "cama_codigo"
-		IF NOT iuo_camara.Existe(gstr_paramplanta.codigoplanta,Integer(Data),True,SqlCa) THEN
+	Case "cama_codigo"
+		If Not iuo_camara.Existe(gstr_paramplanta.codigoplanta,Integer(Data),True,SqlCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-	CASE "copa_codigo"
-		IF NOT iuo_copa.Existe(Integer(data), True, SQLCa) THEN
+	Case "copa_codigo"
+		If Not iuo_copa.Existe(Integer(data), True, SQLCa) Then
 			This.SetItem(1, ls_Columna, Integer(ls_Null))
-			RETURN 1
-		END IF
+			Return 1
+		End If
 		
-END CHOOSE
+End Choose
 
 HabilitaIngreso()
 end event
 
 event buttonclicked;call super::buttonclicked;long ll_fila
-CHOOSE CASE dwo.name
 
-	CASE "b_prodrotulado"
+Choose Case dwo.name
+	Case "b_prodrotulado"
 		BuscaProductor()
 
-	CASE "buscapallet"
-		IF isnull(dw_2.Object.mfee_docrel[1]) THEN
+	Case "buscapallet"
+		If isnull(dw_2.Object.mfee_docrel[1]) Then
 			MessageBox("Atención","Necesita Ingresar un movimiento o una Orden de Proceso.")
-      ELSE
+      	Else
 			BuscaPallet()
-		END IF	
+		End If	
 		
-	CASE "embalaje"
-		IF isnull(This.Object.paen_numero[1]) THEN
+	Case "embalaje"
+		If isnull(This.Object.paen_numero[1]) Then
 			MessageBox("Atención","Necesita Ingresar un Nro de Pallet.")
-      ELSE
+     	Else
 			ll_fila = il_fila
-			il_fila = 0
-			
+			il_fila = 0	
 			BuscaEmbalaje()
-			
 			il_fila = ll_fila
-		END IF
+		End If
 		
-END CHOOSE
+	Case 'b_codigo'
+		This.Object.pafr_codope[1] =  f_CodigoOPeracional(This.Object.espe_codigo[1], This.Object.pafr_codope[1])
+		
+End Choose
 end event
 
 event itemerror;RETURN 1

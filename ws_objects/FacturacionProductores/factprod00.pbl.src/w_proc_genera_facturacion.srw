@@ -58,7 +58,7 @@ end forward
 global type w_proc_genera_facturacion from w_para_informes
 integer x = 14
 integer y = 32
-integer width = 2459
+integer width = 2523
 integer height = 2232
 string title = "Facturación Mensual de Productores"
 boolean minbox = false
@@ -102,7 +102,7 @@ forward prototypes
 public function boolean existeproceso2 (integer cliente, integer planta, date fecha)
 public function boolean wf_existeproceso (integer cliente, integer planta, date fecha, long numero)
 public function long wf_obtienesecuencia (integer cliente, integer planta, date fecha)
-public function boolean wf_existerango (integer cliente, integer planta, date periodo, date fecha)
+public function boolean wf_existerango (integer cliente, integer planta, integer especie, date periodo, date fecha)
 end prototypes
 
 public function boolean existeproceso2 (integer cliente, integer planta, date fecha);Long	ll_cuenta, ll_cuenta2
@@ -166,7 +166,7 @@ End If
 
 end function
 
-public function boolean wf_existerango (integer cliente, integer planta, date periodo, date fecha);Boolean	lb_Retorno
+public function boolean wf_existerango (integer cliente, integer planta, integer especie, date periodo, date fecha);Boolean	lb_Retorno
 Long		ll_Secuencia
 String		ls_Fecha
 
@@ -177,6 +177,7 @@ SELECT Count(IsNull(faen_secuen, 0))
 	FROM dbo.facturprodenca
 	WHERE clie_codigo=:Cliente
 		AND plde_codigo=:Planta
+		AND :Especie in(-1, espe_codigo)
 		And faen_fechaf = :Periodo
 		And :ls_Fecha between faen_fecini and faen_fecter
 	USING SQLCA;
@@ -306,7 +307,7 @@ Else
 	
 	em_ValorCambio.Text = String(iuo_TC.of_Get(Today(), gstr_ParEmpresa.Conecion_GuiaElectronica))
 	
-	dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1)
+	dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1, uo_SelEspecie.Codigo)
 End If
 end event
 
@@ -317,6 +318,8 @@ End If
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_proc_genera_facturacion
+integer x = 2030
+integer y = 224
 integer taborder = 20
 end type
 
@@ -390,7 +393,8 @@ If lb_Existe Then
 						@Cliente			=	:uo_SelCliente.Codigo,
 						@Planta			=	:uo_SelPlanta.Codigo,
 						@MesProceso	=	:ld_MesProceso,
-						@Numero		=	:li_Numero;
+						@Numero		=	:li_Numero,
+						@Especie		=	:uo_SelEspecie.Codigo;
 						
 			EXECUTE Borra_Facturacion;
 			
@@ -419,7 +423,9 @@ If lb_Existe Then
 							@Numero 		=	:li_Numero,
 							@Desde 			=	:ls_desde,
 							@Hasta 			=	:ls_hasta;
+							
 			EXECUTE Re_Genera_Facturacion;
+			
 			If SQLCA.SQLCode < 0 Then
 				MessageBox("Error en Genera Facturación", "Se ha producido un Error en Generación Facturación.~r~r" + &
 								SQLCA.SQLErrText)
@@ -486,7 +492,7 @@ Else
 		End If
 End If
 
-dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1)
+dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1, uo_SelEspecie.Codigo)
 
 SetPointer(Arrow!)
 end event
@@ -577,16 +583,16 @@ event modified;If IsNull(This.Text) Then Return
 
 em_desde.Text		=	'01/' + This.Text
 em_hasta.Text		=	String(RelativeDate(Date('01/' + Mid(String(RelativeDate(Date(em_desde.Text), 31)), 4, 7)), -1))
-dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), -1)
+dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), -1, uo_SelEspecie.Codigo)
 
 em_ValorCambio.Text = String(iuo_TC.of_Get(Date('01/' + This.Text), gstr_ParEmpresa.Conecion_GuiaElectronica))
 
-If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), Date('01/' + This.Text)) Then
-	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
-	em_desde.Text = ''
-	em_desde.SetFocus()
-End If
-
+//If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + This.Text), Date('01/' + This.Text)) Then
+//	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
+//	em_desde.Text = ''
+//	em_desde.SetFocus()
+//End If
+//
 
 end event
 
@@ -792,6 +798,17 @@ on uo_selcliente.destroy
 call uo_seleccion_clientesprod::destroy
 end on
 
+event ue_cambio;call super::ue_cambio;If IsNull(This.Codigo) Then Return
+
+Choose Case This.Codigo 
+	Case -1, -9
+		
+	Case Else
+		dw_1.Retrieve(This.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1, uo_SelEspecie.Codigo)
+		
+End Choose
+end event
+
 type uo_selplanta from uo_seleccion_plantas within w_proc_genera_facturacion
 event destroy ( )
 integer x = 850
@@ -805,6 +822,17 @@ on uo_selplanta.destroy
 call uo_seleccion_plantas::destroy
 end on
 
+event ue_cambio;call super::ue_cambio;If IsNull(This.Codigo) Then Return
+
+Choose Case This.Codigo 
+	Case -1, -9
+		
+	Case Else
+		dw_1.Retrieve(uo_SelCLiente.Codigo, This.Codigo, Date('01/' + em_Fecha.Text), -1, uo_SelEspecie.Codigo)
+		
+End Choose
+end event
+
 type uo_selespecie from uo_seleccion_especie within w_proc_genera_facturacion
 event destroy ( )
 integer x = 850
@@ -816,6 +844,17 @@ end type
 on uo_selespecie.destroy
 call uo_seleccion_especie::destroy
 end on
+
+event ue_cambio;call super::ue_cambio;If IsNull(This.Codigo) Then Return
+
+Choose Case This.Codigo 
+	Case -1, -9
+		
+	Case Else
+		dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date('01/' + em_Fecha.Text), -1, This.Codigo)
+		
+End Choose
+end event
 
 type em_desde from editmask within w_proc_genera_facturacion
 integer x = 850
@@ -842,11 +881,11 @@ event modified;Date ld_desde, ld_Hasta, ld_Actual
 
 If IsNull(This.Text) or This.Text = '00/00/0000' Then Return
 
-If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date("01/" + em_Fecha.Text), Date(This.Text)) Then
+If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, uo_SelEspecie.Codigo, Date("01/" + em_Fecha.Text), Date(This.Text)) Then
 	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
 	This.Text = ''
 	em_Hasta.Text = ''
-	THis.SetFocus()
+	This.SetFocus()
 Else
 	ld_Desde	=	Date('01/' + em_Fecha.Text)
 	ld_hasta	=	Date(String(RelativeDate(Date('01/' + Mid(String(RelativeDate(ld_Desde, 31)), 4, 7)), -1)))
@@ -886,11 +925,11 @@ event modified;Date ld_desde, ld_Hasta, ld_Actual
 
 If IsNull(This.Text) or This.Text = '00/00/0000' Then Return
 
-If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, Date("01/" + em_Fecha.Text), Date(This.Text)) Then
+If wf_ExisteRango(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, uo_SelEspecie.Codigo, Date("01/" + em_Fecha.Text), Date(This.Text)) Then
 	MessageBox('Error', 'Fecha esta contenida dentro de un rango ya validado', StopSign!, Ok!)
 	This.Text = ''
 	em_Hasta.Text = ''
-	THis.SetFocus()
+	This.SetFocus()
 Else
 	ld_Desde	=	Date('01/' + em_Fecha.Text)
 	ld_hasta	=	Date(String(RelativeDate(Date('01/' + Mid(String(RelativeDate(ld_Desde, 31)), 4, 7)), -1)))
@@ -984,9 +1023,9 @@ boolean focusrectangle = false
 end type
 
 type dw_1 from uo_dw within w_proc_genera_facturacion
-integer x = 133
+integer x = 146
 integer y = 1448
-integer width = 1925
+integer width = 2213
 integer height = 668
 integer taborder = 11
 boolean bringtotop = true
@@ -1002,6 +1041,9 @@ Else
 	em_desde.Text = String(This.Object.faen_fecini[Row], 'dd/mm/yyyy')
 	em_hasta.Text = String(This.Object.faen_fecter[Row], 'dd/mm/yyyy')
 	em_numero.Text = String(This.Object.faen_secuen[Row])
+	
+	uo_SelEspecie.Todos(False)
+	uo_SelEspecie.Inicia(This.Object.espe_codigo[Row])
 End If
 end event
 
@@ -1041,24 +1083,24 @@ vinf.dw_1.DataObject = "dw_info_validaproforma"
 vinf.dw_1.SetTransObject(sqlca)
 ll_Fila = vinf.dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, ld_MesProceso, uo_SelEspecie.Codigo, ld_Desde, ld_Hasta, Dec(em_ValorCambio.Text), -1, 0)
 
-IF ll_Fila = -1 THEN
+If ll_Fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Fila = 0 THEN
+ElseIf ll_Fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
-	IF gs_Ambiente = 'Windows' THEN
-		vinf.dw_1.Modify('DataWindow.Print.Preview = Yes')
-		vinf.dw_1.Modify('DataWindow.Print.Preview.Zoom = 75')
+Else
+	If gs_Ambiente = 'Windows' Then
+		vinf.dw_1.ModIfy('DataWindow.Print.Preview = Yes')
+		vinf.dw_1.ModIfy('DataWindow.Print.Preview.Zoom = 75')
 	
 		vinf.Visible	= True
 		vinf.Enabled	= True
-	ELSE
+	Else
 		F_ImprimeInformePdf(vinf.dw_1, "TituloInforme")
-	END IF
+	End If
 //	
 //	If MessageBox('Atencion', "Esta correcta la validacion?", Exclamation!, YesNo!, 2) = 1 Then
 		pb_Acepta.Enabled = True
 //	End If
-END IF
+End If
 end event
 

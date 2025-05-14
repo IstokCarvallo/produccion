@@ -67,7 +67,7 @@ public subroutine habilitaencab (boolean habilita);If Habilita Then
 	dw_2.Object.prod_codigo.Protect				=	0
 	dw_2.Object.ticket.Protect						=	0
 	
-	dw_2.Object.ticket.Color							=	0
+	dw_2.Object.ticket.Color							=	RGB(255,255,255)
 
 	dw_2.Object.plde_codigo.Color		=	0
 	dw_2.Object.coca_numero.Color	=	0
@@ -377,6 +377,7 @@ iuo_Planta		=	Create uo_Plantadesp
 
 If Not iuo_Especies.Existe(Integer(Message.StringParm), True, Sqlca) Then Return
 if Not iuo_Planta.Existe(gi_CodPlanta, True, Sqlca) Then Return
+
 This.Title		= "Categorias de Condicion: " + iuo_especies.Nombre
 dw_1.Title	= "Detalle Categorias de Condicion: [" + iuo_especies.Nombre + "]"
 istr_Mant.Argumento[2] = String(Today(), 'dd/mm/yyyy')
@@ -523,8 +524,10 @@ dw_3.x					= dw_1.x + dw_1.Width + 50
 dw_3.y					= 64 + dw_2.Height
 dw_3.Height			= This.WorkSpaceHeight() - dw_1.y - 41
 
-ddlb_nota.x				=	((dw_3.x + dw_3.Width) - ddlb_nota.Width) 
+ddlb_nota.x			=	((dw_3.x + dw_3.Width) - ddlb_nota.Width) 
 st_nota.x				=	ddlb_nota.x - st_nota.Width
+st_nota.y				=	dw_3.y - st_nota.Height
+ddlb_nota.y			=	st_nota.y
 
 li_posic_x				= This.WorkSpaceWidth() - 250
 li_posic_y				= 88
@@ -661,8 +664,8 @@ end event
 type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_ctlcalcategoriacondicion
 integer x = 110
 integer y = 32
-integer width = 1975
-integer height = 584
+integer width = 1911
+integer height = 544
 integer taborder = 10
 string dataobject = "dw_mant_categoriacondicionenca"
 boolean controlmenu = true
@@ -931,19 +934,19 @@ End If
 end event
 
 type st_nota from statictext within w_maed_ctlcalcategoriacondicion
-integer x = 4635
-integer y = 572
-integer width = 165
-integer height = 64
+integer x = 4622
+integer y = 560
+integer width = 192
+integer height = 80
 boolean bringtotop = true
-integer textsize = -10
+integer textsize = -11
 integer weight = 700
 fontcharset fontcharset = ansi!
 fontpitch fontpitch = variable!
 fontfamily fontfamily = swiss!
 string facename = "Tahoma"
 long textcolor = 33554432
-long backcolor = 30586022
+long backcolor = 553648127
 string text = "Nota"
 boolean focusrectangle = false
 end type

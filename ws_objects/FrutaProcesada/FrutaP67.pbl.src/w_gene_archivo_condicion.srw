@@ -59,25 +59,25 @@ private function boolean wf_grabar ();Boolean	lb_AutoCommit, lb_Retorno
 lb_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
 
-IF dw_2.Update(True, False) = 1 THEN		
+If dw_2.Update(True, False) = 1 Then		
 	Commit;
 			
-	IF sqlca.SQLCode <> 0 THEN
+	If sqlca.SQLCode <> 0 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 				
 		RollBack;
-	ELSE
+	Else
 		lb_Retorno	=	True
 		dw_2.ResetUpdate()
-	END IF										
-ELSE
+	End If										
+Else
 	F_ErrorBaseDatos(sqlca, This.Title)		
 	RollBack;
-END IF
+End If
 
 sqlca.AutoCommit	=	lb_AutoCommit
 
-RETURN lb_Retorno
+Return lb_Retorno
 end function
 
 on w_gene_archivo_condicion.create
@@ -146,6 +146,7 @@ type st_temporada from w_para_informes`st_temporada within w_gene_archivo_condic
 end type
 
 type p_logo from w_para_informes`p_logo within w_gene_archivo_condicion
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_gene_archivo_condicion

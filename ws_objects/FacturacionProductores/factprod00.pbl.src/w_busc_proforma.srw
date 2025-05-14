@@ -29,7 +29,7 @@ event open;call super::open;
 istr_Busq = Message.PowerObjectParm
 
 
-IF dw_1.Retrieve(Integer(istr_Busq.Argum[1]), Long(istr_Busq.Argum[2]), Date(istr_Busq.Argum[3]), Integer(istr_Busq.Argum[4])) > 0 THEN
+IF dw_1.Retrieve(Integer(istr_Busq.Argum[1]), Long(istr_Busq.Argum[2]), Date(istr_Busq.Argum[3]), Integer(istr_Busq.Argum[4]), Integer(istr_Busq.Argum[5])) > 0 THEN
 	dw_1.SetFocus()
 	dw_1.SelectRow(1,True)
 ELSE
@@ -41,6 +41,7 @@ end event
 event ue_asignacion;istr_Mant.Argumento[1]	= String(dw_1.GetItemNumber(dw_1.GetRow(),"faen_secuen"))
 istr_Mant.Argumento[2]	= String(dw_1.GetItemDateTime(dw_1.GetRow(),"faen_fecini"), 'dd/mm/yyyy')
 istr_Mant.Argumento[3]	= String(dw_1.GetItemDateTime(dw_1.GetRow(),"faen_fecter"), 'dd/mm/yyyy')
+istr_Mant.Argumento[4]	= String(dw_1.GetItemNumber(dw_1.GetRow(),"espe_codigo"))
 
 CloseWithReturn(This, istr_Mant)
 end event

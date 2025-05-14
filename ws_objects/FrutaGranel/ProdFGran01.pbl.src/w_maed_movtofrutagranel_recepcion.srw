@@ -192,7 +192,6 @@ end variables
 forward prototypes
 public subroutine determina_productoresenvase (integer ai_tipomovto)
 protected function integer wf_modifica ()
-public subroutine destare (boolean ab_actualiza)
 public subroutine habilitaingreso (string as_columna)
 public subroutine habilitaencab (boolean habilita)
 public subroutine habilitagrabacion (string as_columna)
@@ -203,12 +202,9 @@ public function boolean noexistechofer (string rut)
 public subroutine habilitasalida ()
 public subroutine actualizakiloslote ()
 public subroutine buscacamion ()
-public subroutine captura_totales ()
 public function boolean actual_ultimo_lote ()
 public function boolean noexistecliente (integer cliente)
 public function boolean procesopacking ()
-public function boolean ordenproceso ()
-public subroutine asignapeso ()
 public function boolean existedocproceso (integer ai_planta, long al_numero)
 public function boolean existemovtoproceso (integer ai_planta, integer ai_tipomovto, integer ai_tipodocto, long al_proceso)
 public subroutine f_membreteds (datastore ds_1)
@@ -217,7 +213,6 @@ public function boolean existerecepcion (integer ai_planta, integer ai_tipomovto
 public subroutine updatemovtogranpesa ()
 public function boolean chequea_binscontraenvases ()
 public subroutine cargamovenv ()
-public subroutine cargaenvases ()
 public function boolean packingproductor (integer al_productor)
 public function boolean wf_generadoctopdf ()
 public function boolean wf_grabaregistro ()
@@ -226,6 +221,10 @@ public function boolean wf_creaarchivo (string as_archivo)
 public subroutine set_tarjas (integer cliente, long planta)
 public function boolean procesopackingfull ()
 public function boolean datos_correo ()
+public subroutine wf_captura_totales ()
+public subroutine wf_asignapeso ()
+public subroutine wf_cargaenvases ()
+public subroutine wf_destare (boolean ab_actualiza)
 end prototypes
 
 event ue_imprimir_tarja();SetPointer(HourGlass!)
@@ -1961,157 +1960,6 @@ IF dw_2.ModifiedCount() > 0 THEN RETURN 0
 RETURN 1
 end function
 
-public subroutine destare (boolean ab_actualiza);Long			ll_Fila, li_filas, ll_Fila_lote
-Integer		li_Especie, li_TipoEnvase, li_Envase, li_TipoAnt, li_EnvaAnt,&
-				li_TotBultos, li_Secuencia, li_Lote, li_LoteAnt, li_BultosLote, li_Cliente
-Boolean		lb_FueraRango
-Date			ld_Fechamovto
-Decimal{3}	ld_TotalNeto, ld_PesoEstandar[], ld_PesoMinimo[], ld_PesoMaximo[],&
-				ld_TotalEstandar, ld_PesoDistrib, ld_LoteDistrib, ld_NetoLoteEnvase,&
-				ld_TotalDistrib, ld_Remanente
-Double		ld_Factor
-/*
-INICIO Cambio hecho en coquimbo
-*/
-Decimal Ld_entradaa, Ld_entradab, Ld_salidaa, Ld_salidab, ld_enven, ld_envsan, ld_TaraBultos
-
-Ld_entradaa						=	dw_2.Object.refg_tkbent[1] 
-Ld_entradab						=	dw_2.Object.refg_tkbenc[1]
-Ld_salidaa						= 	dw_2.Object.refg_tkbsal[1]
-Ld_salidab						=	dw_2.Object.refg_tkbsac[1] 
-ld_enven							=	dw_2.Object.refg_tkenen[1]
-ld_envsan						=	dw_2.Object.refg_tkensa[1]
-dw_2.Object.mfge_tpneto[1] = 	(Ld_entradaa - Ld_salidaa) + ( Ld_entradab - Ld_salidab) - ( ld_enven + ld_envsan)
-
-li_Especie						=	dw_2.Object.espe_codigo[1]
-ld_FechaMovto					=	dw_2.Object.mfge_fecmov[1]
-ld_TotalNeto					=	dw_2.Object.mfge_tpneto[1]
-li_Cliente						=	dw_2.Object.clie_codigo[1]
-
-dw_3.SetSort("lote_pltcod A, lote_espcod A, lote_codigo A")
-dw_3.Sort()
-
-dw_6.SetSort("lote_pltcod A, lote_espcod A, lote_codigo A, enva_tipoen A, enva_codigo A")
-dw_6.Sort()
-
-FOR ll_Fila = 1 TO dw_6.RowCount()
-	li_TipoEnvase	=	dw_6.Object.enva_tipoen[ll_Fila]
-	li_Envase		=	dw_6.Object.enva_codigo[ll_Fila]
-	
-	IF li_TipoEnvase <> li_TipoAnt OR li_Envase <> li_EnvaAnt THEN
-		IF iuo_PesoEstanEspe.Existe(li_Especie, li_TipoEnvase, li_Envase, ld_FechaMovto, True, SQLCA) THEN
-			li_Secuencia ++
-			ld_PesoEstandar[li_Secuencia]	=	iuo_PesoEstanEspe.PesoDistrib
-			ld_PesoMinimo[li_Secuencia]	=	iuo_PesoEstanEspe.PesoMinimo
-			ld_PesoMaximo[li_Secuencia]	=	iuo_PesoEstanEspe.PesoMaximo
-		ELSE
-			RETURN
-		END IF
-		li_TipoAnt	=	li_TipoEnvase
-		li_EnvaAnt	=	li_Envase
-	END IF
-	
-	li_TotBultos		=	dw_6.Object.lotd_totbul[ll_Fila]
-	ld_TotalEstandar	=	ld_TotalEstandar + (li_TotBultos*ld_PesoEstandar[li_Secuencia])
-	
-NEXT
-
-IF IsNull(ld_TotalEstandar) OR ld_TotalEstandar = 0 THEN
-	Return
-END IF
-
-ld_Factor		=	ld_TotalNeto / ld_TotalEstandar
-li_Secuencia	=	0
-li_TipoAnt		=	0
-li_EnvaAnt		=	0
-
-FOR ll_Fila = 1 TO dw_6.RowCount()
-	li_Lote			=	dw_6.Object.lote_codigo[ll_Fila]
-	li_TipoEnvase	=	dw_6.Object.enva_tipoen[ll_Fila]
-	li_Envase		=	dw_6.Object.enva_codigo[ll_Fila]
-	
-	IF li_Lote <> li_LoteAnt THEN
-		IF li_LoteAnt > 0 THEN
-			ld_PesoDistrib = Round(ld_LoteDistrib / li_BultosLote,ii_kildec)
-			IF ab_actualiza THEN
-				dw_3.Object.lote_kilpro[ll_Fila_lote]	=	ld_PesoDistrib
-				dw_3.Object.lote_totnet[ll_Fila_lote]	=	ld_LoteDistrib
-			END IF
-			IF lb_FueraRango THEN
-				dw_3.Object.font[ll_Fila_lote]	=	1
-			ELSE
-				dw_3.Object.font[ll_Fila_lote]	=	0
-			END IF
-		END IF
-		
-		ll_Fila_lote ++
-		li_BultosLote	=	dw_3.Object.lote_totbul[ll_Fila_lote]
-		ld_LoteDistrib	=	0
-		li_LoteAnt		=	li_Lote
-		lb_FueraRango	=	False
-		
-	END IF
-	
-	IF li_TipoEnvase <> li_TipoAnt OR li_Envase <> li_EnvaAnt THEN
-		li_Secuencia ++
-		li_TipoAnt	=	li_TipoEnvase
-		li_EnvaAnt	=	li_Envase
-	END IF
-	
-	li_TotBultos		=	dw_6.Object.lotd_totbul[ll_Fila]
-	ld_PesoDistrib		=	Round(ld_PesoEstandar[li_Secuencia] * ld_Factor,ii_kildec)
-	ld_NetoLoteEnvase	=	Round(ld_PesoDistrib * li_TotBultos,ii_kildec)
-	
-	IF ld_PesoDistrib < ld_PesoMinimo[li_Secuencia] OR ld_PesoDistrib > ld_PesoMaximo[li_Secuencia] THEN
-		dw_6.Object.font[ll_Fila]	=	1
-		lb_FueraRango					=	True
-	ELSE
-		dw_6.Object.font[ll_Fila]	=	0
-	END IF
-	
-	IF ab_actualiza THEN
-		dw_6.Object.lotd_kilpro[ll_Fila]	=	ld_PesoDistrib
-		dw_6.Object.lotd_totnet[ll_Fila]	=	ld_NetoLoteEnvase
-		
-	END IF
-	
-	ld_LoteDistrib		=	ld_LoteDistrib 	+ ld_NetoLoteEnvase
-	ld_TotalDistrib	=	ld_TotalDistrib 	+ ld_NetoLoteEnvase
-	
-NEXT
-
-IF li_LoteAnt > 0 THEN
-	ld_PesoDistrib = Round(ld_LoteDistrib / li_BultosLote, ii_kildec)
-	
-	IF ab_actualiza THEN
-		dw_3.Object.lote_kilpro[ll_Fila_lote]	=	ld_PesoDistrib
-		dw_3.Object.lote_totnet[ll_Fila_lote]	=	ld_LoteDistrib
-	END IF
-	
-	IF lb_FueraRango THEN
-		dw_3.Object.font[ll_Fila_lote]	=	1
-	ELSE
-		dw_3.Object.font[ll_Fila_lote]	=	0
-	END IF
-END IF
-
-IF ab_actualiza THEN
-	ld_Remanente = ld_TotalDistrib - ld_TotalNeto
-	
-	IF ld_Remanente <> 0 THEN
-		ld_NetoLoteEnvase									=	dw_6.Object.lotd_totnet[dw_6.RowCount()]
-		dw_6.Object.lotd_totnet[dw_6.RowCount()]	=	ld_NetoLoteEnvase - ld_Remanente
-		
-		ld_NetoLoteEnvase									=	dw_3.Object.lote_totnet[dw_3.RowCount()]
-		dw_3.Object.lote_totnet[dw_3.RowCount()]	=	ld_NetoLoteEnvase - ld_Remanente
-	END IF
-	
-	ib_Destare			=	True
-	pb_grabar.Enabled	=	True
-
-END IF
-end subroutine
-
 public subroutine habilitaingreso (string as_columna);Boolean	lb_Estado = True
 Date		ld_Fecha
 Time		lt_hora
@@ -2711,7 +2559,7 @@ dw_2.Object.refg_horasa[1]	=	Time(Mid(String(idt_FechaSistema),12,8))
 pb_grabar.Enabled				=	False
 pb_imprimir.Enabled			=	False
 
-captura_totales()
+wf_captura_totales()
 end subroutine
 
 public subroutine actualizakiloslote ();Long			ll_Fila, ll_Filas
@@ -2773,94 +2621,6 @@ ELSE
 	is_rut = lstr_busq.argum[5]
 	dw_2.Object.mfge_chofer[il_fila]		=	lstr_busq.argum[4]
 	dw_2.SetFocus()
-END IF
-
-RETURN
-end subroutine
-
-public subroutine captura_totales ();Long			ll_Total_Bultos, ll_Fila
-Decimal{3}	ld_Total_PesoEnv_Ent,ld_Total_PesoEnv_Sal, ld_Total_Neto,&
-				ld_Total_KBE, ld_Total_KBS, ld_KBE_Camion, ld_KBE_Carro,&
-				ld_KBS_Camion, ld_KBS_Carro, ld_TaraCamion, ld_TaraCarro
-
-dw_2.AcceptText()
-dw_3.AcceptText()
-dw_5.AcceptText()
-dw_7.AcceptText()
-
-ll_Fila	=	dw_3.RowCount()
- 
-IF ll_Fila > 0 THEN
-	dw_3.GroupCalc()
-	IF dw_3.Object.total_bultos[ll_fila] > 10000 THEN
-		Messagebox("Error de Consistencia","El total de bultos supera lo permitido")
-		RETURN
-	ELSE
-		ll_Total_Bultos		=	dw_3.GetItemNumber(ll_Fila,"total_bultos")
-	END IF
-END IF
-
-
-ll_Fila	=	dw_5.RowCount()
-
-IF ll_Fila > 0 THEN
-	dw_5.GroupCalc()
-	IF dw_5.Object.total_pesoenv[ll_Fila] >= 100000 THEN
-		Messagebox("Error de Consistencia","El peso de los envase supera lo permitido")
-		RETURN
-	ELSE
-		ld_Total_PesoEnv_Ent	=	dw_5.Object.total_pesoenv[ll_Fila]
-	END IF
-	
-	IF dw_5.Object.total_envases[ll_Fila] >= 10000 THEN
-		Messagebox("Error de Consistencia","El total de bultos supera lo permitido")
-		RETURN
-	END IF
-END IF
-
-ll_Fila	=	dw_7.RowCount()
-
-IF ll_Fila > 0 THEN
-	dw_7.GroupCalc()
-	ld_Total_PesoEnv_Sal	=	dw_7.Object.total_pesoenv[ll_Fila]
-END IF
-
-//Determina Peso Neto del Camión
-IF ib_Salida THEN
-	ld_KBE_Camion	=	dw_2.Object.refg_tkbent[1]
-	ld_KBE_Carro	=	dw_2.Object.refg_tkbenc[1]
-	
-	IF Isnull(ld_KBE_Carro) THEN ld_KBE_Carro = 0
-	
-	ld_Total_KBE	=	ld_KBE_Camion + ld_KBE_Carro
-	
-	ld_KBS_Camion	=	dw_2.Object.refg_tkbsal[1]
-	ld_KBS_Carro	=	dw_2.Object.refg_tkbsac[1]
-	ld_TaraCamion	=	iuo_Camion.TaraCamion
-	ld_TaraCarro	=	iuo_Camion.TaraCarro
-	
-	IF Isnull(ld_TaraCamion) THEN ld_TaraCamion = 0
-	IF Isnull(ld_TaraCarro) THEN ld_TaraCarro = 0
-	
-	IF ld_KBS_Camion + ld_KBS_Carro > 0 AND &
-		ld_KBS_Camion + ld_KBS_Carro < ld_Total_PesoEnv_Sal THEN
-		MessageBox("Atención","Kilos de salida no pueden ser menor a los envases de salida")
-		RETURN
-	ELSE
-		ld_Total_KBS	=	ld_KBS_Camion + ld_KBS_Carro - ld_Total_PesoEnv_Sal
-	END IF
-		
-	ld_Total_Neto					=	ld_Total_KBE - ld_Total_PesoEnv_Ent
-
-	dw_2.Object.refg_tkensa[1]	=	ld_Total_PesoEnv_Sal
-	dw_2.Object.mfge_tpneto[1]	=	ld_Total_Neto
-
-END IF
-
-dw_2.Object.refg_tkenen[1]	=	ld_Total_PesoEnv_Ent
-
-IF ib_Destare THEN
-	Destare(True)
 END IF
 
 RETURN
@@ -3281,24 +3041,6 @@ NEXT
 RETURN TRUE
 end function
 
-public function boolean ordenproceso ();
-Return True
-end function
-
-public subroutine asignapeso ();Long 		ll_Fila
-Decimal 	ld_pesos = 0
-
-IF dw_9.RowCount() > 0 THEN
-	FOR ll_Fila = 1 TO dw_9.RowCount()
-		ld_pesos =	ld_pesos + dw_9.Object.mfgp_pesore[ll_fila]
-	NEXT
-END IF
-
-IF NOT gstr_paramplanta.bultobins THEN
-	dw_2.Object.refg_tkbent[1]	 = ld_pesos
-END IF
-end subroutine
-
 public function boolean existedocproceso (integer ai_planta, long al_numero);Long		ll_Numero,ll_Productor
 Integer	li_Especie, li_Variedad, li_Cantidad, li_Vigencia, &
          li_periodo, li_linea, li_turno, li_Cliente
@@ -3666,156 +3408,6 @@ FOR li_rectipenv = LowerBound(is_enva_tipoen) TO UpperBound(is_enva_tipoen)
 		Tab_1.Tp_2.dw_envrec.Object.fgme_sentid[li_filadw_5]		=	1
 	END IF
 NEXT
-end subroutine
-
-public subroutine cargaenvases ();Long 			ll_Fila, ll_rectbp, ll_tibapa[], ll_cant_tibapa[], ll_tibapaant, ll_totalbultos
-Decimal 		ld_pesos = 0
-Integer		li_filas, li_desde, li_hasta, li_UseFind, li_recenv
-String 		ls_enva_tipoen[], ls_enva_codigo[], ls_cale_calida[], ls_cantidad[], &
-				ls_pesone[], ls_cale_nombre[], ls_prod_codigo[], ls_prod_nombre[]
-Boolean		lb_flag, lb_flgtpb
-DataWindow	dw_9Mirror, dw_binsmirror
-
-dw_9.SetFilter('')
-dw_9.Filter()
-
-dw_9Mirror		=	Create DataWindow
-dw_binsmirror	=	Create DataWindow
-
-dw_9Mirror		=	dw_9
-dw_binsmirror	=	dw_spro_bins
-
-dw_9Mirror.SetSort("mfgp_tibapa asc, bins_numero asc")
-dw_binsmirror.SetSort("mfgp_tibapa asc, bins_numero asc")
-dw_9Mirror.Sort()
-dw_binsmirror.Sort()
-
-FOR ll_Fila  =  1 TO dw_binsmirror.RowCount()
-	lb_flgtpb =	False
-	
-	FOR ll_rectbp = 1 TO UpperBound(ll_tibapa[])
-		IF ll_tibapa[ll_rectbp] = dw_binsmirror.Object.fgmb_tibapa[ll_fila] THEN
-			lb_flgtpb						=	True
-			ll_cant_tibapa[ll_rectbp] 	++
-			EXIT
-		END IF
-	NEXT
-	
-	IF NOT lb_flgtpb THEN
-		ll_tibapa[ll_rectbp+1]			=	dw_binsmirror.Object.fgmb_tibapa[ll_fila]
-		ll_cant_tibapa[ll_rectbp+1]	=	1
-	END IF 
-NEXT
-
-IF dw_9Mirror.RowCount() > 0 THEN
-	FOR ll_Fila = 1 TO dw_9Mirror.RowCount()
-		
-		//INICIO Control de envases
-		iuo_bins.Existe(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], dw_9Mirror.Object.bins_numero[ll_Fila], sqlca, TRUE)
-		
-		IF iuo_bins.cale_pesoen > 0 THEN
-			lb_flag	=	False
-			IF UpperBound(ls_enva_tipoen[]) = 0 THEN
-				ls_enva_tipoen[1]		=	String(iuo_bins.enva_tipoen)
-				ls_enva_codigo[1]		=	String(iuo_bins.enva_codigo)
-				ls_cale_calida[1]		=	iuo_bins.cale_calida
-				ls_cantidad[1]			=	"1"
-				ls_pesone[1]			=	String(iuo_bins.cale_pesoen)
-				ls_cale_nombre[1]		=	iuo_bins.cale_nombre
-	
-			ELSE
-				FOR li_recenv = LowerBound(ls_enva_tipoen[]) TO UpperBound(ls_enva_tipoen[])
-					IF ls_enva_tipoen[li_recenv] = String(iuo_bins.enva_tipoen) THEN
-						IF ls_enva_codigo[li_recenv] = String(iuo_bins.enva_codigo) THEN
-							IF ls_cale_calida[li_recenv] = String(iuo_bins.cale_calida) THEN
-							
-								ls_cantidad[li_recenv]	=	String(Integer(ls_cantidad[li_recenv]) + 1)
-								lb_flag						=	True
-								EXIT
-								
-							END IF
-						END IF
-					END IF
-				NEXT
-				
-				IF NOT lb_flag THEN
-					li_recenv								=	li_recenv + 1
-					ls_enva_tipoen[li_recenv]			=	String(iuo_bins.enva_tipoen)
-					ls_enva_codigo[li_recenv]			=	String(iuo_bins.enva_codigo)
-					ls_cale_calida[li_recenv]			=	iuo_bins.cale_calida
-					ls_cantidad[li_recenv]				=	"1"
-					ls_pesone[li_recenv]					=	String(iuo_bins.cale_pesoen)
-					ls_cale_nombre[li_recenv]			=	iuo_bins.cale_nombre
-				END IF
-				
-			END IF
-		END IF
-		//FIN Control de envases
-	NEXT
-END IF
-
-FOR ll_fila = 1 TO UpperBound(ls_cantidad[])
-	ll_totalbultos	=	ll_totalbultos + Long(ls_cantidad[ll_fila])
-NEXT
-
-IF ll_totalbultos > 0 THEN
-	dw_2.Object.mfge_totbul[1]	=	ll_totalbultos
-END IF
-
-IF UpperBound(ll_tibapa[]) > 0 THEN
-	FOR ll_Fila = 1 TO UpperBound(ll_tibapa[])
-		IF ll_tibapa[ll_Fila] > 0 THEN
-			//INICIO Control de base pallets
-			iuo_bins.Existe(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], &
-								 ll_tibapa[ll_Fila], sqlca, TRUE)
-			
-			lb_flag	=	False
-			IF UpperBound(ls_enva_tipoen[]) = 0 THEN
-				ls_enva_tipoen[1]		=	String(iuo_bins.enva_tipoen)
-				ls_enva_codigo[1]		=	String(iuo_bins.enva_codigo)
-				ls_cale_calida[1]		=	iuo_bins.cale_calida
-				ls_cantidad[1]			=	String(ll_cant_tibapa[ll_fila])
-				ls_pesone[1]			=	String(iuo_bins.cale_pesoen)
-				ls_cale_nombre[1]		=	iuo_bins.cale_nombre
-				
-			ELSE
-				
-				FOR li_recenv = LowerBound(ls_enva_tipoen[]) TO UpperBound(ls_enva_tipoen[])
-					IF ls_enva_tipoen[li_recenv] = String(iuo_bins.enva_tipoen) THEN
-						IF ls_enva_codigo[li_recenv] = String(iuo_bins.enva_codigo) THEN
-							IF ls_cale_calida[li_recenv] = String(iuo_bins.cale_calida) THEN
-								ls_cantidad[li_recenv]	=	String(Integer(ls_cantidad[li_recenv]) + ll_cant_tibapa[ll_fila])
-								lb_flag						=	True
-								EXIT
-							END IF
-						END IF
-					END IF
-				NEXT
-				
-				IF NOT lb_flag THEN
-					li_recenv							=	li_recenv + 1
-					ls_enva_tipoen[li_recenv]		=	String(iuo_bins.enva_tipoen)
-					ls_enva_codigo[li_recenv]		=	String(iuo_bins.enva_codigo)
-					ls_cale_calida[li_recenv]		=	iuo_bins.cale_calida
-					ls_cantidad[li_recenv]			=	String(ll_cant_tibapa[ll_fila])
-					ls_pesone[li_recenv]				=	String(iuo_bins.cale_pesoen)
-					ls_cale_nombre[li_recenv]		=	iuo_bins.cale_nombre
-				END IF
-			END IF
-			//FIN Control de envases
-		END IF
-	NEXT
-END IF
-
-//Asignación de envases recepcionados
-is_enva_tipoen[]	=	ls_enva_tipoen[]
-is_enva_codigo[]	=	ls_enva_codigo[]
-is_cale_calida[]		=	ls_cale_calida[]
-is_cantidad[]		=	ls_cantidad[]
-is_pesone[]			=	ls_pesone[]
-is_cale_nombre[]	=	ls_cale_nombre[]
-
-CargaMovEnv()
 end subroutine
 
 public function boolean packingproductor (integer al_productor);
@@ -4343,6 +3935,408 @@ END IF
 Return False
 end function
 
+public subroutine wf_captura_totales ();Long			ll_Total_Bultos, ll_Fila
+Decimal{3}	ld_Total_PesoEnv_Ent,ld_Total_PesoEnv_Sal, ld_Total_Neto,&
+				ld_Total_KBE, ld_Total_KBS, ld_KBE_Camion, ld_KBE_Carro,&
+				ld_KBS_Camion, ld_KBS_Carro, ld_TaraCamion, ld_TaraCarro
+
+dw_2.AcceptText()
+dw_3.AcceptText()
+dw_5.AcceptText()
+dw_7.AcceptText()
+
+ll_Fila	=	dw_3.RowCount()
+ 
+If ll_Fila > 0 Then
+	dw_3.GroupCalc()
+	If dw_3.Object.total_bultos[ll_fila] > 10000 Then
+		Messagebox("Error de Consistencia","El total de bultos supera lo permitido")
+		Return
+	Else
+		ll_Total_Bultos		=	dw_3.GetItemNumber(ll_Fila,"total_bultos")
+	End If
+End If
+
+ll_Fila	=	dw_5.RowCount()
+
+If ll_Fila > 0 Then
+	dw_5.GroupCalc()
+	If dw_5.Object.total_pesoenv[ll_Fila] >= 100000 Then
+		Messagebox("Error de Consistencia","El peso de los envase supera lo permitido")
+		Return
+	Else
+		ld_Total_PesoEnv_Ent	=	dw_5.Object.total_pesoenv[ll_Fila]
+	End If
+	
+	If dw_5.Object.total_envases[ll_Fila] >= 10000 Then
+		Messagebox("Error de Consistencia","El total de bultos supera lo permitido")
+		Return
+	End If
+End If
+
+ll_Fila	=	dw_7.RowCount()
+
+If ll_Fila > 0 Then
+	dw_7.GroupCalc()
+	ld_Total_PesoEnv_Sal	=	dw_7.Object.total_pesoenv[ll_Fila]
+End If
+
+//Determina Peso Neto del Camión
+If ib_Salida Then
+	ld_KBE_Camion	=	dw_2.Object.refg_tkbent[1]
+	ld_KBE_Carro	=	dw_2.Object.refg_tkbenc[1]
+	
+	If Isnull(ld_KBE_Carro) Then ld_KBE_Carro = 0
+	
+	ld_Total_KBE	=	ld_KBE_Camion + ld_KBE_Carro
+	
+	ld_KBS_Camion	=	dw_2.Object.refg_tkbsal[1]
+	ld_KBS_Carro	=	dw_2.Object.refg_tkbsac[1]
+	ld_TaraCamion	=	iuo_Camion.TaraCamion
+	ld_TaraCarro	=	iuo_Camion.TaraCarro
+	
+	If Isnull(ld_TaraCamion) Then ld_TaraCamion = 0
+	If Isnull(ld_TaraCarro) Then ld_TaraCarro = 0
+	
+	If ld_KBS_Camion + ld_KBS_Carro > 0 AND &
+		ld_KBS_Camion + ld_KBS_Carro < ld_Total_PesoEnv_Sal Then
+		MessageBox("Atención","Kilos de salida no pueden ser menor a los envases de salida")
+		Return
+	Else
+		ld_Total_KBS	=	ld_KBS_Camion + ld_KBS_Carro - ld_Total_PesoEnv_Sal
+	End If
+		
+	ld_Total_Neto					=	ld_Total_KBE - ld_Total_PesoEnv_Ent
+
+	dw_2.Object.refg_tkensa[1]	=	ld_Total_PesoEnv_Sal
+	dw_2.Object.mfge_tpneto[1]	=	ld_Total_Neto
+
+End If
+
+dw_2.Object.refg_tkenen[1]	=	ld_Total_PesoEnv_Ent
+
+If ib_Destare Then
+	wf_Destare(True)
+End If
+
+Return
+end subroutine
+
+public subroutine wf_asignapeso ();Long 		ll_Fila
+Decimal 	ld_pesos = 0
+
+IF dw_9.RowCount() > 0 THEN
+	FOR ll_Fila = 1 TO dw_9.RowCount()
+		ld_pesos =	ld_pesos + dw_9.Object.mfgp_pesore[ll_fila]
+	NEXT
+END IF
+
+IF NOT gstr_paramplanta.bultobins THEN
+	dw_2.Object.refg_tkbent[1]	 = ld_pesos
+END IF
+end subroutine
+
+public subroutine wf_cargaenvases ();Long 			ll_Fila, ll_rectbp, ll_tibapa[], ll_cant_tibapa[], ll_tibapaant, ll_totalbultos
+Decimal 		ld_pesos = 0
+Integer		li_filas, li_desde, li_hasta, li_UseFind, li_recenv
+String 		ls_enva_tipoen[], ls_enva_codigo[], ls_cale_calida[], ls_cantidad[], &
+				ls_pesone[], ls_cale_nombre[], ls_prod_codigo[], ls_prod_nombre[]
+Boolean		lb_flag, lb_flgtpb
+DataWindow	dw_9Mirror, dw_binsmirror
+
+dw_9.SetFilter('')
+dw_9.Filter()
+
+dw_9Mirror		=	Create DataWindow
+dw_binsmirror	=	Create DataWindow
+
+dw_9Mirror		=	dw_9
+dw_binsmirror	=	dw_spro_bins
+
+dw_9Mirror.SetSort("mfgp_tibapa asc, bins_numero asc")
+dw_binsmirror.SetSort("mfgp_tibapa asc, bins_numero asc")
+dw_9Mirror.Sort()
+dw_binsmirror.Sort()
+
+For ll_Fila  =  1 TO dw_binsmirror.RowCount()
+	lb_flgtpb =	False
+	
+	For ll_rectbp = 1 TO UpperBound(ll_tibapa[])
+		If ll_tibapa[ll_rectbp] = dw_binsmirror.Object.fgmb_tibapa[ll_fila] Then
+			lb_flgtpb						=	True
+			ll_cant_tibapa[ll_rectbp] 	++
+			EXIT
+		End If
+	NEXT
+	
+	If Not lb_flgtpb Then
+		ll_tibapa[ll_rectbp+1]			=	dw_binsmirror.Object.fgmb_tibapa[ll_fila]
+		ll_cant_tibapa[ll_rectbp+1]	=	1
+	End If 
+NEXT
+
+If dw_9Mirror.RowCount() > 0 Then
+	For ll_Fila = 1 TO dw_9Mirror.RowCount()
+		
+		//INICIO Control de envases
+		iuo_bins.Existe(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], dw_9Mirror.Object.bins_numero[ll_Fila], sqlca, TRUE)
+		
+		If iuo_bins.cale_pesoen > 0 Then
+			lb_flag	=	False
+			If UpperBound(ls_enva_tipoen[]) = 0 Then
+				ls_enva_tipoen[1]		=	String(iuo_bins.enva_tipoen)
+				ls_enva_codigo[1]		=	String(iuo_bins.enva_codigo)
+				ls_cale_calida[1]		=	iuo_bins.cale_calida
+				ls_cantidad[1]			=	"1"
+				ls_pesone[1]			=	String(iuo_bins.cale_pesoen)
+				ls_cale_nombre[1]		=	iuo_bins.cale_nombre
+	
+			Else
+				For li_recenv = LowerBound(ls_enva_tipoen[]) TO UpperBound(ls_enva_tipoen[])
+					If ls_enva_tipoen[li_recenv] = String(iuo_bins.enva_tipoen) Then
+						If ls_enva_codigo[li_recenv] = String(iuo_bins.enva_codigo) Then
+							If ls_cale_calida[li_recenv] = String(iuo_bins.cale_calida) Then
+							
+								ls_cantidad[li_recenv]	=	String(Integer(ls_cantidad[li_recenv]) + 1)
+								lb_flag						=	True
+								EXIT
+								
+							End If
+						End If
+					End If
+				NEXT
+				
+				If Not lb_flag Then
+					li_recenv								=	li_recenv + 1
+					ls_enva_tipoen[li_recenv]			=	String(iuo_bins.enva_tipoen)
+					ls_enva_codigo[li_recenv]			=	String(iuo_bins.enva_codigo)
+					ls_cale_calida[li_recenv]			=	iuo_bins.cale_calida
+					ls_cantidad[li_recenv]				=	"1"
+					ls_pesone[li_recenv]					=	String(iuo_bins.cale_pesoen)
+					ls_cale_nombre[li_recenv]			=	iuo_bins.cale_nombre
+				End If
+				
+			End If
+		End If
+		//FIN Control de envases
+	NEXT
+End If
+
+For ll_fila = 1 TO UpperBound(ls_cantidad[])
+	ll_totalbultos	=	ll_totalbultos + Long(ls_cantidad[ll_fila])
+NEXT
+
+If ll_totalbultos > 0 Then
+	dw_2.Object.mfge_totbul[1]	=	ll_totalbultos
+End If
+
+If UpperBound(ll_tibapa[]) > 0 Then
+	For ll_Fila = 1 TO UpperBound(ll_tibapa[])
+		If ll_tibapa[ll_Fila] > 0 Then
+			//INICIO Control de base pallets
+			iuo_bins.Existe(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1], &
+								 ll_tibapa[ll_Fila], sqlca, TRUE)
+			
+			lb_flag	=	False
+			If UpperBound(ls_enva_tipoen[]) = 0 Then
+				ls_enva_tipoen[1]		=	String(iuo_bins.enva_tipoen)
+				ls_enva_codigo[1]		=	String(iuo_bins.enva_codigo)
+				ls_cale_calida[1]		=	iuo_bins.cale_calida
+				ls_cantidad[1]			=	String(ll_cant_tibapa[ll_fila])
+				ls_pesone[1]			=	String(iuo_bins.cale_pesoen)
+				ls_cale_nombre[1]		=	iuo_bins.cale_nombre
+				
+			Else
+				
+				For li_recenv = LowerBound(ls_enva_tipoen[]) TO UpperBound(ls_enva_tipoen[])
+					If ls_enva_tipoen[li_recenv] = String(iuo_bins.enva_tipoen) Then
+						If ls_enva_codigo[li_recenv] = String(iuo_bins.enva_codigo) Then
+							If ls_cale_calida[li_recenv] = String(iuo_bins.cale_calida) Then
+								ls_cantidad[li_recenv]	=	String(Integer(ls_cantidad[li_recenv]) + ll_cant_tibapa[ll_fila])
+								lb_flag						=	True
+								EXIT
+							End If
+						End If
+					End If
+				NEXT
+				
+				If Not lb_flag Then
+					li_recenv							=	li_recenv + 1
+					ls_enva_tipoen[li_recenv]		=	String(iuo_bins.enva_tipoen)
+					ls_enva_codigo[li_recenv]		=	String(iuo_bins.enva_codigo)
+					ls_cale_calida[li_recenv]		=	iuo_bins.cale_calida
+					ls_cantidad[li_recenv]			=	String(ll_cant_tibapa[ll_fila])
+					ls_pesone[li_recenv]				=	String(iuo_bins.cale_pesoen)
+					ls_cale_nombre[li_recenv]		=	iuo_bins.cale_nombre
+				End If
+			End If
+			//FIN Control de envases
+		End If
+	NEXT
+End If
+
+//Asignación de envases recepcionados
+is_enva_tipoen[]	=	ls_enva_tipoen[]
+is_enva_codigo[]	=	ls_enva_codigo[]
+is_cale_calida[]		=	ls_cale_calida[]
+is_cantidad[]		=	ls_cantidad[]
+is_pesone[]			=	ls_pesone[]
+is_cale_nombre[]	=	ls_cale_nombre[]
+
+CargaMovEnv()
+end subroutine
+
+public subroutine wf_destare (boolean ab_actualiza);Long			ll_Fila, li_filas, ll_Fila_lote
+Integer		li_Especie, li_TipoEnvase, li_Envase, li_TipoAnt, li_EnvaAnt,&
+				li_TotBultos, li_Secuencia, li_Lote, li_LoteAnt, li_BultosLote, li_Cliente
+Boolean		lb_FueraRango
+Date			ld_Fechamovto
+Decimal{3}	ld_TotalNeto, ld_PesoEstandar[], ld_PesoMinimo[], ld_PesoMaximo[],&
+				ld_TotalEstandar, ld_PesoDistrib, ld_LoteDistrib, ld_NetoLoteEnvase,&
+				ld_TotalDistrib, ld_Remanente
+Double		ld_Factor
+/*
+INICIO Cambio hecho en coquimbo
+*/
+Decimal Ld_entradaa, Ld_entradab, Ld_salidaa, Ld_salidab, ld_enven, ld_envsan, ld_TaraBultos
+
+Ld_entradaa						=	dw_2.Object.refg_tkbent[1] 
+Ld_entradab						=	dw_2.Object.refg_tkbenc[1]
+Ld_salidaa						= 	dw_2.Object.refg_tkbsal[1]
+Ld_salidab						=	dw_2.Object.refg_tkbsac[1] 
+ld_enven							=	dw_2.Object.refg_tkenen[1]
+ld_envsan						=	dw_2.Object.refg_tkensa[1]
+dw_2.Object.mfge_tpneto[1] = 	(Ld_entradaa - Ld_salidaa) + ( Ld_entradab - Ld_salidab) - ( ld_enven + ld_envsan)
+
+li_Especie						=	dw_2.Object.espe_codigo[1]
+ld_FechaMovto					=	dw_2.Object.mfge_fecmov[1]
+ld_TotalNeto					=	dw_2.Object.mfge_tpneto[1]
+li_Cliente						=	dw_2.Object.clie_codigo[1]
+
+dw_3.SetSort("lote_pltcod A, lote_espcod A, lote_codigo A")
+dw_3.Sort()
+
+dw_6.SetSort("lote_pltcod A, lote_espcod A, lote_codigo A, enva_tipoen A, enva_codigo A")
+dw_6.Sort()
+
+FOR ll_Fila = 1 TO dw_6.RowCount()
+	li_TipoEnvase	=	dw_6.Object.enva_tipoen[ll_Fila]
+	li_Envase		=	dw_6.Object.enva_codigo[ll_Fila]
+	
+	IF li_TipoEnvase <> li_TipoAnt OR li_Envase <> li_EnvaAnt THEN
+		IF iuo_PesoEstanEspe.Existe(li_Especie, li_TipoEnvase, li_Envase, ld_FechaMovto, True, SQLCA) THEN
+			li_Secuencia ++
+			ld_PesoEstandar[li_Secuencia]	=	iuo_PesoEstanEspe.PesoDistrib
+			ld_PesoMinimo[li_Secuencia]	=	iuo_PesoEstanEspe.PesoMinimo
+			ld_PesoMaximo[li_Secuencia]	=	iuo_PesoEstanEspe.PesoMaximo
+		ELSE
+			RETURN
+		END IF
+		li_TipoAnt	=	li_TipoEnvase
+		li_EnvaAnt	=	li_Envase
+	END IF
+	
+	li_TotBultos		=	dw_6.Object.lotd_totbul[ll_Fila]
+	ld_TotalEstandar	=	ld_TotalEstandar + (li_TotBultos*ld_PesoEstandar[li_Secuencia])
+	
+NEXT
+
+IF IsNull(ld_TotalEstandar) OR ld_TotalEstandar = 0 THEN
+	Return
+END IF
+
+ld_Factor		=	ld_TotalNeto / ld_TotalEstandar
+li_Secuencia	=	0
+li_TipoAnt		=	0
+li_EnvaAnt		=	0
+
+FOR ll_Fila = 1 TO dw_6.RowCount()
+	li_Lote			=	dw_6.Object.lote_codigo[ll_Fila]
+	li_TipoEnvase	=	dw_6.Object.enva_tipoen[ll_Fila]
+	li_Envase		=	dw_6.Object.enva_codigo[ll_Fila]
+	
+	IF li_Lote <> li_LoteAnt THEN
+		IF li_LoteAnt > 0 THEN
+			ld_PesoDistrib = Round(ld_LoteDistrib / li_BultosLote,ii_kildec)
+			IF ab_actualiza THEN
+				dw_3.Object.lote_kilpro[ll_Fila_lote]	=	ld_PesoDistrib
+				dw_3.Object.lote_totnet[ll_Fila_lote]	=	ld_LoteDistrib
+			END IF
+			IF lb_FueraRango THEN
+				dw_3.Object.font[ll_Fila_lote]	=	1
+			ELSE
+				dw_3.Object.font[ll_Fila_lote]	=	0
+			END IF
+		END IF
+		
+		ll_Fila_lote ++
+		li_BultosLote	=	dw_3.Object.lote_totbul[ll_Fila_lote]
+		ld_LoteDistrib	=	0
+		li_LoteAnt		=	li_Lote
+		lb_FueraRango	=	False
+		
+	END IF
+	
+	IF li_TipoEnvase <> li_TipoAnt OR li_Envase <> li_EnvaAnt THEN
+		li_Secuencia ++
+		li_TipoAnt	=	li_TipoEnvase
+		li_EnvaAnt	=	li_Envase
+	END IF
+	
+	li_TotBultos		=	dw_6.Object.lotd_totbul[ll_Fila]
+	ld_PesoDistrib		=	Round(ld_PesoEstandar[li_Secuencia] * ld_Factor,ii_kildec)
+	ld_NetoLoteEnvase	=	Round(ld_PesoDistrib * li_TotBultos,ii_kildec)
+	
+	IF ld_PesoDistrib < ld_PesoMinimo[li_Secuencia] OR ld_PesoDistrib > ld_PesoMaximo[li_Secuencia] THEN
+		dw_6.Object.font[ll_Fila]	=	1
+		lb_FueraRango					=	True
+	ELSE
+		dw_6.Object.font[ll_Fila]	=	0
+	END IF
+	
+	IF ab_actualiza THEN
+		dw_6.Object.lotd_kilpro[ll_Fila]	=	ld_PesoDistrib
+		dw_6.Object.lotd_totnet[ll_Fila]	=	ld_NetoLoteEnvase
+		
+	END IF
+	
+	ld_LoteDistrib		=	ld_LoteDistrib 	+ ld_NetoLoteEnvase
+	ld_TotalDistrib	=	ld_TotalDistrib 	+ ld_NetoLoteEnvase
+	
+NEXT
+
+IF li_LoteAnt > 0 THEN
+	ld_PesoDistrib = Round(ld_LoteDistrib / li_BultosLote, ii_kildec)
+	
+	IF ab_actualiza THEN
+		dw_3.Object.lote_kilpro[ll_Fila_lote]	=	ld_PesoDistrib
+		dw_3.Object.lote_totnet[ll_Fila_lote]	=	ld_LoteDistrib
+	END IF
+	
+	IF lb_FueraRango THEN
+		dw_3.Object.font[ll_Fila_lote]	=	1
+	ELSE
+		dw_3.Object.font[ll_Fila_lote]	=	0
+	END IF
+END IF
+
+IF ab_actualiza THEN
+	ld_Remanente = ld_TotalDistrib - ld_TotalNeto
+	
+	IF ld_Remanente <> 0 THEN
+		ld_NetoLoteEnvase									=	dw_6.Object.lotd_totnet[dw_6.RowCount()]
+		dw_6.Object.lotd_totnet[dw_6.RowCount()]	=	ld_NetoLoteEnvase - ld_Remanente
+		
+		ld_NetoLoteEnvase									=	dw_3.Object.lote_totnet[dw_3.RowCount()]
+		dw_3.Object.lote_totnet[dw_3.RowCount()]	=	ld_NetoLoteEnvase - ld_Remanente
+	END IF
+	
+	ib_Destare			=	True
+	pb_grabar.Enabled	=	True
+
+END IF
+end subroutine
+
 on w_maed_movtofrutagranel_recepcion.create
 int iCurrent
 call super::create
@@ -4429,32 +4423,32 @@ This.ParentWindow().ToolBarVisible	=	True
 im_menu.Item[1].Item[6].Enabled		=	True
 im_menu.Item[7].Visible					=	True
 
-IF gstr_ParamPlanta.etiquetaembalaje = 0 THEN
+If gstr_ParamPlanta.etiquetaembalaje = 0 Then
 	Tab_1.Tp_1.dw_lotes.DataObject	=	"dw_mues_spro_lotesfrutagranel_rec_kguia"
-END IF
+End If
 
 dw_2.Object.oproceso.visible 		= 	gb_RecepcionDeProceso
 dw_2.Object.defg_docrel.visible 	= 	gb_RecepcionDeProceso
 dw_2.Object.ordenproceso.visible 	= 	gb_RecepcionDeProceso
 
-IF NOT gb_RecepcionDeProceso THEN
+If NOT gb_RecepcionDeProceso Then
 	This.Title = "RECEPCION DE HUERTO"
-ELSE
+Else
 	This.Title = "RECEPCION DE PREPROCESO"
-END IF
+End If
 
 dw_1.SetTransObject(sqlca)
 dw_2.SetTransObject(sqlca)
 
-IF gb_RecepcionDeProceso THEN
+If gb_RecepcionDeProceso Then
 	istr_mant.argumento[2]			=	'8'
-ELSE
+Else
 	istr_mant.argumento[2]			=	'1'
-END IF
+End If
 
-IF Not manbin_especie(Long(gstr_ParamPlanta.CodigoPlanta),  Integer(gstr_ParamPlanta.CodigoEspecie), True, sqlca) THEN
+If Not manbin_especie(Long(gstr_ParamPlanta.CodigoPlanta),  Integer(gstr_ParamPlanta.CodigoEspecie), True, sqlca) Then
 	Halt
-END IF
+End If
 			
 istr_mant.argumento[1]	=	String(gstr_ParamPlanta.CodigoPlanta)
 istr_mant.argumento[4]	=	'1'
@@ -4471,24 +4465,24 @@ idwc_planta.Retrieve()
 
 dw_2.GetChild("espe_codigo", idwc_especie)
 idwc_especie.SetTransObject(sqlca)
-IF idwc_especie.Retrieve() = 0 THEN
+If idwc_especie.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Especies")
 	idwc_especie.InsertRow(0)
-ELSE
+Else
 	idwc_especie.SetSort("espe_nombre A")
 	idwc_especie.Sort()
-END IF
+End If
 
 dw_2.GetChild("tran_codigo", idwc_Transp)
 idwc_Transp.SetTransObject(sqlca)
 
-IF idwc_Transp.Retrieve() = 0 THEN
+If idwc_Transp.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Transportistas")
 	idwc_Transp.InsertRow(0)
-ELSE
+Else
 	idwc_Transp.SetSort("tran_nombre A")
 	idwc_Transp.Sort()	
-END IF
+End If
 
 dw_1.GetChild("cama_codigo",idwc_Camara)
 idwc_Camara.SetTransObject(SQLCA)
@@ -4496,13 +4490,13 @@ idwc_Camara.Retrieve(gstr_ParamPlanta.CodigoPlanta)
 
 dw_1.GetChild("lote_espcod", idwc_especiedet2)
 idwc_especiedet2.SetTransObject(sqlca)
-IF idwc_especiedet2.Retrieve() = 0 THEN
+If idwc_especiedet2.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Especies")
 	idwc_especiedet2.InsertRow(0)
-ELSE
+Else
 	idwc_especiedet2.SetSort("espe_nombre A")
 	idwc_especiedet2.Sort()
-END IF
+End If
 
 dw_3	=	Tab_1.Tp_1.dw_lotes
 dw_5	=	Tab_1.Tp_2.dw_envrec
@@ -4537,18 +4531,18 @@ dw_1.GetChild("lote_pltcod",idwc_plantadw1)
 idwc_plantadw1.SetTransObject(SQLCA)
 idwc_plantadw1.Retrieve()
 
-dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
+dw_1.ModIfy("datawindow.message.title='Error '+ is_titulo")
 dw_1.SetRowFocusIndicator(Hand!)
-dw_1.Modify("DataWindow.Footer.Height = 84")
+dw_1.ModIfy("DataWindow.Footer.Height = 84")
 
-dw_3.Modify("datawindow.message.title='Error '+ is_titulo")
-dw_3.Modify("DataWindow.Footer.Height = 84")
+dw_3.ModIfy("datawindow.message.title='Error '+ is_titulo")
+dw_3.ModIfy("DataWindow.Footer.Height = 84")
 
-dw_5.Modify("datawindow.message.title='Error '+ is_titulo")
-dw_5.Modify("DataWindow.Footer.Height = 84")
+dw_5.ModIfy("datawindow.message.title='Error '+ is_titulo")
+dw_5.ModIfy("DataWindow.Footer.Height = 84")
 
-dw_7.Modify("datawindow.message.title='Error '+ is_titulo")
-dw_7.Modify("DataWindow.Footer.Height = 84")
+dw_7.ModIfy("datawindow.message.title='Error '+ is_titulo")
+dw_7.ModIfy("DataWindow.Footer.Height = 84")
 
 istr_mant.dw						=	dw_1
 istr_mant.UsuarioSoloConsulta	=	OpcionSoloConsulta()
@@ -4690,8 +4684,8 @@ END IF
 
 istr_mant.borra	 = False
 
-captura_totales()
-CargaEnvases()
+wf_captura_totales()
+wf_CargaEnvases()
 end event
 
 event ue_borrar;Integer		li_Cliente, li_aplicaenvase
@@ -4953,7 +4947,7 @@ istr_mant.borra	= False
 
 lb_estado			=	istr_mant.Solo_Consulta
 
-IF li_tabpage <> 1 THEN
+If li_tabpage <> 1 Then
 	lstr_mant.argumento				=	istr_mant.argumento
 	lstr_mant.dw						=	istr_mant.dw
 	lstr_mant.dw2						=	istr_mant.dw2
@@ -4965,14 +4959,14 @@ IF li_tabpage <> 1 THEN
 	lstr_mant.usuariosoloconsulta	=	istr_mant.usuariosoloconsulta
 	
 	ProductoresLotes(lstr_mant.productores)
-END IF
+End If
 
-CHOOSE CASE li_tabpage
-	CASE 1
-		IF ib_Destare THEN
+Choose Case li_tabpage
+	Case 1
+		If ib_Destare Then
 			istr_mant.Solo_Consulta	=	True
-		END IF
-		IF dw_3.RowCount() > 0 THEN
+		End If
+		If dw_3.RowCount() > 0 Then
 			istr_mant.dw	=	dw_3
 			istr_mant.dw2	=	dw_6
 			
@@ -4986,51 +4980,51 @@ CHOOSE CASE li_tabpage
 			
 			dw_spro_bins.SetFilter('')
 			dw_spro_bins.Filter()
-			IF NOT gstr_paramplanta.bultobins THEN
-				AsignaPeso()
-			END IF
+			If NOT gstr_paramplanta.bultobins Then
+				wf_AsignaPeso()
+			End If
 			
-		END IF
+		End If
 		istr_mant.Solo_Consulta	=	lb_estado
 		
 		dw_desverd.SetFilter("")
 		dw_desverd.Filter()
 
-	CASE 2				
-		IF ib_Destare THEN
+	Case 2				
+		If ib_Destare Then
 			lstr_mant.Solo_Consulta	=	True
-		END IF
-		IF dw_5.RowCount() > 0 THEN
+		End If
+		If dw_5.RowCount() > 0 Then
 			lstr_mant.dw	=	dw_5
 			SetNull(lstr_mant.dw2)
 			lstr_mant.Argumento[4]	=	'1'
 			OpenWithParm(iw_mantencion_2, lstr_mant)
-		END IF
+		End If
 		lstr_mant.Solo_Consulta	=	lb_estado
 		
-	CASE 3				
-		IF dw_7.RowCount() > 0 THEN
+	Case 3				
+		If dw_7.RowCount() > 0 Then
 			lstr_mant.dw	=	dw_7
 			SetNull(lstr_mant.dw2)
 			lstr_mant.Argumento[4]	=	'2'
 			OpenWithParm(iw_mantencion_2, lstr_mant)
-		END IF
+		End If
 		
-END CHOOSE
+End Choose
 
 dw_6.SetFilter("")
 dw_6.Filter()
 
-captura_totales()
+wf_captura_totales()
 
-IF gstr_paramplanta.palletdebins OR &
+If gstr_paramplanta.palletdebins OR &
 	gstr_paramplanta.binsabins OR &
-	gstr_paramplanta.bultobins THEN
-	CargaEnvases()
-END IF
+	gstr_paramplanta.bultobins Then
+	wf_CargaEnvases()
+End If
 end event
 
-event ue_nuevo;Long			ll_modif
+event ue_nuevo;Long			ll_modIf
 Time 			lt_hora
 str_pesaje	lstr_pesaje
 str_puertacomm  lstr_puertacomm
@@ -5042,33 +5036,33 @@ ib_ok	= True
 
 istr_mant.Solo_Consulta	=	istr_mant.UsuarioSoloConsulta
 
-IF Not istr_mant.Solo_Consulta THEN
-	CHOOSE CASE wf_modifica()
+If Not istr_mant.Solo_Consulta Then
+	CHOOSE CASE wf_modIfica()
 		CASE -1
 			ib_ok = False
 		CASE 0
-			ll_modif	=	dw_1.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_2.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_3.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_6.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_5.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_7.GetNextModified(0, Primary!)
+			ll_modIf	=	dw_1.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_2.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_3.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_6.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_5.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_7.GetNextModIfied(0, Primary!)
 		
-			IF dw_1.RowCount() > 0 and ll_modif > 0 THEN
+			If dw_1.RowCount() > 0 and ll_modIf > 0 Then
 				CHOOSE CASE MessageBox("Grabar registro(s)","Desea Grabar la información ?", Question!, YesNoCancel!)
 					CASE 1
 						Message.DoubleParm = 0
 						This.TriggerEvent("ue_guardar")
-						IF message.DoubleParm = -1 THEN ib_ok = False
+						If message.DoubleParm = -1 Then ib_ok = False
 					CASE 3
 						ib_ok	= False
 						RETURN
-				END CHOOSE
-			END IF
-	END CHOOSE
-END IF
+				End CHOOSE
+			End If
+	End CHOOSE
+End If
 
-IF Not ib_ok THEN RETURN
+If Not ib_ok Then RETURN
 
 dw_1.Reset()
 dw_3.Reset()
@@ -5089,7 +5083,7 @@ dw_2.SetFocus()
 
 pb_eli_det.Enabled				=	False
 pb_ins_det.Enabled				=	False
-pb_grabar.Enabled					=	False
+pb_grabar.Enabled				=	False
 pb_eliminar.Enabled				=	False
 pb_imprimir.Enabled				=	False
 dw_2.Enabled						=	True
@@ -5100,13 +5094,13 @@ dw_2.Object.plde_codigo[1]		=	gstr_ParamPlanta.CodigoPlanta
 
 set_tarjas(dw_2.Object.clie_codigo[1], dw_2.Object.plde_codigo[1])
 
-IF gb_RecepcionDeProceso THEN
+If gb_RecepcionDeProceso Then
 	dw_2.Object.tpmv_codigo[1]		=	8
 	istr_mant.argumento[2]			=	'8'
-ELSE
+Else
 	dw_2.Object.tpmv_codigo[1]		=	1
 	istr_mant.argumento[2]			=	'1'
-END IF
+End If
 
 idt_FechaSistema					=	F_FechaHora()
 
@@ -5115,7 +5109,7 @@ lt_hora								=	Time(Mid(String(idt_FechaSistema, 'dd/mm/yyyy hh:mm:ss'),12,8))
 dw_2.Object.mfge_fecmov[1]		=	Date(String(idt_FechaSistema,'dd/mm/yyyy'))
 dw_2.Object.refg_horaen[1]		=	lt_hora
 
-dw_2.Object.destare.Visible	=	False
+dw_2.Object.destare.Visible		=	False
 dw_2.Object.destare.Text		=	'Salida'
 cb_guia.Enabled					=	False
 ib_Salida								=	False
@@ -5125,17 +5119,18 @@ istr_Mant.Argumento[3]			=	''
 istr_mant.Argumento[5]			=	String(dw_2.Object.espe_codigo[1])
 istr_mant.Argumento[7]			=	'0'
 istr_mant.Argumento[8]			=	String(idt_FechaSistema,'dd/mm/yyyy')
+istr_mant.argumento[10]		=	String(gi_CodExport)
 il_NumFruta							=	0
 il_NumEnva							=	0
 
-//IF iuo_especie.existe(gstr_ParamPlanta.CodigoEspecie,TRUE,SQLCA,Integer(istr_mant.argumento[10])) THEN
-IF iuo_especie.existe(gstr_ParamPlanta.CodigoEspecie,TRUE,SQLCA) THEN
-	IF iuo_especie.kildec = 1 THEN
+//If iuo_especie.existe(gstr_ParamPlanta.CodigoEspecie,TRUE,SQLCA,Integer(istr_mant.argumento[10])) Then
+If iuo_especie.existe(gstr_ParamPlanta.CodigoEspecie,TRUE,SQLCA) Then
+	If iuo_especie.kildec = 1 Then
 		ii_kildec = 2
-	ELSE
+	Else
 		ii_kildec = 0
-	END IF
-END IF	
+	End If
+End If	
 		
 tab_1.tp_1.Enabled	=	False
 tab_1.tp_2.Enabled	=	False
@@ -5151,7 +5146,7 @@ dw_2.SetFocus( )
 //Inicializa Estructura de Pesajes
 wstr_pesaje				=	lstr_pesaje
 
-CargaEnvases()
+wf_CargaEnvases()
 end event
 
 event ue_nuevo_detalle;call super::ue_nuevo_detalle;Integer	li_tabpage
@@ -5180,13 +5175,13 @@ If li_tabpage <> 1 Then
 	ProductoresLotes(lstr_mant.productores)
 End If
 
-CHOOSE Case li_tabpage
+Choose Case li_tabpage
 	Case 1
 		If ib_Destare Then
 			istr_mant.Solo_Consulta	=	True
 		End If
 
-		If Integer(istr_mant.argumento[7]) = 0 Then
+		If Integer(istr_mant.Argumento[7]) = 0 Then
 			If iuo_Correlativo.Obtiene_Correlativo(Integer(istr_mant.argumento[1]), Integer(istr_mant.argumento[5]), True, SQLCA) Then															
 				istr_mant.argumento[7]			=	String(iuo_Correlativo.Correl_LoteFG)
 			Else
@@ -5203,14 +5198,14 @@ CHOOSE Case li_tabpage
 			OpenWithParm(iw_mantencion_1, istr_mant)
 			istr_mant.Solo_Consulta	=	lb_estado
 			
-			If NOT gstr_paramplanta.bultobins Then
-				AsignaPeso()
+			If Not gstr_paramplanta.bultobins Then
+				wf_AsignaPeso()
 			End If
 		End If
 	
-		If NOT istr_mant.Solo_Consulta Then
-			If dw_9.RowCount() > 0 Then Captura_totales()
-			If dw_9.RowCount() > 0 Then CargaEnvases()
+		If Not istr_mant.Solo_Consulta Then
+			If dw_9.RowCount() > 0 Then wf_captura_totales()
+			If dw_9.RowCount() > 0 Then wf_CargaEnvases()
 		End If
 		
 		dw_desverd.SetFilter("")
@@ -5232,17 +5227,17 @@ CHOOSE Case li_tabpage
 		SetNull(lstr_mant.dw2)
 		lstr_mant.Argumento[4]	=	'2'
 		OpenWithParm(iw_mantencion_2, lstr_mant)
-End CHOOSE
+End Choose
 
-If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida Then HabilitaEncab(False)
+If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND Not ib_Salida Then HabilitaEncab(False)
 
-If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND NOT ib_Salida Then
+If dw_3.RowCount() > 0 AND dw_5.RowCount() > 0 AND Not ib_Salida Then
 	pb_eliminar.Enabled	=	True
 	pb_grabar.Enabled		=	True
 	pb_eli_det.Enabled	=	True
 End If
 
-CHOOSE Case li_tabpage 
+Choose Case li_tabpage 
 	Case 1
 		If Not lb_Salir Then
 			istr_mant	=	Message.PowerObjectParm
@@ -5258,7 +5253,7 @@ CHOOSE Case li_tabpage
 		
 		dw_7.SetRow(il_Fila)
 		dw_7.SelectRow(il_Fila, True)
-End CHOOSE
+End Choose
 
 dw_6.SetFilter("")
 dw_6.Filter()
@@ -5276,33 +5271,33 @@ DO
 										 
 	istr_mant.Argumento[11] = String(dw_2.Object.mfge_totbul[1])
 
-	IF ll_fila_e = -1 THEN
+	If ll_fila_e = -1 Then
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", &
 										Information!, RetryCancel!)
-	ELSEIF ll_fila_e > 0 THEN
+	ElseIf ll_fila_e > 0 Then
 		
 		is_rut = dw_2.Object.mfge_rutcho[1]
 		
 		tab_1.tp_1.Enabled		=	True
 		tab_1.tp_2.Enabled		=	True
 		
-		IF dw_2.Object.mfge_estmov[1]	=	3 THEN
+		If dw_2.Object.mfge_estmov[1]	=	3 Then
 			tab_1.tp_3.Enabled		=	True
 			istr_mant.Solo_Consulta	=	True
 			dw_2.Enabled				=	False
 			
-		ELSE
+		Else
 			dw_2.Object.destare.Visible	=	True
 			//istr_mant.Solo_Consulta			=	False
-		END IF
+		End If
 		
 		istr_mant.Argumento[5]	=	String(dw_2.Object.espe_codigo[1])
 		
 		dw_2.SetRedraw(True)
 		
-//		IF Not gb_RecepcionDeProceso THEN
+//		If Not gb_RecepcionDeProceso Then
 //			iuo_Camion.Existe(1, dw_2.Object.cami_patent[1], True, sqlca)
-//		END IF
+//		End If
 		
 		//HabilitaEncab(False)
 		
@@ -5312,15 +5307,15 @@ DO
 		DO
 			dw_1.GetChild("lote_espcod", idwc_especiedet1)
 			idwc_especiedet1.SetTransObject(sqlca)
-			IF idwc_especiedet1.Retrieve() = 0 THEN
+			If idwc_especiedet1.Retrieve() = 0 Then
 				MessageBox("Atención","Falta Registrar Especies")
 				idwc_especiedet1.InsertRow(0)
-			ELSE
+			Else
 				idwc_especiedet1.SetSort("espe_nombre A")
 				idwc_especiedet1.Sort()
-			END IF
+			End If
 			
-			IF dw_1.Retrieve(Long(istr_mant.argumento[1]),&
+			If dw_1.Retrieve(Long(istr_mant.argumento[1]),&
 							     Long(istr_mant.argumento[2]),&
 							     Long(istr_mant.argumento[3]),&
 								  Integer(istr_mant.argumento[10])) = -1 OR &
@@ -5349,16 +5344,16 @@ DO
 				dw_desverd.Retrieve(Integer(istr_mant.argumento[10]),&
 								  Long(istr_mant.argumento[1]),&
 							     Long(istr_mant.argumento[2]),&
-								  Long(istr_mant.argumento[3])) = -1 THEN
+								  Long(istr_mant.argumento[3])) = -1 Then
 				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", &
 												Information!, RetryCancel!)
-			ELSE
+			Else
 				dw_pdf.Retrieve(Integer(istr_mant.argumento[10]), Long(istr_mant.argumento[1]), Long(istr_mant.argumento[2]), Long(istr_mant.argumento[3]))
 				idwc_variedad.Retrieve(dw_2.Object.espe_codigo[1])
 				id_KilosEnv	=	dw_2.Object.refg_tkenen[1]		
 				
 				//Para determinar Fuera de Rango
-				IF dw_2.Object.mfge_estmov[1] = 3 THEN Destare(False)
+				If dw_2.Object.mfge_estmov[1] = 3 Then wf_Destare(False)
 				
 				pb_eliminar.Enabled  	= NOT istr_mant.Solo_Consulta
 				pb_grabar.Enabled	= NOT istr_mant.Solo_Consulta
@@ -5368,16 +5363,16 @@ DO
 				dw_3.SetRow(1)
 				dw_3.SelectRow(1, True)
 				dw_3.SetFocus()
-			END IF
+			End If
 		LOOP WHILE respuesta = 1
 
-		IF respuesta = 2 THEN Close(This)
-	END IF
+		If respuesta = 2 Then Close(This)
+	End If
 	dw_2.SetRedraw(True)
 LOOP WHILE respuesta = 1
 							
 
-IF respuesta = 2 THEN Close(This)
+If respuesta = 2 Then Close(This)
 end event
 
 event ue_antesguardar;Date			ld_Fecha
@@ -5993,7 +5988,7 @@ Choose Case ls_Columna
 			This.SetItem(Row,ls_Columna,Dec(ls_Nula))
 			Return 1
 		Else
-			captura_Totales()
+			wf_captura_totales()
 		End If
 		
 	Case "mfge_totbul"
@@ -6051,83 +6046,75 @@ Str_busqueda	lstr_busq
 
 SetNull(ls_nula)
 
-CHOOSE CASE dwo.Name
-	CASE "buscacamion"
+Choose Case dwo.Name
+	Case "buscacamion"
 		buscacamion()
 		iuo_Camion.Existe(1, This.Object.cami_patent[row], True, sqlca)
 
-	CASE "destare"
-		IF Not ib_Salida THEN
+	Case "destare"
+		If Not ib_Salida Then
 			HabilitaSalida()
-		ELSE
-			Destare(True)
+		Else
+			wf_Destare(True)
 			ib_graba_destare = true
-			IF gstr_paramplanta.bultobins THEN
+			If gstr_paramplanta.bultobins Then
 				UpdateMovtoGranPesa()
-			END IF
-		END IF
+			End If
+		End If
 
-	CASE "camion"
-		IF ib_Salida THEN
-			IF Isnull(iuo_Camion.TaraCamion) THEN
+	Case "camion"
+		If ib_Salida Then
+			If Isnull(iuo_Camion.TaraCamion) Then
 				This.Object.refg_tkbsal[row]	=	0
-				
-			ELSE
+			Else
 				This.Object.refg_tkbsal[row]	=	iuo_Camion.TaraCamion
-				
-				captura_totales()
-			END IF
-		END IF
+				wf_captura_totales()
+			End If
+		End If
 		
-	CASE "carro"
-		IF ib_Salida THEN
-			IF Isnull(iuo_Camion.TaraCarro) THEN
+	Case "carro"
+		If ib_Salida Then
+			If Isnull(iuo_Camion.TaraCarro) Then
 				This.Object.refg_tkbsac[row]	=	0
-				
-			ELSE
+			Else
 				This.Object.refg_tkbsac[row]	=	iuo_Camion.TaraCarro
-				
-				captura_totales()
-			END IF
-		END IF
+				wf_captura_totales()
+			End If
+		End If
 		
-	CASE "romanacamion"
-		IF gstr_paramplanta.bultobins THEN
+	Case "romanacamion"
+		If gstr_paramplanta.bultobins Then
 
 			wstr_pesaje.puerta	=	istr_puertacomm
 			OpenWithParm(w_pesaje_romana_camion,wstr_pesaje)
-			
+
 			ld_peso					=	Message.DoubleParm
-			IF ld_peso > 0 THEN
-				IF NOT ib_salida THEN
+			If ld_peso > 0 Then
+				If Not ib_salida Then
 					This.Object.refg_tkbent[1]	=	ld_peso
-					
-				ELSE
+				Else
 					This.Object.refg_tkbsal[1]	=	ld_peso
-					
-				END IF
-			END IF
-		END IF
+				End If
+			End If
+		End If
 
-	CASE "romanacarro"
-		IF gstr_paramplanta.bultobins THEN
+	Case "romanacarro"
+		If gstr_paramplanta.bultobins Then
 			
 			wstr_pesaje.puerta	=	istr_puertacomm
 			OpenWithParm(w_pesaje_romana_camion,wstr_pesaje)
 			
 			ld_peso					=	Message.DoubleParm
-			IF ld_peso > 0 THEN
-				IF NOT ib_salida THEN
+			If ld_peso > 0 Then
+				If NOT ib_salida Then
 					This.Object.refg_tkbenc[1]	=	ld_peso
-					
-				ELSE
+				Else
 					This.Object.refg_tkbsac[1]	=	ld_peso
-					
-				END IF
-			END IF
-		END IF
+				End If
+			End If
+		End If
 
-	CASE "ordenproceso"
+	Case "ordenproceso"
 		lstr_busq.argum[1]	=	istr_mant.argumento[1]
 		lstr_busq.argum[15]	=	"8"
 		lstr_busq.argum[16]	=	istr_mant.Argumento[10]
@@ -6135,17 +6122,17 @@ CHOOSE CASE dwo.Name
 		OpenWithParm(w_busc_spro_ordenproceso_traspaso, lstr_busq)
 		lstr_busq	=	Message.PowerObjectParm
 
-		IF lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" THEN
-			IF Not Existedocproceso(gstr_ParamPlanta.CodigoPlanta,Integer(lstr_busq.argum[1])) THEN
+		If lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" Then
+			If Not Existedocproceso(gstr_ParamPlanta.CodigoPlanta,Integer(lstr_busq.argum[1])) Then
 				dw_2.SetItem(1, 'defg_docrel', integer(ls_Nula))
-				RETURN 1
-			ELSE
+				Return 1
+			Else
 				dw_2.Object.defg_docrel[row]		=	Integer(lstr_busq.argum[1])
-			END IF
+			End If
 			dw_2.AcceptText()
-		END IF
+		End If
 		
-END CHOOSE
+End Choose
 end event
 
 event dw_2::itemfocuschanged;call super::itemfocuschanged;IF is_rut <> "" THEN

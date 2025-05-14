@@ -99,8 +99,8 @@ public function integer carganropesmax ()
 public subroutine habilitadesverd ()
 public subroutine calculafechaestimada (integer ai_columna, string ai_horas)
 public function long cargaagronomo (string as_columna, string as_valor)
-public function boolean validaingresolote (boolean ab_mensaje)
 public subroutine recupera_packing (long al_productor)
+public function boolean wf_validaingresolote (boolean ab_mensaje)
 end prototypes
 
 event ue_nuevo_detalle();Integer	li_Lote, li_fila, li_preservafila
@@ -126,7 +126,7 @@ If gstr_paramplanta.binsabins OR gstr_paramplanta.bultobins Then
 	dw_3.Object.fgmb_base[il_Fila_det]			=	0
 	dw_3.Object.fgmb_posici[il_Fila_det]			=	0
 	dw_3.Object.fgmb_estado[il_Fila_det]		=	1
-	ib_modIfica = True
+	ib_modifica = True
 	dw_3.SetColumn("fgmb_nrotar")
 	
 	If gstr_paramplanta.bultobins Then
@@ -1124,7 +1124,26 @@ ELSE
 END IF
 end function
 
-public function boolean validaingresolote (boolean ab_mensaje);Integer		li_cont
+public subroutine recupera_packing (long al_productor);Long li_packing
+
+SELECT	max(prpk_bodega) 
+	INTO	:li_packing
+	FROM	dbo.prodpacking
+	WHERE	prod_codigo = :al_productor ;
+	
+IF sqlca.SQLCode = -1 THEN
+	F_errorbasedatos(sqlca,"Lectura Tabla prodpacking")
+ELSEIF sqlca.SQLCode = 0 THEN
+	dw_1.Object.lote_prdpak[1] = li_packing
+END IF
+
+RETURN 
+
+
+
+end subroutine
+
+public function boolean wf_validaingresolote (boolean ab_mensaje);Integer		li_cont
 Long			ll_Fila, ll_Totbul, ll_Bultos
 Decimal{3}	ld_TotNet, ld_Neto
 String		ls_mensaje, ls_colu[]
@@ -1201,25 +1220,6 @@ End If
 Return True
 end function
 
-public subroutine recupera_packing (long al_productor);Long li_packing
-
-SELECT	max(prpk_bodega) 
-	INTO	:li_packing
-	FROM	dbo.prodpacking
-	WHERE	prod_codigo = :al_productor ;
-	
-IF sqlca.SQLCode = -1 THEN
-	F_errorbasedatos(sqlca,"Lectura Tabla prodpacking")
-ELSEIF sqlca.SQLCode = 0 THEN
-	dw_1.Object.lote_prdpak[1] = li_packing
-END IF
-
-RETURN 
-
-
-
-end subroutine
-
 on w_mant_deta_lotesfrutagranel_recepcion.create
 int iCurrent
 call super::create
@@ -1273,7 +1273,7 @@ ias_campo[12]	= String(dw_1.object.lote_totnet[il_fila])
 ias_campo[13]	= String(dw_1.object.lote_kilpro[il_fila])
 ias_campo[15]	= String(dw_1.object.clie_codigo[il_fila])
 
-recupera_packing(dw_1.object.prod_codigo[il_fila])
+Recupera_Packing(dw_1.object.prod_codigo[il_fila])
 
 gstr_paramplanta.porcentaje	=	iuo_Productor.Porcentaje(dw_1.object.prod_codigo[il_fila], Integer(istr_mant.Argumento[5]), False, SQLCa)
 li_Lote								=	dw_1.Object.lote_codigo[il_fila]
@@ -1671,17 +1671,17 @@ dw_1.Object.t_2.visible 				= 	NOT gb_RecepcionDeProceso
 istr_mant 								= 	Message.PowerObjectParm
 iuo_bins									=	Create uo_bins
 
-IF Integer(istr_mant.argumento[5]) = 21 THEN
+If Integer(istr_mant.argumento[5]) = 21 Then
 	dw_3.DataObject	=	"dw_spro_movtobins_cerezas"
-ELSE
+Else
 	dw_3.DataObject	=	"dw_spro_movtobins"
-END IF
+End If
 
 li_Cliente	=	Integer(istr_mant.argumento[10])
 
-IF gstr_ParamPlanta.etiquetaembalaje = 0 THEN
+If gstr_ParamPlanta.etiquetaembalaje = 0 Then
 	dw_1 .DataObject	=	"dw_mant_spro_lotesfrutagranel_rec_kguia"
-END IF
+End If
 
 dw_1.SetItem(1,"clie_codigo",li_Cliente)
 
@@ -1719,9 +1719,9 @@ idwc_Predio.Retrieve(0)
 
 dw_1.GetChild("prcc_codigo",idwc_Cuartel)
 idwc_Cuartel.SetTransObject(SQLCA)
-IF idwc_cuartel.Retrieve(-1, -1) = 0 THEN
+If idwc_cuartel.Retrieve(-1, -1) = 0 Then
 	idwc_Cuartel.InsertRow(0)
-END IF
+End If
 
 dw_1.GetChild("cama_codigo",idwc_Camara)
 idwc_Camara.SetTransObject(SQLCA)
@@ -1731,32 +1731,32 @@ idwc_Camara.Sort()
 
 dw_1.GetChild("vari_codigo",idwc_Variedad)
 idwc_Variedad.SetTransObject(SQLCA)
-IF idwc_Variedad.Retrieve(Integer(istr_mant.argumento[5])) = 0 THEN
+If idwc_Variedad.Retrieve(Integer(istr_mant.argumento[5])) = 0 Then
 	MessageBox("Atención","Falta registrar las Variedades de la Especie")
 	idwc_Variedad.InsertRow(0)
-ELSE
+Else
 	idwc_Variedad.SetSort("vari_nombre A")
 	idwc_Camara.Sort()
-END IF
+End If
 
-dw_1.GetChild("nice_codigo", idwc_certificacion)
-idwc_certificacion.SetTransObject(sqlca)
+dw_1.GetChild("nice_codigo", idwc_certIficacion)
+idwc_certIficacion.SetTransObject(sqlca)
 
 dw_1.GetChild("lote_espcod", idwc_especie)
 idwc_especie.SetTransObject(sqlca)
-IF idwc_especie.Retrieve() = 0 THEN
+If idwc_especie.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Especies")
 	idwc_especie.InsertRow(0)
-ELSE
+Else
 	idwc_especie.SetSort("espe_nombre A")
 	idwc_especie.Sort()
-END IF
+End If
 
 dw_1.SetTransObject(Sqlca)
 istr_mant.dw.ShareData(dw_1)
 
-dw_2.Modify("datawindow.message.title='Error '+ is_titulo")
-dw_2.Modify("DataWindow.Footer.Height = 84")
+dw_2.ModIfy("datawindow.message.title='Error '+ is_titulo")
+dw_2.ModIfy("DataWindow.Footer.Height = 84")
 
 dw_2.SetTransObject(Sqlca)
 istr_mant.dw2.ShareData(dw_2)
@@ -1765,27 +1765,27 @@ dw_4.SetTransObject(Sqlca)
 dw_3.SetTransObject(Sqlca)
 ib_mantencion	=	False
 
-IF	istr_mant.argumento[9] 	=	'R' THEN
+If	istr_mant.argumento[9] 	=	'R' Then
 	w_maed_movtofrutagranel_recepcion.dw_9.ShareData(dw_4)
 	w_maed_movtofrutagranel_recepcion.dw_5.ShareData(dw_5)
 	w_maed_movtofrutagranel_recepcion.dw_spro_bins.ShareData(dw_3)
 	w_maed_movtofrutagranel_recepcion.dw_desverd.ShareData(dw_6)
 	
-ELSEIF istr_mant.argumento[9] 	=	'R2' THEN
+ElseIf istr_mant.argumento[9] 	=	'R2' Then
 	w_maed_movtofrutagranel_recep_reembalaje.dw_9.ShareData(dw_4)
 	w_maed_movtofrutagranel_recep_reembalaje.dw_5.ShareData(dw_5)
 	w_maed_movtofrutagranel_recep_reembalaje.dw_spro_bins.ShareData(dw_3)
 	w_maed_movtofrutagranel_recep_reembalaje.dw_desverd.ShareData(dw_6)
 	dw_6.Enabled	=	False
 	
-ELSEIF istr_mant.argumento[9] 	=	'R3' THEN
+ElseIf istr_mant.argumento[9] 	=	'R3' Then
 	w_maed_movtofrutagranel_mantreembala.dw_9.ShareData(dw_4)
 	w_maed_movtofrutagranel_mantreembala.dw_5.ShareData(dw_5)
 	w_maed_movtofrutagranel_mantreembala.dw_spro_bins.ShareData(dw_3)
 	w_maed_movtofrutagranel_mantreembala.dw_desverd.ShareData(dw_6)
 	dw_6.Enabled	=	False
 	
-ELSE
+Else
 	w_maed_movtofrutagranel_mantrecepcion.dw_9.ShareData(dw_4)
 	w_maed_movtofrutagranel_mantrecepcion.dw_5.ShareData(dw_5)
 	w_maed_movtofrutagranel_mantrecepcion.dw_spro_bins.ShareData(dw_3)
@@ -1796,17 +1796,17 @@ ELSE
 	dw_3.Enabled		=	False
 	dw_5.Enabled		=	False
 	
-	IF NOT gstr_paramplanta.palletdebins AND NOT gstr_paramplanta.binsabins THEN
-		IF NOT gstr_paramplanta.bultobins THEN
-			dw_2.Enabled		=	TRUE
-		ELSE
+	If NOT gstr_paramplanta.palletdebins AND NOT gstr_paramplanta.binsabins Then
+		If NOT gstr_paramplanta.bultobins Then
+			dw_2.Enabled		=	True
+		Else
 			dw_2.Enabled		=	False
-		END IF
+		End If
 		dw_2.Enabled		=	FAlse
-	END IF
+	End If
 	
 	ib_mantencion		=	True
-END IF
+End If
 
 dw_1.SetFocus()
 
@@ -1819,7 +1819,7 @@ iuo_tratamientofrio	=  Create uo_tratamientofrio
 iuo_bins					=	Create uo_bins
 iuo_planta				=	Create uo_plantadesp
 
-IF gstr_paramplanta.palletdebins THEN
+If gstr_paramplanta.palletdebins Then
 	dw_3.GetChild("fgmb_tibapa",idwc_tibapa)
 	idwc_tibapa.SetTransObject(sqlca)
 	idwc_tibapa.Retrieve(Integer(istr_mant.Argumento[10]),Integer(istr_mant.Argumento[1]), 1)
@@ -1827,9 +1827,9 @@ IF gstr_paramplanta.palletdebins THEN
 	dw_3.GetChild("bins_numero",idwc_bins)
 	idwc_bins.SetTransObject(sqlca)
 	idwc_bins.Retrieve(Integer(istr_mant.Argumento[10]),Integer(istr_mant.Argumento[1]), 0)
-END IF
+End If
 
-Identificabins()
+IdentIficaBins()
 end event
 
 event resize;Integer	maximo, li_posic_x, li_posic_y, li_visible = 0, &
@@ -1963,14 +1963,14 @@ end type
 
 event pb_acepta::clicked;istr_mant.respuesta = 1
 
-IF istr_mant.agrega THEN
+If istr_mant.Agrega Then
 	Parent.TriggerEvent("ue_nuevo")
-ELSE
-	IF gstr_paramplanta.palletdebins THEN
+Else
+	IF gstr_paramplanta.palletdebins Then
 		CargaPalletGranel()
-	END IF
+	End If
 	CloseWithReturn(Parent, istr_mant)
-END IF
+End If
 end event
 
 type pb_salir from w_mant_detalle_csd`pb_salir within w_mant_deta_lotesfrutagranel_recepcion
@@ -2116,7 +2116,7 @@ Choose Case ls_columna
 				End If
 			End If
 			
-			If ValidaIngresoLote(False) Then 
+			If wf_ValidaIngresoLote(False) Then 
 				ib_cambiocamara 	= 	True
 				CargaBins()
 			End If
@@ -2132,7 +2132,7 @@ Choose Case ls_columna
 						Return 1
 					Else
 						dw_1.Object.lote_desvrd[row] 	= 	iuo_tratamientofrio.ii_frio_cndesp
-						If ValidaIngresoLote(False) Then 
+						If wf_ValidaIngresoLote(False) Then 
 							ib_cambiocamara 					= 	True
 							CargaBins()
 						End If			
@@ -2148,7 +2148,7 @@ Choose Case ls_columna
 			Return 1
 		Else
 			dw_1.Object.lote_desvrd[row] 	= 	iuo_tratamientofrio.ii_frio_cndesp
-			If ValidaIngresoLote(False) Then 
+			If wf_ValidaIngresoLote(False) Then 
 				ib_cambiocamara 				= 	True
 				CargaBins()
 			End If			
@@ -2288,7 +2288,7 @@ end type
 
 event clicked;Integer li_fila, li_columna
 
-If Not ValidaIngresoLote(True) Then Return
+If Not wf_ValidaIngresoLote(True) Then Return
 
 If dw_1.Object.clie_codigo[il_fila] <> 590 Then dw_1.Object.lote_blokeo[il_fila] =	1
 

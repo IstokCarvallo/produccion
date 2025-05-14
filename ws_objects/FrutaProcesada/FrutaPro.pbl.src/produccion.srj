@@ -1,5 +1,5 @@
 ﻿$PBExportHeader$produccion.srj
-EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,0,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
+EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
 CMP:1,0,0,2,0,0,1
 COM:PRAGMATIC TECNOLOGIA E INFORMATICA
 DES:Fruta Procesada
@@ -471,6 +471,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_solicitud_ins
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_detallefumisolicitud_control,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_info_despafrigode_palletencab,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mant_palletencab_modifica,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_maed_recfruprocee_granel,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_mues_alpalletfruta_gen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP60.pbl,dddw_tipofrio,d
@@ -577,6 +578,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mant_recfruprocee
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mant_palletencab,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruprocee,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_mant_mues_alturapallet,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_sele_codigooperacional,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_ordencargaenca,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_camaras_planta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,w_info_existencia_por_dia,w
@@ -665,6 +667,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mant_modificaplan
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP62.pbl,w_info_fumigaenc,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_reetienc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,dw_mues_palletfruta_transitorio_origen_caja,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_statnombre,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_agrupa_repa_sag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP51.pbl,w_proc_traspaso_zonas,w
@@ -791,6 +794,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_operacion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mant_repalletenca,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletencab_trans_modifica,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,dw_mues_palletfruta_cajasprod,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_sele_codigooperacional,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_mant_mues_ordencargapallet,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,w_maed_generapalletdesdecajas_granel,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_busqueda,s

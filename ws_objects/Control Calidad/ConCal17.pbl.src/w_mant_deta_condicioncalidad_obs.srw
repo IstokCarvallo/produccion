@@ -5,9 +5,9 @@ end type
 end forward
 
 global type w_mant_deta_condicioncalidad_obs from w_mant_detalle_csd
-integer width = 2409
+integer width = 2437
 integer height = 1244
-string title = "FORMA DE PAGO"
+string title = "OBSERVACION NOTA CALIDAD"
 end type
 global w_mant_deta_condicioncalidad_obs w_mant_deta_condicioncalidad_obs
 
@@ -45,24 +45,24 @@ type pb_primero from w_mant_detalle_csd`pb_primero within w_mant_deta_condicionc
 end type
 
 type pb_cancela from w_mant_detalle_csd`pb_cancela within w_mant_deta_condicioncalidad_obs
-integer x = 2098
+integer x = 1998
 integer y = 360
 end type
 
 type pb_acepta from w_mant_detalle_csd`pb_acepta within w_mant_deta_condicioncalidad_obs
-integer x = 2098
+integer x = 1998
 integer y = 144
 end type
 
 type pb_salir from w_mant_detalle_csd`pb_salir within w_mant_deta_condicioncalidad_obs
-integer x = 2098
+integer x = 1998
 integer y = 576
 end type
 
 type dw_1 from w_mant_detalle_csd`dw_1 within w_mant_deta_condicioncalidad_obs
 integer x = 82
-integer width = 1920
-integer height = 1028
+integer width = 1847
+integer height = 944
 string dataobject = "dw_mant_mues_condicioncalidad_obs"
 end type
 

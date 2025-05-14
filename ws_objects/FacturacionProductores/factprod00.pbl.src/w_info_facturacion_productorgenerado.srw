@@ -145,62 +145,10 @@ Long		il_cont
 end variables
 
 forward prototypes
-public subroutine wf_cargaproforma (integer cliente, long planta, date periodo)
 public subroutine wf_existefactura ()
-public subroutine wf_buscaproforma (integer cliente, long planta, date periodo)
+public subroutine wf_buscaproforma (integer cliente, long planta, date periodo, integer especie)
+public subroutine wf_cargaproforma (integer cliente, long planta, date periodo, integer especie)
 end prototypes
-
-public subroutine wf_cargaproforma (integer cliente, long planta, date periodo);Integer	li_Cantidad, li_Secuencia
-Date		ld_Desde, ld_Hasta
-
-
- Select Count(plde_codigo)
-	Into :li_Cantidad
-	  From dbo.facturprodenca
-	 Where clie_codigo= :Cliente
-		  And :Planta in (-9,plde_codigo)
-		  And Datediff(mm, :Periodo, faen_fechaf) = 0
-		  And faen_estado = 1
-	Using SQLCA;
-
-IF SQLCA.SQLCode = -1 THEN
-	MessageBox("Error", "No se pudo efectur revision.", StopSign!)
-	em_numero.Text = ''
-	em_mDesde.Text = ''
-	em_mHasta.Text = ''
-	Return
-Else
-	If li_Cantidad = 0 Then
-		MessageBox("Atencion", "No existen Facturas proforma para periodo seleccionado.", Exclamation!)
-		em_numero.Text = ''
-		em_mDesde.Text = ''
-		em_mHasta.Text = ''
-		Return
-	ElseIf li_Cantidad = 1 Then
-		
-		 Select faen_secuen, faen_fecini, faen_fecter
-			Into :li_Secuencia, :ld_Desde, :ld_Hasta
-			  From dbo.facturprodenca
-			 Where clie_codigo= :Cliente
-				  And :Planta in (-9,plde_codigo)
-				  And Datediff(mm, :Periodo, faen_fechaf) = 0
-				   And faen_estado = 1
-			Using SQLCA;
-			
-		If SQLCA.SQLCode = -1 THEN
-			MessageBox("Error", "No se pudo conectar a la base de datos.", StopSign!)
-			Return
-		Else
-			em_numero.Text = String(li_Secuencia)
-			em_mDesde.Text = String(ld_Desde, 'dd/mm/yyyy')
-			em_mHasta.Text = String(ld_Hasta, 'dd/mm/yyyy')
-		End If
-	Else
-		wf_BuscaProforma(Cliente, Planta, Periodo)
-		
-	End If
-END IF
-end subroutine
 
 public subroutine wf_existefactura ();Integer	li_cliente, li_planta
 Date		ld_fecha
@@ -244,13 +192,14 @@ em_cambio.Text	=	String(ld_cambio)
 
 end subroutine
 
-public subroutine wf_buscaproforma (integer cliente, long planta, date periodo);str_busqueda	lstr_busq
+public subroutine wf_buscaproforma (integer cliente, long planta, date periodo, integer especie);str_busqueda	lstr_busq
 str_Mant			lstr_Mant
 
 lstr_Busq.Argum[1]	=	String(Cliente)
 lstr_Busq.Argum[2]	=	String(Planta)
 lstr_Busq.Argum[3]	=	String(Periodo, 'dd/mm/yyyy')
 lstr_Busq.Argum[4]	=	'1'
+lstr_Busq.Argum[5]	=	String(Especie)
 
 OpenWithParm(w_busc_proforma,lstr_busq)
 
@@ -260,8 +209,63 @@ If UpperBound(lstr_Mant.Argumento) > 0 Then
 	em_numero.Text	= lstr_Mant.Argumento[1]
 	em_mDesde.Text	= lstr_Mant.Argumento[2]
 	em_mHasta.Text	= lstr_Mant.Argumento[3]
+	uo_SelEspecie.Todos(False)
+	uo_SelEspecie.Inicia(Integer(lstr_Mant.Argumento[4]))
 End If
 
+end subroutine
+
+public subroutine wf_cargaproforma (integer cliente, long planta, date periodo, integer especie);Integer	li_Cantidad, li_Secuencia
+Date		ld_Desde, ld_Hasta
+
+
+ Select Count(plde_codigo)
+	Into :li_Cantidad
+	  From dbo.facturprodenca
+	 Where clie_codigo= :Cliente
+		  And :Planta in (-9,plde_codigo)
+		  And Datediff(mm, :Periodo, faen_fechaf) = 0
+		  And faen_estado = 1
+	Using SQLCA;
+
+IF SQLCA.SQLCode = -1 THEN
+	MessageBox("Error", "No se pudo efectur revision.", StopSign!)
+	em_numero.Text = ''
+	em_mDesde.Text = ''
+	em_mHasta.Text = ''
+	Return
+Else
+	If li_Cantidad = 0 Then
+		MessageBox("Atencion", "No existen Facturas proforma para periodo seleccionado.", Exclamation!)
+		em_numero.Text = ''
+		em_mDesde.Text = ''
+		em_mHasta.Text = ''
+		Return
+	ElseIf li_Cantidad = 1 Then
+		
+		 Select faen_secuen, faen_fecini, faen_fecter
+			Into :li_Secuencia, :ld_Desde, :ld_Hasta
+			  From dbo.facturprodenca
+			 Where clie_codigo= :Cliente
+				  And :Planta in (-9,plde_codigo)
+				  And :Especie in(-1, espe_codigo)
+				  And Datediff(mm, :Periodo, faen_fechaf) = 0
+				   And faen_estado = 1
+			Using SQLCA;
+			
+		If SQLCA.SQLCode = -1 THEN
+			MessageBox("Error", "No se pudo conectar a la base de datos.", StopSign!)
+			Return
+		Else
+			em_numero.Text = String(li_Secuencia)
+			em_mDesde.Text = String(ld_Desde, 'dd/mm/yyyy')
+			em_mHasta.Text = String(ld_Hasta, 'dd/mm/yyyy')
+		End If
+	Else
+		wf_BuscaProforma(Cliente, Planta, Periodo, Especie)
+		
+	End If
+END IF
 end subroutine
 
 on w_info_facturacion_productorgenerado.create
@@ -461,10 +465,10 @@ Integer	ll_Filas, li_Planta, li_Zona, li_Consolidado, li_Variedades, &
 Date		ld_MesProceso, ld_Fdesde, ld_Fhasta
 Decimal{2}	ld_PorIVA, ld_ValCambio
 
-IF il_cont > 1 THEN
+If il_cont > 1 Then
 	MessageBox( "Atención", "Revise Datos de De valores de Tipo Cambio.", StopSign!, Ok!)
 	Return
-END IF					 
+End If					 
 
 DataWindowChild	ldwc_planta
 istr_info.titulo	= 'FACTURACION MENSUAL DE PRODUCTORES'
@@ -481,54 +485,54 @@ If IsNull(li_Secuencia) Or li_Secuencia = 0 Then
 End If
 
 li_Guia	=	0
-IF cbx_guia.CheCked THEN
+If cbx_guia.CheCked Then
 	li_Guia	=	1
-END IF
+End If
 
-IF cbx_1.checked THEN
+If cbx_1.checked Then
 	vinf.dw_1.DataObject = "dw_info_facturacion_productorgeneradodet"
-ELSEIF rb_compara.Checked THEN
+ElseIf rb_compara.Checked Then
 	vinf.dw_1.DataObject = "dw_info_facturacion_productorgenerado_grnel" 
-ELSEIF rb_produccion.Checked THEN
+ElseIf rb_produccion.Checked Then
 	vinf.dw_1.DataObject = "dw_info_facturacion_productorgenerado" 
-ELSE
+Else
 	vinf.dw_1.DataObject = "dw_info_facturacion_productorgeneradoproceso" 
-END IF
+End If
 
-IF cbx_todos.checked = True THEN
+If cbx_todos.checked = True Then
 	li_zona = -1
-ElSE
+Else
 	li_zona = Integer(istr_mant.argumento[10])
-END IF	
+End If	
 
-IF cbx_consolidado.checked = True THEN 
+If cbx_consolidado.checked = True Then 
 	li_planta = -9
 	wf_ExisteFactura()
-ELSE
+Else
 	li_Planta		=	Integer(istr_mant.argumento[2])
 	wf_ExisteFactura()
-END IF
+End If
 
-IF cbx_ConsoVariedades.Checked THEN
+If cbx_ConsoVariedades.Checked Then
 	li_Variedades	=	-9
-ELSE
+Else
 	li_Variedades	=	0
-END IF
+End If
 
-IF cbx_ConsoCalibres.Checked THEN
+If cbx_ConsoCalibres.Checked Then
 	li_Calibres	=	-9
-ELSE
+Else
 	li_Calibres	=	0
-END IF
+End If
 
-IF cbx_ConsoEmbalajes.Checked THEN
+If cbx_ConsoEmbalajes.Checked Then
 	li_Embalajes	=	-9
-ELSE
+Else
 	li_Embalajes	=	0
-END IF
+End If
 
 ld_MesProceso 	= 	Date("01/" + em_Fecha.Text)
-IF il_cont > 0 THEN Return
+If il_cont > 0 Then Return
 
 ld_PorIVA		=	Dec(em_poriva.Text)
 ld_ValCambio	=	Dec(em_Cambio.Text)
@@ -541,15 +545,15 @@ vinf.dw_1.SetTransObject(sqlca)
 
 ll_Filas	=	vinf.dw_1.Retrieve(uo_SelCliente.Codigo, li_Planta, ld_MesProceso, uo_SelProductor.Codigo,li_zona, ld_ValCambio, ld_PorIVA,&
 										li_Variedades,li_Calibres,li_Embalajes,li_Guia, ld_Fdesde,ld_Fhasta,uo_SelEspecie.Codigo, li_Secuencia)
-IF ll_Filas = -1 THEN
+If ll_Filas = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Filas = 0 THEN
+ElseIf ll_Filas = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)				
 end event
@@ -621,7 +625,7 @@ end type
 
 event modified;istr_mant.argumento[3]	=	'01/' + This.Text
 wf_ExisteFactura()
-wf_CargaProforma(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]), Date('01/' + This.Text))
+wf_CargaProforma(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]), Date('01/' + This.Text), uo_SelEspecie.Codigo)
 
 end event
 
@@ -1313,7 +1317,7 @@ end type
 type cb_proforma from commandbutton within w_info_facturacion_productorgenerado
 integer x = 2153
 integer y = 892
-integer width = 123
+integer width = 119
 integer height = 92
 integer taborder = 60
 boolean bringtotop = true
@@ -1326,6 +1330,6 @@ string facename = "Arial"
 string text = "..."
 end type
 
-event clicked;wf_BuscaProforma(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]), Date('01/' + em_fecha.Text))
+event clicked;wf_BuscaProforma(uo_SelCliente.Codigo, Long(istr_mant.argumento[2]), Date('01/' + em_fecha.Text), uo_SelEspecie.Codigo)
 end event
 

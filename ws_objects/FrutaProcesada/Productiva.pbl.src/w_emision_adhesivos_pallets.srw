@@ -307,11 +307,11 @@ DECLARE Codigo PROCEDURE FOR dbo.genera_adhesivos_pallets
 			
 EXECUTE Codigo;
 
-IF SQLCA.SQLCode = -1 THEN
+If SQLCA.SQLCode = -1 Then
 	F_ErrorBaseDatos(SQLCA, "Lectura del Procedimiento Almacenado genera_adhesivos_pallets" )				
-ELSE
+Else
 	FETCH Codigo INTO :ls_respuesta;
-END IF	
+End If	
 	
 CLOSE Codigo;
 

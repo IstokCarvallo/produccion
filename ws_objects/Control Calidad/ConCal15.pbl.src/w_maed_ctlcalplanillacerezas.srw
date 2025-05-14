@@ -2670,8 +2670,8 @@ end type
 type dw_3 from datawindow within w_maed_ctlcalplanillacerezas
 integer x = 754
 integer y = 692
-integer width = 3205
-integer height = 260
+integer width = 3136
+integer height = 224
 integer taborder = 20
 boolean bringtotop = true
 string dataobject = "dw_mues_ctlcallotes"
