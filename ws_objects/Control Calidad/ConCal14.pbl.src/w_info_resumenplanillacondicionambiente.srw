@@ -233,7 +233,7 @@ end type
 type st_titulo from w_para_informes`st_titulo within w_info_resumenplanillacondicionambiente
 integer x = 293
 integer y = 304
-integer width = 1833
+integer width = 1920
 string text = "Condición y Ambiente en Camara AC"
 end type
 
@@ -269,7 +269,7 @@ ElseIf li_fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Object.DataWindow.Zoom = 70
+	vinf.dw_1.Object.DataWindow.Zoom = 65
 	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 End If
 
@@ -399,9 +399,9 @@ string text = " Fecha Control "
 end type
 
 type st_44 from statictext within w_info_resumenplanillacondicionambiente
-integer x = 293
+integer x = 251
 integer y = 416
-integer width = 1833
+integer width = 1920
 integer height = 1100
 integer textsize = -10
 integer weight = 700

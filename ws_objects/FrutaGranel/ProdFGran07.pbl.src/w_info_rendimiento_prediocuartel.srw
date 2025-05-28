@@ -30,6 +30,8 @@ type st_8 from statictext within w_info_rendimiento_prediocuartel
 end type
 type cbx_consfec from checkbox within w_info_rendimiento_prediocuartel
 end type
+type cbx_lote from checkbox within w_info_rendimiento_prediocuartel
+end type
 end forward
 
 global type w_info_rendimiento_prediocuartel from w_para_informes
@@ -52,6 +54,7 @@ em_fecini em_fecini
 em_fecter em_fecter
 st_8 st_8
 cbx_consfec cbx_consfec
+cbx_lote cbx_lote
 end type
 global w_info_rendimiento_prediocuartel w_info_rendimiento_prediocuartel
 
@@ -72,6 +75,7 @@ this.em_fecini=create em_fecini
 this.em_fecter=create em_fecter
 this.st_8=create st_8
 this.cbx_consfec=create cbx_consfec
+this.cbx_lote=create cbx_lote
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_2
 this.Control[iCurrent+2]=this.uo_seleprod
@@ -87,6 +91,7 @@ this.Control[iCurrent+11]=this.em_fecini
 this.Control[iCurrent+12]=this.em_fecter
 this.Control[iCurrent+13]=this.st_8
 this.Control[iCurrent+14]=this.cbx_consfec
+this.Control[iCurrent+15]=this.cbx_lote
 end on
 
 on w_info_rendimiento_prediocuartel.destroy
@@ -105,6 +110,7 @@ destroy(this.em_fecini)
 destroy(this.em_fecter)
 destroy(this.st_8)
 destroy(this.cbx_consfec)
+destroy(this.cbx_lote)
 end on
 
 event open;call super::open;Boolean	lb_cerrar = False
@@ -156,10 +162,10 @@ end type
 event pb_acepta::clicked;SetPointer(HourGlass!)
 Date		ld_fecini, ld_fecter
 Long		fila
-Integer	li_consfecha
+Integer	li_consfecha, li_Lote = 1
 String	ls_texto
 
-istr_info.titulo	= "INFORME DE RENDIMIENTO POR PREDIO/CUARTEL"
+istr_info.titulo	= "INFORME DE REndIMIENTO POR PREDIO/CUARTEL"
 istr_info.copias	= 1
 
 OpenWithParm(vinf, istr_info)
@@ -168,30 +174,30 @@ ls_texto		=	'Desde ' + em_fecini.Text + ' Hasta ' + em_fecter.Text
 ld_fecini	=	Date(em_fecini.Text)
 ld_fecter	=	Date(em_fecter.Text)
 
-IF cbx_consfec.Checked THEN
+If cbx_consfec.Checked Then
 	li_consfecha	=	1
 	ls_texto			=	ls_texto + ', Fechas Consolidadas.'
-ELSE
+Else
 	li_consfecha	=	0
 	ls_texto			=	ls_texto + ', Abierto por fecha.'
-END IF
+End If
 
-vinf.dw_1.DataObject = "dw_informe_rendimiento_prediocuartel"
+If cbx_lote.Checked Then li_Lote	=	0
+
+vinf.dw_1.DataObject = "dw_informe_rEndimiento_prediocuartel"
 vinf.dw_1.SetTransObject(sqlca)
 
-fila = vinf.dw_1.Retrieve(uo_seleprod.Codigo, uo_selepred.Codigo, uo_selecuar.Codigo, &
-								  ld_fecini, ld_fecter, li_consfecha)
+fila = vinf.dw_1.Retrieve(uo_seleprod.Codigo, uo_selepred.Codigo, uo_selecuar.Codigo, ld_fecini, ld_fecter, li_consfecha, li_Lote)
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
 	vinf.dw_1.Object.Titulo.Text 	=	ls_texto
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
@@ -202,9 +208,9 @@ integer y = 1176
 end type
 
 type st_2 from statictext within w_info_rendimiento_prediocuartel
-integer x = 457
+integer x = 338
 integer y = 552
-integer width = 402
+integer width = 265
 integer height = 64
 boolean bringtotop = true
 integer textsize = -10
@@ -220,7 +226,7 @@ boolean focusrectangle = false
 end type
 
 type uo_seleprod from uo_seleccion_productor within w_info_rendimiento_prediocuartel
-integer x = 951
+integer x = 713
 integer y = 460
 integer taborder = 40
 boolean bringtotop = true
@@ -274,7 +280,7 @@ boolean focusrectangle = false
 end type
 
 type uo_selepred from uo_seleccion_prodpredio within w_info_rendimiento_prediocuartel
-integer x = 951
+integer x = 713
 integer y = 732
 integer height = 184
 integer taborder = 50
@@ -293,8 +299,8 @@ END IF
 end event
 
 type uo_selecuar from uo_seleccion_prodcuarteles within w_info_rendimiento_prediocuartel
-integer x = 951
-integer y = 952
+integer x = 713
+integer y = 944
 integer taborder = 20
 boolean bringtotop = true
 boolean enabled = false
@@ -323,9 +329,9 @@ boolean focusrectangle = false
 end type
 
 type st_5 from statictext within w_info_rendimiento_prediocuartel
-integer x = 457
+integer x = 338
 integer y = 820
-integer width = 402
+integer width = 265
 integer height = 64
 boolean bringtotop = true
 integer textsize = -10
@@ -341,9 +347,9 @@ boolean focusrectangle = false
 end type
 
 type st_6 from statictext within w_info_rendimiento_prediocuartel
-integer x = 457
+integer x = 338
 integer y = 1040
-integer width = 402
+integer width = 265
 integer height = 64
 boolean bringtotop = true
 integer textsize = -10
@@ -463,5 +469,23 @@ string facename = "Tahoma"
 long textcolor = 16777215
 long backcolor = 553648127
 string text = "Consolida"
+end type
+
+type cbx_lote from checkbox within w_info_rendimiento_prediocuartel
+integer x = 1723
+integer y = 1032
+integer width = 375
+integer height = 80
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Lote"
+boolean lefttext = true
 end type
 

@@ -1167,7 +1167,7 @@ end function
 
 private function boolean of_generaguia_fruticolagde (long planta, long cliente, long movimiento, integer tipo);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut, ls_Mosca = ''
+String		ls_Referencia, ls_Rut, ls_Mosca = '', ls_GGN = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -1237,13 +1237,19 @@ Else
 	
 	If Planta <> 4014 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA'
 	
+	If ids_Source_GDE.Object.ggn[1] = '' Or IsNull(ids_Source_GDE.Object.ggn[1]) Then
+		ls_GGN = ''
+	Else
+		ls_GGN = ' \ FRUTA CERTIFICADA GLOBALG.A.P. GGN : ' + ids_Source_GDE.Object.ggn[1]
+	End If
+	
 	of_InsertaRegistro('Monto Exento', '')
 	of_InsertaRegistro('Tasa Iva', '19')
 	of_InsertaRegistro('xMontoEscrito', '')
-	of_InsertaRegistro('xObservaciones', Mid(ids_Source_GDE.Object.defe_glosa[1], 1, 120))
+	of_InsertaRegistro('xObservaciones', Mid(Trim(ids_Source_GDE.Object.defe_glosa[1]) + ' \ FRUTA CERTIFICADA SYSTEMS APPROACH', 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid(ids_Source_GDE.Object.defe_glosas[1] + ls_Mosca, 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ' \ FRUTA CERTIFICADA GLOBALG.A.P. GGN : ' + ids_Source_GDE.Object.ggn[1], 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid(' CSG:' + ids_Source_GDE.Object.CSG[1] + ' CSP:' + ids_Source_GDE.Object.CSP[1], 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ls_GGN, 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid(' CSG:' + ids_Source_GDE.Object.CSG[1] /*+ ' CSP:' + ids_Source_GDE.Object.CSP[1]*/, 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
 	

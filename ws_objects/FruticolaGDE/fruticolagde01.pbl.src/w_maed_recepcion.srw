@@ -230,6 +230,8 @@ DO
 					dw_1.SetRow(1)
 					dw_1.SelectRow(1,True)
 					dw_1.SetFocus()
+					
+					idwc_Color.Retrieve(dw_3.Object.espe_codigo[1])
 					HabilitaEncab(False)
 				ELSE
 					pb_ins_det.SetFocus()

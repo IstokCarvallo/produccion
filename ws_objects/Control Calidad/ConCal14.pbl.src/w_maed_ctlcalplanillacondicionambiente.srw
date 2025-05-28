@@ -1025,8 +1025,8 @@ end type
 type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_ctlcalplanillacondicionambiente
 integer x = 265
 integer y = 36
-integer width = 2377
-integer height = 896
+integer width = 2318
+integer height = 888
 integer taborder = 10
 string dataobject = "dw_mant_ctlcalcondicionambiente_enca"
 boolean controlmenu = true
