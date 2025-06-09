@@ -32,8 +32,6 @@ type st_variedad from statictext within w_info_pallet_historico_embar
 end type
 type st_15 from statictext within w_info_pallet_historico_embar
 end type
-type st_9 from statictext within w_info_pallet_historico_embar
-end type
 type cbx_packing from checkbox within w_info_pallet_historico_embar
 end type
 type dw_packing from datawindow within w_info_pallet_historico_embar
@@ -220,7 +218,6 @@ dw_pesoneto dw_pesoneto
 tit_peso tit_peso
 st_variedad st_variedad
 st_15 st_15
-st_9 st_9
 cbx_packing cbx_packing
 dw_packing dw_packing
 st_10 st_10
@@ -448,7 +445,6 @@ this.dw_pesoneto=create dw_pesoneto
 this.tit_peso=create tit_peso
 this.st_variedad=create st_variedad
 this.st_15=create st_15
-this.st_9=create st_9
 this.cbx_packing=create cbx_packing
 this.dw_packing=create dw_packing
 this.st_10=create st_10
@@ -544,86 +540,85 @@ this.Control[iCurrent+12]=this.dw_pesoneto
 this.Control[iCurrent+13]=this.tit_peso
 this.Control[iCurrent+14]=this.st_variedad
 this.Control[iCurrent+15]=this.st_15
-this.Control[iCurrent+16]=this.st_9
-this.Control[iCurrent+17]=this.cbx_packing
-this.Control[iCurrent+18]=this.dw_packing
-this.Control[iCurrent+19]=this.st_10
-this.Control[iCurrent+20]=this.cbx_operacion
-this.Control[iCurrent+21]=this.dw_operaciones
-this.Control[iCurrent+22]=this.st_14
-this.Control[iCurrent+23]=this.cbx_embarque
-this.Control[iCurrent+24]=this.dw_embarques
-this.Control[iCurrent+25]=this.st_17
-this.Control[iCurrent+26]=this.em_fzarpe
-this.Control[iCurrent+27]=this.rb_fecha
-this.Control[iCurrent+28]=this.cbx_1
-this.Control[iCurrent+29]=this.rb_prod
-this.Control[iCurrent+30]=this.st_embalaje
-this.Control[iCurrent+31]=this.em_embalaje
-this.Control[iCurrent+32]=this.cbx_embalaje
-this.Control[iCurrent+33]=this.cb_buscaembalaje
-this.Control[iCurrent+34]=this.st_11
-this.Control[iCurrent+35]=this.rb_pallet
-this.Control[iCurrent+36]=this.gb_3
-this.Control[iCurrent+37]=this.rb_embalaje
-this.Control[iCurrent+38]=this.cbx_calidad
-this.Control[iCurrent+39]=this.em_calidad
-this.Control[iCurrent+40]=this.st_12
-this.Control[iCurrent+41]=this.cbx_repalletizados
-this.Control[iCurrent+42]=this.st_13
-this.Control[iCurrent+43]=this.st_48
-this.Control[iCurrent+44]=this.dw_destino
-this.Control[iCurrent+45]=this.cbx_destino
-this.Control[iCurrent+46]=this.cbx_destcons
-this.Control[iCurrent+47]=this.st_19
-this.Control[iCurrent+48]=this.cbx_status
-this.Control[iCurrent+49]=this.cbx_consstatus
-this.Control[iCurrent+50]=this.st_20
-this.Control[iCurrent+51]=this.dw_status
-this.Control[iCurrent+52]=this.uo_selespecie
-this.Control[iCurrent+53]=this.uo_selvariedad
-this.Control[iCurrent+54]=this.cbx_varirotula
-this.Control[iCurrent+55]=this.dw_plantadestino
-this.Control[iCurrent+56]=this.st_plantadestino
-this.Control[iCurrent+57]=this.gb_5
-this.Control[iCurrent+58]=this.st_18
-this.Control[iCurrent+59]=this.dw_tiposalida
-this.Control[iCurrent+60]=this.st_22
-this.Control[iCurrent+61]=this.cbx_2
-this.Control[iCurrent+62]=this.st_21
-this.Control[iCurrent+63]=this.dw_frio
-this.Control[iCurrent+64]=this.cbx_frio
-this.Control[iCurrent+65]=this.st_23
-this.Control[iCurrent+66]=this.cbx_excluye
-this.Control[iCurrent+67]=this.st_24
-this.Control[iCurrent+68]=this.uo_selcondicion
-this.Control[iCurrent+69]=this.gb_4
-this.Control[iCurrent+70]=this.st_5
-this.Control[iCurrent+71]=this.st_25
-this.Control[iCurrent+72]=this.st_29
-this.Control[iCurrent+73]=this.ddlb_calificacion
-this.Control[iCurrent+74]=this.cbx_todcalifi
-this.Control[iCurrent+75]=this.cbx_consolcalifi
-this.Control[iCurrent+76]=this.uo_selproductor
-this.Control[iCurrent+77]=this.st_26
-this.Control[iCurrent+78]=this.st_27
-this.Control[iCurrent+79]=this.em_iniemb
-this.Control[iCurrent+80]=this.st_28
-this.Control[iCurrent+81]=this.em_finemb
-this.Control[iCurrent+82]=this.st_30
-this.Control[iCurrent+83]=this.st_16
-this.Control[iCurrent+84]=this.st_32
-this.Control[iCurrent+85]=this.em_norden
-this.Control[iCurrent+86]=this.cbx_3
-this.Control[iCurrent+87]=this.cbx_consorden
-this.Control[iCurrent+88]=this.dw_excel
-this.Control[iCurrent+89]=this.cbx_calrotu
-this.Control[iCurrent+90]=this.st_31
-this.Control[iCurrent+91]=this.dw_exportador
-this.Control[iCurrent+92]=this.st_33
-this.Control[iCurrent+93]=this.st_34
-this.Control[iCurrent+94]=this.cbx_4
-this.Control[iCurrent+95]=this.uo_selcliente
+this.Control[iCurrent+16]=this.cbx_packing
+this.Control[iCurrent+17]=this.dw_packing
+this.Control[iCurrent+18]=this.st_10
+this.Control[iCurrent+19]=this.cbx_operacion
+this.Control[iCurrent+20]=this.dw_operaciones
+this.Control[iCurrent+21]=this.st_14
+this.Control[iCurrent+22]=this.cbx_embarque
+this.Control[iCurrent+23]=this.dw_embarques
+this.Control[iCurrent+24]=this.st_17
+this.Control[iCurrent+25]=this.em_fzarpe
+this.Control[iCurrent+26]=this.rb_fecha
+this.Control[iCurrent+27]=this.cbx_1
+this.Control[iCurrent+28]=this.rb_prod
+this.Control[iCurrent+29]=this.st_embalaje
+this.Control[iCurrent+30]=this.em_embalaje
+this.Control[iCurrent+31]=this.cbx_embalaje
+this.Control[iCurrent+32]=this.cb_buscaembalaje
+this.Control[iCurrent+33]=this.st_11
+this.Control[iCurrent+34]=this.rb_pallet
+this.Control[iCurrent+35]=this.gb_3
+this.Control[iCurrent+36]=this.rb_embalaje
+this.Control[iCurrent+37]=this.cbx_calidad
+this.Control[iCurrent+38]=this.em_calidad
+this.Control[iCurrent+39]=this.st_12
+this.Control[iCurrent+40]=this.cbx_repalletizados
+this.Control[iCurrent+41]=this.st_13
+this.Control[iCurrent+42]=this.st_48
+this.Control[iCurrent+43]=this.dw_destino
+this.Control[iCurrent+44]=this.cbx_destino
+this.Control[iCurrent+45]=this.cbx_destcons
+this.Control[iCurrent+46]=this.st_19
+this.Control[iCurrent+47]=this.cbx_status
+this.Control[iCurrent+48]=this.cbx_consstatus
+this.Control[iCurrent+49]=this.st_20
+this.Control[iCurrent+50]=this.dw_status
+this.Control[iCurrent+51]=this.uo_selespecie
+this.Control[iCurrent+52]=this.uo_selvariedad
+this.Control[iCurrent+53]=this.cbx_varirotula
+this.Control[iCurrent+54]=this.dw_plantadestino
+this.Control[iCurrent+55]=this.st_plantadestino
+this.Control[iCurrent+56]=this.gb_5
+this.Control[iCurrent+57]=this.st_18
+this.Control[iCurrent+58]=this.dw_tiposalida
+this.Control[iCurrent+59]=this.st_22
+this.Control[iCurrent+60]=this.cbx_2
+this.Control[iCurrent+61]=this.st_21
+this.Control[iCurrent+62]=this.dw_frio
+this.Control[iCurrent+63]=this.cbx_frio
+this.Control[iCurrent+64]=this.st_23
+this.Control[iCurrent+65]=this.cbx_excluye
+this.Control[iCurrent+66]=this.st_24
+this.Control[iCurrent+67]=this.uo_selcondicion
+this.Control[iCurrent+68]=this.gb_4
+this.Control[iCurrent+69]=this.st_5
+this.Control[iCurrent+70]=this.st_25
+this.Control[iCurrent+71]=this.st_29
+this.Control[iCurrent+72]=this.ddlb_calificacion
+this.Control[iCurrent+73]=this.cbx_todcalifi
+this.Control[iCurrent+74]=this.cbx_consolcalifi
+this.Control[iCurrent+75]=this.uo_selproductor
+this.Control[iCurrent+76]=this.st_26
+this.Control[iCurrent+77]=this.st_27
+this.Control[iCurrent+78]=this.em_iniemb
+this.Control[iCurrent+79]=this.st_28
+this.Control[iCurrent+80]=this.em_finemb
+this.Control[iCurrent+81]=this.st_30
+this.Control[iCurrent+82]=this.st_16
+this.Control[iCurrent+83]=this.st_32
+this.Control[iCurrent+84]=this.em_norden
+this.Control[iCurrent+85]=this.cbx_3
+this.Control[iCurrent+86]=this.cbx_consorden
+this.Control[iCurrent+87]=this.dw_excel
+this.Control[iCurrent+88]=this.cbx_calrotu
+this.Control[iCurrent+89]=this.st_31
+this.Control[iCurrent+90]=this.dw_exportador
+this.Control[iCurrent+91]=this.st_33
+this.Control[iCurrent+92]=this.st_34
+this.Control[iCurrent+93]=this.cbx_4
+this.Control[iCurrent+94]=this.uo_selcliente
 end on
 
 on w_info_pallet_historico_embar.destroy
@@ -643,7 +638,6 @@ destroy(this.dw_pesoneto)
 destroy(this.tit_peso)
 destroy(this.st_variedad)
 destroy(this.st_15)
-destroy(this.st_9)
 destroy(this.cbx_packing)
 destroy(this.dw_packing)
 destroy(this.st_10)
@@ -1057,11 +1051,11 @@ vinf.dw_1.DataObject = "dw_info_pallet_historico_embar"
 /*
 Especies
 */
-IF IsNull(uo_selespecie.Codigo)THEN
+If IsNull(uo_selespecie.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Especie Previamente",Exclamation!)
 	uo_selespecie.dw_Seleccion.SetFocus()
-	RETURN
-END IF
+	Return
+End If
 
 //productor
 ls_lista = uo_selproductor.Lista
@@ -1069,44 +1063,44 @@ ls_lista = uo_selproductor.Lista
 /*
 Variedad
 */
-IF IsNull(uo_selvariedad.Codigo)THEN
+If IsNull(uo_selvariedad.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Variedad Previamente",Exclamation!)
 	uo_selvariedad.dw_Seleccion.SetFocus()
-	RETURN
-END IF
+	Return
+End If
 
 //Condición
-IF uo_selcondicion.cbx_todos.checked THEN
+If uo_selcondicion.cbx_todos.checked Then
    li_condicion	= -1
 	ls_condicion   = 'Todas'
-ELSE
+Else
    li_condicion	= uo_selcondicion.dw_Seleccion.Object.codigo[1]
-   IF IsNull(li_condicion)THEN
+   If IsNull(li_condicion)Then
 	   MessageBox("Atención","Debe Seleccionar una Condición Previamente",Exclamation!)
-	   RETURN
-	ELSE
+	   Return
+	Else
 		ls_condicion   = String(li_condicion)+' '+uo_selcondicion.Nombre
-	END IF
-END IF
+	End If
+End If
 
-IF cbx_varirotula.Checked THEN
+If cbx_varirotula.Checked Then
 	li_varirotula = 1
-ELSE
+Else
 	li_varirotula = 0
-END IF
+End If
 
-IF cbx_calrotu.Checked THEN
+If cbx_calrotu.Checked Then
 	li_calrotul = 1
-ELSE
+Else
 	li_calrotul = 0
-END IF
+End If
 
 
-IF cbx_excluye.Checked THEN
+If cbx_excluye.Checked Then
 	li_incluye = 1
-ELSE	
+Else	
 	li_incluye = 0
-END IF
+End If
 
 li_cliente 		=	Integer(istr_mant.argumento[1])
 li_planta		=	Integer(istr_mant.argumento[2])
@@ -1117,141 +1111,141 @@ texto_hasta		=	f_fecha_texto(String(ld_hasta), 1)
 texto_fecha		=	"Desde El :  " + texto_desde + "   Hasta El :  " + texto_hasta
 ls_nroguia		=	"Todas"
 
-IF IsNull(dw_plantadestino.Object.plde_codigo[1]) THEN
+If IsNull(dw_plantadestino.Object.plde_codigo[1]) Then
 	ii_plantadestino	=	0
-ELSE
+Else
 	ii_plantadestino	=	dw_plantadestino.Object.plde_codigo[1]
-END IF
+End If
 
-IF cbx_embalaje.Checked THEN
+If cbx_embalaje.Checked Then
 	ls_embalaje = 'Z'
-ELSE
+Else
 	ls_embalaje = em_embalaje.Text
-END IF
+End If
 
-IF cbx_1.Checked=False THEN
+If cbx_1.Checked=False Then
 	ls_cajas = "Reales"
 	istr_mant.argumento[8]	=	"1"
-ELSE
+Else
 	istr_mant.argumento[8]	=	String(dw_pesoneto.Object.enva_pesone[1])
 	ls_cajas = "Base " + istr_mant.argumento[8] 
-END IF
+End If
 
-IF cbx_destcons.Checked THEN
+If cbx_destcons.Checked Then
 	li_Destino	=	-9
-ELSEIF cbx_destino.Checked THEN
+ElseIf cbx_destino.Checked Then
        li_Destino = -1
-	ELSE
+	Else
 		 li_Destino =	dw_destino.Object.dest_codigo[1]
-	END IF
+	End If
 
-IF is_Embarque = 'Z' THEN
+If is_Embarque = 'Z' Then
 	is_Instructivo = 'Todos'
-ELSE
+Else
 	is_Instructivo = is_Embarque
 	
-END IF
+End If
 
 //Frio
-IF cbx_frio.Checked THEN
+If cbx_frio.Checked Then
 	is_frio = '*'
-END IF
+End If
 
-IF rb_pallet.Checked THEN
+If rb_pallet.Checked Then
 	ls_orden = "clie_codigo,plde_codigo,stat_codigo,paen_numero,prod_codigo,defe_fecdes"
 	ls_ordenamiento = 'Por Pallet'
-ELSEIF rb_fecha.Checked THEN
+ElseIf rb_fecha.Checked Then
 	   ls_orden = "clie_codigo,plde_codigo,stat_codigo,paen_fecemb,paen_numero,prod_codigo,defe_fecdes"
 		ls_ordenamiento = 'Por Fecha Embalaje'
-ELSEIF rb_embalaje.Checked THEN
+ElseIf rb_embalaje.Checked Then
 	   ls_orden = "clie_codigo,plde_codigo,stat_codigo,emba_codigo,paen_numero,prod_codigo,defe_fecdes"
 		ls_ordenamiento = 'Por Embalaje'
-ELSE
+Else
 		ls_orden = "clie_codigo,plde_codigo,stat_codigo,prod_codigo,paen_fecemb,paen_numero,defe_fecdes"
 		ls_ordenamiento = 'Por Productor'
-END IF
+End If
 
 vinf.dw_1.SetTransObject(sqlca)
 
-IF cbx_repalletizados.checked= True THEN
+If cbx_repalletizados.checked= True Then
 	li_repalletizaje = 1
 
-ELSE
+Else
 	li_repalletizaje = 0
 
-END IF
+End If
 
 fila	=	vinf.dw_1.Retrieve(li_cliente, li_planta, ld_desde, ld_hasta,&
 				uo_selespecie.Codigo, 0, Integer(istr_mant.argumento[7]),&
 				Dec(istr_mant.argumento[8]),uo_selvariedad.Codigo,is_embarque,&
 				ii_operacion,ls_embalaje,istr_mant.argumento[28],li_repalletizaje,li_Destino,&
 				Integer(istr_mant.argumento[29]),Integer(istr_mant.argumento[20]),ii_PlantaDestino,&
-				li_varirotula,is_frio,li_incluye,li_condicion,ls_lista,ii_calificacion,Date(istr_mant.argumento[30]),&
+				li_varirotula,is_frio,li_incluye,li_condicion,ls_lista,ii_calIficacion,Date(istr_mant.argumento[30]),&
 				Date(istr_mant.argumento[31]),ll_norden,li_calrotul,ii_exportador)
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
 
-ELSEIF fila = 0 THEN
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", &
 	             StopSign!, Ok!)
 
 
-ELSE
+Else
 	as_Columna = is_NomEmbarque
-	CHOOSE CASE as_Columna
-		CASE "2"
+	Choose Case as_Columna
+		Case "2"
 			ls_nomtipo = 'Reproceso'
-		CASE "3"
+		Case "3"
 			ls_nomtipo = 'Reembalaje'
-		CASE "5"
+		Case "5"
 			ls_nomtipo = 'Reproceso Serv. 3º'
-		CASE "6"
+		Case "6"
 			ls_nomtipo = 'Reembalaje Serv. 3º'
-		CASE "7"
+		Case "7"
 			ls_nomtipo = 'Embarque Maritimo'
-		CASE "8"
+		Case "8"
 			ls_nomtipo = 'Embarque Aereo'
-		CASE "9"
+		Case "9"
 			ls_nomtipo = 'Embarque Terrestre'
-		CASE "10"
+		Case "10"
 			ls_nomtipo = 'Devolución al Productor'
-		CASE "11"
+		Case "11"
 			ls_nomtipo = 'Traspaso Inter-Planta'
-		CASE "12"
+		Case "12"
 			ls_nomtipo = 'M/I Cta. Propia'
-		CASE "13"
+		Case "13"
 			ls_nomtipo = 'M/I Cta. Productor'
-		CASE "14"
+		Case "14"
 			ls_nomtipo = 'Muestra Ensayo'
-		CASE "15"
+		Case "15"
 			ls_nomtipo = 'Botadero'	
-		CASE "16"
+		Case "16"
 			ls_nomtipo = 'Ventas a Terceros'
-		CASE "17"
+		Case "17"
 			ls_nomtipo = 'Desp. Servicios 3º'
-		CASE "20"
+		Case "20"
 			ls_nomtipo = 'Packing Externo'
-		CASE "21"
+		Case "21"
 			ls_nomtipo = 'Venta Exp. País'	
-		CASE "0"
+		Case "0"
 			ls_nomtipo = 'Todas'	
-	END CHOOSE
+	End Choose
 	
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify("tiposa.text = '" + ls_nomtipo + "'")
-	vinf.dw_1.Modify("fechas.text = '" + texto_fecha + "'")
-	vinf.dw_1.Modify("operacion.text = '" + is_Operacion + "'")
-	vinf.dw_1.Modify("embarque.text = '" + is_Instructivo + "'")
-	vinf.dw_1.Modify("t_orden.text = '" + ls_ordenamiento + "'")
-//	vinf.dw_1.Modify("nave.text = '" + is_NomEmbarque + "'")		
+	vinf.dw_1.ModIfy("tiposa.text = '" + ls_nomtipo + "'")
+	vinf.dw_1.ModIfy("fechas.text = '" + texto_fecha + "'")
+	vinf.dw_1.ModIfy("operacion.text = '" + is_Operacion + "'")
+	vinf.dw_1.ModIfy("embarque.text = '" + is_Instructivo + "'")
+	vinf.dw_1.ModIfy("t_orden.text = '" + ls_ordenamiento + "'")
+//	vinf.dw_1.ModIfy("nave.text = '" + is_NomEmbarque + "'")		
 
    	vinf.dw_1.SetSort(ls_orden)
 	vinf.dw_1.Sort()
 	
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 SetPointer(Arrow!)				
 end event
 
@@ -1570,26 +1564,6 @@ long backcolor = 16711680
 boolean enabled = false
 boolean border = true
 borderstyle borderstyle = styleraised!
-boolean focusrectangle = false
-end type
-
-type st_9 from statictext within w_info_pallet_historico_embar
-boolean visible = false
-integer x = 3648
-integer y = 332
-integer width = 238
-integer height = 64
-boolean bringtotop = true
-integer textsize = -10
-integer weight = 700
-fontcharset fontcharset = ansi!
-fontpitch fontpitch = variable!
-fontfamily fontfamily = swiss!
-string facename = "Tahoma"
-long textcolor = 33554432
-long backcolor = 33543637
-string text = "Packing"
-alignment alignment = right!
 boolean focusrectangle = false
 end type
 
@@ -3277,7 +3251,7 @@ integer height = 180
 integer taborder = 70
 boolean bringtotop = true
 string title = "none"
-string dataobject = "dw_excel_pallethistoricoembar"
+string dataobject = "dw_info_pallet_historico_embar"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type

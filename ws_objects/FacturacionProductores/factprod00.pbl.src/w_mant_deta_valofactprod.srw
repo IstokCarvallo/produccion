@@ -283,6 +283,12 @@ If IsNull(dw_1.Object.emba_codigo[il_fila]) OR dw_1.Object.emba_codigo[il_fila] 
 	ls_colu[li_cont]	= "emba_codigo"
 End If
 
+If IsNull(dw_1.GetItemNumber(il_fila, "emba_tipvid")) Or dw_1.GetItemNumber(il_fila, "emba_tipvid") = 0 Then
+	li_cont ++
+	ls_mensaje 			= ls_mensaje + "~nTipo de Vida"
+	ls_colu[li_cont]	= "emba_tipvid"
+End If
+
 If li_cont > 0 Then
 	MessageBox("Error de Consistencia", "Falta el ingreso de :" + ls_mensaje + ".", StopSign!, Ok!)
 	dw_1.SetColumn(ls_colu[1])

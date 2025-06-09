@@ -4043,42 +4043,43 @@ If ii_Especie = 27 Or ii_Especie = 26 Or ii_Especie = 81 Or ii_Especie = 36 Or i
 	End If
 End If	
 
-	If dw_7.RowCount() > 0 And ii_Especie = 21 Then
-		If IsNull(dw_7.Object.iccd_vpcnor[1]) Or dw_7.Object.iccd_vpcnor[1] = 0  Then
-			MessageBox("Error de Consistencia", " Falta Vida PC Norma" +  &
-							"~n~nen Carpeta Evaluación de Condición.", StopSign!, Ok!)
-			Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_vpcnor")
-			Tab_1.TabPage_5.dw_inspecpromedio.SetFocus()
-			Tab_1.SelectTab(2)
-			Bloquea_Columnas()
-			Message.DoubleParm = -1
-			Return
-		End If
+If dw_7.RowCount() > 0 And (ii_Especie =  21 Or  ii_Especie =  26 Or  ii_Especie =  27 Or ii_Especie =  78 Or ii_Especie = 21 Or ii_Especie = 36) Then
+	If IsNull(dw_7.Object.iccd_clasif[1]) Or dw_7.Object.iccd_clasif[1] = 0  Then
+		MessageBox("Error de Consistencia", " Falta Vida PC Final~n~nen Carpeta Evaluación de Condición.", StopSign!, Ok!)
+		Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_clasif")
+		Tab_1.TabPage_5.dw_inspecpromedio.SetFocus()
+		Tab_1.SelectTab(2)
+		Bloquea_Columnas()
+		Message.DoubleParm = -1
+		Return
+	End If
+End If
 
-		If IsNull(dw_7.Object.iccd_clasIf[1]) Or dw_7.Object.iccd_clasIf[1] = 0  Then
-			MessageBox("Error de Consistencia", " Falta Vida PC Final" +  &
-							"~n~nen Carpeta Evaluación de Condición.", StopSign!, Ok!)
-			Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_clasIf")
+If dw_7.RowCount() > 0 And ii_Especie = 21 Then
+	If IsNull(dw_7.Object.iccd_vpcnor[1]) Or dw_7.Object.iccd_vpcnor[1] = 0  Then
+		MessageBox("Error de Consistencia", " Falta Vida PC Norma" +  &
+						"~n~nen Carpeta Evaluación de Condición.", StopSign!, Ok!)
+		Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_vpcnor")
+		Tab_1.TabPage_5.dw_inspecpromedio.SetFocus()
+		Tab_1.SelectTab(2)
+		Bloquea_Columnas()
+		Message.DoubleParm = -1
+		Return
+	End If
+
+	If IsNull(dw_7.Object.iccd_usumod[1]) Or dw_7.Object.iccd_usumod[1] = 0  Then
+		If dw_7.Object.iccd_clasIf[1] <> dw_7.Object.iccd_vpcnor[1] Then
+			MessageBox("Error de Consistencia", " Falta Quien modfica" +  &
+							"~n~nen Carpeta P.Interno.", StopSign!, Ok!)
+			Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_usumod")
 			Tab_1.TabPage_5.dw_inspecpromedio.SetFocus()
 			Tab_1.SelectTab(2)
 			Bloquea_Columnas()
 			Message.DoubleParm = -1
 			Return
 		End If
-	
-		If IsNull(dw_7.Object.iccd_usumod[1]) Or dw_7.Object.iccd_usumod[1] = 0  Then
-			If dw_7.Object.iccd_clasIf[1] <> dw_7.Object.iccd_vpcnor[1] Then
-				MessageBox("Error de Consistencia", " Falta Quien modfica" +  &
-								"~n~nen Carpeta P.Interno.", StopSign!, Ok!)
-				Tab_1.TabPage_5.dw_inspecpromedio.SetColumn("iccd_usumod")
-				Tab_1.TabPage_5.dw_inspecpromedio.SetFocus()
-				Tab_1.SelectTab(2)
-				Bloquea_Columnas()
-				Message.DoubleParm = -1
-				Return
-			End If
-		End If
-	End If	
+	End If
+End If	
 
 If ii_Especie = 27 Or ii_Especie = 26 Or ii_Especie = 78 Or ii_Especie = 41 Or ii_Especie = 21 Or ii_Especie = 81 Or ii_Especie = 36  Or ii_Especie = 10 Then
 	If IsNull(dw_2.Object.ccre_reslot[1]) Then
@@ -5239,6 +5240,7 @@ Choose Case ls_Columna
 		If Integer(data) >= 1 And Integer(data) <= 5 Then
 			For ll_fila = 1 To dw_7.RowCount()
 				dw_7.Object.iccd_clasif[ll_fila] =  Integer(Data)
+				
 				If dw_7.Object.iccd_vpcnor[ll_Fila] = Integer(Data) Then
 					dw_7.SetItem(ll_Fila, "iccd_usumod ", Integer(ls_Null))
 				End If
@@ -5251,7 +5253,7 @@ Choose Case ls_Columna
 					dw_2.Object.ccre_reslot[1] = Integer(ls_Null)
 				End Choose
 		Else
-			MessageBox('Atencion...','Estado debe estar entre 1 y 4')
+			MessageBox('Atencion...','Estado debe estar entre 1 y 5')
 			This.SetItem(Row, ls_Columna, ls_Null)
 			Return 1
 		End If

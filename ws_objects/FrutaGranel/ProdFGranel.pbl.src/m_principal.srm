@@ -454,7 +454,7 @@ type m_42 from menu within m_recepcin
 end type
 type m_emisióndetarjas from menu within m_recepcin
 end type
-type Ar from menu within m_recepcin
+type ar from menu within m_recepcin
 end type
 type m_- from menu within m_recepcin
 end type
@@ -492,7 +492,7 @@ m_mantenciondedesverdizado m_mantenciondedesverdizado
 m_mantenciondeatemperado m_mantenciondeatemperado
 m_42 m_42
 m_emisióndetarjas m_emisióndetarjas
-Ar Ar
+ar ar
 m_- m_-
 m_aperturadelotes m_aperturadelotes
 m_-18 m_-18
@@ -6794,7 +6794,7 @@ m_mantenciondedesverdizado m_mantenciondedesverdizado
 m_mantenciondeatemperado m_mantenciondeatemperado
 m_42 m_42
 m_emisióndetarjas m_emisióndetarjas
-Ar Ar
+ar ar
 m_- m_-
 m_aperturadelotes m_aperturadelotes
 m_-18 m_-18
@@ -6833,7 +6833,7 @@ this.m_mantenciondedesverdizado=create m_mantenciondedesverdizado
 this.m_mantenciondeatemperado=create m_mantenciondeatemperado
 this.m_42=create m_42
 this.m_emisióndetarjas=create m_emisióndetarjas
-this.Ar=create Ar
+this.ar=create ar
 this.m_-=create m_-
 this.m_aperturadelotes=create m_aperturadelotes
 this.m_-18=create m_-18
@@ -6852,7 +6852,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_mantenciondedesverdizado
 this.Item[UpperBound(this.Item)+1]=this.m_mantenciondeatemperado
 this.Item[UpperBound(this.Item)+1]=this.m_42
 this.Item[UpperBound(this.Item)+1]=this.m_emisióndetarjas
-this.Item[UpperBound(this.Item)+1]=this.Ar
+this.Item[UpperBound(this.Item)+1]=this.ar
 this.Item[UpperBound(this.Item)+1]=this.m_-
 this.Item[UpperBound(this.Item)+1]=this.m_aperturadelotes
 this.Item[UpperBound(this.Item)+1]=this.m_-18
@@ -6875,7 +6875,7 @@ destroy(this.m_mantenciondedesverdizado)
 destroy(this.m_mantenciondeatemperado)
 destroy(this.m_42)
 destroy(this.m_emisióndetarjas)
-destroy(this.Ar)
+destroy(this.ar)
 destroy(this.m_-)
 destroy(this.m_aperturadelotes)
 destroy(this.m_-18)
@@ -7550,10 +7550,10 @@ gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_info_tarjas, w_main, ii_Columna, Original!)
 end event
 
-type Ar from menu within m_recepcin
+type ar from menu within m_recepcin
 end type
 
-on Ar.create
+on ar.create
 call super::create
 this.text = "Archivo Peso Tarjas"
 this.menutextcolor = 134217735
@@ -7573,7 +7573,7 @@ this.toolbargradient = true
 this.bitmapgradient = true
 end on
 
-on Ar.destroy
+on ar.destroy
 call super::destroy
 end on
 
@@ -9359,12 +9359,12 @@ type m_interplanta from menu within m_despacho
 event clicked ( )
 end type
 
-event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+event clicked;SetPointer(HourGlass!);If Not AccesoPuntoCritico() Then Return
 gstr_us.OpcionActiva	=	This.ClassName()
 
-IF ExisteParametro() THEN
+If ExisteParametro() Then
 	OpenSheetWithParm(w_maed_movtofrutagranel_despacho, "22", w_main, ii_Columna, Original!)
-END IF	
+End If	
 end event
 
 on m_interplanta.create

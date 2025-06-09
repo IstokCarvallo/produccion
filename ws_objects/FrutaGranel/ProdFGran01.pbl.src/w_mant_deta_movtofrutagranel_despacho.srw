@@ -3,8 +3,6 @@ $PBExportComments$Mantención de Detalle Despacho de Fruta Granel Interplanta y 
 forward
 global type w_mant_deta_movtofrutagranel_despacho from w_mant_detalle_csd
 end type
-type dw_lotes from datawindow within w_mant_deta_movtofrutagranel_despacho
-end type
 type pb_tarjas from picturebutton within w_mant_deta_movtofrutagranel_despacho
 end type
 type dw_2 from datawindow within w_mant_deta_movtofrutagranel_despacho
@@ -18,7 +16,6 @@ integer width = 2679
 integer height = 2312
 string title = "DETALLE DE LOTES A DESPACHO"
 boolean controlmenu = true
-dw_lotes dw_lotes
 pb_tarjas pb_tarjas
 dw_2 dw_2
 dw_tarjas dw_tarjas
@@ -46,11 +43,12 @@ end variables
 
 forward prototypes
 public function boolean duplicado (string as_columna, string as_valor)
-public subroutine capturakilospromedio (string as_columna, string as_valor)
-public subroutine buscaenvase ()
-public function boolean hayexistencia (string as_columna, string as_valor, integer ai_cantidad)
-public subroutine buscalote ()
-public subroutine cambiatarjas (integer ai_fila)
+public subroutine wf_cambiatarjas (integer ai_fila)
+public subroutine wf_buscaenvase ()
+public subroutine wf_capturakilospromedio (string as_columna, string as_valor)
+public function boolean wf_hayexistencia (string as_columna, string as_valor, integer ai_cantidad)
+public subroutine wf_buscalote ()
+public subroutine wf_calcula (long fila)
 end prototypes
 
 public function boolean duplicado (string as_columna, string as_valor);Long		ll_Fila
@@ -100,7 +98,61 @@ ELSE
 END IF
 end function
 
-public subroutine capturakilospromedio (string as_columna, string as_valor);Integer		li_PlantaLote, li_EspecieLote, li_filas, li_bultos
+public subroutine wf_cambiatarjas (integer ai_fila);str_mant				lstr_mant
+
+lstr_mant.Argumento[01]	=	String(dw_1.Object.lote_pltcod[ai_fila])
+lstr_mant.Argumento[02]	=	String(dw_1.Object.lote_espcod[ai_fila])
+lstr_mant.Argumento[03]	=	String(dw_1.Object.lote_codigo[ai_fila])
+lstr_mant.Argumento[04]	=	String(dw_1.Object.enva_tipoen[ai_fila])
+lstr_mant.Argumento[05]	=	String(dw_1.Object.enva_codigo[ai_fila])
+lstr_mant.dw					=	dw_tarjas
+
+OpenWithParm(w_seleccion_tarjas, lstr_mant)
+
+lstr_mant	= Message.PowerObjectParm		
+
+If lstr_mant.Respuesta = 1 Then wf_Calcula(ai_Fila)
+end subroutine
+
+public subroutine wf_buscaenvase ();str_busqueda	lstr_busq
+String			ls_Nula
+
+SetNull(ls_Nula)
+
+lstr_busq.argum[1]	=	String(dw_1.Object.enva_tipoen[il_Fila])
+
+OpenWithParm(w_busc_envases, lstr_busq)
+
+lstr_busq	= Message.PowerObjectParm
+
+IF lstr_busq.argum[2] = "" THEN
+	dw_1.SetColumn("enva_codigo")
+	dw_1.Object.enva_codigo[il_Fila]	=	Integer(ls_Nula)
+	dw_1.Object.enva_nombre[il_Fila]	=	ls_Nula
+	dw_1.SetFocus()
+ELSE
+	IF Duplicado("enva_codigo",lstr_busq.argum[2]) THEN
+		dw_1.SetItem(il_Fila, "enva_codigo", Integer(ls_Nula))
+	ELSE	
+		dw_1.Object.enva_codigo[il_Fila]	=	Integer(lstr_busq.argum[2])
+		dw_1.Object.enva_nombre[il_Fila]	=	lstr_busq.argum[3]
+		
+		ExisteEnvase(dw_1.object.enva_tipoen[il_fila], &
+						 dw_1.object.enva_codigo[il_fila], istr_Envase)
+				
+		IF iuo_TipoMovto.Sentido = 2 THEN
+			IF Not wf_HayExistencia("enva_codigo", lstr_busq.argum[2], &
+				dw_1.Object.mfgd_bulent[il_Fila]) THEN
+				dw_1.SetItem(il_Fila, "enva_codigo", Integer(ls_Nula))
+			END IF
+		END IF
+	END IF	
+END IF
+
+RETURN
+end subroutine
+
+public subroutine wf_capturakilospromedio (string as_columna, string as_valor);Integer		li_PlantaLote, li_EspecieLote, li_filas, li_bultos
 Long     	ll_NumeroLote
 Integer 		li_Cliente, li_Planta, li_lote, li_Especie, li_Envase, li_TipoEnva, li_TipOrden, li_Numero, li_fila
 Long			ll_Bins, ll_cantidad
@@ -186,50 +238,12 @@ If istr_mant.argumento[2] <> '2' Then
 End If	
 end subroutine
 
-public subroutine buscaenvase ();str_busqueda	lstr_busq
-String			ls_Nula
-
-SetNull(ls_Nula)
-
-lstr_busq.argum[1]	=	String(dw_1.Object.enva_tipoen[il_Fila])
-
-OpenWithParm(w_busc_envases, lstr_busq)
-
-lstr_busq	= Message.PowerObjectParm
-
-IF lstr_busq.argum[2] = "" THEN
-	dw_1.SetColumn("enva_codigo")
-	dw_1.Object.enva_codigo[il_Fila]	=	Integer(ls_Nula)
-	dw_1.Object.enva_nombre[il_Fila]	=	ls_Nula
-	dw_1.SetFocus()
-ELSE
-	IF Duplicado("enva_codigo",lstr_busq.argum[2]) THEN
-		dw_1.SetItem(il_Fila, "enva_codigo", Integer(ls_Nula))
-	ELSE	
-		dw_1.Object.enva_codigo[il_Fila]	=	Integer(lstr_busq.argum[2])
-		dw_1.Object.enva_nombre[il_Fila]	=	lstr_busq.argum[3]
-		
-		ExisteEnvase(dw_1.object.enva_tipoen[il_fila], &
-						 dw_1.object.enva_codigo[il_fila], istr_Envase)
-				
-		IF iuo_TipoMovto.Sentido = 2 THEN
-			IF Not HayExistencia("enva_codigo", lstr_busq.argum[2], &
-				dw_1.Object.mfgd_bulent[il_Fila]) THEN
-				dw_1.SetItem(il_Fila, "enva_codigo", Integer(ls_Nula))
-			END IF
-		END IF
-	END IF	
-END IF
-
-RETURN
-end subroutine
-
-public function boolean hayexistencia (string as_columna, string as_valor, integer ai_cantidad);Boolean	lb_Retorno = True
+public function boolean wf_hayexistencia (string as_columna, string as_valor, integer ai_cantidad);Boolean	lb_Retorno = True
 Integer	li_Planta, li_Camara, li_PlantaLote, li_EspecieLote,  &
 			li_tipoenva, li_envase
 Long     ll_saldo, ll_NumeroLote
 
-IF istr_mant.argumento[2] <> '2' THEN
+If istr_mant.argumento[2] <> '2' Then
 
 	li_Planta		=	dw_1.Object.plde_codigo[il_Fila]
 	li_Camara		=	dw_1.Object.cama_codigo[il_Fila]
@@ -262,7 +276,7 @@ IF istr_mant.argumento[2] <> '2' THEN
 		CASE "enva_codigo"
 			li_envase		=	Integer(as_Valor)
 			
-	END CHOOSE
+	End CHOOSE
 	
 	SELECT	IsNull(Sum(caex_canbul), 0)
 		INTO	:ll_Saldo
@@ -275,47 +289,47 @@ IF istr_mant.argumento[2] <> '2' THEN
 		AND   IsNull(:li_TipoEnva, -1) in (enva_tipoen, -1)
 		AND   IsNull(:li_Envase, -1) in (enva_codigo, -1);
 	
-	IF sqlca.SQLCode = -1 THEN
+	If sqlca.SQLCode = -1 Then
 		F_ErrorBaseDatos(sqlca, "Lectura tabla de Existencia Frigorífico")
 		
 		lb_Retorno	=	False
 		
-	ELSEIF sqlca.SQLCode = 100 THEN
-		MessageBox("Atención", "No existe Lote en Cámara especificada.~r~r" + &
+	ElseIf sqlca.SQLCode = 100 Then
+		MessageBox("Atención", "No existe Lote en Cámara especIficada.~r~r" + &
 						"Ingrese o seleccione otros antecedentes.")
 		
 		lb_Retorno	=	False
 		
-	ELSEIF Not IsNull(ai_Cantidad) AND ai_Cantidad > 0 AND ai_Cantidad > ll_Saldo THEN
+	ElseIf Not IsNull(ai_Cantidad) AND ai_Cantidad > 0 AND ai_Cantidad > ll_Saldo Then
 		MessageBox("Atención", "No hay Existencia suficiente del Lote~r" + &
-						"en Cámara especificada. Saldo = " +String(ll_saldo)+"~r~r" + &
+						"en Cámara especIficada. Saldo = " +String(ll_saldo)+"~r~r" + &
 						"Ingrese o seleccione otros antecedentes.")
 		
 		lb_Retorno	=	False
 		
-	ELSE
+	Else
 				
 		dw_2.Reset()
-		dw_tarjas.RowsMove(1, dw_tarjas.RowCount(), Primary!, dw_2, dw_2.RowCount() + 1, Primary!)
-		
-		dw_2.Retrieve(li_PlantaLote, li_EspecieLote, ll_NumeroLote,li_tipoenva,li_envase)
-		
+		dw_tarjas.RowsMove(1, dw_tarjas.RowCount(), Primary!, dw_2, dw_2.RowCount() + 1, Primary!)		
+		dw_2.Retrieve(li_PlantaLote, li_EspecieLote, ll_NumeroLote,li_tipoenva,li_envase)		
 		dw_2.RowsMove(1, dw_2.RowCount(), Primary!, dw_tarjas, dw_tarjas.RowCount() + 1 , Primary!)
 			
-		IF ll_Saldo > 0 THEN
-		ELSE
+		If ll_Saldo > 0 Then
+			
+		Else
 					
-			CapturaKilosPromedio(as_columna,as_valor)
+			wf_CapturaKilosPromedio(as_columna,as_valor)
 			dw_1.Object.mfgd_bulent[il_Fila] =  ll_Saldo
 			dw_1.Object.mfgd_kgnent[il_Fila]	=	ll_Saldo * id_KilosPromed
-		END IF
+		End If
 		
-	END IF
-END IF	
+	End If
+End If	
+
 RETURN lb_Retorno
 end function
 
-public subroutine buscalote ();str_busqueda	lstr_busq
+public subroutine wf_buscalote ();str_busqueda	lstr_busq
 String			ls_Nula
 
 SetNull(ls_Nula)
@@ -344,14 +358,12 @@ If istr_mant.Argumento[2]='21' Then
 		dw_1.Object.vari_nombre[il_Fila] 	=	lstr_busq.argum[13]
 		dw_1.Object.prod_nombre[il_Fila]	=	lstr_busq.argum[6]
 	
-		If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, &
-							Integer(lstr_busq.argum[3]), True, sqlca) Then
+		If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, Integer(lstr_busq.argum[3]), True, sqlca) Then
 		  If iuo_TipoMovto.Sentido = 2 Then
-			If Not HayExistencia("lote_codigo", lstr_busq.argum[3], &
-				dw_1.Object.mfgd_bulent[il_Fila]) Then
+			If Not wf_HayExistencia("lote_codigo", lstr_busq.argum[3],  dw_1.Object.mfgd_bulent[il_Fila]) Then
 				dw_1.SetItem(il_Fila, "lote_codigo", Integer(ls_Nula))
 			Else
-				CapturaKilosPromedio("","")
+				wf_CapturaKilosPromedio("","")
 			End If
 		  End If				
 		End If					
@@ -382,11 +394,9 @@ If istr_mant.Argumento[2]='2' Then
 		dw_1.Object.vari_nombre[il_Fila] =	lstr_busq.argum[13]
 		dw_1.Object.prod_nombre[il_Fila] =	lstr_busq.argum[6]
 	
-		If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, &
-							Integer(lstr_busq.argum[3]), True, sqlca) Then
+		If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo,  Integer(lstr_busq.argum[3]), True, sqlca) Then
 		  If iuo_TipoMovto.Sentido = 2 Then
-			If Not HayExistencia("lote_codigo", lstr_busq.argum[3], &
-				dw_1.Object.mfgd_bulent[il_Fila]) Then
+			If Not wf_HayExistencia("lote_codigo", lstr_busq.argum[3],  dw_1.Object.mfgd_bulent[il_Fila]) Then
 				dw_1.SetItem(il_Fila, "lote_codigo", Integer(ls_Nula))
 			End If
 		  End If				
@@ -425,15 +435,13 @@ If istr_mant.Argumento[2]='22' OR  istr_mant.Argumento[2]='30' Then
 			dw_1.SetItem(il_Fila, "enva_codigo", Integer(ls_Nula))
 			dw_1.SetItem(il_Fila, "enva_nombre", ls_Nula)
 		Else
-			If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, &
-									 Integer(lstr_busq.argum[3]), True, sqlca) Then
+			If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, Integer(lstr_busq.argum[3]), True, sqlca) Then
 			  If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia("lote_codigo", lstr_busq.argum[3], &
+				If Not wf_HayExistencia("lote_codigo", lstr_busq.argum[3], &
 					dw_1.Object.mfgd_bulent[il_Fila]) Then
 					dw_1.SetItem(il_Fila, "lote_codigo", Integer(ls_Nula))
 				Else
-					CapturaKilosPromedio("","")
-					
+					wf_CapturaKilosPromedio("","")					
 					dw_1.Object.mfgd_bulent[il_Fila] =  long(lstr_busq.argum[8])
 					dw_1.Object.mfgd_kgnent[il_Fila]	=	long(lstr_busq.argum[8]) * id_KilosPromed
 				End If
@@ -468,10 +476,7 @@ If istr_mant.Argumento[2]='23' Then
 					
 		dw_2.Reset()
 		dw_tarjas.RowsMove(1, dw_tarjas.RowCount(), Primary!, dw_2, dw_2.RowCount() + 1, Primary!)
-		
-		dw_2.Retrieve(iuo_PltaLote.Codigo, iuo_Especie.Codigo, &
-						 Integer(lstr_busq.argum[3]),integer(lstr_busq.argum[10]),integer(lstr_busq.argum[11]))
-		
+		dw_2.Retrieve(iuo_PltaLote.Codigo, iuo_Especie.Codigo, Integer(lstr_busq.argum[3]),integer(lstr_busq.argum[10]),integer(lstr_busq.argum[11]))
 		dw_2.RowsMove(1, dw_2.RowCount(), Primary!, dw_tarjas, dw_tarjas.RowCount() + 1, Primary!)
 	   
 		If Duplicado("lote_codigo", lstr_busq.argum[3]) Then
@@ -484,11 +489,11 @@ If istr_mant.Argumento[2]='23' Then
 		Else	
 			If iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, Integer(lstr_busq.argum[3]), True, sqlca) Then
 			  If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia("lote_codigo", lstr_busq.argum[3], &
+				If Not wf_HayExistencia("lote_codigo", lstr_busq.argum[3], &
 					dw_1.Object.mfgd_bulent[il_Fila]) Then
 					dw_1.SetItem(il_Fila, "lote_codigo", Integer(ls_Nula))
 				Else
-					CapturaKilosPromedio("","")
+					wf_CapturaKilosPromedio("","")
 					dw_1.Object.mfgd_bulent[il_Fila] =  long(lstr_busq.argum[8])
 					dw_1.Object.mfgd_kgnent[il_Fila]	=	long(lstr_busq.argum[8]) * id_KilosPromed
 				End If
@@ -500,57 +505,38 @@ If istr_mant.Argumento[2]='23' Then
 End If
 end subroutine
 
-public subroutine cambiatarjas (integer ai_fila);str_mant				lstr_mant
-Integer				li_fila
+public subroutine wf_calcula (long fila);Long					ll_Fila
 uo_calicosechero	luo_Calidad
 
 luo_Calidad	=	Create uo_calicosechero
 
-lstr_mant.Argumento[01]	=	String(dw_1.Object.lote_pltcod[ai_fila])
-lstr_mant.Argumento[02]	=	String(dw_1.Object.lote_espcod[ai_fila])
-lstr_mant.Argumento[03]	=	String(dw_1.Object.lote_codigo[ai_fila])
-lstr_mant.Argumento[04]	=	String(dw_1.Object.enva_tipoen[ai_fila])
-lstr_mant.Argumento[05]	=	String(dw_1.Object.enva_codigo[ai_fila])
-lstr_mant.dw					=	dw_tarjas
+dw_1.Object.mfgd_kgnent[Fila]	=	0
+dw_1.Object.mfgd_bulent[Fila]	=	0
 
-OpenWithParm(w_seleccion_tarjas, lstr_mant)
+For ll_Fila = 1 To dw_tarjas.RowCount()		
+	iuo_Valida.BinsDuplicados(dw_1.Object.clie_codigo[il_fila],  dw_1.Object.plde_codigo[il_fila],  dw_Tarjas.Object.fgmb_nrotar[ll_Fila], False, Sqlca)
+	iuo_Valida.CargaBins(dw_1.Object.clie_codigo[il_fila],  dw_1.Object.plde_codigo[il_fila], iuo_valida.Bins, True, Sqlca)
+	luo_Calidad.Existe(iuo_valida.TipoEnva, iuo_valida.Envase, iuo_valida.Calidad, False, Sqlca)	
 
-lstr_mant	= Message.PowerObjectParm		
-
-If lstr_mant.Respuesta = 1 Then
-	dw_1.Object.mfgd_kgnent[ai_fila]	=	0
-	dw_1.Object.mfgd_bulent[ai_fila]	=	0
-	
-	For li_fila = 1 To dw_tarjas.RowCount()
-		
-		iuo_valida.binsduplicados(dw_1.Object.clie_codigo[il_fila],  dw_1.Object.plde_codigo[il_fila],  dw_Tarjas.Object.fgmb_nrotar[li_fila], False, Sqlca)
-		iuo_valida.cargabins(dw_1.Object.clie_codigo[il_fila],  dw_1.Object.plde_codigo[il_fila], iuo_valida.Bins, True, Sqlca)
-		luo_Calidad.Existe(iuo_valida.TipoEnva, iuo_valida.Envase, iuo_valida.Calidad, False, Sqlca)	
-
-		dw_1.Object.mfgd_kgnent[ai_fila]	=	dw_1.Object.mfgd_kgnent[ai_fila] + (dw_tarjas.Object.fgmb_kilbru[li_fila] - luo_Calidad.Peso)
-		dw_1.Object.mfgd_bulent[ai_fila]	=	dw_1.Object.mfgd_bulent[ai_fila] + dw_tarjas.Object.fgmb_canbul[li_fila]
-	Next
-	
-End If
+	dw_1.Object.mfgd_kgnent[Fila]=	dw_1.Object.mfgd_kgnent[Fila] + (dw_tarjas.Object.fgmb_kilbru[ll_Fila] - luo_Calidad.Peso)
+	dw_1.Object.mfgd_bulent[Fila]	=	dw_1.Object.mfgd_bulent[Fila] + dw_tarjas.Object.fgmb_canbul[ll_Fila]
+Next
 end subroutine
 
 on w_mant_deta_movtofrutagranel_despacho.create
 int iCurrent
 call super::create
-this.dw_lotes=create dw_lotes
 this.pb_tarjas=create pb_tarjas
 this.dw_2=create dw_2
 this.dw_tarjas=create dw_tarjas
 iCurrent=UpperBound(this.Control)
-this.Control[iCurrent+1]=this.dw_lotes
-this.Control[iCurrent+2]=this.pb_tarjas
-this.Control[iCurrent+3]=this.dw_2
-this.Control[iCurrent+4]=this.dw_tarjas
+this.Control[iCurrent+1]=this.pb_tarjas
+this.Control[iCurrent+2]=this.dw_2
+this.Control[iCurrent+3]=this.dw_tarjas
 end on
 
 on w_mant_deta_movtofrutagranel_despacho.destroy
 call super::destroy
-destroy(this.dw_lotes)
 destroy(this.pb_tarjas)
 destroy(this.dw_2)
 destroy(this.dw_tarjas)
@@ -768,8 +754,6 @@ PostEvent("ue_recuperadatos")
 
 istr_mant = Message.PowerObjectParm
 
-dw_lotes.SetTransObject(SQLCa)
-
 iuo_PltaLote		=	Create uo_plantadesp
 iuo_Especie		=	Create uo_especie
 iuo_Lote			=	Create uo_lotesfrutagranel
@@ -910,49 +894,40 @@ SetNull(ls_Nula)
 
 ls_Columna = dwo.Name
 
-CHOOSE CASE ls_Columna
-	CASE "cama_codigo"
-		If Not iuo_Camara.Existe(Integer(istr_Mant.Argumento[1]), &
-						Integer(Data), True, sqlca) Then
+Choose Case ls_Columna
+	Case "cama_codigo"
+		If Not iuo_Camara.Existe(Integer(istr_Mant.Argumento[1]), Integer(Data), True, sqlca) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[2]))
-			
 			Return 1
 		ElseIf Duplicado(ls_Columna, Data) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[2]))
-			
 			Return 1
 		Else
 			If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia(ls_Columna, Data, &
-				This.Object.mfgd_bulent[il_Fila]) Then
+				If Not wf_HayExistencia(ls_Columna, Data, This.Object.mfgd_bulent[il_Fila]) Then
 					This.SetItem(il_Fila, ls_Columna, integer(ias_campo[2]))
-					
 					Return 1
 				End If
 			End If
 		End If
 
-	CASE "lote_pltcod"
+	Case "lote_pltcod"
 		If Not iuo_PltaLote.Existe(Integer(Data), True, sqlca) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[3]))
-			
 			Return 1
 		ElseIf Duplicado(ls_Columna, Data) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[3]))
-			
 			Return 1
 		Else
 			If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia(ls_Columna, Data, &
-				This.Object.mfgd_bulent[il_Fila]) Then
+				If Not wf_HayExistencia(ls_Columna, Data, This.Object.mfgd_bulent[il_Fila]) Then
 					This.SetItem(il_Fila, ls_Columna, integer(ias_campo[3]))
-					
 					Return 1
 				End If
 			End If
 		End If
 
-	CASE "lote_espcod"
+	Case "lote_espcod"
 		dw_1.Object.vari_nombre[Row] 	=	ls_nula
 		dw_1.Object.prod_nombre[Row] 	=	ls_nula
 		dw_1.Object.enva_tipoen[Row] 	=	Integer(ls_nula)
@@ -964,18 +939,14 @@ CHOOSE CASE ls_Columna
 		
 		If Not iuo_Especie.Existe(Integer(Data), True, sqlca) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[4]))
-			
 			Return 1
 		ElseIf Duplicado(ls_Columna, Data) Then
 			This.SetItem(il_Fila, ls_Columna, integer(ias_campo[4]))
-			
 			Return 1
 		Else
 			If iuo_TipoMovto.Sentido = 2 Then				
-				If Not HayExistencia(ls_Columna, Data, &
-				This.Object.mfgd_bulent[il_Fila]) Then
+				If Not wf_HayExistencia(ls_Columna, Data, This.Object.mfgd_bulent[il_Fila]) Then
 					This.SetItem(il_Fila, ls_Columna, integer(ias_campo[4]))
-					
 					Return 1
 				End If
 			End If
@@ -984,7 +955,7 @@ CHOOSE CASE ls_Columna
 		
 		Parent.TriggerEvent("Resize")
 
-	CASE "lote_codigo"
+	Case "lote_codigo"
 		If Not iuo_Lote.Existe(This.Object.lote_pltcod[Row], This.Object.lote_espcod[Row], Long(Data), True, Sqlca) Then
 			This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))
 			dw_1.Object.lote_codigo[Row] 	=	Long(ls_nula)
@@ -997,7 +968,6 @@ CHOOSE CASE ls_Columna
 			dw_1.Object.mfgd_bulent[Row] 	=  Long(ls_nula)
 			dw_1.Object.mfgd_kgnent[Row]	=	Long(ls_nula)
 			Return 1
-			
 		ElseIf Duplicado(ls_Columna, Data) Then
 			dw_1.Object.lote_codigo[Row] 	=	Long(ls_nula)
 			dw_1.Object.vari_nombre[Row] 	=	ls_nula
@@ -1009,57 +979,28 @@ CHOOSE CASE ls_Columna
 			dw_1.Object.mfgd_bulent[Row] 	=  Long(ls_nula)
 			dw_1.Object.mfgd_kgnent[Row]	=	Long(ls_nula)
 			Return 1
-			
 		Else
 			If iuo_lote.totalneto > 0 Then
 			   If istr_mant.argumento[2] = "23" Then
 					If iuo_Lote.Productor <> Integer(istr_mant.argumento[6]) Then
-						  MessageBox("Atención", "No existe Lote para Productor a Devolución.~r~r" + &
-										  "Ingrese o seleccione otros antecedentes.")
+						  MessageBox("Atención", "No existe Lote para Productor a Devolución.~r~rIngrese o seleccione otros antecedentes.")
 						  This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))
 							Return 1
 				  	End If
 			   End If 
 	
 				If iuo_TipoMovto.Sentido = 2 Then
-					If Not HayExistencia(ls_Columna, Data, &
+					If Not wf_HayExistencia(ls_Columna, Data, &
 						This.Object.mfgd_bulent[il_Fila]) Then
-						This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))
-						
+						This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))						
 						Return 1
 					Else
-						If dw_lotes.Retrieve(This.Object.lote_pltcod[Row], This.Object.lote_espcod[Row], Long(Data), &
-													This.Object.cama_codigo[Row]) > 0 Then
-							dw_1.Object.lote_codigo[Row] 	=	dw_lotes.Object.lote_codigo[1]
-							dw_1.Object.vari_nombre[Row] 	=	dw_lotes.Object.vari_nombre[1]
-							dw_1.Object.prod_nombre[Row] 	=	dw_lotes.Object.prod_nombre[1]
-							dw_1.Object.enva_tipoen[Row] 	=	dw_lotes.Object.enva_tipoen[1]
-							dw_1.Object.enva_codigo[Row] 	=	dw_lotes.Object.enva_codigo[1]
-							dw_1.Object.enva_nombre[Row] 	=	dw_lotes.Object.enva_nombre[1]
-							dw_1.Object.cama_codigo[Row] 	=  dw_lotes.Object.cama_codigo[1]
-							
-							CapturaKilosPromedio("lote_codigo",Data)
-							dw_1.Object.mfgd_bulent[Row] 	=  dw_lotes.Object.caex_canbul[1]
-							dw_1.Object.mfgd_kgnent[Row]	=	dw_lotes.Object.caex_canbul[1] * id_KilosPromed
-							
-						Else
-							MessageBox("Alerta", "El lote no posee existencia en la cámara indicada")
-							dw_1.Object.lote_codigo[Row] 	=	Long(ls_nula)
-							dw_1.Object.vari_nombre[Row] 	=	ls_nula
-							dw_1.Object.prod_nombre[Row] 	=	ls_nula
-							dw_1.Object.enva_tipoen[Row] 	=	Long(ls_nula)
-							dw_1.Object.enva_codigo[Row] 	=	Long(ls_nula)
-							dw_1.Object.enva_nombre[Row] 	=	ls_nula
-							dw_1.Object.cama_codigo[Row] 	=  Long(ls_nula)
-							dw_1.Object.mfgd_bulent[Row] 	=  Long(ls_nula)
-							dw_1.Object.mfgd_kgnent[Row]	=	Long(ls_nula)
-							
-							Return 1
-							
-						End If
+						wf_CapturaKilosPromedio("lote_codigo",Data)
+//						dw_1.Object.mfgd_bulent[il_Fila] =  long(lstr_busq.argum[8])
+//						dw_1.Object.mfgd_kgnent[il_Fila]	=	long(lstr_busq.argum[8]) * id_KilosPromed					
 					End If
-				End If
-	
+				End If	
+				
 				ExisteVariedad_gr(iuo_Especie.Codigo, iuo_Lote.Variedad, istr_Variedad)
 				iuo_Productor.Existe(iuo_Lote.Productor, True, sqlca)
 				
@@ -1070,61 +1011,53 @@ CHOOSE CASE ls_Columna
 				dw_tarjas.Filter()
 
 			Else
-				MessageBox("Atención", "No existe Lote como Definitivo.~r~r" + &
-						     "Ingrese o seleccione otros antecedentes.")
-			  	This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))
-						
+				MessageBox("Atención", "No existe Lote como Definitivo.~r~rIngrese o seleccione otros antecedentes.")
+			  	This.SetItem(il_Fila, ls_Columna, Long(ias_campo[5]))						
 				Return 1
 			End If	
 		End If
 
-	CASE "enva_tipoen"
-		If Not ExisteEnvase(Integer(Data), 0, istr_Envase) OR &
+	Case "enva_tipoen"
+		If Not ExisteEnvase(Integer(Data), 0, istr_Envase) Or &
 			Duplicado(ls_Columna, Data) OR istr_Envase.UsoEnvase <> 1 Then
 			This.SetItem(il_Fila, ls_Columna, Integer(ias_campo[8]))
-
 			Return 1
 		Else
 			If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia(ls_Columna, Data, &
-					This.Object.mfgd_bulent[il_Fila]) Then
+				If Not wf_HayExistencia(ls_Columna, Data, This.Object.mfgd_bulent[il_Fila]) Then
 					This.SetItem(il_Fila, ls_Columna, Integer(ias_campo[8]))
-					
 					Return 1
 				Else
-					CapturaKilosPromedio(ls_Columna,Data)
+					wf_CapturaKilosPromedio(ls_Columna,Data)
 				End If
 			End If
 		End If
 
-	CASE "enva_codigo"
+	Case "enva_codigo"
 		istr_Envase.TipoEnvase = this.Object.enva_tipoen[il_fila]
 		If Not ExisteEnvase(istr_Envase.TipoEnvase, Integer(Data), istr_Envase) OR &
 			Duplicado(ls_Columna, Data) Then
 			This.SetItem(il_Fila, ls_Columna, Integer(ias_campo[9]))
-			
 			Return 1
 		Else
 			dw_1.Object.enva_nombre[il_Fila]	=	istr_Envase.Nombre
 			If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia(ls_Columna, Data, &
-					This.Object.mfgd_bulent[il_Fila]) Then
+				If Not wf_HayExistencia(ls_Columna, Data, This.Object.mfgd_bulent[il_Fila]) Then
 					This.SetItem(il_Fila, ls_Columna, Integer(ias_campo[9]))
-					
 					Return 1
 				Else
-					CapturaKilosPromedio(ls_Columna,Data)
+					wf_CapturaKilosPromedio(ls_Columna,Data)
 				End If
 			End If
 		End If
 		
-	CASE "mfgd_bulent"
+	Case "mfgd_bulent"
 		If Integer(data) > 9999 OR Integer(data) < 0 Then
 			This.Setitem(Row,"mfgd_bulent", Integer(ls_Nula))
 			Return 1
 		Else
 			If iuo_TipoMovto.Sentido = 2 Then
-				If Not HayExistencia(ls_Columna, "0", integer(Data)) Then
+				If Not wf_HayExistencia(ls_Columna, "0", integer(Data)) Then
 					This.SetItem(il_Fila, ls_Columna, Integer(ias_campo[6]))
 					This.SetItem(il_Fila,"mfgd_kgnent",dec(ias_campo[7]))
 					Return 1
@@ -1133,22 +1066,26 @@ CHOOSE CASE ls_Columna
 				End If
 			End If
 		End If
-
-
-End CHOOSE
+End Choose
 end event
 
-event dw_1::buttonclicked;call super::buttonclicked;CHOOSE CASE dwo.Name
-	CASE "b_buscalotes"
-		BuscaLote()
+event dw_1::buttonclicked;call super::buttonclicked;String ls_Boton
 
-	CASE "b_buscaenvase"
-		BuscaEnvase()
+ls_Boton = dwo.Name
 
-	CASE "b_tarjas"
-		cambiatarjas(Row)
-		CapturaKilosPromedio("tarjas", "0")
-END CHOOSE
+Choose Case ls_Boton
+	Case "b_buscalotes"
+		wf_BuscaLote()
+		wf_Calcula(Row)
+
+	Case "b_buscaenvase"
+		wf_BuscaEnvase()
+
+	Case "b_tarjas"
+		wf_cambiatarjas(Row)
+		wf_CapturaKilosPromedio("tarjas", "0")
+		
+END Choose
 end event
 
 event dw_1::rowfocuschanged;call super::rowfocuschanged;
@@ -1162,20 +1099,6 @@ END IF
 
 dw_tarjas.Filter()
 end event
-
-type dw_lotes from datawindow within w_mant_deta_movtofrutagranel_despacho
-boolean visible = false
-integer x = 2185
-integer y = 836
-integer width = 274
-integer height = 184
-integer taborder = 50
-boolean bringtotop = true
-string title = "none"
-string dataobject = "dw_mues_lotes_existencia_mod"
-boolean livescroll = true
-borderstyle borderstyle = stylelowered!
-end type
 
 type pb_tarjas from picturebutton within w_mant_deta_movtofrutagranel_despacho
 string tag = "Carga Tarjas"
@@ -1197,7 +1120,7 @@ string disabledname = "\Desarrollo 17\Imagenes\Botones\apuntes-bn.png"
 alignment htextalign = left!
 end type
 
-event clicked;CambiaTarjas(dw_1.GetRow())
+event clicked;wf_CambiaTarjas(dw_1.GetRow())
 end event
 
 type dw_2 from datawindow within w_mant_deta_movtofrutagranel_despacho

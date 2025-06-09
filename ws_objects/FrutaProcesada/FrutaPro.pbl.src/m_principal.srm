@@ -1570,8 +1570,6 @@ type m_informeconsolidadogeneral from menu within m_4
 end type
 type m_informeconsolidadoporreci%bidor from menu within m_4
 end type
-type m_-46 from menu within m_4
-end type
 type m_consolidadodespachosespeciales from menu within m_4
 end type
 type m_-70 from menu within m_4
@@ -1597,8 +1595,6 @@ end type
 type m_palletcajas from menu within m_4
 end type
 type m_embarquesrecibidores from menu within m_4
-end type
-type m_-21 from menu within m_4
 end type
 type m_informeprueba from menu within m_4
 end type
@@ -1633,7 +1629,6 @@ m_24 m_24
 m_25 m_25
 m_informeconsolidadogeneral m_informeconsolidadogeneral
 m_informeconsolidadoporreci%bidor m_informeconsolidadoporreci%bidor
-m_-46 m_-46
 m_consolidadodespachosespeciales m_consolidadodespachosespeciales
 m_-70 m_-70
 m_informemercadosrecibidoresvariedad m_informemercadosrecibidoresvariedad
@@ -1647,7 +1642,6 @@ m_-75 m_-75
 m_embarquesresumenopcional m_embarquesresumenopcional
 m_palletcajas m_palletcajas
 m_embarquesrecibidores m_embarquesrecibidores
-m_-21 m_-21
 m_informeprueba m_informeprueba
 m_informedetrasladoscamiones m_informedetrasladoscamiones
 m_-38 m_-38
@@ -20265,7 +20259,6 @@ m_24 m_24
 m_25 m_25
 m_informeconsolidadogeneral m_informeconsolidadogeneral
 m_informeconsolidadoporreci%bidor m_informeconsolidadoporreci%bidor
-m_-46 m_-46
 m_consolidadodespachosespeciales m_consolidadodespachosespeciales
 m_-70 m_-70
 m_informemercadosrecibidoresvariedad m_informemercadosrecibidoresvariedad
@@ -20279,7 +20272,6 @@ m_-75 m_-75
 m_embarquesresumenopcional m_embarquesresumenopcional
 m_palletcajas m_palletcajas
 m_embarquesrecibidores m_embarquesrecibidores
-m_-21 m_-21
 m_informeprueba m_informeprueba
 m_informedetrasladoscamiones m_informedetrasladoscamiones
 m_-38 m_-38
@@ -20321,7 +20313,6 @@ this.m_24=create m_24
 this.m_25=create m_25
 this.m_informeconsolidadogeneral=create m_informeconsolidadogeneral
 this.m_informeconsolidadoporreci%bidor=create m_informeconsolidadoporreci%bidor
-this.m_-46=create m_-46
 this.m_consolidadodespachosespeciales=create m_consolidadodespachosespeciales
 this.m_-70=create m_-70
 this.m_informemercadosrecibidoresvariedad=create m_informemercadosrecibidoresvariedad
@@ -20335,7 +20326,6 @@ this.m_-75=create m_-75
 this.m_embarquesresumenopcional=create m_embarquesresumenopcional
 this.m_palletcajas=create m_palletcajas
 this.m_embarquesrecibidores=create m_embarquesrecibidores
-this.m_-21=create m_-21
 this.m_informeprueba=create m_informeprueba
 this.m_informedetrasladoscamiones=create m_informedetrasladoscamiones
 this.m_-38=create m_-38
@@ -20357,7 +20347,6 @@ this.Item[UpperBound(this.Item)+1]=this.m_24
 this.Item[UpperBound(this.Item)+1]=this.m_25
 this.Item[UpperBound(this.Item)+1]=this.m_informeconsolidadogeneral
 this.Item[UpperBound(this.Item)+1]=this.m_informeconsolidadoporreci%bidor
-this.Item[UpperBound(this.Item)+1]=this.m_-46
 this.Item[UpperBound(this.Item)+1]=this.m_consolidadodespachosespeciales
 this.Item[UpperBound(this.Item)+1]=this.m_-70
 this.Item[UpperBound(this.Item)+1]=this.m_informemercadosrecibidoresvariedad
@@ -20371,7 +20360,6 @@ this.Item[UpperBound(this.Item)+1]=this.m_-75
 this.Item[UpperBound(this.Item)+1]=this.m_embarquesresumenopcional
 this.Item[UpperBound(this.Item)+1]=this.m_palletcajas
 this.Item[UpperBound(this.Item)+1]=this.m_embarquesrecibidores
-this.Item[UpperBound(this.Item)+1]=this.m_-21
 this.Item[UpperBound(this.Item)+1]=this.m_informeprueba
 this.Item[UpperBound(this.Item)+1]=this.m_informedetrasladoscamiones
 this.Item[UpperBound(this.Item)+1]=this.m_-38
@@ -20397,7 +20385,6 @@ destroy(this.m_24)
 destroy(this.m_25)
 destroy(this.m_informeconsolidadogeneral)
 destroy(this.m_informeconsolidadoporreci%bidor)
-destroy(this.m_-46)
 destroy(this.m_consolidadodespachosespeciales)
 destroy(this.m_-70)
 destroy(this.m_informemercadosrecibidoresvariedad)
@@ -20411,7 +20398,6 @@ destroy(this.m_-75)
 destroy(this.m_embarquesresumenopcional)
 destroy(this.m_palletcajas)
 destroy(this.m_embarquesrecibidores)
-destroy(this.m_-21)
 destroy(this.m_informeprueba)
 destroy(this.m_informedetrasladoscamiones)
 destroy(this.m_-38)
@@ -20777,33 +20763,6 @@ on m_informeconsolidadoporreci%bidor.destroy
 call super::destroy
 end on
 
-type m_-46 from menu within m_4
-end type
-
-on m_-46.create
-call super::create
-this.text = "-"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_-46.destroy
-call super::destroy
-end on
-
 type m_consolidadodespachosespeciales from menu within m_4
 end type
 
@@ -20908,7 +20867,9 @@ end event
 
 on m_embarqueproductorvariedadzonassemanas.create
 call super::create
+this.visible = false
 this.text = "Despachos Productor/&Variedad/Zonas/Semanas"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -21221,33 +21182,6 @@ this.bitmapgradient = true
 end on
 
 on m_embarquesrecibidores.destroy
-call super::destroy
-end on
-
-type m_-21 from menu within m_4
-end type
-
-on m_-21.create
-call super::create
-this.text = "-"
-this.menutextcolor = 134217735
-this.menubackcolor = 134217732
-this.menuhighlightcolor = 134217741
-this.textsize = 8
-this.weight = 400
-this.facename = "Tahoma"
-this.titlebackcolor = 134217730
-this.bitmapbackcolor = 12632256
-this.menubitmaps = true
-this.titlegradient = true
-this.toolbartextcolor = 134217746
-this.toolbarbackcolor = 67108864
-this.toolbarhighlightcolor = 134217741
-this.toolbargradient = true
-this.bitmapgradient = true
-end on
-
-on m_-21.destroy
 call super::destroy
 end on
 

@@ -576,353 +576,328 @@ istr_info.titulo	= 'EXISTENCIA DE FRUTA GRANEL'
 
 OpenWithParm(vinf, istr_info)
 
-IF	rb_1.checked THEN
-	IF ii_informe = 1 THEN
+If	rb_1.checked Then
+	If ii_informe = 1 Then
 		vinf.dw_1.DataObject = "dw_info_existencia_frutagranel"
-	ELSEIF ii_informe = 3 THEN
+	ElseIf ii_informe = 3 Then
 		vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_protocolo"
-	ELSE
+	Else
 		vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_packing"
-	END IF
+	End If
 	ls_titulo 				=	rb_1.Text
 	
-ElSEIF rb_2.checked THEN
+ElseIf rb_2.checked Then
 	vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_cam"
 	ls_titulo 				=	rb_2.Text
 	
-ELSEIF rb_3.checked THEN
+ElseIf rb_3.checked Then
 	vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_prdvaresp"
 	ls_titulo 				=	rb_3.Text
-ELSEIF rb_4.Checked THEN
+ElseIf rb_4.Checked Then
 	vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_prod"
 	ls_titulo 				=	rb_4.Text
-ELSE
+Else
 	vinf.dw_1.DataObject = "dw_info_existencia_frutagranel_prodfriodesv"
 	ls_titulo 				=	rb_5.Text + "/Cat/Esp/Var"
-END IF
+End If
 
 If dw_1.Object.todosclie[1] = 1 Then
 	ll_cliente = -1
 Else	
 	ll_cliente = dw_1.Object.cliente[1]
-	IF IsNull(ll_cliente) Then
-		MessageBox( "Cliente Erróneo", "Falta Seleccionar un Cliente.", &
-					 StopSign!, Ok!)
-		RETURN 1
-	END IF
+	If IsNull(ll_cliente) Then
+		MessageBox( "Cliente Erróneo", "Falta Seleccionar un Cliente.", StopSign!, Ok!)
+		Return 1
+	End If
 End If
 
 // Acepta Planta //
-IF dw_1.Object.todosplanta[1] = 1 THEN
+If dw_1.Object.todosplanta[1] = 1 Then
 	li_Planta = 10000
-ELSE
+Else
 	li_Planta = dw_1.Object.planta[1]
-	IF IsNull(li_Planta) Then
-		MessageBox( "Planta Errónea", "Falta seleccionar una Planta.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END IF
-END IF
+	If IsNull(li_Planta) Then
+		MessageBox( "Planta Errónea", "Falta seleccionar una Planta.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 
 li_KilosReales	=	dw_1.Object.kilosreales[1]
 
-// Acepta Frigorifico //
-IF dw_1.Object.TodosFrigo[1] = 1 THEN
+// Acepta FrigorIfico //
+If dw_1.Object.TodosFrigo[1] = 1 Then
 	ll_Frigo = 10000
-	IF dw_1.Object.consfrigo[1] = 1 THEN
+	If dw_1.Object.consfrigo[1] = 1 Then
 		ll_Frigo = 90000
-	END IF
-ELSE
-	ll_Frigo	= dw_1.Object.frigorifico[1]
-	IF IsNull(ll_Frigo) THEN
-		MessageBox( "Frigorifico Erróneo", "Falta seleccionar un Frigorifico.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF	
+	End If
+Else
+	ll_Frigo	= dw_1.Object.frigorIfico[1]
+	If IsNull(ll_Frigo) Then
+		MessageBox( "FrigorIfico Erróneo", "Falta seleccionar un FrigorIfico.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If	
 
 // Acepta Camara //
-IF dw_1.Object.todoscama[1] = 1 THEN
+If dw_1.Object.todoscama[1] = 1 Then
 	ll_Camara = 10000
-	IF dw_1.Object.conscama[1] = 1 THEN	
+	If dw_1.Object.conscama[1] = 1 Then	
 		ll_Camara	=	90000
-	END IF
-ELSE
+	End If
+Else
 	ll_Camara	=	dw_1.Object.camara[1]
-	IF IsNull(ll_Camara) THEN
-		MessageBox( "Camara Errónea", "Falta seleccionar una Camara.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+	If IsNull(ll_Camara) Then
+		MessageBox( "Camara Errónea", "Falta seleccionar una Camara.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 
 // Acepta Especie //
-IF dw_1.Object.todosespe[1] = 1 THEN
+If dw_1.Object.todosespe[1] = 1 Then
 	li_Especie = 100
-ELSE
+Else
 	li_Especie = dw_1.Object.especie[1]
-	IF IsNull(li_especie) Then
-		MessageBox( "Especie Errónea", "Falta seleccionar una Especie.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+	If IsNull(li_especie) Then
+		MessageBox( "Especie Errónea", "Falta seleccionar una Especie.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 
 // Acepta Variedad //
-IF dw_1.Object.todosvari[1] = 1 THEN
+If dw_1.Object.todosvari[1] = 1 Then
 	li_Variedad = 10000
-ELSE
+Else
 	li_Variedad = dw_1.Object.variedad[1]
 	If IsNull(li_Variedad) Then
-		MessageBox( "Variedad Errónea", "Falta seleccionar una Variedad.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+		MessageBox( "Variedad Errónea", "Falta seleccionar una Variedad.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 
 // Acepta Grupo de Variedades //
-IF dw_1.Object.todosvari[1] = 1 THEN  
-	IF dw_1.Object.todosgrupo[1] = 1  THEN
+If dw_1.Object.todosvari[1] = 1 Then  
+	If dw_1.Object.todosgrupo[1] = 1  Then
 		li_Grupo = 100
-		IF dw_1.Object.consgrupo[1] = 1  THEN	
+		If dw_1.Object.consgrupo[1] = 1  Then	
 			li_Grupo =	900
-		END IF
-	ELSE
+		End If
+	Else
 		li_Grupo = dw_1.Object.grupo[1]
 		If IsNull(li_Grupo) Then
-			MessageBox( "Grupo Erróneo", "Falta seleccionar un Grupo de Especie.", &
-	      	       StopSign!, Ok!)
-			RETURN 1				 
-   	END IF
-	END IF
-ELSE
+			MessageBox( "Grupo Erróneo", "Falta seleccionar un Grupo de Especie.", StopSign!, Ok!)
+			Return 1				 
+   	End If
+	End If
+Else
 	li_Grupo = 100
-End IF
+End If
 
 // Acepta SubGrupo de Variedades //
-IF dw_1.Object.todosvari[1] = 1 THEN 
+If dw_1.Object.todosvari[1] = 1 Then 
 		
-		IF dw_1.Object.todossubgru[1] = 1  THEN
+		If dw_1.Object.todossubgru[1] = 1  Then
 			li_SubGrupo = 100
-			IF dw_1.Object.conssubgr[1] = 1 THEN
+			If dw_1.Object.conssubgr[1] = 1 Then
 				li_SubGrupo=900
-			END IF
-		ELSE
+			End If
+		Else
 			li_SubGrupo = dw_1.Object.subgrupo[1]
 			If IsNull(li_SubGrupo) Then
 				MessageBox( "SubGrupo Erróneo", "Falta seleccionar un SubGrupo de Especie.", &
 	   	          StopSign!, Ok!)
-				RETURN 1				 
-   		END If
-		END IF
-	ELSE
+				Return 1				 
+   		End If
+		End If
+	Else
 		li_SubGrupo = 100
-End IF
+End If
 // Acepta Tratamientos de frio //
-IF dw_1.Object.todostrata[1] = 1 THEN
+If dw_1.Object.todostrata[1] = 1 Then
 	ls_Tratamiento = '*'
-	IF dw_1.Object.constrata[1] = 1 THEN	
+	If dw_1.Object.constrata[1] = 1 Then	
 		ls_Tratamiento = '**'
-	END IF
-ELSE
+	End If
+Else
 	ls_Tratamiento = dw_1.Object.tratamiento[1]
 	If IsNull(ls_Tratamiento) or ls_tratamiento="" Then
-		MessageBox( "Tratamiento Erróneo", "Falta seleccionar un Tratamiento.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+		MessageBox( "Tratamiento Erróneo", "Falta seleccionar un Tratamiento.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 // Acepta Periodo de Frio //
-IF dw_1.Object.todosperio[1] = 1 THEN
+If dw_1.Object.todosperio[1] = 1 Then
 	li_Periodo = 100
-	IF dw_1.Object.consperio[1] = 1 THEN	
+	If dw_1.Object.consperio[1] = 1 Then	
 		li_Periodo = 900
-	END IF
-ELSE
+	End If
+Else
 	li_Periodo = dw_1.Object.periodo[1]
 	If IsNull(li_Periodo) Then
-		MessageBox( "Período Erróneo", "Falta seleccionar un Período.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+		MessageBox( "Período Erróneo", "Falta seleccionar un Período.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 // Acepta Categorias
-IF dw_1.Object.todoscate[1] = 1  THEN
+If dw_1.Object.todoscate[1] = 1  Then
 	li_Categoria = 1000
-ELSE
+Else
 	li_Categoria = dw_1.Object.categoria[1]
 	If IsNull(li_Categoria) Then
-		MessageBox( "Categoria Errónea", "Falta seleccionar una Categoria.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+		MessageBox( "Categoria Errónea", "Falta seleccionar una Categoria.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 // Acepta Productor
-IF dw_1.Object.todosprod[1] = 1 THEN
+If dw_1.Object.todosprod[1] = 1 Then
 	ll_Productor = 10000
-	IF dw_1.Object.consprod[1] = 1 THEN	
+	If dw_1.Object.consprod[1] = 1 Then	
 		ll_Productor =	90000
-	END IF
-ELSE
+	End If
+Else
 	ll_Productor = dw_1.Object.productor[1]
 	If IsNull(ll_Productor) Then
-		MessageBox( "Productor Erróneo", "Falta seleccionar un Productor.", &
-	             StopSign!, Ok!)
-		RETURN 1				 
-   END If
-END IF
+		MessageBox( "Productor Erróneo", "Falta seleccionar un Productor.", StopSign!, Ok!)
+		Return 1				 
+   End If
+End If
 // Acepta Todos Lotes o Consolida
-IF dw_1.Object.consollote[1] = 1 THEN
+If dw_1.Object.consollote[1] = 1 Then
 	li_ConsLote =	1
-ELSE
+Else
 	li_ConsLote = 0
-END IF
+End If
 
 // Acepta Predio
-IF dw_1.Object.todospredio[1] = 1 THEN
+If dw_1.Object.todospredio[1] = 1 Then
 	li_Predio = -1
-ELSE
+Else
 	li_Predio = dw_1.Object.predio[1]
 	If IsNull(li_Predio) Then
-		MessageBox( "Predio Erróneo", "Falta seleccionar un Predio.", &
-	             StopSign!, Ok!)
-		RETURN				 
-   END If
-END IF
+		MessageBox( "Predio Erróneo", "Falta seleccionar un Predio.", StopSign!, Ok!)
+		Return				 
+   End If
+End If
 
 //Acepta Cuartel
-IF dw_1.Object.todoscuartel[1] = 1 THEN
+If dw_1.Object.todoscuartel[1] = 1 Then
 	li_Cuartel = -1
-ELSE
+Else
 	li_Cuartel  = dw_1.Object.cuartel[1]
 	If IsNull(li_Cuartel ) Then
-		MessageBox( "Cuartel Erróneo", "Falta seleccionar un Cuartel.", &
-	             StopSign!, Ok!)
-		RETURN				 
-   END If
-END IF
+		MessageBox( "Cuartel Erróneo", "Falta seleccionar un Cuartel.", StopSign!, Ok!)
+		Return				 
+   End If
+End If
 
 //Acepta hidrocooler
-IF dw_1.Object.todohidcool[1] = 1 THEN
+If dw_1.Object.todohidcool[1] = 1 Then
 	li_hidcool = -1
-ELSE
+Else
 	li_hidcool  = dw_1.Object.hidcool[1]
 	If IsNull(li_hidcool) Then
-		MessageBox( "Mercado Erróneo", "Falta seleccionar una Cond. de Mercado.", &
-	             StopSign!, Ok!)
-		RETURN				 
-   END If
-END IF
+		MessageBox( "Mercado Erróneo", "Falta seleccionar una Cond. de Mercado.", StopSign!, Ok!)
+		Return				 
+   End If
+End If
 
 //Acepta condicion de mercado
-IF dw_1.Object.todoscmerc[1] = 1 THEN
+If dw_1.Object.todoscmerc[1] = 1 Then
 	li_condmerc = -1
-ELSE
+Else
 	li_condmerc  = dw_1.Object.merc[1]
 	If IsNull(li_condmerc ) Then
-		MessageBox( "Mercado Erróneo", "Falta seleccionar una Cond. de Mercado.", &
-	             StopSign!, Ok!)
-		RETURN				 
-   END If
-END IF
+		MessageBox( "Mercado Erróneo", "Falta seleccionar una Cond. de Mercado.", StopSign!, Ok!)
+		Return				 
+   End If
+End If
 
 //Acepta condicion de embarque
-IF dw_1.Object.todosembq[1] = 1 THEN
+If dw_1.Object.todosembq[1] = 1 Then
 	li_condembq = -1
-ELSE
+Else
 	li_condembq  = dw_1.Object.embq[1]
 	If IsNull(li_condembq ) Then
-		MessageBox( "C.Embq Errónea", "Falta seleccionar una Cond. de Embarque.", &
-	             StopSign!, Ok!)
-		RETURN				 
-   END If
-END IF
+		MessageBox( "C.Embq Errónea", "Falta seleccionar una Cond. de Embarque.", StopSign!, Ok!)
+		Return				 
+   End If
+End If
 
 //Acepta desgarchado
-IF dw_1.Object.tratesptodos[1] = 1 THEN
+If dw_1.Object.tratesptodos[1] = 1 Then
 	li_tratesp = -1
-ELSE
+Else
 	li_tratesp  = dw_1.Object.tratesp[1]
-END IF
+End If
 
 //Acepta desgarchado
-IF dw_1.Object.todosprot[1] = 1 THEN
+If dw_1.Object.todosprot[1] = 1 Then
 	li_protocolo = -1
-ELSE
+Else
 	li_protocolo  = dw_1.Object.protocolo[1]
-END IF
+End If
 
 ld_fecini	=	dw_1.Object.FechaInicio[1]
 ld_fecter	=	dw_1.Object.FechaTermi[1]
 
 vinf.dw_1.SetTransObject(sqlca)
 
-IF ii_informe <> 3 THEN
+If ii_informe <> 3 Then
 	ll_Fila	=	vinf.dw_1.Retrieve(li_Planta,  		ll_Frigo, 		ll_Camara,			li_Especie,			&
 											 li_Grupo,	 		li_SubGrupo,	li_Variedad,		ls_Tratamiento,	&
 											 li_Periodo, 		li_Categoria,	ll_Productor, 		li_ConsLote,		&
 											 ll_cliente, 		li_Predio, 		li_Cuartel, 		li_condmerc,		&
 											 li_KilosReales,	ld_fecini, 		ld_fecter, 			li_condembq, 	&
 											 li_tratesp, 		li_hidcool)
-ELSE
+Else
 	ll_Fila	=	vinf.dw_1.Retrieve(li_Planta,  		ll_Frigo, 		ll_Camara,			li_Especie,			&
 											 li_Grupo,	 		li_SubGrupo,	li_Variedad,		ls_Tratamiento,	&
 											 li_Periodo, 		li_Categoria,	ll_Productor, 		li_ConsLote,		&
 											 ll_cliente, 		li_Predio, 		li_Cuartel, 		li_condmerc,		&
 											 li_KilosReales,	ld_fecini, 		ld_fecter, 			li_condembq, 		&
 											 li_tratesp, 		li_protocolo)
-END IF
+End If
 										 
-IF ll_Fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-
-ELSEIF ll_Fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-	             StopSign!, Ok!)
-
-ELSE
+If ll_Fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf ll_Fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)	
-	IF li_KilosReales = 1 THEN
+	If li_KilosReales = 1 Then
 		ls_titulo	=	ls_titulo + " Kilos Reales"
-	ELSE 
+	Else 
 		ls_titulo	=	ls_titulo + " Kilos Promedio"
-	END IF
+	End If
 	
-	IF ii_informe = 3 THEN
-		vinf.dw_1.Modify("T_8.text = '" + " Segun Certificación" + "'")
-	END IF
+	If ii_informe = 3 Then vinf.dw_1.ModIfy("T_8.text = '" + " Segun CertIficación" + "'")
 	
-	vinf.dw_1.Modify("t_titulo.text = '" + ls_titulo + "'")
+	vinf.dw_1.ModIfy("t_titulo.text = '" + ls_titulo + "'")
 	
-	IF rb_2.checked OR rb_1.checked THEN
-		IF dw_1.Object.totalcate[1]	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.2.Height=0")
-		IF dw_1.Object.totalespe[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.3.Height=0")
-		IF dw_1.Object.totalgrup[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.4.Height=0")
-		IF dw_1.Object.totalsubg[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.5.Height=0")
-		IF dw_1.Object.totalvari[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.6.Height=0")
-		IF dw_1.Object.totaltrat[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.7.Height=0")
-		IF dw_1.Object.totalperi[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.8.Height=0")
-		IF dw_1.Object.totalprod[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.9.Height=0")
-	ELSEIF rb_3.Checked THEN
-		IF dw_1.Object.totalespe[1] 	= 	0 THEN vinf.dw_1.Modify("DataWindow.Trailer.1.Height=0")
-		IF dw_1.Object.totalvari[1] 	= 	0 THEN vinf.dw_1.Modify("DataWindow.Trailer.2.Height=0")
-		IF dw_1.Object.totaltrat[1] 	= 	0 THEN vinf.dw_1.Modify("DataWindow.Trailer.3.Height=0")
-		IF dw_1.Object.totalperi[1] 	= 	0 THEN vinf.dw_1.Modify("DataWindow.Trailer.4.Height=0")
-		IF dw_1.Object.totalprod[1] 	= 	0 THEN vinf.dw_1.Modify("DataWindow.Trailer.5.Height=0")
-	ELSE
-		IF dw_1.Object.totalcate[1]	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.3.Height=0")
-		IF dw_1.Object.totalespe[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.4.Height=0")
-		IF dw_1.Object.totalvari[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.5.Height=0")
-		IF dw_1.Object.totaltrat[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.6.Height=0")
-		IF dw_1.Object.totalperi[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.7.Height=0")
-		IF dw_1.Object.totalprod[1] 	= 0 THEN vinf.dw_1.Modify("DataWindow.Trailer.2.Height=0")
-	END IF
-	IF gs_Ambiente <> 'Windows' THEN
-	   	F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	
-  	END IF
-END IF
+	If rb_2.checked OR rb_1.checked Then
+		If dw_1.Object.totalcate[1]	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.2.Height=0")
+		If dw_1.Object.totalespe[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.3.Height=0")
+		If dw_1.Object.totalgrup[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.4.Height=0")
+		If dw_1.Object.totalsubg[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.5.Height=0")
+		If dw_1.Object.totalvari[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.6.Height=0")
+		If dw_1.Object.totaltrat[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.7.Height=0")
+		If dw_1.Object.totalperi[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.8.Height=0")
+		If dw_1.Object.totalprod[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.9.Height=0")
+	ElseIf rb_3.Checked Then
+		If dw_1.Object.totalespe[1] 	= 	0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.1.Height=0")
+		If dw_1.Object.totalvari[1] 	= 	0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.2.Height=0")
+		If dw_1.Object.totaltrat[1] 	= 	0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.3.Height=0")
+		If dw_1.Object.totalperi[1] 	= 	0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.4.Height=0")
+		If dw_1.Object.totalprod[1] 	= 	0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.5.Height=0")
+	Else
+		If dw_1.Object.totalcate[1]	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.3.Height=0")
+		If dw_1.Object.totalespe[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.4.Height=0")
+		If dw_1.Object.totalvari[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.5.Height=0")
+		If dw_1.Object.totaltrat[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.6.Height=0")
+		If dw_1.Object.totalperi[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.7.Height=0")
+		If dw_1.Object.totalprod[1] 	= 0 Then vinf.dw_1.ModIfy("DataWindow.Trailer.2.Height=0")
+	End If
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event

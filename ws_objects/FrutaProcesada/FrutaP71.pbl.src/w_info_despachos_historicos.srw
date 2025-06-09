@@ -663,6 +663,7 @@ string facename = "Tahoma"
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_despachos_historicos
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_despachos_historicos
@@ -692,40 +693,39 @@ OpenWithParm(vinf, istr_info)
 /*
 Especies
 */
-IF IsNull(uo_selespecie.Codigo)THEN
+If IsNull(uo_selespecie.Codigo)Then
 	MessageBox("Atención","Debe Seleccionar una Especie Previamente",Exclamation!)
-	uo_selespecie.dw_Seleccion.SetFocus()
+	uo_SelEspecie.dw_Seleccion.SetFocus()
 	RETURN
-END IF
+End If
 
-IF cbx_varirotula.Checked THEN
+If cbx_varirotula.Checked Then
 	li_varirotula = 1
-ELSE
+Else
 	li_varirotula = 0
-END IF
+End If
 
-IF cbx_todosprod.Checked THEN
+If cbx_todosprod.Checked Then
 	il_productor = 0
-ELSE
+Else
 	il_productor = dw_productor.Object.prod_codigo[1]
-END IF
+End If
 
-IF cbx_todosembalaje.Checked THEN
+If cbx_todosembalaje.Checked Then
 	is_embalajes = '0'
-ELSE
+Else
 	is_embalajes = dw_embalaje.Object.emba_codigo[1]
-END IF
+End If
 
-IF cbx_conspuerto.Checked  THEN
+If cbx_conspuerto.Checked  Then
 	li_puertoori = -9
-ELSEIF cbx_todospuerto.Checked THEN
+ElseIf cbx_todospuerto.Checked Then
 	li_puertoori = -1
-ELSE	
+Else	
 	li_puertoori = dw_puerto.Object.puer_codigo[1]
-END IF
+End If
 
-
-IF cbx_forexcel.Checked = True THEN
+If cbx_forexcel.Checked = True Then
 	vinf.dw_1.DataObject ="dw_info_despacho_formatoexcel"
 	cbx_1.Enabled = False
 	cbx_2.Enabled = False
@@ -741,58 +741,50 @@ IF cbx_forexcel.Checked = True THEN
 	cbx_6.Checked = False	
 	cbx_varirotula.Enabled = False
 	cbx_varirotula.Checked = False
-ELSE
-	IF cbx_1.Checked THEN
-		IF cbx_6.Checked THEN
+Else
+	If cbx_1.Checked Then
+		If cbx_6.Checked Then
 			vinf.dw_1.DataObject = "dw_info_adm_repalletizajefriorec_prodcon"
-		ELSE
+		Else
 			vinf.dw_1.DataObject = "dw_info_adm_repalletizajefriodes_prod"
-		END IF
-	ELSE
+		End If
+	Else
 		vinf.dw_1.DataObject = "dw_info_adm_repalletizajefriodes"
-	END IF
-	IF cbx_2.Checked THEN
+	End If
+	If cbx_2.Checked Then
 	   vinf.dw_1.DataObject = "dw_info_adm_repalfriodesemb"
-	ELSEIF cbx_3.Checked THEN
+	ElseIf cbx_3.Checked Then
 		vinf.dw_1.DataObject = "dw_info_adm_repalfriodesemb_prod"
-	ELSEIF cbx_4.Checked THEN
+	ElseIf cbx_4.Checked Then
 		vinf.dw_1.DataObject = "dw_info_despacho_historico"
-	ELSEIF cbx_5.Checked THEN
+	ElseIf cbx_5.Checked Then
 		vinf.dw_1.DataObject = "dw_info_despachohistoricoporprod"
-	END IF
-	
-END IF
+	End If	
+End If
 vinf.dw_1.SetTransObject(sqlca)
 
-IF cbx_forexcel.Checked = True THEN
+If cbx_forexcel.Checked Then
 	ll_Fila	=	vinf.dw_1.Retrieve(ii_Cliente, ii_Planta,uo_selespecie.Codigo,ii_tipo,il_productor,&
-                                  			ii_tipoi,ii_destinos,Date(em_fzarpe.text),Date(em_hasta.text),&
-										 	 Long(em_numdesde.text),Long(em_numhasta.text),ii_camion,is_embalajes,&
-										 	 Long(em_guiaini.text),Long(em_guiafin.text),li_puertoori,li_varirotula,&
-											 ii_PlantaDestino,ii_packing,ii_exportador)
-ELSE										 
+                           ii_tipoi,ii_destinos,Date(em_fzarpe.text),Date(em_hasta.text), Long(em_numdesde.text),Long(em_numhasta.text),&
+						ii_camion,is_embalajes, Long(em_guiaini.text),Long(em_guiafin.text),li_puertoori,li_varirotula,ii_PlantaDestino,ii_packing,ii_exportador)
+Else										 
 	ll_Fila	=	vinf.dw_1.Retrieve(ii_Cliente, ii_Planta,uo_selespecie.Codigo,ii_tipo,il_productor,&
-                                 ii_tipoi,ii_destinos,Date(em_fzarpe.text),Date(em_hasta.text),&
-										 	Long(em_numdesde.text),Long(em_numhasta.text),ii_camion,&
-										 	is_embalajes,li_varirotula)
-END IF
+							ii_tipoi,ii_destinos,Date(em_fzarpe.text),Date(em_hasta.text),Long(em_numdesde.text),&
+							Long(em_numhasta.text),ii_camion, is_embalajes,li_varirotula)
+End If
 
-IF ll_Fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-				"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-	StopSign!, Ok!)
-ELSE
+If ll_Fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf ll_Fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.",  StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
 	
-	vinf.dw_1.Modify("desde.text = '" + em_fzarpe.text + "'")
-	vinf.dw_1.Modify("hasta.text = '" + em_hasta.text + "'")
+	vinf.dw_1.ModIfy("desde.text = '" + em_fzarpe.text + "'")
+	vinf.dw_1.ModIfy("hasta.text = '" + em_hasta.text + "'")
 		
-	IF gs_Ambiente <> 'Windows' THEN
-		F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	END IF
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 end event
 
 type pb_salir from w_para_informes`pb_salir within w_info_despachos_historicos
@@ -2177,7 +2169,6 @@ type uo_selespecie from uo_seleccion_especie within w_info_despachos_historicos
 event destroy ( )
 integer x = 1010
 integer y = 652
-integer height = 172
 integer taborder = 120
 boolean bringtotop = true
 end type

@@ -935,79 +935,79 @@ dw_1.SetTransObject(sqlca)
 dw_2.GetChild("plde_codigo", idwc_planta)
 idwc_planta.SetTransObject(sqlca)
 
-IF idwc_planta.Retrieve(gi_codexport) = 0 THEN
+If idwc_planta.Retrieve(gi_codexport) = 0 Then
 	idwc_planta.InsertRow(0)
-END IF
+End If
 
 dw_2.GetChild("espe_codigo", idwc_especie)
 idwc_especie.SetTransObject(sqlca)
-IF idwc_especie.Retrieve() = 0 THEN
+If idwc_especie.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Especies")
 	idwc_especie.InsertRow(0)
-ELSE
+Else
 	idwc_especie.SetSort("espe_nombre A")
 	idwc_especie.Sort()
-END IF
+End If
 
 dw_1.GetChild("vari_codigo",idwc_variedad)
 idwc_variedad.SetTransObject(Sqlca)
-IF idwc_variedad.Retrieve(gstr_paramplanta.codigoespecie) = 0 THEN
+If idwc_variedad.Retrieve(gstr_paramplanta.codigoespecie) = 0 Then
 	MessageBox("Atención","Falta Registrar Variedades")
 	idwc_variedad.InsertRow(0)
-ELSE
+Else
 	idwc_variedad.SetSort("vari_nombre A")
 	idwc_variedad.Sort()
-END IF
+End If
 
 dw_1.Getchild("prod_codigo", idwc_productor)
 idwc_productor.SetTransObject(sqlca)
-IF idwc_productor.Retrieve(-1) = 0 THEN
+If idwc_productor.Retrieve(-1) = 0 Then
 	MessageBox("Atención","Falta Registrar Productores")
 	idwc_productor.InsertRow(0)
-ELSE
+Else
 	idwc_productor.SetSort("prod_nombre A")
 	idwc_productor.Sort()
-END IF
+End If
 
 dw_1.Getchild("pefr_codigo", idwc_periodofrio)
 idwc_periodofrio.SetTransObject(sqlca)
-IF idwc_periodofrio.Retrieve() = 0 THEN
+If idwc_periodofrio.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Período Frío")
 	idwc_periodofrio.InsertRow(0)
-ELSE
+Else
 	idwc_periodofrio.SetSort("pefr_nombre A")
 	idwc_periodofrio.Sort()
-END IF
+End If
 
 dw_1.Getchild("frio_tipofr", idwc_tratamiento)
 idwc_tratamiento.SetTransObject(sqlca)
-IF idwc_tratamiento.Retrieve() = 0 THEN
+If idwc_tratamiento.Retrieve() = 0 Then
 	MessageBox("Atención","Falta Registrar Tratamiento Frío")
 	idwc_tratamiento.InsertRow(0)
-ELSE
+Else
 	idwc_tratamiento.SetSort("frio_nombre A")
 	idwc_tratamiento.Sort()
-END IF
+End If
 
 dw_1.Getchild("line_codigo", idwc_lineapacking)
 idwc_lineapacking.SetTransObject(sqlca)
-IF idwc_lineapacking.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 THEN
+If idwc_lineapacking.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 Then
 	MessageBox("Atención","Falta Registrar Linea Packing")
 	idwc_lineapacking.InsertRow(0)
-ELSE
+Else
 	idwc_lineapacking.SetSort("line_nombre A")
 	idwc_lineapacking.Sort()
-END IF
+End If
 
 dw_3.Getchild("cama_codigo", idwc_camara)
 idwc_camara.SetTransObject(sqlca)
-IF idwc_camara.Retrieve(Integer(istr_Mant.Argumento[1])) = 0 THEN
+If idwc_camara.Retrieve(Integer(istr_Mant.Argumento[1])) = 0 Then
 	MessageBox("Atención","Falta Registrar Camara Frigorífico")
 	idwc_camara.InsertRow(0)
-ELSE
+Else
 	idwc_camara.SetSort("cama_nombre A")
 	idwc_camara.Sort()
-END IF
+End If
 
 //Cliente
 dw_2.GetChild("clie_codigo", idwc_cliente)
@@ -1043,19 +1043,19 @@ Paramtemporada(gstr_paramtempo)
 ldt_fechaIni = gstr_paramtempo.fechainicio
 ldt_fechater = gstr_paramtempo.fechatermino
 
-IF ii_TipoOrd 	= 9 THEN
-	THIS.Title 	= "Orden de Re Proceso"
+If ii_TipoOrd 	= 9 Then
+	This.Title 	= "Orden de Re Proceso"
 	dw_1.Title 	= "Detalle de Orden de Re Proceso"
-ELSEIF ii_TipoOrd 	= 8 THEN
-	THIS.Title 	= "Orden de Pre Proceso"
+ElseIf ii_TipoOrd 	= 8 Then
+	This.Title 	= "Orden de Pre Proceso"
 	dw_1.Title 	= "Detalle de Orden de Pre Proceso"
-ELSEIF ii_TipoOrd 	= 7 THEN
-	THIS.Title 	= "Orden de Re Embalaje"
+ElseIf ii_TipoOrd 	= 7 Then
+	This.Title 	= "Orden de Re Embalaje"
 	dw_1.Title 	= "Detalle de Orden de Re Embalaje"
-ELSE
-	THIS.Title 	= "Orden de Proceso"
+Else
+	This.Title 	= "Orden de Proceso"
 	dw_1.Title 	= "Detalle de Orden de Proceso"
-END IF
+End If
 
 pb_nuevo.PostEvent(Clicked!)
 end event

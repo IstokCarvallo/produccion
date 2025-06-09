@@ -1870,8 +1870,7 @@ istr_mant.Argumento[16]   		= String (gi_codexport)
 idt_FechaSistema					=	F_FechaHora()
 
 dw_2.Object.mfge_fecmov[1]	=	Date(idt_FechaSistema)
-dw_2.Object.refg_horasa[1]	=	Time(Mid(String(idt_FechaSistema),10))
-//dw_2.Object.espe_codigo[1]	=	gstr_ParamPlanta.CodigoEspecie
+dw_2.Object.refg_horasa[1]	=	Time(idt_FechaSistema)
 dw_2.Object.defg_tipdoc[1]	=	2  //Guía de Despacho
 
 cb_guia.Enabled  =	False
