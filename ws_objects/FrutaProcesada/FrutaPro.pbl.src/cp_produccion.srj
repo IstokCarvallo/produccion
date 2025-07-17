@@ -202,6 +202,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,f_calcula_digito,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP70.pbl,w_info_cuadra_tempo_prod_embq,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,w_info_historiapalletprefiro,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP80.pbl,w_cons_recfruprocee_particular_trans,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_clienprove,w
@@ -1241,6 +1242,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_info_conspalletsor
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP65.pbl,w_info_produccion_zonavarprodsem,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP61.pbl,dw_grafico_consulta_prefrio,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_despachos_gestion_xpredio,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_mues_regiones,w

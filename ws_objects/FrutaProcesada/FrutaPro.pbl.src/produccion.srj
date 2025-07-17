@@ -1,5 +1,5 @@
 ﻿$PBExportHeader$produccion.srj
-EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
+EXE:Produccion.exe,..\..\imagenes\productiva.pbr,0,0,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
 CMP:1,0,0,2,0,0,1
 COM:PRAGMATIC TECNOLOGIA E INFORMATICA
 DES:Fruta Procesada
@@ -454,6 +454,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_predio_productor,d
 OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,uo_voicecode,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP62.pbl,w_info_estiba_camaras,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP62.pbl,w_info_existencia_calibres,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP69.pbl,dw_info_pallet_historico_embar,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_puertos,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_packing,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_info_facturacion_productor,w
@@ -902,7 +903,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mant_spro_cajaspr
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP51.pbl,w_gene_archivo_recepcion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP62.pbl,dw_info_puchos_repalletizado_variedad,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP64.pbl,w_info_produccion_packprodzonaembj,w
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP69.pbl,dw_excel_pallethistoricoembar,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_info_procesoshistoricosunpallet_nuevo,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_info_cuadra_prod_embq,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_serviplantadeta,u

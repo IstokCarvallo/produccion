@@ -111,6 +111,7 @@ OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal12.pbl,dw_mant_ctlcalplani
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal11.pbl,dw_mues_ctlcalanalisisfirmezacolumela,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal06.pbl,dw_mant_ctlcaldestinoplanilla,d
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCalTab.pbl,uo_seleccion_inspectores_mod,u
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcalagroproduc,w
@@ -583,6 +584,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_productor_mod
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_deta_reclasif,w
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_planillasmodificadas,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\Productiva\Control Calidad\ConCal01.pbl,w_mant_mues_ctlcaltiposinspeccion,w

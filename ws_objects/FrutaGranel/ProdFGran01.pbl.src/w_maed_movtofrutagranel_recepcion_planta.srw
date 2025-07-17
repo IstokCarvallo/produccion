@@ -11,7 +11,7 @@ type dw_lotedet from uo_dw within w_maed_movtofrutagranel_recepcion_planta
 end type
 type dw_pesaje from uo_dw within w_maed_movtofrutagranel_recepcion_planta
 end type
-type dw_spro_bins from datawindow within w_maed_movtofrutagranel_recepcion_planta 
+type dw_spro_bins from datawindow within w_maed_movtofrutagranel_recepcion_planta
 end type
 type dw_exiencab from datawindow within w_maed_movtofrutagranel_recepcion_planta
 end type
@@ -171,9 +171,9 @@ public function integer existemovtobins (integer ai_fila)
 public function integer existebins (integer ai_fila)
 public function boolean conexionexistencia ()
 public subroutine determina_productoresenvase (integer ai_tipomovto)
-public subroutine cargabruto ()
 public function boolean datos_correo ()
 public subroutine productoreslotes (ref string productores[])
+public subroutine wf_cargabruto ()
 end prototypes
 
 event ue_carga_detalle;Integer		li_retorn, li_estado, li_control
@@ -187,7 +187,7 @@ dw_2.Reset()
 
 IF iuo_traspaso.dw_movtoenca.RowsCopy(1, iuo_traspaso.dw_movtoenca.RowCount(), Primary!, dw_2, 1, Primary!) = -1 OR &
    iuo_traspaso.dw_movtodeta.RowsCopy(1, iuo_traspaso.dw_movtodeta.RowCount(), Primary!,dw_3, 1, Primary!) = -1 OR &
-   iuo_traspaso.dw_granpesa.RowsCopy(1, iuo_traspaso.dw_granpesa.RowCount(), Primary!,dw_pesaje, 1, Primary!) = -1 OR &
+   iuo_traspaso.dw_granpesa.RowsCopy(1, iuo_traspaso.dw_granpesa.RowCount(), Primary!, dw_pesaje, 1, Primary!) = -1 OR &
    iuo_traspaso.dw_envaenca.RowsCopy(1, iuo_traspaso.dw_envaenca.RowCount(), Primary!,dw_1, 1, Primary!) = -1 OR &
    iuo_traspaso.dw_envadeta.RowsCopy(1, iuo_traspaso.dw_envadeta.RowCount(), Primary!,dw_4, 1, Primary!) = -1 OR &
    iuo_traspaso.dw_movtoBinsTrans.RowsCopy(1, iuo_traspaso.dw_movtoBinsTrans.RowCount(), Primary!,dw_spro_bins, 1, Primary!) = -1 OR &
@@ -195,6 +195,7 @@ IF iuo_traspaso.dw_movtoenca.RowsCopy(1, iuo_traspaso.dw_movtoenca.RowCount(), P
    iuo_traspaso.dw_lotedeta.RowsCopy(1, iuo_traspaso.dw_lotedeta.RowCount(), Primary!,dw_lotedet, 1, Primary!) = -1 THEN//OR &
 //   iuo_traspaso.dw_bins.RowsCopy(1, iuo_traspaso.dw_bins.RowCount(), Primary!,&
 //												 dw_bins, 1, Primary!) = -1 THEN
+	MessageBox('Error', 'AL traspasar datos')
 	lb_retorno = False
 ELSE
 	
@@ -1442,26 +1443,6 @@ NEXT
 RETURN
 end subroutine
 
-public subroutine cargabruto ();Integer	li_fila, li_especie
-Decimal	ld_Bruto, ld_totbut
-Long		ll_planta, ll_lote
-uo_bins	luo_bins
-
-luo_bins	= Create uo_bins
-
-FOR li_fila = 1 TO dw_pesaje.RowCount()
-	IF luo_bins.Existe(dw_pesaje.Object.clie_codigo[li_fila], &
-							 dw_pesaje.Object.plde_codigo[li_fila], &
-							 dw_pesaje.Object.bins_numero[li_fila], sqlca, False) THEN
-		ld_bruto = ld_bruto + luo_bins.cale_pesoen
-	END IF
-NEXT
-
-dw_2.Object.refg_tkenen[1]	=	ld_bruto
-ld_totbut						=	dw_2.Object.mfge_tpneto[1] + ld_bruto
-dw_2.Object.refg_tkbent[1]	=	ld_totbut
-end subroutine
-
 public function boolean datos_correo ();Integer li_codigo
 
 SELECT 	empr_codplt
@@ -1547,6 +1528,26 @@ NEXT
 RETURN
 end subroutine
 
+public subroutine wf_cargabruto ();Integer	li_fila, li_especie
+Decimal	ld_Bruto, ld_totbut
+Long		ll_planta, ll_lote
+uo_bins	luo_bins
+
+luo_bins	= Create uo_bins
+
+For li_fila = 1 To dw_pesaje.RowCount()
+	If luo_bins.Existe(dw_pesaje.Object.clie_codigo[li_fila], dw_pesaje.Object.plde_codigo[li_fila],  dw_pesaje.Object.bins_numero[li_fila], sqlca, False) THEN
+		ld_bruto = ld_bruto + luo_bins.cale_pesoen
+	End If
+Next
+
+dw_2.Object.refg_tkenen[1]	=	ld_bruto
+//ld_totbut							=	dw_2.Object.mfge_tpneto[1] + ld_bruto
+dw_2.Object.refg_tkbent[1]	=	dw_2.Object.mfge_tpneto[1] + ld_bruto //ld_totbut
+
+Destroy luo_bins
+end subroutine
+
 event open;/* 
 	Argumentos
 		istr_Mant.Argumento[1]	=	Código Planta
@@ -1604,8 +1605,7 @@ IF idwc_PltaDest.Retrieve() = 0 THEN
 	MessageBox("Atención", "Falta Registrar Plantas")
 	idwc_PltaDest.InsertRow(0)
 ELSE
-	idwc_PltaDest.SetFilter("plde_codigo <> " + &
-									String(gstr_ParamPlanta.CodigoPlanta))
+	idwc_PltaDest.SetFilter("plde_codigo <> " + String(gstr_ParamPlanta.CodigoPlanta))
 	idwc_PltaDest.Filter()
 	idwc_PltaDest.SetSort("plde_nombre A")
 	idwc_PltaDest.Sort()
@@ -1629,8 +1629,7 @@ IF idwc_pltaOrigdw1.Retrieve() = 0 THEN
 	MessageBox("Atención", "Falta Registrar Plantas")
 	idwc_pltaOrigdw1.InsertRow(0)
 ELSE
-	idwc_pltaOrigdw1.SetFilter("plde_codigo <> " + &
-									String(gstr_ParamPlanta.CodigoPlanta))
+	idwc_pltaOrigdw1.SetFilter("plde_codigo <> " + String(gstr_ParamPlanta.CodigoPlanta))
 	idwc_pltaOrigdw1.Filter()
 	idwc_pltaOrigdw1.SetSort("plde_nombre A")
 	idwc_pltaOrigdw1.Sort()
@@ -1662,8 +1661,7 @@ END IF
 dw_3.GetChild("cama_codigo", ldwc_Camara)
 ldwc_Camara.SetTransObject(sqlca)
 IF ldwc_Camara.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 THEN
-	MessageBox("Atención", "Falta Registrar Cámaras para Planta " + &
-					String(gstr_ParamPlanta.CodigoPlanta, '0000'))
+	MessageBox("Atención", "Falta Registrar Cámaras para Planta " + String(gstr_ParamPlanta.CodigoPlanta, '0000'))
 	ldwc_Camara.InsertRow(0)
 ELSE
 	ldwc_Camara.SetSort("cama_nombre A")
@@ -1699,8 +1697,7 @@ dw_4.GetChild("cama_codigo", ldwc_Camara)
 ldwc_Camara.SetTransObject(sqlca)
 
 IF ldwc_Camara.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 THEN
-	MessageBox("Atención", "Falta Registrar Cámaras para Planta " + &
-					String(gstr_ParamPlanta.CodigoPlanta, '0000'))
+	MessageBox("Atención", "Falta Registrar Cámaras para Planta " + String(gstr_ParamPlanta.CodigoPlanta, '0000'))
 	ldwc_Camara.InsertRow(0)
 ELSE
 	ldwc_Camara.SetSort("cama_nombre A")
@@ -2125,69 +2122,68 @@ event ue_antesguardar;Long		ll_Fila, ll_Productor, li_findprod
 Integer	li_Secuencia, li_Planta, li_cliente, li_TipoMovto, li_TipoMovtoEnva, li_control, li_estado
 Boolean     lb_Actualiza_Fruta = FALSE, lb_Actualiza_Envase = FALSE, lb_retorno = TRUE
 
-IF dw_3.RowCount() > 0 THEN
-	IF dw_3.Object.total_bultos[dw_3.RowCount()] > 9999 THEN
+If dw_3.RowCount() > 0 Then
+	If dw_3.Object.total_bultos[dw_3.RowCount()] > 9999 Then
 		Messagebox("Error de Consistencia","La cantidad de bultos no es permitida")
 		Message.DoubleParm = -1
-		RETURN
-	END IF 
-END IF
+		Return
+	End If 
+End If
 
-IF dw_4.RowCount() > 0 THEN
-	IF dw_4.Object.total_pesoenv[dw_4.RowCount()] > 99999 THEN
+If dw_4.RowCount() > 0 Then
+	If dw_4.Object.total_pesoenv[dw_4.RowCount()] > 99999 Then
 		Messagebox("Error de Consistencia","El peso de envases supera lo permitido")
 		Message.DoubleParm = -1
-		RETURN
-	END IF
+		Return
+	End If
 	
-	IF dw_4.Object.total_envases[dw_4.RowCount()] > 9999 THEN
+	If dw_4.Object.total_envases[dw_4.RowCount()] > 9999 Then
 		Messagebox("Error de Consistencia","La cantidad de envases supera lo permitido")
 		Message.DoubleParm = -1
-		RETURN
-	END IF
-END IF
+		Return
+	End If
+End If
 
-IF NOT revisaenvases() THEN
+If NOT revisaenvases() Then
 	Message.DoubleParm = -1
-	RETURN
-END IF	
+	Return
+End If	
 
 ib_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
 
 li_cliente			=	dw_2.Object.clie_codigo[1]
 li_Planta			=	dw_2.Object.plde_codigo[1]
-li_TipoMovto		=	dw_2.Object.tpmv_codigo[1]
+li_TipoMovto	=	dw_2.Object.tpmv_codigo[1]
 li_TipoMovtoEnva  =  42
 
-IF dw_2.GetItemStatus(1, 0, Primary!) = NewModified! THEN
-
-	IF il_NumEnva=0 THEN
+If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
+	If il_NumEnva=0 Then
 		
 		iuo_TipoMovtoEnva.bloqueacorrel()	
 		il_NumEnva = iuo_TipoMovtoEnva.UltimoCorrelativo(4,li_TipoMovtoEnva,li_Planta) 
 	
-		IF il_NumEnva = 0 OR IsNull(il_NumEnva) THEN
+		If il_NumEnva = 0 OR IsNull(il_NumEnva) Then
 			Messagebox("Error de Conección","Vuelva a Intentar Grabar.")
 			Message.DoubleParm = -1
-			RETURN
-		ELSE
+			Return
+		Else
 			lb_Actualiza_Envase = TRUE
-		END IF
-	END IF
+		End If
+	End If
 	
-	IF il_NumFruta=0 THEN
+	If il_NumFruta=0 Then
 		iuo_TipoMovtoFruta.bloqueacorrel()
 		il_NumFruta = iuo_TipoMovtoFruta.UltimoCorrelativo(1,li_TipoMovto,li_Planta) 
 	
-		IF il_NumFruta = 0 OR IsNull(il_NumFruta) THEN
+		If il_NumFruta = 0 OR IsNull(il_NumFruta) Then
 			Messagebox("Error de Conección","Vuelva a Intentar Grabar.")
 			Message.DoubleParm = -1
-			RETURN
-		ELSE
+			Return
+		Else
 			lb_Actualiza_Fruta = TRUE	
-		END IF
-   END IF	
+		End If
+   End If	
 		
 	dw_2.Object.mfge_numero[1]	=	il_NumFruta
 	dw_2.Object.mfge_estmov[1]	=	3
@@ -2213,7 +2209,7 @@ IF dw_2.GetItemStatus(1, 0, Primary!) = NewModified! THEN
 		dw_1.Object.mfge_numero[ll_Fila]		=	il_NumFruta
 		
 		dw_1.Object.tran_codigo[ll_Fila]		=	dw_2.Object.tran_codigo[1]
-		dw_1.Object.cami_clasifi[ll_Fila]	=	dw_2.Object.cami_clasifi[1]
+		dw_1.Object.cami_clasIfi[ll_Fila]	=	dw_2.Object.cami_clasIfi[1]
 		dw_1.Object.cami_patent[ll_Fila]		=	dw_2.Object.cami_patent[1]
 		dw_1.Object.cami_patcar[ll_Fila]		=	dw_2.Object.cami_patcar[1]
 		dw_1.Object.meen_rutcho[ll_Fila]		=	dw_2.Object.mfge_rutcho[1]
@@ -2225,12 +2221,12 @@ IF dw_2.GetItemStatus(1, 0, Primary!) = NewModified! THEN
 	//Descuenta último Correlativo Envases acumulado.
 	il_NumEnva --
 	//Preguntar el Momento de Actualización
-	IF lb_Actualiza_Fruta  THEN iuo_TipoMovtoFruta.Actualiza_Correlativo(1,li_Planta,li_TipoMovto,il_NumFruta) 
-   IF lb_Actualiza_Envase THEN iuo_TipoMovtoEnva.Actualiza_Correlativo(4,li_Planta,li_TipoMovtoEnva,il_NumEnva) 
+	If lb_Actualiza_Fruta  Then iuo_TipoMovtoFruta.Actualiza_Correlativo(1,li_Planta,li_TipoMovto,il_NumFruta) 
+   If lb_Actualiza_Envase Then iuo_TipoMovtoEnva.Actualiza_Correlativo(4,li_Planta,li_TipoMovtoEnva,il_NumEnva) 
    ///////////////////////////////////////
-ELSE
+Else
 	il_NumFruta	=	dw_2.Object.mfge_numero[1]	
-END IF
+End If
 
 SELECT	IsNull(Max(mfgd_secuen), 0) + 1
 	INTO	:li_Secuencia
@@ -2240,30 +2236,30 @@ SELECT	IsNull(Max(mfgd_secuen), 0) + 1
 	AND	mfge_numero	=	:il_NumFruta;
 	
 FOR ll_Fila = 1 TO dw_3.RowCount()
-	IF dw_3.GetItemStatus(1, 0, Primary!) = NewModified! THEN
+	If dw_3.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
 		dw_3.Object.plde_codigo[ll_Fila]	=	dw_2.Object.plde_codigo[1]
 		dw_3.Object.tpmv_codigo[ll_Fila]	=	dw_2.Object.tpmv_codigo[1]
 		dw_3.Object.mfge_numero[ll_Fila]	=	dw_2.Object.mfge_numero[1]
 		dw_3.Object.mfgd_secuen[ll_Fila]	=	li_Secuencia
 		
 		li_Secuencia ++
-	END IF
+	End If
 NEXT
 
 FOR ll_Fila = dw_4.RowCount() TO 1 Step -1
-	IF ll_fila > 0 THEN
+	If ll_fila > 0 Then
 		
-		IF dw_4.Object.enva_tipoen[ll_Fila] < 1 OR IsNull(dw_4.Object.enva_tipoen[ll_Fila]) THEN
+		If dw_4.Object.enva_tipoen[ll_Fila] < 1 OR IsNull(dw_4.Object.enva_tipoen[ll_Fila]) Then
 			dw_4.deleteRow(ll_Fila)
-		ELSE
+		Else
 			li_findprod = dw_1.Find("prod_codigo = " + String(dw_4.Object.prod_codigo[ll_Fila]), 1, dw_1.RowCount())
 			
 			dw_4.Object.plde_codigo[ll_Fila]	=	dw_1.Object.plde_codigo[li_findprod]
 			dw_4.Object.tpmv_codigo[ll_Fila]	=	dw_1.Object.tpmv_codigo[li_findprod]
 			dw_4.Object.meen_numero[ll_Fila]	=	dw_1.Object.meen_numero[li_findprod]
 			dw_4.Object.clie_codigo[ll_Fila]	=	dw_1.Object.clie_codigo[li_findprod]	
-		END IF
-	END IF
+		End If
+	End If
 NEXT
 
 FOR ll_fila = 1 TO dw_bins.RowCount()
@@ -2279,86 +2275,86 @@ NEXT
 
 FOR ll_fila = 1 TO dw_1.RowCount()
 	li_control = ExisteEnvaEncab(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_1.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_1.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_1.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_1.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 			
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_2.RowCount()
 	li_control = ExisteMovtoEncab(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_2.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_2.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_2.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_2.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_3.RowCount()
 	li_control = ExisteMovtoDeta(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_3.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_3.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_3.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_3.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_4.RowCount()
 	li_control = ExisteEnvaDeta(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_4.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_4.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_4.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_4.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_loteenc.RowCount()
 	li_control = ExisteLoteEnca(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_loteenc.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_loteenc.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_loteenc.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_loteenc.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_lotedet.RowCount()
 	li_control = ExisteLoteDeta(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_lotedet.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_lotedet.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_lotedet.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_lotedet.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_pesaje.RowCount()
@@ -2367,58 +2363,58 @@ FOR ll_fila = 1 TO dw_pesaje.RowCount()
 	dw_pesaje.Object.plde_codigo[ll_fila] = dw_2.Object.plde_codigo[1]
 	
 	li_control = ExisteMovtoPesa(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_pesaje.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_pesaje.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_pesaje.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_pesaje.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_spro_bins.RowCount()
 	dw_spro_bins.Object.mfge_numero[ll_fila] = il_NumFruta
 	
 	li_control = ExisteMovtoBins(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_spro_bins.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_spro_bins.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_spro_bins.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_spro_bins.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
 FOR ll_fila = 1 TO dw_bins.RowCount()
 	li_control = ExisteBins(ll_fila)
-	CHOOSE CASE li_control
-		CASE 0
-			li_estado = dw_bins.SetItemStatus(ll_fila, 0, Primary!, NewModified!)
-		CASE 1
-			li_estado = dw_bins.SetItemStatus(ll_fila, 0, Primary!, DataModified!)
-		CASE ELSE
+	Choose Case li_control
+		Case 0
+			li_estado = dw_bins.SetItemStatus(ll_fila, 0, Primary!, NewModIfied!)
+		Case 1
+			li_estado = dw_bins.SetItemStatus(ll_fila, 0, Primary!, DataModIfied!)
+		Case Else
 			li_estado = -1
-	END CHOOSE
+	End Choose
 	li_control	=	dw_bins.Find("clie_codigo = "	+ String(dw_bins.Object.clie_codigo[ll_fila]) + " AND " + &
 										 "plde_codigo = " + String(dw_bins.Object.plde_codigo[ll_fila]) + " AND " + &
 										 "bins_numero = " + String(dw_bins.Object.bins_numero[ll_fila]), &
 										 1, dw_bins.RowCount())
 
-	IF li_control > 0 AND li_control <> ll_fila THEN
+	If li_control > 0 AND li_control <> ll_fila Then
 		dw_bins.DeleteRow(li_control)
-		IF li_control < ll_fila THEN ll_fila --
-	END IF
+		If li_control < ll_fila Then ll_fila --
+	End If
 		
-	IF li_estado = -1 THEN lb_retorno = False
+	If li_estado = -1 Then lb_retorno = False
 NEXT
 
-IF NOT lb_retorno THEN Message.DoubleParm = -1
+If NOT lb_retorno Then Message.DoubleParm = -1
 end event
 
 event ue_borrar;Integer	li_Cliente
@@ -2522,7 +2518,7 @@ Integer li_cliente
 
 li_cliente = dw_2.Object.clie_codigo[1]
 
-lstr_busq.argum[1] = String(gstr_param.plde_codigo)
+lstr_busq.argum[1] = String(dw_2.Object.plde_codigo[1])
 lstr_busq.argum[2] = '2'								// Movimiento de Recepción
 lstr_busq.argum[3] = ''									// Cualquier estado
 lstr_busq.argum[4] = String(idt_FechaSistema)   // Desde Fecha de Inicio Ducha
@@ -2623,35 +2619,35 @@ IF il_NumFruta>0 AND dw_2.GetItemStatus(1, 0, Primary!) = NotModified! THEN
 END IF
 end event
 
-event ue_imprimir;Long	ll_modif
+event ue_imprimir;Long	ll_modIf
 Date	ld_FechaRecepcion
 
-IF Not istr_mant.Solo_Consulta THEN
-	CHOOSE CASE wf_modifica()
-		CASE -1
+If Not istr_mant.Solo_Consulta Then
+	Choose Case wf_modIfica()
+		Case -1
 			ib_ok = False
-		CASE 0
-			ll_modif	=	dw_1.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_2.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_3.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_4.GetNextModified(0, Primary!)
-			ll_modif	+=	dw_pesaje.GetNextModified(0, Primary!)
+		Case 0
+			ll_modIf	=	dw_1.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_2.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_3.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_4.GetNextModIfied(0, Primary!)
+			ll_modIf	+=	dw_pesaje.GetNextModIfied(0, Primary!)
 		
-			IF dw_3.RowCount() > 0 and ll_modif > 0 THEN
-				CHOOSE CASE MessageBox("Grabar registro(s)","Desea Grabar la información antes de Imprimir ?", Question!, YesNoCancel!)
-					CASE 1
+			If dw_3.RowCount() > 0 and ll_modIf > 0 Then
+				Choose Case MessageBox("Grabar registro(s)","Desea Grabar la información antes de Imprimir ?", Question!, YesNoCancel!)
+					Case 1
 						Message.DoubleParm = 0
 						This.TriggerEvent("ue_guardar")
-						IF message.DoubleParm = -1 THEN ib_ok = False
-					CASE 3
+						If message.DoubleParm = -1 Then ib_ok = False
+					Case 3
 						ib_ok	= False
-						RETURN
-				END CHOOSE
-			END IF
-	END CHOOSE
-END IF
+						Return
+				End Choose
+			End If
+	End Choose
+End If
 
-IF Not ib_ok THEN RETURN
+If Not ib_ok Then Return
 
 SetPointer(HourGlass!)
 
@@ -2664,48 +2660,33 @@ istr_info.copias	= 1
 OpenWithParm(vinf,istr_info)
 
 li_estado					=	dw_2.object.mfge_estmov[1]
-ld_FechaRecepcion			=	dw_2.object.mfge_fecmov[1]
+ld_FechaRecepcion	=	dw_2.object.mfge_fecmov[1]
 
-IF li_estado=1 THEN
+If li_estado=1 Then
    vinf.dw_1.DataObject = 	"dw_info_guia_recepcion_Transitoria"
-	
-ELSE
+Else
 	vinf.dw_1.DataObject = 	"dw_info_guia_recepcion_definitiva_interplanta"
 	li_Kilos 				= 	0
-	
-END IF
+End If
 
 vinf.dw_1.SetTransObject(sqlca)
 
-fila = vinf.dw_1.Retrieve(dw_2.Object.plde_codigo[1], 		&
-								  dw_2.Object.tpmv_codigo[1], 		&
-								  dw_2.Object.mfge_numero[1],		&
-								  dw_2.Object.clie_codigo[1], &
-								  ld_FechaRecepcion, ld_FechaRecepcion)
+fila = vinf.dw_1.Retrieve(dw_2.Object.plde_codigo[1], dw_2.Object.tpmv_codigo[1],dw_2.Object.mfge_numero[1], dw_2.Object.clie_codigo[1],  ld_FechaRecepcion, ld_FechaRecepcion)
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-					
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-					
-ELSE
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.",  StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
+	If li_estado=1 Then
+		vinf.dw_1.ModIfy('t_9.Text	= "Recepción InterPlanta Transitoria"')
+	Else
+		vinf.dw_1.ModIfy('t_9.Text	= "Recepción InterPlanta Definitiva"')
+	End If
 	
-	IF li_estado=1 THEN
-		vinf.dw_1.Modify('t_9.Text	= "Recepción InterPlanta Transitoria"')
-		
-	ELSE
-		vinf.dw_1.Modify('t_9.Text	= "Recepción InterPlanta Definitiva"')
-		
-	END IF
-	IF gs_Ambiente <> 'Windows' THEN
-	   	F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-	
-  	END IF
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
@@ -2725,7 +2706,7 @@ end type
 type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_movtofrutagranel_recepcion_planta
 integer x = 46
 integer y = 32
-integer width = 3310
+integer width = 3282
 integer height = 804
 integer taborder = 10
 string dataobject = "dw_mant_movtofrutagranenca_origen"
@@ -2921,19 +2902,18 @@ string facename = "Arial"
 string text = "Captura"
 end type
 
-event clicked;String	ls_directorio
-Integer	li_valida, li_opcion = 1
-dwitemstatus stat
+event clicked;String				ls_directorio
+Integer			li_valida, li_opcion = 1
+dwitemstatus	stat
 
 ib_ok	= True
 
 pb_nuevo.TriggerEvent(Clicked!)
 
-IF IsValid(iuo_traspaso) THEN
-	Destroy iuo_traspaso;
-END IF
+If IsValid(iuo_traspaso) Then Destroy iuo_traspaso;
 
 iuo_traspaso				=	Create nvuo_traspaso_interplanta
+
 iuo_traspaso.ii_sentido	=	2
 iuo_traspaso.w_parent	=	Parent
 iuo_traspaso.ii_planta 	= 	gstr_ParamPlanta.CodigoPlanta//dw_2.Object.plde_codigo[1]
@@ -2941,21 +2921,18 @@ iuo_traspaso.ii_tipo		=	22
 iuo_traspaso.ii_cliente	=	dw_2.Object.clie_codigo[1]
 
 iuo_traspaso.ii_ManAut = Messagebox("Modo de Carga", "Selección de metodo de carga. ~n~r"+&
-																	  "Presione [SI] para Archivos Planos, "+&
-																	  "[NO] para Tablas Temporales", Question!, YesNo!, 2)
+													"Presione [SI] para Archivos Planos, [NO] para Tablas Temporales", Question!, YesNo!, 2)
 
-
-
-iuo_traspaso.Triggerevent("traspasadatos")
+iuo_traspaso.Triggerevent("ue_traspasadatos")
 
 Istr_Mant.Argumento[20] = String(dw_2.Object.mfge_fecmov[1])
 
 //LRBB 16.ene.2014 cheque parametros de planta y especie, cuando es captura de datos desde transferencias
-IF Not manbin_especie(dw_2.Object.plde_codigo[1], dw_2.Object.espe_codigo[1], True, sqlca) THEN
-			RETURN 1
-END IF
+If Not manbin_especie(dw_2.Object.plde_codigo[1], dw_2.Object.espe_codigo[1], True, sqlca) Then Return 1
 
-CargaBruto()
+wf_CargaBruto()
+
+//dw_2.Object.tpmv_codigo[1] = Integer(istr_Mant.Argumento[2])
 end event
 
 type dw_loteenc from uo_dw within w_maed_movtofrutagranel_recepcion_planta

@@ -133,6 +133,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_termografos
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_termografos
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_termografos
@@ -149,42 +150,36 @@ end type
 
 event pb_acepta::clicked;SetPointer(Arrow!)
 
-Integer	fila, li_transito
+Integer	fila, li_transito = 2
 
 istr_info.titulo	= 'INFORME DE TERMOGRAFOS DESPACHADOS'
 
 OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_rango_termografos"
-
-IF cbx_transito.Checked THEN
-	li_transito = 1
-ELSE
-	li_transito = 2
-END IF	
-
 vinf.dw_1.SetTransObject(sqlca)
+
+If cbx_transito.Checked Then li_transito = 1
 
 fila	=	vinf.dw_1.Retrieve(uo_SelCliente.Codigo,uo_SelPlanta.Codigo,Date(em_Desde.Text),Date(em_Hasta.Text),li_transito)
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-			   	"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify("fechas.text = '" + "Desde El :  " + f_fecha_texto(em_Desde.Text, 1) + &
+	vinf.dw_1.ModIfy("fechas.text = '" + "Desde El :  " + f_fecha_texto(em_Desde.Text, 1) + &
 						"   Hasta El :  " + f_fecha_texto(em_Hasta.Text, 1) + "'")
-	IF li_transito = 1 THEN
-		vinf.dw_1.Modify("t_transito.text = '" + 'Solo En Tránsito' + "'")
-	ELSE
-		vinf.dw_1.Modify("t_transito.text = '" + 'Todos los Termógrafos' + "'")
-	END IF	
+	If li_transito = 1 Then
+		vinf.dw_1.ModIfy("t_transito.text = '" + 'Solo En Tránsito' + "'")
+	Else
+		vinf.dw_1.ModIfy("t_transito.text = '" + 'Todos los Termógrafos' + "'")
+	End If	
 	
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
 	vinf.Visible	= True
 	vinf.Enabled	= True
-END IF
+End If
 SetPointer(Arrow!)				
 end event
 

@@ -542,7 +542,7 @@ destroy(this.dw_2)
 destroy(this.dw_tarjas)
 end on
 
-event ue_recuperadatos;call super::ue_recuperadatos;IF istr_mant.Argumento[2]='21' THEN
+event ue_recuperadatos;call super::ue_recuperadatos;If istr_mant.Argumento[2]='21' Then
    	dw_1.Object.lote_espcod[il_Fila]				=	integer(istr_mant.Argumento[8])
 	dw_1.Object.prod_nombre[il_fila]				=	istr_mant.argumento[7]
 	dw_1.Object.vari_nombre[il_fila]				=	istr_mant.argumento[10]
@@ -558,24 +558,24 @@ event ue_recuperadatos;call super::ue_recuperadatos;IF istr_mant.Argumento[2]='2
 	dw_1.Object.lote_espcod.BackGround.Color 	=	553648127
 	dw_1.Object.prod_nombre.BackGround.Color 	=	553648127
 	dw_1.Object.vari_nombre.BackGround.Color 	=	553648127
-END IF	
+End If	
 
 dw_1.Object.lote_pltcod.Protect 					=	0
 dw_1.Object.lote_pltcod.Color						=	0
 dw_1.Object.lote_pltcod.BackGround.Color		=	RGB(255,255,255)
 
-ias_campo[1]											=	String(dw_1.object.plde_coorde[il_fila])
-ias_campo[2]											=	String(dw_1.object.cama_codigo[il_fila])
-ias_campo[3]											=	String(dw_1.object.lote_pltcod[il_fila])
-ias_campo[4]											=	String(dw_1.object.lote_espcod[il_fila])
-ias_campo[5]											=	String(dw_1.object.lote_codigo[il_fila])
-ias_campo[6]											=	String(dw_1.object.mfgd_bulent[il_fila])
-ias_campo[7]											=	String(dw_1.object.mfgd_kgnent[il_fila])
-ias_campo[8]											=	String(dw_1.object.enva_tipoen[il_fila])
-ias_campo[9]											=	String(dw_1.object.enva_codigo[il_fila])
-ias_campo[10]											=	String(dw_1.object.clie_codigo[il_fila])
+ias_campo[1]		=	String(dw_1.object.plde_coorde[il_fila])
+ias_campo[2]		=	String(dw_1.object.cama_codigo[il_fila])
+ias_campo[3]		=	String(dw_1.object.lote_pltcod[il_fila])
+ias_campo[4]		=	String(dw_1.object.lote_espcod[il_fila])
+ias_campo[5]		=	String(dw_1.object.lote_codigo[il_fila])
+ias_campo[6]		=	String(dw_1.object.mfgd_bulent[il_fila])
+ias_campo[7]		=	String(dw_1.object.mfgd_kgnent[il_fila])
+ias_campo[8]		=	String(dw_1.object.enva_tipoen[il_fila])
+ias_campo[9]		=	String(dw_1.object.enva_codigo[il_fila])
+ias_campo[10]		=	String(dw_1.object.clie_codigo[il_fila])
 
-IF istr_mant.Agrega THEN
+If istr_mant.Agrega Then
 	dw_1.Object.clie_codigo[il_Fila]	=	Integer(istr_Mant.Argumento[16])
 	dw_1.Object.plde_codigo[il_Fila]	=	Integer(istr_Mant.Argumento[1])
 	dw_1.Object.plde_coorde[il_Fila]	=	Integer(istr_Mant.Argumento[1])
@@ -587,24 +587,24 @@ IF istr_mant.Agrega THEN
 	iuo_PltaLote.Existe(Integer(istr_Mant.Argumento[1]), True, sqlca)
 	iuo_Especie.Existe(gstr_ParamPlanta.CodigoEspecie, True, sqlca)
 	
-ELSEIF Not istr_mant.Agrega AND Not istr_mant.Borra THEN
+ElseIf Not istr_mant.Agrega AND Not istr_mant.Borra Then
 	iuo_PltaLote.Existe(dw_1.object.lote_pltcod[il_fila], True, sqlca)
 	iuo_Especie.Existe(dw_1.object.lote_espcod[il_fila], True, sqlca)
 	iuo_Lote.Existe(iuo_PltaLote.Codigo, iuo_Especie.Codigo, dw_1.object.lote_codigo[il_fila], True, sqlca)
 	ExisteVariedad_gr(iuo_Especie.Codigo, iuo_Lote.Variedad, istr_Variedad)
 	iuo_Productor.Existe(iuo_Lote.Productor, True, sqlca)
-END IF
+End If
 
 dw_tarjas.Visible	=	True
 pb_tarjas.Enabled	=	True
 
 TriggerEvent("Resize")
 
-IF IsNull(dw_1.Object.lote_codigo[il_fila]) THEN
+If IsNull(dw_1.Object.lote_codigo[il_fila]) Then
 	dw_tarjas.SetFilter("lote_codigo = 0")
-ELSE
+Else
 	dw_tarjas.SetFilter("lote_codigo = " + String(dw_1.Object.lote_codigo[il_fila]))
-END IF
+End If
 
 dw_tarjas.Filter()
 end event
@@ -697,41 +697,39 @@ END IF
 end event
 
 event ue_nuevo;call super::ue_nuevo;//Agrega L.M.
-IF istr_mant.Argumento[2]='21' THEN
-   dw_1.Object.lote_espcod[il_Fila]				=	integer(istr_mant.Argumento[8])
-	dw_1.Object.prod_nombre[il_fila]				=	istr_mant.argumento[7]
-	dw_1.Object.vari_nombre[il_fila]				=	istr_mant.argumento[10]
-	
-ELSE
-   dw_1.Object.lote_espcod[il_Fila]	=	gstr_ParamPlanta.CodigoEspecie
-	iuo_Especie.Existe(gstr_ParamPlanta.CodigoEspecie, True, sqlca)
-	
-END IF
+If istr_mant.Argumento[2]='21' Then
+   	dw_1.Object.lote_espcod[il_Fila]	=	integer(istr_mant.Argumento[8])
+	dw_1.Object.prod_nombre[il_fila]	=	istr_mant.argumento[7]
+	dw_1.Object.vari_nombre[il_fila]	=	istr_mant.argumento[10]
+Else
+	dw_1.Object.lote_espcod[il_Fila]	=	gstr_ParamPlanta.CodigoEspecie
+	iuo_Especie.Existe(gstr_ParamPlanta.CodigoEspecie, True, sqlca)	
+End If
 
-dw_1.Object.plde_codigo[il_Fila]	=	Integer(istr_Mant.Argumento[1])
-dw_1.Object.plde_coorde[il_Fila]	=	Integer(istr_Mant.Argumento[1])
-dw_1.Object.tpmv_codigo[il_Fila]	=	Integer(istr_Mant.Argumento[2])
+dw_1.Object.clie_codigo[il_Fila]		=	Integer(istr_Mant.Argumento[16])
+dw_1.Object.plde_codigo[il_Fila]		=	Integer(istr_Mant.Argumento[1])
+dw_1.Object.plde_coorde[il_Fila]		=	Integer(istr_Mant.Argumento[1])
+dw_1.Object.tpmv_codigo[il_Fila]		=	Integer(istr_Mant.Argumento[2])
 dw_1.Object.mfge_numero[il_Fila]	=	Integer(istr_Mant.Argumento[3])
-dw_1.Object.lote_pltcod[il_Fila]	=	Integer(istr_Mant.Argumento[1])
+dw_1.Object.lote_pltcod[il_Fila]		=	Integer(istr_Mant.Argumento[1])
 
-IF istr_mant.argumento[2] = '2' THEN
+If istr_mant.argumento[2] = '2' Then
 	dw_1.Object.lote_pltcod.Protect =  0
 	dw_1.Object.lote_pltcod.Color 	= 	0
 	dw_1.Object.lote_pltcod.BackGround.Color 	= 	RGB(255,255,255)
-	
-ELSE
+Else
 	dw_1.Object.lote_pltcod.Protect 				= 	1
 	dw_1.Object.lote_pltcod.Color					=	RGB(255,255,255)
 	dw_1.Object.lote_pltcod.BackGround.Color	=	553648127
-END IF
+End If
 
 iuo_PltaLote.Existe(Integer(istr_Mant.Argumento[1]), True, sqlca)
 
-IF IsNull(dw_1.Object.lote_codigo[il_fila]) THEN
+If IsNull(dw_1.Object.lote_codigo[il_fila]) Then
 	dw_tarjas.SetFilter("lote_codigo = 0")
-ELSE
+Else
 	dw_tarjas.SetFilter("lote_codigo = " + String(dw_1.Object.lote_codigo[il_fila]))
-END IF
+End If
 
 dw_tarjas.Filter()
 end event

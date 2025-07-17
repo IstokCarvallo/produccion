@@ -138,10 +138,10 @@ global w_maed_ctlcalplanillaespecies w_maed_ctlcalplanillaespecies
 
 type variables
 DataWindowChild idwc_zonas,idwc_plantas,idwc_productores,idwc_especies, &
-idwc_variedades,idwc_tecnicos,idwc_inspectores,idwc_predio,idwc_cuartel
+						idwc_variedades,idwc_tecnicos,idwc_inspectores,idwc_predio,idwc_cuartel
 
-Datawindow    dw_3,dw_4,dw_5,dw_6,dw_7,dw_8,dw_9,dw_10, dw_11, dw_12, dw_13
-Datastore     ds_porespecie,ds_firmeza
+Datawindow 	dw_3,dw_4,dw_5,dw_6,dw_7,dw_8,dw_9,dw_10, dw_11, dw_12, dw_13
+Datastore     	ds_porespecie, ds_firmeza
 
 uo_zonas             		iuo_zonas
 uo_plantadesp        	iuo_plantas
@@ -152,10 +152,10 @@ uo_especie         	 	iuo_especies
 uo_prodcuarteles     	iuo_prodcuarteles
 uo_prodpredio			iuo_prodpredio
 
-Integer ii_especie, ii_zona, ii_sw //este sw controla si la planilla existe con otra especie
-Long	il_lote1, il_lote2, il_lote3, il_lote4, il_lote5
-String is_calibre
-Date	id_fechaproc
+Integer	ii_especie, ii_zona, ii_sw //este sw controla si la planilla existe con otra especie
+Long		il_lote1, il_lote2, il_lote3, il_lote4, il_lote5
+String 	is_calibre
+Date		id_fechaproc
 
 
 

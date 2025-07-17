@@ -242,7 +242,7 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		+=	'Total: ' + String(luo_Factura.Total, '#,##0') + ' ~n'
 						
 						ls_Texto		+=	 '~nNota:Por seguridad, para abrir el archivo deberás ingresar una clave que corresponde a los dígitos de tu Rut (sin dígito verificador).'
-						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text)
+						ls_Texto		+=	 '~n~tRecordar facturar con fecha ' + luo_Factura.of_UltimoDia(em_fecha.Text, ll_Productor)
 						ls_Texto		+=	 '~n~tFavor una vez emitida la factura, enviar a las personas que están en copia en este correo.'						
 						
 						luo_Mail.Of_Send(luo_Productor.Mail, luo_Planta.CC, ls_Asunto, ls_Texto, {ls_Envio}, 0) 

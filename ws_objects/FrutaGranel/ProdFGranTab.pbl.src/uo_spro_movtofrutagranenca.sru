@@ -26,7 +26,7 @@ SELECT	plde_codigo, tpmv_codigo, mfge_numero, espe_codigo, prod_codigo,
 			tran_codigo, mfge_fecmov
 	INTO	:ii_plde_codigo, :ii_tpmv_codigo, :il_mfge_numero, :ii_espe_codigo, 
 			:il_prod_codigo, :ii_tran_codigo, :idt_mfge_fecmov
-	FROM	dba.spro_movtofrutagranenca
+	FROM	dbo.spro_movtofrutagranenca
 	WHERE	plde_codigo =	:ai_Planta
 	AND	tpmv_codigo	=	:ai_TipoMovto
 	AND	mfge_numero =	:ai_Numero
@@ -53,7 +53,7 @@ SELECT	plde_codigo, tpmv_codigo, mfge_numero, espe_codigo, prod_codigo,
 			tran_codigo, mfge_fecmov
 	INTO	:ii_plde_codigo, :ii_tpmv_codigo, :il_mfge_numero, :ii_espe_codigo, 
 			:il_prod_codigo, :ii_tran_codigo, :idt_mfge_fecmov
-	FROM	dba.spro_movtofrutagranenca
+	FROM	dbo.spro_movtofrutagranenca
 	WHERE	plde_codigo =	:ai_Planta
 	AND	clie_codigo =  :ai_cliente
 	AND	tpmv_codigo	=	:ai_TipoMovto

@@ -11,7 +11,7 @@ global uo_condicioncc uo_condicioncc
 
 type variables
 Integer	Codigo
-String	Nombre
+String		Nombre
 end variables
 
 forward prototypes
@@ -22,7 +22,7 @@ public function boolean existe (integer ai_codigo, boolean ab_mensaje, transacti
 
 SELECT	cocc_codigo, cocc_nombre
 	INTO	:Codigo, :Nombre
-	FROM	dba.spro_condicioncc
+	FROM	dbo.spro_condicioncc
 	WHERE	cocc_codigo	=	:ai_Codigo
 	USING at_Transaccion;
 

@@ -242,6 +242,7 @@ type st_temporada from w_para_informes`st_temporada within w_info_despacho_camio
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_despacho_camiones_edisag
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_despacho_camiones_edisag
@@ -267,27 +268,27 @@ OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_despacho_camiones_edisag2"
 vinf.dw_1.SetTransObject(sqlca)
 
-IF cbx_2.Checked THEN
+If cbx_2.Checked Then
 	ls_operacion	=	'Todas'
-ELSE
+Else
 	ls_operacion	=	String(ii_Operacion)
-END IF
+End If
 
 ls_fechas	=	String(Date(em_desde.Text))+' al '+ String(Date(em_hasta.Text))
 
 ll_Fila	=	vinf.dw_1.Retrieve(ii_Cliente, ii_Planta, ii_Operacion, ii_Tipocamion,Date(em_desde.Text),Date(em_hasta.Text),istr_mant.argumento[10])
 
-IF ll_Fila = -1 THEN
+If ll_Fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 				"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Fila = 0 THEN
+ElseIf ll_Fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify("operacion.text = '" + ls_Operacion + "'")
-	vinf.dw_1.Modify("fechas.text = '" + ls_fechas + "'")		
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	vinf.dw_1.ModIfy("operacion.text = '" + ls_Operacion + "'")
+	vinf.dw_1.ModIfy("fechas.text = '" + ls_fechas + "'")		
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 end event
 
 type pb_salir from w_para_informes`pb_salir within w_info_despacho_camiones_edisag

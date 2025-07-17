@@ -2298,7 +2298,7 @@ If Long(dw_2.Object.mfge_guisii[1]) > 0 Then
 	iuo_traspaso.ii_ManAut		=	1
 	iuo_traspaso.il_guiasii		=	dw_2.Object.mfge_guisii[1]
 	
-	iuo_traspaso.TriggerEvent("traspasadatos")
+	iuo_traspaso.TriggerEvent("ue_traspasadatos")
 End If
 end event
 

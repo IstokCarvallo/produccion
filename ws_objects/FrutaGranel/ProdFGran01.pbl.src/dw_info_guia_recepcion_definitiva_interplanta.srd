@@ -29,7 +29,7 @@ table(column=(type=decimal(0) updatewhereclause=no name=plde_codigo dbname="plde
  column=(type=decimal(0) updatewhereclause=no name=refg_diagra dbname="refg_diagra" initial="0" )
  column=(type=decimal(3) updatewhereclause=no name=lote_knguia dbname="lote_knguia" )
  column=(type=decimal(0) updatewhereclause=no name=clie_codigo dbname="clie_codigo" )
- procedure="1 execute dba.fgran_ctrol_envases_enca_def;0 @Planta = :Planta, @TipoMovto = :TipoMovto, @Numero = :Numero, @Cliente = :Cliente, @FInicio = :FInicio, @FTermino = :FTermino" arguments=(("Planta", number),("TipoMovto", number),("Numero", number),("Cliente", number),("FInicio", date),("FTermino", date)) )
+ procedure="1 execute dbo.fgran_ctrol_envases_enca_def;0 @Planta = :Planta, @TipoMovto = :TipoMovto, @Numero = :Numero, @Cliente = :Cliente, @FInicio = :FInicio, @FTermino = :FTermino" arguments=(("Planta", number),("TipoMovto", number),("Numero", number),("Cliente", number),("FInicio", date),("FTermino", date)) )
 data(1, 1, 613, 2007-07-08, 08:34:11:000000, 09:26:11:000000, null 14194.200, 1615.000, 38, 0.000, 0.000, 12579.200, 89770, null "EL SAUCE", "0000000000", null null null null 0.000, 89, ) 
 group(level=1 header.height=0 trailer.height=0 by=("prod_codigo" ) header.color="536870912" trailer.color="536870912" )
 group(level=2 header.height=492 trailer.height=0 by=("plde_codigo" , "clie_codigo" , "tpmv_codigo" , "mfge_numero" , "mfge_fecmov" ) newpage=yes header.color="536870912" trailer.color="536870912" )
@@ -111,4 +111,3 @@ export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
 import.xml()
 export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
 export.xhtml()
- 

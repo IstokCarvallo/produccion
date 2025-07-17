@@ -2496,7 +2496,7 @@ agregaclientea_dws()
 end event
 
 event ue_borrar;Integer	li_Cliente
-IF dw_2.RowCount() < 1 THEN RETURN
+If dw_2.RowCount() < 1 Then Return
 
 SetPointer(HourGlass!)
 
@@ -2505,78 +2505,75 @@ ib_AutoCommit	=	sqlca.AutoCommit
 
 w_main.SetMicroHelp("Validando la eliminación...")
 
-IF NOT valida_password() THEN
+If NOT valida_password() Then
 	MessageBox("Error", "No es posible anular el movimiento, ya que no posee el password correspondiente")
 	Return
-END IF
+End If
 
 Message.DoubleParm = 0
 
 This.TriggerEvent ("ue_validaborrar")
 
-IF Message.DoubleParm = -1 THEN RETURN
+If Message.DoubleParm = -1 Then Return
 
-IF dw_3.RowCount() > 0 THEN
+If dw_3.RowCount() > 0 Then
 	dw_3.RowsMove(1, dw_3.RowCount(), Primary!, dw_3, 1, Delete!)
-END IF
+End If
 
-IF dw_4.RowCount() > 0 THEN
+If dw_4.RowCount() > 0 Then
 	dw_4.RowsMove(1, dw_4.RowCount(), Primary!, dw_4, 1, Delete!)
-END IF
+End If
 
-IF dw_1.DeleteRow(0) = 1 THEN
+If dw_1.DeleteRow(0) = 1 Then
 		ib_Borrar	=	False
 		
 		w_main.SetMicroHelp("Anulando Registro...")
-		IF istr_Mant.Argumento[2] = '25' THEN
+		If istr_Mant.Argumento[2] = '25' Then
 			dw_2.DeleteRow(1)
-		ELSE
+		Else
 			dw_2.Object.mfco_estmov[1]	=	0
-		END IF
+		End If
 		
-		IF wf_actualiza_db(True) THEN
-			IF istr_Mant.Argumento[2]	=	'23' THEN
-				IF gi_admenvase <> 1 THEN
-					li_Cliente = dw_2.Object.clie_codigo[1]
-					
-					SELECT clie_conexi, cone_codigo
-					INTO :il_conexiste, :il_coneccion
-					FROM dbo.clientesprod
-					WHERE clie_codigo = :li_Cliente;
-					
-					IF il_conexiste = 1 THEN
-						sqlexi	=	CREATE Transaction
-						
-						IF Conexionexistencia() THEN
-							IF ib_ModificacionEnvase THEN
-								dw_exideta.SetTransObject(sqlexi)
-								dw_exiencab.SetTransObject(sqlexi)	
-								dw_exismovtodetanulos.SetTransObject(sqlexi)
-								dw_exidetaborra.SetTransObject(sqlexi)
-								TriggerEvent("ue_despuesborrar")
-								Disconnect Using sqlexi;
-							END IF
-						ELSE
-							MessageBox("Atención", "No puede Despachar.~r~r" + &
-										"Falló Conexion con Existencia.", Exclamation!, Ok!)
-				
-							RETURN 
-						END IF
-					END IF	
-				END IF	
-			END IF
+		If wf_actualiza_db(True) Then
+//			If istr_Mant.Argumento[2]	=	'23' Then
+//				If gi_admenvase <> 1 Then
+//					li_Cliente = dw_2.Object.clie_codigo[1]
+//					
+//					SELECT clie_conexi, cone_codigo
+//					INTO :il_conexiste, :il_coneccion
+//					FROM dbo.clientesprod
+//					WHERE clie_codigo = :li_Cliente;
+//					
+//					If il_conexiste = 1 Then
+//						sqlexi	=	CREATE Transaction
+//						
+//						If Conexionexistencia() Then
+//							If ib_ModIficacionEnvase Then
+//								dw_exideta.SetTransObject(sqlexi)
+//								dw_exiencab.SetTransObject(sqlexi)	
+//								dw_exismovtodetanulos.SetTransObject(sqlexi)
+//								dw_exidetaborra.SetTransObject(sqlexi)
+//								TriggerEvent("ue_despuesborrar")
+//								Disconnect Using sqlexi;
+//							End If
+//						Else
+//							MessageBox("Atención", "No puede Despachar.~r~rFalló Conexion con Existencia.", Exclamation!, Ok!)
+//							Return 
+//						End If
+//					End If	
+//				End If	
+//			End If
 			
 			w_main.SetMicroHelp("Registro Borrado...")
 			This.TriggerEvent("ue_nuevo")
 			SetPointer(Arrow!)
-		ELSE
+		Else
 			w_main.SetMicroHelp("Registro no Borrado...")
-		END IF			
-ELSE
+		End If			
+Else
 	ib_Borrar	=	False
-	
 	MessageBox(This.Title,"No se puede borrar actual registro.")
-END IF
+End If
 end event
 
 event ue_seleccion;call super::ue_seleccion;Str_Busqueda	lstr_Busq

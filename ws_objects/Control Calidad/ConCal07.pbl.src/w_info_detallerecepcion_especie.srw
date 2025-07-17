@@ -292,11 +292,14 @@ type st_temporada from w_para_informes`st_temporada within w_info_detallerecepci
 end type
 
 type p_logo from w_para_informes`p_logo within w_info_detallerecepcion_especie
+integer width = 343
+integer height = 304
 string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_detallerecepcion_especie
-integer width = 1833
+integer x = 279
+integer width = 1719
 string text = "Consulta Planilla de Recepción"
 end type
 
@@ -343,7 +346,7 @@ ElseIf uo_SelEspecies.Codigo= 26 Then
 	vinf.dw_1.Object.DataWindow.Zoom = 62
 ElseIf uo_SelEspecies.Codigo = 36   Then
 	vinf.dw_1.DataObject = "dw_info_planillarecep_mandarinas"	
-	vinf.dw_1.Object.DataWindow.Zoom = 62
+	vinf.dw_1.Object.DataWindow.Zoom = 60
 ElseIf uo_SelEspecies.Codigo= 10 Then
 	vinf.dw_1.DataObject = "dw_info_planillarecep_lima"	
 	vinf.dw_1.Object.DataWindow.Zoom = 90

@@ -43,6 +43,7 @@ w_informes				vinf
 
 DataStore	ids_archivo,ids_archivo2
 end variables
+
 global type produccion from application
 string appname = "produccion"
 string themepath = "C:\Program Files (x86)\Appeon\Shared\PowerBuilder\theme190"
@@ -55,7 +56,7 @@ long richtexteditx64type = 5
 long richtexteditversion = 3
 string richtexteditkey = ""
 string appicon = "\Desarrollo 17\Imagenes\Sistemas\fruta_procesada.ico"
-string appruntimeversion = "22.0.0.1900"
+string appruntimeversion = "22.2.0.3397"
 boolean manualsession = false
 boolean unsupportedapierror = false
 boolean bignoreservercertificate = false

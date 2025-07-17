@@ -4909,7 +4909,7 @@ Choose Case ls_Columna
 		
 	Case "lfcd_kilbru"
 		If gstr_paramplanta.binsabins Then
-			ldec_kilosant 	= ObtieneKilosant(This.Object.fgmb_nrotar[row])
+			ldec_kilosant 	= ObtieneKilosAnt(This.Object.fgmb_nrotar[row])
 		Else
 			ldec_kilosant 	= 0
 		End If
