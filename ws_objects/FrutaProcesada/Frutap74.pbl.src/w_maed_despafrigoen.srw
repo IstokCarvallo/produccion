@@ -982,72 +982,66 @@ end function
 
 protected function boolean wf_actualiza_db (boolean borrando);Boolean	lb_AutoCommit, lb_Retorno
 
-IF Not dw_2.uf_check_required(0) THEN RETURN False
-
-IF Not dw_1.uf_validate(0) THEN RETURN False
+If Not dw_2.uf_check_required(0) Then RETURN False
+If Not dw_1.uf_validate(0) Then RETURN False
 
 lb_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
 
-IF Borrando THEN
-	IF dw_1.Update(True, False) = 1 THEN
-		IF dw_2.Update(True, False) = 1 THEN
+If Borrando Then
+	If dw_1.Update(True, False) = 1 Then
+		If dw_2.Update(True, False) = 1 Then
 			Commit;
 			
-			IF sqlca.SQLCode <> 0 THEN
-				F_ErrorBaseDatos(sqlca, This.Title)
-				
+			If sqlca.SQLCode <> 0 Then
+				F_ErrorBaseDatos(sqlca, This.Title)				
 				RollBack;
-			ELSE
+			Else
 				lb_Retorno	=	True
 				
 				dw_1.ResetUpdate()
 				dw_2.ResetUpdate()
-			END IF
-		ELSE
-			F_ErrorBaseDatos(sqlca, This.Title)
-			
+			End If
+		Else
+			F_ErrorBaseDatos(sqlca, This.Title)			
 			RollBack;
-		END IF
-	ELSE
+		End If
+	Else
 		F_ErrorBaseDatos(sqlca, This.Title)
-	END IF
-ELSE
-	IF ids_CorrelMovim.Update()	=	1 THEN
-		IF dw_2.Update(True, False) = 1 THEN
-			IF dw_1.Update(True, False) = 1 THEN
-				IF ids_palletfruta_fecha.Update()=1 THEN		
+	End If
+Else
+	If ids_CorrelMovim.Update()	=	1 Then
+		If dw_2.Update(True, False) = 1 Then
+			If dw_1.Update(True, False) = 1 Then
+				If ids_palletfruta_fecha.Update()=1 Then		
 					Commit;
 					
-					IF sqlca.SQLCode <> 0 THEN
-						F_ErrorBaseDatos(sqlca, This.Title)
-						
+					If sqlca.SQLCode <> 0 Then
+						F_ErrorBaseDatos(sqlca, This.Title)						
 						RollBack;
-					ELSE
+					Else
 						lb_Retorno	=	True
 						
 						dw_1.ResetUpdate()
 						dw_2.ResetUpdate()
 						ids_palletfruta_fecha.ResetUpdate()
 						ids_CorrelMovim.ResetUpdate()
-					END IF
-				ELSE
-					F_ErrorBaseDatos(sqlca, This.Title)
-				
+					End If
+				Else
+					F_ErrorBaseDatos(sqlca, This.Title)				
 					RollBack;				
-				END IF
-			ELSE
-				F_ErrorBaseDatos(sqlca, This.Title)
-				
+				End If
+			Else
+				F_ErrorBaseDatos(sqlca, This.Title)				
 				RollBack;
-			END IF
-		ELSE
+			End If
+		Else
 			F_ErrorBaseDatos(sqlca, This.Title)
-		END IF
-	ELSE
+		End If
+	Else
 		F_ErrorBaseDatos(sqlca, This.Title)
-	END IF
-END IF
+	End If
+End If
 
 sqlca.AutoCommit	=	lb_AutoCommit
 
@@ -1938,7 +1932,7 @@ RETURN ib_Conectado2
 
 end function
 
-public subroutine enviamail ();String		ls_DirectorioAct, ls_rut, ls_Contenedor, ls_Archivo,  ls_embarques, ls_ruta,ls_Archivo1,ls_Archivo2,ls_Archivo3
+public subroutine enviamail ();String			ls_DirectorioAct, ls_rut, ls_Contenedor, ls_Archivo,  ls_embarques, ls_ruta,ls_Archivo1,ls_Archivo2,ls_Archivo3
 Long			ll_Fila, ll_Archivo, ll_guia
 Boolean		lb_Existe
 str_parms	lstr_parms
@@ -1947,8 +1941,10 @@ If dw_ArchPlano.Retrieve(dw_2.Object.clie_codigo[1],dw_2.Object.plde_codigo[1],d
 	Messagebox("Error", "Los pallets involucrados en este despacho no poseen detalle de cajas~n~r" + &
 								"No se pudo concretar envio Automático de E-Mail", Exclamation!)
 Else
-	RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)	
+	RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)
+	
 	ls_Archivo	= '\Interplanta' + String(dw_2.Object.plde_codigo[1], '00000') + String(dw_2.Object.defe_numero[1], '00000000') + '.CSV'
+	
 	If dw_archplano.SaveAs(ls_ruta + ls_archivo, CSV!, FALSE) = -1 Then
 		MessageBox("Error", "No se logro Almacenar el archivo generado en la carpeta especIficada~n~r" + &
 						ls_ruta + ls_archivo+"~n~rNo se pudo concretar envio Automático de E-Mail", StopSign!)
@@ -1966,7 +1962,7 @@ Else
 		
 		dw_inspeccion_enc.Reset()
 		
-		ll_Numero	= Long(dw_2.Object.defe_numero[1])
+		ll_Numero = Long(dw_2.Object.defe_numero[1])
 		li_cliente	= Long(dw_2.Object.clie_codigo[1])
 		li_planta	= Long(dw_2.Object.plde_codigo[1])
 		
@@ -2010,7 +2006,7 @@ Else
 		End If
 		
 		ll_nroguia = dw_2.Object.defe_guides[1]
-		ids_archivo	=	CREATE	DataStore
+		ids_archivo	=	Create DataStore
 		ls_Archivo3	=	"\Guia Despacho-"+String(ll_nroguia)+".xls"
 		ids_archivo.DataObject	=	'dw_info_anexo_resumen_guia_despacho'
 		ids_archivo.SetTransObject(sqlca)
@@ -2828,12 +2824,12 @@ iuo_TransportistaServ	=	Create uo_transportista
 
 
 // Para guardar fecha de despacho en la Palletfruta
-ids_palletfruta_fecha				=	CREATE	DataStore
+ids_palletfruta_fecha				=	Create	DataStore
 ids_palletfruta_fecha.DataObject	=	'dw_mues_palletfruta_pafrfecdes'
 ids_palletfruta_fecha.SetTransObject(sqlca)
 
-ids_CorrelMovim						=	CREATE	DataStore
-ids_CorrelMovim.DataObject			=	'dw_mues_correlmoviemientos_despa'
+ids_CorrelMovim					=	Create	DataStore
+ids_CorrelMovim.DataObject	=	'dw_mues_correlmoviemientos_despa'
 ids_CorrelMovim.SetTransObject(sqlca)
 
 dw_14.SetTransObject(sqlca)
@@ -3416,13 +3412,9 @@ Str_Busqueda	lstr_Busq
 If dw_1.AcceptText() = -1 Then RETURN
 
 SetPointer(HourGlass!)
-
 w_main.SetMicroHelp("Grabando información...")
-
 Message.DoubleParm = 0
-
 TriggerEvent("ue_antesguardar")
-
 If Message.DoubleParm = -1  Then RETURN
 
 If gi_Emisor_Electronico = 1 And iuo_Cliente.Guia_Electronica = 1 And &
@@ -3449,9 +3441,7 @@ If wf_actualiza_db(False) Then
 	pb_eliminar.Enabled	= True
 	pb_imprimir.Enabled	= True
 	//Envia correo de despacho interplanta.
-	If dw_2.Object.defe_tiposa[1] = 31 OR dw_2.Object.defe_tiposa[1] = 11 Then
-		EnviaMail()
-	End If
+	If dw_2.Object.defe_tiposa[1] = 31 OR dw_2.Object.defe_tiposa[1] = 11 Then EnviaMail()
 	
 	TriggerEvent("ue_despuesgrabar")
 	
@@ -3533,10 +3523,12 @@ Else
 End If 
 	
 If dw_2.Object.defe_tiposa[1] = 11 Then
+	
 	SELECT empr_codtra  
-    INTO :li_codigo  
-    FROM dbo.parempresa;
-	 
+   		INTO :li_codigo  
+    		FROM dbo.parempresa
+		Using SQLCA;
+
 	If li_codigo = 1 Then
    		Message.DoubleParm = 0
 		If ConexionBase() Then

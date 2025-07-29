@@ -1115,13 +1115,13 @@ END IF
 
 end function
 
-public function boolean busca_tipopallet ();Long ll_numero
+public function boolean busca_tipopallet ();Long 		ll_numero
 Integer	li_fila, li_cont, li_cliente
-String	ls_cajas, ls_embalaje
+String		ls_cajas, ls_embalaje
 
 //dw_agrupa.Retrieve()
 
-FOR li_fila = 1 TO dw_agrupa.RowCount()
+For li_fila = 1 To dw_agrupa.RowCount()
 	
 //	li_cliente 	= dw_agrupa.Object.clie_codigo[li_fila]
 //	ls_embalaje = dw_agrupa.Object.emba_codigo[li_fila]
@@ -1144,7 +1144,7 @@ FOR li_fila = 1 TO dw_agrupa.RowCount()
 //								Exclamation!, OK!)
 //		Return True
 //	END IF	
-NEXT
+Next
 
 Return False
 
@@ -1729,10 +1729,11 @@ alignment htextalign = left!
 long backcolor = 553648127
 end type
 
-event clicked;String	ls_directorio, ls_archivo, path, nombre, pathpordefault, is_enterplanta
+event clicked;String		ls_directorio, ls_archivo, path, nombre, pathpordefault, is_enterplanta
 Integer	li_valida, li_opcion = 1
 Long		ll_rc, ll_fila
-dwitemstatus stat
+
+DwItemStatus stat
 
 ib_ok	= True
 
@@ -1764,7 +1765,8 @@ dw_1.Reset()
 DO
 	RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, pathpordefault)
 	If GetFileOpenName ("Carga de Archivo", path, nombre,  "csv", "Archivos Planos (*.csv),*.csv", pathpordefault)< 1 Then Return
-	is_enterplanta = Mid(nombre, 1, 11)
+	is_enterplanta	=	Mid(nombre, 1, 11)
+	is_plantaori		=	Mid(nombre, 12, 5)
 	
 	If is_enterplanta <> 'Interplanta' Then
 		MessageBox("Atención","Archivo NO Corresponde a Interplanta",Information!,Ok!)

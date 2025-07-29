@@ -72,6 +72,10 @@ table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie
  column=(type=char(60) update=yes updatewhereclause=yes name=cama_nombre dbname="SPRO_CAJASPROD_TRANS.cama_nombre" dbalias=".cama_nombre" )
  column=(type=decimal(0) update=yes updatewhereclause=yes name=capr_catrot dbname="SPRO_CAJASPROD_TRANS.capr_catrot" dbalias=".capr_catrot" )
  column=(type=char(30) update=yes updatewhereclause=yes name=pafr_ggncod dbname="SPRO_CAJASPROD_TRANS.pafr_ggncod" dbalias=".pafr_ggncod" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=defe_chofer dbname="SPRO_CAJASPROD_TRANS.defe_chofer" dbalias=".defe_chofer" )
+ column=(type=char(8) update=yes updatewhereclause=yes name=defe_pataco dbname="SPRO_CAJASPROD_TRANS.defe_pataco" dbalias=".defe_pataco" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=pafr_codope dbname="SPRO_CAJASPROD_TRANS.pafr_codope" dbalias=".pafr_codope" )
+ column=(type=datetime update=yes updatewhereclause=yes name=paen_fecter dbname="SPRO_CAJASPROD_TRANS.paen_fecter" dbalias=".paen_fecter" )
  retrieve="  SELECT dbo.spro_cajasprod_trans.clie_codigo,   
          dbo.spro_cajasprod_trans.plde_codigo,   
          dbo.spro_cajasprod_trans.capr_numero,   
@@ -138,7 +142,11 @@ table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie
          dbo.spro_cajasprod_trans.pafr_secori,   
          dbo.spro_cajasprod_trans.cama_nombre,   
          dbo.spro_cajasprod_trans.capr_catrot,
-		dbo.spro_cajasprod_trans.pafr_ggncod
+		dbo.spro_cajasprod_trans.pafr_ggncod,
+		dbo.spro_cajasprod_trans.defe_chofer,
+		dbo.spro_cajasprod_trans.defe_pataco,
+		dbo.spro_cajasprod_trans.pafr_codope,
+		dbo.spro_cajasprod_trans.paen_fecter
     FROM dbo.spro_cajasprod_trans   
 " update="dbo.spro_cajasprod_trans" updatewhere=0 updatekeyinplace=yes )
 text(band=header alignment="2" text="

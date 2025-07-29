@@ -31,6 +31,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_osversioninfo,s
 OBJ:C:\Desarrollo 22\Productiva\Valida Existencia\ValidaExis01.pbl,dw_mant_mues_bitacoraexis_val,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admagruposistema,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_aplicacion,s
@@ -111,6 +112,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_cambio_password,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesoaplicaciones,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_actualiza_log,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_acceso_usuario,w

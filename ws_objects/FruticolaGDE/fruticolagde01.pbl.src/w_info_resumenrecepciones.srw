@@ -147,16 +147,16 @@ vinf.dw_1.SetTransObject(sqlca)
 
 ll_Fila	=	vinf.dw_1.Retrieve(uo_SelContratista.Codigo, DateTime(em_Desde.Text), DateTime(em_Hasta.Text))
 
-IF ll_Fila = -1 THEN
+If ll_Fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF ll_Fila = 0 THEN
+ElseIf ll_Fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
 //	vinf.dw_1.Object.DataWindow.Zoom = 95
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event

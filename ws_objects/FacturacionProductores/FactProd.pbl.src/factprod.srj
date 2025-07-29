@@ -47,6 +47,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admagruposistema,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_busc_copiavalorizacion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_embalajesprod,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_mues_facturprodgenerado,w
@@ -212,6 +213,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_plantadesp_tipo_zona,d
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_mues_valorespecial,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_variecalibre,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\Productiva\FacturacionProductores\FactProd00.pbl,w_mant_deta_valorespecial,w

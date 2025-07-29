@@ -164,6 +164,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_info_control_temperatura,
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_correladhesivos,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_etiquetas,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,w_info_lotes_vaciados_pp,w
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_gtin_dun14,w
@@ -752,6 +753,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_etiqueta,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admausuarios_actualizacion,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_temporada,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_spro_pesoestanespe,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_timbredespacho,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_despafrigoen,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_busc_condtemperatura,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_maed_programa_procesos,w
@@ -939,6 +941,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_busqueda_doctointernopack
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,w_mant_bitacorasitua,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,dw_mues_anulaguia,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existeembalaje,f
