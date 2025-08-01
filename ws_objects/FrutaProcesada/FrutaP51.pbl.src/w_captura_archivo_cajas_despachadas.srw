@@ -1364,7 +1364,6 @@ Message.DoubleParm = 0
 TriggerEvent("ue_antesguardar")
 
 If Message.DoubleParm = 0 Then
-	
 	Delete from dbo.spro_cajasprod_trans;
 	Commit;
 	
