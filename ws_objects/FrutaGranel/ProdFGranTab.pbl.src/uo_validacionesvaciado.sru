@@ -23,6 +23,7 @@ public function boolean validalote (integer ai_planta, integer ai_cliente, integ
 public function boolean validalote (integer ai_planta, integer ai_cliente, integer ai_tipoord, integer ai_proceso, long al_lote, integer ai_tipenv, integer ai_codenv, boolean ab_mensaje, transaction at_transaccion)
 public subroutine controlmultiplanta (integer ai_cliente, long al_planta, long al_tarja)
 public function boolean validalote (integer ai_planta, integer ai_cliente, integer ai_tipoord, integer ai_proceso, long al_lote, integer ai_tipenv, integer ai_codenv, integer ai_pltcod, boolean ab_mensaje, transaction at_transaccion)
+public function boolean of_validatarja (integer ai_planta, integer ai_cliente, long al_nrotarja, boolean ab_mensaje, transaction at_transaccion)
 end prototypes
 
 public function boolean cargabins (integer ai_cliente, integer ai_planta, long al_bins, boolean ab_mensaje, transaction at_transaction);SELECT	enva_tipoen, enva_codigo, cale_calida
@@ -200,18 +201,17 @@ INTO	:ll_cantidad, :planta
 		AND	enva_codigo		=	:ai_codenv
 		USING at_transaccion;
 
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Spro_OrdenProcDeta" )
 	Return False			
-ELSEIF sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 THEN
-	IF ab_mensaje THEN
+ElseIf sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 Then
+	If ab_mensaje Then
 		messagebox("Atención","No Existe Lote " + String(al_lote, '00000') + " " + &
 								 "dentro de los lotes asignados al proceso. Ingrese otra tarja.")			
-	END IF
+	End If
 	
 	Return False		
-END IF
-
+End If
 
 SELECT Count(lote_codigo)
   INTO :ll_cantidad
@@ -228,22 +228,21 @@ SELECT Count(lote_codigo)
 	AND mgd.lote_codigo	=	:al_lote
  USING at_transaccion;
 
-IF sqlca.SQLCode = -1 THEN
+If sqlca.SQLCode = -1 Then
 	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla spro_movtofrutagrandeta" )
 	Return False			
-ELSEIF sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 THEN
-	IF ab_mensaje THEN
+ElseIf sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 Then
+	If ab_mensaje Then
 		messagebox("Atención","El Lote " + String(al_lote, '00000') + " " + &
 								 "no posee un traspaso relacionado al actual proceso, favor comprobar información. "+&
 								 "Ingrese otra tarja.", StopSign!)			
-	END IF
+	End If
 	
 	Return False		
-END IF
+End If
 
 Return True
 
-Return True
 end function
 
 public subroutine controlmultiplanta (integer ai_cliente, long al_planta, long al_tarja);istr_mant.Argumento[1]	=	String(ai_cliente)
@@ -269,7 +268,7 @@ INTO	:ll_cantidad, :planta
 	WHERE 	plde_codigo		=	:ai_planta
 		AND	clie_codigo		=	:ai_cliente
 		AND	orpr_tipord		=	:ai_TipoOrd	
-		AND	orpr_numero		=	:ai_proceso
+		AND	orpr_numero	=	:ai_proceso
 		AND 	lote_codigo		=	:al_lote
 		AND	enva_tipoen 	=	:ai_tipenv
 		AND	enva_codigo		=	:ai_codenv
@@ -288,11 +287,10 @@ ELSEIF sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 THEN
 	Return False		
 END IF
 
-
 SELECT Count(lote_codigo)
   INTO :ll_cantidad
   FROM dbo.spro_movtofrutagranenca as mge, dbo.spro_movtofrutagrandeta as mgd
- WHERE mge.mfge_numero 	= 	mgd.mfge_numero
+ WHERE mge.mfge_numero = 	mgd.mfge_numero
  	AND mge.plde_codigo 	= 	mgd.plde_codigo
 	AND mge.tpmv_codigo 	= 	mgd.tpmv_codigo
 	AND mge.clie_codigo 	= 	mgd.clie_codigo
@@ -319,8 +317,33 @@ ELSEIF sqlca.SQLCode = 100 OR IsNull(ll_cantidad) OR ll_cantidad = 0 THEN
 END IF
 
 Return True
+end function
 
-Return True
+public function boolean of_validatarja (integer ai_planta, integer ai_cliente, long al_nrotarja, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+Long		ll_Cantidad, Proceso
+
+SELECT lote_codigo, lote_pltcod, orpr_numero
+INTO	:ll_cantidad, :planta, :Proceso
+	FROM	dbo.spro_ordenprocvacdeta
+	WHERE 	plde_codigo		=	:ai_planta
+		AND	clie_codigo		=	:ai_cliente
+		AND	(opve_nrtar1	=	:al_nrotarja
+		 Or opve_nrtar2		=:	al_nrotarja
+		 Or opve_nrtar3		= :al_nrotarja)
+		USING at_transaccion;
+
+If sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Spro_OrdenProcDeta" )
+	lb_Retorno =  False			
+ElseIf ll_cantidad > 0 Then
+	If ab_mensaje Then
+		MessageBox("Atención","Tarja " + String(al_nrotarja, '00000') + " dentro de orden de proceso (" + String(Proceso, '000') + "). Ingrese otra tarja.")			
+	End If
+	lb_Retorno =  False		
+End If
+
+Return lb_Retorno
+
 end function
 
 on uo_validacionesvaciado.create

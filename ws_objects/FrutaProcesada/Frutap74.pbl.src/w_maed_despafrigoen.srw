@@ -1054,38 +1054,29 @@ Boolean	lb_AutoCommit, lb_Retorno
 lb_AutoCommit		=	sqlconec.AutoCommit
 sqlconec.AutoCommit	=	False
 
-		IF dw_7.Update(True, False) = 1 THEN
-			IF dw_8.Update(True, False) = 1 THEN
-				IF dw_3.Update(True, False) = 1 THEN
-					IF dw_4.Update(True, False) = 1 THEN
-						IF dw_11.Update(True, False) = 1 THEN
-							IF dw_12.Update(True, False) = 1 THEN
-								IF dw_15.Update(True, False)	=	1	THEN
-									Commit;
-										
-									IF sqlconec.SQLCode <> 0 THEN
-										F_ErrorBaseDatos(sqlconec, This.Title)
-										RollBack;
-									ELSE
-										lb_Retorno	=	True
-																
-										dw_7.ResetUpdate()
-										dw_8.ResetUpdate()
-										dw_3.ResetUpdate()
-										dw_4.ResetUpdate()
-										dw_11.ResetUpdate()
-										dw_12.ResetUpdate()
-										dw_15.ResetUpdate()										
-									END IF
-								ELSE
-									F_ErrorBaseDatos(sqlconec, This.Title)
-									RollBack;
-								END IF
-							ELSE
+IF dw_7.Update(True, False) = 1 THEN
+	IF dw_8.Update(True, False) = 1 THEN
+		IF dw_3.Update(True, False) = 1 THEN
+			IF dw_4.Update(True, False) = 1 THEN
+				IF dw_11.Update(True, False) = 1 THEN
+					IF dw_12.Update(True, False) = 1 THEN
+						IF dw_15.Update(True, False)	=	1	THEN
+							Commit;
+								
+							IF sqlconec.SQLCode <> 0 THEN
 								F_ErrorBaseDatos(sqlconec, This.Title)
 								RollBack;
+							ELSE
+								lb_Retorno	=	True
+														
+								dw_7.ResetUpdate()
+								dw_8.ResetUpdate()
+								dw_3.ResetUpdate()
+								dw_4.ResetUpdate()
+								dw_11.ResetUpdate()
+								dw_12.ResetUpdate()
+								dw_15.ResetUpdate()										
 							END IF
-						
 						ELSE
 							F_ErrorBaseDatos(sqlconec, This.Title)
 							RollBack;
@@ -1094,6 +1085,7 @@ sqlconec.AutoCommit	=	False
 						F_ErrorBaseDatos(sqlconec, This.Title)
 						RollBack;
 					END IF
+				
 				ELSE
 					F_ErrorBaseDatos(sqlconec, This.Title)
 					RollBack;
@@ -1106,6 +1098,14 @@ sqlconec.AutoCommit	=	False
 			F_ErrorBaseDatos(sqlconec, This.Title)
 			RollBack;
 		END IF
+	ELSE
+		F_ErrorBaseDatos(sqlconec, This.Title)
+		RollBack;
+	END IF
+ELSE
+	F_ErrorBaseDatos(sqlconec, This.Title)
+	RollBack;
+END IF
 
 sqlconec.AutoCommit	=	lb_AutoCommit
 

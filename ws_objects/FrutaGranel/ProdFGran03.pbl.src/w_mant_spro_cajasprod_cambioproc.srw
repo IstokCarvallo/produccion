@@ -18,7 +18,7 @@ end forward
 
 global type w_mant_spro_cajasprod_cambioproc from w_mant_directo
 integer width = 3246
-integer height = 1164
+integer height = 1544
 string title = "Mantención de Cajas - Cambio de Proceso"
 boolean minbox = false
 boolean maxbox = false
@@ -36,7 +36,7 @@ global w_mant_spro_cajasprod_cambioproc w_mant_spro_cajasprod_cambioproc
 type variables
 Integer 				ii_productor, ii_proceso, ii_nro
 Long					ii_caja
-DataWindowChild	idwc_categorias, idwc_Productor
+DataWindowChild	idwc_categorias, idwc_Productor, idwc_Predio, idwc_Cuartel
 end variables
 
 forward prototypes
@@ -101,23 +101,31 @@ IF lstr_busq.argum[1] <> "" and lstr_busq.argum[1]<> "0" THEN
 END IF
 end subroutine
 
-protected function boolean wf_actualiza_db ();boolean			lb_Retorno
-Integer			li_especie
+protected function boolean wf_actualiza_db ();boolean	lb_Retorno
+Integer	li_especie, li_Predio, li_Cuartel
+String		GGN
 
 dw_1.AcceptText()
 
-ii_productor	=	dw_1.Object.prod_codigo[1]
-ii_proceso		=	dw_1.Object.capr_docrel[1]
-li_especie		=	dw_1.Object.espe_codigo[1]
+ii_Productor	=	dw_1.Object.prod_codigo[1]
+ii_Proceso	=	dw_1.Object.capr_docrel[1]
+li_Especie	=	dw_1.Object.espe_codigo[1]
+li_Predio		=	dw_1.Object.prod_predio[1]
+li_Cuartel	=	dw_1.Object.prod_cuarte[1]
 
+GGN = f_AsignaGGN(ii_Productor, li_Predio, li_Especie, dw_1.Object.capr_fecemb[1], True)
+		
 If dw_1.ModIfiedCount() > 0 Then
 	DECLARE ModIficaCajas PROCEDURE FOR dbo.fgran_modIfica_cajasprod
 		@Planta 		=	:uo_SelPlanta.Codigo,   
 		@Cliente 	=	:uo_SelCliente.Codigo,   
-		@Numero 	=	:ii_caja,   
-		@Proceso	=	:ii_proceso,   
-		@Productor 	=	:ii_productor,
-		@Especie	=	:li_especie
+		@Numero 	=	:ii_Caja,   
+		@Proceso	=	:ii_Proceso,   
+		@Productor 	=	:ii_Productor,
+		@Especie	=	:li_Especie,
+		@Predio 		= 	:li_Predio,
+		@Cuartel 	= 	:li_Cuartel, 
+		@GGN 		=	:GGN
 	Using sqlca;
 			
 	Execute ModIficaCajas;
@@ -192,13 +200,12 @@ event ue_recuperadatos;call super::ue_recuperadatos;Long	ll_fila, respuesta
 DO
 	ll_fila	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, ii_caja)
 	
-	IF ll_fila = -1 THEN
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", &
-										Information!, RetryCancel!)
-	ELSEIF ll_fila > 0 THEN
+	If ll_fila = -1 Then
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
+	ElseIf ll_fila > 0 Then
 		dw_1.SetRow(1)
 		dw_1.SetFocus()
-		pb_grabar.Enabled 	= 	TRUE
+		pb_grabar.Enabled 	= 	True
 		ii_nro					=	dw_1.Object.capr_docrel[1]
 		
 		dw_1.GetChild("prod_codigo", idwc_Productor)
@@ -209,24 +216,32 @@ DO
 		idwc_categorias.SetTransObject(SQLCA)
 		idwc_categorias.Retrieve()
 		
+		dw_1.GetChild("prod_predio",idwc_Predio)
+		idwc_Predio.SetTransObject(SQLCA)
+		idwc_Predio.Retrieve(dw_1.Object.prod_codigo[1])
+		
+		dw_1.GetChild("prod_cuarte",idwc_Cuartel)
+		idwc_Cuartel.SetTransObject(SQLCA)
+		If idwc_cuartel.Retrieve(dw_1.Object.prod_codigo[1], dw_1.Object.prod_predio[1]) = 0 Then
+			idwc_Cuartel.InsertRow(0)
+		End If
+		
 		idwc_categorias.SetFilter("cate_embala = 1")
 		idwc_categorias.Filter()
 		
-		IF NOT ValidaProceso() THEN
-			dw_1.Reset()
-			
-			pb_grabar.Enabled 	= 	FALSE
+		If Not ValidaProceso() Then
+			dw_1.Reset()			
+			pb_grabar.Enabled 	= 	False
 			sle_caja.Text = ""
 			sle_caja.SetFocus()
-		END IF
-				
-	ELSE
+		End If				
+	Else
 		MessageBox("Error", "La caja ingresada no existe")
-		pb_grabar.Enabled 	= 	FALSE
-	END IF
+		pb_grabar.Enabled 	= 	False
+	End If
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN Close(This)
+If respuesta = 2 Then Close(This)
 end event
 
 event open;Boolean	lb_Cerrar
@@ -236,11 +251,11 @@ If IsNull(uo_SelPlanta.Codigo) Then lb_Cerrar = True
 
 im_menu		=	m_principal
 
-IF gs_Ambiente = "Windows" THEN
+If gs_Ambiente = "Windows" Then
 	This.ParentWindow().ToolBarVisible	=	True
 	im_menu.Item[1].Item[6].Enabled		=	True
 	im_menu.Item[7].Visible					=	False
-END IF
+End If
 
 This.Icon									=	Gstr_apl.Icono
 
@@ -259,9 +274,19 @@ Else
 	uo_SelCliente.Inicia(gi_CodExport)
 	uo_SelPlanta.Inicia(gstr_ParamPlanta.CodigoPlanta)
 	
-	IF NOT IsNull(gstr_paramplanta.PassPack) AND Trim(gstr_paramplanta.PassPack) <> '' THEN
+	dw_1.GetChild("prod_predio",idwc_Predio)
+	idwc_Predio.SetTransObject(SQLCA)
+	idwc_Predio.Retrieve(0)
+	
+	dw_1.GetChild("prod_cuarte",idwc_Cuartel)
+	idwc_Cuartel.SetTransObject(SQLCA)
+	If idwc_cuartel.Retrieve(-1, -1) = 0 Then
+		idwc_Cuartel.InsertRow(0)
+	End If
+	
+	If Not IsNull(gstr_paramplanta.PassPack) And Trim(gstr_paramplanta.PassPack) <> '' Then
 		PostEvent("ue_validapassword")
-	END IF
+	End If
 End If
 end event
 
@@ -316,13 +341,15 @@ type pb_grabar from w_mant_directo`pb_grabar within w_mant_spro_cajasprod_cambio
 integer x = 2757
 integer y = 452
 integer taborder = 40
+integer weight = 400
+fontcharset fontcharset = ansi!
 end type
 
 type dw_1 from w_mant_directo`dw_1 within w_mant_spro_cajasprod_cambioproc
 integer x = 41
 integer y = 364
 integer width = 2647
-integer height = 684
+integer height = 1064
 boolean titlebar = true
 string title = "Datos Originales Caja"
 string dataobject = "dw_mant_mues_spro_cajasprod_proceso"
@@ -334,62 +361,105 @@ event dw_1::buttonclicked;call super::buttonclicked;string ls_columna
 
 ls_columna = dwo.Name
 
-CHOOSE CASE ls_columna
-		
-	CASE "b_procesos"
-		
+Choose Case ls_columna	
+	Case "b_procesos"
 		buscaorden()
 		
-END CHOOSE		
+End Choose 
 end event
 
 event dw_1::itemchanged;call super::itemchanged;Integer						li_Null, li_cliente, li_capr_tipdoc
-String						ls_Columna
+String							ls_Columna, ls_Nula
 Str_Busqueda				lstr_busq
-String 						ls_Nula
-uo_spro_ordenproceso 	luo_ordenproceso
+uo_spro_ordenproceso 	luo_OrdenProceso
 
-dw_1.accepttext()
+dw_1.AcceptText()
 SetNull(li_Null)
 
-luo_ordenproceso		=	Create uo_spro_ordenproceso
+luo_OrdenProceso		=	Create uo_spro_ordenproceso
 
 ls_Columna	=	dwo.Name
 
-CHOOSE CASE ls_Columna
-	CASE "capr_docrel"
+Choose Case ls_Columna
+	Case "capr_docrel"
 		li_capr_tipdoc	=	This.Object.capr_tipdoc[Row]
 		
-		IF luo_ordenproceso.Existe(uo_SelPlanta.Codigo, li_capr_tipdoc, Integer(data),True,Sqlca, uo_SelCliente.Codigo) THEN
-			IF luo_ordenproceso.Estado > 3 THEN
-				 IF luo_ordenproceso.Estado = 4 THEN
+		If luo_OrdenProceso.Existe(uo_SelPlanta.Codigo, li_capr_tipdoc, Integer(data),True,Sqlca, uo_SelCliente.Codigo) Then
+			If luo_OrdenProceso.Estado > 3 Then
+				 If luo_OrdenProceso.Estado = 4 Then
 					MessageBox("Atención","Procesos Digitado se encuentra Cerrado, Favor digite un Proceso Abierto.")
-				 ELSE
+				 Else
 					MessageBox("Atención","Procesos Con Cierre Web, Favor digite un Proceso Abierto.")
-				 END IF
+				 End If
 				 pb_lectura.triggerEvent(Clicked!)
 				 Return 1
-			ELSE
-				IF ( luo_ordenproceso.VarRot = dw_1.Object.capr_varrot[1] ) OR &
-					( ( luo_ordenproceso.VarRot > 50 ) AND &
-					  ( dw_1.Object.capr_varrot[1] > 50) ) OR This.Object.capr_tipdoc[Row] = 5 THEN
+			Else
+				If ( luo_OrdenProceso.VarRot = dw_1.Object.capr_varrot[1] ) Or &
+					( ( luo_OrdenProceso.VarRot > 50 ) And &
+					  ( dw_1.Object.capr_varrot[1] > 50) ) Or This.Object.capr_tipdoc[Row] = 5 Then
 				
-					dw_1.object.prod_codigo[1] = luo_ordenproceso.productor
-					dw_1.Object.vari_codigo[1] = luo_ordenproceso.variedad
+					This.object.prod_codigo[1] = luo_OrdenProceso.Productor
+					This.Object.vari_codigo[1] = luo_OrdenProceso.Variedad
+					
+					luo_OrdenProceso.of_LotesOrden(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, li_capr_tipdoc, Integer(data), True, Sqlca) 
+					
+					This.GetChild("prod_predio",idwc_Predio)
+					idwc_Predio.SetTransObject(SQLCA)
+					idwc_Predio.Retrieve(luo_OrdenProceso.Productor)
+					
+					This.GetChild("prod_cuarte",idwc_Cuartel)
+					idwc_Cuartel.SetTransObject(SQLCA)
+					If idwc_cuartel.Retrieve(luo_OrdenProceso.Productor, -1) = 0 Then
+						idwc_Cuartel.InsertRow(0)
+					End If
+					
+					If luo_OrdenProceso.Cantidad = 1 Then
+						This.Object.prod_predio[Row] = luo_OrdenProceso.Predio
+						This.Object.prod_cuarte[Row] = luo_OrdenProceso.Cuartel
+						
+						This.Object.prod_predio.Protect = 1
+						This.Object.prod_cuarte.Protect = 1
+						This.Object.prod_predio.BackGround.Color = 553647128
+						This.Object.prod_cuarte.BackGround.Color = 553647128
+						
+						This.Object.prod_predio.Color = RGB(255,255,255)
+						This.Object.prod_cuarte.Color = RGB(255,255,255)
+					Else
+						This.Object.prod_predio.Protect = 0
+						This.Object.prod_cuarte.Protect = 0
+						This.Object.prod_predio.BackGround.Color = RGB(255,255,255)
+						This.Object.prod_cuarte.BackGround.Color = RGB(255,255,255)
+						
+						This.Object.prod_predio.Color = 0
+						This.Object.prod_cuarte.Color = 0
+						
+						This.Object.prod_predio[Row] = Integer(ls_Nula)
+						This.Object.prod_cuarte[Row] = Integer(ls_Nula)						
+					End If
+					
 					ii_nro	=	Integer(Data)
-				ELSE
+				Else
 					dw_1.SetItem(1,"capr_docrel",ii_nro)
 					MessageBox("Error","Los Procesos no tienen variedad rotulada compatible.")
 					Return 1
-				END IF
-			END IF
-		ELSE
+				End If
+			End If
+		Else
 			dw_1.SetItem(1,"capr_docrel",ii_nro)
 			MessageBox("Error","No existe la orden de proceso ingresada")
 			Return 1
-		END IF
+		End If
+		
+	Case "prod_predio"
+		This.GetChild("prod_cuarte",idwc_Cuartel)
+		idwc_Cuartel.SetTransObject(SQLCA)
+		If idwc_cuartel.Retrieve(dw_1.object.prod_codigo[1], Long(Data)) = 0 Then
+			idwc_Cuartel.InsertRow(0)
+		End If
 	
-END CHOOSE
+End Choose
+
+Destroy luo_OrdenProceso
 end event
 
 event dw_1::itemerror;call super::itemerror;Return 1

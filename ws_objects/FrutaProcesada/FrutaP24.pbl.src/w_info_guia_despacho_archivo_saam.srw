@@ -144,6 +144,8 @@ type cb_1 from commandbutton within w_info_guia_despacho_archivo_saam
 end type
 type dw_embarcador from datawindow within w_info_guia_despacho_archivo_saam
 end type
+type cb_2 from commandbutton within w_info_guia_despacho_archivo_saam
+end type
 end forward
 
 global type w_info_guia_despacho_archivo_saam from w_para_informes
@@ -228,6 +230,7 @@ cb_rossi cb_rossi
 dw_error dw_error
 cb_1 cb_1
 dw_embarcador dw_embarcador
+cb_2 cb_2
 end type
 global w_info_guia_despacho_archivo_saam w_info_guia_despacho_archivo_saam
 
@@ -1496,6 +1499,7 @@ this.cb_rossi=create cb_rossi
 this.dw_error=create dw_error
 this.cb_1=create cb_1
 this.dw_embarcador=create dw_embarcador
+this.cb_2=create cb_2
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.st_2
@@ -1568,6 +1572,7 @@ this.Control[iCurrent+68]=this.cb_rossi
 this.Control[iCurrent+69]=this.dw_error
 this.Control[iCurrent+70]=this.cb_1
 this.Control[iCurrent+71]=this.dw_embarcador
+this.Control[iCurrent+72]=this.cb_2
 end on
 
 on w_info_guia_despacho_archivo_saam.destroy
@@ -1643,6 +1648,7 @@ destroy(this.cb_rossi)
 destroy(this.dw_error)
 destroy(this.cb_1)
 destroy(this.dw_embarcador)
+destroy(this.cb_2)
 end on
 
 event open;call super::open;Boolean rtn, lb_Cerrar = False
@@ -3557,4 +3563,25 @@ string title = "none"
 string dataobject = "dw_info_archivoembarcadorguias"
 borderstyle borderstyle = stylelowered!
 end type
+
+type cb_2 from commandbutton within w_info_guia_despacho_archivo_saam
+integer x = 2373
+integer y = 592
+integer width = 402
+integer height = 112
+integer taborder = 21
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+string text = "ODOO GUIA"
+end type
+
+event clicked;
+iuo_Guia.of_CargaGuia(uo_SelPlanta.Codigo, uo_SelCliente.Codigo, Long(em_nroguia.Text), 0, 0, 0, 0, 0, 0, 0, 1, iuo_Despacho.Despacho)
+
+end event
 

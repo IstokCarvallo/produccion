@@ -20,12 +20,22 @@ Private 	String		PuertoDestino, NumerosSellos, CantidadSellos, UbicacionSello, G
 Private Constant	Integer 	_TipoDocto 			= 28
 Private Constant	Integer 	_TipoDoctoDTE 	= 52
 Private Constant 	Integer 	_Emisor	 			= 1
-Private Constant	String	  	_Separador			= '_'
+Private Constant	String	  	_SeparadorFile		= '_'
 Private Constant	String	 	_SeparadorDTE	= '|'
+
+Private Constant	String	  	_INICIO				= '{'
+Private Constant	String	  	_FINAL				= '}'
+Private Constant	String	 	_INICIOBLOQUE	= '['
+Private Constant	String	 	_FINALBLOQUE		= ']'
+Private Constant	String	 	_Separador			= ':'
+Private Constant	String	 	_MARCA				= '"'
+Private Constant	String	 	_FINLINEA			= ','
 
 Private uo_Plantadesp	iuo_Planta
 Private uo_Conectividad	iuo_Coneccion
 Private n_buscaarchivo	iuo_BuscaArchivo
+
+
 
 end variables
 
@@ -65,6 +75,9 @@ private function boolean of_generaguia (long planta, long cliente, long movimien
 private function boolean of_generaguia_fruticolagde (long planta, long cliente, long movimiento, integer tipo)
 public function long of_emiteguia_fruticolagde (long planta, long cliente, integer movimiento, integer tipo)
 public function boolean of_generalibroguia_gde (integer tipo)
+private function string of_insertalinea (string tag, string valor, byte final)
+private function string of_cargajson (long planta, long cliente, long movimiento, long variedad, long productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
+public function integer of_cargaguia (integer planta, long cliente, long movimiento, integer variedad, integer productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
 end prototypes
 
 private function boolean of_conectar (integer ai_coneccion);SetPointer (HourGlass!)
@@ -345,10 +358,10 @@ If of_DatosEmpresa(Tipo) Then
 //		End If
 //	End If
 
-	ls_File	=	"C:\GeneraGuiaElectronica\" + String(_TipoDoctoDTE) + _Separador + String(Folio) + _Separador + This.Rut + '.txt'
+	ls_File	=	"C:\GeneraGuiaElectronica\" + String(_TipoDoctoDTE) + _SeparadorFile + String(Folio) + _SeparadorFile + This.Rut + '.txt'
 	ids_Guia.SaveAs(ls_File, Text!, False)
 	
-	ls_File	=	ls_Path + String(_TipoDoctoDTE) + _Separador + String(Folio) + _Separador + This.Rut + '.txt'
+	ls_File	=	ls_Path + String(_TipoDoctoDTE) + _SeparadorFile + String(Folio) + _SeparadorFile + This.Rut + '.txt'
 	
 	If ids_Guia.SaveAs(ls_File, Text!, False) = -1 Then
 		MessageBox('Error', 'No se pùdo generar archivo ('+ ls_File +') con información solicitda.' , StopSign!, OK! )
@@ -358,7 +371,7 @@ If of_DatosEmpresa(Tipo) Then
 	End If
 Else
 	If Not DirectoryExists("C:\GeneraGuiaElectronica") Then CreateDirectory ("C:\GeneraGuiaElectronica")
-	ls_File	=	"C:\GeneraGuiaElectronica\" + String(_TipoDoctoDTE) + _Separador + String(Folio) + _Separador + This.Rut + '.txt'
+	ls_File	=	"C:\GeneraGuiaElectronica\" + String(_TipoDoctoDTE) + _SeparadorFile + String(Folio) + _SeparadorFile + This.Rut + '.txt'
 	ids_Guia.SaveAs(ls_File, Text!, False)
 	
 //	lb_Retorno = False
@@ -1119,6 +1132,7 @@ IF of_DatosEmpresa(Tipo) Then
 					
 					of_InsertaRegistro('', ls_Referencia)	
 				End If
+				
 				//Detalle de codigos CSG
 				ls_Referencia = String(ll_Linea) + _SeparadorDTE
 				ls_Referencia += '' + _SeparadorDTE
@@ -1369,6 +1383,427 @@ If of_Conectar(li_Conexion) Then
 Else
 	MessageBox('Error', 'No se pudo conectar con la base para generar libro de Guias.', StopSign!, OK!)
 End If
+
+Return lb_Retorno
+end function
+
+private function string of_insertalinea (string tag, string valor, byte final);String	ls_Retorno
+
+If IsNull(TAG) Then TAG = ''
+If IsNull(Valor) Then Valor = ''
+
+Valor = F_Global_Replace(Valor, ',', '.')
+
+If Final = 1 Then
+	ls_Retorno = _MARCA + TAG + _MARCA + _Separador + _MARCA + Valor + _MARCA + Char(13)
+Else
+	ls_Retorno = _MARCA + TAG + _MARCA + _Separador + _MARCA + Valor + _MARCA + _FINLINEA + Char(13)
+End If
+
+Return ls_Retorno
+end function
+
+private function string of_cargajson (long planta, long cliente, long movimiento, long variedad, long productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante);Long		ll_New, ll_Fila, ll_Linea
+String		ls_Referencia, ls_Rut, ls_PuertoOrigen, ls_Puerto, ls_Pais, ls_Totales, ls_Retorno
+
+SetNull(ls_Referencia)
+
+IVA = of_IvaPlanta(Planta)
+
+If IVA = -1 Then
+	Messagebox('Error', 'No esta configurado el porcentaje de IVA en Parametros de Planta, se utilizara 19%.', StopSign!, OK!)
+	IVA = 19
+End If
+
+IF of_DatosEmpresa(Tipo) Then
+	//Movimiento
+	If Tipo = 1 Or Tipo = 0 Then
+		ll_Fila = ids_Source.Retrieve(Cliente, Planta, Movimiento, 1, Variedad, Productor, Calibre, ConsVariedad, ConsEmbalaje, ConsCalibre, Resumen, Comprobante)
+	Else
+		ll_Fila = ids_Source.Retrieve(Cliente, Planta, Variedad, Productor, Calibre)
+	End If
+	
+	If  ll_Fila	= -1 Then
+		MessageBox('Error', 'Error al cargar informacion para generacion de Guia Electronica.', StopSign!, OK!)
+		ls_Retorno = '*'
+	ElseIf ll_Fila	= 0 Then
+		MessageBox('Alerta', 'No se pudo recuperar informacion de Guia Electronica (Filas Recuperadas = ' + String(ll_Fila)+ ')', Exclamation!, OK!)
+		ls_Retorno = '*'
+	Else
+		
+		of_SetRutRecibidor(ids_Source.Object.embc_nrorut[1])
+		of_SetRecibidor(ids_Source.Object.embc_nombre[1])
+		of_SetTipoTransporte(ids_Source.Object.defe_tipotr[1])
+		
+		ls_Rut = String(Long(Mid(This.RutRecibidor, 1, Len(String(This.RutRecibidor)) - 1))) + '-' + Right(This.RutRecibidor, 1)
+	
+		//Genera Encabezado
+		ls_Retorno = _INICIO  + Char(13)
+		ls_Retorno += _MARCA + 'encabezado' + _MARCA  + _Separador + _INICIO + Char(13)
+
+		ls_Retorno += of_InsertaLinea('tipo_dte', String(_TipoDoctoDTE), 0)
+		ls_Retorno += of_InsertaLinea('folio', String(il_NroGuia), 0)
+		//of_InsertaLinea('Fecha de Emision', String(ids_Source.Object.defe_fecdes[1], 'dd-mm-yyyy'), 0)
+		ls_Retorno += of_InsertaLinea('ind_traslado_bienes', String(ids_Source.Object.defe_tipotr[1]), 0)
+		ls_Retorno += of_InsertaLinea('codigo_traslado', '1', 0)
+		ls_Retorno += of_InsertaLinea('tipo_despacho', String(ids_Source.Object.defe_tipode[1]), 0)
+		
+		ls_Retorno += of_InsertaLinea('rut_receptor', ls_Rut, 0)
+		//of_InsertaLinea('Codigo Interno Receptor', '', 0)
+		ls_Retorno += of_InsertaLinea('razon_social_receptor', This.Recibidor, 0)
+		ls_Retorno += of_InsertaLinea('giro_receptor', Mid(ids_Source.Object.embc_giroem[1], 1, 40), 0) 
+		ls_Retorno += of_InsertaLinea('contacto_receptor', '', 0)
+		ls_Retorno += of_InsertaLinea('direccion_receptor', ids_Source.Object.embc_dirori[1], 0)
+		ls_Retorno += of_InsertaLinea('comuna_receptor', ids_Source.Object.embc_comuna[1], 0)
+		ls_Retorno += of_InsertaLinea('ciudad_receptor', ids_Source.Object.embc_ciudad[1], 0)
+		
+		ls_Rut = String(Long(Mid(ids_Source.Object.defe_chfrut[1], 1, Len(String(ids_Source.Object.defe_chfrut[1])) - 1))) + '-' + &
+									Right(ids_Source.Object.defe_chfrut[1], 1)
+									
+		ls_Retorno += of_InsertaLinea('rut_chofer', ls_Rut, 0)
+		ls_Retorno += of_InsertaLinea('xcelular_chofer', ids_Source.Object.defe_celcho[1], 0)
+		ls_Retorno += of_InsertaLinea('nombre_chofer', ids_Source.Object.defe_chofer[1], 0)
+		ls_Retorno += of_InsertaLinea("patente_transporte", ids_Source.Object.defe_patent[1], 0)
+		ls_Retorno += of_InsertaLinea("xpatente_carro", ids_Source.Object.defe_pataco[1], 0)
+		
+		ls_Retorno += of_InsertaLinea('direccion_origen', This.Direccion, 0) 
+//		ls_Retorno += of_InsertaLinea('Comuna Origen', This.Comuna, 0)
+//		ls_Retorno += of_InsertaLinea('Ciudad Origen', This.Ciudad, 0)
+	
+		ls_Retorno += of_InsertaLinea('direccion_destino', ids_Source.Object.embc_direcc[1], 0)
+//		ls_Retorno += of_InsertaLinea('Comuna Destino', ids_Source.Object.embc_comdes[1], 0)
+//		ls_Retorno += of_InsertaLinea('xSitiodestino', ids_Source.Object.defe_nomdes[1], 0)
+		
+		If Tipo = 1 Or Tipo = 0 Then 
+			ls_Retorno += of_InsertaLinea('monto_neto', '0', 0)
+			ls_Retorno += of_InsertaLinea('iva', '', 0)
+			ls_Retorno += of_InsertaLinea('monto_total', '0', 0)
+		Else
+			ls_Retorno += of_InsertaLinea('monto_neto', String(ids_Source.Object.Total_Neto[1], '#,##0'), 0)
+			If ids_Source.Object.Total_Iva[1] = 0 Then
+				ls_Retorno += of_InsertaLinea('iva', '', 0)
+			Else
+				ls_Retorno += of_InsertaLinea('iva', String(ids_Source.Object.Total_Iva[1], '#,##0'), 0)
+			End If
+			
+			ls_Retorno += of_InsertaLinea('monto_total', String(ids_Source.Object.Total[1], '#,##0'), 0)
+		End If
+		
+		ls_Retorno += of_InsertaLinea('monto_exento', '', 0)
+		ls_Retorno += of_InsertaLinea('tasa_iva', String(IVA), 0)
+		//of_InsertaLinea('xMontoEscrito', '', 0)			
+	
+		If IsNull(ids_Source.Object.defe_glosas[1]) Then
+			ls_Referencia = ''
+		Else
+			ls_Referencia = Trim(ids_Source.Object.defe_glosas[1])
+			If Tipo = 1 Then
+				ls_Referencia =  ls_Referencia + ' - Fruta Certificada GLOBALG.A.P. ' + f_Kilos_GGN(Cliente, Planta, Movimiento)
+			End If
+		End If
+		
+		ls_Retorno += of_InsertaLinea('xobservaciones', Mid(ls_Referencia, 1, 120), 0)
+		
+		If Tipo = 3 Then 
+			If IsNull(ids_Source.Object.glosas[1]) Then
+				ls_Referencia = ''
+			Else
+				ls_Referencia = Trim(ids_Source.Object.glosas[1])
+			End If
+			
+//			ls_Retorno += of_InsertaLinea('xObservaciones1', Mid(ls_Referencia, 1, 120), 0)
+//			ls_Retorno += of_InsertaLinea('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120), 0)
+		ElseIf Tipo = 4  Then
+//			ls_Retorno += of_InsertaLinea('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120), 0)
+		ElseIf Tipo = 1 Then //Guia Exportacion / Embarques
+			//Glosa 1
+//			ls_Referencia = Mid('Total VGM: ' + String(ids_Source.Object.defe_totvgm[1], '#,##0.00') + &
+//								', Sello(s) N : ' + CantidadSellos + ' - ' + NumerosSellos + &
+//								', Ubicación : ' + UbicacionSello +  ', Multiuso : ' + Trim(ids_Source.Object.defe_term01[1]) + '/' + &
+//								Trim(ids_Source.Object.defe_term02[1]) + '/' + Trim(ids_Source.Object.defe_term03[1]),1,120)		
+//			ls_Retorno += of_InsertaLinea('xObservaciones1', ls_Referencia, 0)
+//			//Glosa 2
+//			ls_Referencia = Mid('Sello Naviera: ' + Trim(ids_Source.Object.defe_selnav[1]) + &
+//								', Reserva: ' + Trim(ids_Source.Object.embq_bookin[1]) + &
+//								', Planilla SAG: ' + String(ids_Source.Object.defe_nrosps[1]) + ', Termografo : '  + &
+//								of_GeneraTermografos(Cliente, Planta, Movimiento), 1, 120)
+//								
+//			ls_Retorno += of_InsertaLinea('xObservaciones2', ls_Referencia, 0)
+			
+//			ls_Retorno += of_InsertaLinea('Sello', Mid(NumerosSellos, 1, 20), 0)
+//			ls_Retorno += of_InsertaLinea('Booking', Trim(ids_Source.Object.embq_bookin[1]), 0)
+//			ls_Retorno += of_InsertaLinea('Nombre Transporte', ids_Source.Object.embq_nomnav[1], 0)
+//			ls_Retorno += of_InsertaLinea('xEmbarque', ids_Source.Object.embq_codigo[1], 0)
+		
+			If ids_Source.Object.embq_ptoori[1] = 0 Or IsNull(ids_Source.Object.embq_ptoori[1]) Then
+				ls_PuertoOrigen	= ''
+			Else
+				ls_PuertoOrigen	=	String(ids_Source.Object.embq_ptoori[1])
+			End If
+			
+			If ids_Source.Object.puer_codadu[1] = 0 Or IsNull(ids_Source.Object.puer_codadu[1]) Then
+				ls_Puerto	= ''
+			Else
+				ls_Puerto	=	String(ids_Source.Object.puer_codadu[1])
+			End If
+			
+			If ids_Source.Object.dest_codigo[1] = 0 Or IsNull(ids_Source.Object.dest_codigo[1]) Then
+				ls_Pais	= ''
+			Else
+				ls_Pais	=	String(ids_Source.Object.dest_codigo[1])
+			End If
+			
+//			ls_Retorno += of_InsertaLinea('Cod. Puerto Embarque', ls_PuertoOrigen, 0)
+//			ls_Retorno += of_InsertaLinea('Id. Adicional Puerto Embarque', ids_Source.Object.orindespacho[1], 0)
+//			ls_Retorno += of_InsertaLinea('Cod. Puerto Desembarque', ls_Puerto, 0)
+//			ls_Retorno += of_InsertaLinea('Id Adicional Puerto Desembarque', PuertoDestino, 0)
+//			ls_Retorno += of_InsertaLinea('Cod. Pais Destino', ls_Pais, 0)
+//		
+//			ls_Retorno += of_InsertaLinea('xcontenedor', ids_Source.Object.defe_nrcont[1], 0)
+//			ls_Retorno += of_InsertaLinea('xConsignatario', ids_Source.Object.reci_nombre[1], 0)
+//			ls_Retorno += of_InsertaLinea('xDUS', ids_Source.Object.embq_nrodus[1], 0)
+//			ls_Retorno += of_InsertaLinea('xASP', ids_Source.Object.defe_nrspsd[1], 0)
+		End If
+		
+		ls_Retorno += of_InsertaLinea('xusuario_emision', gstr_us.Nombre, 0)
+		ls_Retorno += of_InsertaLinea('xlugar_emision', iuo_Planta.Nombre, 1)
+		ls_Retorno += _FINAL + _FINLINEA + Char(13)
+		//Genera Detalle
+		SetNull(ls_Referencia)
+		ls_Retorno += _MARCA + 'detalle' + _MARCA  + _Separador + _INICIOBLOQUE + Char(13)
+		For ll_Fila = 1 To ids_Source.RowCount()
+			ls_Retorno += _INICIO + Char(13)			
+			ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Fila), 0)
+			ls_Retorno += of_InsertaLinea('tipo_codigo', '1', 0)
+			ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+			
+			If Tipo = 1 Then 
+				ls_Retorno += of_InsertaLinea('nombre_item', Mid('Cajas ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exp. ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb.' ,1,80), 0)
+				ls_Retorno += of_InsertaLinea('descripcion_adicional', 'Cajas ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Exp. ' + Trim(ids_Source.Object.emba_codigo[ll_Fila]) + ' ' + Trim(ids_Source.Object.vari_nombre[ll_Fila]) + ' Cal.' +Trim(ids_Source.Object.pafr_calibr[ll_Fila])  + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ' + String(ids_Source.Object.enva_pesobr[ll_Fila], '#,##0.00') + ' Kb.', 0)
+			ElseIf Tipo = 0 Then
+				ls_Retorno += of_InsertaLinea('nombre_item', Mid('Cajas muestra ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Lote ' + Trim(String(ids_Source.Object.defi_nrlote[ll_Fila], '000000')) + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ',1,80), 0)
+				ls_Retorno += of_InsertaLinea('descripcion_adicional', 'Cajas muestra ' + Trim(ids_Source.Object.espe_nombre[ll_Fila]) + ' Lote ' + Trim(String(ids_Source.Object.defi_nrlote[ll_Fila], '000000')) + ' - ' + String(ids_Source.Object.enva_pesone[ll_Fila], '#,##0.00') + ' Kn. ', 0)
+			Else
+				ls_Retorno += of_InsertaLinea('nombre_item', Mid(Trim(ids_Source.Object.Detalle[ll_Fila]) ,1,80), 0)
+				ls_Retorno += of_InsertaLinea('descripcion_adicional', Trim(ids_Source.Object.Detalle[ll_Fila]), 0)
+			End If
+			
+			
+			If Tipo = 1 Or Tipo = 0 Then 
+				ls_Retorno += of_InsertaLinea('cantidad', String(ids_Source.Object.paen_ccajas[ll_Fila], "#,##0"), 0)
+				ls_Retorno += of_InsertaLinea('unidad_medida', 'UNID', 0)
+			Else
+				If ids_Source.Object.enva_codigo[ll_Fila] = 0 Then 
+					ls_Retorno += of_InsertaLinea('cantidad', String(ids_Source.Object.paen_ccajas[ll_Fila], "#,##0"), 0)
+					ls_Retorno += of_InsertaLinea('unidad_medida', 'KILO', 0)
+				Else
+					ls_Retorno += of_InsertaLinea('cantidad', String(ids_Source.Object.paen_ccajas[ll_Fila], "#,##0"), 0)
+					ls_Retorno += of_InsertaLinea('unidad_medida', 'UNID', 0)
+				End If
+			End If
+			
+			If Tipo = 1 Or Tipo = 0 Then 
+				ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+			Else
+				If ids_Source.Object.mfcd_preuni[ll_Fila] = 0 Then
+					ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+				Else
+					ls_Retorno += of_InsertaLinea('precio_unitario', String(ids_Source.Object.mfcd_preuni[ll_Fila], "#,##0"), 0)
+				End If
+				ls_Retorno += of_InsertaLinea('precio_unitario',String(ids_Source.Object.Neto[ll_Fila], "#,##0"), 0)
+			End If
+			
+			ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+			ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+			
+			If ll_Fila = ids_Source.RowCount()	 Then
+				ls_Retorno += _FINAL + Char(13)
+			Else
+				ls_Retorno +=  _FINAL + Char(13) + _FINLINEA + Char(13)
+			End If
+		Next
+		
+		If Tipo = 1 Or Tipo = 0 Then //Detalle Guia Embarques (1) y Lotes USDA (0)
+			//Genera Item con totales
+			ll_Linea = ll_Fila 
+			
+			If Tipo = 1 Then
+				ls_Totales = 'Total Cajas : ' + String(ids_Source.Object.Total_Cajas[1], '#,##0') + &
+								' / Total KN: ' + String(ids_Source.Object.Total_KNetos[1], '#,##0.00') + &
+								' / Total KB: ' + String(ids_Source.Object.Total_KBrutos[1], '#,##0.00')
+			ElseIf Tipo = 0 Then
+				ls_Totales = 'Total Cajas : ' + String(ids_Source.Object.Total_Cajas[1], '#,##0') + &
+								' / Total KN: ' + String(ids_Source.Object.Total_KNetos[1], '#,##0.00') 
+			End If
+	
+			ls_Retorno += _FINLINEA + _INICIO + Char(13)			
+			ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+			ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+			ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+			ls_Retorno += of_InsertaLinea('nombre_item', ls_Totales, 0)
+			ls_Retorno += of_InsertaLinea('descripcion_adicional', ls_Totales, 0)
+			ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+			ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+			ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+			ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+			ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+			ls_Retorno += _FINAL+ _FINLINEA + Char(13)
+			
+			ll_Linea++
+				
+			If Tipo = 1 Then
+				//Genera Detalle IFCO
+				ids_IFCO.Retrieve(Cliente, Planta, Movimiento)
+				For ll_Fila = 1 To ids_IFCO.RowCount()
+					ls_Retorno += _INICIO + Char(13)			
+					ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+					ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+					ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+					ls_Retorno += of_InsertaLinea('nombre_item', ids_IFCO.Object.Response[ll_Fila], 0)
+					ls_Retorno += of_InsertaLinea('descripcion_adicional', ids_IFCO.Object.Response[ll_Fila], 0)
+					ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+					ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+					ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+					ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+					ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+					ls_Retorno += _FINAL + _FINLINEA + Char(13)
+					
+					ll_Linea++
+				Next
+			
+				//Genera Informacion detalle de envases
+				If Resumen = 1 Then
+					ids_Pallet.Retrieve(Cliente, Planta, Movimiento, 1, Variedad, Productor, Calibre, ConsVariedad, ConsEmbalaje, ConsCalibre)
+					For ll_Fila = 1 To ids_Pallet.RowCount()
+						ls_Retorno += _INICIO + Char(13)			
+						ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+						ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+						ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+						ls_Retorno += of_InsertaLinea('nombre_item', String(ids_Pallet.Object.Cont[ll_Fila], '#,##0') + ' --> ' + String(ids_Pallet.Object.copa_anchos[ll_Fila], '#,##0.00') + ' X ' + String(ids_Pallet.Object.copa_largos[ll_Fila], '#,##0.00'), 0)
+						ls_Retorno += of_InsertaLinea('descripcion_adicional', String(ids_Pallet.Object.Cont[ll_Fila], '#,##0') + ' --> ' + String(ids_Pallet.Object.copa_anchos[ll_Fila], '#,##0.00') + ' X ' + String(ids_Pallet.Object.copa_largos[ll_Fila], '#,##0.00'), 0)
+						ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+						ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+						ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+						ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+						ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+						ls_Retorno += _FINAL + _FINLINEA + Char(13)
+						
+						ll_Linea++
+					Next
+					
+					ids_Cajas.Retrieve(Cliente, Planta, Movimiento, 1, Variedad, Productor, Calibre, ConsVariedad, ConsEmbalaje, ConsCalibre)
+					For ll_Fila = 1 To ids_Cajas.RowCount()						
+						ls_Retorno += _INICIO + Char(13)			
+						ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+						ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+						ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+						ls_Retorno += of_InsertaLinea('nombre_item', String(ids_Cajas.Object.Cont[ll_Fila], '#,##0') + ' X ' + String(ids_Cajas.Object.cajas[ll_Fila], '#,##0.00'), 0)
+						ls_Retorno += of_InsertaLinea('descripcion_adicional', String(ids_Cajas.Object.Cont[ll_Fila], '#,##0') + ' X ' + String(ids_Cajas.Object.cajas[ll_Fila], '#,##0.00'), 0)
+						ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+						ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+						ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+						ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+						ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+						ls_Retorno += _FINAL + _FINLINEA + Char(13)
+						
+						ll_Linea++
+					Next
+					
+					ls_Retorno += _INICIO + Char(13)			
+					ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+					ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+					ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+					ls_Retorno += of_InsertaLinea('nombre_item', String(ids_Cajas.Object.TotalPallet[1], '#,##0') + ' Total de Pallets', 0)
+					ls_Retorno += of_InsertaLinea('descripcion_adicional', String(ids_Cajas.Object.TotalPallet[1], '#,##0') + ' Total de Pallets', 0)
+					ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+					ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+					ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+					ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+					ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+					ls_Retorno += _FINAL + _FINLINEA + Char(13)
+				End If
+				
+				//Detalle de codigos CSG
+				ls_Retorno += _INICIO + Char(13)			
+				ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+				ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+				ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+				ls_Retorno += of_InsertaLinea('nombre_item', Mid(' CSG / ' + of_CodigoCSG(Cliente, Planta, Movimiento), 1, 80), 0)
+				ls_Retorno += of_InsertaLinea('descripcion_adicional',  ' CSG / ' + of_CodigoCSG(Cliente, Planta, Movimiento), 0)
+				ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+				ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+				ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+				ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+				ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+				ls_Retorno += _FINAL + _FINLINEA + Char(13)
+				
+				//Detalle de codigos CSP				
+				ls_Retorno += _INICIO + Char(13)			
+				ls_Retorno += of_InsertaLinea('nro_linea', String(ll_Linea) , 0)
+				ls_Retorno += of_InsertaLinea('tipo_codigo', '2', 0)
+				ls_Retorno += of_InsertaLinea('codigo_item', '', 0)
+				ls_Retorno += of_InsertaLinea('nombre_item', Mid(' CSP / ' + of_CodigoCSP(Cliente, Planta, Movimiento), 1, 80), 0)
+				ls_Retorno += of_InsertaLinea('descripcion_adicional',  ' CSP / ' + of_CodigoCSP(Cliente, Planta, Movimiento), 0)
+				ls_Retorno += of_InsertaLinea('cantidad', '0', 0)
+				ls_Retorno += of_InsertaLinea('unidad_medida', '', 0)
+				ls_Retorno += of_InsertaLinea('precio_unitario', '0', 0)
+				ls_Retorno += of_InsertaLinea('impuestos', '["IVA 19%"]', 0)
+				ls_Retorno += of_InsertaLinea('monto_item', '0', 1)
+				ls_Retorno += _FINAL + Char(13)					
+			End If
+		End If
+		
+		ls_Retorno += _FINALBLOQUE + _FINLINEA + Char(13)
+		
+		//Genera Referencia
+		ls_Retorno += of_InsertaLinea('referencia', '', 1)
+		ls_Retorno += + _FINAL + Char(13)
+		
+	End If
+Else
+	ls_Retorno = '*'
+End If
+
+Return ls_Retorno
+end function
+
+public function integer of_cargaguia (integer planta, long cliente, long movimiento, integer variedad, integer productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante);String			ls_Responsebody, ls_PostData
+Integer		li_SendReturn, lb_Retorno = 1
+RestClient 	lrc_WSRossi
+
+//"X-API-KEY:e36af9cf-3638-48bb-b938-7af3bddc7931"
+//"https://api.insacom.cl/expo-carlo-test/cargar-guia"
+
+If lb_Retorno <> -1 Then 
+	lrc_WSRossi = Create RestClient 
+//	lrc_WSRossi.SetRequestHeaders(_HEADERS)
+		
+	ls_PostData = of_CargaJSON(Planta, Cliente, Movimiento, Variedad, Productor, Calibre, ConsVariedad, ConsEmbalaje, ConsCalibre, Resumen, Tipo, Comprobante)
+	
+	If ls_PostData <> '*' Then
+//		li_SendReturn = lrc_WSRossi.SendPostRequest(_URL, ls_PostData, ls_Responsebody)
+//		
+//		If li_SendReturn <> 1 Or lrc_WSRossi.GetResponseStatusCode() <> 200 Then
+//			of_SetAsunto('Carga de Guia en Servicio ROSSI')
+//			of_SetCuerpo(ls_Responsebody)
+//			of_EnviaCorreo(2)
+//			lb_Retorno = -1
+//		Else
+//			of_Resultado(ls_Responsebody, adw)
+//		End If
+	Else
+			ls_Responsebody = '{"message": "No se genero JSON para carga."}'
+			lb_Retorno = -1
+	End If
+	
+	If IsValid(lrc_WSRossi) Then Destroy lrc_WSRossi
+End If
+
+//If lb_Retorno = -1 Then 
+//	of_SetCuerpo(ls_Responsebody)
+//	of_SetAsunto('Error:' + _Asunto)
+//	of_EnviaCorreo(2)
+//End If
 
 Return lb_Retorno
 end function

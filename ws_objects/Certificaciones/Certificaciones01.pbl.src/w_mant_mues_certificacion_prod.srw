@@ -316,12 +316,12 @@ end type
 type pb_eliminar from w_mant_tabla`pb_eliminar within w_mant_mues_certificacion_prod
 integer x = 3049
 integer y = 632
+integer height = 244
 end type
 
 type pb_grabar from w_mant_tabla`pb_grabar within w_mant_mues_certificacion_prod
-integer x = 3049
-integer y = 992
-integer height = 152
+integer x = 3081
+integer y = 1016
 end type
 
 type pb_imprimir from w_mant_tabla`pb_imprimir within w_mant_mues_certificacion_prod

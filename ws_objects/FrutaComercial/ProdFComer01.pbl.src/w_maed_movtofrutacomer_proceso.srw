@@ -173,48 +173,67 @@ end prototypes
 event ue_validaregistro();Integer	li_cont
 String	ls_mensaje, ls_colu[]
 
-IF il_fila < 1 OR dw_4.RowCount() < 1 THEN RETURN
+If il_fila < 1 OR dw_4.RowCount() < 1 Then Return
 
-IF iuo_spro_ordenproceso.Estado > 2 THEN
-	MessageBox("Error", 	"No es posible Modificar o Agregar registros a esta recepción, ~r~n"+&
+If iuo_spro_ordenproceso.Estado > 2 Then
+	MessageBox("Error", 	"No es posible ModIficar o Agregar registros a esta recepción, ~r~n"+&
 								"ya que la orden de proceso asociada se encuentra cerrada", StopSign!)
 	li_cont ++
-END IF
+End If
 
-IF Isnull(dw_4.GetItemString(il_fila, "refe_gcalib")) OR dw_4.GetItemString(il_fila, "refe_gcalib") = "" THEN
+If IsNull(dw_4.GetItemNumber(il_fila, "fgmb_nrotar")) OR dw_4.GetItemNumber(il_fila, "fgmb_nrotar") = 0 Then
+	li_cont ++
+	ls_mensaje 		= ls_mensaje + "~nNumero de Tarja"
+	ls_colu[li_cont]	= "fgmb_nrotar"
+End If
+
+If IsNull(dw_4.GetItemString(il_fila, "refe_gcalib")) OR dw_4.GetItemString(il_fila, "refe_gcalib") = "" Then
 	li_cont ++
 	ls_mensaje 			= ls_mensaje + "~nGrupo Calibre"
 	ls_colu[li_cont]	= "refe_gcalib"
-END IF
+End If
 
-IF Isnull(dw_4.GetItemNumber(il_fila, "lfcd_bultos")) OR dw_4.GetItemNumber(il_fila, "lfcd_bultos") = 0 THEN
+If IsNull(dw_4.GetItemNumber(il_fila, "lfcd_bultos")) OR dw_4.GetItemNumber(il_fila, "lfcd_bultos") = 0 Then
 	li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nCantidad de Bultos"
+	ls_mensaje 		= ls_mensaje + "~nCantidad de Bultos"
 	ls_colu[li_cont]	= "lfcd_bultos"
-END IF
+End If
 
-IF Isnull(dw_4.GetItemNumber(il_fila, "lfcd_kilnet")) OR dw_4.GetItemNumber(il_fila, "lfcd_kilnet") = 0 THEN
+If IsNull(dw_4.GetItemNumber(il_fila, "lfcd_kilnet")) OR dw_4.GetItemNumber(il_fila, "lfcd_kilnet") = 0 Then
 	li_cont ++
-	ls_mensaje 			= ls_mensaje + "~nKilos Netos"
+	ls_mensaje 		= ls_mensaje + "~nKilos Netos"
 	ls_colu[li_cont]	= "lfcd_kilnet"
-END IF
+End If
 
-IF dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso" THEN
-	IF Isnull(dw_4.GetItemString(il_fila, "cale_calida")) OR dw_4.GetItemString(il_fila, "cale_calida") = '' THEN
+If dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso" Then
+	If IsNull(dw_4.GetItemString(il_fila, "cale_calida")) OR dw_4.GetItemString(il_fila, "cale_calida") = '' Then
 		li_cont ++
-		ls_mensaje 			= ls_mensaje + "~nCalidad Envase"
+		ls_mensaje 		= ls_mensaje + "~nCalidad Envase"
 		ls_colu[li_cont]	= "cale_calida"
-	END IF
-END IF
+	End If
+Else
+	If IsNull(dw_4.GetItemNumber(il_fila, "prbr_codpre")) OR dw_4.GetItemNumber(il_fila, "prbr_codpre") = 0 Then
+		li_cont ++
+		ls_mensaje 		= ls_mensaje + "~nCodigo de Predio"
+		ls_colu[li_cont]	= "prbr_codpre"
+	End If
+	
+	If IsNull(dw_4.GetItemNumber(il_fila, "prcc_codigo")) OR dw_4.GetItemNumber(il_fila, "prcc_codigo") = 0 Then
+		li_cont ++
+		ls_mensaje 		= ls_mensaje + "~nCodigo de Cuartel"
+		ls_colu[li_cont]	= "prcc_codigo"
+	End If	
+End If
 
-IF li_cont > 0 THEN
-	IF UpperBound(ls_colu) > 0 THEN
+If li_cont > 0 Then
+	If UpperBound(ls_colu) > 0 Then
 		MessageBox("Error de Consistencia", "Falta el ingreso de :" + ls_mensaje + ".", StopSign!, Ok!)
 		dw_4.SetColumn(ls_colu[1])
-	END IF
+	End If
+	
 	dw_4.SetFocus()
 	Message.DoubleParm = -1
-END IF
+End If
 
 end event
 
@@ -3642,12 +3661,15 @@ li_especie					=	Integer(istr_Mant.Argumento[7])
 ll_Fila = 1
 
 dw_4.SetRedraw(False)
-
-Message.DoubleParm 		= 	0
+Message.DoubleParm = 	0
 
 TriggerEvent("ue_validaregistro")
 	
-If Message.DoubleParm = -1 Then Return
+If Message.DoubleParm = -1 Then
+	Message.DoubleParm = -1
+	dw_4.SetRedraw(True)
+	Return
+End If
 
 If Istr_Mant.Argumento[11] = "2" Then
 	dw_3.Object.prod_codigo[1] = dw_2.Object.prod_codigo[1]
@@ -3659,21 +3681,21 @@ ElseIf Istr_Mant.Argumento[11] = "1" Then
 	End If	
 End If 	
 
-DO WHILE ll_Fila <= dw_4.RowCount()
+Do While ll_Fila <= dw_4.RowCount()
 	If dw_4.GetItemStatus(ll_Fila, 0, Primary!) = New! Then
 		dw_4.DeleteRow(ll_Fila)
 	Else
 		ll_Fila ++
 	End If
-LOOP
+Loop
 
-If NOT RevisaEnvases() Then
+If Not RevisaEnvases() Then
 	Message.DoubleParm = -1
-	dw_4.SetRedraw(TRUE)
+	dw_4.SetRedraw(TrUE)
 	Return
 End If	
 
-li_tipodoc	=	dw_2.Object.mfco_tipdoc[1]
+li_tipodoc=	dw_2.Object.mfco_tipdoc[1]
 ll_docrel	=	dw_2.Object.mfco_docrel[1]
 
 dw_4.SetFilter("")
@@ -3687,10 +3709,10 @@ If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
 		If il_NumEnva = 0 OR IsNull(il_NumEnva) Then
 		  	Messagebox("Error de Conección","Vuelva a Intentar Grabar.")
 		  	Message.DoubleParm = -1
-		  	dw_4.SetRedraw(TRUE)
+		  	dw_4.SetRedraw(True)
 		  	Return
 		Else
-			lb_Actualiza_Envase = TRUE
+			lb_Actualiza_Envase = True
 		End If
 	 End If
 
@@ -3701,24 +3723,21 @@ If dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
 	  	If il_NumFruta = 0 OR IsNull(il_NumFruta) Then
 			Messagebox("Error de Conección","Vuelva a Intentar Grabar.")
 		 	Message.DoubleParm = -1
-		 	dw_4.SetRedraw(TRUE)
+		 	dw_4.SetRedraw(True)
 		 	Return
 	  	Else
-			lb_Actualiza_Fruta = TRUE
+			lb_Actualiza_Fruta = True
 	  End If
 	End If
 
 	dw_2.Object.mfco_numero[1]			=	il_NumFruta
 	dw_2.Object.mfco_estmov[1] 			=  1
-
 	istr_Mant.Argumento[3] 					= 	String(il_NumFruta)
 
 	ll_Fila	=	dw_6.InsertRow(0)
-
 	dw_6.Object.plde_codigo[ll_Fila]		=	dw_2.Object.plde_codigo[1]
 	dw_6.Object.tpmv_codigo[ll_Fila]		=	li_TipoMovtoEnva
 	dw_6.Object.meen_numero[ll_Fila]	=  il_NumEnva
-
   	dw_6.Object.prod_codigo[ll_Fila]		=	dw_2.Object.prod_codigo[1]
 	dw_6.Object.meen_fecmov[ll_Fila]	=	dw_2.Object.mfco_fecmov[1]
 	dw_6.Object.meen_modulo[ll_Fila]	=	2
@@ -3741,7 +3760,6 @@ If IsNull(dw_3.Object.lofc_lotefc[1]) OR dw_3.Object.lofc_lotefc[1] = 0 Then
 End If
 
 ll_numerolote 					= 	dw_3.Object.lofc_lotefc[1]
-
 dw_3.Object.lofc_totbul[1]	=	dw_4.Object.total_bulto[1]
 dw_3.Object.lofc_totkil[1]	=	dw_4.Object.total_kilos[1]
 dw_3.Object.lofc_tipool[1]	=  Integer(Istr_Mant.Argumento[11])
@@ -3753,7 +3771,7 @@ SELECT	IsNull(Max(lfcd_secuen), 0) + 1
 	AND	lofc_espcod	=	:li_especie
 	AND   lofc_lotefc =  :ll_Numerolote;
 
-FOR ll_Fila = 1 TO dw_4.RowCount()
+For ll_Fila = 1 To dw_4.RowCount()
 	If dw_4.GetItemStatus(ll_Fila, 0, Primary!) 		= 	NewModIfied! Then
 		dw_4.Object.lofc_pltcod[ll_Fila]				=	dw_3.Object.lofc_pltcod[1]
 		dw_4.Object.lofc_espcod[ll_Fila]				=	dw_3.Object.lofc_espcod[1]
@@ -3772,10 +3790,7 @@ FOR ll_Fila = 1 TO dw_4.RowCount()
 		li_Secuencia ++
 		
 	ElseIf dw_4.GetItemStatus(ll_Fila, 0, Primary!) 	= 	DataModIfied! Then
-		If gstr_paramplanta.palletdebins Then
-			DestaraFila(ll_fila)
-			
-		End If
+		If gstr_paramplanta.palletdebins Then DestaraFila(ll_fila)			
 	End If
 Next
 
@@ -3786,7 +3801,7 @@ Next
 	AND	tpmv_codigo	=	:li_TipoMovto
 	AND   mfco_numero =  :il_NumFruta;
 
-FOR ll_Fila = 1 TO dw_4.RowCount()
+For ll_Fila = 1 To dw_4.RowCount()
 	If dw_4.GetItemStatus(ll_Fila, 0, Primary!) = NewModIfied! Then
 		ll_Nuevo	=	dw_1.InsertRow(0)
 
@@ -3807,11 +3822,9 @@ FOR ll_Fila = 1 TO dw_4.RowCount()
 
 		li_Secuencia ++
 		
-	ElseIf dw_4.GetItemStatus(ll_Fila, 0, Primary!) = DataModIfied! Then
-
+	ElseIf dw_4.GetItemStatus(ll_Fila, 0, Primary!) = DataModified! Then
 		ll_FilaMov	=	dw_1.Find("lofc_lotefc = " + String(dw_4.Object.lofc_lotefc[ll_Fila]) 	+ ' and ' + &
-										 "lfcd_secuen = " + String(dw_4.Object.lfcd_secuen[ll_Fila]), 	+ &
-										 1, dw_1.RowCount())
+										 "lfcd_secuen = " + String(dw_4.Object.lfcd_secuen[ll_Fila]), 1, dw_1.RowCount())
 
 		If ll_FilaMov > 0 Then
 			///////////////////////////////////////////////////////////////////////
@@ -3820,14 +3833,12 @@ FOR ll_Fila = 1 TO dw_4.RowCount()
 			///////////////////////////////////////////////////////////////////////
 			dw_1.Object.mfcd_calibr[ll_FilaMov]	=	dw_4.Object.refe_gcalib[ll_Fila]
 			dw_1.Object.vari_codigo[ll_FilaMov]	=	dw_4.Object.vari_codigo[ll_Fila]
-			///////////////////////////////////////////////////////////////////////
-			
-		End If
-	
+			///////////////////////////////////////////////////////////////////////			
+		End If	
 	End If
 Next
 
-FOR ll_Fila = 1 TO dw_5.RowCount()
+For ll_Fila = 1 To dw_5.RowCount()
 	If dw_5.GetItemStatus(ll_fila, 0, Primary!) = NewModIfied! Then
 		dw_5.Object.plde_codigo[ll_Fila]	=	dw_2.Object.plde_codigo[1]
 		dw_5.Object.tpmv_codigo[ll_Fila]	=	li_TipoMovtoEnva
@@ -3838,7 +3849,7 @@ Next
 
 dw_4.SetFilter("lfcd_tipdoc = " + String(li_tipodoc) + " And lfcd_docrel = " + String(ll_docrel))
 dw_4.Filter()
-dw_4.SetRedraw(TRUE)
+dw_4.SetRedraw(True)
 
 //revisar asignacion
 If Istr_Mant.Argumento[11] = "2" Then
@@ -3848,8 +3859,7 @@ If Istr_Mant.Argumento[11] = "2" Then
 ElseIf Istr_Mant.Argumento[11] = "1" Then
 	If iuo_productores.Existe(gstr_paramplanta.productorempresa,True,SqlCa) Then
 		dw_3.SetItem(1, "prod_codigo", gstr_paramplanta.productorempresa )
-		dw_3.SetItem(1, "prod_nombre", iuo_productores.Nombre)
-		
+		dw_3.SetItem(1, "prod_nombre", iuo_productores.Nombre)		
 	End If	
 End If 	
 

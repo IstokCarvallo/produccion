@@ -200,11 +200,12 @@ end type
 
 event pb_excel::clicked;call super::clicked;SetPointer(Arrow!)
 
-Long	ll_Fila
-String	ls_Archivo, ls_Ruta
+Long		ll_Fila
+Integer	li_Resultado
+String		ls_Archivo, ls_Ruta
 
-RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)
-ls_Archivo	= '\LiquidacionDespachos_' + Mid(em_Desde.Text, 1, 2) + Mid(em_Desde.Text, 4, 2) + Mid(em_Desde.Text, 7, 4) + '.xls'
+//RegistryGet( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "Personal", RegString!, ls_Ruta)
+//ls_Archivo	= 'LiquidacionDespachos_' + Mid(em_Desde.Text, 1, 2) + Mid(em_Desde.Text, 4, 2) + Mid(em_Desde.Text, 7, 4) + '.xlsx'
 
 ll_Fila	=	dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlanta.Codigo, uo_SelEspecie.Codigo, &
 			Date(em_Desde.Text), Date(em_Hasta.Text), Date(em_EDesde.Text), Date(em_EHasta.Text))
@@ -215,11 +216,11 @@ If ll_Fila = -1 Then
 ElseIf ll_Fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 Else
-	If dw_1.SaveAs(ls_Ruta + ls_Archivo, EXCEL8!, True) = -1 Then
+	If dw_1.SaveAs() = -1 Then
 		Messagebox('Error', 'Archivo no se pudo generar.', StopSign!, Ok!)
 		Return
 	Else
-		Messagebox('Atencion', 'Archivo genrado en ruta:' + ls_Ruta + ls_Archivo, Information!, Ok!)
+		Messagebox('Atencion', 'Archivo genrado en ruta:', Information!, Ok!)
 	End If
 End If
 

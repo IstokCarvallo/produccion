@@ -186,42 +186,42 @@ li_Planta 		= 	Integer(istr_Mant.Argumento[2])
 li_TipOrden	=	Integer(istr_mant.Argumento[3])
 li_Numero	=	Integer(istr_mant.Argumento[4])
 
-
 li_fila = dw_1.Find("opve_nrtar1 = " + String(al_nrotarja) + ' or ' + &
 				    	  "opve_nrtar2 = " + String(al_nrotarja) + ' or ' + &
 				    	  "opve_nrtar3 = " + String(al_nrotarja), 1, dw_1.Rowcount())
-IF li_fila > 0 THEN
-	messagebox("Atención","La tarja  " + String(al_nrotarja, '00000000') + " " + &
-								 "esta ingresada en este Vaciado, ingrese otra Tarja")
+If li_fila > 0 Then
+	MessageBox("Atención","La tarja  " + String(al_nrotarja, '00000000') + " esta ingresada en este Vaciado, ingrese otra Tarja.")
 	Return True		
-END IF
+End If
 
-IF NOT iuo_valida.binsduplicados(li_Cliente, li_Planta, al_nrotarja, TRUE, sqlca) THEN
+If Not iuo_Valida.BinsDuplicados(li_Cliente, li_Planta, al_nrotarja, True, SQLCA) Then
 	Return True		
-END IF
+End If
 
 ll_bins		=	iuo_valida.Bins
 li_lote			=	iuo_valida.Lote
 li_especie	=	iuo_valida.Especie
 li_pltcod		=	iuo_valida.plantalote
 		
-IF NOT iuo_valida.cargabins(li_Cliente, li_Planta, ll_Bins, TRUE, sqlca) THEN
+If Not iuo_valida.CargaBins(li_Cliente, li_Planta, ll_Bins, True, SQLCA) Then
 	Return True		
-END IF
+End If
 
 li_TipoEnva	=	iuo_valida.TipoEnva
 li_Envase		=	iuo_valida.Envase
 ls_Calidad 	=	iuo_valida.Calidad
 
- If iuo_valida.lotetarja > 0 THEN
-	IF NOT iuo_valida.ValidaLote(li_Planta, li_Cliente, li_TipOrden, li_Numero, li_lote, li_TipoEnva, li_Envase,li_pltcod, TRUE, sqlca) THEN
+ If iuo_valida.LoteTarja > 0 Then
+	If Not iuo_valida.ValidaLote(li_Planta, li_Cliente, li_TipOrden, li_Numero, li_lote, li_TipoEnva, li_Envase,li_pltcod, True, SQLCA) Then
 		Return True		
-	END IF	
- ELSE	
-	IF NOT iuo_valida.ValidaLote(li_Planta, li_Cliente, li_TipOrden, li_Numero, li_lote, li_TipoEnva, li_Envase, TRUE, sqlca) THEN
+	End If	
+ Else	
+	If Not iuo_valida.ValidaLote(li_Planta, li_Cliente, li_TipOrden, li_Numero, li_lote, li_TipoEnva, li_Envase, True, SQLCA) Then
 		Return True		
-	END IF
-END IF
+	End If
+End If
+
+If NOT iuo_valida.of_ValidaTarja(li_Planta, li_Cliente, al_nrotarja, True, SQLCA) Then Return True		
 
 dw_1.GetChild("enva_codigo", idwc_envases)
 dw_1.GetChild("cale_calida", idwc_CaliCosechero)
@@ -232,22 +232,15 @@ idwc_CaliCosechero.SetTransObject(sqlca)
 idwc_envases.Retrieve(li_TipoEnva)
 idwc_CaliCosechero.Retrieve(li_TipoEnva, li_envase)
 
-/*
-P.M.H. 05.09.07
-
-Esta validacion ha sido comentada ya que le resta operatibilidad al sistema
-no ha sido eliminada aun, por que esta en estudio la forma de validar el ingreso
-de bins con diferentes descripciones.
-*/
-IF ( (dw_1.Object.enva_tipoen[il_Fila] <> li_TipoEnva) OR &
+If ( (dw_1.Object.enva_tipoen[il_Fila] <> li_TipoEnva) OR &
 	  (dw_1.Object.enva_codigo[il_Fila] <> li_Envase)   OR &
 	  (dw_1.Object.cale_calida[il_Fila] <> ls_Calidad)  OR &
 	  (dw_1.Object.lote_codigo[il_Fila] <> li_Lote) ) AND &
-	( dw_1.Object.opvd_canbul[il_fila] >= 1 ) THEN
+	( dw_1.Object.opvd_canbul[il_fila] >= 1 ) Then
 	MessageBox("Error", "Tarja Ingresada no cumple con la caracteristica de las Tarjas ya Ingresadas."+&
 							  "~r~nIngrese o Seleccione otra.", Exclamation!)
 	Return True
-END IF
+End If
 
 
 dw_1.Object.orpr_tipord[il_Fila]	=	Integer(istr_mant.Argumento[3])
@@ -265,7 +258,7 @@ dw_1.Object.fgmb_tibapa[il_Fila]	= 	iuo_valida.fgmb_tibapa
 li_fila 			= idwc_CaliCosechero.Find("cale_calida ='" + ls_Calidad + "'", 1, idwc_CaliCosechero.RowCount()) 
 id_taraenvase 	= idwc_CaliCosechero.GetItemDecimal(li_fila, "cale_pesoen")
 
-RETURN False
+Return False
 
 end function
 
@@ -754,30 +747,30 @@ Integer li_Resp
 
 ls_columna = dwo.Name
 
-CHOOSE CASE ls_columna
-	CASE "botonromana"		
-		IF (istr_puertacomm.pesajebins = 1 AND This.Object.kilos[il_fila] >= istr_puertacomm.PesoMinimo) OR &
-			(This.Object.kilos[il_fila] >= 0) THEN
+Choose Case ls_columna
+	Case "botonromana"		
+		If (istr_puertacomm.pesajebins = 1 And This.Object.kilos[il_fila] >= istr_puertacomm.PesoMinimo) OR &
+			(This.Object.kilos[il_fila] >= 0) Then
 				This.AcceptText()
 				AsignaBultos()
 				This.Object.opvd_pesobr[il_Fila]	=	This.Object.kilos[Row]
-				IF gstr_paramplanta.bultobins THEN
-					 IF MessageBox("Atención", "Desea Utilizar Peso de Recepción", Exclamation!, YesNo!,1) = 1 THEN
+				If gstr_paramplanta.bultobins Then
+					 If MessageBox("Atención", "Desea Utilizar Peso de Recepción", Exclamation!, YesNo!,1) = 1 Then
 						KilosBultoBins()
-					ELSE
+					Else
 						CalculaPesos()
-					END IF
-				ELSE
+					End If
+				Else
 					CalculaPesos()
-				END IF
-		ELSEIF gstr_paramplanta.bultobins THEN
-			 IF MessageBox("Atención", "Desea Utilizar Peso de Recepción", Exclamation!, YesNo!,1) = 1 THEN
+				End If
+		ElseIf gstr_paramplanta.bultobins Then
+			 If MessageBox("Atención", "Desea Utilizar Peso de Recepción", Exclamation!, YesNo!,1) = 1 Then
 				KilosBultoBins()
-			ELSE
+			Else
 				CalculaPesos()
-			END IF
-		END IF
-END CHOOSE		
+			End If
+		End If
+End Choose		
 end event
 
 event dw_1::itemchanged;call super::itemchanged;Integer	li_codigo, li_bultos, li_fila
