@@ -341,23 +341,23 @@ istr_Mant.Argumento[10]	=	String(gi_CodExport)
 dw_2.GetChild("tpmv_codigo", idwc_tipomov)
 idwc_tipomov.SetTransObject(sqlca)
 
-IF idwc_tipomov.Retrieve() = 0 THEN
+If idwc_tipomov.Retrieve() = 0 Then
 	MessageBox("Atención", "Falta Registrar Tipo de Movimiento")
 	idwc_tipomov.InsertRow(0)
-END IF
+End If
 
 
 dw_1.GetChild("cama_codigo", idwc_Camara)
 idwc_Camara.SetTransObject(sqlca)
 
-IF idwc_Camara.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 THEN
+If idwc_Camara.Retrieve(gstr_ParamPlanta.CodigoPlanta) = 0 Then
 	MessageBox("Atención", "Falta Registrar Cámaras para Planta " + &
 					String(gstr_ParamPlanta.CodigoPlanta, '0000'))
 	idwc_Camara.InsertRow(0)
-ELSE
+Else
 	idwc_Camara.SetSort("cama_nombre A")
 	idwc_Camara.Sort()
-END IF
+End If
 
 dw_1.GetChild("lote_pltcod", idwc_PltaLote)
 idwc_PltaLote.SetTransObject(sqlca)
@@ -686,7 +686,7 @@ DateTime			ld_FechaInicio
 
 lstr_Busq.Argum[1]	=	istr_Mant.Argumento[1]
 lstr_Busq.Argum[2]	=	istr_Mant.Argumento[2]
-lstr_Busq.Argum[3]	=	'3'
+//lstr_Busq.Argum[3]	=	'3'
 lstr_Busq.Argum[4]	=	String(ld_FechaInicio,'dd/mm/yyyy')
 lstr_Busq.Argum[10]	=	String(dw_2.Object.clie_codigo[1])
 

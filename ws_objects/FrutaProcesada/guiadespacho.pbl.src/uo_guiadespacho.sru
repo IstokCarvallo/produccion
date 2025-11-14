@@ -31,6 +31,8 @@ Private Constant	String	 	_Separador			= ':'
 Private Constant	String	 	_MARCA				= '"'
 Private Constant	String	 	_FINLINEA			= ','
 
+Private String	_HEADERS, _URL, _API-KEY, _AUTH
+
 Private uo_Plantadesp	iuo_Planta
 Private uo_Conectividad	iuo_Coneccion
 Private n_buscaarchivo	iuo_BuscaArchivo
@@ -78,6 +80,7 @@ public function boolean of_generalibroguia_gde (integer tipo)
 private function string of_insertalinea (string tag, string valor, byte final)
 private function string of_cargajson (long planta, long cliente, long movimiento, long variedad, long productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
 public function integer of_cargaguia (integer planta, long cliente, long movimiento, integer variedad, integer productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
+public function string of_obtienenroguia ()
 end prototypes
 
 private function boolean of_conectar (integer ai_coneccion);SetPointer (HourGlass!)
@@ -1806,6 +1809,41 @@ End If
 //End If
 
 Return lb_Retorno
+end function
+
+public function string of_obtienenroguia ();String				ls_Responsebody, ls_PostData, ls_Retorno, ls_Usuario, ls_Company
+Integer			li_SendReturn
+RestClient 		lrc_WS
+JsonPackage	ljp_Token
+
+_API-KEY		=	"Bearer  64885e3f922bbd2308688e104a551d7b2edbd292"
+_HEADERS	=	"Content-Type: application/json; charset=utf-8"
+_URL			=	"https://rioblanco-prueba-24704896.dev.odoo.com/bl_stock_picking_api/caf/next"
+_AUTH		=	"Authorization: Bearer 2ba721a479b2cebeef2a745839fa95a5ba70123e"
+
+ls_Usuario	= 'packing'
+ls_Company	= 'Comercial Rio Blanco Spa'
+
+lrc_WS = Create RestClient 
+ljp_Token	=	Create JsonPackage
+lrc_WS.SetRequestHeaders(_HEADERS)
+lrc_WS.SetRequestHeaders(_AUTH)
+
+ls_PostData = '{ "username" : "' + ls_Usuario + '",  "company" : "' + ls_Company + '"}'
+
+li_SendReturn = lrc_WS.SendPostRequest(_URL, ls_PostData, ls_Responsebody)
+
+If li_SendReturn <> 1 Or lrc_WS.GetResponseStatusCode() <> 200 Then
+
+	ls_Retorno = '*'
+Else
+	 ljp_Token.LoadString(ls_Responsebody)
+	 ls_Retorno = ljp_Token.GetValue("folio")
+End If
+
+If IsValid(lrc_WS) Then Destroy lrc_WS
+
+Return ls_Retorno
 end function
 
 on uo_guiadespacho.create

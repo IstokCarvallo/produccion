@@ -211,18 +211,20 @@ If dw_4.DataObject = "dw_mues_lotesfrutacomdeta_proceso" Then
 		ls_mensaje 		= ls_mensaje + "~nCalidad Envase"
 		ls_colu[li_cont]	= "cale_calida"
 	End If
-Else
+Else	
 	If IsNull(dw_4.GetItemNumber(il_fila, "prbr_codpre")) OR dw_4.GetItemNumber(il_fila, "prbr_codpre") = 0 Then
 		li_cont ++
 		ls_mensaje 		= ls_mensaje + "~nCodigo de Predio"
 		ls_colu[li_cont]	= "prbr_codpre"
 	End If
 	
-	If IsNull(dw_4.GetItemNumber(il_fila, "prcc_codigo")) OR dw_4.GetItemNumber(il_fila, "prcc_codigo") = 0 Then
-		li_cont ++
-		ls_mensaje 		= ls_mensaje + "~nCodigo de Cuartel"
-		ls_colu[li_cont]	= "prcc_codigo"
-	End If	
+	If dw_4.DataObject <> "dw_mues_lotesfrutacomdeta_proceso_bp" Then
+		If IsNull(dw_4.GetItemNumber(il_fila, "prcc_codigo")) OR dw_4.GetItemNumber(il_fila, "prcc_codigo") = 0 Then
+			li_cont ++
+			ls_mensaje 		= ls_mensaje + "~nCodigo de Cuartel"
+			ls_colu[li_cont]	= "prcc_codigo"
+		End If	
+	End If
 End If
 
 If li_cont > 0 Then

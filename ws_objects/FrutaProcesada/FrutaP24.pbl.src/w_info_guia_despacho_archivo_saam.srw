@@ -3581,7 +3581,11 @@ string text = "ODOO GUIA"
 end type
 
 event clicked;
-iuo_Guia.of_CargaGuia(uo_SelPlanta.Codigo, uo_SelCliente.Codigo, Long(em_nroguia.Text), 0, 0, 0, 0, 0, 0, 0, 1, iuo_Despacho.Despacho)
+String	ls_NroGrua
+
+//iuo_Guia.of_CargaGuia(uo_SelPlanta.Codigo, uo_SelCliente.Codigo, Long(em_nroguia.Text), 0, 0, 0, 0, 0, 0, 0, 1, iuo_Despacho.Despacho)
+
+ls_NroGrua	=	iuo_Guia.of_ObtieneNroGuia()
 
 end event
 

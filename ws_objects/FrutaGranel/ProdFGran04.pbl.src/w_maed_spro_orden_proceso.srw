@@ -1515,15 +1515,16 @@ ldt_FechaProc	=	Date(Mid(istr_Mant.Argumento[4], 1, 10))
 fila = vinf.dw_1.Retrieve(Integer(istr_Mant.Argumento[1]), Integer(istr_Mant.Argumento[2]), &
 								  Long(istr_Mant.Argumento[3]),ldt_FechaProc,Integer(istr_Mant.Argumento[13]),ii_TipoOrd)
 
-IF fila = -1 Then
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ElseIF fila = 0 Then
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
 Else
 	F_Membrete(vinf.dw_1)
-	IF gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-End IF
+	vinf.dw_1.Object.DataWindow.Zoom = 96
+	
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event

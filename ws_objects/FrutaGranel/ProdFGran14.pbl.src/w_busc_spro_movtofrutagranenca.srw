@@ -112,6 +112,7 @@ IF istr_Busq.Argum[2] <> "" THEN
 		Tab_1.TabPage_1.ddlb_estado.AddItem('Transitoria')
 		Tab_1.TabPage_1.ddlb_estado.AddItem('Definitiva')
 	END IF
+	
 	Tab_1.TabPage_1.dw_4.SetItem(1, "tpmv_codigo", Integer(istr_Busq.Argum[2]))
 	Tab_1.TabPage_1.dw_4.Enabled	=	False
 END IF

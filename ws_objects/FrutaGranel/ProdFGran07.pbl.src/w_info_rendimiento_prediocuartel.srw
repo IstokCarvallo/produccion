@@ -170,7 +170,7 @@ istr_info.copias	= 1
 
 OpenWithParm(vinf, istr_info)
 
-ls_texto		=	'Desde ' + em_fecini.Text + ' Hasta ' + em_fecter.Text
+ls_texto	=	'Desde ' + em_fecini.Text + ' Hasta ' + em_fecter.Text
 ld_fecini	=	Date(em_fecini.Text)
 ld_fecter	=	Date(em_fecter.Text)
 
