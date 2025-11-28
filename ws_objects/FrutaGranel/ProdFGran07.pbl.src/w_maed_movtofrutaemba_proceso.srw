@@ -55,6 +55,7 @@ uo_camarasfrigo					iuo_camara
 uo_fechaMovto						iuo_FechaMovto
 uo_AnalizaPallet					iuo_pallet
 uo_valida_codigopallet			iuo_copa
+uo_ProdPredio						iuo_Predio
 
 Integer							ii_envacodigo, ii_envatipoen, ii_categoria
 String								is_ultimacol, is_embalaje, is_embacodigo, is_nomcuartel
@@ -80,15 +81,15 @@ public subroutine habilitaencab (boolean habilita)
 public subroutine buscaordenproceso ()
 public function boolean existepallet (integer ai_tipodocrel, long al_doctorel)
 public subroutine borradetalles ()
-public subroutine buscaembalaje ()
 public function boolean noexistecliente (integer cliente)
 public function boolean existemovimiento (long al_numero, integer ai_cliente)
 public function integer buscaexportador ()
 public function boolean cargaembalaje (string as_embacodigo)
-public subroutine buscacuartel ()
-public function boolean existepredio (integer al_productor, integer ai_predio)
 public function boolean existecuartel (long al_productor, integer ai_predio, integer ai_cuartel)
 public function string cargacodigo (integer ai_cliente, long al_planta, long al_pallet, integer ai_procedencia)
+public subroutine wf_buscacuartel ()
+public subroutine wf_buscaembalaje ()
+public subroutine wf_buscapredio (long productor)
 end prototypes
 
 event ue_recuperapallet();Long		ll_fila_d, ll_fila_e, respuesta
@@ -118,7 +119,7 @@ DO
 		idwc_predio.SetTransObject(SqlCa)
 		idwc_predio.Retrieve(dw_2.Object.prod_codigo[1])
 		
-		istr_Mant.Argumento[9]	=	String(dw_3.Object.enva_tipoen[1])
+		istr_Mant.Argumento[9]		=	String(dw_3.Object.enva_tipoen[1])
 		istr_Mant.Argumento[10]	=	String(dw_3.Object.enva_codigo[1])
 
 		DO
@@ -137,8 +138,7 @@ DO
 				
 				ls_embalaje	=	dw_4.Object.emba_codigo[1]
 				idwc_tipopallet.Retrieve(Integer(istr_Mant.Argumento[1]),ls_embalaje)
-				iuo_tipopallet.Existe_PorEmbalaje(Integer(istr_Mant.Argumento[1]),&
-									ls_embalaje, dw_3.Object.tpen_codigo[1],True, Sqlca)
+				iuo_tipopallet.Existe_PorEmbalaje(Integer(istr_Mant.Argumento[1]), ls_embalaje, dw_3.Object.tpen_codigo[1],True, Sqlca)
 									
 				dw_4.Enabled			=	lb_Habilita
 				pb_eliminar.Enabled	=	lb_Habilita	
@@ -154,8 +154,8 @@ DO
 				pb_ventanas.ii_cliente		=	dw_3.Object.clie_codigo[1]
 				pb_ventanas.ii_especie		=	dw_3.Object.espe_codigo[1]
 				pb_ventanas.ii_cajas			=	dw_3.Object.paen_ccajas[1]
-				pb_ventanas.il_planta		=	dw_3.Object.plde_codigo[1]
-				pb_ventanas.il_pallet		=	dw_3.Object.paen_numero[1]
+				pb_ventanas.il_planta			=	dw_3.Object.plde_codigo[1]
+				pb_ventanas.il_pallet			=	dw_3.Object.paen_numero[1]
 				pb_ventanas.ii_procedencia	=	1//Granel
 				pb_ventanas.ii_operacion	=	1//Impresion
 				pb_ventanas.ii_sistema		=	1//Granel	
@@ -634,7 +634,7 @@ IF lstr_Busq.Argum[2] <> "" THEN
 END IF
 end subroutine
 
-public subroutine habilitaencab (boolean habilita);IF Habilita THEN
+public subroutine habilitaencab (boolean habilita);If Habilita Then
 	dw_2.Object.clie_codigo.Protect	=	0
 	dw_2.Object.mfee_numero.Protect	=	0
 	dw_2.Object.mfee_fecmov.Protect	=	0
@@ -643,8 +643,6 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 	dw_3.Object.clie_codigo.Protect	=	0
 	dw_3.Object.vari_codigo.Protect	=	0
 	dw_3.Object.paen_tipopa.Protect	=	0
-	dw_3.Object.enva_tipoen.Protect	=	0
-	dw_3.Object.enva_codigo.Protect	=	0
 	dw_3.Object.tpen_codigo.Protect	=	0
 	dw_3.Object.cate_codigo.Protect	=	0
 	dw_3.Object.etiq_codigo.Protect	=	0
@@ -657,8 +655,6 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 	dw_3.Object.clie_codigo.Color 		= 0
 	dw_3.Object.vari_codigo.Color 		= 0
 	dw_3.Object.paen_tipopa.Color 	= 0
-	dw_3.Object.enva_tipoen.Color 	= 0
-	dw_3.Object.enva_codigo.Color 	= 0
 	dw_3.Object.cate_codigo.Color 	= 0
 	dw_3.Object.etiq_codigo.Color 		= 0
 	dw_3.Object.tpen_codigo.Color 	= 0
@@ -671,8 +667,6 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 	dw_3.Object.clie_codigo.BackGround.Color = RGB(255,255,255)
 	dw_3.Object.vari_codigo.BackGround.Color = RGB(255,255,255)
 	dw_3.Object.paen_tipopa.BackGround.Color = RGB(255,255,255)
-	dw_3.Object.enva_tipoen.BackGround.Color = RGB(255,255,255)
-	dw_3.Object.enva_codigo.BackGround.Color = RGB(255,255,255)
 	dw_3.Object.cate_codigo.BackGround.Color = RGB(255,255,255)
 	dw_3.Object.etiq_codigo.BackGround.Color = RGB(255,255,255)
 	dw_3.Object.tpen_codigo.BackGround.Color = RGB(255,255,255)
@@ -682,7 +676,7 @@ public subroutine habilitaencab (boolean habilita);IF Habilita THEN
 	
 	dw_2.SetColumn("clie_codigo")
 	dw_2.SetFocus()
-ELSE
+Else
 	dw_2.Object.clie_codigo.Protect	=	1
 	dw_2.Object.mfee_numero.Protect=	1
 	dw_2.Object.mfee_fecmov.Protect	=	1
@@ -702,7 +696,7 @@ ELSE
 	dw_2.Object.mfee_docrel.BackGround.Color 	= 553648127
 	
 	dw_2.Object.b_ordenproceso.visible = 0
-END IF
+End If
 end subroutine
 
 public subroutine buscaordenproceso ();Str_Busqueda	lstr_Busq
@@ -885,42 +879,6 @@ END IF
 
 end subroutine
 
-public subroutine buscaembalaje ();Str_Busqueda	lstr_Busq
-
-lstr_Busq.Argum[1]	=	""//istr_Mant.Argumento[9]
-lstr_Busq.Argum[2]	=	""//istr_Mant.Argumento[10]
-
-OpenWithParm(w_busc_envase_embalajes, lstr_Busq)
-
-lstr_Busq	= Message.PowerObjectParm
-
-IF il_fila < 1 then 
-	IF lstr_Busq.Argum[1] <> "" THEN
-		dw_3.Object.emba_codigo[dw_3.GetRow()] = lstr_Busq.argum[1]
-		
-		dw_3.SetColumn("vari_codigo")
-		dw_3.SetFocus()
-	ELSE
-		
-		dw_3.SetColumn("emba_codigo")
-		dw_3.SetFocus()
-		
-	END IF
-ELSE
-	
-	IF lstr_Busq.Argum[1] <> "" THEN
-		dw_4.SetItem(il_Fila, "emba_codigo", lstr_Busq.Argum[1])
-	
-		dw_4.SetColumn("cate_codigo")
-		dw_4.SetFocus()
-	ELSE
-		dw_4.SetColumn("emba_codigo")
-		dw_4.SetFocus()
-	END IF
-	
-END IF
-end subroutine
-
 public function boolean noexistecliente (integer cliente);String ls_nombre
 
 SELECT 	clie_nombre
@@ -1011,45 +969,6 @@ ii_envatipoen = li_envatipoen
 Return True
 end function
 
-public subroutine buscacuartel ();Str_Busqueda	lstr_Busq
-
-lstr_Busq.Argum[1]	=	String(dw_2.Object.prod_codigo[1])
-lstr_Busq.Argum[2]	=	istr_Mant.Argumento[20]
-
-OpenWithParm(w_busc_cuartel, lstr_Busq)
-
-lstr_Busq	= Message.PowerObjectParm
-
-IF lstr_Busq.Argum[1] <> "" THEN
-	dw_4.Object.pafr_cuart1[il_Fila] = integer(lstr_Busq.argum[1])
-	dw_4.Object.prcc_nombre[il_Fila] = lstr_Busq.argum[2]
-END IF
-end subroutine
-
-public function boolean existepredio (integer al_productor, integer ai_predio);Integer	li_Cantidad, li_cliente, li_Planta
-Long		ll_NumeroPallet
-
-
-SELECT	prpr_codigo
-	INTO	:ll_NumeroPallet
-	FROM	dbo.spro_prodpredio
-	WHERE	prod_codigo	=	:al_productor
-	AND	prpr_codigo	=	:ai_predio;
-
-IF SqlCa.SQLCode = -1 THEN
-	F_ErrorBaseDatos(SqlCa, "Lectura de Tabla spro_prodpredio")
-
-	RETURN True
-ELSEIF ll_NumeroPallet > 0 THEN
-	
-	RETURN False
-ELSE	
-	RETURN True
-END IF
-
-RETURN False
-end function
-
 public function boolean existecuartel (long al_productor, integer ai_predio, integer ai_cuartel);
 
 SELECT	prcc_nombre
@@ -1097,6 +1016,69 @@ CLOSE Codigo;
 RETURN ls_respuesta 
 
 end function
+
+public subroutine wf_buscacuartel ();Str_Busqueda	lstr_Busq
+
+lstr_Busq.Argum[1]	=	String(dw_2.Object.prod_codigo[1])
+lstr_Busq.Argum[2]	=	istr_Mant.Argumento[20]
+
+OpenWithParm(w_busc_cuartel, lstr_Busq)
+
+lstr_Busq	= Message.PowerObjectParm
+
+IF lstr_Busq.Argum[1] <> "" THEN
+	dw_4.Object.pafr_cuart1[il_Fila] = integer(lstr_Busq.argum[1])
+	dw_4.Object.prcc_nombre[il_Fila] = lstr_Busq.argum[2]
+END IF
+end subroutine
+
+public subroutine wf_buscaembalaje ();Str_Busqueda	lstr_Busq
+
+lstr_Busq.Argum[1]	=	""//istr_Mant.Argumento[9]
+lstr_Busq.Argum[2]	=	""//istr_Mant.Argumento[10]
+
+OpenWithParm(w_busc_envase_embalajes, lstr_Busq)
+
+lstr_Busq	= Message.PowerObjectParm
+
+If il_fila < 1 Then 
+	If lstr_Busq.Argum[1] <> "" Then
+		dw_3.Object.emba_codigo[dw_3.GetRow()] = lstr_Busq.argum[1]
+		
+		dw_3.SetColumn("vari_codigo")
+		dw_3.SetFocus()
+	Else		
+		dw_3.SetColumn("emba_codigo")
+		dw_3.SetFocus()
+	End If
+Else	
+	If lstr_Busq.Argum[1] <> "" Then
+		dw_4.SetItem(il_Fila, "emba_codigo", lstr_Busq.Argum[1])
+	
+		dw_4.SetColumn("cate_codigo")
+		dw_4.SetFocus()
+	Else
+		dw_4.SetColumn("emba_codigo")
+		dw_4.SetFocus()
+	End If	
+End If
+end subroutine
+
+public subroutine wf_buscapredio (long productor);Str_Busqueda	lstr_Busq
+
+lstr_Busq.Argum[2]	=	String(Productor)
+
+OpenWithParm(w_busc_prodpredio, lstr_Busq)
+
+lstr_Busq	= Message.PowerObjectParm
+
+If lstr_Busq.Argum[1] <> "" Then
+	dw_4.Object.pafr_huert1[il_Fila] = Integer(lstr_Busq.argum[1])
+	dw_4.Object.prpr_nombre[il_Fila] = lstr_Busq.argum[3]	
+	dw_4.Object.prbr_codpre[il_Fila] = Integer(lstr_Busq.argum[1])
+	dw_4.Object.pafr_ggncod[il_Fila] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Integer(lstr_Busq.argum[1]), dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1], True)
+End If
+end subroutine
 
 on w_maed_movtofrutaemba_proceso.create
 int iCurrent
@@ -1155,6 +1137,7 @@ iuo_camara							=	Create uo_camarasfrigo
 iuo_FechaMovto					=  Create uo_fechaMovto	
 iuo_pallet							=	Create uo_AnalizaPallet	
 iuo_copa								=	Create uo_valida_codigopallet
+iuo_Predio							=	Create uo_ProdPredio
 
 This.Height	= 2550
 im_menu		= m_principal
@@ -1687,9 +1670,7 @@ luo_variedad	=	Create uo_variedades
 FOR ll_Fila = 1 TO dw_4.RowCount()
 	dw_4.Object.pafr_calibr[ll_Fila]	=	dw_4.Object.pafr_calibr[ll_Fila]//Mid(dw_4.Object.pafr_calibr[ll_Fila] + "   ", 1, 3)
 	If dw_4.GetItemStatus(ll_Fila, 0, Primary!) = NewModIfied! Then
-		
-//		luo_variedad.Existe(dw_2.Object.espe_codigo[1], dw_3.Object.vari_codigo[1], False, sqlca)
-		
+//		luo_variedad.Existe(dw_2.Object.espe_codigo[1], dw_3.Object.vari_codigo[1], False, sqlca)		
 		dw_4.Object.clie_codigo[ll_Fila]		=	dw_3.Object.clie_codigo[1]
 		dw_4.Object.plde_codigo[ll_Fila]		=	dw_3.Object.plde_codigo[1]
 		dw_4.Object.paen_numero[ll_Fila]	=	dw_3.Object.paen_numero[1]
@@ -1699,8 +1680,7 @@ FOR ll_Fila = 1 TO dw_4.RowCount()
 		dw_4.Object.espe_codigo[ll_Fila]		=	dw_3.Object.espe_codigo[1]
 		dw_4.Object.vari_codigo[ll_Fila]		=	dw_2.Object.vari_codigo[1]
 		dw_4.Object.pafr_varrot[ll_Fila]		=	dw_4.Object.vari_codrot[ll_Fila]
-		dw_4.Object.etiq_codigo[ll_Fila]		=	dw_3.Object.etiq_codigo[1]
-		dw_4.Object.prod_codrot[ll_Fila]		=	dw_3.Object.prod_codrot[1]
+		dw_4.Object.etiq_codigo[ll_Fila]		=	dw_3.Object.etiq_codigo[1]		
 		dw_4.Object.prod_codigo[ll_Fila]		=	dw_2.Object.prod_codigo[1]
 		dw_4.Object.plde_origen[ll_Fila]		=	dw_3.Object.plde_codigo[1]
 		dw_4.Object.pafr_tipdoc[ll_Fila]		=	dw_2.Object.mfee_tipdoc[1]
@@ -1712,14 +1692,20 @@ FOR ll_Fila = 1 TO dw_4.RowCount()
 		dw_4.Object.pafr_catrot[ll_Fila]		=	dw_3.Object.cate_codigo[1]
 		dw_4.Object.pafr_copack[ll_Fila] 		=	gi_Packing
 		
+		If dw_3.Object.rotulado[1] = 1 Then
+			dw_4.Object.prod_codrot[ll_Fila]		=	dw_3.Object.prod_codrot[1]
+		Else
+			dw_4.Object.prod_codrot[ll_Fila]		=	dw_2.Object.prod_codigo[1]
+		End IF
+		
 		li_Secuencia ++
-		lb_detalle = TRUE		
+		lb_detalle = True
 		
 	End If
 	li_totcaj									=	li_totcaj + dw_4.Object.pafr_ccajas[ll_Fila]
 	dw_3.Object.paen_ccajas[1]		=	li_totcaj
 	FueraDeNorma(ll_Fila)
-NEXT
+Next
 
 If lb_detalle Then
 	ll_FilaMov	=	dw_1.Find("clie_codigo = " + String(dw_3.Object.clie_codigo[1]) + &
@@ -2447,13 +2433,16 @@ Choose Case ls_Columna
 		End If
 				
 	Case "pafr_huert1"
-		If existepredio(dw_2.Object.prod_codigo[1],Integer(data)) Then
+		If Not iuo_Predio.Existe(Integer(data), dw_2.Object.prod_codigo[1], True, SQLCA) Then
 			MessageBox("Atención","El predio ingesado no existe.")
 			This.SetItem(row, ls_Columna, Integer(ls_Nula))
+			This.Object.prpr_nombre[Row] = ls_Nula
+			This.Object.pafr_ggncod[Row] = ls_Nula
 			Return 1
 		Else
 			This.Object.prbr_codpre[Row] = Integer(Data)
-			This.Object.pafr_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1], Integer(Data), dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1], True)
+			This.Object.prpr_nombre[Row] = iuo_Predio.Nombre
+			This.Object.pafr_ggncod[Row] = f_AsignaGGN(dw_2.Object.prod_codigo[1],  iuo_Predio.Codigo, dw_2.Object.espe_codigo[1], dw_3.Object.paen_feccon[1], True)
 		End If		
 	
 	Case "pafr_cuart1"
@@ -2479,26 +2468,29 @@ end event
 event buttonclicked;call super::buttonclicked;Choose Case dwo.name
 		
 	Case "b_embalaje"
-		If isnull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
+		If IsNull(dw_4.Object.pafr_docrel[row]) OR (dw_4.Object.pafr_docrel[row] = dw_2.Object.mfee_docrel[1] AND &
 		    dw_4.Object.pafr_tipdoc[row] = dw_2.Object.mfee_tipdoc[1])Then
-			BuscaEmbalaje()
+			wf_BuscaEmbalaje()
 		Else
 			MessageBox("Atención","El registro pertenece a otra Orden de Proceso. Imposible ModIficar.")
 		End If	
 		
 	Case "b_cuartel"
-		If NOT isnull(dw_2.Object.prod_codigo[1]) OR NOT isnull(dw_4.Object.pafr_huert1[row]) Then
+		If Not IsNull(dw_2.Object.prod_codigo[1]) OR NOT IsNull(dw_4.Object.pafr_huert1[row]) Then
 			istr_Mant.Argumento[20] = String(dw_4.Object.pafr_huert1[row])
-			buscacuartel()
+			wf_BuscaCuartel()
 		End If	
+		
+	Case "b_predio"
+		If Not IsNull(dw_2.Object.prod_codigo[1]) Then wf_BuscaPredio(dw_2.Object.prod_codigo[1])
 
 End Choose
 end event
 
 type dw_3 from uo_dw within w_maed_movtofrutaemba_proceso
-integer x = 745
+integer x = 754
 integer y = 476
-integer width = 3095
+integer width = 3072
 integer height = 636
 integer taborder = 20
 boolean bringtotop = true
@@ -2770,7 +2762,7 @@ Choose Case dwo.name
      	Else
 			ll_fila = il_fila
 			il_fila = 0	
-			BuscaEmbalaje()
+			wf_BuscaEmbalaje()
 			il_fila = ll_fila
 		End If
 		

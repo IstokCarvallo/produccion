@@ -1184,7 +1184,7 @@ end function
 
 private function boolean of_generaguia_fruticolagde (long planta, long cliente, long movimiento, integer tipo);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut, ls_Mosca = '', ls_GGN = ''
+String		ls_Referencia, ls_Rut, ls_Mosca = '', ls_GGN = '', ls_System = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -1254,6 +1254,8 @@ Else
 	
 	If Planta <> 4014 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA'
 	If Planta = 3006 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA REGLAMENTADA POR MMe'
+	If Planta = 4008 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por mosca de la fruta '
+	If Planta = 4013 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
 	
 	If ids_Source_GDE.Object.ggn[1] = '' Or IsNull(ids_Source_GDE.Object.ggn[1]) Then
 		ls_GGN = ''
@@ -1261,10 +1263,13 @@ Else
 		ls_GGN = ' \ FRUTA CERTIFICADA GLOBALG.A.P. GGN ' + ids_Source_GDE.Object.ggn[1]
 	End If
 	
+	// ls_System = ' \ FRUTA CERTIFICADA SYSTEMS APPROACH'
+	ls_System = 'Fruta a proceso de selección y embalaje a cuenta de Exportadora RIOblanco SpA'
+	
 	of_InsertaRegistro('Monto Exento', '')
 	of_InsertaRegistro('Tasa Iva', '19')
 	of_InsertaRegistro('xMontoEscrito', '')
-	of_InsertaRegistro('xObservaciones', Mid(Trim(ids_Source_GDE.Object.defe_glosa[1]) + ' \ FRUTA CERTIFICADA SYSTEMS APPROACH', 1, 120))
+	of_InsertaRegistro('xObservaciones', Mid(Trim(ids_Source_GDE.Object.defe_glosa[1]) + ls_System, 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid(ids_Source_GDE.Object.defe_glosas[1] + ls_Mosca, 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ls_GGN + &
 											'\ CSG:' + ids_Source_GDE.Object.CSG[1], 1, 120))

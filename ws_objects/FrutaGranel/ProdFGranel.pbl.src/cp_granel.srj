@@ -393,11 +393,11 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_certificaciones,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_seleccion_tarjas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_pallets_trasvasije,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_mant_cajasprod_imprime_elimina,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,w_busc_prodpredio,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dw_busq_mues_doctoprocesopack,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,w_info_adhesivos_embalaje,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran08.pbl,dw_selecciona_lado,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,w_busc_prodpredio,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran05.pbl,dw_cierrelineadtencion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran10.pbl,w_mant_variedadrotulada,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dw_control_embalajes,d
@@ -891,9 +891,9 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_spro_ubicadocto
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_plantadesp_plantas,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_salidalineapacking,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_lotescorrel,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,dw_busc_prodpredio,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,w_busc_spro_concalprecos,w
 OBJ:C:\Desarrollo 22\Productiva\CajasProd\CajasProdFto.pbl,dw_info_spro_cajasprod_gtin14_nvofto_wm,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,dw_busc_prodpredio,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran05.pbl,dw_mant_mues_cierre_turno,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran05.pbl,dw_mues_spro_detencionlineahora,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_info_errorcategoriagraf,w

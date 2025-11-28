@@ -45,19 +45,16 @@ end type
 global w_maed_muevecajas w_maed_muevecajas
 
 type variables
-w_mant_deta_recfruprocee iw_mantencion
-
-Boolean		ib_existe_folio, ib_primera_entrada
+Boolean	ib_existe_folio, ib_primera_entrada
 
 end variables
 
 forward prototypes
 protected function boolean wf_actualiza_db (boolean borrando)
-public function boolean existefolio (string as_columna, string as_valor)
-public function long buscanuevofolio (integer cliente, integer planta)
 public subroutine borra_tablas (integer ai_borra)
 public subroutine borra_historico (integer ai_dato)
-public subroutine actualiza_estado ()
+public subroutine wf_actualiza_estado ()
+public function boolean wf_actualiza ()
 end prototypes
 
 event ue_validapassword();Str_mant		lstr_mant
@@ -82,146 +79,65 @@ ldt_FechaHora		=	F_FechaHora()
 dw_1.GrupoFecha	=	ldt_FechaHora
 dw_2.GrupoFecha	=	ldt_FechaHora
 
-IF Not dw_2.uf_check_required(0) THEN RETURN False
-
-IF Not dw_1.uf_validate(0) THEN RETURN False
+If Not dw_2.uf_check_required(0) Then Return False
+If Not dw_1.uf_validate(0) Then Return False
 
 lb_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
 
-IF Borrando THEN
-	IF dw_1.Update(True, False) = 1 THEN
-		IF dw_2.Update(True, False) = 1 THEN
+If Borrando Then
+	If dw_1.Update(True, False) = 1 Then
+		If dw_2.Update(True, False) = 1 Then
 			Commit;
 			
-			IF sqlca.SQLCode <> 0 THEN
+			If sqlca.SQLCode <> 0 Then
 				F_ErrorBaseDatos(sqlca, This.Title)
 				
 				RollBack;
-			ELSE
+			Else
 				lb_Retorno	=	True
 				
 				dw_1.ResetUpdate()
 				dw_2.ResetUpdate()
-			END IF
-		ELSE
+			End If
+		Else
 			F_ErrorBaseDatos(sqlca, This.Title)
 			
 			RollBack;
-		END IF
-	ELSE
+		End If
+	Else
 		F_ErrorBaseDatos(sqlca, This.Title)
-	END IF
-ELSE
-	IF dw_2.Update(True, False) = 1 THEN
-		IF dw_1.Update(True, False) = 1 THEN
+	End If
+Else
+	If dw_2.Update(True, False) = 1 Then
+		If dw_1.Update(True, False) = 1 Then
 			Commit;
 			
-			IF sqlca.SQLCode <> 0 THEN
+			If sqlca.SQLCode <> 0 Then
 				F_ErrorBaseDatos(sqlca, This.Title)
 				
 				RollBack;
-			ELSE
+			Else
 				lb_Retorno	=	True
 				
 				dw_1.ResetUpdate()
 				dw_2.ResetUpdate()
 				
-				actualiza_estado()
-			END IF
-		ELSE
+				wf_Actualiza_Estado()
+			End If
+		Else
 			F_ErrorBaseDatos(sqlca, This.Title)
 			
 			RollBack;
-		END IF
-	ELSE
+		End If
+	Else
 		F_ErrorBaseDatos(sqlca, This.Title)
-	END IF
-END IF
+	End If
+End If
 
 sqlca.AutoCommit	=	lb_AutoCommit
 
-RETURN lb_Retorno
-end function
-
-public function boolean existefolio (string as_columna, string as_valor);Integer	li_planta, li_existe,li_cliente, li_tipoen
-Long		ll_nfolio
-
-li_planta	=	dw_2.Object.plde_codigo[1]
-ll_nfolio 	=	dw_2.Object.altu_numero[1]
-li_cliente	=  dw_2.Object.clie_codigo[1]
-
-CHOOSE CASE as_columna
-	CASE "plde_codigo"
-		li_planta	=	Integer(as_valor)
-		
-	CASE "altu_numero"
-		ll_nfolio 	=	Long(as_valor)
-		
-	CASE "clie_codigo"
-		li_cliente 	=	Integer(as_valor)	
-		
-END CHOOSE
-
-SELECT  	plde_codigo
-	INTO	:li_tipoen
-	FROM	dbo.alpalletencab
-	WHERE	plde_codigo	=	:li_planta
-	AND	altu_numero	=	:ll_nfolio
-	AND   clie_codigo =  :li_cliente ;
-				
-IF sqlca.SQLCode = -1 THEN
-	F_errorbasedatos(sqlca,"Lectura tabla Alpalletencab")
-	RETURN False
-ELSEIF sqlca.SQLCode = 0 THEN
-	    istr_mant.argumento[1]	= String(li_planta)
-	    istr_mant.argumento[2]	= String(ll_nfolio)
-       istr_mant.argumento[3]	= String(li_cliente) 
-	
-	    dw_2.SetItem(1, "clie_codigo",li_cliente)
-	    dw_2.SetItem(1, "plde_codigo",li_planta)
-	    This.TriggerEvent("ue_recuperadatos")
-		 ib_existe_folio	=	True
-	    RETURN False
-	ELSE
-	    IF IsNull(ll_nfolio) THEN
-   		 	istr_mant.argumento[1]	= String(li_planta)
-		    	istr_mant.argumento[2]	= String(ll_nfolio)
-		    	istr_mant.argumento[3]	= String(li_cliente)
-			ib_existe_folio	=	False
-		    RETURN False
-	    ELSE
-		    MessageBox("Atención","Número de Movimiento No ha sido generado. Ingrese Otro.")
- 			 ib_existe_folio	=	False
-		    RETURN True
-	    END IF
-    END IF
-
-end function
-
-public function long buscanuevofolio (integer cliente, integer planta);Integer	li_planta, li_cliente
-Long		ll_numero
-
-li_cliente	=	cliente	
-li_planta	=	planta
-
-SELECT max(altu_numero) INTO:ll_numero
-FROM dbo.Alpalletencab
-WHERE	clie_codigo = :li_cliente
-AND	plde_codigo = :li_planta
-AND	altu_numero < 99999999 ;
-
-IF sqlca.SQLCode = -1 THEN
-	F_errorbasedatos(sqlca,"Lectura tabla Alpalletencab")
-ELSEIF IsNull(ll_numero) THEN
-	ll_numero=1
-ELSEIF ll_numero=0 THEN
-	ll_numero=1
-ELSE
-	ll_numero++		
-END IF
-
-RETURN ll_numero
+Return lb_Retorno
 end function
 
 public subroutine borra_tablas (integer ai_borra);
@@ -230,20 +146,19 @@ end subroutine
 public subroutine borra_historico (integer ai_dato);
 end subroutine
 
-public subroutine actualiza_estado ();Long		ll_numero, ll_fila, ll_numero2, ll_cajas
+public subroutine wf_actualiza_estado ();Long		ll_numero, ll_fila, ll_numero2, ll_cajas
 Boolean	lb_actualiza = False
 
 ll_numero	=	Long(em_desde.Text)
 ll_numero2	=	Long(em_hasta.Text)
 
 FOR ll_fila = 1 TO dw_1.RowCount()
-	IF dw_1.Object.pafr_ccajas[ll_fila] > 0 THEN
+	If dw_1.Object.pafr_ccajas[ll_fila] > 0 Then
 		lb_actualiza = True
-	END IF	
+	End If	
 NEXT
 
-IF lb_actualiza = True THEN
-	
+If lb_actualiza = True Then	
 	SELECT sum(pafr_ccajas)
 	INTO :ll_cajas
 	FROM dbo.palletfruta
@@ -251,16 +166,14 @@ IF lb_actualiza = True THEN
 	AND	clie_codigo = :uo_SelCliente.Codigo
 	AND	plde_codigo = :uo_SelPlantas.Codigo;
 	
-	UPDATE dbo.palletencab SET
-	paen_estado = 1,
-	paen_ccajas = :ll_cajas
+	UPDATE dbo.palletencab 
+		SET	paen_estado = 1,
+				paen_ccajas = :ll_cajas
 	WHERE paen_numero = :ll_numero
 	AND	clie_codigo = :uo_SelCliente.Codigo
 	AND	plde_codigo = :uo_SelPlantas.Codigo;
 	
-	IF sqlca.SQLCode = -1 THEN
-		F_errorbasedatos(sqlca,"Lectura tabla Palletencab Origen")
-	END IF
+	If sqlca.SQLCode = -1 Then F_errorbasedatos(sqlca,"Lectura tabla Palletencab Origen")
 	
 	ll_cajas = 0
 	
@@ -271,22 +184,62 @@ IF lb_actualiza = True THEN
 	AND	clie_codigo = :uo_SelCliente.Codigo
 	AND	plde_codigo = :uo_SelPlantas.Codigo;
 	
-	UPDATE dbo.palletencab SET
-	paen_estado = 1,
-	paen_ccajas = :ll_cajas
+	UPDATE dbo.palletencab 
+		SET	paen_estado = 1,
+				paen_ccajas = :ll_cajas
 	WHERE paen_numero = :ll_numero2
 	AND	clie_codigo = :uo_SelCliente.Codigo
 	AND	plde_codigo = :uo_SelPlantas.Codigo;
 	
-	IF sqlca.SQLCode = -1 THEN
-		F_errorbasedatos(sqlca,"Lectura tabla Palletencab Destino")
-	END IF
-END IF
+	If sqlca.SQLCode = -1 Then F_errorbasedatos(sqlca,"Lectura tabla Palletencab Destino")
+	
+End If
 
 lb_actualiza = False
 	
 
 end subroutine
+
+public function boolean wf_actualiza ();Boolean	lb_Retorno = True
+Long		ll_Folio1, ll_Folio2, ll_Caja, ll_Fila
+
+ll_Folio1	=	Long(em_desde.Text)
+ll_Folio2	=	Long(em_hasta.Text)
+
+For ll_Fila = 1 To dw_2.RowCount()
+	If dw_2.Object.Traspasa[ll_Fila] = 1 Then 
+		ll_Caja	= dw_2.Object.pafr_secuen[ll_Fila]
+
+		Update dbo.palletfruta
+			set pafr_ccajas = 0
+			where clie_codigo = :uo_SelCliente.Codigo
+			and plde_codigo = :uo_SelPlantas.Codigo
+			and paen_numero = :ll_Folio1
+			and pafr_secuen = :ll_Caja;
+			
+		If sqlca.SQLCode = -1 Then 
+			F_errorbasedatos(sqlca,"Lectura tabla Paletfruta Origen")
+			lb_Retorno = False
+		Else
+			Update dbo.palletfruta
+			set pafr_ccajas = 1
+			where clie_codigo = :uo_SelCliente.Codigo
+			and plde_codigo = :uo_SelPlantas.Codigo
+			and paen_numero = :ll_Folio2
+			and pafr_secuen = :ll_Caja;
+			
+			If sqlca.SQLCode = -1 Then 
+				F_Errorbasedatos(sqlca,"Lectura tabla Paletfruta Destino")
+				lb_Retorno = False
+			End If
+		End If
+	End If
+Next 
+
+If lb_Retorno Then wf_Actualiza_Estado()
+
+Return lb_Retorno
+end function
 
 event open;call super::open;Boolean lb_Cerrar
 
@@ -323,34 +276,35 @@ DO
 	
 	ll_fila_e	= dw_2.Retrieve(uo_SelCliente.Codigo, uo_SelPlantas.Codigo,ll_numero, ll_numero2)
 	ll_fila_d	= dw_1.Retrieve(uo_SelCliente.Codigo, uo_SelPlantas.Codigo,ll_numero2, ll_numero)
-	IF ll_fila_e = -1 THEN
+	
+	If ll_fila_e = -1 Then
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-	ELSE
+	Else
 		DO
-			IF ll_fila_d = -1 THEN
+			If ll_fila_d = -1 Then
 				respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-			ELSE                                                    
+			Else                                                    
 				pb_eliminar.Enabled	= True
-				pb_grabar.Enabled		= True
+				pb_grabar.Enabled	= True
 				pb_imprimir.Enabled	= True
 				pb_ins_det.Enabled	= True
 
-				IF ll_fila_d > 0 THEN
+				If ll_fila_d > 0 Then
 					pb_eli_det.Enabled	= True
 					dw_1.SetRow(1)
 					dw_1.SelectRow(1,True)
 					dw_1.SetFocus()
-   				ELSE
-				END IF
-			END IF
+   				Else
+				End If
+			End If
 		LOOP WHILE respuesta = 1
 
-		IF respuesta = 2 THEN Close(This)
-	END IF
+		If respuesta = 2 Then Close(This)
+	End If
 	dw_2.SetRedraw(True)
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN Close(This)
+If respuesta = 2 Then Close(This)
 end event
 
 on w_maed_muevecajas.create
@@ -419,7 +373,7 @@ dw_2.Height	=	dw_1.Height
 
 end event
 
-event ue_guardar;IF dw_1.AcceptText() = -1 THEN RETURN
+event ue_guardar;If dw_1.AcceptText() = -1 Then Return
 
 SetPointer(HourGlass!)
 
@@ -429,32 +383,22 @@ Message.DoubleParm = 0
 
 TriggerEvent("ue_antesguardar")
 
-IF Message.DoubleParm = -1 THEN RETURN
+If Message.DoubleParm = -1 Then Return
 
-IF wf_actualiza_db(False) THEN
+If wf_actualiza() Then
 	w_main.SetMicroHelp("Información Grabada.")
 	pb_eliminar.Enabled	= True
 	pb_imprimir.Enabled	= True
-ELSE
+Else
 	w_main.SetMicroHelp("No se puede Grabar información.")
 	Message.DoubleParm = -1
-	RETURN
-END IF
-pb_eliminar.Enabled	= 	TRUE
-pb_buscar.Enabled		=	TRUE
-pb_nuevo.Enabled		=	TRUE
+	Return
+End If
 
+pb_eliminar.Enabled	= 	True
+pb_buscar.Enabled	=	True
+pb_nuevo.Enabled		=	True
 
-end event
-
-event ue_antesguardar;call super::ue_antesguardar;Long	ll_fila
-
-FOR ll_fila = 1 TO dw_2.RowCount()
-	IF dw_2.Object.traspasa[ll_fila] = 1 THEN
-		dw_1.Object.pafr_ccajas[ll_fila] = 1 
-		dw_2.Object.pafr_ccajas[ll_fila] = 0 
-	END IF	
-NEXT	
 
 end event
 
@@ -470,9 +414,6 @@ boolean hscrollbar = false
 boolean livescroll = false
 end type
 
-event dw_1::dragdrop;call super::dragdrop;dw_1.Object.objetname.Moveable = 0 
-end event
-
 event dw_1::doubleclicked;//
 end event
 
@@ -486,24 +427,20 @@ string dataobject = "dw_mueve_cajaspalletfruta_origen"
 boolean vscrollbar = true
 end type
 
-event dw_2::itemchanged;call super::itemchanged;String	ls_columna, ls_nula
-Date		ld_nula
-DataWIndowChild	dw_calibres
-
-SetNull(ls_nula)
-SetNull(ld_nula)
-
-ls_columna = GetColumnName()
-
-CHOOSE CASE ls_columna
-	CASE "plde_codigo"
-		
-		
-END CHOOSE
-
+event dw_2::doubleclicked;//
 end event
 
-event dw_2::doubleclicked;//
+event dw_2::itemchanged;call super::itemchanged;String	ls_Columna
+
+ls_Columna = dwo.Name
+
+Choose Case ls_Columna
+	Case 'traspasa'
+		IF Integer(Data) = 1 Then
+			dw_1.Object.pafr_ccajas[Row] = 1 
+			dw_2.Object.pafr_ccajas[Row] = 0 
+		End If
+End Choose 
 end event
 
 type pb_nuevo from w_mant_encab_deta_csd`pb_nuevo within w_maed_muevecajas
@@ -525,12 +462,12 @@ integer x = 3392
 integer y = 612
 end type
 
-event pb_grabar::clicked;IF dw_2.RowCount() > 0 AND dw_1.RowCount() > 0 THEN
+event pb_grabar::clicked;If dw_2.RowCount() > 0 AND dw_1.RowCount() > 0 Then
 	Parent.TriggerEvent("ue_guardar")
-ELSE
+Else
 	MessageBox("Atención","No Existe Informacion para Mover Cajas.")
 	Return
-END IF	
+End If	
 
 
 end event
@@ -580,7 +517,7 @@ end event
 
 type st_6 from statictext within w_maed_muevecajas
 integer x = 87
-integer y = 56
+integer y = 64
 integer width = 306
 integer height = 64
 boolean bringtotop = true
@@ -598,7 +535,7 @@ end type
 
 type st_1 from statictext within w_maed_muevecajas
 integer x = 1728
-integer y = 56
+integer y = 64
 integer width = 306
 integer height = 64
 boolean bringtotop = true
@@ -748,8 +685,8 @@ end event
 type uo_selcliente from uo_seleccion_clientesprod within w_maed_muevecajas
 event destroy ( )
 integer x = 352
-integer y = 40
-integer height = 96
+integer y = 56
+integer height = 84
 integer taborder = 40
 boolean bringtotop = true
 end type
@@ -760,8 +697,8 @@ end on
 
 type uo_selplantas from uo_seleccion_plantas within w_maed_muevecajas
 integer x = 1989
-integer y = 40
-integer height = 96
+integer y = 56
+integer height = 84
 integer taborder = 40
 boolean bringtotop = true
 end type

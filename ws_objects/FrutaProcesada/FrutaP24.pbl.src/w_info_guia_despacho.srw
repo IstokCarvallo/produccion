@@ -261,8 +261,9 @@ end prototypes
 
 public function boolean existeguia (long al_guia);Integer	li_codexp, li_planta, li_Tipova, li_tipoembq, li_embc_codigo, li_tecnic, li_cansel, li_exportador
 Date		ld_fecha
-String	ls_Embarque, ls_puerto, ls_destino, ls_contraparte, ls_numsel, ls_ubisel
+String		ls_Embarque, ls_puerto, ls_destino, ls_contraparte, ls_numsel, ls_ubisel
 LOng		ll_fila, ll_fila1, ll_contpal, ll_cont
+
 li_codexp		=	Integer(istr_mant.argumento[1])
 li_planta		=	Integer(istr_mant.argumento[2])
 
@@ -270,8 +271,7 @@ is_Recibidor	= ''
 is_Direccion	= ''
 is_Rut			= ''
 
-IF al_guia <> 0 OR li_planta = 0 THEN
-
+If al_guia <> 0 OR li_planta = 0 Then
 	SELECT defe_tiposa,defe_numero,defe_especi
 		INTO	:li_tipoembq,:il_despacho,:ii_especie
 		FROM	dbo.DESPAFRIGOEN 
@@ -281,17 +281,16 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		
 		ii_tipoemb = li_tipoembq
 				
-	IF sqlca.SQLCode = -1 THEN
+	If sqlca.SQLCode = -1 Then
 		F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
 		em_nroguia.SetFocus()
-		RETURN False
-	ELSEIF sqlca.SQLCode = 100 THEN
-		MessageBox("Atención", "No existe Número Guia Despacho Indicado.~r~rIngrese otro Número.", &
-						Exclamation!, Ok!)
+		Return False
+	ElseIf sqlca.SQLCode = 100 Then
+		MessageBox("Atención", "No existe Número Guia Despacho Indicado.~r~rIngrese otro Número.", Exclamation!, Ok!)
 		pb_acepta.Enabled	= False
 		em_nroguia.SetFocus()
-		RETURN False
-	ELSEIF li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9 THEN		
+		Return False
+	ElseIf li_tipoembq = 7 OR li_tipoembq = 8 OR li_tipoembq = 9 Then		
 		
 		SELECT embq_codigo, defe_tecnic, defe_plasag, defe_nturno, defe_fecdes
 		INTO	:ls_Embarque, :li_tecnic, :al_planilla, :is_tipopla, :ld_fecha	
@@ -302,10 +301,10 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		
 		is_embarque = ls_Embarque
 		
-		IF ls_Embarque <> '' THEN
-			IF ExisteOperacion(ls_Embarque) THEN
-			END IF	
-		END IF	
+		If ls_Embarque <> '' Then
+			If ExisteOperacion(ls_Embarque) Then
+			End If	
+		End If	
 								
 		SELECT RTrim(tecn_nombre)+' '+RTrim(tecn_apepat)+' '+RTrim(tecn_apemat)
 		INTO  :ls_contraparte
@@ -335,12 +334,12 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		
 		ll_fila = dw_3.Retrieve(li_planta,al_planilla)
 		
-		IF ll_fila > 0 THEN
+		If ll_fila > 0 Then
 			FOR ll_fila1 = 1 TO dw_3.RowCount()
 				ls_numsel = ls_numsel+''+dw_3.Object.sell_numero[ll_fila1]+'-'
 				ls_ubisel = ls_ubisel+''+dw_3.Object.sell_nombre[ll_fila1]+'-'
 			NEXT
-		END IF	
+		End If	
 		
 		em_cansellos.Text = String(ll_fila)
 		
@@ -350,39 +349,37 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		em_numsellos.Text			=	ls_numsel
 		em_ubisellos.Text			=	ls_ubisel
 								
-		IF sqlca.SQLCode = -1 THEN
+		If sqlca.SQLCode = -1 Then
 			//F_ErrorBaseDatos(sqlca,"Lectura de la Tabla DESPAFRIGOEN")
-			MessageBox("Atención", "Problema en Selección de Detalle en Encabezado del Despacho.", &
-							Exclamation!, Ok!)	
-		END IF
+			MessageBox("Atención", "Problema en Selección de Detalle en Encabezado del Despacho.", Exclamation!, Ok!)	
+		End If
 			
-		IF sqlca.SQLCode = -1 THEN
+		If sqlca.SQLCode = -1 Then
 			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla EMBARQUEPROD")
 			em_nroguia.SetFocus()
-			RETURN False
-//		ELSEIF sqlca.SQLCode = 100 THEN
+			Return False
+//		ElseIf sqlca.SQLCode = 100 Then
 //				MessageBox("Atención", "No existe Embarque.~r~r", &
 //							Exclamation!, Ok!)
 //				pb_acepta.Enabled	= False
 //				em_nroguia.SetFocus()
-//				RETURN False
-		ELSE					
+//				Return False
+		Else					
 			SELECT embc_nombre, embc_direcc, embc_nrorut, embc_ciudad
 			INTO	:is_Recibidor, :is_Direccion, :is_Rut, :is_ciudad
 			FROM	dbo.EMBARCADORES 
 			WHERE	embc_codigo	=	:li_embc_codigo;	
 			
-			IF sqlca.SQLCode = -1 THEN
+			If sqlca.SQLCode = -1 Then
 				F_ErrorBaseDatos(sqlca,"Lectura de la Tabla EMBARCADORES")
 				em_nroguia.SetFocus()
-				RETURN False
-			ELSEIF sqlca.SQLCode = 100 THEN
-				MessageBox("Atención", "No existe Embarcadores.~r~r", &
-							Exclamation!, Ok!)
+				Return False
+			ElseIf sqlca.SQLCode = 100 Then
+				MessageBox("Atención", "No existe Embarcadores.~r~r", Exclamation!, Ok!)
 				pb_acepta.Enabled	= False
 				em_nroguia.SetFocus()
-				RETURN False			
-			ELSE
+				Return False			
+			Else
 				
 				SELECT count(*)
 				INTO	:ll_contpal
@@ -394,13 +391,13 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 				AND	enc.plde_codigo = det.plde_codigo
 				AND	enc.defe_numero = det.defe_numero;	
 				
-				IF sqlca.SQLCode = -1 THEN
+				If sqlca.SQLCode = -1 Then
 					F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 					em_nroguia.SetFocus()
-					RETURN False
-				END IF
+					Return False
+				End If
 				
-				IF ll_contpal >= 4 THEN
+				If ll_contpal >= 4 Then
 					SELECT count(*)
 					INTO	:ll_cont
 					FROM	dbo.despafrigode as det,dbo.DESPAFRIGOEN as enc
@@ -412,18 +409,17 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 					AND	enc.defe_numero = det.defe_numero
 					AND 	isnull(det.defe_tempe1,0) <> 0;	
 							
-					IF sqlca.SQLCode = -1 THEN
+					If sqlca.SQLCode = -1 Then
 						F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 						em_nroguia.SetFocus()
-						RETURN False
-					ELSEIF ll_cont < 2 THEN
-						MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", &
-									Exclamation!, Ok!)
+						Return False
+					ElseIf ll_cont < 2 Then
+						MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", Exclamation!, Ok!)
 						pb_acepta.Enabled	= False
 						em_nroguia.SetFocus()
-						RETURN False	
-					END IF	
-				END IF
+						Return False	
+					End If	
+				End If
 				
 				istr_mant.argumento[25]	=	String(li_Tipova)
 				em_recibidor.Text			=	is_Recibidor
@@ -432,18 +428,18 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 				em_nomdespachador.Text	=  ls_contraparte
 				em_ciudad.Text				=	is_ciudad
 				pb_acepta.Enabled			= 	True
-				IF  ii_tipo = 1 OR ii_tipo = 3 THEN
+				If  ii_tipo = 1 OR ii_tipo = 3 Then
 					em_recibidor.Enabled	=	True
 					em_rut.Enabled			=	True
 					em_direccion.Enabled	=	True
 					em_puerto.Text 		=	ls_puerto
 					em_destino.Text		=	ls_destino
-				END IF
-				RETURN True
-			END IF
-		END IF
+				End If
+				Return True
+			End If
+		End If
 				
-	ELSEIF li_tipoembq = 21 OR li_tipoembq = 16 OR li_tipoembq = 31 THEN
+	ElseIf li_tipoembq = 21 OR li_tipoembq = 16 OR li_tipoembq = 31 Then
 		SELECT embq_codigo,clpr_rut, defe_plasag, defe_nturno, defe_fecdes
 		INTO	:ls_embarque,:is_rut,:al_planilla, :is_tipopla, :ld_fecha	
 		FROM	dbo.DESPAFRIGOEN 
@@ -478,12 +474,12 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		
 		ll_fila = dw_3.Retrieve(li_planta,al_planilla)
 		
-		IF ll_fila > 0 THEN
+		If ll_fila > 0 Then
 			FOR ll_fila1 = 1 TO dw_3.RowCount()
 				ls_numsel = Trim(ls_numsel)+''+Trim(dw_3.Object.sell_numero[ll_fila1])+'-'
 				ls_ubisel = Trim(ls_ubisel)+''+Trim(dw_3.Object.sell_nombre[ll_fila1])+'-'
 			NEXT
-		END IF
+		End If
 		
 		SELECT count(*)
 		INTO	:ll_contpal
@@ -495,14 +491,13 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		AND	enc.plde_codigo = det.plde_codigo
 		AND	enc.defe_numero = det.defe_numero;	
 		
-		IF sqlca.SQLCode = -1 THEN
+		If sqlca.SQLCode = -1 Then
 			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 			em_nroguia.SetFocus()
-			RETURN False
-		END IF
+			Return False
+		End If
 		
-		IF ll_contpal >= 4 THEN
-		
+		If ll_contpal >= 4 Then		
 			SELECT count(*)
 			INTO	:ll_cont
 			FROM	dbo.despafrigode as det,dbo.DESPAFRIGOEN as enc
@@ -514,18 +509,17 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 			AND	enc.defe_numero = det.defe_numero
 			AND 	isnull(det.defe_tempe1,0) <> 0;	
 					
-			IF sqlca.SQLCode = -1 THEN
+			If sqlca.SQLCode = -1 Then
 				F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 				em_nroguia.SetFocus()
-				RETURN False
-			ELSEIF ll_cont < 2 THEN
-				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", &
-							Exclamation!, Ok!)
+				Return False
+			ElseIf ll_cont < 2 Then
+				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", Exclamation!, Ok!)
 				pb_acepta.Enabled	= False
 				em_nroguia.SetFocus()
-				RETURN False	
-			END IF	
-		END IF
+				Return False	
+			End If	
+		End If
 		em_cansellos.Text = String(ll_fila)
 		
 		ls_numsel = Mid(Trim(ls_numsel), 1,len(Trim(ls_numsel)) -1 )
@@ -542,11 +536,9 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		em_destino.Text			=	ls_destino
 			
 		em_recibidor.Enabled		=	True
-		em_rut.Enabled				=	True				
+		em_rut.Enabled			=	True				
 		em_direccion.Enabled		=	True
-
-	ELSEIF li_tipoembq = 11 THEN
-		
+	ElseIf li_tipoembq = 11 Then
 		SELECT count(*)
 		INTO	:ll_contpal
 		FROM	dbo.despafrigode as det,dbo.DESPAFRIGOEN as enc
@@ -557,11 +549,11 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		AND	enc.plde_codigo = det.plde_codigo
 		AND	enc.defe_numero = det.defe_numero;	
 						
-		IF sqlca.SQLCode = -1 THEN
+		If sqlca.SQLCode = -1 Then
 			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 			em_nroguia.SetFocus()
-			RETURN False
-		ELSEIF  ll_contpal >= 4 THEN
+			Return False
+		ElseIf  ll_contpal >= 4 Then
 			
 			SELECT count(*)
 			INTO	:ll_cont
@@ -574,23 +566,21 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 			AND	enc.defe_numero = det.defe_numero
 			AND 	isnull(det.defe_tempe1,0) <> 0;	
 			
-			IF ll_cont < 2 THEN
-				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", &
-							Exclamation!, Ok!)
+			If ll_cont < 2 Then
+				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", Exclamation!, Ok!)
 				pb_acepta.Enabled	= False
 				em_nroguia.SetFocus()
-				RETURN False	
-			END IF	
-		END IF
+				Return False	
+			End If	
+		End If
 		
 		em_recibidor.Enabled		=	True
 		em_rut.Enabled				=	True				
 		em_direccion.Enabled		=	True
 		istr_mant.argumento[25]	=	'1'
 		pb_acepta.Enabled	= True
-		RETURN True
-	ELSE	
-		
+		Return True
+	Else		
 		SELECT count(*)
 		INTO	:ll_contpal
 		FROM	dbo.despafrigode as det,dbo.DESPAFRIGOEN as enc
@@ -601,14 +591,13 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 		AND	enc.plde_codigo = det.plde_codigo
 		AND	enc.defe_numero = det.defe_numero;	
 		
-		IF sqlca.SQLCode = -1 THEN
+		If sqlca.SQLCode = -1 Then
 			F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 			em_nroguia.SetFocus()
-			RETURN False
-		END IF
+			Return False
+		End If
 		
-		IF ll_contpal >= 4 THEN
-		
+		If ll_contpal >= 4 Then		
 			SELECT count(*)
 			INTO	:ll_cont
 			FROM	dbo.despafrigode as det,dbo.DESPAFRIGOEN as enc
@@ -620,27 +609,25 @@ IF al_guia <> 0 OR li_planta = 0 THEN
 			AND	enc.defe_numero = det.defe_numero
 			AND 	isnull(det.defe_tempe1,0) <> 0;	
 					
-			IF sqlca.SQLCode = -1 THEN
+			If sqlca.SQLCode = -1 Then
 				F_ErrorBaseDatos(sqlca,"Lectura de la Tabla Despachos")
 				em_nroguia.SetFocus()
-				RETURN False
-			ELSEIF ll_cont < 2 THEN
-				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", &
-							Exclamation!, Ok!)
+				Return False
+			ElseIf ll_cont < 2 Then
+				MessageBox("Atención", "Debe Registrar la Temperatura de al Menos 2 Pallet de esta Guía.~r~r", Exclamation!, Ok!)
 				pb_acepta.Enabled	= False
 				em_nroguia.SetFocus()
-				RETURN False	
-			END IF	
-		END IF
+				Return False	
+			End If	
+		End If
 		istr_mant.argumento[25]	=	'1'
 		pb_acepta.Enabled	= True
-		RETURN True
-	END IF
-ELSE
-	MessageBox("Atención", "Faltan parámetros de búsqueda.~r~rIngreselos todos.", &
-					Exclamation!, Ok!)
-	RETURN False
-END IF
+		Return True
+	End If
+Else
+	MessageBox("Atención", "Faltan parámetros de búsqueda.~r~rIngreselos todos.", Exclamation!, Ok!)
+	Return False
+End If
 end function
 
 public subroutine enviamail ();String		ls_Nombre, ls_NomReporte, ls_Archivo, ls_DirectorioAct 
