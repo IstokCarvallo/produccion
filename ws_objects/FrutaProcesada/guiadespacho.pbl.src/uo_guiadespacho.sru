@@ -630,7 +630,7 @@ end function
 
 private function boolean of_generaguia_fruticola (long planta, long cliente, long movimiento);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut 
+String		ls_Referencia, ls_Rut, ls_Leyenda = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -689,7 +689,13 @@ Else
 	of_InsertaRegistro('Iva', '')
 	of_InsertaRegistro('Monto Total', '0')
 	of_InsertaRegistro('xMontoEscrito', '')
-	of_InsertaRegistro('xObservaciones', Mid(ids_Source_Frut.Object.defe_glosa[1], 1, 120))
+
+	ls_Leyenda = ids_Source_Frut.Object.defe_glosa[1]
+	
+	If Planta = 6006 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
+	If Planta = 6007 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
+
+	of_InsertaRegistro('xObservaciones', Mid(ls_Leyenda, 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
@@ -1256,6 +1262,7 @@ Else
 	If Planta = 3006 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA REGLAMENTADA POR MMe'
 	If Planta = 4008 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por mosca de la fruta '
 	If Planta = 4013 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
+	If Planta = 4014 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
 	
 	If ids_Source_GDE.Object.ggn[1] = '' Or IsNull(ids_Source_GDE.Object.ggn[1]) Then
 		ls_GGN = ''
@@ -1264,7 +1271,7 @@ Else
 	End If
 	
 	// ls_System = ' \ FRUTA CERTIFICADA SYSTEMS APPROACH'
-	ls_System = 'Fruta a proceso de selección y embalaje a cuenta de Exportadora RIOblanco SpA'
+	If Tipo = 2 Then ls_System = 'Fruta a proceso de selección y embalaje a cuenta de Exportadora RIOblanco SpA'
 	
 	of_InsertaRegistro('Monto Exento', '')
 	of_InsertaRegistro('Tasa Iva', '19')

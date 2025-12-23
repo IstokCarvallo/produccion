@@ -57,6 +57,7 @@ end event
 
 type pb_insertar from w_busqueda`pb_insertar within w_busc_prodpredio
 integer x = 2610
+integer y = 1028
 integer taborder = 50
 end type
 
@@ -81,6 +82,17 @@ integer y = 60
 integer width = 2098
 integer selectedtab = 2
 end type
+
+on tab_1.create
+call super::create
+this.Control[]={this.tabpage_1,&
+this.tabpage_2,&
+this.tabpage_3}
+end on
+
+on tab_1.destroy
+call super::destroy
+end on
 
 type tabpage_1 from w_busqueda`tabpage_1 within tab_1
 boolean visible = false

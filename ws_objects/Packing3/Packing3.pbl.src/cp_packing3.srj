@@ -101,6 +101,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_movtofrutagra
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_busc_spro_ordenproceso_traspaso,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mues_recfruprocee_trans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran15.pbl,dw_mues_ordenesproceso,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,w_busc_prodpredio,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_grupoespecie,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_envases,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mant_prograproceso_deta,d
@@ -157,9 +158,9 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_spro_ordenproceso,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_formatosadhesivos,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_parms,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_directo,w
-OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_carga_json,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\tabprod04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\tabprod04.pbl,w_sele_codigooperacional,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,w_carga_json,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_entidades,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,str_temporada,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,d_columna_ordena,d
@@ -222,10 +223,10 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_lineapacking,
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\tabprod04.pbl,dw_mant_mues_codigooperacional,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_embalajes,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFEnva01.pbl,dw_mant_movtoenvadeta_recepfruta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_info_guia_recepcion_definitiva,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_tipopallet,u
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_busc_palletencab,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admaunidadadmini,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_admasistemas,u
@@ -351,8 +352,8 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_busc_especies_gpp,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_etiquetas,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_sistemasgrupos,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_variedades,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_info_guia_despacho_cal,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\tabprod04.pbl,dw_sele_codigooperacional,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_info_guia_despacho_cal,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mant_prograproceso_enca,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_correo_error,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_compaccorrel_equipos,w
@@ -481,6 +482,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_salidalineapacking,
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,uo_seleccion_centroemisor,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta_csd,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_productores,u
+OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_busc_prodpredio,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_mues_adhesivos_genericos,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_insertamenu,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_usuario,s

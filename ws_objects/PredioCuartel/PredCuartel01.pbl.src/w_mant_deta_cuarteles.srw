@@ -60,7 +60,7 @@ global type w_mant_deta_cuarteles from w_mant_detalle_csd
 integer x = 123
 integer y = 96
 integer width = 3337
-integer height = 1388
+integer height = 1372
 string title = "CUARTELES"
 boolean controlmenu = true
 tab_cuartel tab_cuartel
@@ -660,7 +660,7 @@ type tab_cuartel from tab within w_mant_deta_cuarteles
 integer x = 37
 integer y = 84
 integer width = 2711
-integer height = 1092
+integer height = 1164
 integer taborder = 30
 boolean bringtotop = true
 integer textsize = -10
@@ -706,7 +706,7 @@ type tabpage_1 from userobject within tab_cuartel
 integer x = 18
 integer y = 176
 integer width = 2674
-integer height = 900
+integer height = 972
 long backcolor = 16777215
 string text = "Cuartel"
 long tabtextcolor = 33554432
@@ -728,7 +728,7 @@ type dw_cuartel from uo_dw within tabpage_1
 integer x = 55
 integer y = 48
 integer width = 2555
-integer height = 840
+integer height = 924
 integer taborder = 11
 string dataobject = "dw_mant_cuarteles_general"
 boolean vscrollbar = false
@@ -811,11 +811,23 @@ End IF
 
 end event
 
+event buttonclicked;call super::buttonclicked;String ls_Boton
+
+ls_Boton = dwo.Name
+
+Choose Case ls_Boton
+		
+	Case 'b_codigo'
+		This.Object.prcc_codope[Row] =  f_CodigoOPeracional(This.Object.espe_codigo[Row], This.Object.prcc_codope[Row])
+		
+End Choose
+end event
+
 type tabpage_2 from userobject within tab_cuartel
 integer x = 18
 integer y = 176
 integer width = 2674
-integer height = 900
+integer height = 972
 long backcolor = 16777215
 string text = "Plantas"
 long tabtextcolor = 33554432
@@ -864,7 +876,7 @@ type tabpage_3 from userobject within tab_cuartel
 integer x = 18
 integer y = 176
 integer width = 2674
-integer height = 900
+integer height = 972
 long backcolor = 16777215
 string text = "Cajas"
 long tabtextcolor = 33554432
@@ -920,7 +932,7 @@ type tabpage_4 from userobject within tab_cuartel
 integer x = 18
 integer y = 176
 integer width = 2674
-integer height = 900
+integer height = 972
 long backcolor = 16777215
 string text = "Observaciones"
 long tabtextcolor = 33554432
@@ -961,7 +973,7 @@ type tabpage_5 from userobject within tab_cuartel
 integer x = 18
 integer y = 176
 integer width = 2674
-integer height = 900
+integer height = 972
 long backcolor = 16777215
 string text = "Variedades~r~nRoyalty"
 long tabtextcolor = 33554432

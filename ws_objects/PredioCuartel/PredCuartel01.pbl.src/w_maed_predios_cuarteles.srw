@@ -361,7 +361,7 @@ sqlca.AutoCommit	=	lb_AutoCommit
 RETURN lb_Retorno
 end function
 
-public subroutine wf_replicacion ();Integer	ll_Fila, ll_Fila2, ll_Fila3, li_Correo
+public subroutine wf_replicacion ();Integer			ll_Fila, ll_Fila2, ll_Fila3, li_Correo
 uo_Mail			iuo_Mail
 dwItemStatus	lis_Error
 
@@ -395,10 +395,8 @@ If ll_fila > 0 OR ll_fila2 > 0 Then
 		
 		ls_Texto +=  '~n~n~nAtte.~nSoporte TI, RIOblanco SPA.'
 		ls_Correo = {gstr_Parempresa.Correo_Soporte_Zonal}
-		iuo_mail.of_Send(ls_Correo,ls_asunto,ls_texto,0)
-							
+		iuo_mail.of_Send(ls_Correo,ls_asunto,ls_texto,0)							
 	End If	
-	
 End If
 
 Destroy iuo_Mail

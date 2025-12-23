@@ -168,22 +168,28 @@ public subroutine wf_cargadatos (integer ai_cliente);Integer	li_fila, respuesta
 DO
 	ii_cliente	=	ai_cliente
 	ii_planta	=	gstr_paramplanta.CodigoPlanta
+	
+	If IsNull(ii_planta) Or ii_planta = 0 Then
+		MessageBox("Error Planta", "Parametro de planta no esta activo, favor comunicarse con Soporte", Information!, Ok!)
+		Return
+	End If
 
 	li_fila = dw_2.Retrieve(ii_cliente, ii_planta)
-	IF li_fila = -1 THEN
+	
+	If li_fila = -1 Then
 		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-	ELSEIF li_fila = 0 THEN
+	ElseIf li_fila = 0 Then
 		dw_2.InsertRow(0)
 		dw_2.Object.clie_codigo[1] 	=	ii_cliente
 		dw_2.Object.plde_codigo[1]	=	ii_planta
-	END IF
+	End If
 	
 LOOP WHILE respuesta = 1
 
-IF respuesta = 2 THEN Close(THIS)
+If respuesta = 2 Then Close(THIS)
 
-IF Not IsNull(ii_cantidad)	 	THEN dw_2.Object.crta_cantid[1] = ii_cantidad
-IF Not IsNull(is_abreviado) 	THEN dw_2.Object.clie_abrevi[1] = is_abreviado
+If Not IsNull(ii_cantidad)	 	Then dw_2.Object.crta_cantid[1] = ii_cantidad
+If Not IsNull(is_abreviado) 	Then dw_2.Object.clie_abrevi[1] = is_abreviado
 
 dw_2.SetColumn("crta_cantid")
 end subroutine
@@ -222,7 +228,7 @@ iuo_impresora	=	Create uo_manejoimpresora
 SetNull(ii_cantidad)
 SetNull(is_abreviado)
 
-iuo_cliente.existe(gi_CodExport, TRUE, sqlca)
+iuo_cliente.existe(gi_CodExport, True, sqlca)
 
 //iuo_formadh.Existe(gstr_ParamPlanta.CodigoPlanta, gstr_ParamPlanta.CodigoEspecie, gstr_us.computador, True, SQLCA)
 //

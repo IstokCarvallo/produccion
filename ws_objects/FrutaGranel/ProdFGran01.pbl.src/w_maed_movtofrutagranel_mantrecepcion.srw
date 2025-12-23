@@ -185,7 +185,6 @@ public function boolean otrosmovtosdetalle ()
 protected function boolean wf_actualiza_db (boolean borrando)
 public subroutine captura_totales ()
 public function boolean actual_ultimo_lote ()
-public function boolean verificalote (integer ai_planta, integer ai_especie, long al_lote)
 public function boolean verificabultos (integer ai_planta, integer ai_loteplanta, integer ai_especie, integer ai_lotecod, integer ai_bultos)
 public subroutine destare (boolean ab_actualiza)
 public subroutine habilitasalida ()
@@ -211,6 +210,7 @@ public subroutine cargaenvases ()
 public function boolean eliminacion_packing ()
 public function boolean datos_correo ()
 public function any tipo_update_lote (long al_planta, integer ai_especie, long al_lote, integer ai_tipenv, integer ai_codenv)
+public function boolean wf_verificalote (integer ai_planta, integer ai_especie, long al_lote)
 end prototypes
 
 event ue_validapassword();str_mant	lstr_mant
@@ -2025,33 +2025,6 @@ END IF
 RETURN TRUE
 end function
 
-public function boolean verificalote (integer ai_planta, integer ai_especie, long al_lote);Integer li_planta, li_cantidad
-
-li_planta = dw_2.Object.plde_codigo[1]
-
-SELECT count(*) INTO :li_Cantidad
-  FROM dbo.spro_movtofrutagrandeta
- WHERE plde_codigo = :li_planta
-   AND lote_pltcod = :ai_planta
-   AND lote_espcod = :ai_especie
-   AND lote_codigo = :al_lote
-   AND tpmv_codigo <> 1 ;
-
-IF isnull(li_cantidad) THEN li_cantidad = 0
-
-IF sqlca.SQLCode = -1 THEN
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Recepción Fruta Granel")
-	RETURN FALSE
-	
-ELSEIF li_cantidad > 1 THEN
-	MessageBox("Atención","El Lote "+String(al_lote,'0000')+ " posee otros movimientos. No se puede eliminar.")
-	RETURN FALSE
-	
-END IF
-
-RETURN TRUE
-end function
-
 public function boolean verificabultos (integer ai_planta, integer ai_loteplanta, integer ai_especie, integer ai_lotecod, integer ai_bultos);Integer  li_Resultado
 
 sqlca.AutoCommit = TRUE
@@ -3654,6 +3627,32 @@ ELSE
 END IF
 end function
 
+public function boolean wf_verificalote (integer ai_planta, integer ai_especie, long al_lote);Integer	li_Planta, li_Cantidad
+Boolean	lb_Retorno = True
+
+li_Planta = dw_2.Object.plde_codigo[1]
+
+SELECT count(*) INTO :li_Cantidad
+  FROM dbo.spro_movtofrutagrandeta
+ WHERE plde_codigo = :li_planta
+   AND lote_pltcod = :ai_planta
+   AND lote_espcod = :ai_especie
+   AND lote_codigo = :al_lote
+   AND tpmv_codigo <> :ii_TipMov ;
+
+If IsNull(li_Cantidad) Then li_Cantidad = 0
+
+If sqlca.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Recepción Fruta Granel")
+	lb_Retorno = False	
+ElseIf li_cantidad > 1 Then
+	MessageBox("Atención","El Lote "+String(al_lote,'0000')+ " posee otros movimientos. No se puede eliminar.")
+	lb_Retorno = False	
+End If
+
+Return lb_Retorno
+end function
+
 on w_maed_movtofrutagranel_mantrecepcion.create
 int iCurrent
 call super::create
@@ -3942,7 +3941,7 @@ END IF
 
 CHOOSE CASE li_tabpage
 	CASE 1 
-		IF NOT verificalote(dw_3.Object.lote_pltcod[il_fila],&
+		IF NOT wf_VerificaLote(dw_3.Object.lote_pltcod[il_fila],&
 									dw_3.Object.lote_espcod[il_fila],&
 									dw_3.Object.lote_codigo[il_fila]) THEN
 			Message.DoubleParm = -1
@@ -5127,22 +5126,20 @@ END IF
 end event
 
 event ue_validaborrar;Long ll_fila
-IF MessageBox("Borrar Registro","Desea Borrar la Información ?", Question!, YesNo!) = 1 THEN
+If MessageBox("Borrar Registro","Desea Borrar la Información ?", Question!, YesNo!) = 1 Then
 	Message.DoubleParm = 1
 	
 	FOR ll_fila = 1 TO dw_3.RowCount()
-		IF NOT VerificaLote(dw_3.Object.lote_pltcod[ll_fila],&
+		If Not wf_VerIficaLote(dw_3.Object.lote_pltcod[ll_fila],&
 									dw_3.Object.lote_espcod[ll_fila],&
-									dw_3.Object.lote_codigo[ll_fila]) THEN
+									dw_3.Object.lote_codigo[ll_fila]) Then
 			Message.DoubleParm = -1
-			RETURN
-		END IF	
+			Return
+		End If	
 	NEXT	
-ELSE
+Return
 	Message.DoubleParm = -1
-END IF
-
-RETURN
+End If
 end event
 
 type dw_1 from w_mant_encab_deta_csd`dw_1 within w_maed_movtofrutagranel_mantrecepcion

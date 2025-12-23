@@ -105,6 +105,7 @@ integer width = 4165
 integer height = 2204
 string title = "RECEPCION DE HUERTO"
 string menuname = ""
+boolean minbox = false
 boolean center = true
 event ue_imprimir_tarja ( )
 event type long ue_despuesguardar ( )
@@ -220,13 +221,13 @@ Long				  	fila,ll_fila, respuesta
 String 	      		n_lote, tmp, command
 Integer 				li_imprimir, li_bultos, li_tarjas
 
-IF NOT gstr_paramplanta.binsabins AND NOT gstr_paramplanta.palletdebins THEN Return
+If NOT gstr_paramplanta.binsabins AND NOT gstr_paramplanta.palletdebins Then Return
 
 li_imprimir 	=	MessageBox("Lote", "¿ Desea Imprimir una tarja para cada Bulto del Lote ?~r"+&
 												"Presione No para imprimir solo una tarja~r"+&
 												"o Cancelar para no imprimir tarjas", Question!, YesNoCancel!, 1)
 
-IF li_imprimir <> 3 THEN
+If li_imprimir <> 3 Then
 	
 	lds_informe	= Create DataStore
 	lds_Informe.DataObject = "dw_info_lotesfrutagranel_recepcion_grand"
@@ -235,19 +236,19 @@ IF li_imprimir <> 3 THEN
 		lds_Informe.SetTransObject(Sqlca)
 		ll_fila	= lds_Informe.Retrieve(dw_2.Object.plde_codigo[dw_2.GetRow()],Integer(istr_mant.argumento[10]),&
 										  1,dw_2.Object.mfge_numero[dw_2.GetRow()])
-		IF fila = -1 THEN
+		If fila = -1 Then
 			MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 							"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-		ELSE
+		Else
 			FOR ll_fila = 1 TO tab_1.tp_1.dw_lotes.RowCount()
 		 
 				n_lote =  String(tab_1.tp_1.dw_lotes.object.compute_2[ll_fila])
 			 
-				IF li_imprimir = 1 THEN
+				If li_imprimir = 1 Then
 					li_bultos	=	tab_1.tp_1.dw_lotes.Object.lote_totbul[ll_fila]
-				ELSE
+				Else
 					li_bultos	=	1
-				END IF
+				End If
 				
 				lds_Informe.SetFilter("compute_2 = '"+ n_lote +" '")
 				lds_Informe.Filter()
@@ -258,37 +259,37 @@ IF li_imprimir <> 3 THEN
 				
 			NEXT
 			SetPointer(Arrow!)
-		END IF
+		End If
 	LOOP WHILE respuesta = 1
 
-END IF
+End If
 	
 	
 Destroy lds_informe
 
 li_imprimir 	=	MessageBox("Lote", "¿ Desea Imprimir Anexo de Pesaje del Lote ?~r", Question!, YesNo!, 1)
 
-IF li_imprimir = 1 THEN
+If li_imprimir = 1 Then
 	lds_informe	= Create DataStore
 	
-	IF NOT gstr_paramplanta.palletdebins THEN
+	If NOT gstr_paramplanta.palletdebins Then
 		lds_Informe.DataObject = "dw_info_anexo_pesaje_recepcion_granel"
-	ELSE
+	Else
 		lds_Informe.DataObject = "dw_info_anexo_pesaje_recepcion_granel"
-	END IF
+	End If
 	
 	lds_Informe.SetTransObject(Sqlca)
 	ll_fila	= lds_Informe.Retrieve(dw_2.Object.plde_codigo[dw_2.GetRow()],&
 										  1,dw_2.Object.mfge_numero[dw_2.GetRow()],&
 										  Integer(istr_mant.argumento[10]))
-	IF fila = -1 THEN
+	If fila = -1 Then
 		MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
 						"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-	ELSE
+	Else
 		f_membreteds(lds_Informe)
 		lds_Informe.Print()
-	END IF
-END IF
+	End If
+End If
 end event
 
 event type long ue_despuesguardar();integer	li_bodega, li_fila, li_cliente, li_enva_codigo, li_enva_tipoen, li_packing,&

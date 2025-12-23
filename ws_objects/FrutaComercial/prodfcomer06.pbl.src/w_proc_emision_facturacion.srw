@@ -25,6 +25,8 @@ type pb_ninguno from picturebutton within w_proc_emision_facturacion
 end type
 type dw_proforma from uo_dw within w_proc_emision_facturacion
 end type
+type cbx_expor from checkbox within w_proc_emision_facturacion
+end type
 end forward
 
 global type w_proc_emision_facturacion from w_para_informes
@@ -49,6 +51,7 @@ dw_1 dw_1
 pb_todos pb_todos
 pb_ninguno pb_ninguno
 dw_proforma dw_proforma
+cbx_expor cbx_expor
 end type
 global w_proc_emision_facturacion w_proc_emision_facturacion
 
@@ -70,6 +73,7 @@ this.dw_1=create dw_1
 this.pb_todos=create pb_todos
 this.pb_ninguno=create pb_ninguno
 this.dw_proforma=create dw_proforma
+this.cbx_expor=create cbx_expor
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_4
 this.Control[iCurrent+2]=this.st_1
@@ -82,6 +86,7 @@ this.Control[iCurrent+8]=this.dw_1
 this.Control[iCurrent+9]=this.pb_todos
 this.Control[iCurrent+10]=this.pb_ninguno
 this.Control[iCurrent+11]=this.dw_proforma
+this.Control[iCurrent+12]=this.cbx_expor
 end on
 
 on w_proc_emision_facturacion.destroy
@@ -97,6 +102,7 @@ destroy(this.dw_1)
 destroy(this.pb_todos)
 destroy(this.pb_ninguno)
 destroy(this.dw_proforma)
+destroy(this.cbx_expor)
 end on
 
 event open;call super::open;Boolean	lb_Cerrar = False
@@ -225,10 +231,18 @@ For ll_Fila = 1 To dw_1.RowCount()
 						ls_Texto		+=	'Junto con saludar, solicitamos a Ud. emitir facturación del mes de ' + ls_Mes[Integer(Mid(em_fecha.Text, 1, 2))] + &
 														'-' + Mid(em_fecha.Text, 4) + ' con el siguiente detalle:.~n~n'
 						ls_Texto		+=	'Factura por fruta comercial.~n'
-						ls_Texto		+=	'Nombre: Comercial Rio Blanco SPA.~n' //+ uo_SelCliente.Nombre + '~n'
-						ls_Texto		+=	'Rut: 76.412.835-4~n' //+ String(Long(Mid(uo_SelCliente.Rut, 1, 9)), '#,##0') + '-' + Right(uo_SelCliente.Rut, 1)+ ' ~n'
-						ls_Texto		+=	'Dirección: Alonso de Monroy 2677, Piso 4, Vitacura, Santiago.~n' //+ uo_SelCliente.DireccionCompleta +' ~n'
-						ls_Texto		+=	'Giro: Otros servicios agricolas.~n' //+ uo_SelCliente.Giro +' ~n'
+						
+						If  cbx_expor.Checked Then
+							ls_Texto		+=	'Nombre: EXPORTADORA RIO BLANCO SPA.~n' //+ uo_SelCliente.Nombre + '~n'
+							ls_Texto		+=	'Rut: .: 76.408.816-6~n' //+ String(Long(Mid(uo_SelCliente.Rut, 1, 9)), '#,##0') + '-' + Right(uo_SelCliente.Rut, 1)+ ' ~n'
+							ls_Texto		+=	'Dirección: Alonso de Monroy 2677, Piso 4, Vitacura, Santiago.~n' //+ uo_SelCliente.DireccionCompleta +' ~n'
+							ls_Texto		+=	'Giro: Otros servicios agricolas.~n' //+ uo_SelCliente.Giro +' ~n'
+						Else
+							ls_Texto		+=	'Nombre: Comercial Rio Blanco SPA.~n' //+ uo_SelCliente.Nombre + '~n'
+							ls_Texto		+=	'Rut: 76.412.835-4~n' //+ String(Long(Mid(uo_SelCliente.Rut, 1, 9)), '#,##0') + '-' + Right(uo_SelCliente.Rut, 1)+ ' ~n'
+							ls_Texto		+=	'Dirección: ALONSO DE MONROY N° 2677 PISO 4 VITACURA – SANTIAGO.~n' //+ uo_SelCliente.DireccionCompleta +' ~n'
+							ls_Texto		+=	'Giro: VENTA AL POR MAYOR NO ESPECIALIZADA.~n' //+ uo_SelCliente.Giro +' ~n'
+						End If
 						
 						luo_Factura.Of_Totales_Comercial(ll_Cliente, ll_Planta, ll_Productor, Date('01/' + em_Fecha.Text), SQLCA)
 						
@@ -298,7 +312,7 @@ type st_4 from statictext within w_proc_emision_facturacion
 integer x = 247
 integer y = 424
 integer width = 3168
-integer height = 316
+integer height = 384
 boolean bringtotop = true
 integer textsize = -10
 integer weight = 700
@@ -423,9 +437,9 @@ end on
 
 type dw_1 from uo_dw within w_proc_emision_facturacion
 integer x = 247
-integer y = 772
+integer y = 832
 integer width = 3168
-integer height = 1348
+integer height = 1288
 integer taborder = 11
 boolean bringtotop = true
 string dataobject = "dw_gene_estadoproformacomer_envio"
@@ -563,5 +577,23 @@ boolean bringtotop = true
 string dataobject = "dw_info_fproforma_fcomer"
 boolean vscrollbar = false
 boolean border = false
+end type
+
+type cbx_expor from checkbox within w_proc_emision_facturacion
+integer x = 343
+integer y = 708
+integer width = 818
+integer height = 80
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Arial"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Usa Exportadora"
+boolean lefttext = true
 end type
 
