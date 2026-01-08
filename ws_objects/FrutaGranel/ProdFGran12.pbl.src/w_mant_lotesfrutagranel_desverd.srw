@@ -270,7 +270,7 @@ dw_1.Object.lode_hosaes[dw_1.GetRow()]	=	lt_hora
 	
 end subroutine
 
-public subroutine habilitalote ();IF istr_mant.Argumento[30] = '1' THEN
+public subroutine habilitalote ();If istr_mant.Argumento[30] = '1' Then
 	CHOOSE CASE dw_1.Object.lode_estado[il_fila]
 		CASE 0
 			dw_1.Object.ccag_codigo.Protect	=	1
@@ -323,38 +323,40 @@ public subroutine habilitalote ();IF istr_mant.Argumento[30] = '1' THEN
 			dw_1.Object.lode_hosare.BackGround.Color		=	553648127
 			
 		CASE 1
-			IF IsNull(dw_1.Object.lode_mohod1[il_fila]) THEN
+			If IsNull(dw_1.Object.lode_mohod1[il_fila]) Then
 				dw_1.Object.lode_mohod1.Protect					=	0
 				dw_1.Object.lode_mohod1.Color					=	0
 				dw_1.Object.lode_mohod1.BackGround.Color	=	RGB(255, 255, 255)
-			ELSE
+			Else
 				dw_1.Object.lode_mohod1.Protect					=	1
 				dw_1.Object.lode_mohod1.Color					=	RGB(255,255,255)
 				dw_1.Object.lode_mohod1.BackGround.Color	=	553648127
-			END IF
+			End If
 				
-			IF IsNull(dw_1.Object.lode_mohod2[il_fila]) THEN
+			If IsNull(dw_1.Object.lode_mohod2[il_fila]) Then
 				dw_1.Object.lode_mohod2.Protect					=	0
 				dw_1.Object.lode_mohod2.Color					=	0
 				dw_1.Object.lode_mohod2.BackGround.Color	=	RGB(255, 255, 255)
-			ELSE
+			Else
 				dw_1.Object.lode_mohod2.Protect					=	1
 				dw_1.Object.lode_mohod2.Color					=	RGB(255,255,255)
 				dw_1.Object.lode_mohod2.BackGround.Color	=	553648127
-			END IF
+			End If
 				
-			IF IsNull(dw_1.Object.lode_mohod3[il_fila]) THEN
+			If IsNull(dw_1.Object.lode_mohod3[il_fila]) Then
 				dw_1.Object.lode_mohod3.Protect					=	0
 				dw_1.Object.lode_mohod3.Color					=	0
 				dw_1.Object.lode_mohod3.BackGround.Color	=	RGB(255, 255, 255)
-			ELSE
+			Else
 				dw_1.Object.lode_mohod3.Protect					=	1
 				dw_1.Object.lode_mohod3.Color					=	RGB(255,255,255)
 				dw_1.Object.lode_mohod3.BackGround.Color	=	553648127
-			END IF
+			End If
 			
 			dw_1.Object.lode_fesare.Protect	=	0
 			dw_1.Object.lode_hosare.Protect	=	0
+			dw_1.Object.lode_fesare.Color		=	0
+			dw_1.Object.lode_hosare.Color	=	0
 			dw_1.Object.lode_fesare.BackGround.Color	=	RGB(255, 255, 255)
 			dw_1.Object.lode_hosare.BackGround.Color	=	RGB(255, 255, 255)
 			
@@ -427,8 +429,8 @@ public subroutine habilitalote ();IF istr_mant.Argumento[30] = '1' THEN
 			dw_1.Object.lode_fesare.BackGround.Color	=	553648127
 			dw_1.Object.lode_hosare.BackGround.Color	=	553648127
 			dw_1.Object.ccev_codigo.BackGround.Color	=	553648127
-	END CHOOSE
-ELSE
+	End CHOOSE
+Else
 		dw_1.Object.ccag_codigo.Protect	=	1
 		dw_1.Object.lode_fecing.Protect	=	1
 		dw_1.Object.lode_horing.Protect	=	1
@@ -459,9 +461,9 @@ ELSE
 		dw_1.Object.lode_observ.BackGround.Color	=	RGB(255, 255, 255)
 		dw_1.Object.lode_obsdre.BackGround.Color	=	RGB(255, 255, 255)
 		dw_1.Object.lode_hordes.BackGround.Color	=	RGB(255, 255, 255)	
-END IF
+End If
 
-IF IsNull(dw_1.Object.ccag_codigo[il_fila]) OR dw_1.Object.ccag_codigo[il_fila] = 0 THEN
+If IsNull(dw_1.Object.ccag_codigo[il_fila]) Or dw_1.Object.ccag_codigo[il_fila] = 0 Then
 	dw_1.Object.ccag_codigo.Protect	=	0
 	dw_1.Object.lode_observ.Protect	=	0
 	dw_1.Object.lode_obsdre.Protect	=	0
@@ -482,7 +484,7 @@ IF IsNull(dw_1.Object.ccag_codigo[il_fila]) OR dw_1.Object.ccag_codigo[il_fila] 
 	dw_1.Object.lode_hocuhu.BackGround.Color=	RGB(255, 255, 255)
 	dw_1.Object.lode_hordes.BackGround.Color	=	RGB(255, 255, 255)
 	dw_1.Object.ccev_codigo.BackGround.Color	=	RGB(255, 255, 255)
-END IF
+End If
 end subroutine
 
 on w_mant_lotesfrutagranel_desverd.create
@@ -563,62 +565,58 @@ event closequery;call super::closequery;Integer	li_estado, li_cont
 Date		lt_fecha
 String	ls_fecha, ls_mensaje, ls_colu[]
 
-IF ib_verde THEN
-	IF Isnull(dw_1.Object.ccag_codigo[il_fila]) OR dw_1.Object.ccag_codigo[il_fila] = 0 THEN
+If ib_verde Then
+	If Isnull(dw_1.Object.ccag_codigo[il_fila]) OR dw_1.Object.ccag_codigo[il_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nCódigo Agrónomo"
 		ls_colu[li_cont]	= "ccag_codigo"
-	END IF
+	End If
 	
-	IF Isnull(dw_1.Object.ccev_codigo[il_fila]) OR dw_1.Object.ccev_codigo[il_fila] = 0 THEN
+	If Isnull(dw_1.Object.ccev_codigo[il_fila]) OR dw_1.Object.ccev_codigo[il_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nCódigo Color"
 		ls_colu[li_cont]	= "ccev_codigo"
-	END IF
+	End If
 	
-	IF Isnull(dw_1.Object.lode_hordes[il_fila]) OR dw_1.Object.lode_hordes[il_fila] = 0 THEN
+	If Isnull(dw_1.Object.lode_hordes[il_fila]) OR dw_1.Object.lode_hordes[il_fila] = 0 Then
 		li_cont ++
 		ls_mensaje 			= ls_mensaje + "~nHoras Desverdizado"
 		ls_colu[li_cont]	= "lode_hordes"
-	END IF
+	End If
 	
-	IF li_cont > 0 THEN
+	If li_cont > 0 Then
 		MessageBox("Error de Consistencia", "Falta el ingreso de:~n" + ls_mensaje + ".", StopSign!, Ok!)
 		dw_1.SetColumn(ls_colu[1])
 		dw_1.SetFocus()
 		
-		RETURN 1
-	END IF
+		Return 1
+	End If
 	
 	li_estado								=	dw_1.Object.lode_estado[il_fila]
 	dw_1.Object.bloqueo[il_fila]		=	0
 	
-	CHOOSE CASE li_estado
-		CASE 0
+	Choose Case li_estado
+		Case 0
 			lt_fecha	=	dw_1.Object.lode_fecing[il_fila]
 			ls_fecha	=	String(dw_1.Object.lode_fecing[il_fila])
 			
-			IF NOT IsNull(lt_fecha) AND IsDate(ls_fecha) THEN
+			If NOT IsNull(lt_fecha) AND IsDate(ls_fecha) Then
 				dw_1.Object.lode_estado[il_fila]	=	1
-				dw_1.Object.lode_usuing[il_fila]	=	gstr_us.Nombre
-				
-			END IF
+				dw_1.Object.lode_usuing[il_fila]	=	gstr_us.Nombre				
+			End If
 			
-		CASE 1
+		Case 1
 			lt_fecha	=	dw_1.Object.lode_fesare[il_fila]
 			ls_fecha	=	String(dw_1.Object.lode_fesare[il_fila])
 			
-			IF NOT IsNull(lt_fecha) AND IsDate(ls_fecha) THEN
-				dw_1.Object.lode_estado[il_fila]	=	2
-				
-			END IF
-			
-	END CHOOSE
-	
-ELSE
+			If NOT IsNull(lt_fecha) AND IsDate(ls_fecha) Then
+				dw_1.Object.lode_estado[il_fila]	=	2				
+			End If			
+	End Choose	
+Else
 	dw_1.Object.bloqueo[il_fila]		=	0
 	
-END IF
+End If
 end event
 
 event ue_deshace;call super::ue_deshace;dw_1.Object.lote_pltcod[il_fila]		=	Long(istr_mantdes.Argumento[01])

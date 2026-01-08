@@ -10,7 +10,7 @@ PVN:5,22,2802,2023
 FVS:5.22.28022023
 FVN:5,22,2802,2023
 MAN:0,asInvoker,0
-POWERCLIENT:﻿{"cp_produccion":{"Format":"1.0","AppType":1,"AppName":"Produccion","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\Produccion","ResourceName":"C:\\Desarrollo 22\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.22.28022023","MinimumValidVersion":"5.22.28022023","OnlineTime":"2021-7-14 21:3:28","OfflineTime":"2031-7-14 21:3:28","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuildEx":0,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":false,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":3,"LauncherName":"Default","PackageOutputPath":"C:\\Instaladores PC\\DistribucionAPP","UploadOrPackageLauncherFiles":true,"UploadStrategyWhenExist":0,"FullDownload":true,"SaveDynamicCommandLineArgs":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"Produccion","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.2.0.3441","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Fruta Procesada","CompanyName":"RIOblanco Spa","Description":"Fruta Procesada","Copyright":"2013","ProductVersion":"5.22.28022023","FileVersion":"5.22.28022023","ProductVersionMajor":5,"ProductVersionMinor":22,"ProductVersionBuild":2802,"ProductVersionRevision":2023,"FileVersionMajor":5,"FileVersionMinor":22,"FileVersionBuild":2802,"FileVersionRevision":2023,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","WebViewType":0,"Libraries":[{"PbdName":"FrutaPro.pbd","PbdLocalPath":"FrutaPro.pbd"},{"PbdName":"FrutaP00.pbd","PbdLocalPath":"FrutaP00.pbd"},{"PbdName":"FrutaP20.pbd","PbdLocalPath":"FrutaP20.pbd"},{"PbdName":"FrutaP21.pbd","PbdLocalPath":"FrutaP21.pbd"},{"PbdName":"FrutaP22.pbd","PbdLocalPath":"FrutaP22.pbd"},{"PbdName":"FrutaP23.pbd","PbdLocalPath":"FrutaP23.pbd"},{"PbdName":"FrutaP24.pbd","PbdLocalPath":"FrutaP24.pbd"},{"PbdName":"FrutaP25.pbd","PbdLocalPath":"FrutaP25.pbd"},{"PbdName":"FrutaP26.pbd","PbdLocalPath":"FrutaP26.pbd"},{"PbdName":"FrutaP27.pbd","PbdLocalPath":"FrutaP27.pbd"},{"PbdName":"FrutaP28.pbd","PbdLocalPath":"FrutaP28.pbd"},{"PbdName":"FrutaP29.pbd","PbdLocalPath":"FrutaP29.pbd"},{"PbdName":"FrutaP30.pbd","PbdLocalPath":"FrutaP30.pbd"},{"PbdName":"FrutaP31.pbd","PbdLocalPath":"FrutaP31.pbd"},{"PbdName":"FrutaP50.pbd","PbdLocalPath":"FrutaP50.pbd"},{"PbdName":"FrutaP51.pbd","PbdLocalPath":"FrutaP51.pbd"},{"PbdName":"FrutaP52.pbd","PbdLocalPath":"FrutaP52.pbd"},{"PbdName":"FrutaP53.pbd","PbdLocalPath":"FrutaP53.pbd"},{"PbdName":"FrutaP60.pbd","PbdLocalPath":"FrutaP60.pbd"},{"PbdName":"FrutaP61.pbd","PbdLocalPath":"FrutaP61.pbd"},{"PbdName":"FrutaP62.pbd","PbdLocalPath":"FrutaP62.pbd"},{"PbdName":"FrutaP63.pbd","PbdLocalPath":"FrutaP63.pbd"},{"PbdName":"FrutaP64.pbd","PbdLocalPath":"FrutaP64.pbd"},{"PbdName":"FrutaP65.pbd","PbdLocalPath":"FrutaP65.pbd"},{"PbdName":"FrutaP66.pbd","PbdLocalPath":"FrutaP66.pbd"},{"PbdName":"FrutaP67.pbd","PbdLocalPath":"FrutaP67.pbd"},{"PbdName":"FrutaP68.pbd","PbdLocalPath":"FrutaP68.pbd"},{"PbdName":"FrutaP69.pbd","PbdLocalPath":"FrutaP69.pbd"},{"PbdName":"FrutaP70.pbd","PbdLocalPath":"FrutaP70.pbd"},{"PbdName":"FrutaP71.pbd","PbdLocalPath":"FrutaP71.pbd"},{"PbdName":"FrutaP72.pbd","PbdLocalPath":"FrutaP72.pbd"},{"PbdName":"frutap73.pbd","PbdLocalPath":"frutap73.pbd"},{"PbdName":"Frutap74.pbd","PbdLocalPath":"Frutap74.pbd"},{"PbdName":"FrutaP80.pbd","PbdLocalPath":"FrutaP80.pbd"},{"PbdName":"FrutaP81.pbd","PbdLocalPath":"FrutaP81.pbd"},{"PbdName":"FrutaPBasura.pbd","PbdLocalPath":"FrutaPBasura.pbd"},{"PbdName":"FrutaPGD.pbd","PbdLocalPath":"FrutaPGD.pbd"},{"PbdName":"guiadespacho.pbd","PbdLocalPath":"guiadespacho.pbd"},{"PbdName":"Productiva.pbd","PbdLocalPath":"Productiva.pbd"},{"PbdName":"webserviceguiadespacho.pbd","PbdLocalPath":"webserviceguiadespacho.pbd"},{"PbdName":"CajasProdFto.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\CajasProd\\CajasProdFto.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"TabProd04.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdConsol.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdConsol.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 22\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 22\\ObjePubl.pbd"},{"PbdName":"WebServices17.pbd","PbdLocalPath":"C:\\Desarrollo 22\\WebServices17.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["FrutaPro.ini","see32.dll"],"InstantDownloadFiles":[],"RuntimeModules":["coreruntimefiles","sncsqlnativeclient","msexcel12support","nativepdfsupport","restclientsupport","smtpclientsupport"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","CertificateType":0,"PfxFile":"","Token":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapipath":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","TargetFramework":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"FrutaPro.ini","UpdateType":3}],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1}}}
+POWERCLIENT:﻿{"cp_produccion":{"Format":"1.0","AppType":1,"AppName":"Produccion","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache 22.0\\temp\\Produccion","ResourceName":"C:\\Desarrollo 22\\imagenes\\productiva.pbr","Arguments":"","DeployVersion":"5.22.28022023","MinimumValidVersion":"5.22.28022023","OnlineTime":"2021-7-14 21:3:28","OfflineTime":"2031-7-14 21:3:28","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuildEx":0,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":false,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"","LauncherMode":0,"RuntimePlatform":3,"LauncherName":"Default","PackageOutputPath":"C:\\Instaladores PC\\DistribucionAPP","UploadOrPackageLauncherFiles":true,"UploadStrategyWhenExist":0,"FullDownload":true,"SaveDynamicCommandLineArgs":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"Produccion","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"22.2.0.3441","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Fruta Procesada","CompanyName":"RIOblanco Spa","Description":"Fruta Procesada","Copyright":"2013","ProductVersion":"5.22.28022023","FileVersion":"5.22.28022023","ProductVersionMajor":5,"ProductVersionMinor":22,"ProductVersionBuild":2802,"ProductVersionRevision":2023,"FileVersionMajor":5,"FileVersionMinor":22,"FileVersionBuild":2802,"FileVersionRevision":2023,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","WebViewType":0,"Libraries":[{"PbdName":"FrutaPro.pbd","PbdLocalPath":"FrutaPro.pbd"},{"PbdName":"FrutaP00.pbd","PbdLocalPath":"FrutaP00.pbd"},{"PbdName":"FrutaP20.pbd","PbdLocalPath":"FrutaP20.pbd"},{"PbdName":"FrutaP21.pbd","PbdLocalPath":"FrutaP21.pbd"},{"PbdName":"FrutaP22.pbd","PbdLocalPath":"FrutaP22.pbd"},{"PbdName":"FrutaP23.pbd","PbdLocalPath":"FrutaP23.pbd"},{"PbdName":"FrutaP24.pbd","PbdLocalPath":"FrutaP24.pbd"},{"PbdName":"FrutaP25.pbd","PbdLocalPath":"FrutaP25.pbd"},{"PbdName":"FrutaP26.pbd","PbdLocalPath":"FrutaP26.pbd"},{"PbdName":"FrutaP27.pbd","PbdLocalPath":"FrutaP27.pbd"},{"PbdName":"FrutaP28.pbd","PbdLocalPath":"FrutaP28.pbd"},{"PbdName":"FrutaP29.pbd","PbdLocalPath":"FrutaP29.pbd"},{"PbdName":"FrutaP30.pbd","PbdLocalPath":"FrutaP30.pbd"},{"PbdName":"FrutaP31.pbd","PbdLocalPath":"FrutaP31.pbd"},{"PbdName":"FrutaP50.pbd","PbdLocalPath":"FrutaP50.pbd"},{"PbdName":"FrutaP51.pbd","PbdLocalPath":"FrutaP51.pbd"},{"PbdName":"FrutaP52.pbd","PbdLocalPath":"FrutaP52.pbd"},{"PbdName":"FrutaP53.pbd","PbdLocalPath":"FrutaP53.pbd"},{"PbdName":"FrutaP60.pbd","PbdLocalPath":"FrutaP60.pbd"},{"PbdName":"FrutaP61.pbd","PbdLocalPath":"FrutaP61.pbd"},{"PbdName":"FrutaP62.pbd","PbdLocalPath":"FrutaP62.pbd"},{"PbdName":"FrutaP63.pbd","PbdLocalPath":"FrutaP63.pbd"},{"PbdName":"FrutaP64.pbd","PbdLocalPath":"FrutaP64.pbd"},{"PbdName":"FrutaP65.pbd","PbdLocalPath":"FrutaP65.pbd"},{"PbdName":"FrutaP66.pbd","PbdLocalPath":"FrutaP66.pbd"},{"PbdName":"FrutaP67.pbd","PbdLocalPath":"FrutaP67.pbd"},{"PbdName":"FrutaP68.pbd","PbdLocalPath":"FrutaP68.pbd"},{"PbdName":"FrutaP69.pbd","PbdLocalPath":"FrutaP69.pbd"},{"PbdName":"FrutaP70.pbd","PbdLocalPath":"FrutaP70.pbd"},{"PbdName":"FrutaP71.pbd","PbdLocalPath":"FrutaP71.pbd"},{"PbdName":"FrutaP72.pbd","PbdLocalPath":"FrutaP72.pbd"},{"PbdName":"frutap73.pbd","PbdLocalPath":"frutap73.pbd"},{"PbdName":"Frutap74.pbd","PbdLocalPath":"Frutap74.pbd"},{"PbdName":"FrutaP80.pbd","PbdLocalPath":"FrutaP80.pbd"},{"PbdName":"FrutaP81.pbd","PbdLocalPath":"FrutaP81.pbd"},{"PbdName":"FrutaPGD.pbd","PbdLocalPath":"FrutaPGD.pbd"},{"PbdName":"Productiva.pbd","PbdLocalPath":"Productiva.pbd"},{"PbdName":"FrutaPBasura.pbd","PbdLocalPath":"FrutaPBasura.pbd"},{"PbdName":"webserviceguiadespacho.pbd","PbdLocalPath":"webserviceguiadespacho.pbd"},{"PbdName":"GuiaDespacho.pbd","PbdLocalPath":"GuiaDespacho.pbd"},{"PbdName":"CajasProdFto.pbd","PbdLocalPath":"C:\\Desarrollo 22\\Productiva\\CajasProd\\CajasProdFto.pbd"},{"PbdName":"TabProd01.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd01.pbd"},{"PbdName":"TabProd02.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd02.pbd"},{"PbdName":"TabProd03.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd03.pbd"},{"PbdName":"TabProd04.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd04.pbd"},{"PbdName":"TabProd05.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd05.pbd"},{"PbdName":"TabProd06.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProd06.pbd"},{"PbdName":"TabProdConsol.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdConsol.pbd"},{"PbdName":"TabProdTab.pbd","PbdLocalPath":"C:\\Desarrollo 22\\TablasProd\\Tablas\\TabProdTab.pbd"},{"PbdName":"WebServices17.pbd","PbdLocalPath":"C:\\Desarrollo 22\\WebServices17.pbd"},{"PbdName":"AdmUsuar.pbd","PbdLocalPath":"C:\\Desarrollo 22\\AdmUsuar.pbd"},{"PbdName":"ObjePubl.pbd","PbdLocalPath":"C:\\Desarrollo 22\\ObjePubl.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["FrutaPro.ini","see32.dll"],"InstantDownloadFiles":[],"RuntimeModules":["coreruntimefiles","sncsqlnativeclient","msexcel12support","nativepdfsupport","restclientsupport","smtpclientsupport"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","CertificateType":0,"PfxFile":"","Token":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapipath":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","TargetFramework":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"FrutaPro.ini","UpdateType":3}],"CSharpUIConfig":{"ServerType":0,"RuntimeFileType":1}}}
 PBD:FrutaPro.pbl,,1
 PBD:FrutaP00.pbl,,1
 PBD:FrutaP20.pbl,,1
@@ -46,11 +46,11 @@ PBD:frutap73.pbl,,1
 PBD:Frutap74.pbl,,1
 PBD:FrutaP80.pbl,,1
 PBD:FrutaP81.pbl,,1
-PBD:FrutaPBasura.pbl,,1
 PBD:FrutaPGD.pbl,,1
-PBD:guiadespacho.pbl,,1
 PBD:Productiva.pbl,,1
+PBD:FrutaPBasura.pbl,,1
 PBD:webserviceguiadespacho.pbl,,1
+PBD:GuiaDespacho.pbl,,1
 PBD:..\CajasProd\CajasProdFto.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProd01.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProd02.pbl,,1
@@ -60,9 +60,9 @@ PBD:..\..\TablasProd\Tablas\TabProd05.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProd06.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProdConsol.pbl,,1
 PBD:..\..\TablasProd\Tablas\TabProdTab.pbl,,1
+PBD:..\..\WebServices17.pbl,,1
 PBD:..\..\AdmUsuar.pbl,,1
 PBD:..\..\ObjePubl.pbl,,1
-PBD:..\..\WebServices17.pbl,,1
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mensaje,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_mues_zonas,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_especies,d
@@ -167,6 +167,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mues_guia_exist
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_existencia_frigopalletinspec_gestion2,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_regiones,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_destinos,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,dw_sele_anulaguia,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_busc_productores_clientes,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP30.pbl,dw_mues_termografo,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_mant_mues_anula_inspeccion,w
@@ -196,7 +197,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletencab_
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,w_maed_recfruprocee_particular_palletenc,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_etiquetas,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruprocee_devolucion_puerto,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,w_mant_mues_anulaguia,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP25.pbl,w_mant_mues_statuspalletencab_trans,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,f_calcula_digito,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP70.pbl,w_info_cuadra_tempo_prod_embq,w
@@ -399,8 +399,8 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_produccion_g
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,m_sys_frame,m
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,grabaaccesoaplicacion,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_comunasexp,u
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp_mantencion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_especie,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_plantadesp_mantencion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_embalajetipopalletclie,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_cexpusuarios,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,dw_mant_planificallegadaenca,d
@@ -444,6 +444,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_status,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,dddw_spro_tipomovtofruta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_info_planificacionllegada,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existevariedad_relacionada,f
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,n_buscaarchivo,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,w_info_planilla_despacho,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mues_controldespachos,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_prodcuarteles,u
@@ -461,6 +462,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_puertos,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_packing,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_info_facturacion_productor,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_accesousuarios,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_plantas,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_especies,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_deta_cargostecnicos,w
@@ -474,7 +476,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_info_solicitud_ins
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_detallefumisolicitud_control,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_info_despafrigode_palletencab,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mant_palletencab_modifica,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_maed_recfruprocee_granel,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_mues_alpalletfruta_gen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP60.pbl,dddw_tipofrio,d
@@ -570,6 +571,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP71.pbl,w_archivo_tablas_alh
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_embarques,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,w_cons_trazabilidad,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_condicion,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_sele_codigooperacional,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_plantas,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mant_camarasbode,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mues_envases,d
@@ -581,7 +583,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mant_recfruprocee
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,dw_mant_palletencab,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruprocee,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_mant_mues_alturapallet,w
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_sele_codigooperacional,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_ordencargaenca,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dddw_camaras_planta,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,w_info_existencia_por_dia,w
@@ -662,6 +663,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,dw_gene_archivo_saam
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP64.pbl,w_info_existencia_sitio_revusda,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_despachos_gestion_general,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP00.pbl,w_mant_mues_valofactespe,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_tratamientos,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_busc_palletencab,w
@@ -670,7 +672,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mant_modificaplan
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP62.pbl,w_info_fumigaenc,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_reetienc,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,dw_mues_palletfruta_transitorio_origen_caja,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_system_approach,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_statnombre,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP52.pbl,dw_agrupa_repa_sag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP51.pbl,w_proc_traspaso_zonas,w
@@ -746,7 +747,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,dw_mues_actividadest
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mues_embarques,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletfruta_rotulatrans,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existecliente,f
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,dw_mues_anulaguia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_mant_mues_controldespachos,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP61.pbl,w_info_mues_anula_inspeccion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mues_sagcambiodestdeta,d
@@ -783,6 +783,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_info_pallet_reclas
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP61.pbl,dw_grafico_consulta,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_mail,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admasucursales,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_sele_codigooperacional,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_variedades,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_mant_mues_status2,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_cargostecnicos,d
@@ -797,7 +798,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_operacion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mant_repalletenca,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletencab_trans_modifica,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,dw_mues_palletfruta_cajasprod,d
-OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_sele_codigooperacional,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,w_mant_mues_ordencargapallet,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,w_maed_generapalletdesdecajas_granel,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_busqueda,s
@@ -1008,7 +1008,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_lotescorrelequipo,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,w_maed_palletencab_encabezado,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_info_selec_aplic_plaguicidas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_planilla_despacho_muestras,w
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,w_info_guiasnulas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mues_estibacamiones,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_borra_ultimo_repa,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mant_fumigadet,d
@@ -1131,6 +1130,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletencabh
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mant_receprodenca,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_mant_deta_despafrigode_usda,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_palletfrutahisto_inpe,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,w_mant_mues_anulaguia,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Productiva.pbl,w_info_resumen_listado_trasladosuncamion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_busqueda_pallets_repal,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP21.pbl,dw_mues_palletfruta_repaletizaje_caja,d
@@ -1177,7 +1177,6 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dw_mant_recibidores,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_correldoctoelectronico,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_mant_recfruprocee_detalle,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mues_spro_cajasprod,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,n_buscaarchivo,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,dw_controla_prediocuartel_guia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,w_busc_aplica_plaguisida_productor,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,existeoperacion,f
@@ -1233,6 +1232,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_ws_embarcador,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mant_facdiaslibres,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_clienprove,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mues_despafrigode_muestra,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,dw_mues_anulaguia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_info_compactorepa,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,dddw_destinos_codigo,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mant_rechazocondicion,d
@@ -1272,6 +1272,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_busc_planificalleg
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletencab_devolucion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_palletfruta_encadetalle,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_mant_mues_traspasocliente_folio,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP51.pbl,w_proc_rehabilita_anulacion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_clienterotulado,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,w_gene_archivo_condicion_sag,w
@@ -1290,7 +1291,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,w_maed_recfruprocee_
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,dw_ubicacionessellossag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_validatipopallet,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_maed_aplic_plaguisidas_productor,w
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,dw_sele_anulaguia,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,w_sele_observa_nulo,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_info_instructivo_emb_pallets,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP29.pbl,w_busc_sagcambiodestenca,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,w_cons_condicion,w
@@ -1420,6 +1421,7 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_maed_planificalleg
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd02.pbl,w_busc_embarques,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mues_rebaje_produccionporrecepcion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,dw_mues_arch_planos_cajasprod_despaemba,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,w_info_guiasnulas,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_mant_instructivo_emb,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP22.pbl,w_caracteristicas_condicion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP27.pbl,dw_mant_fumigaenc,d
@@ -1471,7 +1473,6 @@ OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP31.pbl,w_mant_mues_activida
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_tratamiento,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dddw_destinosag,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletfruta_interfecemb,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,uo_guiadespacho,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_despacho_fruta_inspec,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mant_aplic_deta_plaguisida,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP26.pbl,dw_borra_repa,d
@@ -1515,9 +1516,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_patente,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mant_palletfruta_trans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_palletfruta_rotulatrans,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_recfruproced_trans,d
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,f_kilos_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_guia_despacho,w
-OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,w_sele_observa_nulo,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,dw_mueve_cajaspalletfruta_origen,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP63.pbl,dw_info_excel_frigorificos_pallet_inspec,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,w_maed_generapalletdesdecajas,w
@@ -1577,6 +1576,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_mues_embarvalores,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,uo_seleccion_centroemisor,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_mant_encab_deta_csd,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,w_busc_recfruprocee_devolucion_puerto,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,uo_guiadespacho,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP23.pbl,dw_mant_palletencab_historia,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP50.pbl,dw_info_archivo_saam_packing_nuevo,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,dw_mant_controldespachos,d

@@ -697,7 +697,7 @@ Else
 
 	of_InsertaRegistro('xObservaciones', Mid(ls_Leyenda, 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source_Frut.Object.ggn[1], 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
 	
@@ -935,9 +935,9 @@ IF of_DatosEmpresa(Tipo) Then
 			End If
 			
 			of_InsertaRegistro('xObservaciones1', Mid(ls_Referencia, 1, 120))
-			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120))
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 4  Then
-			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN : ' + ids_Source.Object.ggn[1], 1, 120))
+			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 1 Then //Guia Exportacion / Embarques
 			//Glosa 1
 			ls_Referencia = Mid('Total VGM: ' + String(ids_Source.Object.defe_totvgm[1], '#,##0.00') + &

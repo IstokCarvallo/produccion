@@ -48,7 +48,7 @@ end forward
 
 global type w_maed_recfruprocee_particular from w_mant_encab_deta_csd
 integer width = 4389
-integer height = 2164
+integer height = 2168
 string title = "RECEPCION DE PALLETS"
 string menuname = ""
 windowstate windowstate = maximized!
@@ -86,14 +86,14 @@ type variables
 w_mant_deta_recfruprocee iw_mantencion
 
 DataWindowChild	dw_puerto, dw_planta, dw_ptaori, dw_fruta, idwc_patente
+
 Integer 	ii_recepcion, ii_cliente, ii_planta, ii_estado, ii_controlaaceso,ii_borra=0,ii_bloquea
 Boolean	ib_existe_folio, ib_primera_entrada, ib_conectado
-Long     il_pallet, il_folio, il_numero, il_NroCaja, il_NroPallet
-Date     id_mespro 
-String   is_Archivo, is_mensaje, is_Computador, is_correo, is_nomplanta, is_planta
+Long     	il_pallet, il_folio, il_numero, il_NroCaja, il_NroPallet
+Date     	id_mespro 
+String   	is_Archivo, is_mensaje, is_Computador, is_correo, is_nomplanta, is_planta
 
 Transaction	sqlexis
-
 Transaction	sqlconec
 
 Boolean	ib_ConectadoExistencia
@@ -2327,22 +2327,18 @@ RETURN False
 
 end function
 
-public subroutine wf_capturarecepciones (integer ai_cliente, integer ai_planta, long al_numero);Long 		ll_Fila_e, ll_Fila_d, ll_Fila, ll_Null, respuesta, ll_fila2, ll_palletexis, ll_Exis, ll_cont
+public subroutine wf_capturarecepciones (integer ai_cliente, integer ai_planta, long al_numero);Long 		ll_Fila_e, ll_Fila_d, ll_Fila, ll_Null, respuesta, ll_fila2, ll_palletexis, ll_Exis, ll_Cont
 Integer	li_Plantaexis, li_clientexis, li_transportista
 
 SetNull(ll_Null)
 
-dw_1.Reset() 
-dw_2.Reset()
-dw_2.InsertRow(0)
+//dw_1.Reset() 
+//dw_2.Reset()
+//dw_2.InsertRow(0)
 
 ll_fila_e	= dw_3.Retrieve(ai_Planta,al_Numero,ai_Cliente) 
-
 li_transportista = dw_3.Object.tran_codigo[1]
-
-If IsNull(li_transportista) Then
-	li_transportista = 0 
-End If	
+If IsNull(li_transportista) Then li_transportista = 0 
 
 If li_transportista > 0 Then
 	SELECT	count(*)
@@ -2371,93 +2367,99 @@ Else
 	If ll_fila_d = -1 Then
 		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
 	Else                        
-		FOR ll_Fila = 1 TO dw_4.RowCount()
-										
+		For  ll_Fila = 1 To dw_4.RowCount()										
 			li_clientexis	=	dw_4.Object.clie_codigo[ll_Fila] 
 			li_Plantaexis	=	dw_4.Object.plde_codigo[ll_Fila] 
 			ll_palletexis	=	dw_4.Object.paen_numero[ll_Fila]
 			
-			SELECT count(*) INTO :ll_Exis
+			SELECT Count(1) INTO :ll_Exis
 			FROM  dbo.recfruproced
 			WHERE clie_codigo 	= :li_clientexis
 			AND   plde_codigo 	= :li_Plantaexis
 			AND   paen_numero 	= :ll_palletexis;
 
-			//If ll_Exis = 0 OR IsNull(ll_Exis) Then
-				ll_fila2=dw_1.InsertRow(0)
-				dw_1.Object.plde_codigo[ll_fila2]		= dw_4.Object.plde_codigo[ll_Fila] 
-				dw_1.Object.rfpe_numero[ll_fila2]		= ll_Null 
-				dw_1.Object.clie_codigo[ll_fila2]		= dw_4.Object.clie_codigo[ll_Fila]  
-				dw_1.Object.paen_numero[ll_fila2] 	= dw_4.Object.paen_numero[ll_Fila]  
-				dw_1.Object.paen_tipopa[ll_fila2] 		= dw_4.Object.paen_tipopa[ll_Fila]  
-				dw_1.Object.emba_codigo[ll_fila2] 	= dw_4.Object.emba_codigo[ll_Fila]  
-				dw_1.Object.cate_codigo[ll_fila2] 		= dw_4.Object.cate_codigo[ll_Fila]  
-				dw_1.Object.stat_codigo[ll_fila2] 		= dw_4.Object.stat_codigo[ll_Fila]  
-				dw_1.Object.paen_ccajas[ll_fila2] 	= dw_4.Object.paen_ccajas[ll_Fila]  
-				dw_1.Object.espe_codigo[ll_fila2] 	= dw_4.Object.espe_codigo[ll_Fila]  
-				dw_1.Object.tpem_codigo[ll_fila2] 	= dw_4.Object.tpem_codigo[ll_Fila]     
-				dw_1.Object.vari_codigo[ll_fila2] 		= dw_4.Object.vari_codigo[ll_Fila]      
-				dw_1.Object.tiem_codigo[ll_fila2] 		= dw_4.Object.tiem_codigo[ll_Fila]      
-				dw_1.Object.etiq_codigo[ll_fila2] 		= dw_4.Object.etiq_codigo[ll_Fila]  
-				dw_1.Object.trat_codigo[ll_fila2] 		= dw_4.Object.trat_codigo[ll_Fila]  
-				dw_1.Object.frio_codigo[ll_fila2] 		= dw_4.Object.frio_codigo[ll_Fila]  
-				dw_1.Object.cond_codigo[ll_fila2] 	= dw_4.Object.cond_codigo[ll_Fila]  
-				dw_1.Object.paen_fecemb[ll_Fila2] 	= dw_4.Object.paen_fecemb[ll_Fila]  
-				dw_1.Object.paen_cosecha[ll_fila2] 	=dw_4.Object.paen_cosecha[ll_Fila]   
-				dw_1.Object.paen_altura[ll_fila2] 		= dw_4.Object.paen_altura[ll_Fila]  
-				dw_1.Object.copa_codigo[ll_fila2] 	= dw_4.Object.copa_codigo[ll_Fila] 
-				dw_1.Object.paen_conpal[ll_fila2] 	= dw_4.Object.paen_conpal[ll_Fila] 
-				dw_1.Object.paen_conpar[ll_fila2] 	= dw_4.Object.paen_conpar[ll_Fila] 
-				dw_1.Object.rfpe_pcopda[ll_fila2] 	= 2			
-		NEXT
+				If ll_Exis = 0 Or IsNull(ll_Exis) Then
+					ll_fila2=dw_1.InsertRow(0)
+					dw_1.Object.plde_codigo[ll_fila2]		= dw_4.Object.plde_codigo[ll_Fila] 
+					dw_1.Object.rfpe_numero[ll_fila2]		= ll_Null 
+					dw_1.Object.clie_codigo[ll_fila2]		= dw_4.Object.clie_codigo[ll_Fila]  
+					dw_1.Object.paen_numero[ll_fila2] 	= dw_4.Object.paen_numero[ll_Fila]  
+					dw_1.Object.paen_tipopa[ll_fila2] 		= dw_4.Object.paen_tipopa[ll_Fila]  
+					dw_1.Object.emba_codigo[ll_fila2] 	= dw_4.Object.emba_codigo[ll_Fila]  
+					dw_1.Object.cate_codigo[ll_fila2] 		= dw_4.Object.cate_codigo[ll_Fila]  
+					dw_1.Object.stat_codigo[ll_fila2] 		= dw_4.Object.stat_codigo[ll_Fila]  
+					dw_1.Object.paen_ccajas[ll_fila2] 	= dw_4.Object.paen_ccajas[ll_Fila]  
+					dw_1.Object.espe_codigo[ll_fila2] 	= dw_4.Object.espe_codigo[ll_Fila]  
+					dw_1.Object.tpem_codigo[ll_fila2] 	= dw_4.Object.tpem_codigo[ll_Fila]     
+					dw_1.Object.vari_codigo[ll_fila2] 		= dw_4.Object.vari_codigo[ll_Fila]      
+					dw_1.Object.tiem_codigo[ll_fila2] 		= dw_4.Object.tiem_codigo[ll_Fila]      
+					dw_1.Object.etiq_codigo[ll_fila2] 		= dw_4.Object.etiq_codigo[ll_Fila]  
+					dw_1.Object.trat_codigo[ll_fila2] 		= dw_4.Object.trat_codigo[ll_Fila]  
+					dw_1.Object.frio_codigo[ll_fila2] 		= dw_4.Object.frio_codigo[ll_Fila]  
+					dw_1.Object.cond_codigo[ll_fila2] 	= dw_4.Object.cond_codigo[ll_Fila]  
+					dw_1.Object.paen_fecemb[ll_Fila2] 	= dw_4.Object.paen_fecemb[ll_Fila]  
+					dw_1.Object.paen_cosecha[ll_fila2] 	=dw_4.Object.paen_cosecha[ll_Fila]   
+					dw_1.Object.paen_altura[ll_fila2] 		= dw_4.Object.paen_altura[ll_Fila]  
+					dw_1.Object.copa_codigo[ll_fila2] 	= dw_4.Object.copa_codigo[ll_Fila] 
+					dw_1.Object.paen_conpal[ll_fila2] 	= dw_4.Object.paen_conpal[ll_Fila] 
+					dw_1.Object.paen_conpar[ll_fila2] 	= dw_4.Object.paen_conpar[ll_Fila] 
+					dw_1.Object.rfpe_pcopda[ll_fila2] 	= 2
+				Else
+					MessageBox('Atencion', 'El folio: ' + String(ll_palletexis) + '. Ya se encuentra cargado en otra recepcion.', StopSign!, OK!)
+				End If
+			Next
 	End If
-
- 	dw_2.Object.rfpe_numero[1] 	= ll_Null
-  	dw_2.Object.plde_codigo[1] 	= dw_3.Object.plde_codigo[1]
-  	dw_2.Object.inpr_numero[1] 	= dw_3.Object.inpr_numero[1]
-  	dw_2.Object.rfpe_fecrec[1] 	= dw_3.Object.rfpe_fecrec[1]
-  	dw_2.Object.rfpe_tarjas[1] 		= dw_3.Object.rfpe_tarjas[1]
-  	dw_2.Object.rfpe_nrores[1] 	= dw_3.Object.rfpe_nrores[1]
-  	dw_2.Object.rfpe_tipoen[1] 	= dw_3.Object.rfpe_tipoen[1]
-  	dw_2.Object.rfpe_guides[1] 	= dw_3.Object.rfpe_guides[1]
-  	dw_2.Object.rfpe_ptaori[1] 		= dw_3.Object.rfpe_ptaori[1]
-  	dw_2.Object.puer_codigo[1] 	= dw_3.Object.puer_codigo[1]
-  	dw_2.Object.embq_codigo[1] 	= dw_3.Object.embq_codigo[1]
-  	dw_2.Object.prod_codigo[1] 	= dw_3.Object.prod_codigo[1]
-  	dw_2.Object.rfpe_nomres[1] 	= dw_3.Object.rfpe_nomres[1]
-  	dw_2.Object.clie_codigo[1] 		= dw_3.Object.clie_codigo[1]
-  	dw_2.Object.rfpe_tardef[1] 		= dw_3.Object.rfpe_tardef[1]
-  	dw_2.Object.tran_codigo[1] 	= dw_3.Object.tran_codigo[1]
-  	dw_2.Object.rfpe_patent[1] 	= dw_3.Object.rfpe_patent[1]
-  	dw_2.Object.rfpe_chofer[1] 	= dw_3.Object.rfpe_chofer[1]
-  	dw_2.Object.tica_codigo[1] 		= dw_3.Object.tica_codigo[1]
-  	dw_2.Object.rfpe_fecact[1] 		= dw_3.Object.rfpe_fecact[1]
-  	dw_2.Object.rfpe_horact[1] 	= dw_3.Object.rfpe_horact[1]
-  	dw_2.Object.frre_codigo[1] 	= dw_3.Object.frre_codigo[1]
-  	dw_2.Object.rfpe_horrec[1] 	= dw_3.Object.rfpe_horrec[1]
-	dw_2.Object.rfpe_numtra[1] 	= dw_3.Object.rfpe_numero[1]
-	dw_2.Object.rfpe_observ[1] 	= dw_3.Object.rfpe_observ[1]
-	dw_2.Object.rfpe_porter[1] 	= dw_3.Object.rfpe_porter[1]
-	dw_2.Object.rfpe_patcar[1] 	= dw_3.Object.rfpe_patcar[1]
-	dw_2.Object.rfpe_fecpac[1] 	= dw_3.Object.rfpe_fecpac[1]
-	dw_2.Object.rfpe_fecpld[1] 		= dw_3.Object.rfpe_fecpld[1]
 	
-	pb_eliminar.Enabled	= True
-	pb_grabar.Enabled		= True
-	pb_imprimir.Enabled	= True
-	pb_ins_det.Enabled	= True
-
-	If ll_fila_d > 0 Then
-		pb_eli_det.Enabled	= True
-		dw_1.SetRow(1)
-		dw_1.SelectRow(1,True)
-		dw_1.SetFocus()
-		HabilitaEncab(False)
-			
-		istr_mant.Argumento[4]		=	String(dw_2.Object.rfpe_tarjas[1])
-		istr_mant.Argumento[11]	=	String(dw_2.Object.rfpe_tardef[1])
-		istr_mant.argumento[21] 	=  String(dw_2.Object.rfpe_ptaori[1])
-		istr_mant.argumento[30] 	=  String(dw_2.Object.rfpe_nrores[1])
+	If dw_1.RowCount() > 0 Then
+		//dw_2.Object.rfpe_numero[1] 	= ll_Null
+		dw_2.Object.plde_codigo[1] 	= dw_3.Object.plde_codigo[1]
+		dw_2.Object.inpr_numero[1] 	= dw_3.Object.inpr_numero[1]
+		dw_2.Object.rfpe_fecrec[1] 	= dw_3.Object.rfpe_fecrec[1]
+		dw_2.Object.rfpe_tarjas[1] 		= dw_3.Object.rfpe_tarjas[1]
+		dw_2.Object.rfpe_nrores[1] 	= dw_3.Object.rfpe_nrores[1]
+		dw_2.Object.rfpe_tipoen[1] 	= dw_3.Object.rfpe_tipoen[1]
+		dw_2.Object.rfpe_guides[1] 	= dw_3.Object.rfpe_guides[1]
+		dw_2.Object.rfpe_ptaori[1] 		= dw_3.Object.rfpe_ptaori[1]
+		dw_2.Object.puer_codigo[1] 	= dw_3.Object.puer_codigo[1]
+		dw_2.Object.embq_codigo[1] 	= dw_3.Object.embq_codigo[1]
+		dw_2.Object.prod_codigo[1] 	= dw_3.Object.prod_codigo[1]
+		dw_2.Object.rfpe_nomres[1] 	= dw_3.Object.rfpe_nomres[1]
+		dw_2.Object.clie_codigo[1] 		= dw_3.Object.clie_codigo[1]
+		dw_2.Object.rfpe_tardef[1] 		= dw_3.Object.rfpe_tardef[1]
+		dw_2.Object.tran_codigo[1] 	= dw_3.Object.tran_codigo[1]
+		dw_2.Object.rfpe_patent[1] 	= dw_3.Object.rfpe_patent[1]
+		dw_2.Object.rfpe_chofer[1] 	= dw_3.Object.rfpe_chofer[1]
+		dw_2.Object.tica_codigo[1] 		= dw_3.Object.tica_codigo[1]
+		dw_2.Object.rfpe_fecact[1] 		= dw_3.Object.rfpe_fecact[1]
+		dw_2.Object.rfpe_horact[1] 	= dw_3.Object.rfpe_horact[1]
+		dw_2.Object.frre_codigo[1] 	= dw_3.Object.frre_codigo[1]
+		dw_2.Object.rfpe_horrec[1] 	= dw_3.Object.rfpe_horrec[1]
+		dw_2.Object.rfpe_numtra[1] 	= dw_3.Object.rfpe_numero[1]
+		dw_2.Object.rfpe_observ[1] 	= dw_3.Object.rfpe_observ[1]
+		dw_2.Object.rfpe_porter[1] 	= dw_3.Object.rfpe_porter[1]
+		dw_2.Object.rfpe_patcar[1] 	= dw_3.Object.rfpe_patcar[1]
+		dw_2.Object.rfpe_fecpac[1] 	= dw_3.Object.rfpe_fecpac[1]
+		dw_2.Object.rfpe_fecpld[1] 		= dw_3.Object.rfpe_fecpld[1]
+		
+		pb_eliminar.Enabled	= True
+		pb_grabar.Enabled		= True
+		pb_imprimir.Enabled	= True
+		pb_ins_det.Enabled	= True
+	
+		If ll_fila_d > 0 Then
+			pb_eli_det.Enabled	= True
+			dw_1.SetRow(1)
+			dw_1.SelectRow(1,True)
+			dw_1.SetFocus()
+			HabilitaEncab(False)
+				
+			istr_mant.Argumento[4]		=	String(dw_2.Object.rfpe_tarjas[1])
+			istr_mant.Argumento[11]	=	String(dw_2.Object.rfpe_tardef[1])
+			istr_mant.argumento[21] 	=  String(dw_2.Object.rfpe_ptaori[1])
+			istr_mant.argumento[30] 	=  String(dw_2.Object.rfpe_nrores[1])
+		End If
+	Else
+		MessageBox('Atencion', 'Recepcion sin detalle, no se genero recepcion.')
 	End If
 End If
 end subroutine
@@ -3013,12 +3015,10 @@ If IsNull(dw_2.Object.frre_codigo[1]) Then
 	Return
 End If
 
-If dw_2.GetNextModIfied(0, Primary!) > 0 Then
+If dw_2.GetNextModified(0, Primary!) > 0 Then
 	dw_2.SetItem(1, "rfpe_fecact", Today())
 	dw_2.SetItem(1, "rfpe_horact", Now())
 End If
-
-ll_nuevofolio = dw_2.Object.rfpe_numero[1]
 
 //If Not ib_primera_entrada AND Not ib_existe_folio  Then
 
@@ -3037,6 +3037,8 @@ If dw_2.GetItemStatus(1, 0, Primary!) = New! OR &
 			 
 	If IsNull(dw_2.Object.rfpe_numero[1]) OR dw_2.Object.rfpe_numero[1] = 0 Then
 		ll_nuevofolio=Buscanuevofolio(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]))
+	Else
+		ll_nuevofolio = dw_2.Object.rfpe_numero[1]
 	End If
 	
 	If Long(ll_nuevofolio) = 0  Then
@@ -3068,7 +3070,7 @@ dw_13.Reset()
 If istr_mant.argumento[13] = '2'  OR  istr_mant.argumento[13] = '1' Then
 	For ll_filas	=	1	To	dw_1.RowCount()
 		If	dw_13.Retrieve(dw_2.Object.clie_codigo[1],dw_1.Object.paen_numero[ll_filas],dw_2.Object.plde_codigo[1]) > 0 Then
-			FOR ll_fila_d = 1 TO dw_13.RowCount()
+			For ll_fila_d = 1 To dw_13.RowCount()
 				ll_fila_g	=	ids_palletfruta_fechaI.InsertRow(0)
 				ids_palletfruta_fechaI.SetItem(ll_fila_g,'clie_codigo',dw_13.Object.clie_codigo[ll_fila_d])				
 				ids_palletfruta_fechaI.SetItem(ll_fila_g,'paen_numero',dw_13.Object.paen_numero[ll_fila_d])						
@@ -3102,12 +3104,12 @@ If istr_mant.argumento[13] = '2'  OR  istr_mant.argumento[13] = '1' Then
 	DwItemStatus	Estadol 
 	ids_palletfruta_fechaI.ResetUpdate()
 	
-	FOR ll_filas 	=	1 TO 	ids_palletfruta_fechaI.RowCount()
+	For ll_filas 	=	1 To 	ids_palletfruta_fechaI.RowCount()
 		Estadol	=	ids_palletfruta_fechaI.GetItemStatus(ll_filas, 0, Primary!)
 		//ids_palletfruta_fechaI.SetItemStatus(ll_filas,0,  Primary!, DataModIfied!	)	
 		ids_palletfruta_fechaI.SetItemStatus(ll_filas,'pafr_fecing',  Primary!, DataModIfied!	)	
 		Estadol	=	ids_palletfruta_fechaI.GetItemStatus(ll_filas, 0, Primary!)
-	NEXT
+	Next
 End If
 
 dw_13.Reset()
@@ -3244,18 +3246,15 @@ end event
 event ue_guardar;Integer 	li_Planta, li_Cliente, li_administradora, li_bodeadmin, li_codigo, li_Estado, li_gencaj, &
 			li_plantaori, li_seleccion, li_area, li_entrada, li_tipopa
 Long    	ll_Pallet, ll_Fila, ll_numero, ll_cajas, ll_cont
-String	ls_usuario, ls_cajas, ls_Null
+String		ls_usuario, ls_cajas, ls_Null
 Date		ld_fecha
 Time		lt_hora
 
 If dw_1.AcceptText() = -1 Then Return
   
 SetPointer(HourGlass!)
-
 SetNull(ls_Null)
-
 w_main.SetMicroHelp("Grabando información...")
-
 Message.DoubleParm = 0
 
 TriggerEvent("ue_validacontrolcalidad")
@@ -3289,7 +3288,7 @@ If istr_mant.argumento[33] =	'1' Then
 			ls_cajas	  	= String(dw_1.Object.paen_ccajas[ll_Fila])
 			
 			If li_entrada <> 2 AND li_entrada <> 6 Then
-				If existepallet(li_cliente,li_Planta,ll_Pallet) Then
+				If Existepallet(li_cliente,li_Planta,ll_Pallet) Then
 					
 					SELECT count(*)
 					INTO :li_seleccion
@@ -3491,7 +3490,16 @@ If wf_actualiza_db(False) Then
 		End If
 	End If
 Else
-	MessageBox("PROBLEMA", "NO SE EJECUTO." )	
+	MessageBox("ATENCION", "Volver a cargar la recepcion tarnsitorio sobre la misma recepcion: " + String(dw_2.Object.rfpe_numero[1]))
+	
+	uo_Mail	luo_Mail
+	luo_Mail	=	Create uo_Mail
+	
+	luo_Mail.of_Send({"istok.Carvallo@rioblanco.net"}, 'Recepcion Definitiva Problema', 'Recepcion con problemas.', 1)
+
+	
+	Destroy luo_Mail
+	
 							
 	FOR ll_Fila = 1 TO dw_1.RowCount()
 					
@@ -3924,41 +3932,30 @@ Long			ll_FilaPallet, ll_FilaCajas, ll_NroPallet, ll_NroCajas, ll_Registros
 
 li_TipoEntrada	=	dw_2.Object.rfpe_tipoen[1]
 
-IF li_TipoEntrada =  7 THEN
-	
+If li_TipoEntrada =  7 Then	
 	li_Reimprime	=	MessageBox("Atención","Desea Re-Imprimir Adhesivos Compactos?",Exclamation!, OKCancel!, 2)
-	
-	IF li_Reimprime = 1 THEN
-		
-		FOR ll_FilaPallet = 1 TO dw_1.RowCount()
-          			
+	If li_Reimprime = 1 Then		
+		FOR ll_FilaPallet = 1 TO dw_1.RowCount()          			
 		 	ll_NroPallet	=	dw_1.Object.paen_numero[ll_FilaPallet]
 			il_NroPallet	=	ll_NroPallet
 		 	dw_15.Reset()
 		 	dw_15.Retrieve(Integer(istr_mant.argumento[3]),ll_NroPallet,Integer(istr_mant.argumento[1]))
 			ll_Registros = dw_15.RowCount()
 			FOR ll_FilaCajas = 1 TO dw_15.RowCount()
-				IF dw_15.Object.pafr_ccajas[ll_FilaCajas] > 0 THEN
-			
+				If dw_15.Object.pafr_ccajas[ll_FilaCajas] > 0 Then			
 					il_NroCaja	=	dw_15.Object.pafr_secuen[ll_FilaCajas]
 					il_NroPallet = dw_15.Object.paen_numero[ll_FilaCajas]
-					dw_16.Reset()
-					  
-					Parent.TriggerEvent("ue_imprimir2")
-					
-				END IF	
-				  
+					dw_16.Reset()					  
+					Parent.TriggerEvent("ue_imprimir2")					
+				End If				  
 			NEXT
 	   NEXT
-	ELSE
-		
+	Else
 		CALL SUPER::Clicked
-	END IF
-ELSE
-		
-	CALL Super::Clicked
-	
-END IF
+	End If
+Else		
+	CALL Super::Clicked	
+End If
 end event
 
 type pb_salir from w_mant_encab_deta_csd`pb_salir within w_maed_recfruprocee_particular
@@ -4053,7 +4050,7 @@ If istr_busq.argum[5] <> "" Then
 	dw_ptaori.Setfilter("plde_tipopl=1")
 	dw_ptaori.Filter()
 	wf_CapturaRecepciones(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]),Long(istr_mant.argumento[34]))
-Return
+Else
 	istr_mant.argumento[33] = ''
 	istr_mant.argumento[34] = ''
 	pb_buscar.SetFocus()

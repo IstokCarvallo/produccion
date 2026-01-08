@@ -178,23 +178,23 @@ WHERE pate_tempor=:ll_tempor;
 
 ll_Guia	=	Long(istr_mant.argumento[2])
 	
-IF rb_todos.Checked THEN
+If rb_todos.Checked Then
 	lstr_info.titulo	= "RECEPCION DE PALLETS"
 	lstr_info.copias	= 1
 	OpenWithParm(vinf,lstr_info)
 	vinf.dw_1.DataObject = "dw_info_recepcion_pallet"
-ElseIF rb_sin_deta.Checked THEN
+ElseIf rb_sin_deta.Checked Then
 	lstr_info.titulo	= "RECEPCION DE PALLETS SIN DETALLE"
 	lstr_info.copias	= 1	
 	OpenWithParm(vinf,lstr_info)
 	vinf.dw_1.DataObject = "dw_info_recepcion_pallet_sindetalle"	
-ElseIF cbx_guias.Checked THEN
+ElseIf cbx_guias.Checked Then
 	ll_Guia = -1
 	lstr_info.titulo	= "RECEPCIONES CON PALLETS SIN DETALLE"
 	lstr_info.copias	= 1	
 	OpenWithParm(vinf,lstr_info)
 	vinf.dw_1.DataObject = "dw_info_recepcion_palletsindetalletodos"	
-END IF
+End If
 		
 vinf.dw_1.SetTransObject(sqlca)
 ls_descri = BuscDescFruta(Integer(istr_mant.argumento[38]))
@@ -206,17 +206,17 @@ ls_recepcion = ls_recepcion + "                       En Planta "+istr_mant.argu
 
 fila = vinf.dw_1.Retrieve(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]), ld_desde,ld_hasta,0,ll_Guia,0,0)
 
-IF fila = -1 THEN
+If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
+ElseIf fila = 0 Then
 	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
-ELSE
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify("guia.text = '" + ls_recepcion + "'")
-	vinf.dw_1.Modify("fruta.text = '" + ls_descri + "'")  
+	vinf.dw_1.ModIfy("guia.text = '" + ls_recepcion + "'")
+	vinf.dw_1.ModIfy("fruta.text = '" + ls_descri + "'")  
 	//vinf.dw_1.Object.DataWindow.Zoom = 80
-	IF gs_Ambiente <> 'Windows' THEN F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
-END IF
+	If gs_Ambiente <> 'Windows' Then F_ImprimeInformePdf(vinf.dw_1, istr_info.titulo)
+End If
 
 SetPointer(Arrow!)
 end event
