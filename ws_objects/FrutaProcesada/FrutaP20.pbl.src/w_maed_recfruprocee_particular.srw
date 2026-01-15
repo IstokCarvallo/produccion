@@ -47,7 +47,7 @@ end type
 end forward
 
 global type w_maed_recfruprocee_particular from w_mant_encab_deta_csd
-integer width = 4389
+integer width = 4169
 integer height = 2168
 string title = "RECEPCION DE PALLETS"
 string menuname = ""
@@ -1434,44 +1434,44 @@ protected function boolean wf_actualiza_db (boolean borrando);Boolean	lb_AutoCom
 Long numero
 Integer li_planta, li_movto
 
-IF Not dw_2.uf_check_required(0) THEN RETURN False
+If Not dw_2.uf_check_required(0) Then RETURN False
 
-IF Not dw_1.uf_validate(0) THEN RETURN False
+If Not dw_1.uf_validate(0) Then RETURN False
 
 lb_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
 
-IF Borrando THEN
-	IF dw_1.Update() = -1 THEN
+If Borrando Then
+	If dw_1.Update() = -1 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 		lb_Retorno	=	False
-	ELSEIF dw_2.Update() = -1 THEN
+	ElseIf dw_2.Update() = -1 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 		RollBack;
 		lb_Retorno	=	False
-	ELSE
+	Else
 		Commit;
-		IF sqlca.SQLCode <> 0 THEN
+		If sqlca.SQLCode <> 0 Then
 			F_ErrorBaseDatos(sqlca, This.Title)
 			lb_Retorno	=	False
-		ELSE
+		Else
 			lb_Retorno	=	True
-		END IF
-	END IF
-ELSE
-	IF dw_2.Update() = -1 THEN
+		End If
+	End If
+Else
+	If dw_2.Update() = -1 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 		RollBack;
 		lb_Retorno	=	False
-	ELSEIF dw_1.Update() = -1 THEN
+	ElseIf dw_1.Update() = -1 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 		lb_Retorno	=	False
 		RollBack;
-	ELSE
+	Else
 		COMMIT;
 		lb_Retorno	=	True
-	END IF
-END IF
+	End If
+End If
 
 sqlca.AutoCommit	=	lb_AutoCommit
 
@@ -2327,8 +2327,9 @@ RETURN False
 
 end function
 
-public subroutine wf_capturarecepciones (integer ai_cliente, integer ai_planta, long al_numero);Long 		ll_Fila_e, ll_Fila_d, ll_Fila, ll_Null, respuesta, ll_fila2, ll_palletexis, ll_Exis, ll_Cont
+public subroutine wf_capturarecepciones (integer ai_cliente, integer ai_planta, long al_numero);Long 		ll_Fila_e, ll_Fila_d, ll_Fila, ll_Null, respuesta, ll_fila2, ll_palletexis, ll_Exis, ll_Cont, ll_Numero, ll_Buscar
 Integer	li_Plantaexis, li_clientexis, li_transportista
+String		ls_Buscar
 
 SetNull(ll_Null)
 
@@ -2365,23 +2366,53 @@ Else
 	ll_fila_d	= dw_4.Retrieve(ai_Planta,al_Numero,ai_Cliente)
 
 	If ll_fila_d = -1 Then
-		respuesta = MessageBox(	"Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
-	Else                        
+		respuesta = MessageBox("Error en Base de Datos", "No es posible conectar la Base de Datos.", Information!, RetryCancel!)
+	Else 
+		ll_Numero = dw_2.Object.rfpe_numero[1]
+		
 		For  ll_Fila = 1 To dw_4.RowCount()										
 			li_clientexis	=	dw_4.Object.clie_codigo[ll_Fila] 
 			li_Plantaexis	=	dw_4.Object.plde_codigo[ll_Fila] 
 			ll_palletexis	=	dw_4.Object.paen_numero[ll_Fila]
 			
-			SELECT Count(1) INTO :ll_Exis
-			FROM  dbo.recfruproced
-			WHERE clie_codigo 	= :li_clientexis
-			AND   plde_codigo 	= :li_Plantaexis
-			AND   paen_numero 	= :ll_palletexis;
-
+			ls_Buscar = 'clie_codigo = ' + string(li_clientexis) + ' And plde_codigo = ' + string(li_Plantaexis) + ' And paen_numero = ' + String(ll_palletexis)
+			ll_Buscar = dw_1.Find(ls_Buscar, 1, dw_1.GetRow())
+			
+			If ll_Buscar > 0 Then
+				dw_1.Object.plde_codigo[ll_Buscar]		= dw_4.Object.plde_codigo[ll_Fila]					
+				dw_1.Object.clie_codigo[ll_Buscar]		= dw_4.Object.clie_codigo[ll_Fila]  
+				dw_1.Object.paen_numero[ll_Buscar] 	= dw_4.Object.paen_numero[ll_Fila]  
+				dw_1.Object.paen_tipopa[ll_Buscar] 		= dw_4.Object.paen_tipopa[ll_Fila]  
+				dw_1.Object.emba_codigo[ll_Buscar] 	= dw_4.Object.emba_codigo[ll_Fila]  
+				dw_1.Object.cate_codigo[ll_Buscar] 		= dw_4.Object.cate_codigo[ll_Fila]  
+				dw_1.Object.stat_codigo[ll_Buscar] 		= dw_4.Object.stat_codigo[ll_Fila]  
+				dw_1.Object.paen_ccajas[ll_Buscar] 		= dw_4.Object.paen_ccajas[ll_Fila]  
+				dw_1.Object.espe_codigo[ll_Buscar] 		= dw_4.Object.espe_codigo[ll_Fila]  
+				dw_1.Object.tpem_codigo[ll_Buscar] 		= dw_4.Object.tpem_codigo[ll_Fila]     
+				dw_1.Object.vari_codigo[ll_Buscar] 		= dw_4.Object.vari_codigo[ll_Fila]      
+				dw_1.Object.tiem_codigo[ll_Buscar] 		= dw_4.Object.tiem_codigo[ll_Fila]      
+				dw_1.Object.etiq_codigo[ll_Buscar] 		= dw_4.Object.etiq_codigo[ll_Fila]  
+				dw_1.Object.trat_codigo[ll_Buscar] 		= dw_4.Object.trat_codigo[ll_Fila]  
+				dw_1.Object.frio_codigo[ll_Buscar] 		= dw_4.Object.frio_codigo[ll_Fila]  
+				dw_1.Object.cond_codigo[ll_Buscar] 		= dw_4.Object.cond_codigo[ll_Fila]  
+				dw_1.Object.paen_fecemb[ll_Buscar] 	= dw_4.Object.paen_fecemb[ll_Fila]  
+				dw_1.Object.paen_cosecha[ll_Buscar] 	= dw_4.Object.paen_cosecha[ll_Fila]   
+				dw_1.Object.paen_altura[ll_Buscar] 		= dw_4.Object.paen_altura[ll_Fila]  
+				dw_1.Object.copa_codigo[ll_Buscar] 		= dw_4.Object.copa_codigo[ll_Fila] 
+				dw_1.Object.paen_conpal[ll_Buscar] 		= dw_4.Object.paen_conpal[ll_Fila] 
+				dw_1.Object.paen_conpar[ll_Buscar]	 	= dw_4.Object.paen_conpar[ll_Fila] 
+				dw_1.Object.rfpe_pcopda[ll_Buscar] 		= 2	
+			Else			
+				SELECT Count(1) INTO :ll_Exis
+				FROM  dbo.recfruproced
+				WHERE clie_codigo 	= :li_clientexis
+				AND   plde_codigo 	= :li_Plantaexis
+				AND   paen_numero 	= :ll_palletexis;
+	
 				If ll_Exis = 0 Or IsNull(ll_Exis) Then
 					ll_fila2=dw_1.InsertRow(0)
-					dw_1.Object.plde_codigo[ll_fila2]		= dw_4.Object.plde_codigo[ll_Fila] 
-					dw_1.Object.rfpe_numero[ll_fila2]		= ll_Null 
+					dw_1.Object.rfpe_numero[ll_fila2]		= ll_Null
+					dw_1.Object.plde_codigo[ll_fila2]		= dw_4.Object.plde_codigo[ll_Fila]					
 					dw_1.Object.clie_codigo[ll_fila2]		= dw_4.Object.clie_codigo[ll_Fila]  
 					dw_1.Object.paen_numero[ll_fila2] 	= dw_4.Object.paen_numero[ll_Fila]  
 					dw_1.Object.paen_tipopa[ll_fila2] 		= dw_4.Object.paen_tipopa[ll_Fila]  
@@ -2398,20 +2429,21 @@ Else
 					dw_1.Object.frio_codigo[ll_fila2] 		= dw_4.Object.frio_codigo[ll_Fila]  
 					dw_1.Object.cond_codigo[ll_fila2] 	= dw_4.Object.cond_codigo[ll_Fila]  
 					dw_1.Object.paen_fecemb[ll_Fila2] 	= dw_4.Object.paen_fecemb[ll_Fila]  
-					dw_1.Object.paen_cosecha[ll_fila2] 	=dw_4.Object.paen_cosecha[ll_Fila]   
+					dw_1.Object.paen_cosecha[ll_fila2] 	= dw_4.Object.paen_cosecha[ll_Fila]   
 					dw_1.Object.paen_altura[ll_fila2] 		= dw_4.Object.paen_altura[ll_Fila]  
 					dw_1.Object.copa_codigo[ll_fila2] 	= dw_4.Object.copa_codigo[ll_Fila] 
 					dw_1.Object.paen_conpal[ll_fila2] 	= dw_4.Object.paen_conpal[ll_Fila] 
 					dw_1.Object.paen_conpar[ll_fila2] 	= dw_4.Object.paen_conpar[ll_Fila] 
-					dw_1.Object.rfpe_pcopda[ll_fila2] 	= 2
+					dw_1.Object.rfpe_pcopda[ll_fila2] 	= 2					
 				Else
 					MessageBox('Atencion', 'El folio: ' + String(ll_palletexis) + '. Ya se encuentra cargado en otra recepcion.', StopSign!, OK!)
 				End If
-			Next
+			End If
+		Next
 	End If
 	
 	If dw_1.RowCount() > 0 Then
-		//dw_2.Object.rfpe_numero[1] 	= ll_Null
+		dw_2.Object.rfpe_numero[1] 	= ll_Numero
 		dw_2.Object.plde_codigo[1] 	= dw_3.Object.plde_codigo[1]
 		dw_2.Object.inpr_numero[1] 	= dw_3.Object.inpr_numero[1]
 		dw_2.Object.rfpe_fecrec[1] 	= dw_3.Object.rfpe_fecrec[1]
@@ -2442,7 +2474,7 @@ Else
 		dw_2.Object.rfpe_fecpld[1] 		= dw_3.Object.rfpe_fecpld[1]
 		
 		pb_eliminar.Enabled	= True
-		pb_grabar.Enabled		= True
+		pb_grabar.Enabled	= True
 		pb_imprimir.Enabled	= True
 		pb_ins_det.Enabled	= True
 	
@@ -3022,9 +3054,7 @@ End If
 
 //If Not ib_primera_entrada AND Not ib_existe_folio  Then
 
-If dw_2.GetItemStatus(1, 0, Primary!) = New! OR &
-	dw_2.GetItemStatus(1, 0, Primary!) = NewModIfied! Then
-
+If dw_2.GetItemStatus(1, 0, Primary!) = New! Or  dw_2.GetItemStatus(1, 0, Primary!) = NewModified! Then
 	/*
 	Se actualiza tabla recfruprocee a objeto de bloquearla hasta que termine la grabación
 	del ingreso
@@ -3036,26 +3066,22 @@ If dw_2.GetItemStatus(1, 0, Primary!) = New! OR &
 			 AND   rfpe_tardef = 999;
 			 
 	If IsNull(dw_2.Object.rfpe_numero[1]) OR dw_2.Object.rfpe_numero[1] = 0 Then
-		ll_nuevofolio=Buscanuevofolio(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]))
+		ll_NuevoFolio=BuscaNuevoFolio(Integer(istr_mant.argumento[3]),Integer(istr_mant.argumento[1]))
+		dw_2.Object.rfpe_numero[1]	= ll_NuevoFolio
 	Else
-		ll_nuevofolio = dw_2.Object.rfpe_numero[1]
+		ll_NuevoFolio = dw_2.Object.rfpe_numero[1]
 	End If
 	
-	If Long(ll_nuevofolio) = 0  Then
+	If Long(ll_NuevoFolio) = 0  Then
 		MessageBox("Advertencia","No Quedan Correlativos Disponibles, Proceda por Mantención.")
 		Message.DoubleParm = -1
 		Return 
 	End If
-	
-	If IsNull(dw_2.Object.rfpe_numero[1]) OR dw_2.Object.rfpe_numero[1] = 0 Then
-		dw_2.Object.rfpe_numero[1]	= ll_nuevofolio
-   		dw_2.SetItem(1, "rfpe_numero",ll_nuevofolio)
-	End If	
 
-	istr_mant.argumento[2]	= String(ll_nuevofolio)
+	istr_mant.Argumento[2]	= String(ll_NuevoFolio)
 	
 	FOR li_fillas = 1 TO dw_1.RowCount()
-		 dw_1.Object.rfpe_numero[li_fillas]	= ll_nuevofolio
+		 dw_1.Object.rfpe_numero[li_fillas]	= ll_NuevoFolio
 	NEXT	
 	
 	dw_2.Object.rfpe_pcopda[1]	=	1
@@ -3086,28 +3112,25 @@ If istr_mant.argumento[13] = '2'  OR  istr_mant.argumento[13] = '1' Then
 				
 				ld_Fecha_Ing	=	dw_13.GetItemDate(ll_fila_d,'pafr_fecing')
 				// Para guardar la fecha de Ingreso cuando es Packing
-				If istr_mant.argumento[13] = '2' Then
-					ld_Fecha_Ing	= dw_2.Object.rfpe_fecrec[1] 
-				End If
-
+				If istr_mant.argumento[13] = '2' Then ld_Fecha_Ing	= dw_2.Object.rfpe_fecrec[1] 
+				
 				// Para guardar la fecha de Ingreso cuando traspaso Inperplanta
 				If  istr_mant.argumento[13] = '1'  Then
-					If IsNull(ld_Fecha_Ing) OR ld_Fecha_Ing = Date('1900-01-01') Then
+					If IsNull(ld_Fecha_Ing) Or ld_Fecha_Ing = Date('1900-01-01') Then
 						ld_Fecha_Ing	= dw_2.Object.rfpe_fecrec[1]
 					End If
 				End If
 				ids_palletfruta_fechaI.SetItem(ll_fila_g,'pafr_fecing',ld_Fecha_Ing)							
-			NEXT
+			Next
 		End If
-	NEXT
+	Next
 	
 	DwItemStatus	Estadol 
 	ids_palletfruta_fechaI.ResetUpdate()
 	
 	For ll_filas 	=	1 To 	ids_palletfruta_fechaI.RowCount()
 		Estadol	=	ids_palletfruta_fechaI.GetItemStatus(ll_filas, 0, Primary!)
-		//ids_palletfruta_fechaI.SetItemStatus(ll_filas,0,  Primary!, DataModIfied!	)	
-		ids_palletfruta_fechaI.SetItemStatus(ll_filas,'pafr_fecing',  Primary!, DataModIfied!	)	
+		ids_palletfruta_fechaI.SetItemStatus(ll_filas,'pafr_fecing',  Primary!, DataModified!)	
 		Estadol	=	ids_palletfruta_fechaI.GetItemStatus(ll_filas, 0, Primary!)
 	Next
 End If
@@ -3258,18 +3281,14 @@ w_main.SetMicroHelp("Grabando información...")
 Message.DoubleParm = 0
 
 TriggerEvent("ue_validacontrolcalidad")
-If Message.DoubleParm = -1 Then 	Return
+If Message.DoubleParm = -1 Then Return
 
 TriggerEvent("ue_antesguardar")
 
-If Message.DoubleParm = -1 Then 	Return
-
-/*  INICIO  TRANSMISION AUTOMÁTICA (RECEPCIÓN INTERPLANTA)    */	
+If Message.DoubleParm = -1 Then Return
 
 If istr_mant.argumento[33] =	'1' Then
-	
-	//TriggerEvent("ue_validaregistro")
-	
+	//TriggerEvent("ue_validaregistro")	
 	If Message.DoubleParm = -1  Then Return
 		
 	If IsNull(dw_2.Object.rfpe_ptaori[1]) OR dw_2.Object.rfpe_ptaori[1] = 0 Then
@@ -3490,14 +3509,15 @@ If wf_actualiza_db(False) Then
 		End If
 	End If
 Else
-	MessageBox("ATENCION", "Volver a cargar la recepcion tarnsitorio sobre la misma recepcion: " + String(dw_2.Object.rfpe_numero[1]))
+	MessageBox("ATENCION", "Volver a cargar la recepcion tarnsitorio sobre la recepcion: " + String(dw_2.Object.rfpe_numero[1]))
+	
+	ll_Numero = dw_2.Object.rfpe_numero[1]
 	
 	uo_Mail	luo_Mail
 	luo_Mail	=	Create uo_Mail
 	
-	luo_Mail.of_Send({"istok.Carvallo@rioblanco.net"}, 'Recepcion Definitiva Problema', 'Recepcion con problemas.', 1)
+	luo_Mail.of_Send({"istok.Carvallo@rioblanco.net"}, 'Recepcion Definitiva Problema', 'Recepcion ' + String(ll_Numero) + ' con problemas.', 1)
 
-	
 	Destroy luo_Mail
 	
 							

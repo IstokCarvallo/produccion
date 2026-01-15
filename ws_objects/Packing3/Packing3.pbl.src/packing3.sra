@@ -58,8 +58,13 @@ string appicon = "\Desarrollo 17\Imagenes\Sistemas\fruta_granel_pterceros.ico"
 string appruntimeversion = "22.0.0.1900"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean ultrafast = false
 boolean bignoreservercertificate = false
 uint ignoreservercertificate = 0
+long webview2distribution = 0
+boolean webview2checkx86 = false
+boolean webview2checkx64 = false
+string webview2url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/"
 end type
 global packing3 packing3
 
@@ -67,6 +72,7 @@ type prototypes
 
 
 end prototypes
+
 type variables
 Constant	Date			id_FechaLiberacion	=	Date('2019-02-12')
 Constant	Time			it_HoraLiberacion		=	Now()
@@ -120,6 +126,12 @@ IF AccesoSistemaValido() THEN
 	Parempresa()
 	ParamPlanta()
 	gstr_param.plde_codigo	=	gstr_ParamPlanta.CodigoPlanta
+	
+	SetPointer(HourGlass!)
+	f_CargaPacking(gstr_ParEmpresa.empr_codplt, False)
+	f_CargaCuartel(gstr_parempresa.Productor, False)
+	SetPointer(Arrow!)
+	
 	Open(w_main)
 ELSE
 	HALT

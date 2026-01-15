@@ -87,6 +87,8 @@ type m_cambiodeplanta from menu within m_aplicacion
 end type
 type m_cargatablas from menu within m_aplicacion
 end type
+type m_15 from menu within m_aplicacion
+end type
 type m_8 from menu within m_aplicacion
 end type
 type m_9 from menu within m_aplicacion
@@ -140,6 +142,7 @@ m_7 m_7
 m_usuariosporplanta m_usuariosporplanta
 m_cambiodeplanta m_cambiodeplanta
 m_cargatablas m_cargatablas
+m_15 m_15
 m_8 m_8
 m_9 m_9
 m_11 m_11
@@ -650,6 +653,7 @@ m_7 m_7
 m_usuariosporplanta m_usuariosporplanta
 m_cambiodeplanta m_cambiodeplanta
 m_cargatablas m_cargatablas
+m_15 m_15
 m_8 m_8
 m_9 m_9
 m_11 m_11
@@ -673,6 +677,7 @@ this.m_7=create m_7
 this.m_usuariosporplanta=create m_usuariosporplanta
 this.m_cambiodeplanta=create m_cambiodeplanta
 this.m_cargatablas=create m_cargatablas
+this.m_15=create m_15
 this.m_8=create m_8
 this.m_9=create m_9
 this.m_11=create m_11
@@ -692,6 +697,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_7
 this.Item[UpperBound(this.Item)+1]=this.m_usuariosporplanta
 this.Item[UpperBound(this.Item)+1]=this.m_cambiodeplanta
 this.Item[UpperBound(this.Item)+1]=this.m_cargatablas
+this.Item[UpperBound(this.Item)+1]=this.m_15
 this.Item[UpperBound(this.Item)+1]=this.m_8
 this.Item[UpperBound(this.Item)+1]=this.m_9
 this.Item[UpperBound(this.Item)+1]=this.m_11
@@ -715,6 +721,7 @@ destroy(this.m_7)
 destroy(this.m_usuariosporplanta)
 destroy(this.m_cambiodeplanta)
 destroy(this.m_cargatablas)
+destroy(this.m_15)
 destroy(this.m_8)
 destroy(this.m_9)
 destroy(this.m_11)
@@ -2194,6 +2201,39 @@ this.bitmapgradient = true
 end on
 
 on m_cargatablas.destroy
+call super::destroy
+end on
+
+type m_15 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!);If Not AccesoPuntoCritico() Then Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_carga_cuarteles_codope, w_main, ii_Columna, Original!)
+end event
+
+on m_15.create
+call super::create
+this.text = "Carga Codigo Operacional Cuarteles"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_15.destroy
 call super::destroy
 end on
 

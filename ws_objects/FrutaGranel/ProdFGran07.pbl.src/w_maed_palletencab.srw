@@ -1309,6 +1309,8 @@ SELECT	IsNull(Max(pafr_secuen), 0) + 1
 dw_2.Object.esta_codigo[1]		=	1 // Estacion Packing
 dw_2.Object.paen_fecpro[1]	=	Datetime(Today(), Now())
 
+dw_2.Object.pafr_codope[1] = f_CodigoOperacional_Genera(li_Planta, dw_1)
+
 For ll_Fila = 1 To dw_1.RowCount()
 	If dw_1.GetItemStatus(ll_Fila,0,Primary!) = NewModIfied! Then
 		dw_1.Object.clie_codigo[ll_Fila]		=	dw_2.Object.clie_codigo[1]
@@ -1526,7 +1528,7 @@ type dw_2 from w_mant_encab_deta_csd`dw_2 within w_maed_palletencab
 integer x = 261
 integer y = 40
 integer width = 2917
-integer height = 996
+integer height = 912
 string dataobject = "dw_mant_palletencab"
 boolean hsplitscroll = true
 end type
