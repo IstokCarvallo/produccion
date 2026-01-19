@@ -86,6 +86,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,parempresa,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,dw_mues_spro_lotesfrutagradet_recepcion,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,w_busc_spro_recepcion_lote,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran07.pbl,dw_mues_movtofrutaembadeta,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_codigooperacional_genera,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran01.pbl,w_maed_spro_bitaproducducha,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran09.pbl,dw_mues_movtofrutagraneldeta_comercial,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_colorcalidad,u
@@ -276,6 +277,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_mant_mues_usuarplanta,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGranTab.pbl,uo_manejoimpresora,u
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,dw_mant_spro_lotesfrutagranel_desverd,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran12.pbl,dw_mues_spro_lotesfrutagranel_atemper,d
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,f_codigooperacional_inter,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,w_busc_despafrigoen,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran14.pbl,dw_genera_archivo_peppi,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaGranel\ProdFGran02.pbl,w_mant_mues_spro_camexisfg_directa,w
