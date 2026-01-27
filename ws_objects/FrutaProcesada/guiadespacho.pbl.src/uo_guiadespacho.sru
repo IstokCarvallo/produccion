@@ -630,7 +630,7 @@ end function
 
 private function boolean of_generaguia_fruticola (long planta, long cliente, long movimiento);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut, ls_Leyenda = ''
+String		ls_Referencia, ls_Rut, ls_Leyenda = '', ls_Mosca = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -691,12 +691,15 @@ Else
 	of_InsertaRegistro('xMontoEscrito', '')
 
 	ls_Leyenda = ids_Source_Frut.Object.defe_glosa[1]
+	ls_Mosca = "Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. "
 	
 	If Planta = 6006 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
 	If Planta = 6007 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
-
+	
+	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por Ceratitis capitata o Mosca de la Fruta '
+		
 	of_InsertaRegistro('xObservaciones', Mid(ls_Leyenda, 1, 120))
-	of_InsertaRegistro('xObservaciones1', Mid("Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. " + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
+	of_InsertaRegistro('xObservaciones1', Mid(ls_Mosca + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
@@ -935,7 +938,8 @@ IF of_DatosEmpresa(Tipo) Then
 			End If
 			
 			of_InsertaRegistro('xObservaciones1', Mid(ls_Referencia, 1, 120))
-			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source.Object.ggn[1], 1, 120))
+			//of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source.Object.ggn[1], 1, 120))
+			of_InsertaRegistro('xObservaciones2', Mid(f_kilos_com_ggn(Cliente, Planta, Movimiento) + ' Producto Certificado GLOBALG.A.P. – CoC 4063651711332', 1, 120))
 		ElseIf Tipo = 4  Then
 			of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source.Object.ggn[1], 1, 120))
 		ElseIf Tipo = 1 Then //Guia Exportacion / Embarques
@@ -1259,7 +1263,7 @@ Else
 	End If	
 	
 	If Planta <> 4014 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA'
-	If Planta = 3006 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA REGLAMENTADA POR MMe'
+	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por  Ceratitis capitata o Mosca de la Fruta'
 	If Planta = 4008 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por mosca de la fruta '
 	If Planta = 4013 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
 	If Planta = 4014 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'

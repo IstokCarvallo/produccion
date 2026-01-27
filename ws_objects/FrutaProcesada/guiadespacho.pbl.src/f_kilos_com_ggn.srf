@@ -1,0 +1,41 @@
+﻿$PBExportHeader$f_kilos_com_ggn.srf
+global type f_kilos_com_ggn from function_object
+end type
+
+forward prototypes
+global function string f_kilos_com_ggn (long cliente, long planta, long numero)
+end prototypes
+
+global function string f_kilos_com_ggn (long cliente, long planta, long numero);Decimal{2} ld_Kilos
+String  ls_retorno
+
+SELECT Sum(IsNull(mc.mfcd_kgnent, 0))
+  	Into :ld_Kilos
+    FROM dbo.spro_lotesfrutacomdeta fc Inner Join dbo.spro_movtofrutacomdeta  mc
+	 		On mc.lofc_pltcod = fc.lofc_pltcod 
+			 and mc.lofc_espcod = fc.lofc_espcod 
+			 and mc.lofc_lotefc = fc.lofc_lotefc 
+			 and mc.lfcd_secuen = fc.lfcd_secuen 
+							Inner Join dbo.spro_movtofrutacomenca me
+			On mc.clie_codigo = me.clie_codigo
+			And mc.plde_codigo = me.plde_codigo
+			And mc.mfco_numero = me.mfco_numero
+			And mc.tpmv_codigo = me.tpmv_codigo
+   WHERE  me.plde_codigo = :Planta
+   AND me.mfco_guisii = :Numero
+   AND me.clie_codigo = :Cliente
+   And IsNull(fc.lfcd_ggncod, '') <> ''
+Using SQLCA;
+	
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA, "Carga de Kilos Netos Certificados GLOBA GAP.")
+	ld_Kilos	=	0
+End If	
+
+If IsNull(ld_Kilos) Then ld_Kilos = 0
+
+ls_retorno =String(ld_Kilos, '#,##0.00') + ' KN'
+
+Return ls_retorno
+end function
+

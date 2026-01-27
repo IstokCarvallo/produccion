@@ -417,6 +417,7 @@ end type
 type p_logo from w_para_informes`p_logo within w_info_estiba_camaras
 integer width = 1051
 integer height = 264
+string picturename = "\Desarrollo 17\Imagenes\Logos\RBlanco.jpg"
 end type
 
 type st_titulo from w_para_informes`st_titulo within w_info_estiba_camaras

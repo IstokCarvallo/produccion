@@ -12,19 +12,19 @@ String  ls_retorno
  Select IsNull(Sum(IsNull(ev.enva_pesone, 0) * IsNull(pf.pafr_ccajas, 0)), 0)
 	Into :ld_Kilos
 	  From dbo.despafrigoen de   Inner Join dbo.despafrigode dd
-																 On de.clie_codigo = dd.clie_codigo
-																And de.plde_codigo = dd.plde_codigo
-																And de.defe_numero = dd.defe_numero
-															Inner Join dbo.palletfruta pf
-																 On dd.clie_codigo = pf.clie_codigo
-																And dd.plde_codigo = pf.plde_codigo
-																And dd.paen_numero = pf.paen_numero
-															Inner Join dbo.embalajesprod em
-																 On pf.clie_codigo = em.clie_codigo
-																And pf.emba_codigo = em.emba_codigo
-															Inner Join dbo.envases ev
-																 On em.enva_tipoen = ev.enva_tipoen
-																And em.enva_codigo = ev.enva_codigo
+						 On de.clie_codigo = dd.clie_codigo
+						And de.plde_codigo = dd.plde_codigo
+						And de.defe_numero = dd.defe_numero
+					Inner Join dbo.palletfruta pf
+						 On dd.clie_codigo = pf.clie_codigo
+						And dd.plde_codigo = pf.plde_codigo
+						And dd.paen_numero = pf.paen_numero
+					Inner Join dbo.embalajesprod em
+						 On pf.clie_codigo = em.clie_codigo
+						And pf.emba_codigo = em.emba_codigo
+					Inner Join dbo.envases ev
+						 On em.enva_tipoen = ev.enva_tipoen
+						And em.enva_codigo = ev.enva_codigo
 	 Where de.clie_codigo = :Cliente
 		 And de.plde_codigo = :Planta
 		 And de.defe_guides = :Numero

@@ -920,6 +920,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,manbin_especie,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP28.pbl,dw_mant_spro_palletencab,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_proceso_temperatura_recepcion,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\frutap73.pbl,w_mant_deta_traspasorecepcion,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_com_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP20.pbl,dw_mues_palletfruta_usda,d
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\Frutap74.pbl,w_maed_modificaplanilla,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\FrutaP24.pbl,w_info_despacho_annex_report,w
