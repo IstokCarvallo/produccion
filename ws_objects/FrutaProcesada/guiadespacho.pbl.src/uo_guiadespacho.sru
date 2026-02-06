@@ -696,7 +696,8 @@ Else
 	If Planta = 6006 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
 	If Planta = 6007 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
 	
-	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por Ceratitis capitata o Mosca de la Fruta '
+	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por Ceratitis capitata o Mosca de la Fruta'
+	If Planta = 3015 Then ls_Mosca = ' \ Fruta de área regulada por MMe'
 		
 	of_InsertaRegistro('xObservaciones', Mid(ls_Leyenda, 1, 120))
 	of_InsertaRegistro('xObservaciones1', Mid(ls_Mosca + ids_Source_Frut.Object.defe_glosas[1], 1, 120))

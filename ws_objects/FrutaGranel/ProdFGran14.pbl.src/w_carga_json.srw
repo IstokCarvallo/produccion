@@ -321,7 +321,7 @@ If dw_2.RowCount() > 0 Then
 	dw_1.SetTransObject(SQLCA)
 	dw_1.Retrieve(Cliente, Embalaje, -1)
 	For ll_Fila = 1 To dw_2.RowCount()		  
-		ls_Busca = 'emba_codigo = "'  + Trim(Embalaje)+ '" And Gtin_Calibr = "' + dw_2.Object.Gtin_Calibr[ll_Fila] + '" and espe_codigo = ' + &
+		ls_Busca = 'emba_codigo = "'  + Trim(Embalaje) +  '" And Gtin_Calibr = "' + dw_2.Object.Gtin_Calibr[ll_Fila] + '" and espe_codigo = ' + &
 							String(dw_2.Object.Espe_Codigo[ll_Fila]) + ' And vari_codigo = ' + String(dw_2.Object.Vari_Codigo[ll_Fila])
 		ll_Busca = dw_1.Find(ls_Busca, 1, dw_1.RowCount(), Primary!)
 	

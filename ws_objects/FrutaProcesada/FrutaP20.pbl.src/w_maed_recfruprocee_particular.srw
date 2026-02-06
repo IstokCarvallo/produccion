@@ -2376,7 +2376,7 @@ Else
 			ll_palletexis	=	dw_4.Object.paen_numero[ll_Fila]
 			
 			ls_Buscar = 'clie_codigo = ' + string(li_clientexis) + ' And plde_codigo = ' + string(li_Plantaexis) + ' And paen_numero = ' + String(ll_palletexis)
-			ll_Buscar = dw_1.Find(ls_Buscar, 1, dw_1.GetRow())
+			ll_Buscar = dw_1.Find(ls_Buscar, 1, dw_1.RowCount())
 			
 			If ll_Buscar > 0 Then
 				dw_1.Object.plde_codigo[ll_Buscar]		= dw_4.Object.plde_codigo[ll_Fila]					

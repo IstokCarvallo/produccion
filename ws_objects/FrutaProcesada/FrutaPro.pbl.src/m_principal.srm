@@ -1145,6 +1145,8 @@ type m_informeordencargapallet from menu within m_ordencargapallet
 end type
 type m_informeconsolidadopallet from menu within m_ordencargapallet
 end type
+type m_124 from menu within m_ordencargapallet
+end type
 type m_informeestibacámaras from menu within m_ordencargapallet
 end type
 type m_informeestibacámaraspre-frío from menu within m_ordencargapallet
@@ -1169,6 +1171,7 @@ m_confirmacióndedespacho m_confirmacióndedespacho
 m_-5 m_-5
 m_informeordencargapallet m_informeordencargapallet
 m_informeconsolidadopallet m_informeconsolidadopallet
+m_124 m_124
 m_informeestibacámaras m_informeestibacámaras
 m_informeestibacámaraspre-frío m_informeestibacámaraspre-frío
 m_informeestibacámarasporbins m_informeestibacámarasporbins
@@ -15798,6 +15801,7 @@ m_confirmacióndedespacho m_confirmacióndedespacho
 m_-5 m_-5
 m_informeordencargapallet m_informeordencargapallet
 m_informeconsolidadopallet m_informeconsolidadopallet
+m_124 m_124
 m_informeestibacámaras m_informeestibacámaras
 m_informeestibacámaraspre-frío m_informeestibacámaraspre-frío
 m_informeestibacámarasporbins m_informeestibacámarasporbins
@@ -15832,6 +15836,7 @@ this.m_confirmacióndedespacho=create m_confirmacióndedespacho
 this.m_-5=create m_-5
 this.m_informeordencargapallet=create m_informeordencargapallet
 this.m_informeconsolidadopallet=create m_informeconsolidadopallet
+this.m_124=create m_124
 this.m_informeestibacámaras=create m_informeestibacámaras
 this.m_informeestibacámaraspre-frío=create m_informeestibacámaraspre-frío
 this.m_informeestibacámarasporbins=create m_informeestibacámarasporbins
@@ -15846,6 +15851,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_confirmacióndedespacho
 this.Item[UpperBound(this.Item)+1]=this.m_-5
 this.Item[UpperBound(this.Item)+1]=this.m_informeordencargapallet
 this.Item[UpperBound(this.Item)+1]=this.m_informeconsolidadopallet
+this.Item[UpperBound(this.Item)+1]=this.m_124
 this.Item[UpperBound(this.Item)+1]=this.m_informeestibacámaras
 this.Item[UpperBound(this.Item)+1]=this.m_informeestibacámaraspre-frío
 this.Item[UpperBound(this.Item)+1]=this.m_informeestibacámarasporbins
@@ -15864,6 +15870,7 @@ destroy(this.m_confirmacióndedespacho)
 destroy(this.m_-5)
 destroy(this.m_informeordencargapallet)
 destroy(this.m_informeconsolidadopallet)
+destroy(this.m_124)
 destroy(this.m_informeestibacámaras)
 destroy(this.m_informeestibacámaraspre-frío)
 destroy(this.m_informeestibacámarasporbins)
@@ -16036,6 +16043,39 @@ this.bitmapgradient = true
 end on
 
 on m_informeconsolidadopallet.destroy
+call super::destroy
+end on
+
+type m_124 from menu within m_ordencargapallet
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_estiba_camaras_historico, w_main, columna, Original!)
+end event
+
+on m_124.create
+call super::create
+this.text = "Informe Estiba Cámaras Historico"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_124.destroy
 call super::destroy
 end on
 

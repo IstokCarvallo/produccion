@@ -77,6 +77,8 @@ type ids_archivo2dw from datawindow within w_info_solicitud_inspeccion_nuevo
 end type
 type cbx_inspeccion from checkbox within w_info_solicitud_inspeccion_nuevo
 end type
+type cbx_sdp from checkbox within w_info_solicitud_inspeccion_nuevo
+end type
 end forward
 
 global type w_info_solicitud_inspeccion_nuevo from w_para_informes
@@ -120,6 +122,7 @@ rb_solicitud rb_solicitud
 ids_archivodw ids_archivodw
 ids_archivo2dw ids_archivo2dw
 cbx_inspeccion cbx_inspeccion
+cbx_sdp cbx_sdp
 end type
 global w_info_solicitud_inspeccion_nuevo w_info_solicitud_inspeccion_nuevo
 
@@ -240,6 +243,7 @@ this.rb_solicitud=create rb_solicitud
 this.ids_archivodw=create ids_archivodw
 this.ids_archivo2dw=create ids_archivo2dw
 this.cbx_inspeccion=create cbx_inspeccion
+this.cbx_sdp=create cbx_sdp
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.st_1
 this.Control[iCurrent+2]=this.dw_cliente
@@ -278,6 +282,7 @@ this.Control[iCurrent+34]=this.rb_solicitud
 this.Control[iCurrent+35]=this.ids_archivodw
 this.Control[iCurrent+36]=this.ids_archivo2dw
 this.Control[iCurrent+37]=this.cbx_inspeccion
+this.Control[iCurrent+38]=this.cbx_sdp
 end on
 
 on w_info_solicitud_inspeccion_nuevo.destroy
@@ -319,6 +324,7 @@ destroy(this.rb_solicitud)
 destroy(this.ids_archivodw)
 destroy(this.ids_archivo2dw)
 destroy(this.cbx_inspeccion)
+destroy(this.cbx_sdp)
 end on
 
 event open;call super::open;If gi_vari_rotulada = 1 Then
@@ -413,8 +419,8 @@ end type
 event pb_acepta::clicked;SetPointer(HourGlass!)
 
 Long		ll_Filas, li_prdrot, li_calrot, ll_numero, ll_Fila, ll_cont, ll_fil,ll_cantidad,ll_pallet, ll_tramoa, ll_tramob, ll_tramoc
-Integer	li_varrot, li_Cliente, li_info, li_packrot, li_tipo, li_planta, li_marca, li_cont, li_conexion, li_cliente2
-String	ls_Archivo, ls_Ruta, ls_Archivo2, ls_mensaje, ls_colu[],ls_conexion,ls_nomodb,ls_nomser,&
+Integer	li_varrot, li_Cliente, li_info, li_packrot, li_tipo, li_planta, li_marca, li_cont, li_conexion, li_cliente2, li_SDP = 0
+String		ls_Archivo, ls_Ruta, ls_Archivo2, ls_mensaje, ls_colu[],ls_conexion,ls_nomodb,ls_nomser,&
 			ls_nombas,li_base,ls_Usuario,ls_Password,ls_ubicacion,ls_ip,ls_puerto,ls_nodbms,ls_Motor
 Boolean	lb_Conectado
 Dec		ld_peso, ld_kiloa, ld_kilob, ld_kiloc
@@ -476,6 +482,8 @@ End If
 li_tipo			= Integer(istr_mant.argumento[3])
 ll_numero	= Long(istr_mant.argumento[4])
 li_planta 		= Integer(istr_mant.argumento[2])
+
+If cbx_SDP.Checked Then li_SDP = 1
 
 If Not cbx_conex.Checked Then
 	If Not cbx_formato.Checked and Not cbx_inspeccion.Checked Then
@@ -544,7 +552,7 @@ If Not cbx_conex.Checked Then
 	ll_Filas = vinf2.dw_1.Retrieve(Integer(istr_mant.argumento[3]), &
 					Long(istr_mant.argumento[4]), &
 					li_Cliente, Integer(istr_mant.argumento[2]),li_varrot,&
-					li_info,li_prdrot,li_calrot,li_packrot,li_marca)
+					li_info,li_prdrot,li_calrot,li_packrot,li_marca, li_SDP)
 End If	
 
 If cbx_conex.Checked Then
@@ -1304,7 +1312,7 @@ end type
 
 type cbx_id from checkbox within w_info_solicitud_inspeccion_nuevo
 integer x = 1792
-integer y = 744
+integer y = 736
 integer width = 343
 integer height = 100
 boolean bringtotop = true
@@ -1563,4 +1571,21 @@ Else
 End If
 
 end event
+
+type cbx_sdp from checkbox within w_info_solicitud_inspeccion_nuevo
+integer x = 1792
+integer y = 620
+integer width = 343
+integer height = 100
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 700
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+long textcolor = 16777215
+long backcolor = 553648127
+string text = "Sin SDP"
+end type
 
