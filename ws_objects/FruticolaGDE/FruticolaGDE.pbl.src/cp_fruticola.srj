@@ -77,6 +77,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,paramplanta,f
 OBJ:C:\Desarrollo 22\Productiva\FruticolaGDE\FruticolaGDE01.pbl,w_maed_recepcion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,str_agronomousuario,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_etiquetas,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_timbresag,u
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conduccion,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_fecha_carta,f
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios_unidadsucursal,d
@@ -110,6 +111,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,f_codigooperacional,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_conectividad,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_errorbasedatos,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_clientesprod,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_timbre_despacho,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_exportadores,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_startupinfo,s
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,dw_mant_clientesprod,d
@@ -187,6 +189,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admausuarios,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_ws_cargoproduce,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_etiqueta,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_admausuarios_actualizacion,u
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_timbredespacho,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,f_creamenubd,f
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_dw,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admagruposistema,d
@@ -243,6 +246,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_informes,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,f_global_replace,f
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,opcionsoloconsulta,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_contratista,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,w_mant_mues_timbresag,w
 OBJ:C:\Desarrollo 22\Productiva\PredioCuartel\PredCuartel01.pbl,dw_mant_prodpredio_legal,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_clientesprod,u
 OBJ:C:\Desarrollo 22\Productiva\FruticolaGDE\FruticolaGDE01.pbl,w_info_despachos,w
@@ -259,12 +263,14 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_contratista,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_gruposusuarios,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_seleccion_variedad,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_correo,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd04.pbl,dw_mant_mues_timbresag,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_aviso_acceso,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admaaplicacces,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_paises,u
 OBJ:C:\Desarrollo 22\Productiva\FruticolaGDE\FruticolaGDE01.pbl,w_mant_mues_correltarjacont,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_errorbasedatos,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_mues_admatipoadmiusua,w
+OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mues_timbre_despacho,d
 OBJ:C:\Desarrollo 22\Productiva\PredioCuartel\PredCuartel01.pbl,w_mant_deta_cuarteles,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_prod_parempresa,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_transportista,u

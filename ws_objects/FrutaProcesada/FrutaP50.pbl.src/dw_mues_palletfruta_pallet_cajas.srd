@@ -1,6 +1,6 @@
 ﻿$PBExportHeader$dw_mues_palletfruta_pallet_cajas.srd
-release 21;
-datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+release 22;
+datawindow(units=0 data.export.format=1 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 97 print.margin.bottom = 97 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
 header(height=168 color="553648127" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
 summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
 footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
@@ -65,23 +65,26 @@ table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=clie
         pf.pafr_embrea,pe.cate_codigo,cp.clie_codbar,em.emba_nroint,pp.prpr_prepro,
         Convert(Varchar(20), gd.gtin_numero) as emba_nrogs1,
 	   Convert(Varchar(15), IsNull(gd.gtin_codupc, '0')) as gtin_codupc
-    FROM dbo.palletfruta pf Left Join dbo.gtin_dun14 gd 
+   FROM dbo.palletfruta pf Left Join dbo.gtin_dun14 gd 
                             On pf.clie_codigo = gd.clie_codigo
                            and pf.espe_codigo = gd.espe_codigo
                            and pf.vari_codigo = gd.vari_codigo
                            and pf.emba_codigo = gd.emba_codigo
-						And pf.pafr_calibr = gd.gtin_calibr,
-        dbo.palletencab pe, dbo.clientesprod cp, dbo.embalajesprod em,
-        dbo.spro_prodpredio pp
-   WHERE pf.clie_codigo = pe.clie_codigo
-     and pf.paen_numero = pe.paen_numero
-     and pf.plde_codigo = pe.plde_codigo
-     and pe.clie_codigo = cp.clie_codigo
-     and pe.clie_codigo = em.clie_codigo
-     And pf.emba_codigo = em.emba_codigo
-     And pf.prod_codigo = pp.prod_codigo
-     And pf.pafr_huert4 = pp.prpr_codigo
-     and pf.clie_codigo = :cliente
+						   And (pf.pafr_calibr = gd.gtin_calibr
+						    Or gd.gtin_calibr = -1)
+						 Inner Join dbo.palletencab pe
+							On pf.clie_codigo = pe.clie_codigo
+							and pf.paen_numero = pe.paen_numero
+							and pf.plde_codigo = pe.plde_codigo
+						 Inner Join dbo.clientesprod cp
+							On pe.clie_codigo = cp.clie_codigo
+						 Inner Join dbo.embalajesprod em
+							On pe.clie_codigo = em.clie_codigo
+							And pf.emba_codigo = em.emba_codigo
+						 Inner Join dbo.spro_prodpredio pp
+							On pf.prod_codigo = pp.prod_codigo
+							And pf.pafr_huert4 = pp.prpr_codigo
+   WHERE pf.clie_codigo = :cliente
      AND :pallet in (-1, pf.paen_numero)
      AND pf.plde_codigo = :planta
      AND :caja in (-1,pf.pafr_secuen)  
@@ -117,6 +120,6 @@ xsltgen()
 jsgen()
 export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
 import.xml()
-export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.pdf(method=0 distill.custompostscript="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
 export.xhtml()
  

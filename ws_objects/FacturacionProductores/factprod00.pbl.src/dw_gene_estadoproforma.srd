@@ -27,7 +27,7 @@ table(column=(type=decimal(0) updatewhereclause=yes key=yes name=clie_codigo dbn
  column=(type=datetime update=yes updatewhereclause=yes name=faen_fecmod dbname="facturprodenca.faen_fecmod" )
  column=(type=decimal(0) updatewhereclause=yes name=fade_tipimp dbname="fade_tipimp" values="PMG	0/PLC	1/" )
  column=(type=decimal(0) updatewhereclause=yes name=faen_enviado dbname="faen_enviado" values="Sin Enviar	0/Enviada	1/" )
- column=(type=decimal(0) updatewhereclause=yes name=espe_codigo dbname="facturproddeta.espe_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes key=yes name=espe_codigo dbname="facturproddeta.espe_codigo" )
  column=(type=char(15) updatewhereclause=yes name=espe_nombre dbname="especies.espe_nombre" )
  retrieve="    Select  fe.clie_codigo, fe.plde_codigo, pl.plde_nombre, fe.faen_fechaf, fe.zona_codigo, fe.prod_codigo,
                 pr.prod_nombre,  fe.faen_fecini, fe.faen_fecter, fe.faen_secuen,  fe.faen_estado, fe.faen_cambio, 
@@ -44,6 +44,7 @@ table(column=(type=decimal(0) updatewhereclause=yes key=yes name=clie_codigo dbn
                           And fe.prod_codigo = fd.prod_codigo
                           And fe.faen_fechaf = fd.faen_fechaf
                           And fe.faen_secuen = fd.faen_secuen
+						And fe.espe_codigo = fd.espe_codigo
 										Inner Join dbo.plantadesp pl
 						On fe.plde_codigo = pl.plde_codigo
 										Inner Join dbo.especies es

@@ -327,13 +327,13 @@ destroy(this.cbx_inspeccion)
 destroy(this.cbx_sdp)
 end on
 
-event open;call super::open;If gi_vari_rotulada = 1 Then
-	cbx_varrot.Checked	= True
-	cbx_varrot.Enabled	= False
-Else
-	cbx_varrot.Checked	= False
-	cbx_varrot.Enabled	= True
-End If	
+event open;call super::open;//If gi_vari_rotulada = 1 Then
+//	cbx_varrot.Checked	= True
+//	cbx_varrot.Enabled	= False
+//Else
+//	cbx_varrot.Checked	= False
+//	cbx_varrot.Enabled	= True
+//End If	
 
 If gi_prod_rotulado = 1 Then
 	cbx_prdrot.Checked	=	True
@@ -1050,7 +1050,6 @@ string facename = "Tahoma"
 long textcolor = 16777215
 long backcolor = 553648127
 string text = "Variedad Rotulada"
-boolean checked = true
 end type
 
 event clicked;IF This.Checked THEN

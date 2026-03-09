@@ -329,12 +329,12 @@ integer taborder = 50
 fontcharset fontcharset = ansi!
 end type
 
-event pb_acepta::clicked;Long	ll_pallet, ll_caja, ll_FilaPallet, ll_NroPallet, ll_Registros, ll_FilaCajas, ll_Fila, ll_cont,&
-		ll_Fila1, ll_final,ll_inicial,ll_filadet, ll_productor, ll_secuencia, ll_prodrot, ll_filnew, ll_ncaja, ll_existe,&
-		ll_fill, gl_packing, ll_nrocaja, ll_inicio, ll_numerocaja
+event pb_acepta::clicked;Long		ll_pallet, ll_caja, ll_FilaPallet, ll_NroPallet, ll_Registros, ll_FilaCajas, ll_Fila, ll_cont,  ll_Fila1, ll_final,&
+			ll_inicial,ll_filadet, ll_productor, ll_secuencia, ll_prodrot, ll_filnew, ll_ncaja, ll_existe,&
+			ll_fill, gl_packing, ll_nrocaja, ll_inicio, ll_numerocaja
 Integer	li_planta, li_cliente, li_especie, li_variedad, li_condicion, li_etiqueta, li_mercado, li_secuencia, &
-		li_existe, li_existe2, li_resultado, li_formato, li_categoria, li_carotulado
-String	ls_dw, ls_camara, ls_embalaje, ls_calibre, ls_fecha, ls_gtin_numero, ls_formato, ls_CSG, ls_Codigo, ls_QR, ls_Ruta
+			li_existe, li_existe2, li_resultado, li_formato, li_categoria, li_carotulado
+String		ls_dw, ls_camara, ls_embalaje, ls_calibre, ls_fecha, ls_gtin_numero, ls_formato, ls_CSG, ls_Codigo, ls_QR, ls_Ruta
 Boolean	lb_autocommit
 
 li_planta = Integer(istr_mant.argumento[2])
@@ -423,11 +423,13 @@ End If
 					dw_spro_cajasprod.Object.prod_cuarte[ll_filnew] = dw_1.Object.pafr_cuart4[ll_filadet]  
 					dw_spro_cajasprod.Object.emba_codigo[ll_filnew] = ls_embalaje  
 					dw_spro_cajasprod.Object.etiq_codigo[ll_filnew] = li_etiqueta 
-					If NOT IsNull(dw_1.Object.pafr_fecrot[ll_filadet]) Then 
+					
+					If Not IsNull(dw_1.Object.pafr_fecrot[ll_filadet]) Then 
 						dw_spro_cajasprod.Object.capr_fecemb[ll_filnew] = dw_1.Object.pafr_fecrot[ll_filadet]   
 					Else	
 						dw_spro_cajasprod.Object.capr_fecemb[ll_filnew] = dw_1.Object.pafr_fecemb[ll_filadet]   
 					End If	
+					
 					dw_spro_cajasprod.Object.capr_calibr[ll_filnew] = ls_calibre  
 					dw_spro_cajasprod.Object.capr_numpal[ll_filnew] = ll_pallet 
 					dw_spro_cajasprod.Object.capr_numtra[ll_filnew] = ll_pallet
@@ -490,6 +492,8 @@ End If
 					dw_3.Object.cama_nombre[ll_filnew]		= dw_1.Object.cama_nombre[ll_filadet] 
 					dw_3.Object.cate_codigo[ll_filnew] 		= dw_1.Object.cate_codigo[ll_filadet] 
 					dw_3.Object.pafr_catrot[ll_filnew] 		= dw_1.Object.pafr_catrot[ll_filadet] 
+					dw_3.Object.pafr_ggncod[ll_filnew] 		= dw_1.Object.pafr_ggncod[ll_filadet] 
+					
 									
 				//End If
 				
@@ -611,7 +615,7 @@ End If
 			dw_16.Object.Ole_1.Object.BarCode	=	Integer(dw_1.Object.clie_codbar[1])
 			
 			dw_16.Object.Ole_1.Object.BarCode = Integer(dw_1.Object.clie_codbar[1])
-			//	sle_1.Text								=	"ImprimiEndo Adhesivos en Formato GS1"
+			//	sle_1.Text								=	"Imprimiendo Adhesivos en Formato GS1"
 			ls_fecha									=	String(dw_1.Object.pafr_fecemb[1])
 			ls_fecha									=	Left(ls_fecha, 2) + Mid(ls_fecha, 4, 2) + Right(ls_fecha, 2)
 			dw_16.Object.Ole_1.Object.Text 	= 	"01" + ls_gtin_numero + "10" + ls_fecha /*+ "\F" + &
@@ -648,7 +652,7 @@ End If
 			dw_16.Object.Ole_1.Object.BarCode	=	Integer(dw_1.Object.clie_codbar[1])
 			
 			If dw_16.Object.Ole_1.Object.BarCode = 20 Then
-//				sle_1.Text								=	"ImprimiEndo Adhesivos en Formato CodeBar128"
+//				sle_1.Text								=	"Imprimiendo Adhesivos en Formato CodeBar128"
 				dw_16.Object.Ole_1.Object.Text 	= 	'00' + &
 																String(dw_1.Object.zona_codigo[1],'00') + &
 																String(dw_1.Object.plde_codigo[1],'0000') + &
@@ -852,30 +856,26 @@ event modified;Long	ll_cont, ll_pallet
 dw_1.reset()
 
 istr_mant.argumento[4]	=	This.Text
-ll_pallet					=	Long(This.Text)
+ll_pallet	=	Long(This.Text)
 
-IF This.Text <> '' THEN
-	IF NOT existe_pallet(ll_pallet) THEN
+If This.Text <> '' Then
+	If Not Existe_pallet(ll_pallet) Then
 		This.Text = ''
 		This.SetFocus()
 		Return
-	END IF		
+	Else
+		ll_cont = dw_1.Retrieve(Integer(istr_mant.argumento[1]),ll_pallet,Integer(istr_mant.argumento[2]))
+
+		If ll_cont = 0 Then
+			MessageBox( "No Existe información", "Faltan Datos Para Generar Cajas.",StopSign!, OK!)
+			This.Text = ''
+			Return
+		End If	
+	End If	
+End If	
 	
-//	IF il_cont > 0 THEN
-//		MessageBox( "Atención", "Pallet ya es Caja a Caja.",StopSign!, OK!)
-//		This.Text = ''
-//		This.SetFocus()
-//		Return
-	END IF	
-	
-	ll_cont = dw_1.Retrieve(Integer(istr_mant.argumento[1]),ll_pallet,Integer(istr_mant.argumento[2]))
-	
-	IF ll_cont = 0 THEN
-		MessageBox( "No Existe información", "Faltan Datos Para Generar Cajas.",StopSign!, OK!)
-		This.Text = ''
-		Return
-	END IF	
-//END IF	
+
+
 end event
 
 type st_3 from statictext within w_crea_cajas_bultos

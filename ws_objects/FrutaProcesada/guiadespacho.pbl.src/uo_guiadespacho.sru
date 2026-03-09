@@ -22,6 +22,7 @@ Private Constant	Integer 	_TipoDoctoDTE 	= 52
 Private Constant 	Integer 	_Emisor	 			= 1
 Private Constant	String	  	_SeparadorFile		= '_'
 Private Constant	String	 	_SeparadorDTE	= '|'
+Private Constant	String	 	_SeparadorGlosa	= ' / '
 
 Private Constant	String	  	_INICIO				= '{'
 Private Constant	String	  	_FINAL				= '}'
@@ -81,6 +82,7 @@ private function string of_insertalinea (string tag, string valor, byte final)
 private function string of_cargajson (long planta, long cliente, long movimiento, long variedad, long productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
 public function integer of_cargaguia (integer planta, long cliente, long movimiento, integer variedad, integer productor, integer calibre, integer consvariedad, integer consembalaje, integer conscalibre, integer resumen, integer tipo, long comprobante)
 public function string of_obtienenroguia ()
+public function string of_leyendasag ()
 end prototypes
 
 private function boolean of_conectar (integer ai_coneccion);SetPointer (HourGlass!)
@@ -630,7 +632,7 @@ end function
 
 private function boolean of_generaguia_fruticola (long planta, long cliente, long movimiento);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut, ls_Leyenda = '', ls_Mosca = ''
+String		ls_Referencia, ls_Rut, ls_Leyenda = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -691,16 +693,16 @@ Else
 	of_InsertaRegistro('xMontoEscrito', '')
 
 	ls_Leyenda = ids_Source_Frut.Object.defe_glosa[1]
-	ls_Mosca = "Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. "
+//	ls_Mosca = "Fruta área libre de lobesia botrana - Fruta libre de área reglamentada MMe. "
 	
 	If Planta = 6006 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
 	If Planta = 6007 And ids_Source_Frut.Object.PlantaDestino[1] = 55 Then ls_Leyenda = 'Fruta a proceso de Frío para venta posterior por cuenta de Exportadoora Rio Blanco SpA'
-	
-	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por Ceratitis capitata o Mosca de la Fruta'
-	If Planta = 3015 Then ls_Mosca = ' \ Fruta de área regulada por MMe'
+
+//	If Planta = 3006 Then ls_Mosca = 'Area cuarentenada por Ceratitis capitata o Mosca de la Fruta'
+//	If Planta = 3015 Then ls_Mosca = 'Fruta de área regulada por MMe'
 		
 	of_InsertaRegistro('xObservaciones', Mid(ls_Leyenda, 1, 120))
-	of_InsertaRegistro('xObservaciones1', Mid(ls_Mosca + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
+	of_InsertaRegistro('xObservaciones1', Mid(of_LeyendaSAG() +  _SeparadorGlosa + ids_Source_Frut.Object.defe_glosas[1], 1, 120))
 	of_InsertaRegistro('xObservaciones2', Mid('Fruta Certificada GLOBALG.A.P. GGN ' + ids_Source_Frut.Object.ggn[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
@@ -1195,7 +1197,7 @@ end function
 
 private function boolean of_generaguia_fruticolagde (long planta, long cliente, long movimiento, integer tipo);Boolean	lb_Retorno = True
 Long		ll_New, ll_Fila
-String		ls_Referencia, ls_Rut, ls_Mosca = '', ls_GGN = '', ls_System = ''
+String		ls_Referencia, ls_Rut, ls_GGN = '', ls_System = ''
 
 SetNull(ls_Referencia)
 //Movimiento
@@ -1263,16 +1265,16 @@ Else
 		of_InsertaRegistro('Monto Total', String(ids_Source_GDE.Object.Total[1], '#,##0'))
 	End If	
 	
-	If Planta <> 4014 Then ls_Mosca = ' \ FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA'
-	If Planta = 3006 Then ls_Mosca = ' \ Area cuarentenada por  Ceratitis capitata o Mosca de la Fruta'
-	If Planta = 4008 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por mosca de la fruta '
-	If Planta = 4013 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
-	If Planta = 4014 Then ls_Mosca = ' \ Fruta proveniente de area reglamenta por Lobesia Botrana'
+//	If Planta <> 4014 Then ls_Mosca = 'FRUTA PROVENIENTE DE AREA LIBRE DE MOSCA DE LA FRUTA'
+//	If Planta = 3006 Then ls_Mosca = 'Area cuarentenada por  Ceratitis capitata o Mosca de la Fruta'
+//	If Planta = 4008 Then ls_Mosca = 'Fruta proveniente de area reglamenta por mosca de la fruta '
+//	If Planta = 4013 Then ls_Mosca = 'Fruta proveniente de area reglamenta por Lobesia Botrana'
+//	If Planta = 4014 Then ls_Mosca = 'Fruta proveniente de area reglamenta por Lobesia Botrana'
 	
 	If ids_Source_GDE.Object.ggn[1] = '' Or IsNull(ids_Source_GDE.Object.ggn[1]) Then
 		ls_GGN = ''
 	Else
-		ls_GGN = ' \ FRUTA CERTIFICADA GLOBALG.A.P. GGN ' + ids_Source_GDE.Object.ggn[1]
+		ls_GGN = 'FRUTA CERTIFICADA GLOBALG.A.P. GGN ' + ids_Source_GDE.Object.ggn[1]
 	End If
 	
 	// ls_System = ' \ FRUTA CERTIFICADA SYSTEMS APPROACH'
@@ -1282,10 +1284,9 @@ Else
 	of_InsertaRegistro('Tasa Iva', '19')
 	of_InsertaRegistro('xMontoEscrito', '')
 	of_InsertaRegistro('xObservaciones', Mid(Trim(ids_Source_GDE.Object.defe_glosa[1]) + ls_System, 1, 120))
-	of_InsertaRegistro('xObservaciones1', Mid(ids_Source_GDE.Object.defe_glosas[1] + ls_Mosca, 1, 120))
-	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + ls_GGN + &
-											'\ CSG:' + ids_Source_GDE.Object.CSG[1], 1, 120))
-//	of_InsertaRegistro('xObservaciones2', Mid('\ CSG:' + ids_Source_GDE.Object.CSG[1] /*+ ' CSP:' + ids_Source_GDE.Object.CSP[1]*/, 1, 120))
+	of_InsertaRegistro('xObservaciones1', Mid(ids_Source_GDE.Object.defe_glosas[1] + _SeparadorGlosa + of_LeyendaSAG(), 1, 120))
+	of_InsertaRegistro('xObservaciones2', Mid('Productor : ' + String(ids_Source_GDE.Object.prod_codigo[1], '0000') + _SeparadorGlosa + ls_GGN + &
+											_SeparadorGlosa + 'CSG:' + ids_Source_GDE.Object.CSG[1], 1, 120))
 	of_InsertaRegistro('xUsuario Emision', gstr_us.Nombre)
 	of_InsertaRegistro('xLugar Emision', iuo_Planta.Nombre)
 	
@@ -1859,6 +1860,24 @@ Else
 End If
 
 If IsValid(lrc_WS) Then Destroy lrc_WS
+
+Return ls_Retorno
+end function
+
+public function string of_leyendasag ();String	ls_Retorno
+
+Select IsNull(ts.tisa_nombre, '')
+Into :ls_Retorno
+from dbo.parempresa pe Inner Join dbo.TimbreSAG ts
+		On pe.tisa_codigo = ts.tisa_codigo
+USING	SQLCA; 
+	
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Parametros de Empresa")
+	ls_Retorno	=	''
+ElseIf SQLCA.SQLCode = 100 Then
+	ls_Retorno	=	''
+End If
 
 Return ls_Retorno
 end function

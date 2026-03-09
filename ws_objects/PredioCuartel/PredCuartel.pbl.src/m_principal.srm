@@ -1088,6 +1088,7 @@ type m_mantenciónsistemaconducción from menu within m_aplicacion
 end type
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_mant_mues_prodsistconduc, w_main, columna, Original!)
 end event
 
@@ -1146,6 +1147,7 @@ type m_mantenciónsistemariego from menu within m_aplicacion
 end type
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_mant_mues_prodsistriego, w_main, columna, Original!)
 end event
 
@@ -1228,6 +1230,7 @@ call super::destroy
 end on
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_mant_mues_estadocertific, w_main, columna, Original!)
 end event
 
@@ -1235,6 +1238,7 @@ type m_nivelcertificación from menu within m_aplicacion
 end type
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_mant_mues_nivelcertificacion, w_main, columna, Original!)
 end event
 
@@ -1294,6 +1298,7 @@ end type
 
 event clicked;SetPointer(HourGlass!)
 IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 
 OpenSheet(w_maed_predios_cuarteles, w_main, columna, Original!)
 end event
@@ -1388,6 +1393,7 @@ type m_1 from menu within m_aplicacion
 end type
 
 event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
 OpenSheet(w_mant_mues_certificacion, w_main, columna, Original!)
 end event
 

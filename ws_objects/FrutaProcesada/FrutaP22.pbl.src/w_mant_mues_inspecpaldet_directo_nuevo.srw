@@ -275,7 +275,7 @@ ElseIf li_tipoin = 2 AND li_inspec = 0 Then
 					"Ingrese o seleccione otro Pallet.")
 	Return True
 ElseIf li_inspec = 5	Then
-	MessageBox("Atención","Nro. de Pallet se Encuentra en Estado PEndiente.~r~r" + &
+	MessageBox("Atención","Nro. de Pallet se Encuentra en Estado Pendiente.~r~r" + &
 					"Ingrese o seleccione otro Pallet.")
 	Return True
 ElseIf li_fumiga <> 0 Then

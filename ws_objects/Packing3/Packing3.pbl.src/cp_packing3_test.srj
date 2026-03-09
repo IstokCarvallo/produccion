@@ -220,6 +220,7 @@ OBJ:C:\Desarrollo 22\Productiva\Packing3\Packing3.pbl,str_parametros,s
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_info_admasucursales,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd03.pbl,w_mant_deta_usuarplanta,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,w_mant_mues_lotescorrel_equipos,w
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\guiadespacho.pbl,f_kilos_com_ggn,f
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProdTab.pbl,uo_spro_palletencab,u
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagrupousuario,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w

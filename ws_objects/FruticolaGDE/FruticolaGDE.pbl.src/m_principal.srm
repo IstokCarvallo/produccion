@@ -44,6 +44,16 @@ type m_correlativotarjas from menu within m_aplicacion
 end type
 type m_7 from menu within m_aplicacion
 end type
+type m_3 from menu within m_aplicacion
+end type
+type m_4 from menu within m_3
+end type
+type m_5 from menu within m_3
+end type
+type m_3 from menu within m_aplicacion
+m_4 m_4
+m_5 m_5
+end type
 type m_productores from menu within m_aplicacion
 end type
 type m_prediocuartel from menu within m_aplicacion
@@ -66,6 +76,7 @@ m_packing m_packing
 m_correlativogde m_correlativogde
 m_correlativotarjas m_correlativotarjas
 m_7 m_7
+m_3 m_3
 m_productores m_productores
 m_prediocuartel m_prediocuartel
 m_0 m_0
@@ -465,6 +476,7 @@ m_packing m_packing
 m_correlativogde m_correlativogde
 m_correlativotarjas m_correlativotarjas
 m_7 m_7
+m_3 m_3
 m_productores m_productores
 m_prediocuartel m_prediocuartel
 m_0 m_0
@@ -486,6 +498,7 @@ this.m_packing=create m_packing
 this.m_correlativogde=create m_correlativogde
 this.m_correlativotarjas=create m_correlativotarjas
 this.m_7=create m_7
+this.m_3=create m_3
 this.m_productores=create m_productores
 this.m_prediocuartel=create m_prediocuartel
 this.m_0=create m_0
@@ -503,6 +516,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_packing
 this.Item[UpperBound(this.Item)+1]=this.m_correlativogde
 this.Item[UpperBound(this.Item)+1]=this.m_correlativotarjas
 this.Item[UpperBound(this.Item)+1]=this.m_7
+this.Item[UpperBound(this.Item)+1]=this.m_3
 this.Item[UpperBound(this.Item)+1]=this.m_productores
 this.Item[UpperBound(this.Item)+1]=this.m_prediocuartel
 this.Item[UpperBound(this.Item)+1]=this.m_0
@@ -524,6 +538,7 @@ destroy(this.m_packing)
 destroy(this.m_correlativogde)
 destroy(this.m_correlativotarjas)
 destroy(this.m_7)
+destroy(this.m_3)
 destroy(this.m_productores)
 destroy(this.m_prediocuartel)
 destroy(this.m_0)
@@ -1566,6 +1581,108 @@ this.bitmapgradient = true
 end on
 
 on m_7.destroy
+call super::destroy
+end on
+
+type m_3 from menu within m_aplicacion
+m_4 m_4
+m_5 m_5
+end type
+
+on m_3.create
+call super::create
+this.text = "Timbres"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_4=create m_4
+this.m_5=create m_5
+this.Item[UpperBound(this.Item)+1]=this.m_4
+this.Item[UpperBound(this.Item)+1]=this.m_5
+end on
+
+on m_3.destroy
+call super::destroy
+destroy(this.m_4)
+destroy(this.m_5)
+end on
+
+type m_4 from menu within m_3
+end type
+
+event clicked;SetPointer(HourGlass!);IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_timbre_despacho, w_main, ii_columna, Original!)
+end event
+
+on m_4.create
+call super::create
+this.text = "Timbres Despacho"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_4.destroy
+call super::destroy
+end on
+
+type m_5 from menu within m_3
+end type
+
+event clicked;SetPointer(HourGlass!)
+IF NOT accesopuntocritico() THEN Return
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_timbresag, w_main, ii_columna, Original!)
+end event
+
+on m_5.create
+call super::create
+this.text = "Timbres SAG"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_5.destroy
 call super::destroy
 end on
 

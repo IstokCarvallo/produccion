@@ -358,6 +358,7 @@ OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,dw_mant_especies,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd01.pbl,w_mant_deta_tipocamion,w
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd05.pbl,dw_mant_spro_stockenvaseplantas,d
 OBJ:C:\Desarrollo 22\TablasProd\Tablas\TabProd06.pbl,dw_mant_paramprodfcomer,d
+OBJ:C:\Desarrollo 22\Productiva\FrutaProcesada\GuiaDespacho.pbl,f_kilos_com_ggn,f
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer01.pbl,w_busc_ordenventacomercial,w
 OBJ:C:\Desarrollo 22\Productiva\FrutaComercial\ProdFComer05.pbl,w_mant_cambiodecajas,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admagrupos,w
